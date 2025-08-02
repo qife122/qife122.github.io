@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Fri, 01 Aug 2025 22:26:13 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 16:35:35 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/xss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>分割XSS攻击载荷：突破20字符限制的技巧</title>
+      <link>https://qife122.github.io/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Sat, 02 Aug 2025 16:35:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;h1 id=&#34;split-xss---分割xss攻击载荷&#34;&gt;Split XSS - 分割XSS攻击载荷&lt;/h1&gt;&#xA;&lt;h2 id=&#34;突破20字符限制的xss攻击技术&#34;&gt;突破20字符限制的XSS攻击技术&lt;/h2&gt;&#xA;&lt;p&gt;在测试一个编辑表单时，我发现8个输入字段都存在XSS漏洞，但每个字段限制为20个字符。常规XSS攻击无法在如此短的字符限制下完成，于是我开发了以下技术：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharePoint XSS漏洞技术分析与缓解措施</title>
+      <link>https://qife122.github.io/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>
+      <pubDate>Sat, 02 Aug 2025 15:40:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</guid>
+      <description>&lt;h1 id=&#34;sharepoint-xss漏洞&#34;&gt;SharePoint XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;今天我们发布了安全公告983438，向客户通报SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。以下是该漏洞的详细技术分析。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用Flash和base标签绕过XSS Auditor的技术分析</title>
       <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8flash%E5%92%8Cbase%E6%A0%87%E7%AD%BE%E7%BB%95%E8%BF%87xss-auditor%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>

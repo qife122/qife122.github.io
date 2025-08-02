@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 03:38:35 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 16:13:46 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/windows%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MS09-012补丁：修复&#34;令牌劫持&#34;漏洞的技术解析</title>
+      <link>https://qife122.github.io/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 16:13:46 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;ms09-012-修复令牌劫持漏洞&#34;&gt;MS09-012: 修复&amp;quot;令牌劫持&amp;quot;漏洞&lt;/h1&gt;&#xA;&lt;p&gt;今天早晨我们发布了MS09-012更新，用于修复公开披露的&amp;quot;令牌劫持&amp;quot;漏洞(&lt;a href=&#34;http://www.argeniss.com/research/TokenKidnapping.pdf&#34;&gt;http://www.argeniss.com/research/TokenKidnapping.pdf&lt;/a&gt;)。该漏洞允许从Network Service账户提权至Local System账户。通常情况下，恶意用户不会以Network Service身份运行，除非是像IIS这样的少数程序，可以在以Network Service运行的服务中执行任意代码。这使得攻击者能够攻破并控制Windows系统。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用未公开特性伪造PE节区头部的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%9C%AA%E5%85%AC%E5%BC%80%E7%89%B9%E6%80%A7%E4%BC%AA%E9%80%A0pe%E8%8A%82%E5%8C%BA%E5%A4%B4%E9%83%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 12:36:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%9C%AA%E5%85%AC%E5%BC%80%E7%89%B9%E6%80%A7%E4%BC%AA%E9%80%A0pe%E8%8A%82%E5%8C%BA%E5%A4%B4%E9%83%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;滥用未公开特性伪造pe节区头部&#34;&gt;滥用未公开特性伪造PE节区头部&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在调试其他项目时，我偶然发现PE文件的特殊行为：当NT头中的SectionAlignment值小于页面大小(4096)时，镜像的内存映射方式会出现显著差异。加载器不会按常规方式解析节区表构造内存镜像，而是将整个文件（包括头部）以RWX权限映射到内存中 - 完全忽略单独的节区头部。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Sysmon v6 安全监控工具发布公告：增强Windows系统安全事件追踪能力</title>
       <link>https://qife122.github.io/p/sysmon-v6-%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7%E5%8F%91%E5%B8%83%E5%85%AC%E5%91%8A%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E8%BF%BD%E8%B8%AA%E8%83%BD%E5%8A%9B/</link>

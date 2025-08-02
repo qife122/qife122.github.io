@@ -7,8 +7,57 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 09:07:14 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 18:26:56 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>软件定义无线电(SDR)攻防实验：无线门铃与Keeloq钥匙扣攻击实战</title>
+      <link>https://qife122.github.io/p/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%97%A0%E7%BA%BF%E7%94%B5sdr%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%97%A0%E7%BA%BF%E9%97%A8%E9%93%83%E4%B8%8Ekeeloq%E9%92%A5%E5%8C%99%E6%89%A3%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sat, 02 Aug 2025 18:26:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%97%A0%E7%BA%BF%E7%94%B5sdr%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%97%A0%E7%BA%BF%E9%97%A8%E9%93%83%E4%B8%8Ekeeloq%E9%92%A5%E5%8C%99%E6%89%A3%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;wild-west-hackin-fest-wwhf-sdr-实验室&#34;&gt;Wild West Hackin&amp;rsquo; Fest (WWHF) SDR 实验室&lt;/h1&gt;&#xA;&lt;p&gt;作者：David Fletcher //&lt;/p&gt;&#xA;&lt;p&gt;在WWHF会议期间，许多参会者索要软件定义无线电(SDR)实验的器材清单和源代码以便在家实践。由于需要根据会议期间的观察修改实验文档和代码，直到现在才完成整理。以下是完整的WWHF SDR实验资料，每个实验包含：器材清单、实验指南和实验脚本，下载全部三个文件即可开始实践。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>分割XSS攻击载荷：突破20字符限制的技巧</title>
+      <link>https://qife122.github.io/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Sat, 02 Aug 2025 16:35:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;h1 id=&#34;split-xss---分割xss攻击载荷&#34;&gt;Split XSS - 分割XSS攻击载荷&lt;/h1&gt;&#xA;&lt;h2 id=&#34;突破20字符限制的xss攻击技术&#34;&gt;突破20字符限制的XSS攻击技术&lt;/h2&gt;&#xA;&lt;p&gt;在测试一个编辑表单时，我发现8个输入字段都存在XSS漏洞，但每个字段限制为20个字符。常规XSS攻击无法在如此短的字符限制下完成，于是我开发了以下技术：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharePoint XSS漏洞技术分析与缓解措施</title>
+      <link>https://qife122.github.io/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>
+      <pubDate>Sat, 02 Aug 2025 15:40:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</guid>
+      <description>&lt;h1 id=&#34;sharepoint-xss漏洞&#34;&gt;SharePoint XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;今天我们发布了安全公告983438，向客户通报SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。以下是该漏洞的详细技术分析。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>揭秘GRX网络与间谍活动：移动数据安全漏洞分析</title>
+      <link>https://qife122.github.io/p/%E6%8F%AD%E7%A7%98grx%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%97%B4%E8%B0%8D%E6%B4%BB%E5%8A%A8%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 15:02:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%8F%AD%E7%A7%98grx%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%97%B4%E8%B0%8D%E6%B4%BB%E5%8A%A8%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;移动数据网络基础&#34;&gt;移动数据网络基础&lt;/h3&gt;&#xA;&lt;p&gt;在移动数据网络中，设备位置信息至关重要。例如荷兰KPN运营商拥有约5000个基站，每个基站通过小区标识符（CI）和路由区域码（RAC）进行管理。国际移动用户标识（IMSI）、接入点名称（APN）和SIM卡存储的通用集成电路卡（UICC）是网络接入的核心要素。数据包传输需经过服务GPRS支持节点（SGSN）、网关GPRS支持节点（GGSN）等组件，并通过GPRS隧道协议（GTP）建立专用通信隧道（基于UDP的GTPv0/v1/v2协议）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HEMA网站盲注SQL注入漏洞技术分析</title>
+      <link>https://qife122.github.io/p/hema%E7%BD%91%E7%AB%99%E7%9B%B2%E6%B3%A8sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 12:04:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/hema%E7%BD%91%E7%AB%99%E7%9B%B2%E6%B3%A8sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;hema网站盲sql注入漏洞分析&#34;&gt;HEMA网站盲SQL注入漏洞分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;技术背景&#34;&gt;技术背景&lt;/h2&gt;&#xA;&lt;p&gt;现代网站普遍采用数据库存储数据，服务器应用通过SQL查询语句与数据库交互。当存在查询构造缺陷时，攻击者可能通过注入恶意SQL代码获取敏感数据，这类漏洞被称为SQL注入(SQLi)，在漏洞赏金计划中通常属于高危漏洞。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>RubyGems.org安全审计报告：33个漏洞与加固建议</title>
+      <link>https://qife122.github.io/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</link>
+      <pubDate>Sat, 02 Aug 2025 11:53:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</guid>
+      <description>&lt;h1 id=&#34;ruby生态系统中央包仓库安全审计&#34;&gt;Ruby生态系统中央包仓库安全审计&lt;/h1&gt;&#xA;&lt;p&gt;Ruby Central委托Trail of Bits对Ruby应用官方包管理系统RubyGems.org进行安全评估和竞品分析。作为下载量超1840亿次的关键基础设施，该平台的安全直接影响数百万Ruby开发者。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NoSQL注入实验室 - 探索MongoDB安全漏洞实战</title>
+      <link>https://qife122.github.io/p/nosql%E6%B3%A8%E5%85%A5%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E6%8E%A2%E7%B4%A2mongodb%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Sat, 02 Aug 2025 10:07:12 +0800</pubDate>
+      <guid>https://qife122.github.io/p/nosql%E6%B3%A8%E5%85%A5%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E6%8E%A2%E7%B4%A2mongodb%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;nosqli-lab&#34;&gt;NoSQLi Lab&lt;/h1&gt;&#xA;&lt;p&gt;随着NoSQL的流行，我决定建立一个实验室来研究针对NoSQL数据库的各种攻击技术。这就是最终的成果&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;由于之前已使用Redis进行过开发工作，本次实验我选择MongoDB作为研究对象。实验室构建了两种漏洞场景：一种是类似SQL注入中&amp;quot;or 1=1&amp;quot;的经典漏洞，另一种是NoSQL特有的脚本注入攻击。未来可能会添加更多场景，但当前这两个已足够开展基础研究。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>RFID近场克隆攻击技术深度解析</title>
       <link>https://qife122.github.io/p/rfid%E8%BF%91%E5%9C%BA%E5%85%8B%E9%9A%86%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>

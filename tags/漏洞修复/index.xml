@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Fri, 01 Aug 2025 23:01:47 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 16:13:46 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MS09-012补丁：修复&#34;令牌劫持&#34;漏洞的技术解析</title>
+      <link>https://qife122.github.io/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 16:13:46 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;ms09-012-修复令牌劫持漏洞&#34;&gt;MS09-012: 修复&amp;quot;令牌劫持&amp;quot;漏洞&lt;/h1&gt;&#xA;&lt;p&gt;今天早晨我们发布了MS09-012更新，用于修复公开披露的&amp;quot;令牌劫持&amp;quot;漏洞(&lt;a href=&#34;http://www.argeniss.com/research/TokenKidnapping.pdf&#34;&gt;http://www.argeniss.com/research/TokenKidnapping.pdf&lt;/a&gt;)。该漏洞允许从Network Service账户提权至Local System账户。通常情况下，恶意用户不会以Network Service身份运行，除非是像IIS这样的少数程序，可以在以Network Service运行的服务中执行任意代码。这使得攻击者能够攻破并控制Windows系统。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>紧急更新：Apache Log4j严重漏洞修复指南</title>
+      <link>https://qife122.github.io/p/%E7%B4%A7%E6%80%A5%E6%9B%B4%E6%96%B0apache-log4j%E4%B8%A5%E9%87%8D%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sat, 02 Aug 2025 13:09:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%B4%A7%E6%80%A5%E6%9B%B4%E6%96%B0apache-log4j%E4%B8%A5%E9%87%8D%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;紧急更新修复apache-log4j严重漏洞&#34;&gt;紧急更新：修复Apache Log4j严重漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;新闻稿 | 2021年12月11日 | 20:02&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;荷兰国家网络安全中心(NCSC)发现Apache Log4j（Web应用程序广泛使用的日志组件）存在严重漏洞。攻击者可远程利用该漏洞（被命名为&amp;quot;Log4Shell&amp;quot;）劫持服务器权限，NCSC已发布&lt;strong&gt;高危/高危&lt;/strong&gt;安全警报。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>微软2024年2月安全更新：修复多款产品高危漏洞</title>
       <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
