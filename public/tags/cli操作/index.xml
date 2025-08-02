@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>CLI操作 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/cli%E6%93%8D%E4%BD%9C/</link>
+        <description>Recent content in CLI操作 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 23:40:15 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cli%E6%93%8D%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HPE网络交换机基础配置指南</title>
+        <link>http://localhost:1313/p/hpe%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sat, 02 Aug 2025 23:40:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hpe%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;基础网络交换机配置&#34;&gt;基础网络交换机配置
+&lt;/h1&gt;&lt;h2 id=&#34;问题描述&#34;&gt;问题描述
+&lt;/h2&gt;&lt;p&gt;我是一名IT分析师，老板希望让我更多地接触网络相关的工作。他让我在办公室搭建一个实验环境。目前，我已经安装了一台HPE FlexNetwork 5130 EI交换机，并通过控制台端口和PuTTY串行连接成功接入设备。&lt;/p&gt;
+&lt;p&gt;在CLI界面中，我已经完成了以下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置交换机名称&lt;/li&gt;
+&lt;li&gt;为控制台端口设置密码&lt;/li&gt;
+&lt;li&gt;将用户角色设置为&lt;code&gt;network-admin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置时区并启用夏令时&lt;/li&gt;
+&lt;li&gt;设置NTP协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但我不知道接下来该做什么。虽然我在边学边做，但搜索到的相关资料非常有限。&lt;/p&gt;
+&lt;h2 id=&#34;下一步建议&#34;&gt;下一步建议
+&lt;/h2&gt;&lt;p&gt;对于“基础交换机配置”，我认为接下来应该设置IP地址，但我想制定一个计划，让这个项目更有条理。&lt;/p&gt;
+&lt;h3 id=&#34;可能的配置步骤&#34;&gt;可能的配置步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;配置管理IP地址&lt;/strong&gt;：为交换机分配一个IP地址，以便通过SSH或Web界面远程管理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设置VLAN&lt;/strong&gt;：如果需要划分网络，可以配置VLAN。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置端口&lt;/strong&gt;：根据需求设置端口的速率、双工模式或启用/禁用端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;保存配置&lt;/strong&gt;：确保所有更改保存到启动配置中，避免重启后丢失。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果你有更具体的需求或问题，可以进一步讨论！&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
