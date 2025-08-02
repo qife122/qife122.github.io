@@ -7,7 +7,101 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 02:11:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 19:42:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SonicWall SMA 100系列管理界面多重漏洞可能导致远程代码执行</title>
+        <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Sat, 02 Aug 2025 19:42:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;sonicwall-secure-mobile-access-sma-100系列管理界面多重漏洞可能导致远程代码执行&#34;&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面多重漏洞可能导致远程代码执行
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;MS-ISAC公告编号&lt;/strong&gt;：2025-046&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;：2025/05/05&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;SonicWall Secure Mobile Access (SMA) 100管理界面发现多个安全漏洞，可能导致远程代码执行。SonicWall SMA是企业用于提供远程应用访问的统一安全网关。攻击者组合利用这些漏洞可实现远程代码执行，进而导致会话劫持和系统完全沦陷。&lt;/p&gt;
+&lt;h2 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h2&gt;&lt;p&gt;WatchTowr报告显示CVE-2024-38475和CVE-2023-44221已在真实攻击中被利用。CISA已将这两个漏洞列入已知被利用漏洞目录(KEV)。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SMA 200&lt;/li&gt;
+&lt;li&gt;SMA 210&lt;/li&gt;
+&lt;li&gt;SMA 400&lt;/li&gt;
+&lt;li&gt;SMA 410&lt;/li&gt;
+&lt;li&gt;SMA 500v&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;政府机构：中大型政府实体(高危)/小型政府实体(中危)&lt;/li&gt;
+&lt;li&gt;企业：中大型企业(高危)/小型企业(中危)&lt;/li&gt;
+&lt;li&gt;家庭用户：低危&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞详情如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻击策略&lt;/strong&gt;：初始访问(TA0001)&lt;br&gt;
+&lt;strong&gt;技术手段&lt;/strong&gt;：利用公开应用漏洞(T1190)：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SMA100 SSL-VPN管理界面存在特殊元素过滤不当漏洞，具有管理员权限的远程攻击者可注入任意命令(CVE-2023-44221)&lt;/li&gt;
+&lt;li&gt;Apache HTTP Server 2.4.59及更早版本的mod_rewrite存在输出转义缺陷，攻击者可映射URL到服务器允许访问的文件系统位置(CVE-2024-38475)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;组合利用这些漏洞可实现远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立即应用补丁&lt;/strong&gt;：测试后立即安装SonicWall提供的更新(M1051)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施7.1：建立并维护漏洞管理流程&lt;/li&gt;
+&lt;li&gt;保障措施7.2：建立基于风险的修复策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;自动化漏洞管理&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施7.4：每月执行自动化应用补丁管理&lt;/li&gt;
+&lt;li&gt;保障措施7.5：每季度执行自动化漏洞扫描&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络架构加固&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施12.1：保持网络基础设施更新&lt;/li&gt;
+&lt;li&gt;保障措施12.2：建立安全网络架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施18.1：建立渗透测试计划&lt;/li&gt;
+&lt;li&gt;保障措施18.2：定期执行外部渗透测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最小权限原则&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施4.7：管理默认账户&lt;/li&gt;
+&lt;li&gt;保障措施5.5：维护服务账户清单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;应用防护&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施16.13：执行应用渗透测试&lt;/li&gt;
+&lt;li&gt;保障措施10.5：启用防漏洞利用功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cisa.gov/news-events/alerts/2025/05/01/cisa-adds-two-known-exploited-vulnerabilities-catalog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CISA公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-38475&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2024-38475&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44221&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2023-44221&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2023-0018&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SonicWall安全公告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析，以Uber为例</title>
         <link>http://localhost:1313/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</link>
         <pubDate>Sat, 02 Aug 2025 02:11:51 +0800</pubDate>

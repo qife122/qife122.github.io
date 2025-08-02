@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>APT28 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/apt28/</link>
+        <description>Recent content in APT28 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 21:38:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/apt28/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>俄罗斯APT28新型恶意软件利用LLM生成恶意Windows命令</title>
+        <link>http://localhost:1313/p/%E4%BF%84%E7%BD%97%E6%96%AFapt28%E6%96%B0%E5%9E%8B%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%A9%E7%94%A8llm%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8Fwindows%E5%91%BD%E4%BB%A4/</link>
+        <pubDate>Sat, 02 Aug 2025 21:38:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%84%E7%BD%97%E6%96%AFapt28%E6%96%B0%E5%9E%8B%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%A9%E7%94%A8llm%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8Fwindows%E5%91%BD%E4%BB%A4/</guid>
+        <description>&lt;p&gt;俄罗斯网络间谍组织APT28已开发出通过查询大型语言模型(LLM)生成命令的恶意软件。该恶意软件被乌克兰CERT命名为LAMEHUG，近期被用于针对乌克兰政府实体的鱼叉式钓鱼攻击，成为攻击者利用AI实施攻击的新案例。&lt;/p&gt;
+&lt;p&gt;根据CERT-UA报告，钓鱼邮件来自被入侵的邮箱账户，冒充乌克兰某部委代表。恶意软件包含在ZIP压缩包中，使用.pif(MS-DOS可执行文件)扩展名，但也观察到.exe和.py扩展名的变体。&lt;/p&gt;
+&lt;p&gt;CERT-UA将这些攻击归因于其追踪为UAC-0001的组织，该组织在安全社区更广为人知的名称是APT28。西方情报机构已正式将该组织与俄罗斯军事情报局GRU的第26165部队(或称第85主要特别服务中心)联系起来。&lt;/p&gt;
+&lt;p&gt;APT28(又称Sofacy、Pawn Storm或Fancy Bear)自2004年起就对西方国家目标开展网络行动，在2022年2月俄罗斯入侵乌克兰之前就已在乌频繁活动。去年美国司法部起诉了五名GRU军官和一名涉嫌协助的平民，指控其对乌克兰计算机基础设施实施破坏性网络攻击，并探测包括美国在内的26个北约成员国政府计算机系统。鉴于APT28的全球行动范围，新型LAMEHUG恶意软件很可能不久就会被用于西方目标。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实时查询LLM API的创新手法&lt;/strong&gt;
+此前观察到的攻击者主要使用LLM编写恶意脚本或优化钓鱼邮件内容，网络犯罪论坛上也出售各种未经审查和越狱的LLM订阅服务。但LAMEHUG开发者采取了不同方法，将直接查询LLM的功能内置到恶意程序本身。&lt;/p&gt;
+&lt;p&gt;LAMEHUG通过Hugging Face平台(网络最大的LLM和其他AI资产托管平台)的API，向Qwen 2.5-Coder-32B-Instruct模型发送查询指令，要求模型模拟Windows系统管理员生成命令列表：创建文件夹、收集计算机/网络/Active Directory域信息并存入文本文件。另一个独立查询则要求模型生成递归复制Documents、Downloads和Desktop文件夹中所有.pdf和.txt文档到新建的C:\Programdata\info\目录下的命令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;技术实现细节&lt;/strong&gt;
+LAMEHUG采用Python编写，通过PyInstaller将源代码编译为可执行二进制文件。CERT-UA观察到其分发形态包括Appendix.pif、AI_generator_uncensored_Canvas_PRO_v0.9.exe、AI_image_generator_v0.95.exe和image.py等变体，各版本在数据渗出方式上存在功能差异。恶意软件的C2服务器托管在合法但已被入侵的基础设施上。&lt;/p&gt;
+&lt;p&gt;正如LLM正成为组织和员工的常用工具，它们对攻击者也同样有用。研究人员近期测试LLM执行漏洞开发和利用任务的能力，发现虽然目前效果不佳但进步迅速。随着时间推移，我们很可能会看到更多AI辅助攻击，甚至高级黑客行为，就像AI辅助编程的兴起一样。通过动态使用LLM生成多样化命令，攻击者可能希望借此引入多态性特征来规避检测签名。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

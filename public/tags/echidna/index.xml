@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Echidna on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/echidna/</link>
+        <description>Recent content in Echidna on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 21:15:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/echidna/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>以太坊智能合约的可复用属性测试指南</title>
+        <link>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sat, 02 Aug 2025 21:15:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h3 id=&#34;可复用的以太坊合约属性测试&#34;&gt;可复用的以太坊合约属性测试
+&lt;/h3&gt;&lt;p&gt;随着智能合约安全技术的演进，基于属性的模糊测试已成为开发者和安全工程师的核心技术。该技术依赖代码属性（通常称为不变量）的创建，这些属性描述了代码的预期行为。为帮助社区定义属性，我们发布了168个预构建属性集，可用于指导我们的智能合约模糊测试工具Echidna，或直接通过单元测试使用。覆盖范围包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见ERC代币接口合规性&lt;/li&gt;
+&lt;li&gt;通用可测试安全属性&lt;/li&gt;
+&lt;li&gt;定点数学运算测试属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;实战直播安排&#34;&gt;实战直播安排
+&lt;/h4&gt;&lt;p&gt;为帮助掌握这些工具，我们将举办两场直播：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;3月7日&lt;/strong&gt;：ERC20属性、示例用法和Echidna作弊码（Guillermo Larregay主讲）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3月14日&lt;/strong&gt;：ERC4626属性、示例用法及高效模糊测试技巧（Benjamin Samuels主讲）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;为什么需要使用&#34;&gt;为什么需要使用？
+&lt;/h3&gt;&lt;p&gt;该资源库及配套研讨会将展示模糊测试如何提供比单元测试更高级别的安全保障。这些属性集可轻松集成到使用知名标准或常用库的项目中，当前包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ABDKMath64x64库&lt;/strong&gt;测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ERC-20代币标准&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ERC-4626代币化金库标准&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;核心测试内容&#34;&gt;核心测试内容
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;ERC20&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标准接口函数属性&lt;/li&gt;
+&lt;li&gt;基础合理性属性（如：用户余额不应超过代币供应量）&lt;/li&gt;
+&lt;li&gt;可销毁、可铸造、可暂停等扩展功能属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ERC4626&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;符合规范的舍入方向验证&lt;/li&gt;
+&lt;li&gt;禁止回退函数的属性&lt;/li&gt;
+&lt;li&gt;差分测试属性（如deposit()必须与previewDeposit()预测功能匹配）&lt;/li&gt;
+&lt;li&gt;非规范安全属性（份额通胀攻击、代币授权检查等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ABDKMath64x64&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交换律、结合律、分配律和恒等属性&lt;/li&gt;
+&lt;li&gt;差分测试属性（如2^(-x) == 1/2^(x)）&lt;/li&gt;
+&lt;li&gt;输入范围回退验证&lt;/li&gt;
+&lt;li&gt;区间属性（如min(x,y) &amp;lt;= avg(x,y) &amp;lt;= max(x,y)）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;快速开始指南&#34;&gt;快速开始指南
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;安装Echidna&lt;/li&gt;
+&lt;li&gt;导入属性库：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hardhat项目&lt;/strong&gt;：&lt;code&gt;npm install https://github.com/crytic/properties.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Foundry项目&lt;/strong&gt;：&lt;code&gt;forge install crytic/properties&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;按文档创建测试合约&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;erc20测试合约示例&#34;&gt;ERC20测试合约示例
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;pragma solidity&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;^&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;./YetAnotherCashEquivalentToken.sol&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICryticTokenMock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;@crytic/properties/contracts/ERC20/external/util/ITokenMock.sol&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;contract&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CryticERC20ExternalHarness&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CryticERC20ExternalBasicProperties&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;constructor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;token&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICryticTokenMock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;address&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CryticTokenMock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;echidna配置文件&#34;&gt;Echidna配置文件
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;corpusDir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tests/erc20/echidna-corpus&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;testMode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;testLimit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;100000&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;sender&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0x10000&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0x20000&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0x30000&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行命令：&lt;code&gt;echidna-test . --contract CryticERC20ExternalHarness --config echidna.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;未来计划&#34;&gt;未来计划
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;扩展数学库测试（如PRBMath）&lt;/li&gt;
+&lt;li&gt;增加更多ERC标准测试&lt;/li&gt;
+&lt;li&gt;构建AMM/流动性池等通用合约测试集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文档所有技术内容均基于Trail of Bits官方发布材料，无AI虚构内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

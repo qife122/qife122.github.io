@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>DNS Over HTTPS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/dns-over-https/</link>
+        <description>Recent content in DNS Over HTTPS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 19:21:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns-over-https/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>在Cobalt Strike中利用DNS over HTTPS实现隐蔽命令控制</title>
+        <link>http://localhost:1313/p/%E5%9C%A8cobalt-strike%E4%B8%AD%E5%88%A9%E7%94%A8dns-over-https%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/</link>
+        <pubDate>Sat, 02 Aug 2025 19:21:02 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9C%A8cobalt-strike%E4%B8%AD%E5%88%A9%E7%94%A8dns-over-https%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/</guid>
+        <description>&lt;h1 id=&#34;dns-over-https-for-cobalt-strike&#34;&gt;DNS Over HTTPS for Cobalt Strike
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;近年来，红队行动中C2基础设施的搭建变得越来越困难。这对安全社区来说是件好事，因为这意味着厂商和专业从业者已经从过去成功的技术中吸取教训，并在网络中实施了有效的缓解措施。&lt;/p&gt;
+&lt;p&gt;DNS over HTTPS（DoH）是一个未被充分重视的命令控制通道。本文将展示如何在Cobalt Strike中使用DoH，这种方式无需第三方账户或基础设施设置，通过有效的SSL证书加密流量，并将通信发送到信誉良好的域名。&lt;/p&gt;
+&lt;h2 id=&#34;现有技术&#34;&gt;现有技术
+&lt;/h2&gt;&lt;p&gt;攻击者和攻防安全专业人员使用不同的重定向器实现已有一段时间。最早使用的重定向器是配置了各种转发规则的简单Apache和Nginx服务器。&lt;/p&gt;
+&lt;p&gt;重定向器不仅能增强基础设施的弹性，还能绕过依赖域名分类的防御措施。例如，当内容分发网络（CDN）对开发者更易获取后，攻击者就从传统重定向器转向这些平台，因为它们通常提供有效域名甚至SSL证书，减少了攻击者的工作量。&lt;/p&gt;
+&lt;p&gt;后来出现的&amp;quot;域名伪装&amp;quot;技术被许多测试者大量使用。但最近CDN提供商开始打击这种行为。许多网站完全禁止域名伪装或主动搜索使用该技术的人。特别是微软，曾在行动中直接关闭Azure订阅。&lt;/p&gt;
+&lt;h2 id=&#34;dns-over-https&#34;&gt;DNS over HTTPS
+&lt;/h2&gt;&lt;p&gt;传统DNS信标相对容易被检测。我从未在行动中使用过Cobalt Strike的DNS监听器，仅限于之前描述的HTTPS监听器和重定向器。&lt;/p&gt;
+&lt;p&gt;通过DoH实现的Beacon为我们提供了信誉良好的域名和有效的SSL证书，无需账户或重定向器配置。这进一步减少了操作员的设置时间，并消除了账户被关闭的风险。&lt;/p&gt;
+&lt;h2 id=&#34;今日主题cobalt-strike中的dns-over-https&#34;&gt;今日主题：Cobalt Strike中的DNS over HTTPS
+&lt;/h2&gt;&lt;p&gt;Austin Hudson首次在Twitter上向我介绍了DoH的使用。他过去一年的推文详细记录了实现这一功能的进展，并最终开发出开源工具TitanLdr。这个Cobalt Strike用户定义反射加载器（UDRL）通过钩取Beacon的导入地址表（IAT），将负责传统DNS查询的API调用（DNSQuery_A）替换为向dns.google（8.8.8.8和8.8.4.4）发送DoH请求的函数。&lt;/p&gt;
+&lt;p&gt;仅这一点就是极佳的能力，但TitanLdr的DNSQuery_A钩子具有足够通用性，可与许多不同的DoH服务器配合使用！我已测试以下域名并确认它们可作为即插即用的替代方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dns.quad9.net&lt;/li&gt;
+&lt;li&gt;mozilla.cloudflare-dns.com&lt;/li&gt;
+&lt;li&gt;cloudflare-dns.com&lt;/li&gt;
+&lt;li&gt;doh.opendns.com&lt;/li&gt;
+&lt;li&gt;ordns.he.net&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用titanldr&#34;&gt;使用TitanLdr
+&lt;/h2&gt;&lt;p&gt;TitanLdr是将此功能集成到Cobalt Strike的关键。原始版本的TitanLdr可通过单一DNS提供商进行HTTPS通信：https://github.com/secidiot/TitanLdr。您可以在hooks目录下的DnsQuery_A.c文件第111行更改DNS服务器。&lt;/p&gt;
+&lt;p&gt;我还fork了TitanLdr以支持指定多个DoH服务器。每次回调时，Beacon会从硬编码列表中随机选择一个。如需使用多个DoH服务器，可从https://github.com/kyleavery/TitanLdr下载我的fork版本。hooks目录下DnsQuery_A.c文件的第116行可修改服务器列表。&lt;/p&gt;
+&lt;p&gt;下载后需要构建程序，这需要安装NASM和MinGW的Linux主机。安装这些程序后，运行make命令创建必要文件。&lt;/p&gt;
+&lt;p&gt;将Titan.cna Aggressor脚本导入Cobalt Strike后，即可使用DoH！像往常一样配置DNS监听器。Cobalt Strike文档对此监听器的配置有更详细介绍。&lt;/p&gt;
+&lt;h2 id=&#34;dns-over-https的缺点&#34;&gt;DNS over HTTPS的缺点
+&lt;/h2&gt;&lt;p&gt;虽然DoH信标相比传统HTTPS信标有优势，但也存在明显缺点：&lt;/p&gt;
+&lt;p&gt;首先，传输相同信息需要更多数据包。DNS TXT记录最多只能包含255个字符，意味着每个数据包只能发送少量数据。&lt;/p&gt;
+&lt;p&gt;其次，我们对可用服务器的路径或域名没有控制权。环境或设备拒绝向流行或已知DoH服务器发送443/TCP出站流量，比阻止Microsoft的*.azurewebsites.net或Cloudflare的*.workers.dev似乎更容易。可以通过使用更冷门的DoH服务器或自行构建并随时间推移进行分类来解决此问题，具体取决于环境配置。&lt;/p&gt;
+&lt;h2 id=&#34;潜在检测方法&#34;&gt;潜在检测方法
+&lt;/h2&gt;&lt;p&gt;当前检测技术在检测DNS over HTTPS方面可能存在漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对恶意HTTPS流量的检测通常利用域名信誉，对DoH可能无效，因为使用的域名信誉良好&lt;/li&gt;
+&lt;li&gt;针对恶意DNS流量的检测通常监控大量DNS请求，对DoH可能无效，因为流量不再使用DNS协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;传统DNS监控与SSL检查相结合可能是潜在解决方案，但我目前不知道有任何工具或产品这样做。&lt;/p&gt;
+&lt;p&gt;我认为防御此攻击的主要方法是阻止向组织未使用的已知DoH服务器发送443/TCP出站流量。我遇到的大多数网络仍使用传统DNS，通常作为Active Directory环境一部分运行本地DNS服务器。这种情况下，无需允许向dns.google、cloudflare-dns.com或本文提到的其他服务器发送HTTPS流量。&lt;/p&gt;
+&lt;h2 id=&#34;结束语&#34;&gt;结束语
+&lt;/h2&gt;&lt;p&gt;绝对有更多DNS over HTTPS服务器可用于此配置。此外，用户可以设置自己的DoH服务器，甚至可能位于CDN或其他云服务后面，以引入此技术的变体。&lt;/p&gt;
+&lt;p&gt;TitanLdr仅限于Cobalt Strike，但DoH实现可以移植到任何其他C2框架。这种方法并非在所有情况下都是最佳选择，但它是我希望您能利用的工具箱中的另一个工具。如有任何问题或意见，请通过Twitter @kyleavery_与我联系。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

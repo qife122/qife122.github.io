@@ -7,7 +7,153 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 10:23:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 23:13:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MS13-051漏洞分析：Office PNG解析漏洞的技术细节与攻击模式</title>
+        <link>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sat, 02 Aug 2025 23:13:07 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;h1 id=&#34;ms13-051get-out-of-my-office&#34;&gt;MS13-051：Get Out of My Office!
+&lt;/h1&gt;&lt;p&gt;MS13-051修复了Microsoft Office 2003和Office for Mac中的一个安全漏洞。较新版本的Windows版Office不受此漏洞影响，但Mac版Office 2011仍受影响。我们已发现该漏洞在野外的针对性0day攻击中被利用。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;在Office的PNG文件解析代码中，存在对块长度字段检查不严的漏洞。根据PNG规范(&lt;a class=&#34;link&#34; href=&#34;http://www.w3.org/TR/PNG/#5Chunk-layout&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.w3.org/TR/PNG/#5Chunk-layout&lt;/a&gt;)，&amp;ldquo;虽然编码器和解码器应将长度视为无符号数，但其值不应超过2^31-1字节&amp;rdquo;。然而在恶意PNG文件中，我们发现块长度字段被设置为0xFFFFFFFF。PNG解析代码虽然正确将该字段视为无符号数，但未检查该值是否超过2^31-1的限制。&lt;/p&gt;
+&lt;p&gt;Shellcode分析显示该漏洞利用是典型的基于栈的缓冲区溢出，攻击者通过向栈上缓冲区写入超量数据，最终劫持程序执行流。旧版Office/Windows缺乏针对此类攻击的缓解措施，而新版则具备防护能力。我们也验证了EMET 3.0及以上版本能有效阻止已观察到的攻击。&lt;/p&gt;
+&lt;h2 id=&#34;攻击模式&#34;&gt;攻击模式
+&lt;/h2&gt;&lt;p&gt;观察到的攻击具有高度针对性，攻击者刻意规避安全研究人员调查。恶意样本是Office 2003二进制格式文档，其中不直接包含恶意PNG文件，而是通过引用远程服务器上的PNG文件实现攻击。&lt;/p&gt;
+&lt;p&gt;攻击者还在服务器上部署了脚本，避免多次提供PNG漏洞利用文件，以保持0day的隐蔽性。已观察到的攻击主要分布在印度尼西亚和马来西亚地区。&lt;/p&gt;
+&lt;h2 id=&#34;检测建议&#34;&gt;检测建议
+&lt;/h2&gt;&lt;p&gt;所有恶意文档的共同特征是使用&amp;quot;space.gif&amp;quot;文件名获取远程PNG漏洞文件。为帮助安全厂商和企业检测潜在威胁，我们提供部分用于加载远程PNG漏洞的URL和恶意Office文档哈希值：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;恶意URL示例&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/4307/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/3807/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://mister.nofrillspace.com/users/web8_dice/3791/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;文档哈希值&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;MD5&lt;/th&gt;
+          &lt;th&gt;SHA1&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;fde37e60cc4be73dada0fb1ad3d5f273&lt;/td&gt;
+          &lt;td&gt;1bdc1a0bc995c1beb363b11b71c14324be8577c9&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2f1ab543b38a7ad61d5dbd72eb0524c4&lt;/td&gt;
+          &lt;td&gt;2a33542038a85db4911d7b846573f6b251e16b2d&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;感谢Google公司的Andrew Lyons和Neel Mehta的报告，以及Elia Florio和Cristian Craioveanu对本案例的帮助。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Neil Sikka, MSRC Engineering
+@neilsikka&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>安全更新程序剖析：微软安全响应中心的内部流程解析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F%E5%89%96%E6%9E%90%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E7%9A%84%E5%86%85%E9%83%A8%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 22:22:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F%E5%89%96%E6%9E%90%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E7%9A%84%E5%86%85%E9%83%A8%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;本博客是《Anatomy of a Security Update》的日文翻译版。最新信息请参考原文。&lt;/p&gt;
+&lt;p&gt;微软安全响应中心作为防御社区的一部分，始终站在客户与公司安全响应的最前线。我们的使命是保护客户和微软免受当前及未来新型安全与隐私威胁。通过持续监控威胁态势，为组织提供防御、识别和修复攻击的最新工具与指南。&lt;/p&gt;
+&lt;p&gt;我们经常被问到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么微软不能更快发布安全更新？&lt;/li&gt;
+&lt;li&gt;为什么发现零日漏洞后不能立即发布补丁？&lt;/li&gt;
+&lt;li&gt;为什么要依赖协调漏洞披露？
+这些都是很好的问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安全更新的生命周期&#34;&gt;安全更新的生命周期
+&lt;/h3&gt;&lt;p&gt;&amp;ldquo;安全更新的开发需要在质量与时效性之间取得微妙平衡。我们必须考虑如何最小化客户干扰，同时最大化保护效果。&amp;rdquo; ——微软安全响应中心副总裁 Aanchal Gupta&lt;/p&gt;
+&lt;p&gt;每个漏洞都具有独特性，需要解决特定的技术挑战。从问题发现到安全更新发布的时间长度受多重因素影响。我们必须考虑更新发布后对客户环境的实际影响，这包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨产品服务的多样化客户环境&lt;/li&gt;
+&lt;li&gt;存在漏洞的受支持平台数量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更新开发遵循严格流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;取证调查&lt;/strong&gt;：漏洞发现后立即启动，分析研究者报告内容并与代码库进行映射&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;变种分析&lt;/strong&gt;：搜索并研究该漏洞的变种，确保全面修复&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨服务影响评估&lt;/strong&gt;：检查漏洞对微软全线服务的影响&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合作伙伴协同&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;通过MAPP计划向安全合作伙伴提供检测指南&lt;/li&gt;
+&lt;li&gt;通过SUVP程序与外部合作伙伴进行实际测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;质量验证&lt;/strong&gt;：更新需通过严格测试确保无副作用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发布决策&lt;/strong&gt;：满足质量标准后纳入&amp;quot;补丁星期二&amp;quot;或进行带外发布&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;同时会准备CVE文档，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;漏洞指南&lt;/li&gt;
+&lt;li&gt;常见问题解答&lt;/li&gt;
+&lt;li&gt;现有缓解措施&lt;/li&gt;
+&lt;li&gt;更新链接&lt;/li&gt;
+&lt;li&gt;发布说明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些信息均发布于《安全更新指南》。&lt;/p&gt;
+&lt;h3 id=&#34;什么是零日漏洞&#34;&gt;什么是零日漏洞？
+&lt;/h3&gt;&lt;p&gt;零日漏洞指尚未发布官方补丁的软件缺陷。软件供应商可能知晓或不知晓该漏洞。这类漏洞通常具有高严重性，可能被积极利用。&lt;/p&gt;
+&lt;p&gt;但并非所有零日漏洞都会导致攻击。攻击复杂度、安装基数可用性和利用可靠性都是攻击者考虑的因素。&lt;/p&gt;
+&lt;h3 id=&#34;协调漏洞披露cvd&#34;&gt;协调漏洞披露(CVD)
+&lt;/h3&gt;&lt;p&gt;我们坚信CVD是缓解零日漏洞风险的最佳实践。其核心目标是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为客户提供及时一致的防护指南&lt;/li&gt;
+&lt;li&gt;通过研究者协作限制攻击者机会窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;微软要求研究者直接向我们报告新发现漏洞，在公开前给予我们诊断和修复的机会。符合奖励计划范围的漏洞研究者将获得奖金和公开致谢。&lt;/p&gt;
+&lt;p&gt;当攻击广泛进行而微软尚未完成补丁时，我们将与研究者紧密协作提前披露漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;客户最佳实践&#34;&gt;客户最佳实践
+&lt;/h3&gt;&lt;p&gt;建议客户保持系统处于最新状态：
+&amp;ldquo;您的技术基础设施和安防系统就像&amp;rsquo;免疫系统&amp;rsquo;。即使没有零日更新，保持系统更新也能增强整体防护能力。&amp;rdquo; ——Aanchal Gupta&lt;/p&gt;
+&lt;p&gt;攻击者常组合使用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;零日漏洞&lt;/li&gt;
+&lt;li&gt;已修复但未更新的旧漏洞&lt;/li&gt;
+&lt;li&gt;社会工程攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键防护措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定期更新&lt;/strong&gt;：遵循&amp;quot;补丁星期二&amp;quot;节奏&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用安全工具&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Microsoft 365 Defender的威胁与漏洞管理功能&lt;/li&gt;
+&lt;li&gt;安全更新指南中的CVSS评分和可利用性指数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全意识&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;仅从官方商店下载软件&lt;/li&gt;
+&lt;li&gt;验证可疑附件和链接&lt;/li&gt;
+&lt;li&gt;启用多因素认证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于IT管理员：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用安全更新指南规划部署&lt;/li&gt;
+&lt;li&gt;通过威胁分析报告获取攻击上下文&lt;/li&gt;
+&lt;li&gt;优先处理高可利用性漏洞&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>构建AI驱动的统一SOC：微软新电子书指南</title>
         <link>http://localhost:1313/p/%E6%9E%84%E5%BB%BAai%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%9F%E4%B8%80soc%E5%BE%AE%E8%BD%AF%E6%96%B0%E7%94%B5%E5%AD%90%E4%B9%A6%E6%8C%87%E5%8D%97/</link>
         <pubDate>Sat, 02 Aug 2025 10:23:13 +0800</pubDate>

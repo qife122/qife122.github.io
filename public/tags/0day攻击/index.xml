@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>0day攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/0day%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in 0day攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 23:13:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/0day%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MS13-051漏洞分析：Office PNG解析漏洞的技术细节与攻击模式</title>
+        <link>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sat, 02 Aug 2025 23:13:07 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;h1 id=&#34;ms13-051get-out-of-my-office&#34;&gt;MS13-051：Get Out of My Office!
+&lt;/h1&gt;&lt;p&gt;MS13-051修复了Microsoft Office 2003和Office for Mac中的一个安全漏洞。较新版本的Windows版Office不受此漏洞影响，但Mac版Office 2011仍受影响。我们已发现该漏洞在野外的针对性0day攻击中被利用。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;在Office的PNG文件解析代码中，存在对块长度字段检查不严的漏洞。根据PNG规范(&lt;a class=&#34;link&#34; href=&#34;http://www.w3.org/TR/PNG/#5Chunk-layout&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.w3.org/TR/PNG/#5Chunk-layout&lt;/a&gt;)，&amp;ldquo;虽然编码器和解码器应将长度视为无符号数，但其值不应超过2^31-1字节&amp;rdquo;。然而在恶意PNG文件中，我们发现块长度字段被设置为0xFFFFFFFF。PNG解析代码虽然正确将该字段视为无符号数，但未检查该值是否超过2^31-1的限制。&lt;/p&gt;
+&lt;p&gt;Shellcode分析显示该漏洞利用是典型的基于栈的缓冲区溢出，攻击者通过向栈上缓冲区写入超量数据，最终劫持程序执行流。旧版Office/Windows缺乏针对此类攻击的缓解措施，而新版则具备防护能力。我们也验证了EMET 3.0及以上版本能有效阻止已观察到的攻击。&lt;/p&gt;
+&lt;h2 id=&#34;攻击模式&#34;&gt;攻击模式
+&lt;/h2&gt;&lt;p&gt;观察到的攻击具有高度针对性，攻击者刻意规避安全研究人员调查。恶意样本是Office 2003二进制格式文档，其中不直接包含恶意PNG文件，而是通过引用远程服务器上的PNG文件实现攻击。&lt;/p&gt;
+&lt;p&gt;攻击者还在服务器上部署了脚本，避免多次提供PNG漏洞利用文件，以保持0day的隐蔽性。已观察到的攻击主要分布在印度尼西亚和马来西亚地区。&lt;/p&gt;
+&lt;h2 id=&#34;检测建议&#34;&gt;检测建议
+&lt;/h2&gt;&lt;p&gt;所有恶意文档的共同特征是使用&amp;quot;space.gif&amp;quot;文件名获取远程PNG漏洞文件。为帮助安全厂商和企业检测潜在威胁，我们提供部分用于加载远程PNG漏洞的URL和恶意Office文档哈希值：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;恶意URL示例&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/4307/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/3807/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://mister.nofrillspace.com/users/web8_dice/3791/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;文档哈希值&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;MD5&lt;/th&gt;
+          &lt;th&gt;SHA1&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;fde37e60cc4be73dada0fb1ad3d5f273&lt;/td&gt;
+          &lt;td&gt;1bdc1a0bc995c1beb363b11b71c14324be8577c9&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2f1ab543b38a7ad61d5dbd72eb0524c4&lt;/td&gt;
+          &lt;td&gt;2a33542038a85db4911d7b846573f6b251e16b2d&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;感谢Google公司的Andrew Lyons和Neel Mehta的报告，以及Elia Florio和Cristian Craioveanu对本案例的帮助。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Neil Sikka, MSRC Engineering
+@neilsikka&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

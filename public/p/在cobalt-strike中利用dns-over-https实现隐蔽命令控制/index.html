@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何通过TitanLdr工具在Cobalt Strike中实现基于DNS over HTTPS的隐蔽通信，包括技术原理、配置方法以及与传统DNS信标的对比分析。">
+<title>在Cobalt Strike中利用DNS over HTTPS实现隐蔽命令控制</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%9C%A8cobalt-strike%E4%B8%AD%E5%88%A9%E7%94%A8dns-over-https%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="在Cobalt Strike中利用DNS over HTTPS实现隐蔽命令控制">
+<meta property='og:description' content="本文详细介绍了如何通过TitanLdr工具在Cobalt Strike中实现基于DNS over HTTPS的隐蔽通信，包括技术原理、配置方法以及与传统DNS信标的对比分析。">
+<meta property='og:url' content='http://localhost:1313/p/%E5%9C%A8cobalt-strike%E4%B8%AD%E5%88%A9%E7%94%A8dns-over-https%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DNS over HTTPS' /><meta property='article:tag' content='Cobalt Strike' /><meta property='article:tag' content='红队技术' /><meta property='article:tag' content='命令控制' /><meta property='article:published_time' content='2025-08-02T19:21:02&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T19:21:02&#43;08:00'/>
+<meta name="twitter:title" content="在Cobalt Strike中利用DNS over HTTPS实现隐蔽命令控制">
+<meta name="twitter:description" content="本文详细介绍了如何通过TitanLdr工具在Cobalt Strike中实现基于DNS over HTTPS的隐蔽通信，包括技术原理、配置方法以及与传统DNS信标的对比分析。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#现有技术">现有技术</a></li>
+    <li><a href="#dns-over-https">DNS over HTTPS</a></li>
+    <li><a href="#今日主题cobalt-strike中的dns-over-https">今日主题：Cobalt Strike中的DNS over HTTPS</a></li>
+    <li><a href="#使用titanldr">使用TitanLdr</a></li>
+    <li><a href="#dns-over-https的缺点">DNS over HTTPS的缺点</a></li>
+    <li><a href="#潜在检测方法">潜在检测方法</a></li>
+    <li><a href="#结束语">结束语</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%9C%A8cobalt-strike%E4%B8%AD%E5%88%A9%E7%94%A8dns-over-https%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/">在Cobalt Strike中利用DNS over HTTPS实现隐蔽命令控制</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了如何通过TitanLdr工具在Cobalt Strike中实现基于DNS over HTTPS的隐蔽通信，包括技术原理、配置方法以及与传统DNS信标的对比分析。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="dns-over-https-for-cobalt-strike">DNS Over HTTPS for Cobalt Strike
+</h1><h2 id="引言">引言
+</h2><p>近年来，红队行动中C2基础设施的搭建变得越来越困难。这对安全社区来说是件好事，因为这意味着厂商和专业从业者已经从过去成功的技术中吸取教训，并在网络中实施了有效的缓解措施。</p>
+<p>DNS over HTTPS（DoH）是一个未被充分重视的命令控制通道。本文将展示如何在Cobalt Strike中使用DoH，这种方式无需第三方账户或基础设施设置，通过有效的SSL证书加密流量，并将通信发送到信誉良好的域名。</p>
+<h2 id="现有技术">现有技术
+</h2><p>攻击者和攻防安全专业人员使用不同的重定向器实现已有一段时间。最早使用的重定向器是配置了各种转发规则的简单Apache和Nginx服务器。</p>
+<p>重定向器不仅能增强基础设施的弹性，还能绕过依赖域名分类的防御措施。例如，当内容分发网络（CDN）对开发者更易获取后，攻击者就从传统重定向器转向这些平台，因为它们通常提供有效域名甚至SSL证书，减少了攻击者的工作量。</p>
+<p>后来出现的&quot;域名伪装&quot;技术被许多测试者大量使用。但最近CDN提供商开始打击这种行为。许多网站完全禁止域名伪装或主动搜索使用该技术的人。特别是微软，曾在行动中直接关闭Azure订阅。</p>
+<h2 id="dns-over-https">DNS over HTTPS
+</h2><p>传统DNS信标相对容易被检测。我从未在行动中使用过Cobalt Strike的DNS监听器，仅限于之前描述的HTTPS监听器和重定向器。</p>
+<p>通过DoH实现的Beacon为我们提供了信誉良好的域名和有效的SSL证书，无需账户或重定向器配置。这进一步减少了操作员的设置时间，并消除了账户被关闭的风险。</p>
+<h2 id="今日主题cobalt-strike中的dns-over-https">今日主题：Cobalt Strike中的DNS over HTTPS
+</h2><p>Austin Hudson首次在Twitter上向我介绍了DoH的使用。他过去一年的推文详细记录了实现这一功能的进展，并最终开发出开源工具TitanLdr。这个Cobalt Strike用户定义反射加载器（UDRL）通过钩取Beacon的导入地址表（IAT），将负责传统DNS查询的API调用（DNSQuery_A）替换为向dns.google（8.8.8.8和8.8.4.4）发送DoH请求的函数。</p>
+<p>仅这一点就是极佳的能力，但TitanLdr的DNSQuery_A钩子具有足够通用性，可与许多不同的DoH服务器配合使用！我已测试以下域名并确认它们可作为即插即用的替代方案：</p>
+<ul>
+<li>dns.quad9.net</li>
+<li>mozilla.cloudflare-dns.com</li>
+<li>cloudflare-dns.com</li>
+<li>doh.opendns.com</li>
+<li>ordns.he.net</li>
+</ul>
+<h2 id="使用titanldr">使用TitanLdr
+</h2><p>TitanLdr是将此功能集成到Cobalt Strike的关键。原始版本的TitanLdr可通过单一DNS提供商进行HTTPS通信：https://github.com/secidiot/TitanLdr。您可以在hooks目录下的DnsQuery_A.c文件第111行更改DNS服务器。</p>
+<p>我还fork了TitanLdr以支持指定多个DoH服务器。每次回调时，Beacon会从硬编码列表中随机选择一个。如需使用多个DoH服务器，可从https://github.com/kyleavery/TitanLdr下载我的fork版本。hooks目录下DnsQuery_A.c文件的第116行可修改服务器列表。</p>
+<p>下载后需要构建程序，这需要安装NASM和MinGW的Linux主机。安装这些程序后，运行make命令创建必要文件。</p>
+<p>将Titan.cna Aggressor脚本导入Cobalt Strike后，即可使用DoH！像往常一样配置DNS监听器。Cobalt Strike文档对此监听器的配置有更详细介绍。</p>
+<h2 id="dns-over-https的缺点">DNS over HTTPS的缺点
+</h2><p>虽然DoH信标相比传统HTTPS信标有优势，但也存在明显缺点：</p>
+<p>首先，传输相同信息需要更多数据包。DNS TXT记录最多只能包含255个字符，意味着每个数据包只能发送少量数据。</p>
+<p>其次，我们对可用服务器的路径或域名没有控制权。环境或设备拒绝向流行或已知DoH服务器发送443/TCP出站流量，比阻止Microsoft的*.azurewebsites.net或Cloudflare的*.workers.dev似乎更容易。可以通过使用更冷门的DoH服务器或自行构建并随时间推移进行分类来解决此问题，具体取决于环境配置。</p>
+<h2 id="潜在检测方法">潜在检测方法
+</h2><p>当前检测技术在检测DNS over HTTPS方面可能存在漏洞：</p>
+<ul>
+<li>针对恶意HTTPS流量的检测通常利用域名信誉，对DoH可能无效，因为使用的域名信誉良好</li>
+<li>针对恶意DNS流量的检测通常监控大量DNS请求，对DoH可能无效，因为流量不再使用DNS协议</li>
+</ul>
+<p>传统DNS监控与SSL检查相结合可能是潜在解决方案，但我目前不知道有任何工具或产品这样做。</p>
+<p>我认为防御此攻击的主要方法是阻止向组织未使用的已知DoH服务器发送443/TCP出站流量。我遇到的大多数网络仍使用传统DNS，通常作为Active Directory环境一部分运行本地DNS服务器。这种情况下，无需允许向dns.google、cloudflare-dns.com或本文提到的其他服务器发送HTTPS流量。</p>
+<h2 id="结束语">结束语
+</h2><p>绝对有更多DNS over HTTPS服务器可用于此配置。此外，用户可以设置自己的DoH服务器，甚至可能位于CDN或其他云服务后面，以引入此技术的变体。</p>
+<p>TitanLdr仅限于Cobalt Strike，但DoH实现可以移植到任何其他C2框架。这种方法并非在所有情况下都是最佳选择，但它是我希望您能利用的工具箱中的另一个工具。如有任何问题或意见，请通过Twitter @kyleavery_与我联系。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/dns-over-https/">DNS Over HTTPS</a>
+        
+            <a href="/tags/cobalt-strike/">Cobalt Strike</a>
+        
+            <a href="/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/">红队技术</a>
+        
+            <a href="/tags/%E5%91%BD%E4%BB%A4%E6%8E%A7%E5%88%B6/">命令控制</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细分析了Aave借贷协议中存在的严重安全漏洞，该漏洞允许攻击者通过直接调用逻辑合约初始化函数并利用代理合约的delegatecall特性来破坏整个系统，影响范围波及多个外部DeFi合约。">
+<title>揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷">
+<meta property='og:description' content="本文详细分析了Aave借贷协议中存在的严重安全漏洞，该漏洞允许攻击者通过直接调用逻辑合约初始化函数并利用代理合约的delegatecall特性来破坏整个系统，影响范围波及多个外部DeFi合约。">
+<meta property='og:url' content='http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='区块链安全' /><meta property='article:tag' content='智能合约' /><meta property='article:tag' content='漏洞分析' /><meta property='article:published_time' content='2025-08-02T21:04:25&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T21:04:25&#43;08:00'/>
+<meta name="twitter:title" content="揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷">
+<meta name="twitter:description" content="本文详细分析了Aave借贷协议中存在的严重安全漏洞，该漏洞允许攻击者通过直接调用逻辑合约初始化函数并利用代理合约的delegatecall特性来破坏整个系统，影响范围波及多个外部DeFi合约。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#漏洞原理">漏洞原理</a></li>
+    <li><a href="#可升级合约初始化">可升级合约初始化</a></li>
+    <li><a href="#任意delegatecall">任意delegatecall</a></li>
+    <li><a href="#存在性检查缺失">存在性检查缺失</a></li>
+    <li><a href="#受影响合约">受影响合约</a></li>
+    <li><a href="#修复建议">修复建议</a></li>
+    <li><a href="#形式化验证非万能">形式化验证非万能</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/">揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细分析了Aave借贷协议中存在的严重安全漏洞，该漏洞允许攻击者通过直接调用逻辑合约初始化函数并利用代理合约的delegatecall特性来破坏整个系统，影响范围波及多个外部DeFi合约。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="breaking-aave-upgradeability">Breaking Aave Upgradeability
+</h1><p>2020年12月3日，Aave部署了其代码库的V2版本。虽然我们未被雇佣进行代码审计，但在次日我们对其进行了简要检查。我们迅速发现了一个同时影响V1和V2线上合约的漏洞并立即报告。Aave团队在收到分析报告后一小时内就修复了该漏洞。若被利用，该漏洞将摧毁Aave系统并影响外部DeFi合约中的资金。</p>
+<p>尽管有五家安全公司（包括使用形式化验证的机构）审计过Aave代码库，但此漏洞仍被遗漏。本文将详述该漏洞原理、为何未被发现以及经验教训。同时我们开源了新的Slither检测器以提升以太坊生态安全性。</p>
+<h2 id="漏洞原理">漏洞原理
+</h2><p>Aave使用了我们此前多次讨论的delegatecall代理模式。该模式将组件分为：1)包含实现逻辑的逻辑合约；2)包含数据并通过delegatecall与逻辑合约交互的代理合约。用户与代理合约交互，而代码在逻辑合约执行。以下是简化示意图：</p>
+<p>在Aave中，LendingPool(LendingPool.sol)是采用delegatecall代理的可升级组件。该漏洞依赖两个关键特性：</p>
+<ol>
+<li>逻辑合约的函数（包括初始化函数）可直接调用</li>
+<li>借贷池自身具有delegatecall能力</li>
+</ol>
+<h2 id="可升级合约初始化">可升级合约初始化
+</h2><p>这种升级模式的限制在于代理合约无法依赖逻辑合约的构造函数进行初始化。因此状态变量和初始设置必须在公开的初始化函数中完成，这些函数无法享受构造函数的保护机制。</p>
+<p>在LendingPool中，initialize函数设置provider地址(_addressesProvider)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-solidity" data-lang="solidity"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">ILendingPoolAddressesProvider</span> <span class="n">provider</span><span class="p">)</span> <span class="k">public</span> <span class="n">initializer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_addressesProvider</span> <span class="o">=</span> <span class="n">provider</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>initializer修饰符防止多次调用initialize，要求满足以下条件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-solidity" data-lang="solidity"><span class="line"><span class="cl"><span class="nb">require</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">initializing</span> <span class="o">||</span> <span class="n">isConstructor</span><span class="p">()</span> <span class="o">||</span> <span class="n">revision</span> <span class="o">&gt;</span> <span class="n">lastInitializedRevision</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#39;Contract instance has already been initialized&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中：</p>
+<ul>
+<li>initializing允许同一交易内多次调用</li>
+<li>isConstructor()供代理合约执行代码所需</li>
+<li>revision &gt; lastInitializedRevision允许合约升级时再次调用初始化函数</li>
+</ul>
+<p>通过代理调用时工作正常，但第三条也允许任何人直接调用逻辑合约的initialize函数。当逻辑合约部署后：</p>
+<ul>
+<li>revision为0x2</li>
+<li>lastInitializedRevision为0x0</li>
+</ul>
+<p><strong>漏洞本质</strong>：任何人都能设置LendingPool逻辑合约的_addressesProvider。</p>
+<h2 id="任意delegatecall">任意delegatecall
+</h2><p>LendingPool.liquidationCall直接delegatecall到_addressProvider返回的地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-solidity" data-lang="solidity"><span class="line"><span class="cl"><span class="kt">address</span> <span class="n">collateralManager</span> <span class="o">=</span> <span class="n">_addressesProvider</span><span class="p">.</span><span class="n">getLendingPoolCollateralManager</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">,</span> <span class="kt">bytes</span> <span class="k">memory</span> <span class="n">result</span><span class="p">)</span> <span class="o">=</span> <span class="n">collateralManager</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">abi</span><span class="p">.</span><span class="nb">encodeWithSignature</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#39;liquidationCall(address,address,address,uint256,bool)&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">collateralAsset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">debtAsset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">user</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">debtToCover</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">receiveAToken</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这使得攻击者可：</p>
+<ol>
+<li>初始化LendingPool逻辑合约</li>
+<li>设置受控的addresses provider</li>
+<li>执行任意代码（包括selfdestruct）</li>
+</ol>
+<p><strong>攻击场景</strong>：任何人都能销毁借贷池逻辑合约。简化示意图如下：</p>
+<h2 id="存在性检查缺失">存在性检查缺失
+</h2><p>该漏洞本身已足够严重（可类比Parity事件）。但OpenZeppelin代理合约的使用放大了危害。我们2018年的博文曾指出：对空合约的delegatecall会返回success但不会执行任何代码。尽管有此警告，OpenZeppelin仍未修复其代理合约的回退函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-solidity" data-lang="solidity"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">_delegate</span><span class="p">(</span><span class="kt">address</span> <span class="n">implementation</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assembly</span> {
+</span></span><span class="line"><span class="cl">        <span class="nf">calldatacopy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">calldatasize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="ow">let</span> <span class="nv">result</span> <span class="o">:=</span> <span class="nf">delegatecall</span><span class="p">(</span><span class="nf">gas</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">calldatasize</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若代理合约delegatecall到已被销毁的逻辑合约，代理将返回success但实际未执行任何代码。虽然Aave可通过更新代理指向新逻辑合约来修复，但在漏洞存在期间，任何第三方合约调用借贷池时都会误认为代码已执行。</p>
+<h2 id="受影响合约">受影响合约
+</h2><p>所有AToken：用户燃烧AToken但无法取回底层资产
+WETHGateway：存款会存储在网关中导致资产被盗
+基于Aave Credit Delegation v2的所有代码库
+其他受影响的外部合约包括：</p>
+<ul>
+<li>DefiSaver v1/v2</li>
+<li>PieDao等</li>
+</ul>
+<p>这凸显了DeFi可组合性的潜在风险。</p>
+<h2 id="修复建议">修复建议
+</h2><p>幸运的是漏洞在被利用前就被修复。Aave调用了两个版本借贷池的initialize函数进行加固：</p>
+<ul>
+<li>V1修复时间：2020-12-04 19:34:26 UTC</li>
+<li>V2修复时间：2020-12-04 19:53:00 UTC</li>
+</ul>
+<p>长期建议：</p>
+<ol>
+<li>在所有逻辑合约中添加构造函数禁用initialize函数</li>
+<li>在代理合约的回退函数中添加合约存在性检查</li>
+<li>仔细审查delegatecall陷阱并使用slither-check-upgradeability</li>
+</ol>
+<h2 id="形式化验证非万能">形式化验证非万能
+</h2><p>Aave代码库经过&quot;形式化验证&quot;，但该漏洞证明安全属性并非绝对。验证报告中的属性（如操作成功时返回true不回滚）在逻辑合约被销毁时就会失效。可能原因包括：</p>
+<ul>
+<li>验证未考虑可升级性</li>
+<li>验证工具不支持复杂合约交互</li>
+</ul>
+<p>形式化技术虽好，但需注意其覆盖范围有限。相比之下，自动化工具（如Slither）和人工审计能以较少资源实现更高安全保证。</p>
+<h2 id="结论">结论
+</h2><p>Aave反应迅速值得肯定，但其他项目就没这么幸运。我们建议开发者在部署前：</p>
+<ol>
+<li>参考我们的安全清单和培训材料</li>
+<li>将Slither加入CI流程并检查所有报告</li>
+<li>给予安全团队充足的审计时间</li>
+<li>谨慎处理可升级性，至少阅读相关反模式文档</li>
+</ol>
+<p>我们通过公开此漏洞和Slither检测器希望预防类似错误。安全是持续过程，建议项目启动前联系我们进行安全审计。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/">区块链安全</a>
+        
+            <a href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E8%B6%85%E8%B6%8A%E7%A7%81%E9%92%A5%E9%A3%8E%E9%99%A9%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">超越私钥风险：智能合约安全成熟度进阶指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

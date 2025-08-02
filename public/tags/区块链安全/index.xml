@@ -7,7 +7,231 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 07:29:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 21:04:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</link>
+        <pubDate>Sat, 02 Aug 2025 21:04:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</guid>
+        <description>&lt;h1 id=&#34;breaking-aave-upgradeability&#34;&gt;Breaking Aave Upgradeability
+&lt;/h1&gt;&lt;p&gt;2020年12月3日，Aave部署了其代码库的V2版本。虽然我们未被雇佣进行代码审计，但在次日我们对其进行了简要检查。我们迅速发现了一个同时影响V1和V2线上合约的漏洞并立即报告。Aave团队在收到分析报告后一小时内就修复了该漏洞。若被利用，该漏洞将摧毁Aave系统并影响外部DeFi合约中的资金。&lt;/p&gt;
+&lt;p&gt;尽管有五家安全公司（包括使用形式化验证的机构）审计过Aave代码库，但此漏洞仍被遗漏。本文将详述该漏洞原理、为何未被发现以及经验教训。同时我们开源了新的Slither检测器以提升以太坊生态安全性。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h2&gt;&lt;p&gt;Aave使用了我们此前多次讨论的delegatecall代理模式。该模式将组件分为：1)包含实现逻辑的逻辑合约；2)包含数据并通过delegatecall与逻辑合约交互的代理合约。用户与代理合约交互，而代码在逻辑合约执行。以下是简化示意图：&lt;/p&gt;
+&lt;p&gt;在Aave中，LendingPool(LendingPool.sol)是采用delegatecall代理的可升级组件。该漏洞依赖两个关键特性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;逻辑合约的函数（包括初始化函数）可直接调用&lt;/li&gt;
+&lt;li&gt;借贷池自身具有delegatecall能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;可升级合约初始化&#34;&gt;可升级合约初始化
+&lt;/h2&gt;&lt;p&gt;这种升级模式的限制在于代理合约无法依赖逻辑合约的构造函数进行初始化。因此状态变量和初始设置必须在公开的初始化函数中完成，这些函数无法享受构造函数的保护机制。&lt;/p&gt;
+&lt;p&gt;在LendingPool中，initialize函数设置provider地址(_addressesProvider)：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ILendingPoolAddressesProvider&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;initializer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_addressesProvider&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;initializer修饰符防止多次调用initialize，要求满足以下条件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;initializing&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isConstructor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;revision&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lastInitializedRevision&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s&#34;&gt;&amp;#39;Contract instance has already been initialized&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;initializing允许同一交易内多次调用&lt;/li&gt;
+&lt;li&gt;isConstructor()供代理合约执行代码所需&lt;/li&gt;
+&lt;li&gt;revision &amp;gt; lastInitializedRevision允许合约升级时再次调用初始化函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过代理调用时工作正常，但第三条也允许任何人直接调用逻辑合约的initialize函数。当逻辑合约部署后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;revision为0x2&lt;/li&gt;
+&lt;li&gt;lastInitializedRevision为0x0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;漏洞本质&lt;/strong&gt;：任何人都能设置LendingPool逻辑合约的_addressesProvider。&lt;/p&gt;
+&lt;h2 id=&#34;任意delegatecall&#34;&gt;任意delegatecall
+&lt;/h2&gt;&lt;p&gt;LendingPool.liquidationCall直接delegatecall到_addressProvider返回的地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;address&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collateralManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_addressesProvider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getLendingPoolCollateralManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;memory&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collateralManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;delegatecall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;abi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;encodeWithSignature&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s&#34;&gt;&amp;#39;liquidationCall(address,address,address,uint256,bool)&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;collateralAsset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;debtAsset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;debtToCover&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;receiveAToken&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这使得攻击者可：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;初始化LendingPool逻辑合约&lt;/li&gt;
+&lt;li&gt;设置受控的addresses provider&lt;/li&gt;
+&lt;li&gt;执行任意代码（包括selfdestruct）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;攻击场景&lt;/strong&gt;：任何人都能销毁借贷池逻辑合约。简化示意图如下：&lt;/p&gt;
+&lt;h2 id=&#34;存在性检查缺失&#34;&gt;存在性检查缺失
+&lt;/h2&gt;&lt;p&gt;该漏洞本身已足够严重（可类比Parity事件）。但OpenZeppelin代理合约的使用放大了危害。我们2018年的博文曾指出：对空合约的delegatecall会返回success但不会执行任何代码。尽管有此警告，OpenZeppelin仍未修复其代理合约的回退函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;_delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;address&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;assembly&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;calldatacopy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calldatasize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ow&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;delegatecall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;gas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calldatasize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;若代理合约delegatecall到已被销毁的逻辑合约，代理将返回success但实际未执行任何代码。虽然Aave可通过更新代理指向新逻辑合约来修复，但在漏洞存在期间，任何第三方合约调用借贷池时都会误认为代码已执行。&lt;/p&gt;
+&lt;h2 id=&#34;受影响合约&#34;&gt;受影响合约
+&lt;/h2&gt;&lt;p&gt;所有AToken：用户燃烧AToken但无法取回底层资产
+WETHGateway：存款会存储在网关中导致资产被盗
+基于Aave Credit Delegation v2的所有代码库
+其他受影响的外部合约包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DefiSaver v1/v2&lt;/li&gt;
+&lt;li&gt;PieDao等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这凸显了DeFi可组合性的潜在风险。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;幸运的是漏洞在被利用前就被修复。Aave调用了两个版本借贷池的initialize函数进行加固：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;V1修复时间：2020-12-04 19:34:26 UTC&lt;/li&gt;
+&lt;li&gt;V2修复时间：2020-12-04 19:53:00 UTC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;长期建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在所有逻辑合约中添加构造函数禁用initialize函数&lt;/li&gt;
+&lt;li&gt;在代理合约的回退函数中添加合约存在性检查&lt;/li&gt;
+&lt;li&gt;仔细审查delegatecall陷阱并使用slither-check-upgradeability&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;形式化验证非万能&#34;&gt;形式化验证非万能
+&lt;/h2&gt;&lt;p&gt;Aave代码库经过&amp;quot;形式化验证&amp;quot;，但该漏洞证明安全属性并非绝对。验证报告中的属性（如操作成功时返回true不回滚）在逻辑合约被销毁时就会失效。可能原因包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;验证未考虑可升级性&lt;/li&gt;
+&lt;li&gt;验证工具不支持复杂合约交互&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;形式化技术虽好，但需注意其覆盖范围有限。相比之下，自动化工具（如Slither）和人工审计能以较少资源实现更高安全保证。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Aave反应迅速值得肯定，但其他项目就没这么幸运。我们建议开发者在部署前：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;参考我们的安全清单和培训材料&lt;/li&gt;
+&lt;li&gt;将Slither加入CI流程并检查所有报告&lt;/li&gt;
+&lt;li&gt;给予安全团队充足的审计时间&lt;/li&gt;
+&lt;li&gt;谨慎处理可升级性，至少阅读相关反模式文档&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们通过公开此漏洞和Slither检测器希望预防类似错误。安全是持续过程，建议项目启动前联系我们进行安全审计。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>超越私钥风险：智能合约安全成熟度进阶指南</title>
+        <link>http://localhost:1313/p/%E8%B6%85%E8%B6%8A%E7%A7%81%E9%92%A5%E9%A3%8E%E9%99%A9%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sat, 02 Aug 2025 20:14:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B6%85%E8%B6%8A%E7%A7%81%E9%92%A5%E9%A3%8E%E9%99%A9%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;超越私钥风险智能合约安全成熟度进阶&#34;&gt;超越私钥风险：智能合约安全成熟度进阶
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;找出所有漏洞！&amp;rdquo;&lt;/strong&gt;&lt;br&gt;
+这是大多数协议在部署智能合约前的安全口号。团队投入巨资进行审计、竞赛、模糊测试和形式化验证，试图发现每个潜在漏洞。但去年加密货币被盗的最大原因并非智能合约漏洞——而是私钥泄露！&lt;/p&gt;
+&lt;h2 id=&#34;私钥攻击已成头号威胁&#34;&gt;私钥攻击已成头号威胁
+&lt;/h2&gt;&lt;p&gt;根据Chainalysis 2024年报告，43.8%的被盗资金源于私钥泄露，是其他攻击类型的五倍之多。私钥泄露已成为每个工程师设计新智能合约时必须考虑的新兴威胁。&lt;/p&gt;
+&lt;p&gt;传统区块链安全审计往往忽视架构层面的访问控制风险。与其他行业不同，区块链安全评估很少将权限升级和访问控制设计作为核心关注点。Trail of Bits通过代码库成熟度评估标记架构问题，但多数协议直到开发生命周期末期才寻求外部审查。&lt;/p&gt;
+&lt;h2 id=&#34;案例研究超额抵押借贷平台&#34;&gt;案例研究：超额抵押借贷平台
+&lt;/h2&gt;&lt;p&gt;我们以理论上的超额抵押借贷平台为例，展示不同成熟度的访问控制设计：&lt;/p&gt;
+&lt;h3 id=&#34;等级1高风险暴露---单一eoa控制器&#34;&gt;等级1：高风险暴露 - 单一EOA控制器
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;单个外部账户(EOA)控制所有管理功能&lt;/li&gt;
+&lt;li&gt;私钥可能存储在联网的软件钱包中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成熟度等级1&lt;/strong&gt;：单点故障，一旦私钥泄露即导致协议完全沦陷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;等级2基础缓解---中心化多签&#34;&gt;等级2：基础缓解 - 中心化多签
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;管理权转移至多签钱包（如M-of-N Safe Wallet）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成熟度等级2&lt;/strong&gt;：需要多个签名，但仍存在单一控制点&lt;/li&gt;
+&lt;li&gt;改进：单个签名者密钥泄露不足以致命&lt;/li&gt;
+&lt;li&gt;风险：足够多签名者被攻陷仍可立即执行恶意操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;等级3增强控制---时间锁与角色分离&#34;&gt;等级3：增强控制 - 时间锁与角色分离
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;实施时间锁合约（执行延迟）和最小权限原则(PoLP)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成熟度等级3&lt;/strong&gt;：深度防御体系&lt;/li&gt;
+&lt;li&gt;典型协议：Aave、Compound Finance、Lido&lt;/li&gt;
+&lt;li&gt;关键角色：
+&lt;ul&gt;
+&lt;li&gt;核心系统角色（合约升级）：高门槛多签+长时间锁&lt;/li&gt;
+&lt;li&gt;运营角色（日常配置）：中等时间锁和签名门槛&lt;/li&gt;
+&lt;li&gt;暂停监护角色（紧急暂停）：无时间锁+低门槛&lt;/li&gt;
+&lt;li&gt;取消监护角色（中止交易）：安全团队控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;等级4终极形态---彻底不可变与用户主权&#34;&gt;等级4：终极形态 - 彻底不可变与用户主权
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;完全消除管理操作需求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成熟度等级4&lt;/strong&gt;：近乎无控制点的不可变系统&lt;/li&gt;
+&lt;li&gt;典型协议：Uniswap、Liquity&lt;/li&gt;
+&lt;li&gt;设计挑战：
+&lt;ul&gt;
+&lt;li&gt;合约完全不可升级（需部署新系统）&lt;/li&gt;
+&lt;li&gt;资产上架需独立部署新市场&lt;/li&gt;
+&lt;li&gt;风险参数永久固定或算法决定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优势：彻底消除访问控制风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;设计韧性而非被动应对&#34;&gt;设计韧性而非被动应对
+&lt;/h2&gt;&lt;p&gt;2024年43.8%的被盗资金证明，忽视架构级访问控制已不可接受。建议立即行动：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对照成熟度框架评估当前协议&lt;/li&gt;
+&lt;li&gt;为高风险功能实施时间锁并确保监控&lt;/li&gt;
+&lt;li&gt;按最小权限原则划分特权功能&lt;/li&gt;
+&lt;li&gt;考虑部分组件采用等级4不可变模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在Trail of Bits，我们提倡这种安全整体观。通过设计审查和早期咨询等服务，帮助团队主动解决这些基础问题。构建安全的去中心化系统不仅需要漏洞狩猎，更需从第一天就开始设计运营韧性。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式</title>
         <link>http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/</link>
         <pubDate>Sat, 02 Aug 2025 07:29:18 +0800</pubDate>

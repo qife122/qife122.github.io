@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>后渗透 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%90%8E%E6%B8%97%E9%80%8F/</link>
+        <description>Recent content in 后渗透 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 19:09:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%90%8E%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>绕过Windows版Okta多因素认证凭证提供程序的技术分析</title>
+        <link>http://localhost:1313/p/%E7%BB%95%E8%BF%87windows%E7%89%88okta%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%87%AD%E8%AF%81%E6%8F%90%E4%BE%9B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 19:09:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BB%95%E8%BF%87windows%E7%89%88okta%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%87%AD%E8%AF%81%E6%8F%90%E4%BE%9B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;绕过windows版okta多因素认证凭证提供程序&#34;&gt;绕过Windows版Okta多因素认证凭证提供程序
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;发布日期：2023年2月16日&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;需要提前说明的是，这是一项&lt;strong&gt;后渗透技术&lt;/strong&gt;，主要适用于已通过其他方式获取系统管理员权限后，希望在不触发MFA的情况下进行RDP连接的场景。&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;Okta MFA凭证提供程序通过多因素认证强化远程桌面协议(RDP)的安全验证。启用该功能后，访问已加入域的Windows工作站和服务器时，RDP客户端会强制要求MFA验证。&lt;/p&gt;
+&lt;p&gt;（参考：&lt;a class=&#34;link&#34; href=&#34;https://help.okta.com/en-us/Content/Topics/Security/proc-mfa-win-creds-rdp.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Okta官方文档&lt;/a&gt;）&lt;/p&gt;
+&lt;h2 id=&#34;与duo方案的差异&#34;&gt;与Duo方案的差异
+&lt;/h2&gt;&lt;p&gt;本技术与作者此前发布的《绕过Duo双因素认证》方法类似，但存在关键差异：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Okta默认不启用&amp;quot;故障开放&amp;quot;（fail open）模式&lt;/li&gt;
+&lt;li&gt;默认配置不限于RDP场景，因此控制台绕过成功率较低&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现
+&lt;/h2&gt;&lt;p&gt;在已获取管理员权限的shell中，可通过以下步骤禁用MFA验证：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;定位配置文件路径：
+&lt;code&gt;C:\Program Files\Okta\Okta Windows Credential Provider\config\rdp_app_config.json&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改两个关键参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将&lt;code&gt;InternetFailOpenOption&lt;/code&gt;值改为&lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将&lt;code&gt;Url&lt;/code&gt;值修改为无效地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;完成上述修改后，RDP连接将不再触发Okta MFA验证。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;虽然管理员权限可以直接卸载软件，但修改配置文件是最隐蔽的持久化方法。操作完成后可随时恢复原配置。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

