@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 10:59:22 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 23:13:07 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MS13-051漏洞分析：Office PNG解析漏洞的技术细节与攻击模式</title>
+      <link>https://qife122.github.io/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 02 Aug 2025 23:13:07 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</guid>
+      <description>&lt;h1 id=&#34;ms13-051get-out-of-my-office&#34;&gt;MS13-051：Get Out of My Office!&lt;/h1&gt;&#xA;&lt;p&gt;MS13-051修复了Microsoft Office 2003和Office for Mac中的一个安全漏洞。较新版本的Windows版Office不受此漏洞影响，但Mac版Office 2011仍受影响。我们已发现该漏洞在野外的针对性0day攻击中被利用。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MS Exchange新攻击面分析第四部：ProxyRelay技术揭秘</title>
+      <link>https://qife122.github.io/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</link>
+      <pubDate>Sat, 02 Aug 2025 21:26:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ms-exchange%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E5%88%86%E6%9E%90%E7%AC%AC%E5%9B%9B%E9%83%A8proxyrelay%E6%8A%80%E6%9C%AF%E6%8F%AD%E7%A7%98/</guid>
+      <description>&lt;h1 id=&#34;ms-exchange新攻击面分析第四部proxyrelay&#34;&gt;MS Exchange新攻击面分析第四部：ProxyRelay！&lt;/h1&gt;&#xA;&lt;p&gt;这是来自DEVCORE的交叉发布博客。完整系列包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;MS Exchange新攻击面分析第一部：ProxyLogon！&lt;/li&gt;&#xA;&lt;li&gt;MS Exchange新攻击面分析第二部：ProxyOracle！&lt;/li&gt;&#xA;&lt;li&gt;MS Exchange新攻击面分析第三部：ProxyShell！&lt;/li&gt;&#xA;&lt;li&gt;MS Exchange新攻击面分析第四部：ProxyRelay！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;背景说明&#34;&gt;背景说明&lt;/h2&gt;&#xA;&lt;p&gt;这篇迟来的文章原本可以更早发布（原始漏洞于2021年6月报告给MSRC，遵循90天公开披露政策）。在与MSRC沟通期间，他们解释由于这是架构设计问题，需要进行大量代码修改和测试，因此希望通过累积更新(CU)而非常规补丁周二一次性解决。我们理解这一情况并同意延长截止日期。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>揭秘Aave可升级合约漏洞 - 代理模式下的致命缺陷</title>
+      <link>https://qife122.github.io/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</link>
+      <pubDate>Sat, 02 Aug 2025 21:04:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%8F%AD%E7%A7%98aave%E5%8F%AF%E5%8D%87%E7%BA%A7%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7/</guid>
+      <description>&lt;h1 id=&#34;breaking-aave-upgradeability&#34;&gt;Breaking Aave Upgradeability&lt;/h1&gt;&#xA;&lt;p&gt;2020年12月3日，Aave部署了其代码库的V2版本。虽然我们未被雇佣进行代码审计，但在次日我们对其进行了简要检查。我们迅速发现了一个同时影响V1和V2线上合约的漏洞并立即报告。Aave团队在收到分析报告后一小时内就修复了该漏洞。若被利用，该漏洞将摧毁Aave系统并影响外部DeFi合约中的资金。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>IE/Edge崩溃可利用性分析与微软安全防护技术解析</title>
       <link>https://qife122.github.io/p/ie/edge%E5%B4%A9%E6%BA%83%E5%8F%AF%E5%88%A9%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
