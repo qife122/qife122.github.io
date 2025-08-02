@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了AES-GEM（带伽罗瓦扩展模式的AES），这是一种针对AES-GCM现有安全弱点进行改进的新型加密模式。文章探讨了AES-GCM的局限性，AES-GEM的设计原理、性能特点，以及如何通过扩展nonce空间、改进子密钥派生和增加密钥承诺等机制来提升安全性。">
+<title>宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式">
+<meta property='og:description' content="本文详细介绍了AES-GEM（带伽罗瓦扩展模式的AES），这是一种针对AES-GCM现有安全弱点进行改进的新型加密模式。文章探讨了AES-GCM的局限性，AES-GEM的设计原理、性能特点，以及如何通过扩展nonce空间、改进子密钥派生和增加密钥承诺等机制来提升安全性。">
+<meta property='og:url' content='http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='加密技术' /><meta property='article:tag' content='AES' /><meta property='article:tag' content='区块链安全' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-02T07:29:18&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T07:29:18&#43;08:00'/>
+<meta name="twitter:title" content="宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式">
+<meta name="twitter:description" content="本文详细介绍了AES-GEM（带伽罗瓦扩展模式的AES），这是一种针对AES-GCM现有安全弱点进行改进的新型加密模式。文章探讨了AES-GCM的局限性，AES-GEM的设计原理、性能特点，以及如何通过扩展nonce空间、改进子密钥派生和增加密钥承诺等机制来提升安全性。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#aes工作原理">AES工作原理</a></li>
+    <li><a href="#aes-gcm当前的实际挑战">AES-GCM当前的实际挑战</a></li>
+    <li><a href="#介绍aes-gem">介绍AES-GEM</a></li>
+    <li><a href="#从gcm到gem的道路">从GCM到GEM的道路</a></li>
+    <li><a href="#aes-gem的性能特征">AES-GEM的性能特征</a></li>
+    <li><a href="#完善aes-gem">完善AES-GEM</a></li>
+    <li><a href="#切割gem">切割GEM</a></li>
+    <li><a href="#在哪里可以了解更多关于aes-gem的信息">在哪里可以了解更多关于AES-GEM的信息？</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/">宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了AES-GEM（带伽罗瓦扩展模式的AES），这是一种针对AES-GCM现有安全弱点进行改进的新型加密模式。文章探讨了AES-GCM的局限性，AES-GEM的设计原理、性能特点，以及如何通过扩展nonce空间、改进子密钥派生和增加密钥承诺等机制来提升安全性。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 13 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="宣布aes-gem带伽罗瓦扩展模式的aes">宣布AES-GEM（带伽罗瓦扩展模式的AES）
+</h1><p>今天，AES-GCM是TLS 1.3使用的两种加密模式之一（另一种是ChaCha20-Poly1305），也是FIPS验证模块中加密数据的首选方法。但尽管取得了巨大成功，AES-GCM也曾导致一些灾难性故障：例如Hanno Böck和Sean Devlin利用nonce重用漏洞将他们的Black Hat USA幻灯片注入MI5网站。</p>
+<p>多年来，安全研究人员一直在警告AES-GCM的弱点。19年前，Niels Ferguson向NIST提交论文指出AES-GCM存在的认证弱点（尽管NIST最终将其标准化）。今年早些时候，亚马逊发布论文详细说明了AES-GCM的实际挑战，并认为AES的128位块大小已不再足够，更倾向于使用256位块密码（即Rijndael-256）。</p>
+<p>为解决这些问题，我提出了一种名为Galois Extended Mode（简称GEM）的新块密码模式，上个月已在NIST关于手风琴模式密码需求的研讨会上展示。AES-GEM以最小的性能开销在各个方面提升了GCM的安全性。</p>
+<p><strong>重要提示</strong>：当前AES-GEM设计尚未准备好投入生产使用，因为某些细节可能会在未来发生变化。要理解当前设计，让我们先了解AES-GCM的不足，然后讨论如何用GEM做得更好。</p>
+<h2 id="aes工作原理">AES工作原理
+</h2><p>在深入之前，有必要为部分读者解释本文中使用的一些术语和概念。</p>
+<p>AES（高级加密标准）是一种广泛用于加密信息的块密码。它支持多种密钥大小（128位、192位和256位密钥），但始终操作128位块。AES是Rijndael块密码家族的标准化形式。Rijndael支持其他块大小，但NIST仅标准化了128位块。现代处理器提供专用硬件指令加速AES操作，但AES密钥调度仍可能对性能产生负面影响。</p>
+<p>ECB（电子密码本）模式是没有块密码操作模式的情况。它涉及直接在数据块上计算块密码。正如许多密码学家所证明的，ECB模式不是语义安全的。为提高安全性，像AES这样的块密码通常与操作模式一起使用。（如果没有，几乎肯定应该这样做。如果您认为正在使用ECB加密敏感数据，请联系我们的密码学团队。）</p>
+<p>CTR（计数器模式）是一种块密码操作模式，其中递增的值序列通过块密码加密以产生伪随机密钥流。要加密数据，只需计算每个明文字节与相应密钥流字节的XOR。</p>
+<p>GCM（伽罗瓦/计数器模式）是一种提供认证加密的块密码操作模式。密码学家称之为AEAD模式：带附加数据的认证加密。GCM可以为敏感数据提供机密性，为敏感和公共数据提供完整性。</p>
+<p>AEAD模式对于设计密码系统非常重要，这些系统能够抵抗试图改变加密数据以研究系统行为从而希望获得密码分析有用信息的攻击者。</p>
+<p>GCM是用于加密明文的计数器模式（CTR）和用于认证密文（以及如果提供，附加关联数据）的伽罗瓦域消息认证码（GMAC）的组合。GMAC使用称为GHASH的函数定义，该函数是在认证数据上评估的多项式。GHASH的输出与加密计数器块的XOR产生最终认证标签。认证密钥H通过加密128位零块计算得出。</p>
+<p>POLYVAL是GHASH的替代方案，用于AES-GCM-SIV。POLYVAL使用的不可约多项式是GHASH不可约多项式的反转。</p>
+<p>许多密码模式（包括GCM和CTR）要求每个消息使用一个仅使用一次的数字。这个永远不应重复的公共数字称为nonce。</p>
+<p>最后，生日边界是概率论中的一个概念，表示一组随机值中冲突的可能性。在密码学中，它意味着如果随机选择nonce，随着使用更多nonce，两个nonce冲突的概率显著增加。对于具有96位nonce的AES-GCM，大约232条消息后，有1/232的nonce冲突概率，这可能导致诸如伪造消息等安全漏洞。</p>
+<h2 id="aes-gcm当前的实际挑战">AES-GCM当前的实际挑战
+</h2><p>正如其他人指出的那样，AES-GCM的最大挑战是AES只有128位块大小。这有两个主要后果：</p>
+<ol>
+<li>
+<p>公共nonce和内部计数器的大小被限制为总共128位。实际上，nonce大小通常为96位，计数器为32位。如果选择更大的nonce，它会被哈希压缩到适当大小，这对安全性几乎没有改善。如果重用nonce，则会泄漏认证子密钥，因此可以无限期伪造消息。</p>
+</li>
+<li>
+<p>在相同密钥下加密超过一定数量的块后，攻击者可以以显著概率区分密文和随机字节。</p>
+</li>
+</ol>
+<p>当您理解我们处理的是2的幂时，96位nonce空间可能听起来很多，但如果随机选择nonce，只能加密232条消息，然后有2-32的冲突概率。使用具有更大块大小的密码可以缓解这一点，但这不是唯一的解决方法。</p>
+<p>AES块大小不是AES-GCM实践中唯一的问题。正如Niels Ferguson在2005年指出的那样，针对短标签的成功伪造会揭示认证子密钥。</p>
+<p>此外，我们还了解到AES-GCM具有一个意外属性，即多个密钥可以解密相同的密文+认证标签。其发现者将这个问题称为&quot;隐形蝾螈&quot;，因为它允许他们在一款加密消息应用程序的滥用报告工具中隐藏蝾螈图片。在使用AES-GCM的协议中防止隐形蝾螈需要对使用的密钥进行某种单向承诺。</p>
+<p>最后，AES-GCM中单个消息的最大明文长度相对较小：略低于64 GiB。为应对此最大长度，软件通常将较大消息分解为适合此长度限制的较短帧。这导致生日边界前的有限nonce空间比如果容忍较长消息时更快耗尽。</p>
+<h2 id="介绍aes-gem">介绍AES-GEM
+</h2><p>我们的提案Galois Extended Mode是对GCM（伽罗瓦/计数器模式）的修改，目前解决了大多数这些弱点。然而，关于我们想要采用哪种策略来缓解最后一点，仍然存在一个开放性问题，我将在稍后解释。</p>
+<p>在高层次上，我们提出了两种变体：AES-128-GEM和AES-256-GEM。我们还使用标准AEAD接口指定了两种AEAD构造。</p>
+<p><strong>AES-128-GEM</strong></p>
+<ul>
+<li>密钥长度：128位</li>
+<li>子密钥长度：128位</li>
+<li>Nonce长度：192位</li>
+<li>最大明文长度：261 – 1字节</li>
+<li>最大AAD长度：261 – 1字节</li>
+<li>标签长度：48字节（AEAD）或16字节（无承诺）</li>
+</ul>
+<p><strong>AES-256-GEM</strong></p>
+<ul>
+<li>密钥长度：256位</li>
+<li>子密钥长度：256位</li>
+<li>Nonce长度：256位</li>
+<li>最大明文长度：261 – 1字节</li>
+<li>最大AAD长度：261 – 1字节</li>
+<li>标签长度：48字节（AEAD）或16字节（无承诺）</li>
+</ul>
+<h2 id="从gcm到gem的道路">从GCM到GEM的道路
+</h2><p>如果您从AES-GCM的现有设计开始并进行以下更改，您将得到GEM的当前草案。</p>
+<p><strong>Nonce扩展</strong>
+首先，我们需要一个更长的nonce，我们将在下一步中用于子密钥派生。</p>
+<p>对于256位密钥，256位nonce是一个很好的整数。对于128位密钥，我们最终需要192位。</p>
+<p>无论哪种情况，最右边的64位将保留用于实际底层加密。剩余的位（AES-256为192位，AES-128为128位）将用于子密钥派生。</p>
+<p>这使我们能够分摊密钥派生的成本，并在多个消息上设置AES密钥调度，前提是nonce和密钥的前（n – 64）位相同。</p>
+<p><strong>子密钥派生</strong>
+使用AES进行密钥派生有多种策略。在Real World Cryptography 2024上，Shay Gueron展示了DNDK-GCM，它使用了一种有趣的结构来实现子密钥派生。</p>
+<p>我们希望保持简单和易于理解。因此，我们基于CBC-MAC构建了密钥派生策略，因为CMAC已经是FIPS批准的MAC（即用于AES-CCM）。</p>
+<p>在AES-256的情况下，我们使用两个CBC-MAC输出来派生256位子密钥。然而，这种方法有一个微妙恼人的特性：两半永远不会产生相同的输出，因此严格来说，可能的输出少于2256个。</p>
+<p>在GEM的两种变体中，我们借用了Salsa20设计中的一个技巧：将输出与输入密钥进行XOR，以确保子密钥对于任何不知道输入密钥的攻击者来说与均匀随机无法区分。如果您不知道此密钥，则输出与适当长度的随机密钥无法区分。</p>
+<p><strong>支持更长的消息</strong>
+我们需要64位剩余nonce而不是GCM典型的96位的原因是我们的内部计数器大小不是32位长。相反，它是64位长。</p>
+<p>否则，如当前所写，GEM的行为与您对GCM的期望相同：它使用计数器模式进行批量数据加密。让我们暂时搁置这一点，稍后再讨论。</p>
+<p><strong>改进的认证安全性</strong>
+我们的现有设计AES-GCM按以下方式构建：</p>
+<ol>
+<li>通过用密钥加密全清零块派生认证子密钥H。</li>
+<li>计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。</li>
+<li>将步骤2的输出与计数器块的AES-CTR加密进行XOR。</li>
+</ol>
+<p>我们的设计大致相同，但有一个重要的调整：</p>
+<ol>
+<li>通过用子密钥加密全置位块派生认证子密钥H。</li>
+<li>计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。</li>
+<li>使用输入密钥通过AES-ECB加密步骤2的输出。</li>
+<li>将步骤3的输出与计数器块的AES-CTR加密进行XOR。</li>
+</ol>
+<p>步骤3直接解决了Niels Ferguson在2005年指出的AES-GCM弱点。其他更改是实现细节。</p>
+<p>此调整为短标签提供了更好的安全性，因为原始GHASH输出位的AES加密是一种非线性变换，没有密钥无法反转。我们使用输入密钥而不是子密钥，因为唯一其他使用输入密钥加密数据的地方（即子密钥派生）永远不会直接暴露。</p>
+<p><strong>密钥承诺</strong>
+在我们解决GEM对隐形蝾螈式攻击的保护之前，我们需要分析设计中的其他一些微妙之处。</p>
+<p>GCM和GEM的最终块中的组件长度都以位而非字节表示，并且每个都限制为264。这意味着，尽管由于内部计数器，GEM理论上可以允许每条消息最多264块（或268字节）的明文，但我们必须调整最终的GHASH步骤以适应这种额外开销。</p>
+<p>相反，内部计数器的不可达值保留用于密码的内部使用。具体来说，内部计数器值以0x02000000 00000000到0xFFFFFFFF FFFFFFFF结尾的无法在尊重明文261 – 1字节限制的同时达到。</p>
+<p>全置位块（0xFFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF）已在GEM中用于认证子密钥，而64位尾部nonce + 0xFFFFFFFF 0xFFFFFFFE用于计数器块，用于最终认证标签计算。</p>
+<p>为提供密钥承诺，接下来的两个块，nonce + 0xFFFFFFFF 0xFFFFFFFC和0xFFFFFFFF 0xFFFFFFFD将用作密钥和nonce的承诺值。</p>
+<p>我们指定两个块是因为在此处使用一个AES块是不够的。考虑AES-256的情况，它具有256位密钥和128位块：根据鸽巢原理，我们预计有2128个不同的密钥将给定的固定明文值映射到固定密文值。因此，单个块不足以进行承诺。然而，假设块密码是安全的，对于两个连续块，不需要这种鸽巢考虑。</p>
+<p>通过这种方式，我们可以快速生成给定密钥和nonce的承诺值。</p>
+<p>在AEAD接口中，承诺附加到认证标签。解密消息时，必须以恒定时间将两者与其重新计算的值进行比较。</p>
+<h2 id="aes-gem的性能特征">AES-GEM的性能特征
+</h2><p>尽管我们已经解决了GCM的大部分痛点，但GEM的实际性能影响很小。</p>
+<p><strong>AES-256-GEM：</strong></p>
+<ul>
+<li>密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度</li>
+<li>认证：一个额外的AES加密块</li>
+<li>密钥承诺：两个额外的AES加密块</li>
+</ul>
+<p><strong>AES-128-GEM：</strong></p>
+<ul>
+<li>密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度</li>
+<li>认证：一个额外的AES加密块</li>
+<li>密钥承诺：两个额外的AES加密块</li>
+</ul>
+<p>由于如今AES由于硬件加速非常快，这种性能影响在除最性能敏感的应用外的所有应用中应该几乎不明显。在这些情况下，如果派生子密钥被缓存，密钥派生性能成本可以在多达232条不同消息中分摊。</p>
+<h2 id="完善aes-gem">完善AES-GEM
+</h2><p>当前GEM草案未充分解决的一个最终问题，但我们希望在NIST研讨会上讨论此问题，并肯定会在最终设计中解决。</p>
+<p>尽管我们的GEM草案构造允许比GCM更长的消息，但AES块大小使其按原样使用存在风险。主要担忧是加密非常长的消息会给攻击者带来显著优势，以区分AES-GEM密文与随机字节序列。（这是亚马逊2024年论文中提出的一个担忧。）</p>
+<p>我们可以通过几种方式完善GEM以解决此弱点，这些方式具有不同的性能特征和权衡。</p>
+<p><strong>宽块PRP</strong>
+多年来，许多密码设计使用宽块PRP（如XTS模式中的AES）安全加密超过AES块大小通常允许的范围。由于XTS广泛用于磁盘加密，这种方法可能会证明是安全的。</p>
+<p>然而，XTS模式目前尚未标准化用于磁盘加密以外的用例。</p>
+<p><strong>分层密钥派生</strong>
+如果不直接使用子密钥，而是使用内部计数器的高32位从保留的nonce空间中选择不同的值，加密该值，并每236字节派生一个新的子密钥呢？然后，我们仅使用此子密钥加密计数器的剩余32位，这与AES-GCM几十年来所做的类似。</p>
+<p>此子子密钥派生可以类似于密钥承诺构建：</p>
+<ul>
+<li>对于AES-256-GEM，加密来自保留nonce空间的32字节，并将其用作实际CTR密钥。</li>
+<li>对于AES-128-GEM，加密来自保留nonce空间的16字节（但与AES-256-GEM选择的不同nonce空间），并将其用作实际底层CTR密钥。</li>
+</ul>
+<p>这是一个有吸引力的选择，原因有很多。最重要的是，这种策略将以非常直接的方式规避PRP区分器问题。它也不依赖于任何非标准设计（如XTS模式）。您可以使用FIPS批准的组件构建整个东西，就像我们对AES-GEM的其余草案设计所做的那样。</p>
+<p>缺点？这种方法确实会在每236字节明文时产生另一个密钥调度。这可能仍然很好地分摊，但值得记住。</p>
+<p><strong>带分层密钥派生的AES-GEM的总性能成本</strong></p>
+<p><strong>AES-256-GEM：</strong></p>
+<ul>
+<li>密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度</li>
+<li>每236字节明文的额外密钥派生：两个额外的AES加密块，一个额外的密钥调度</li>
+<li>认证：一个额外的AES加密块</li>
+<li>密钥承诺：两个额外的AES加密块</li>
+<li>1 GB明文的额外总开销：七个AES-256块，两个额外的AES-256密钥调度</li>
+<li>1 TB明文的额外总开销：37个AES-256块，17个额外的AES-256密钥调度</li>
+</ul>
+<p><strong>AES-128-GEM：</strong></p>
+<ul>
+<li>密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度</li>
+<li>每236字节明文的额外密钥派生：一个额外的AES加密块，一个额外的密钥调度</li>
+<li>认证：一个额外的AES加密块</li>
+<li>密钥承诺：两个额外的AES加密块</li>
+<li>1 GB明文的额外总开销：五个AES-128块，两个额外的AES-128密钥调度</li>
+<li>1 TB明文的额外总开销：21个AES-128块，17个额外的AES-128密钥调度</li>
+</ul>
+<p><strong>其他想法</strong>
+可能还有我们尚未想象的另一种选择。找到最佳权衡，特别是在考虑硬件设计时，是我们在NIST研讨会上展示GEM的原因之一。</p>
+<h2 id="切割gem">切割GEM
+</h2><p>IETF的CFRG目前正在讨论一种修改后的AES-GCM变体的RFC草案，称为GCM-SST，它对短标签是安全的。他们的设计出于性能原因使用POLYVAL而不是GHASH，并使用带有第二个POLYVAL的第二个认证密钥（Q），所有这些都进行XOR。</p>
+<p>不出所料，这种额外的XOR并不能显著保护AES-GCM中短标签的弱点（尽管它确实使通常的攻击更昂贵）。</p>
+<p>我们对GEM的初始设计使用AES块密码置换GHASH输出，而不是简单地在多项式输出中引入额外的线性操作（XOR）。</p>
+<p>我们有兴趣与其他行业领导者合作，提供一种强调短标签用例（即WebRTC）的GEM变体。这种假设的变体（暂定名为CUT-GEM）可以使用POLYVAL代替GHASH，并使用基于时期的子密钥派生计划来减少每个数据包的性能影响。</p>
+<h2 id="在哪里可以了解更多关于aes-gem的信息">在哪里可以了解更多关于AES-GEM的信息？
+</h2><p>有关AES-GEM的更多信息可在我们的GitHub上找到！</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF/">加密技术</a>
+        
+            <a href="/tags/aes/">AES</a>
+        
+            <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/">区块链安全</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

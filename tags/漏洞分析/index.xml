@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>漏洞分析 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 漏洞分析 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sat, 02 Aug 2025 02:11:51 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析，以Uber为例</title>
+      <link>https://qife122.github.io/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</link>
+      <pubDate>Sat, 02 Aug 2025 02:11:51 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</guid>
+      <description>&lt;h1 id=&#34;攻击ssl-vpn系列一palo-alto-globalprotect预认证rce漏洞分析&#34;&gt;攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;: Orange Tsai(@orange_8361) 和 Meh Chang(@mehqq_)&lt;/p&gt;&#xA;&lt;p&gt;SSL VPN用于保护企业资产免受互联网暴露，但如果SSL VPN本身存在漏洞会怎样？它们暴露在互联网上，被信任为保护内网入口的唯一屏障。一旦SSL VPN服务器被攻破，攻击者就能渗透内网甚至控制所有连接到该VPN的用户！基于其重要性，过去几个月我们启动了对主流SSL VPN产品安全性的研究。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl库doh_write_cb函数内存泄漏漏洞分析</title>
+      <link>https://qife122.github.io/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 01:29:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;内存泄漏来自doh_write_cb函数&#34;&gt;内存泄漏来自doh_write_cb函数&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h2&gt;&#xA;&lt;p&gt;curl_fuzzer_http发现了一个内存泄漏问题&lt;/p&gt;&#xA;&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本&lt;/h2&gt;&#xA;&lt;p&gt;curl 8.13.0-DEV (x86_64-apple-darwin23.6.0)&lt;br&gt;&#xA;libcurl/8.13.0-DEV OpenSSL/1.0.2n zlib/1.2.11 libidn2/2.0.4 libpsl/0.19.1 nghttp2/1.55.1 librtmp/2.3&lt;br&gt;&#xA;发布日期: [未发布]&lt;br&gt;&#xA;协议支持: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns ldap ldaps mqtt pop3 pop3s rtmp rtsp smb smbs smtp smtps telnet tftp ws wss&lt;br&gt;&#xA;功能特性: alt-svc AsynchDNS HSTS HTTP2 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe TLS-SRP UnixSockets&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>深度解析Silent Shard DKLs23阈值签名库的安全审计发现</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</link>
+      <pubDate>Fri, 01 Aug 2025 22:54:49 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</guid>
+      <description>&lt;h1 id=&#34;我们如何审查首批dkls23库之一来自silence-laboratories的silent-shard&#34;&gt;我们如何审查首批DKLs23库之一——来自Silence Laboratories的Silent Shard&lt;/h1&gt;&#xA;&lt;p&gt;2023年10月，我们审计了Silence Laboratories基于DKLs23阈值签名方案(TSS)的库Silent Shard——这是当时首个采用茫然传输(OT)替代传统Paillier密码学的生产级实现。我们的审查发现了可能导致密钥销毁攻击的严重缺陷，Silence Laboratories已及时修复。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

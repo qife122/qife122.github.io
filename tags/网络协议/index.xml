@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络协议 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in 网络协议 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Wed, 30 Jul 2025 21:00:38 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>请勿在DNS MX记录中直接使用IP地址 - 邮件服务器配置指南</title>
+      <link>https://qife122.github.io/p/%E8%AF%B7%E5%8B%BF%E5%9C%A8dns-mx%E8%AE%B0%E5%BD%95%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ip%E5%9C%B0%E5%9D%80-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Wed, 30 Jul 2025 21:00:38 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%AF%B7%E5%8B%BF%E5%9C%A8dns-mx%E8%AE%B0%E5%BD%95%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ip%E5%9C%B0%E5%9D%80-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;请勿在dns-mx记录中直接使用ip地址&#34;&gt;请勿在DNS MX记录中直接使用IP地址&lt;/h1&gt;&#xA;&lt;p&gt;我想强调邮件服务器DNS记录中一个常见的错误配置。&lt;/p&gt;&#xA;&lt;p&gt;当域名配置接收邮件时，通常需要设置指向邮件服务器主机名的MX类型DNS记录。值得注意的是，根据RFC 1035规范，MX记录必须包含域名而&lt;strong&gt;不能直接指向IP地址&lt;/strong&gt;。但某些邮件服务器仍会错误配置IP地址。多数邮件服务器对此类配置错误较为宽容仍能投递邮件，导致问题难以被发现。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

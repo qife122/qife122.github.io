@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细分析了curl库中doh_write_cb函数存在的一个内存泄漏问题，包括漏洞复现步骤、堆栈跟踪信息以及开发团队的修复过程，涉及curl 8.13.0-DEV版本在DNS over HTTPS处理过程中的资源管理问题。">
+<title>curl库doh_write_cb函数内存泄漏漏洞分析</title>
+
+<link rel='canonical' href='http://localhost:1313/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="curl库doh_write_cb函数内存泄漏漏洞分析">
+<meta property='og:description' content="本文详细分析了curl库中doh_write_cb函数存在的一个内存泄漏问题，包括漏洞复现步骤、堆栈跟踪信息以及开发团队的修复过程，涉及curl 8.13.0-DEV版本在DNS over HTTPS处理过程中的资源管理问题。">
+<meta property='og:url' content='http://localhost:1313/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='内存泄漏' /><meta property='article:tag' content='curl' /><meta property='article:tag' content='漏洞分析' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-02T01:29:19&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T01:29:19&#43;08:00'/>
+<meta name="twitter:title" content="curl库doh_write_cb函数内存泄漏漏洞分析">
+<meta name="twitter:description" content="本文详细分析了curl库中doh_write_cb函数存在的一个内存泄漏问题，包括漏洞复现步骤、堆栈跟踪信息以及开发团队的修复过程，涉及curl 8.13.0-DEV版本在DNS over HTTPS处理过程中的资源管理问题。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#漏洞摘要">漏洞摘要</a></li>
+    <li><a href="#受影响版本">受影响版本</a></li>
+    <li><a href="#复现步骤">复现步骤</a></li>
+    <li><a href="#支持材料参考">支持材料/参考</a></li>
+    <li><a href="#影响">影响</a></li>
+    <li><a href="#后续讨论">后续讨论</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">curl库doh_write_cb函数内存泄漏漏洞分析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细分析了curl库中doh_write_cb函数存在的一个内存泄漏问题，包括漏洞复现步骤、堆栈跟踪信息以及开发团队的修复过程，涉及curl 8.13.0-DEV版本在DNS over HTTPS处理过程中的资源管理问题。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="内存泄漏来自doh_write_cb函数">内存泄漏来自doh_write_cb函数
+</h1><h2 id="漏洞摘要">漏洞摘要
+</h2><p>curl_fuzzer_http发现了一个内存泄漏问题</p>
+<h2 id="受影响版本">受影响版本
+</h2><p>curl 8.13.0-DEV (x86_64-apple-darwin23.6.0)<br>
+libcurl/8.13.0-DEV OpenSSL/1.0.2n zlib/1.2.11 libidn2/2.0.4 libpsl/0.19.1 nghttp2/1.55.1 librtmp/2.3<br>
+发布日期: [未发布]<br>
+协议支持: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns ldap ldaps mqtt pop3 pop3s rtmp rtsp smb smbs smtp smtps telnet tftp ws wss<br>
+功能特性: alt-svc AsynchDNS HSTS HTTP2 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe TLS-SRP UnixSockets</p>
+<h2 id="复现步骤">复现步骤
+</h2><p>使用复现程序运行fuzzer</p>
+<h2 id="支持材料参考">支持材料/参考
+</h2><p>堆栈跟踪如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">==</span><span class="mi">14</span><span class="o">==</span><span class="n">ERROR</span><span class="p">:</span> <span class="n">LeakSanitizer</span><span class="p">:</span> <span class="n">detected</span> <span class="n">memory</span> <span class="n">leaks</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Direct</span> <span class="n">leak</span> <span class="n">of</span> <span class="mi">107</span> <span class="n">byte</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="mi">1</span> <span class="n">object</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">allocated</span> <span class="n">from</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#0 0x55da4969379c in realloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:82:3</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#1 0x55da496ff27b in curl_dbg_realloc /src/curl/lib/memdebug.c:265:9</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#2 0x55da497fc6f3 in dyn_nappend /src/curl/lib/dynbuf.c:111:15</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#3 0x55da497faee5 in doh_write_cb /src/curl/lib/doh.c:183:6</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#4 0x55da497f2636 in cw_out_ptr_flush /src/curl/lib/cw-out.c:224:16</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#5 0x55da497f1644 in cw_out_do_write /src/curl/lib/cw-out.c:383:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#6 0x55da497f0ab6 in cw_out_write /src/curl/lib/cw-out.c:416:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#7 0x55da497f2f62 in cw_pause_write /src/curl/lib/cw-pause.c:192:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#8 0x55da497476e1 in Curl_cwriter_write /src/curl/lib/sendf.c:184:10</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#9 0x55da497476e1 in cw_download_write /src/curl/lib/sendf.c:312:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#10 0x55da497415b9 in Curl_cwriter_write /src/curl/lib/sendf.c:184:10</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#11 0x55da497415b9 in Curl_client_write /src/curl/lib/sendf.c:92:12</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#12 0x55da498363a5 in Curl_http_write_resp /src/curl/lib/http.c:4201:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#13 0x55da49762635 in Curl_xfer_write_resp /src/curl/lib/transfer.c:862:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#14 0x55da4975e364 in sendrecv_dl /src/curl/lib/transfer.c:342:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#15 0x55da4975e364 in Curl_sendrecv /src/curl/lib/transfer.c:441:14</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#16 0x55da497250f5 in state_performing /src/curl/lib/multi.c:1733:12</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#17 0x55da497250f5 in multi_runsingle /src/curl/lib/multi.c:2423:12</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#18 0x55da497222f2 in curl_multi_perform /src/curl/lib/multi.c:2599:16</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#19 0x55da496d3e98 in fuzz_handle_transfer(fuzz_data*) /src/curl_fuzzer/curl_fuzzer.cc:419:5</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#20 0x55da496d2e47 in LLVMFuzzerTestOneInput /src/curl_fuzzer/curl_fuzzer.cc:97:3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要传递-runs=100参数，如：<code>/out/curl_fuzzer_http /out/leak-247f5201c537eecc44d9f44dd815fd43f19a8a72 -runs=100</code>，因为并非每次都会出现该问题</p>
+<h2 id="影响">影响
+</h2><p>内存泄漏可能最终导致拒绝服务(DOS)&hellip;</p>
+<h2 id="后续讨论">后续讨论
+</h2><ul>
+<li>报告者认为这可能不是安全问题而是信息性问题</li>
+<li>curl团队确认该问题存在于DNS over HTTPS(doh.c)处理过程中，泄漏量小且不频繁</li>
+<li>团队提供了修复PR(#16834)并确认已合并</li>
+<li>报告者验证修复后确认问题已解决</li>
+<li>最终该报告被标记为&quot;Informative&quot;而非安全漏洞</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">内存泄漏</a>
+        
+            <a href="/tags/curl/">Curl</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

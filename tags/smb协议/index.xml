@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SMB协议 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/smb%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in SMB协议 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sat, 02 Aug 2025 02:55:08 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/smb%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows登录会话共享漏洞：突破服务加固隔离的技术分析</title>
+      <link>https://qife122.github.io/p/windows%E7%99%BB%E5%BD%95%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%AA%81%E7%A0%B4%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA%E9%9A%94%E7%A6%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 02:55:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows%E7%99%BB%E5%BD%95%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%AA%81%E7%A0%B4%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA%E9%9A%94%E7%A6%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;windows登录会话的过度共享&#34;&gt;Windows登录会话的过度共享&lt;/h3&gt;&#xA;&lt;p&gt;Windows的登录会话通常与单个经过身份验证的用户及其令牌绑定。然而对于服务账户而言情况并非如此——在服务加固机制下，同一个登录会话中可能存在多个带有不同服务组的令牌。本文将展示这种共享机制如何破坏服务加固的隔离性（至少对NETWORK SERVICE账户有效），并再次强调S-1-1-0并非安全边界。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

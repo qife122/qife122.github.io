@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>自动化工具 on 办公AI智能小助手</title>
+    <link>http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 自动化工具 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何通过自动化工具发现10&#43;SQL注入和30&#43;XSS漏洞</title>
+      <link>http://localhost:1313/post/deepseekcontent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/deepseekcontent/</guid>
+      <description>&lt;h1 id=&#34;如何通过自动化工具发现10sql注入和30xss漏洞&#34;&gt;如何通过自动化工具发现10+SQL注入和30+XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;大家好，我是Mahmoud Attia（又名0xelkot），本文将分享如何自动化渗透测试流程并发现更多漏洞。&lt;/p&gt;&#xA;&lt;h2 id=&#34;传统漏洞挖掘的困境&#34;&gt;传统漏洞挖掘的困境&lt;/h2&gt;&#xA;&lt;p&gt;大多数安全研究人员都在重复相同的流程：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;收集子域名&lt;/li&gt;&#xA;&lt;li&gt;筛选存活主机&lt;/li&gt;&#xA;&lt;li&gt;使用Nuclei扫描&lt;/li&gt;&#xA;&lt;li&gt;处理重复结果&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;突破性解决方案&#34;&gt;突破性解决方案&lt;/h2&gt;&#xA;&lt;p&gt;通过组合多款工具实现自动化漏洞挖掘流水线：&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-子域名收集&#34;&gt;1. 子域名收集&lt;/h3&gt;&#xA;&lt;p&gt;使用以下工具组合进行子域名枚举：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;subfinder -d $1 -silent | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;assetfinder -subs-only $1 | anew /root/$1/subs.txt  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;amass enum -passive -d $1 | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python sublist3r.py -d $1| anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;github-subdomains -t &amp;lt;github token&amp;gt; -d $1 | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-存活检测&#34;&gt;2. 存活检测&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /root/$1/subs.txt | naabu -p — -silent | anew open-ports.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat open-ports.txt | httpx -silent | anew alive.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-漏洞扫描&#34;&gt;3. 漏洞扫描&lt;/h3&gt;&#xA;&lt;h4 id=&#34;31-cve和配置错误检测&#34;&gt;3.1 CVE和配置错误检测&lt;/h4&gt;&#xA;&lt;p&gt;使用Cent工具整合GitHub上所有Nuclei模板：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
