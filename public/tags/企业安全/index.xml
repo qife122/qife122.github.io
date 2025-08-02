@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>企业安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 企业安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 16:02:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软发布本地管理员密码解决方案(LAPS)工具</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%8F%91%E5%B8%83%E6%9C%AC%E5%9C%B0%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88laps%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Sat, 02 Aug 2025 16:02:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%8F%91%E5%B8%83%E6%9C%AC%E5%9C%B0%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88laps%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;p&gt;こんにちは、村木ゆりかです。
+今回は、マイクロソフト セキュリティ アドバイザリ 3062591 でお知らせしましたツール Local Administrator Password Solution (LAPS) についてご紹介します。&lt;/p&gt;
+&lt;h3 id=&#34;local-administrator-password-solution-laps-とは&#34;&gt;Local Administrator Password Solution (LAPS) とは?
+&lt;/h3&gt;&lt;p&gt;このツールは、Active Directory (AD) に参加しているコンピューターの、ローカル管理者アカウントのパスワードを AD にて管理することができる無償のツールです。&lt;/p&gt;
+&lt;p&gt;攻撃者が組織に侵入する際、マルウェアなどを利用してまずはひとつのドメイン端末に侵入し、その後、Pass the Hash などの手法で同一のパスワードが設定されているその他のドメイン端末へ侵入を試みるなど、徐々に認証サーバーへ侵入するのに必要な高い権限を取得保持している可能性の高いアプリケーション・サービスを狙います。企業ではマスター イメージから複製展開する手法や、ヘルプデスク業務の効率化のために端末毎の管理者アカウントが同一になることが多く、このような場合は、一台がマルウェア感染すると他のすべての端末が侵害される可能性が高くなります。このように侵害を広げていく場合、脆弱性は不要であり、正規の認証を行い、正規の方法で不正なファイルが仕掛けられます。このような組織への侵入を阻止するためには、端末ごとの管理者アカウント パスワードの使い回しをしないことが重要になります。&lt;/p&gt;
+&lt;p&gt;この LAPS ツールを利用する事で、ドメイン端末のローカル管理者アカウントのパスワードをランダムなものにし、管理を行うことができます。これにより、万が一組織内への攻撃者の侵入があった場合でも、組織内への攻撃の広がりや侵入拡大を防ぐためのセキュリティを強化することができます。&lt;/p&gt;
+&lt;h3 id=&#34;laps-でのパスワード更新と管理&#34;&gt;LAPS でのパスワード更新と管理
+&lt;/h3&gt;&lt;p&gt;LAPS を利用することで、各ドメイン端末のローカル管理者アカウントに、自動でランダムなパスワードを設定・定期的に更新し、AD に保存することができます。また、特定の端末のローカル管理者アカウントのパスワードをリセットするなどの管理を行うことができます。もちろん、既定の Administrator 以外のローカル管理者アカウントも管理可能です。&lt;/p&gt;
+&lt;p&gt;LAPS は AD 環境でグループ ポリシーを利用して管理でき、端末から AD へパスワードを保存する際には、Kerberos V5 のプロトコルを利用し、AES で暗号化しており、AD に保存されたパスワードの情報は、特定の権限を持ったユーザーでないと閲覧することができないよう ACL で管理することができます。&lt;/p&gt;
+&lt;h3 id=&#34;local-administrator-password-solution-laps-の入手&#34;&gt;Local Administrator Password Solution (LAPS) の入手
+&lt;/h3&gt;&lt;p&gt;LAPS ツールは、ダウンロード センターから入手できます。
+利用方法や展開方法、アーキテクチャを説明したドキュメント (英語) も、同時にダウンロードできます。
+また、Ignite イベントで行われたセッションで LAPS ツールの説明やデモが行われています。ぜひ、ビデオをチェックしてみてください。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

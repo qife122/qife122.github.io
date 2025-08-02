@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>可信执行环境 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8F%AF%E4%BF%A1%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83/</link>
+        <description>Recent content in 可信执行环境 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 17:04:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8F%AF%E4%BF%A1%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>翻转比特的踪迹：AES-GCM在可信执行环境中的致命漏洞</title>
+        <link>http://localhost:1313/p/%E7%BF%BB%E8%BD%AC%E6%AF%94%E7%89%B9%E7%9A%84%E8%B8%AA%E8%BF%B9aes-gcm%E5%9C%A8%E5%8F%AF%E4%BF%A1%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E8%87%B4%E5%91%BD%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 02 Aug 2025 17:04:02 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BF%BB%E8%BD%AC%E6%AF%94%E7%89%B9%E7%9A%84%E8%B8%AA%E8%BF%B9aes-gcm%E5%9C%A8%E5%8F%AF%E4%BF%A1%E6%89%A7%E8%A1%8C%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E8%87%B4%E5%91%BD%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;翻转比特的踪迹&#34;&gt;翻转比特的踪迹
+&lt;/h1&gt;&lt;p&gt;可信执行环境(TEE)如安全飞地(secure enclave)正日益普及，用于保护云中的资产。它们的承诺很诱人：当飞地被正确使用时，即使是飞地的操作者或云服务提供商也无法访问这些资产。然而，这导致了一个强大的攻击者模型，与飞地交互的实体可能就是攻击者。在这篇博客中，我们将探讨一种涉及AES-GCM、ECDSA和Shamir秘密共享算法的加密技术在这种环境下可能失败的方式——具体来说，通过对AES-GCM使用Forbidden攻击来翻转私钥分片的比特位，我们可以迭代恢复私钥。&lt;/p&gt;
+&lt;h2 id=&#34;可信飞地&#34;&gt;可信飞地
+&lt;/h2&gt;&lt;p&gt;TEE有多种形式和大小。它们可以使用单独的硬件安全模块(HSM)、可信平台模块(TPM)或作为片上系统(SoC)一部分的其他专用安全芯片来实现。也可以使用内存隔离技术(如TrustZone或虚拟机监控程序)在与不可信实体共享的硬件中实现，这类例子包括Intel SGX、Amazon Nitro等安全飞地。&lt;/p&gt;
+&lt;p&gt;安全飞地面临的一个挑战是它们几乎没有持久内存，因此需要在断电周期后仍然可用的大量数据必须存储在飞地外部。为了保持这些数据的安全，必须使用存储在可信环境内部或外部密钥管理服务(KMS)中的存储密钥进行加密，KMS通过某种形式的认证限制对飞地的访问。&lt;/p&gt;
+&lt;p&gt;然而，由于数据存储在外部，与飞地交互的不可信实体会看到这些数据并可能修改它。即使使用强加密技术如带有关联数据的认证加密(AEAD)，飞地也很难保护自己免受回滚攻击，即不可信实体用相同数据的早期版本替换外部数据，因为两者都会通过认证。一个诱人的解决方案是对存储在飞地外部的数据进行版本控制，但由于飞地是无状态的，不知道最新版本应该是什么，这很快变成了一个先有鸡还是先有蛋的问题。因此，在这种情况下跟踪版本号或使用计数器是困难的，甚至是不可能的。&lt;/p&gt;
+&lt;h2 id=&#34;在可信飞地中签名&#34;&gt;在可信飞地中签名
+&lt;/h2&gt;&lt;p&gt;可信飞地的一个有趣应用是保存数字签名私钥(如ECDSA密钥)以执行签名。如果设置正确，没有人可以从飞地中窃取签名密钥。然而，由于签名密钥必须在飞地断电后仍然可用，它们通常必须以某种形式持久存储在外部存储中。为了防止任何有权访问此外部存储的人获取或修改签名密钥，需要使用AEAD对其进行加密。&lt;/p&gt;
+&lt;p&gt;于是我们迎来了大家最爱的AEAD：AES-GCM！由于其脆弱的设计，一旦使用相同的nonce加密两个不同的签名密钥，认证保证就会被不可逆转地破坏。由于AES块大小限制为128位，并且需要32位用于计数器，你只有96位用于nonce。不过别担心，你只需要确保不要使用随机nonce调用AES-GCM超过2^32次！所以飞地只需要跟踪一个使用计数器。唉，正如前面所说，这基本上是不可能的。&lt;/p&gt;
+&lt;p&gt;因此，攻击者可以让飞地生成任意数量的签名密钥，所有这些密钥都必须加密以存储在外部。最终，nonce会重复，攻击者可以使用Forbidden攻击恢复AES-GCM哈希密钥。细节并不十分重要，但本质上，有了AES-GCM哈希密钥，攻击者可以获取任何现有的AES-GCM密文和标签，以某种方式修改密文，并使用哈希密钥更新标签。具体来说，他们可以翻转密文中的比特位，当飞地解密时，将导致原始明文除了相同的比特位被翻转。这很不好。但有多糟糕呢？&lt;/p&gt;
+&lt;h2 id=&#34;攻击ecdsa签名&#34;&gt;攻击ECDSA签名
+&lt;/h2&gt;&lt;p&gt;这种攻击并非ECDSA特有，因此不需要理解ECDSA背后的所有具体数学知识。理解攻击所需的唯一重要背景是了解ECDSA密钥对是如何构造的。私钥对应一个数字(也称为标量)d。要获得相应的公钥Q，私钥乘以你想要使用的特定椭圆曲线的基点G。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Q = d · G
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过利用被破坏的AES-GCM认证，攻击者可以翻转加密私钥中的比特位，并让飞地解密并使用它来签名消息。由于AES-GCM的加密部分本质上是计数器模式，翻转加密私钥中的比特位将导致相应明文私钥中的相同比特位翻转。&lt;/p&gt;
+&lt;p&gt;当我们翻转私钥的最低有效位时会发生什么？零位会变成一，这相当于给私钥加一。相反，一位会变成零，这相当于给私钥减一。本质上，比特翻转对私钥的影响取决于私钥位的未知值。&lt;/p&gt;
+&lt;p&gt;这很好，但我们如何在不了解私钥的情况下知道这两种情况中哪一种发生了呢？好吧，如果我们用翻转后的私钥生成签名，我们可以通过添加或减去生成器来使用修改后的公钥验证签名。如果它用添加的生成器验证，我们知道私钥位是零，而如果它用减去的生成器验证，我们知道私钥位是一。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(d + 1) · G = d · G + G = Q + G
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(d – 1) · G = d · G – G = Q – G
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们现在可以重复这个过程来恢复私钥的其他位。我们将不再加或减一，而是加或减二的幂到私钥。通过从公钥加或减生成器的相应倍数，我们了解私钥的一个新位。严格来说，不需要一次恢复一位。你可以翻转多个位，并根据这些翻转位对私钥可能产生的所有影响尝试签名验证。&lt;/p&gt;
+&lt;h2 id=&#34;分割比特&#34;&gt;分割比特
+&lt;/h2&gt;&lt;p&gt;有趣的是，当私钥在加密前使用Shamir的秘密共享算法分割成不同的分片时，攻击仍然有效。飞地接收不同的加密分片，解密它们，将分片重新组合成私钥，然后签名。因此，我们不能直接翻转私钥中的单个位。&lt;/p&gt;
+&lt;p&gt;但是当我们翻转其中一个分片中的位时会发生什么？在Shamir的秘密共享中(另见我们关于此主题的优秀ZKDocs文章)，每个分片由一对x和y值组成，用于使用拉格朗日插值法插值多项式。秘密值由插值多项式在x = 0处的值给出。&lt;/p&gt;
+&lt;p&gt;翻转其中一个y值中的位会改变插值多项式，对应于一个不同的秘密——在我们的例子中是私钥。基本上，重新组合秘密对应于加权y值的总和，其中每个权重是一个拉格朗日系数λj，可以很容易地从x坐标计算出来(x坐标通常选择为从1开始到分片数量的连续整数)。&lt;/p&gt;
+&lt;p&gt;将所有这些放在一起，翻转其中一个分片中的位会根据位的值向分片添加或减去。然后这导致向私钥添加或减去相应的拉格朗日系数λj的倍数。通过用这个修改后的私钥生成签名并使用修改后的公钥验证它们，我们可以逐位恢复秘密分片的值。获得分片后，我们可以将它们重新组合成私钥。总之，这表明飞地操作者可以从飞地中提取私钥，尽管涉及了所有的密码学和隔离。&lt;/p&gt;
+&lt;h2 id=&#34;最后一位&#34;&gt;最后一位
+&lt;/h2&gt;&lt;p&gt;正如对安全飞地中AES-GCM的Forbidden攻击的探索所揭示的，像AES-GCM、ECDSA和Shamir的秘密共享这样的加密原语，虽然通常很强大，但如果部署不正确，仍然可能容易受到攻击。TEE的复杂性和对抗方法的不断发展使得保护敏感数据成为一项艰巨的任务。在Trail of Bits，我们理解这些挑战。利用我们在密码学和应用安全方面的深厚专业知识，我们提供全面的系统审计，识别潜在漏洞并提供有效的缓解策略。通过与我们合作，开发人员可以更好地避免潜在的加密陷阱，并提高其TEE的整体安全状况。&lt;/p&gt;
+&lt;p&gt;1 你可能会争辩说，在这个玩具示例中，KMS可以跟踪使用计数器，因为它控制着对存储密钥的访问。然而，在实践中，KMS通常在可以加密和解密的数据类型上相当有限(通常只是加密密钥)。例如，加密秘密密钥分片很可能是不可能的。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

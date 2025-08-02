@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>API安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in API安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 18:15:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+        <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 18:15:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞
+&lt;/h3&gt;&lt;p&gt;0:19 章节探讨攻击者如何绕过权限控制获取敏感数据，包含HackerOne案例#343464分析&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞
+&lt;/h3&gt;&lt;p&gt;2:15 演示通过GraphQL突变(Mutation)实现未授权数据操作的漏洞模式，引用HackerOne报告#2233480&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据删除漏洞&#34;&gt;GraphQL与未授权数据删除漏洞
+&lt;/h3&gt;&lt;p&gt;3:27 分析危险的数据删除操作漏洞，涉及HackerOne案例#858671&lt;/p&gt;
+&lt;h3 id=&#34;graphql如何导致dos攻击&#34;&gt;GraphQL如何导致DoS攻击
+&lt;/h3&gt;&lt;p&gt;6:11 解析复杂查询嵌套导致的服务器资源耗尽问题，引用LANDH技术博客2024年3月分析报告&lt;/p&gt;
+&lt;h3 id=&#34;graphql中的sql注入漏洞&#34;&gt;GraphQL中的SQL注入漏洞
+&lt;/h3&gt;&lt;p&gt;7:29 展示GraphQL参数如何传导至后端数据库，包含HackerOne案例#435066的注入技术细节&lt;/p&gt;
+&lt;h3 id=&#34;graphql模式泄露是否算漏洞&#34;&gt;GraphQL模式泄露是否算漏洞？
+&lt;/h3&gt;&lt;p&gt;10:09 讨论introspection查询暴露API结构的风险，分析敏感信息泄露场景&lt;/p&gt;
+&lt;h3 id=&#34;graphql的csrf攻击面&#34;&gt;GraphQL的CSRF攻击面
+&lt;/h3&gt;&lt;p&gt;11:28 讲解跨站请求伪造在GraphQL中的特殊表现形式，引用Doyensec安全研究报告&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/gql&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;获取完整案例研究&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/nl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;订阅邮件列表&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/tw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;关注Twitter&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键资源链接已内嵌在时间轴章节中，包含DEF CON 32会议资料和GitHub OAuth CSRF绕过技术博客等专业参考内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

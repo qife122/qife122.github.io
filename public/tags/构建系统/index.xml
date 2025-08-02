@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>构建系统 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/</link>
+        <description>Recent content in 构建系统 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 11:42:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>QueryCon 2019：osquery发展的转折点 - 技术革新与社区治理</title>
+        <link>http://localhost:1313/p/querycon-2019osquery%E5%8F%91%E5%B1%95%E7%9A%84%E8%BD%AC%E6%8A%98%E7%82%B9-%E6%8A%80%E6%9C%AF%E9%9D%A9%E6%96%B0%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86/</link>
+        <pubDate>Sat, 02 Aug 2025 11:42:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/querycon-2019osquery%E5%8F%91%E5%B1%95%E7%9A%84%E8%BD%AC%E6%8A%98%E7%82%B9-%E6%8A%80%E6%9C%AF%E9%9D%A9%E6%96%B0%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;新的基金会架构&#34;&gt;新的基金会架构
+&lt;/h3&gt;&lt;p&gt;6月18日QueryCon前夕，Linux基金会正式宣布从Facebook接管osquery所有权。新成立的osquery基金会将由技术指导委员会（TSC）管理，成员来自Facebook、Trail of Bits、Google和Kolide等公司的工程师。该变革解决了项目规模超出Facebook单独维护能力的问题。&lt;/p&gt;
+&lt;h3 id=&#34;基金会运作机制&#34;&gt;基金会运作机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Linux基金会提供资金和管理平台支持&lt;/li&gt;
+&lt;li&gt;TSC在社区贡献支持下主导项目方向&lt;/li&gt;
+&lt;li&gt;Trail of Bits承诺每两周举行公开办公时间&lt;/li&gt;
+&lt;li&gt;Facebook移交基础设施控制权但保留维护席位&lt;/li&gt;
+&lt;li&gt;CommunityBridge平台即将开放项目赞助通道&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键技术决策&#34;&gt;关键技术决策
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;版本合并&lt;/strong&gt;：将osql社区分支功能合并回主代码库&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发布周期&lt;/strong&gt;：采用月度交替发布开发版/稳定版机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;构建系统&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;恢复CMake支持（#5604/#5610）&lt;/li&gt;
+&lt;li&gt;重构Linux第三方库源码构建（#5706）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全增强&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;改进Windows证书存储查询（#5696/#5697）&lt;/li&gt;
+&lt;li&gt;引入模糊测试和地址消毒检测（#5665）&lt;/li&gt;
+&lt;li&gt;计划集成静态/动态分析到CI系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;pr提交爆发增长&#34;&gt;PR提交爆发增长
+&lt;/h3&gt;&lt;p&gt;QueryCon后12周内合并89个PR（社区贡献占比超70%），而此前9个月仅合并35个。Trail of Bits贡献了44个关键PR，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;构建依赖项源码编译支持&lt;/li&gt;
+&lt;li&gt;Windows证书全用户扫描能力&lt;/li&gt;
+&lt;li&gt;新的高性能事件框架&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;稳定版重大更新&#34;&gt;稳定版重大更新
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;构建系统&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;同时支持Facebook的Buck和社区标准CMake&lt;/li&gt;
+&lt;li&gt;实现Linux自定义工具链&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新特性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Linux进程事件扩展检测&lt;/li&gt;
+&lt;li&gt;正则表达式查询支持&lt;/li&gt;
+&lt;li&gt;Linux eBPF事件追踪初步支持&lt;/li&gt;
+&lt;li&gt;macOS T1/T2芯片检测表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;性能优化&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;资源泄漏修复&lt;/li&gt;
+&lt;li&gt;表格性能分析工具增强&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;会议成果延续&#34;&gt;会议成果延续
+&lt;/h3&gt;&lt;p&gt;QueryCon 2019作为催化剂，推动了osquery从企业项目向社区驱动模式的转型。技术债务清理、跨平台构建统一和安全监控能力提升，标志着该项目进入新的发展阶段。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

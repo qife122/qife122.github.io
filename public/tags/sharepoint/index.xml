@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SharePoint on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/sharepoint/</link>
+        <description>Recent content in SharePoint on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 15:40:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/sharepoint/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SharePoint XSS漏洞技术分析与缓解措施</title>
+        <link>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Sat, 02 Aug 2025 15:40:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h1 id=&#34;sharepoint-xss漏洞&#34;&gt;SharePoint XSS漏洞
+&lt;/h1&gt;&lt;p&gt;今天我们发布了安全公告983438，向客户通报SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。以下是该漏洞的详细技术分析。&lt;/p&gt;
+&lt;h2 id=&#34;攻击向量分析&#34;&gt;攻击向量分析
+&lt;/h2&gt;&lt;p&gt;公告指出该漏洞可能导致SharePoint站点内的权限提升(EoP)。需要特别说明的是，这种权限提升并非从普通用户到工作站或服务器环境的管理员用户，而是攻击者可以在用户的SharePoint会话上下文中执行恶意脚本。最可能的攻击场景是：攻击者向已登录SharePoint服务器的用户发送恶意链接，当用户点击该链接时，攻击者嵌入的JavaScript将在点击者的用户上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;p&gt;SharePoint使用Http-Only cookies进行身份验证。由于HttpOnly cookies无法通过脚本访问，这显著降低了XSS攻击风险。更多信息请参考《使用HTTP-only Cookies缓解跨站脚本攻击》。&lt;/p&gt;
+&lt;p&gt;IE8的XSS过滤器在Internet区域默认启用，能拦截此类XSS攻击，因此IE8用户面临的风险较低。但该过滤器在本地Intranet区域默认禁用，可通过以下UI界面启用：&lt;/p&gt;
+&lt;p&gt;[图片：IE8 XSS过滤器启用界面]&lt;/p&gt;
+&lt;p&gt;管理员也可以通过组策略为任何区域启用或禁用XSS过滤器，详见《组策略与Internet Explorer 8》。&lt;/p&gt;
+&lt;h2 id=&#34;临时解决方案&#34;&gt;临时解决方案
+&lt;/h2&gt;&lt;p&gt;我们建议通过服务器端ACL设置限制help.aspx文件的访问。启用此方案后，您将无法查看SharePoint站点内的帮助内容。实施此缓解措施的用户可访问以下英文帮助内容作为替代：
+&lt;a class=&#34;link&#34; href=&#34;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Jonathan Ness, David Ross和Chengyun Chu，MSRC工程团队
+&lt;em&gt;本文按&amp;quot;原样&amp;quot;提供，不作任何担保，也不授予任何权利。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

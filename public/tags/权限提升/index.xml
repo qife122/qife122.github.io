@@ -7,7 +7,71 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 23:30:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 16:13:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MS09-012补丁：修复&#34;令牌劫持&#34;漏洞的技术解析</title>
+        <link>http://localhost:1313/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 16:13:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;ms09-012-修复令牌劫持漏洞&#34;&gt;MS09-012: 修复&amp;quot;令牌劫持&amp;quot;漏洞
+&lt;/h1&gt;&lt;p&gt;今天早晨我们发布了MS09-012更新，用于修复公开披露的&amp;quot;令牌劫持&amp;quot;漏洞(&lt;a class=&#34;link&#34; href=&#34;http://www.argeniss.com/research/TokenKidnapping.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.argeniss.com/research/TokenKidnapping.pdf&lt;/a&gt;)。该漏洞允许从Network Service账户提权至Local System账户。通常情况下，恶意用户不会以Network Service身份运行，除非是像IIS这样的少数程序，可以在以Network Service运行的服务中执行任意代码。这使得攻击者能够攻破并控制Windows系统。&lt;/p&gt;
+&lt;h2 id=&#34;我是否受影响&#34;&gt;我是否受影响？
+&lt;/h2&gt;&lt;p&gt;此问题影响两种情况：在Network Service账户拥有的进程中执行不受信任的代码，或在具有SeImpersonatePrivilege的进程中执行代码。公开讨论的攻击方式是通过托管在IIS工作进程中的恶意Full Trust ASPX代码实现的。&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;修复此问题需要微软有史以来最庞大的工程努力之一。本次安全更新涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows内核修改&lt;/li&gt;
+&lt;li&gt;COM、DCOM和LSASS子系统&lt;/li&gt;
+&lt;li&gt;WMI和MSDTC内置服务&lt;/li&gt;
+&lt;li&gt;服务控制管理器(SCM)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们不得不将Vista和Server 2008中的服务令牌工作大量反向移植到XP和Server 2003。部分最资深的开发人员从Windows 7开发中抽调出来处理此问题。&lt;/p&gt;
+&lt;h2 id=&#34;修复的四个cve漏洞&#34;&gt;修复的四个CVE漏洞
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2008-1436 (MSDTC)&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：MSDTC在创建RPC连接时请求过多权限&lt;/li&gt;
+&lt;li&gt;修复：减少RPC连接时的权限请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2009-0079 (RPCSS)&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：Network Service账户下运行服务的权限问题&lt;/li&gt;
+&lt;li&gt;修复：移植Vista的Service SID功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2009-0080 (线程池)&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：线程创建时的权限验证不足&lt;/li&gt;
+&lt;li&gt;修复：强化线程访问权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2009-0078 (WMI)&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：WMI运行Network Service和Local Service提供程序时缺乏保护&lt;/li&gt;
+&lt;li&gt;修复：采用基于Vista Service SID技术的WMI SID保护机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来方向&#34;&gt;未来方向
+&lt;/h2&gt;&lt;p&gt;Windows 7和Server 2008 R2将引入&amp;quot;托管服务账户&amp;quot;功能，提供更灵活的解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;允许服务运行为独立账户&lt;/li&gt;
+&lt;li&gt;提供自动密码管理功能&lt;/li&gt;
+&lt;li&gt;简化域SPN远程认证流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;本文内容&amp;quot;按原样&amp;quot;提供，不提供任何担保，也不授予任何权利。&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nick Finco, MSRC工程团队&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>以最复杂方式绕过UAC：Kerberos协议漏洞利用详解</title>
         <link>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Fri, 01 Aug 2025 23:30:05 +0800</pubDate>

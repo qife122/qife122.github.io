@@ -7,7 +7,50 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 22:54:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 11:53:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RubyGems.org安全审计报告：33个漏洞与加固建议</title>
+        <link>http://localhost:1313/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</link>
+        <pubDate>Sat, 02 Aug 2025 11:53:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rubygems.org%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E6%8A%A5%E5%91%8A33%E4%B8%AA%E6%BC%8F%E6%B4%9E%E4%B8%8E%E5%8A%A0%E5%9B%BA%E5%BB%BA%E8%AE%AE/</guid>
+        <description>&lt;h1 id=&#34;ruby生态系统中央包仓库安全审计&#34;&gt;Ruby生态系统中央包仓库安全审计
+&lt;/h1&gt;&lt;p&gt;Ruby Central委托Trail of Bits对Ruby应用官方包管理系统RubyGems.org进行安全评估和竞品分析。作为下载量超1840亿次的关键基础设施，该平台的安全直接影响数百万Ruby开发者。&lt;/p&gt;
+&lt;h2 id=&#34;审计范围与发现&#34;&gt;审计范围与发现
+&lt;/h2&gt;&lt;p&gt;三名工程师耗时五周审查了rubygems.org和rubygems-terraform代码库，重点评估：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见Web漏洞（XSS/CSRF/SQLi/SSRF）&lt;/li&gt;
+&lt;li&gt;认证绕过风险&lt;/li&gt;
+&lt;li&gt;权限控制有效性&lt;/li&gt;
+&lt;li&gt;AWS服务配置安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;发现的33个安全问题中包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;高危漏洞&lt;/strong&gt;：SMTP邮件系统采用&lt;code&gt;enable_starttls_auto: true&lt;/code&gt;配置，可能被中间人攻击降级为明文传输。建议改用强制TLS的&lt;code&gt;enable_starttls&lt;/code&gt;配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部署流程缺陷&lt;/strong&gt;：生产环境部署缺乏多方审批机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基础设施风险&lt;/strong&gt;：混合使用IaC与手动配置导致安全缺口（TOB-RGM-16等4个相关发现）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反序列化风险&lt;/strong&gt;：RubyGems库存储Marshal数据可能被利用（虽不影响服务本身）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;竞品分析与改进建议&#34;&gt;竞品分析与改进建议
+&lt;/h2&gt;&lt;p&gt;对比PyPI/npm等包管理器后提出19项改进，重点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;强化可信发布基础设施&lt;/li&gt;
+&lt;li&gt;扩展支持平台范围&lt;/li&gt;
+&lt;li&gt;自动化权限管理（Terraform）&lt;/li&gt;
+&lt;li&gt;集成安全测试工具链（Semgrep/Burp Suite/Ruzzy）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自动化测试方案&#34;&gt;自动化测试方案
+&lt;/h2&gt;&lt;p&gt;采用多层次安全测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;静态分析&lt;/strong&gt;：定制Semgrep规则检测不安全配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态测试&lt;/strong&gt;：Burp Suite Professional检测SSRF/API漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模糊测试&lt;/strong&gt;：Ruzzy模糊测试器重点检测WebAuthn的CBOR库内存损坏风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;此次审计既确认了我们负责任地维护着Ruby包生态，也指明了下一步安全投资方向&amp;rdquo; —— Ruby Central安全工程师Samuel Giddins&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整报告详见[审计报告链接]，Ruby Central团队声明参见[公告链接]。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>深度解析Silent Shard DKLs23阈值签名库的安全审计发现</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</link>
         <pubDate>Fri, 01 Aug 2025 22:54:49 +0800</pubDate>

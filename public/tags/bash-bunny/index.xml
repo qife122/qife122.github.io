@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Bash Bunny on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/bash-bunny/</link>
+        <description>Recent content in Bash Bunny on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 13:57:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/bash-bunny/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Bash Bunny获取USB_Exfiltration载荷的实战指南</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8bash-bunny%E8%8E%B7%E5%8F%96usb_exfiltration%E8%BD%BD%E8%8D%B7%E7%9A%84%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sat, 02 Aug 2025 13:57:49 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8bash-bunny%E8%8E%B7%E5%8F%96usb_exfiltration%E8%BD%BD%E8%8D%B7%E7%9A%84%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;使用bash-bunny获取usb_exfiltration载荷&#34;&gt;使用Bash Bunny获取USB_Exfiltration载荷
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者：Jordan Drysdale // 红队工具专家&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是一篇关于我们首次测试并确认在所有启用PowerShell的Windows系统（XP-SP3及以上版本）上100%可靠的实用载荷的快速技术指南。&lt;/p&gt;
+&lt;h2 id=&#34;关键资源&#34;&gt;关键资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bash Bunny Wiki&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;http://wiki.bashbunny.com/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://wiki.bashbunny.com/#!index.md&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;载荷源码&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/usb_exfiltrator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/hak5/bashbunny-payloads/tree/master/payloads/library/usb_exfiltrator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术要点&#34;&gt;技术要点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开关位置与目录结构&lt;/strong&gt;&lt;br&gt;
+理解极其简单的开关位置配置和目录结构是成功的关键。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;载荷获取与修改&lt;/strong&gt;&lt;br&gt;
+我们从Bunny的Git仓库下载了全部现有载荷：&lt;a class=&#34;link&#34; href=&#34;https://github.com/hak5/bashbunny-payloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/hak5/bashbunny-payloads&lt;/a&gt;&lt;br&gt;
+在将USB_Exfil载荷复制到switch1目录前，我们移除了.PDF引用，这使得我们可以获取用户文档目录下的子目录。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;重要警告&#34;&gt;重要警告
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;存储空间限制&lt;/strong&gt;&lt;br&gt;
+根据目标文档目录的大小，Bash Bunny的存储空间可能被占满（最大约2GB）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;系统状态要求&lt;/strong&gt;&lt;br&gt;
+测试表明目标系统必须处于解锁状态才能生效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;无论如何，祝您探索愉快！&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

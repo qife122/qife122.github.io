@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>漏洞防御 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1/</link>
+        <description>Recent content in 漏洞防御 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 17:15:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E5%BE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>防范ELUSIVE COMET Zoom远程控制攻击的技术实践</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E8%8C%83elusive-comet-zoom%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sat, 02 Aug 2025 17:15:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E8%8C%83elusive-comet-zoom%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;防范elusive-comet-zoom远程控制攻击的技术实践&#34;&gt;防范ELUSIVE COMET Zoom远程控制攻击的技术实践
+&lt;/h1&gt;&lt;h2 id=&#34;我们的遭遇经历&#34;&gt;我们的遭遇经历
+&lt;/h2&gt;&lt;p&gt;当我们的CEO收到参加&amp;quot;Bloomberg Crypto&amp;quot;节目的邀请时，他立即识别出这是精心设计的社会工程攻击。攻击者通过两个Twitter账号联系，拒绝使用电子邮件沟通，并引导至非官方的Calendly页面进行日程安排。&lt;/p&gt;
+&lt;h2 id=&#34;新发现的攻击指标iocs&#34;&gt;新发现的攻击指标(IoCs)
+&lt;/h2&gt;&lt;p&gt;新增与ELUSIVE COMET攻击基础设施关联的账户：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X: @KOanhHa&lt;/li&gt;
+&lt;li&gt;X: @EditorStacy&lt;/li&gt;
+&lt;li&gt;邮箱: bloombergconferences[@]gmail.com&lt;/li&gt;
+&lt;li&gt;Zoom会议链接: https://us06web[.]zoom[.]us/j/84525670750&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;zoom远程控制功能解析&#34;&gt;Zoom远程控制功能解析
+&lt;/h2&gt;&lt;p&gt;攻击者利用Zoom合法的远程控制功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安排看似正常的商务会议&lt;/li&gt;
+&lt;li&gt;在屏幕共享时请求远程控制权限&lt;/li&gt;
+&lt;li&gt;将显示名改为&amp;quot;Zoom&amp;quot;伪装系统通知&lt;/li&gt;
+&lt;li&gt;获得权限后安装恶意软件或窃取数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;攻击成功的关键因素&#34;&gt;攻击成功的关键因素
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;合法业务场景掩护&lt;/li&gt;
+&lt;li&gt;权限对话框未明确安全风险&lt;/li&gt;
+&lt;li&gt;用户习惯性点击&amp;quot;同意&amp;quot;&lt;/li&gt;
+&lt;li&gt;受害者注意力集中在业务对话&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;深度防御技术方案&#34;&gt;深度防御技术方案
+&lt;/h2&gt;&lt;h3 id=&#34;终端防护配置&#34;&gt;终端防护配置
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;CrowdStrike Falcon Complete启用24/7威胁狩猎&lt;/li&gt;
+&lt;li&gt;采用&amp;quot;Active&amp;quot;安全策略和云端ML防护&lt;/li&gt;
+&lt;li&gt;实时检测可疑进程行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;系统级防护措施&#34;&gt;系统级防护措施
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;create_zoom_pppc_profile.bash  &lt;span class=&#34;c1&#34;&gt;# 创建系统级PPPC配置文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;disable_zoom_accessibility.bash  &lt;span class=&#34;c1&#34;&gt;# 每15分钟检查移除Zoom权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;uninstall_zoom.bash  &lt;span class=&#34;c1&#34;&gt;# 每周彻底卸载Zoom&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;pppc配置核心优势&#34;&gt;PPPC配置核心优势
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;系统级禁用Zoom辅助功能权限&lt;/li&gt;
+&lt;li&gt;适用于所有用户账户&lt;/li&gt;
+&lt;li&gt;通过代码签名精准定位官方Zoom应用&lt;/li&gt;
+&lt;li&gt;用户无法通过常规方式覆盖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcc数据库动态监控&#34;&gt;TCC数据库动态监控
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每15分钟扫描并重置已有权限&lt;/li&gt;
+&lt;li&gt;生成安全日志用于攻击检测&lt;/li&gt;
+&lt;li&gt;允许临时授权后自动清理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;彻底移除方案&#34;&gt;彻底移除方案
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;完全卸载Zoom客户端&lt;/li&gt;
+&lt;li&gt;清除所有残留组件和缓存&lt;/li&gt;
+&lt;li&gt;强制使用浏览器参会&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;扩展安全建议&#34;&gt;扩展安全建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;建立媒体采访标准化流程&lt;/li&gt;
+&lt;li&gt;部署Material Security等邮件安全工具&lt;/li&gt;
+&lt;li&gt;配置DMARC/SPF/DKIM邮件防护&lt;/li&gt;
+&lt;li&gt;创建无责安全报告文化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;构建弹性防御体系&#34;&gt;构建弹性防御体系
+&lt;/h2&gt;&lt;p&gt;通过组合技术控制(PPPC配置、TCC监控、应用卸载)与操作安全意识，组织可有效防御此类人机交互攻击。对于处理加密货币等敏感业务的环境，建议完全禁用Zoom远程控制功能。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

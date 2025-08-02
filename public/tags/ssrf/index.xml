@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SSRF on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/ssrf/</link>
+        <description>Recent content in SSRF on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 11:15:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ssrf/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>谷歌向黑客二人组支付2.2万美元漏洞赏金，涉及多个云项目安全漏洞</title>
+        <link>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%90%91%E9%BB%91%E5%AE%A2%E4%BA%8C%E4%BA%BA%E7%BB%84%E6%94%AF%E4%BB%982.2%E4%B8%87%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%B6%89%E5%8F%8A%E5%A4%9A%E4%B8%AA%E4%BA%91%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 02 Aug 2025 11:15:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%90%91%E9%BB%91%E5%AE%A2%E4%BA%8C%E4%BA%BA%E7%BB%84%E6%94%AF%E4%BB%982.2%E4%B8%87%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%B6%89%E5%8F%8A%E5%A4%9A%E4%B8%AA%E4%BA%91%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h3 id=&#34;谷歌向黑客二人组支付22万美元漏洞赏金涉及多个云项目安全漏洞&#34;&gt;谷歌向黑客二人组支付2.2万美元漏洞赏金，涉及多个云项目安全漏洞
+&lt;/h3&gt;&lt;p&gt;谷歌云平台(GCP)四个项目中的安全漏洞使两名安全研究人员获得了超过22,000美元的漏洞赏金。黑客二人组Sreeram KL和Sivanesh Ashok收益最丰厚的项目是机器学习训练和部署平台Vertex AI，他们因发现服务器端请求伪造(SSRF)漏洞及后续补丁绕过获得了两个5,000美元的奖励。&lt;/p&gt;
+&lt;p&gt;根据Sreeram的博客文章，该漏洞存在于Vertex AI的Workbench功能中，该功能支持在云上创建基于Jupyter Notebook的开发环境。通过利用SSRF漏洞并诱骗受害者点击恶意URL，攻击者可能夺取授权令牌的控制权，进而控制受害者的所有GCP项目。&lt;/p&gt;
+&lt;h4 id=&#34;ssrf漏洞技术细节&#34;&gt;SSRF漏洞技术细节
+&lt;/h4&gt;&lt;p&gt;研究人员发现某个URL存在SSRF可能时，&amp;ldquo;请求原始URL返回的响应看起来像是发送到compute.googleapis.com的认证请求输出&amp;rdquo;，Sreeram表示。通过模糊测试，他们发现&lt;code&gt;https://{INSTANCE-ID}-dot-us-central1.notebooks.googleusercontent.com/aipn/v2/proxy/{attacker.com}/compute.googleapis.com/&lt;/code&gt;可绕过检查，且该易受攻击的端点是没有CSRF保护的GET请求。&lt;/p&gt;
+&lt;p&gt;谷歌通过为GET端点添加CSRF保护并改进域名验证修复了该问题。&lt;/p&gt;
+&lt;h4 id=&#34;补丁绕过技术&#34;&gt;补丁绕过技术
+&lt;/h4&gt;&lt;p&gt;修复后，研究人员发现将&lt;code&gt;compute.googleapis.com&lt;/code&gt;改为&lt;code&gt;something.google.com&lt;/code&gt;不再触发错误。他们利用Google的FeedBurner服务实现开放重定向，最终结合2020年@s1r1us针对Jupyter Lab开发的CSRF绕过技术完成了漏洞利用。&lt;/p&gt;
+&lt;h4 id=&#34;其他云项目漏洞&#34;&gt;其他云项目漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Theia IDE&lt;/strong&gt;：利用XSS漏洞(CVE-2021-41038)获取元数据服务器中的服务账户令牌，获得3,133.70美元赏金&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compute Engine&lt;/strong&gt;：SSH-in-browser功能中的密钥注入问题可能导致远程代码执行，获得5,000美元奖励及1,000美元额外奖金&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cloud Workstations&lt;/strong&gt;：授权绕过漏洞获得3,133.70美元赏金&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;二人总计通过六个漏洞赏金项目获得22,267美元。文章还包含多个漏洞的概念验证视频和技术细节说明。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

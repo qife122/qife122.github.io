@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Atlassian on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/atlassian/</link>
+        <description>Recent content in Atlassian on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 15:29:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/atlassian/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Atlassian Confluence Server和Data Center关键零日漏洞警报</title>
+        <link>http://localhost:1313/p/atlassian-confluence-server%E5%92%8Cdata-center%E5%85%B3%E9%94%AE%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E8%AD%A6%E6%8A%A5/</link>
+        <pubDate>Sat, 02 Aug 2025 15:29:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/atlassian-confluence-server%E5%92%8Cdata-center%E5%85%B3%E9%94%AE%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E8%AD%A6%E6%8A%A5/</guid>
+        <description>&lt;h1 id=&#34;atlassian-confluence-server和data-center关键零日漏洞&#34;&gt;Atlassian Confluence Server和Data Center关键零日漏洞
+&lt;/h1&gt;&lt;p&gt;软件公司Atlassian于6月2日发布公告，披露一个此前未知的关键漏洞(CVE-2022-26134)，即所谓的零日漏洞。该漏洞影响Atlassian Confluence Server和Confluence Data Center所有受支持版本。根据Atlassian声明，Atlassian Cloud不受影响。荷兰国家网络安全中心(NCSC-NL)发布公告将该漏洞评级为高/高风险。目前尚无可用补丁。&lt;/p&gt;
+&lt;p&gt;该漏洞允许未经认证的攻击者远程执行代码并访问系统范围内的敏感信息。虽然Atlassian仍需确认最早受影响版本，但很可能所有版本均存在漏洞。目前公开渠道尚未出现概念验证代码。&lt;/p&gt;
+&lt;p&gt;据发现该漏洞的安全公司Volexity称，此漏洞极易被利用。Volexity已确认存在有限范围内的漏洞利用活动。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;p&gt;Atlassian正在为受支持版本开发补丁(计划于太平洋时间6月3日下班前发布)。NCSC-NL建议补丁发布后立即安装。同时，Atlassian建议采取以下临时措施降低风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;限制从互联网访问Confluence Server和Data Center实例&lt;/li&gt;
+&lt;li&gt;或完全禁用Confluence Server和Data Center实例直至补丁发布&lt;/li&gt;
+&lt;li&gt;若无法实施上述措施，可部署Web应用防火墙(WAF)规则拦截包含&lt;code&gt;${&lt;/code&gt;的URL以降低风险&lt;/li&gt;
+&lt;li&gt;建议实施网络监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Volexity已共享入侵指标(IOC)和YARA规则。NCSC-NL建议尽可能实施这些缓解措施，各组织需自行评估这些措施对业务流程的影响。NCSC-NL将持续监控情况并在官网更新相关信息。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,82 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 21:24:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 17:43:34 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Magnifier：交互式反编译的实验性工具</title>
+        <link>http://localhost:1313/p/magnifier%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%8F%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Sat, 02 Aug 2025 17:43:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/magnifier%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%8F%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h3 id=&#34;trail-of-bits的反编译技术栈&#34;&gt;Trail of Bits的反编译技术栈
+&lt;/h3&gt;&lt;p&gt;Trail of Bits正在开发多个与程序反编译相关的开源项目：Remill、Anvill、Rellic以及新推出的Magnifier。其技术策略是通过多级中间表示（IR）逐步提升编译程序：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Remill&lt;/strong&gt;：将机器指令转换为LLVM IR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Anvill&lt;/strong&gt;：把机器码函数转化为LLVM函数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rellic&lt;/strong&gt;：通过Clang AST将LLVM IR转换为C代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Magnifier创新性地实现了在任意管道阶段进行交互式转换，研究人员可以实时操作Anvill的LLVM IR并查看Rellic生成的C代码。&lt;/p&gt;
+&lt;h3 id=&#34;从repl起步的原型&#34;&gt;从REPL起步的原型
+&lt;/h3&gt;&lt;p&gt;Magnifier最初作为命令行REPL（读取-求值-输出循环）开发，支持以下核心转换操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用LLVM优化函数&lt;/li&gt;
+&lt;li&gt;函数内联&lt;/li&gt;
+&lt;li&gt;带/不带常量折叠的值替换&lt;/li&gt;
+&lt;li&gt;函数指针去虚拟化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键技术实现包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;唯一标识系统&lt;/strong&gt;：为所有函数、参数、基本块和IR指令分配不透明ID&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指令溯源机制&lt;/strong&gt;：通过&amp;quot;当前ID|源ID&amp;quot;的双重标识追踪转换过程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通用替换接口&lt;/strong&gt;：允许用户监控、允许或拒绝每个替换步骤&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;可视化界面magnifierui&#34;&gt;可视化界面MagnifierUI
+&lt;/h3&gt;&lt;p&gt;基于Vue.js前端和C++后端的MagnifierUI具有以下特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多会话WebSocket通信架构&lt;/li&gt;
+&lt;li&gt;并列显示LLVM IR与Rellic生成的C代码&lt;/li&gt;
+&lt;li&gt;支持指令级高亮关联&lt;/li&gt;
+&lt;li&gt;集成优化按钮调用LLVM全套优化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;典型工作流示例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;上传二进制文件&lt;/li&gt;
+&lt;li&gt;在终端视图执行参数值替换&lt;/li&gt;
+&lt;li&gt;实时观察IR和C代码同步更新&lt;/li&gt;
+&lt;li&gt;通过内联按钮优化函数调用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;llvm优化的实战演示&#34;&gt;LLVM优化的实战演示
+&lt;/h3&gt;&lt;p&gt;通过&amp;quot;fibIter(100)&amp;ldquo;案例展示Magnifier的威力：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;内联fibIter函数调用&lt;/li&gt;
+&lt;li&gt;执行LLVM优化&lt;/li&gt;
+&lt;li&gt;直接获得结果值3314859971（第100个斐波那契数）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;该过程避免了动态调试的复杂性，展示了如何将含循环/条件语句的复杂函数简化为常量。&lt;/p&gt;
+&lt;h3 id=&#34;未来发展方向&#34;&gt;未来发展方向
+&lt;/h3&gt;&lt;p&gt;项目规划包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;扩展转换类型支持（最终实现完整补丁集）&lt;/li&gt;
+&lt;li&gt;集成Anvill直接解析二进制文件&lt;/li&gt;
+&lt;li&gt;增强可视化界面的交互功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Magnifier通过创新的交互式反编译方法，正在重新定义逆向工程的研究范式。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Circomspect工具正式集成至Sindri CLI——零知识证明电路开发迎来安全增强</title>
+        <link>http://localhost:1313/p/circomspect%E5%B7%A5%E5%85%B7%E6%AD%A3%E5%BC%8F%E9%9B%86%E6%88%90%E8%87%B3sindri-cli%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E%E7%94%B5%E8%B7%AF%E5%BC%80%E5%8F%91%E8%BF%8E%E6%9D%A5%E5%AE%89%E5%85%A8%E5%A2%9E%E5%BC%BA/</link>
+        <pubDate>Sat, 02 Aug 2025 12:58:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/circomspect%E5%B7%A5%E5%85%B7%E6%AD%A3%E5%BC%8F%E9%9B%86%E6%88%90%E8%87%B3sindri-cli%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E%E7%94%B5%E8%B7%AF%E5%BC%80%E5%8F%91%E8%BF%8E%E6%9D%A5%E5%AE%89%E5%85%A8%E5%A2%9E%E5%BC%BA/</guid>
+        <description>&lt;p&gt;我们的静态分析工具Circomspect现已正式集成至Sindri命令行界面（CLI）！Circomspect专为帮助开发者更安全地构建Circom电路而设计，特别是在该新型编程框架工具支持有限的情况下。此次集成标志着Circomspect向更广泛使用迈出重要一步，从而为编写Circom电路的开发者提供更好支持。&lt;/p&gt;
+&lt;p&gt;开发零知识证明电路是项艰巨任务。即使忽略技术复杂性，在Circom等平台上运行非基础电路也需要极高的计算资源：基础测试可能耗时数分钟（或更久），这将大幅延长开发周期。Sindri通过让用户访问能显著加速电路执行的专用硬件来缓解该问题。其简洁的API和CLI工具使开发者无需自行管理基础设施即可将电路与专用硬件集成。&lt;/p&gt;
+&lt;p&gt;Sindri Labs首席执行官Stasia Carson对此表示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我们持续聚焦于让Sindri CLI对电路开发者更具普适价值，无论其是否使用Sindri服务。关键在于通过优化Docker容器实现无安装工具分发，并为静态分析、代码检查、编译和验证等工具提供统一的跨框架接口。Circomspect是开发安全Circom电路的关键工具，坦白说它可能是所有框架中最佳的安全工具，因此我们视其为最重要的集成之一。&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;此次集成对Circomspect具有里程碑意义。随着用户群体扩大，我们计划扩展更多分析功能，相关进展将在年内陆续公布。请持续关注我们的博客，获取关于Circomspect和零知识证明电路开发的最新动态！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>McSema二进制转LLVM比特码工具重大升级</title>
         <link>http://localhost:1313/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
         <pubDate>Fri, 01 Aug 2025 21:24:22 +0800</pubDate>

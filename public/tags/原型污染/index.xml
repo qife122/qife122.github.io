@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>原型污染 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93/</link>
+        <description>Recent content in 原型污染 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 12:20:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>谷歌工程师提出方案缓解JavaScript原型污染漏洞</title>
+        <link>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%8F%90%E5%87%BA%E6%96%B9%E6%A1%88%E7%BC%93%E8%A7%A3javascript%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 02 Aug 2025 12:20:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%8F%90%E5%87%BA%E6%96%B9%E6%A1%88%E7%BC%93%E8%A7%A3javascript%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;谷歌工程师提出方案缓解原型污染&#34;&gt;谷歌工程师提出方案缓解原型污染
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;John Leyden&lt;/strong&gt;&lt;br&gt;
+2023年2月6日 15:57 UTC&lt;br&gt;
+更新于2023年2月6日 17:02 UTC&lt;/p&gt;
+&lt;p&gt;谷歌的软件工程师提出了一项提案，旨在遏制已成为Web安全公害的原型污染漏洞。原型污染是JavaScript语言缺陷，允许攻击者在运行时操纵他们无法控制或访问的对象。该问题源于对象（用于在运行时保存数据）与其原型（决定对象行为方式）之间缺乏明确界限。&lt;/p&gt;
+&lt;p&gt;这项获得谷歌支持的提案已提交给技术工作组TC39审议，旨在创建JavaScript对象与原型之间的边界。其技术原理是&amp;quot;消除允许攻击者从对象跳转到原型的路径&amp;quot;。提案技术细节已发布在GitHub上。&lt;/p&gt;
+&lt;h2 id=&#34;可选安全模式&#34;&gt;可选安全模式
+&lt;/h2&gt;&lt;p&gt;正如GitHub帖子所述，该&amp;quot;提案试图通过引入可选安全模式来缓解原型污染，该模式使得无法使用字符串属性键访问原型，而要求必须通过方法（Object.getPrototypeOf）或提议的新符号属性键来访问&amp;quot;。&lt;/p&gt;
+&lt;p&gt;提案合著者Santiago Diaz表示：&amp;ldquo;目标是打破已知的利用技术，同时尽可能与现有代码库兼容，以便这种缓解措施能在互联网上广泛采用。&amp;ldquo;TC39工作组已批准提案从阶段0进入阶段1，开始了五部分批准流程的下一阶段。&lt;/p&gt;
+&lt;h2 id=&#34;符号解决方案&#34;&gt;符号解决方案
+&lt;/h2&gt;&lt;p&gt;PortSwigger安全研究员Gareth Hayes对此提案表示兴趣：&amp;ldquo;这是通过让开发者能够移除__proto__等属性来防止原型污染的提案。他们建议使用符号使网站继续使用__proto__功能，这样网站不会崩溃，攻击者也无法提供这些符号，因为这需要JavaScript执行。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;谷歌提案并非首创。但根据谷歌博客文章，现有解决方案如Object.freeze、preventExtensions和seal存在&amp;quot;使其难以部署的缺点&amp;rdquo;。该提案有望提供更实用的解决方案。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

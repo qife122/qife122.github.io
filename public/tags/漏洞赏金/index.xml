@@ -7,7 +7,74 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 09:23:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 18:42:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>网络安全的核心在于人：2022年网络安全意识月回顾</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9C%A8%E4%BA%8E%E4%BA%BA2022%E5%B9%B4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%84%8F%E8%AF%86%E6%9C%88%E5%9B%9E%E9%A1%BE/</link>
+        <pubDate>Sat, 02 Aug 2025 18:42:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9C%A8%E4%BA%8E%E4%BA%BA2022%E5%B9%B4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%84%8F%E8%AF%86%E6%9C%88%E5%9B%9E%E9%A1%BE/</guid>
+        <description>&lt;p&gt;随着2022年网络安全意识月落幕，我由衷感谢这个自2004年设立的活动持续推动网络安全议题。虽然活动结束，但网络安全工作永无止境。网络安全常被视为复杂的技术问题，但其核心始终关乎人——我们保护的客户与社区、奋战在前线的网络安全专家，以及共同强化全球网络安全的整个社区。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;当每个人都尽己所能时，攻击者就必须击败我们所有人才能击败其中一人。&amp;rdquo;&lt;br&gt;
+——美国国家网络总监克里斯·英格利斯&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;对客户的承诺&lt;/strong&gt;体现在持续提升安全防护能力。微软安全响应中心（MSRC）每日创新防御技术，例如运用AI/ML提升事件响应效率。除技术革新外，我们还通过MSRC博客分享安全研究成果，并优化安全更新指南（SUG）通知系统，帮助客户管理风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前线网络卫士&lt;/strong&gt;是抵御攻击的中坚力量。MSRC团队全天候应对新兴威胁，但网络安全人才短缺加剧了挑战。微软正通过教育项目培养未来人才——技术固然重要，但人才是关键。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;协作的力量&lt;/strong&gt;推动着安全标准的提升。我们与政府、学术界及安全社区建立深度合作，特别是通过漏洞赏金计划和研究者认可计划加强与安全研究者的联系。他们的贡献对全球客户防护至关重要。&lt;/p&gt;
+&lt;p&gt;网络安全本质是&lt;strong&gt;人的事业&lt;/strong&gt;，每个人都能为构建更安全的数字世界贡献力量。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+        <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 18:15:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞
+&lt;/h3&gt;&lt;p&gt;0:19 章节探讨攻击者如何绕过权限控制获取敏感数据，包含HackerOne案例#343464分析&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞
+&lt;/h3&gt;&lt;p&gt;2:15 演示通过GraphQL突变(Mutation)实现未授权数据操作的漏洞模式，引用HackerOne报告#2233480&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据删除漏洞&#34;&gt;GraphQL与未授权数据删除漏洞
+&lt;/h3&gt;&lt;p&gt;3:27 分析危险的数据删除操作漏洞，涉及HackerOne案例#858671&lt;/p&gt;
+&lt;h3 id=&#34;graphql如何导致dos攻击&#34;&gt;GraphQL如何导致DoS攻击
+&lt;/h3&gt;&lt;p&gt;6:11 解析复杂查询嵌套导致的服务器资源耗尽问题，引用LANDH技术博客2024年3月分析报告&lt;/p&gt;
+&lt;h3 id=&#34;graphql中的sql注入漏洞&#34;&gt;GraphQL中的SQL注入漏洞
+&lt;/h3&gt;&lt;p&gt;7:29 展示GraphQL参数如何传导至后端数据库，包含HackerOne案例#435066的注入技术细节&lt;/p&gt;
+&lt;h3 id=&#34;graphql模式泄露是否算漏洞&#34;&gt;GraphQL模式泄露是否算漏洞？
+&lt;/h3&gt;&lt;p&gt;10:09 讨论introspection查询暴露API结构的风险，分析敏感信息泄露场景&lt;/p&gt;
+&lt;h3 id=&#34;graphql的csrf攻击面&#34;&gt;GraphQL的CSRF攻击面
+&lt;/h3&gt;&lt;p&gt;11:28 讲解跨站请求伪造在GraphQL中的特殊表现形式，引用Doyensec安全研究报告&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/gql&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;获取完整案例研究&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/nl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;订阅邮件列表&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://bbre.dev/tw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;关注Twitter&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键资源链接已内嵌在时间轴章节中，包含DEF CON 32会议资料和GitHub OAuth CSRF绕过技术博客等专业参考内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>谷歌向黑客二人组支付2.2万美元漏洞赏金，涉及多个云项目安全漏洞</title>
+        <link>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%90%91%E9%BB%91%E5%AE%A2%E4%BA%8C%E4%BA%BA%E7%BB%84%E6%94%AF%E4%BB%982.2%E4%B8%87%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%B6%89%E5%8F%8A%E5%A4%9A%E4%B8%AA%E4%BA%91%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 02 Aug 2025 11:15:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%90%91%E9%BB%91%E5%AE%A2%E4%BA%8C%E4%BA%BA%E7%BB%84%E6%94%AF%E4%BB%982.2%E4%B8%87%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%B6%89%E5%8F%8A%E5%A4%9A%E4%B8%AA%E4%BA%91%E9%A1%B9%E7%9B%AE%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h3 id=&#34;谷歌向黑客二人组支付22万美元漏洞赏金涉及多个云项目安全漏洞&#34;&gt;谷歌向黑客二人组支付2.2万美元漏洞赏金，涉及多个云项目安全漏洞
+&lt;/h3&gt;&lt;p&gt;谷歌云平台(GCP)四个项目中的安全漏洞使两名安全研究人员获得了超过22,000美元的漏洞赏金。黑客二人组Sreeram KL和Sivanesh Ashok收益最丰厚的项目是机器学习训练和部署平台Vertex AI，他们因发现服务器端请求伪造(SSRF)漏洞及后续补丁绕过获得了两个5,000美元的奖励。&lt;/p&gt;
+&lt;p&gt;根据Sreeram的博客文章，该漏洞存在于Vertex AI的Workbench功能中，该功能支持在云上创建基于Jupyter Notebook的开发环境。通过利用SSRF漏洞并诱骗受害者点击恶意URL，攻击者可能夺取授权令牌的控制权，进而控制受害者的所有GCP项目。&lt;/p&gt;
+&lt;h4 id=&#34;ssrf漏洞技术细节&#34;&gt;SSRF漏洞技术细节
+&lt;/h4&gt;&lt;p&gt;研究人员发现某个URL存在SSRF可能时，&amp;ldquo;请求原始URL返回的响应看起来像是发送到compute.googleapis.com的认证请求输出&amp;rdquo;，Sreeram表示。通过模糊测试，他们发现&lt;code&gt;https://{INSTANCE-ID}-dot-us-central1.notebooks.googleusercontent.com/aipn/v2/proxy/{attacker.com}/compute.googleapis.com/&lt;/code&gt;可绕过检查，且该易受攻击的端点是没有CSRF保护的GET请求。&lt;/p&gt;
+&lt;p&gt;谷歌通过为GET端点添加CSRF保护并改进域名验证修复了该问题。&lt;/p&gt;
+&lt;h4 id=&#34;补丁绕过技术&#34;&gt;补丁绕过技术
+&lt;/h4&gt;&lt;p&gt;修复后，研究人员发现将&lt;code&gt;compute.googleapis.com&lt;/code&gt;改为&lt;code&gt;something.google.com&lt;/code&gt;不再触发错误。他们利用Google的FeedBurner服务实现开放重定向，最终结合2020年@s1r1us针对Jupyter Lab开发的CSRF绕过技术完成了漏洞利用。&lt;/p&gt;
+&lt;h4 id=&#34;其他云项目漏洞&#34;&gt;其他云项目漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Theia IDE&lt;/strong&gt;：利用XSS漏洞(CVE-2021-41038)获取元数据服务器中的服务账户令牌，获得3,133.70美元赏金&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compute Engine&lt;/strong&gt;：SSH-in-browser功能中的密钥注入问题可能导致远程代码执行，获得5,000美元奖励及1,000美元额外奖金&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cloud Workstations&lt;/strong&gt;：授权绕过漏洞获得3,133.70美元赏金&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;二人总计通过六个漏洞赏金项目获得22,267美元。文章还包含多个漏洞的概念验证视频和技术细节说明。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软扩展漏洞赏金计划 - 针对Windows版Office Insider构建的新奖励计划</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%89%A9%E5%B1%95%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92-%E9%92%88%E5%AF%B9windows%E7%89%88office-insider%E6%9E%84%E5%BB%BA%E7%9A%84%E6%96%B0%E5%A5%96%E5%8A%B1%E8%AE%A1%E5%88%92/</link>
         <pubDate>Sat, 02 Aug 2025 09:23:22 +0800</pubDate>

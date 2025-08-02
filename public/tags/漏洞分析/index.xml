@@ -7,7 +7,62 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 02:11:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 10:59:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>IE/Edge崩溃可利用性分析与微软安全防护技术解析</title>
+        <link>http://localhost:1313/p/ie/edge%E5%B4%A9%E6%BA%83%E5%8F%AF%E5%88%A9%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 10:59:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ie/edge%E5%B4%A9%E6%BA%83%E5%8F%AF%E5%88%A9%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;引言&#34;&gt;引言
+&lt;/h3&gt;&lt;p&gt;Internet Explorer（IE）和Edge通过多项安全防护技术显著提升了用户安全性。这些缓解措施不仅使某些漏洞类型无法被利用，还大幅提高了攻击者开发有效漏洞利用的成本。由于这些变化，分析崩溃的可利用性变得更为复杂，必须综合考虑缓解措施的影响。本文旨在为安全社区提供技术指导，帮助判断漏洞是否真正可被利用。&lt;/p&gt;
+&lt;h3 id=&#34;use-after-free漏洞缓解技术&#34;&gt;Use-After-Free漏洞缓解技术
+&lt;/h3&gt;&lt;p&gt;Use-After-Free（UAF）是现代面向对象软件中的常见漏洞类型，通常由对象释放后仍被引用导致。微软开发了两项主要防护技术：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Memory Protector（MP）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对栈或寄存器中保存的悬垂指针，通过延迟释放和扫描机制防止内存被恶意重用。&lt;/li&gt;
+&lt;li&gt;支持&amp;quot;Stress Mode&amp;quot;（通过注册表启用），可立即触发释放以简化分析。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MemGC&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前仅用于Edge和IE11，扩展了MP的功能，额外扫描堆引用，确保对象仅在无任何引用时释放。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;可利用性与服务策略&#34;&gt;可利用性与服务策略
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MemGC防护的UAF漏洞&lt;/strong&gt;：除非出现罕见的零写入导致可利用状态，否则视为已完全缓解，不发布安全更新。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MP防护的UAF漏洞&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;栈/寄存器引用类漏洞视为已缓解（除特殊情况外）；&lt;/li&gt;
+&lt;li&gt;堆引用类漏洞仍需通过安全更新修复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;崩溃分析实战&#34;&gt;崩溃分析实战
+&lt;/h3&gt;&lt;h4 id=&#34;memory-protector示例&#34;&gt;Memory Protector示例
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;启用Stress Mode&lt;/strong&gt;：强制立即释放对象，排除延迟释放干扰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分析崩溃现场&lt;/strong&gt;：若悬垂指针始终存在于栈/寄存器中（如示例中从释放点到崩溃点全程存在引用），则判定为不可利用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键检查点&lt;/strong&gt;：通过Windbg脚本扫描栈帧，确认引用位置是否覆盖关键代码路径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;memgc验证步骤&#34;&gt;MemGC验证步骤
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定位空指针解引用&lt;/strong&gt;：确定对象基址并验证其是否被零写入。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;追踪分配/释放调用栈&lt;/strong&gt;：通过&lt;code&gt;edgehtml!MemoryProtection::HeapAlloc&lt;/code&gt;和&lt;code&gt;HeapFree&lt;/code&gt;确认对象受MemGC保护。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;堆栈引用扫描&lt;/strong&gt;：若发现受保护对象存在堆/栈引用，则判定为已缓解。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;MemGC和MP技术大幅降低了UAF漏洞的可利用性。分析IE/Edge崩溃时，必须结合缓解机制的行为进行综合评估。&lt;/p&gt;
+&lt;h3 id=&#34;致谢&#34;&gt;致谢
+&lt;/h3&gt;&lt;p&gt;感谢Chris Betz、Matt Miller等团队成员对本文的贡献。&lt;br&gt;
+——MSRC工程部漏洞与缓解团队：Stephen Fleming &amp;amp; Richard van Eeden&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析，以Uber为例</title>
         <link>http://localhost:1313/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</link>
         <pubDate>Sat, 02 Aug 2025 02:11:51 +0800</pubDate>

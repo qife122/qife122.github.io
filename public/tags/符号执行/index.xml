@@ -7,7 +7,46 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 03:22:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 11:26:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Maat：让符号执行变得简单 - 跨架构多功能符号执行框架</title>
+        <link>http://localhost:1313/p/maat%E8%AE%A9%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%8F%98%E5%BE%97%E7%AE%80%E5%8D%95-%E8%B7%A8%E6%9E%B6%E6%9E%84%E5%A4%9A%E5%8A%9F%E8%83%BD%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Sat, 02 Aug 2025 11:26:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/maat%E8%AE%A9%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%8F%98%E5%BE%97%E7%AE%80%E5%8D%95-%E8%B7%A8%E6%9E%B6%E6%9E%84%E5%A4%9A%E5%8A%9F%E8%83%BD%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;h1 id=&#34;maat让符号执行变得简单&#34;&gt;Maat：让符号执行变得简单
+&lt;/h1&gt;&lt;p&gt;我们发布了Maat——一个跨架构、多用途且用户友好的符号执行框架。它提供动态符号执行（DSE）、污点分析、二进制插桩、环境模拟和约束求解等核心功能。基于Ghidra的中间表示语言p-code，Maat兼具C++高性能API和Python便捷接口，既适合安全专家也方便初学者入门。&lt;/p&gt;
+&lt;h2 id=&#34;用户友好的灵活api&#34;&gt;用户友好的灵活API
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;提供C++底层API和Python绑定&lt;/li&gt;
+&lt;li&gt;调试器式交互：支持启动/暂停/回滚执行过程&lt;/li&gt;
+&lt;li&gt;支持通过回调函数插桩目标代码（寄存器/内存访问等事件触发）&lt;/li&gt;
+&lt;li&gt;可定制符号数据处理策略（符号指针处理、状态约束保存等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;丰富的架构支持&#34;&gt;丰富的架构支持
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于Ghidra的sleigh库实现跨架构支持&lt;/li&gt;
+&lt;li&gt;当前已验证X86/X64架构&lt;/li&gt;
+&lt;li&gt;未来计划支持Java/Dalvik/Ethereum等虚拟机字节码&lt;/li&gt;
+&lt;li&gt;无需安装Ghidra即可使用独立版sleigh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;性能优化设计&#34;&gt;性能优化设计
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;纯C++核心实现&lt;/li&gt;
+&lt;li&gt;实测性能：主流笔记本每秒执行10-30万条指令（2.3GHz i7/32GB RAM）&lt;/li&gt;
+&lt;li&gt;未来将添加运行时瓶颈诊断功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;快速开始&#34;&gt;快速开始
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;安装：&lt;code&gt;python3 -m pip install pymaat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;查看&lt;a class=&#34;link&#34; href=&#34;https://maat.re/docs/tutorials&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;教程系列&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/maat&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub仓库&lt;/a&gt;获取源码和API文档&lt;/li&gt;
+&lt;li&gt;通过GitHub讨论区提交反馈&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>2017年度回顾：自动化漏洞挖掘、符号执行与区块链安全的技术突破</title>
         <link>http://localhost:1313/p/2017%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/</link>
         <pubDate>Sat, 02 Aug 2025 03:22:11 +0800</pubDate>

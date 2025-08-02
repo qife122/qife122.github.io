@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>C2框架 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/c2%E6%A1%86%E6%9E%B6/</link>
+        <description>Recent content in C2框架 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 14:13:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/c2%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Cobalt Strike与赛门铁克攻防实战：绕过端点防护的技术剖析</title>
+        <link>http://localhost:1313/p/cobalt-strike%E4%B8%8E%E8%B5%9B%E9%97%A8%E9%93%81%E5%85%8B%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%BB%95%E8%BF%87%E7%AB%AF%E7%82%B9%E9%98%B2%E6%8A%A4%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 14:13:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cobalt-strike%E4%B8%8E%E8%B5%9B%E9%97%A8%E9%93%81%E5%85%8B%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%BB%95%E8%BF%87%E7%AB%AF%E7%82%B9%E9%98%B2%E6%8A%A4%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;c2基础设施构建&#34;&gt;C2基础设施构建
+&lt;/h3&gt;&lt;p&gt;红队测试中，Cobalt Strike因其团队协作特性成为理想攻击平台。通过Digital Ocean虚拟机搭建包含以下要素的基础设施：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定制域名系统&lt;/li&gt;
+&lt;li&gt;成熟域名仿冒亚马逊流量&lt;/li&gt;
+&lt;li&gt;支持DNS/HTTP/HTTPS多通道&lt;/li&gt;
+&lt;li&gt;使用自动化脚本生成威胁模拟配置文件（&lt;a class=&#34;link&#34; href=&#34;https://github.com/killswitch-GUI/CobaltStrike-ToolKit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HTTPsC2DoneRight.sh&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;赛门铁克防护机制分析&#34;&gt;赛门铁克防护机制分析
+&lt;/h3&gt;&lt;p&gt;测试环境采用最新版赛门铁克端点防护，主要防御层包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;基于主机的入侵防御系统(HIPS)&lt;/li&gt;
+&lt;li&gt;磁盘可执行文件签名检测&lt;/li&gt;
+&lt;li&gt;进程创建管道中的ACT shim检测&lt;/li&gt;
+&lt;li&gt;内存shellcode检测&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;载荷测试方案设计&#34;&gt;载荷测试方案设计
+&lt;/h3&gt;&lt;p&gt;为规避检测设计三种测试场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;基础HTTP监听&lt;/strong&gt;：无定制配置的80端口监听&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;亚马逊流量伪装&lt;/strong&gt;：使用自动化脚本生成的标准配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定制化伪装&lt;/strong&gt;：修改关键参数的亚马逊配置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关键发现&#34;&gt;关键发现
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;32位载荷&lt;/strong&gt;：全部触发IPS警报并被阻断&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;64位载荷&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;基础HTTP配置成功建立会话&lt;/li&gt;
+&lt;li&gt;标准亚马逊配置在第二阶段GET请求时被TCP重置（无用户告警）&lt;/li&gt;
+&lt;li&gt;修改数字参数的定制配置成功绕过（GET请求中&lt;code&gt;167-3294888-0262949&lt;/code&gt;改为全8）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术结论&#34;&gt;技术结论
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;64位内存注入shellcode仍具高成功率&lt;/li&gt;
+&lt;li&gt;HIPS未检测第二阶段shellcode传递&lt;/li&gt;
+&lt;li&gt;公开的威胁模拟技术易被特定签名阻断&lt;/li&gt;
+&lt;li&gt;防御系统静默拦截会导致&amp;quot;假阴性&amp;quot;风险&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;红队最佳实践&#34;&gt;红队最佳实践
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;避免直接使用公开脚本模板&lt;/li&gt;
+&lt;li&gt;必须自定义关键流量参数（Host头/Cookie值等）&lt;/li&gt;
+&lt;li&gt;需验证所有攻击组件在目标环境的有效性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完整技术细节可参考作者培训课程：《企业攻击模拟与C2植入开发》&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

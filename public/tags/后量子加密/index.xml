@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>后量子加密 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86/</link>
+        <description>Recent content in 后量子加密 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 13:46:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%8A%A0%E5%AF%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>密码学专家解答10大关键技术问题 - 深入解析密码学原理与应用</title>
+        <link>http://localhost:1313/p/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%93%E5%AE%B6%E8%A7%A3%E7%AD%9410%E5%A4%A7%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/</link>
+        <pubDate>Sat, 02 Aug 2025 13:46:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%93%E5%AE%B6%E8%A7%A3%E7%AD%9410%E5%A4%A7%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;密码学专家解答10大关键技术问题&#34;&gt;密码学专家解答10大关键技术问题
+&lt;/h2&gt;&lt;p&gt;密码学是电子设备和互联网的基础组成部分，它保护着信用卡、手机、网页浏览（希望您正在使用TLS！）甚至绝密军事数据的安全。在区块链领域，密码学同样至关重要，以太坊等区块链依赖哈希、Merkle树和ECDSA签名等原语来运行。配对密码学、全同态加密和零知识证明等创新技术也已进入区块链领域。&lt;/p&gt;
+&lt;h3 id=&#34;1-snarks最常用的承诺方案有哪些&#34;&gt;1. SNARKs最常用的承诺方案有哪些？
+&lt;/h3&gt;&lt;p&gt;多项式承诺方案是一种协议，证明者承诺某个多项式并生成证明表明该承诺有效。该协议包含三个主要算法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Commit&lt;/li&gt;
+&lt;li&gt;Open&lt;/li&gt;
+&lt;li&gt;Verify&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在提交阶段，证明者发送其承诺——即他们在给定点对多项式f的评估值（即满足f(x)=a的值a）。该承诺应具有绑定性质，意味着一旦证明者承诺了某个多项式，他们就不能&amp;quot;改变主意&amp;quot;并为另一个多项式生成有效证明。它还可能具有隐藏性质，即在密码学上难以提取满足f(x)=a的值x。&lt;/p&gt;
+&lt;p&gt;最常见的生产环境中使用的承诺方案包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;KZG(Kate-Zaverucha-Goldberg)，例如用于EIP 4844中的danksharding&lt;/li&gt;
+&lt;li&gt;FRI(快速Reed-Solomon交互式Oracle接近性证明)，用于STARKs&lt;/li&gt;
+&lt;li&gt;像Pedersen承诺这样的承诺方案，用于Bulletproofs等证明系统(被Monero和Zcash使用)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-哈希构造mdsponge有何区别&#34;&gt;2. 哈希构造(MD、Sponge)有何区别？
+&lt;/h3&gt;&lt;p&gt;大多数人所熟悉的哈希函数，如MD5和SHA1，都是Merkle-Damgard构造。而我们熟知且喜爱的keccak256函数则是海绵构造。&lt;/p&gt;
+&lt;p&gt;在Merkle-Damgard构造中，任意长度的消息被解析为特定大小的块。关键部分是压缩函数应用于每个块，使用前一个块作为下一个压缩函数的密钥(对于第一个块，我们使用IV或初始化向量代替)。&lt;/p&gt;
+&lt;p&gt;相比之下，海绵构造不使用压缩函数。海绵构造的核心包括两个阶段：一个&amp;quot;吸收&amp;quot;阶段，其中消息的部分与初始状态进行异或运算，同时对它应用置换函数；然后是一个&amp;quot;挤压&amp;quot;阶段，其中输出的部分被提取并作为哈希输出。&lt;/p&gt;
+&lt;h3 id=&#34;3-椭圆曲线密码学ecc的理论攻击有哪些&#34;&gt;3. 椭圆曲线密码学(ECC)的理论攻击有哪些？
+&lt;/h3&gt;&lt;p&gt;ECC通常被视为密码学中复杂且有些神秘的部分，容易受到各种技术攻击。两个值得注意的理论攻击是Weil下降和MOV攻击。&lt;/p&gt;
+&lt;p&gt;Weil下降攻击：这种方法涉及使用代数几何中的概念，特别是称为Weil下降的技术。其思想是将离散对数问题从其原始形式的椭圆曲线(复杂的代数结构)转换为更简单的代数结构(如超椭圆曲线)上的类似问题。&lt;/p&gt;
+&lt;p&gt;MOV攻击：该攻击使用称为Weil配对的数学函数将椭圆曲线离散对数问题(ECDLP)转换为有限域中的离散对数问题，这是一个不同的数学设置。&lt;/p&gt;
+&lt;h3 id=&#34;4-后量子密码系统如基于格和基于同源的密码学概述&#34;&gt;4. 后量子密码系统(如基于格和基于同源的密码学)概述
+&lt;/h3&gt;&lt;p&gt;基于格的密码学使用格(显然)，它是基向量的整数线性组合。关于格有许多难题，如最短向量问题(给定基，找到格中最短的向量)和最接近向量问题(给定格和格外的点p，找到格中最接近p的点)。&lt;/p&gt;
+&lt;p&gt;另一方面，基于同源的密码学涉及使用同源(显然)，这是椭圆曲线之间的同态。我们可以使用这些同源创建标准椭圆曲线Diffie-Hellman密钥交换的后量子版本。&lt;/p&gt;
+&lt;h3 id=&#34;5-fiat-shamir启发式方法有哪些注意事项&#34;&gt;5. Fiat-Shamir启发式方法有哪些注意事项？
+&lt;/h3&gt;&lt;p&gt;Fiat-Shamir用于将交互式Oracle证明系统转换为非交互式证明系统。这允许证明者证明计算的结果，而不需要验证者在线。这是通过获取公共输入的哈希并将该哈希解释为随机输入来实现的。&lt;/p&gt;
+&lt;p&gt;需要注意的几个与安全相关的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;哈希必须包含所有公共输入&lt;/li&gt;
+&lt;li&gt;即使使用强Fiat-Shamir变换，也可能出现更微妙的理论问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-plonk交互式oracle证明系统的最新进展&#34;&gt;6. PLONK交互式Oracle证明系统的最新进展
+&lt;/h3&gt;&lt;p&gt;交互式Oracle证明是SNARKs中的主要信息理论组件，它允许证明者生成证明，以高概率发现伪造证明的方式&amp;quot;说服&amp;quot;验证者的&amp;quot;知识&amp;quot;。&lt;/p&gt;
+&lt;p&gt;PLONK证明系统的变体包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Turboplonk：支持两个以上输入的自定义门&lt;/li&gt;
+&lt;li&gt;UltraPLONK：支持查找表&lt;/li&gt;
+&lt;li&gt;Hyperplonk：消除了对数论变换(NTT)的需求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;7-构建zkevm的各种设计决策type-123等&#34;&gt;7. 构建zkEVM的各种设计决策(Type 1/2/3等)
+&lt;/h3&gt;&lt;p&gt;不同类型的zkEVM可以根据它们与以太坊的&amp;quot;完全兼容性&amp;quot;来考虑，Type 1最等效，Type 4最不等效。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type 1 zkEVMs在各方面等同于以太坊的执行和共识层&lt;/li&gt;
+&lt;li&gt;Type 2 zkEVMs旨在实现EVM等效&lt;/li&gt;
+&lt;li&gt;Type 3 zkEVMs通过使用更少的等效性实现更快的证明时间&lt;/li&gt;
+&lt;li&gt;Type 4 zkEVMs旨在将Solidity和Vyper等语言编译为ZK友好格式以生成证明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-zkevms的进一步改进&#34;&gt;8. zkEVMs的进一步改进
+&lt;/h3&gt;&lt;p&gt;虽然从理论上讲，构建zkEVM和创建高效证明的主要挑战可以通过plonkish算术化、查找和增量可验证组合(IVC)的组合来解决，但在我们真正实现ZK证明所承诺的大规模可扩展性之前，仍存在许多工程挑战。&lt;/p&gt;
+&lt;p&gt;可能的进一步优化包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用更小的字段&lt;/li&gt;
+&lt;li&gt;硬件改进和并行化&lt;/li&gt;
+&lt;li&gt;理论改进&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;9-shamir的秘密共享方案及其常见错误&#34;&gt;9. Shamir的秘密共享方案及其常见错误
+&lt;/h3&gt;&lt;p&gt;Shamir的秘密共享(SSS)是一种在各方之间分割一组秘密的方法，使得一组参与者可以合作恢复秘密，但任何数量少于阈值的参与者都无法了解任何信息。&lt;/p&gt;
+&lt;p&gt;需要注意的几个可能使SSS或Feldman的可验证秘密共享完全不安全的&amp;quot;陷阱&amp;quot;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;向参与者共享0点会无意中泄露秘密&lt;/li&gt;
+&lt;li&gt;确保共享之间的差异不为0或模等价&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;10-递归证明的折叠方案如何工作&#34;&gt;10. 递归证明的折叠方案如何工作？
+&lt;/h3&gt;&lt;p&gt;折叠方案是增量可验证计算问题的一种解决方案。折叠方案起源于Nova，并引入了一个新想法：验证者不会在每次调用F时验证SNARK，而是将当前实例&amp;quot;折叠&amp;quot;到累加器中。&lt;/p&gt;
+&lt;p&gt;对折叠方案的几项更新和改进已经完成。例如，Sangria方案将折叠推广到Plonkish算术化，而不仅仅是R1CS。HyperNova将Nova推广到可定制约束系统(CCS)，这是一个更通用的约束系统，可以表达Plonkish和AIR算术化。&lt;/p&gt;
+&lt;h2 id=&#34;迈向更好的密码学安全&#34;&gt;迈向更好的密码学安全
+&lt;/h2&gt;&lt;p&gt;密码学不断发展，理论与实现之间的差距越来越小。更多有趣的密码学协议和新颖的实现正在各处涌现，包括多方计算、增量可验证组合、全同态加密以及介于两者之间的一切。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入探讨如何为.NET程序集编写高效的YARA特征规则，涵盖IL代码、方法签名定义和特定自定义属性等检测技术，帮助分析师在缺乏样本的情况下构建精确的检测方案。">
+<title>100天掌握YARA：如何编写.NET代码特征规则</title>
+
+<link rel='canonical' href='http://localhost:1313/p/100%E5%A4%A9%E6%8E%8C%E6%8F%A1yara%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99.net%E4%BB%A3%E7%A0%81%E7%89%B9%E5%BE%81%E8%A7%84%E5%88%99/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="100天掌握YARA：如何编写.NET代码特征规则">
+<meta property='og:description' content="本文深入探讨如何为.NET程序集编写高效的YARA特征规则，涵盖IL代码、方法签名定义和特定自定义属性等检测技术，帮助分析师在缺乏样本的情况下构建精确的检测方案。">
+<meta property='og:url' content='http://localhost:1313/p/100%E5%A4%A9%E6%8E%8C%E6%8F%A1yara%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99.net%E4%BB%A3%E7%A0%81%E7%89%B9%E5%BE%81%E8%A7%84%E5%88%99/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='YARA' /><meta property='article:tag' content='.NET' /><meta property='article:tag' content='恶意软件分析' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-02T10:48:22&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T10:48:22&#43;08:00'/>
+<meta name="twitter:title" content="100天掌握YARA：如何编写.NET代码特征规则">
+<meta name="twitter:description" content="本文深入探讨如何为.NET程序集编写高效的YARA特征规则，涵盖IL代码、方法签名定义和特定自定义属性等检测技术，帮助分析师在缺乏样本的情况下构建精确的检测方案。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#案例1基于截图的yara规则">案例1：基于截图的YARA规则</a></li>
+    <li><a href="#net元数据头与流">.NET元数据头与流</a></li>
+    <li><a href="#guid">GUID</a></li>
+    <li><a href="#案例1的修正规则">案例1的修正规则</a></li>
+    <li><a href="#案例2检测方法和il代码">案例2：检测方法和IL代码</a></li>
+    <li><a href="#令牌">令牌</a></li>
+    <li><a href="#il代码模式与通配符">IL代码模式与通配符</a></li>
+    <li><a href="#检测方法的每个部分">检测方法的每个部分</a></li>
+    <li><a href="#案例2的最终规则">案例2的最终规则</a></li>
+    <li><a href="#net-yara规则技巧">.NET YARA规则技巧</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#样本哈希">样本哈希</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/100%E5%A4%A9%E6%8E%8C%E6%8F%A1yara%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99.net%E4%BB%A3%E7%A0%81%E7%89%B9%E5%BE%81%E8%A7%84%E5%88%99/">100天掌握YARA：如何编写.NET代码特征规则</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入探讨如何为.NET程序集编写高效的YARA特征规则，涵盖IL代码、方法签名定义和特定自定义属性等检测技术，帮助分析师在缺乏样本的情况下构建精确的检测方案。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 13 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="100天掌握yara编写net恶意软件特征规则">100天掌握YARA：编写.NET恶意软件特征规则
+</h1><p>当YARA规则仅依赖字符串匹配时，其对.NET程序集的检测能力非常有限。我们将探索更多检测机会，包括IL代码、方法签名定义和特定自定义属性。了解底层.NET元数据结构、令牌和流有助于构建更精确高效的特征规则，甚至在相关恶意样本不可用时也能发挥作用。</p>
+<h2 id="案例1基于截图的yara规则">案例1：基于截图的YARA规则
+</h2><p>有时恶意软件分析师需要根据文章或社交媒体帖子编写威胁狩猎规则，但手头没有样本。样本可能属于机密信息、未公开分享或无法获取哈希值。虽然这是特定场景，但本文还将教会您如何为.NET特征添加上下文，以及如何在有样本时跳过十六进制编辑器直接选择正确格式。</p>
+<p>若只有截图，我们能利用哪些信息？首先，dnSpy会话截图可能显示方法名、参数名、方法标识符和类名。此外还可能包含独特盐值、密码或编码载荷的整数数组。反编译代码也常出现在截图中，但通常无法还原为IL代码模式。我们将讨论如何为每种模式选择适当格式。</p>
+<p>不了解.NET内部机制的分析师可能会编写如下规则。为确保考虑字符串的不同编码，他们可能对所有字符串应用ascii和wide修饰符。</p>
+<p>⚠️ 为避免博客被检测，YARA规则以纯文本形式提供</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rule Buggy_Hunt_Rule {
+</span></span><span class="line"><span class="cl">    strings:
+</span></span><span class="line"><span class="cl">        $s1 = &#34;AssemblyTitle&#34; ascii wide
+</span></span><span class="line"><span class="cl">        $s2 = &#34;Guid&#34; ascii wide
+</span></span><span class="line"><span class="cl">        $s3 = &#34;WindowsFormsApp54.Program.Main&#34; ascii wide
+</span></span><span class="line"><span class="cl">        $timestamp = &#34;E5 93 05 00&#34;
+</span></span><span class="line"><span class="cl">    condition:
+</span></span><span class="line"><span class="cl">        all of them
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但该规则不会匹配样本，因为这些模式存在常见缺陷。在讨论.NET内部机制后，我们将解释这些缺陷并创建改进后的有效规则。</p>
+<h2 id="net元数据头与流">.NET元数据头与流
+</h2><p>.NET文件是包含公共语言运行时(CLR)元数据的可移植可执行文件。CLR头的位置由PE文件头数据目录的第15项设置，在PE COFF规范中名为CLR运行时头。</p>
+<p>CLR头指向以存储签名&rsquo;BSJB&rsquo;开头的元数据头。元数据头定义流头。标准.NET可执行文件包含以下流：#GUID、#Strings、#US、#Blob以及优化的(#~)或未优化的(#-)元数据流（见图3）。</p>
+<p>元数据流引用#GUID、#Strings、#Blob中的数据并指向IL代码。IL代码本身可能引用#US堆上的用户定义字符串。</p>
+<p>元数据头中出现首个检测机会，因为混淆器可能添加无效流（如两个同名流或规范未定义的流名）。仅此异常通常不足以检测恶意软件，但可用于构建强大的混淆器检测规则，为逆向工程师和恶意软件分析师提供重要信息。</p>
+<p>下表描述各流的用途和高级格式说明。在决定YARA规则中使用哪些修饰符和模式时，请以此为参考。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>流名</th>
+          <th>格式</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>#Blob</td>
+          <td>任意大小二进制对象的堆，4字节对齐，每个对象前有压缩长度，字符串通常为UTF-8</td>
+          <td>默认名称、方法和属性签名、自定义属性（如程序集信息、类型库GUID）</td>
+      </tr>
+      <tr>
+          <td>#GUID</td>
+          <td>16字节二进制对象数组</td>
+          <td>全局唯一标识符如MVID</td>
+      </tr>
+      <tr>
+          <td>#Strings</td>
+          <td>UTF-8字符串，始终以零字节包围</td>
+          <td>方法名、类名、字段名、参数名</td>
+      </tr>
+      <tr>
+          <td>#US</td>
+          <td>UTF-16字符串堆，前有压缩长度，尾字节为0或1</td>
+          <td>用户代码中定义的字符串常量</td>
+      </tr>
+      <tr>
+          <td>#~或#-</td>
+          <td>元数据表</td>
+          <td>-</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>#Blob和#US流在每个元素前添加压缩长度。压缩长度计算如下（参见[2]第68页）：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>值范围</th>
+          <th>压缩大小</th>
+          <th>压缩值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x0-0x7F</td>
+          <td>1字节</td>
+          <td>&lt;值&gt;</td>
+      </tr>
+      <tr>
+          <td>0x80-0x3FFF</td>
+          <td>2字节</td>
+          <td>0x8000</td>
+      </tr>
+      <tr>
+          <td>0x4000-0x1FFFFFFF</td>
+          <td>4字节</td>
+          <td>0xC0000000</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>只要#US字符串和#Blob条目短于128字节，前置压缩长度与实际长度相同。大多数恶意软件分析师想要创建的模式很可能就是这种情况。</p>
+<p>正是由于前置长度，当长度恰好是字母数字字符时，fullword修饰符可能会阻止匹配。</p>
+<h2 id="guid">GUID
+</h2><p>我们示例截图中显示的GUID也称为TypeLib ID，Brian Wallace在其文章《使用.NET GUID帮助搜寻恶意软件》[1]中首次描述。</p>
+<p>Typelib ID由Visual Studio添加，唯一标识项目。它保存在#Blob流中，因此始终以长度0x24（即&rsquo;$&lsquo;字符）为前缀。这是一个强大的模式，可以独立存在，并且对重新编译具有鲁棒性。</p>
+<p>对于像AgentTesla这样源代码泄露的恶意软件家族，如果目标是检测该家族，则可能不应使用TypeLib ID。</p>
+<p>Wallace提到的另一个GUID是#GUID流中的MVID。MVID随重新编译而变化，适用于识别特定样本（例如查看是否重新打包了相同载荷）。它不适用于编写抗重新编译的检测规则。</p>
+<h2 id="案例1的修正规则">案例1的修正规则
+</h2><p>现在我们可以修正基于程序集信息截图的错误YARA规则：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rule Fixed_AssemblyInfo_Rule {
+</span></span><span class="line"><span class="cl">    strings:
+</span></span><span class="line"><span class="cl">        $guid = &#34;$\x24\x00\x00\x00\x91\xA2\xF3\xAE\x31\xA2\x4F\x72\xB8\x9A\xEB\x35\xB4\x1D\x48\xA6\xBF\xF5\xD7\x8D\x39\x91\x18\x64\x94\xBF\x7C\x00\x00&#34;
+</span></span><span class="line"><span class="cl">        $title = &#34;a\x34\x00\x00\x00\x4D\x79\x20\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x20\x44\x65\x73\x63\x72\x69\x70\x74\x69\x6F\x6E\x20\x67\x6F\x65\x73\x20\x68\x65\x72\x65&#34;
+</span></span><span class="line"><span class="cl">        $url = { 80 C5 00 68 00 74 00 74 00 70 00 73 00 3A 00 2F 00 2F 00 77 00 77 00 77 00 2E 00 6D 00 79 00 63 00 32 00 73 00 65 00 72 00 76 00 65 00 72 00 2E 00 63 00 6F 00 6D 00 2F 00 70 00 61 00 79 00 6C 00 6F 00 61 00 64 00 2E 00 70 00 68 00 70 00 3F 00 69 00 64 00 3D 00 7B 00 30 00 7D 00 00 }
+</span></span><span class="line"><span class="cl">        $timestamp = &#34;MZ\x90\x00\x03\x00\x00\x00\x04\x00\x00\x00\xFF\xFF\x00\x00\xB8\x00\x00\x00\x00\x00\x00\x00@\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xE8\x00\x00\x00\x0E\x1F\xBA\x0E\x00\xB4\x09\xCD!\xB8\x01L\xCD!This program cannot be run in DOS mode.\r\r\n$\x00\x00\x00\x00\x00\x00\x00\x93\xE5\x05\x00&#34;
+</span></span><span class="line"><span class="cl">        $forms = &#34;\x00WindowsFormsApp54\x00&#34;
+</span></span><span class="line"><span class="cl">    condition:
+</span></span><span class="line"><span class="cl">        $guid and $title and $url and $timestamp and $forms
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在修正的YARA规则中，我们移除了&quot;AssemblyTitle&quot;和&quot;Guid&quot;字符串，因为这些字符串编码在元数据表中，实际不出现在二进制文件中。</p>
+<p>此外，我们使用基于表1的格式。$guid和$title字符串来自程序集信息，因此保存在#Blob流中并带有前置压缩长度。这意味着不需要wide修饰符。</p>
+<p>常见缺陷是在#Blob（或#US）字符串中使用YARA的fullword修饰符。前置长度可能在字母数字范围内，如我们示例中的$title。其长度为0x34，恰好也是字符&rsquo;a&rsquo;。因此，fullword修饰符会阻止此类字符串的匹配，这不是我们想要的。</p>
+<p>通过检查前置长度，我们有一个极好的替代方案来实现fullword修饰符的意图。检查长度有三种不同方式：</p>
+<ul>
+<li>可直接嵌入字符串模式（见$guid和$title）</li>
+<li>可使用十六进制模式（此处未显示），但由于可读性较差，建议用解码字符串的注释补充</li>
+<li>可在条件中检查长度，这对保持可读的宽字符串很有用（见$url的条件）</li>
+</ul>
+<p>除了能像fullword修饰符一样工作外，包含前置长度还为特征模式添加了结构上下文。意外作为方法名（#Strings流）出现的程序集信息文本可能不是我们要找的模式。</p>
+<p>为了展示#US字符串和2字节压缩长度的另一个示例，我还添加了$url。这样的下载URL可能在分析报告中提到，这里我们假设它可能被IL代码引用，因此是#US流的一部分。该URL的长度为98字符，即98*2=96字节（0xC4），因为#US以UTF-16保存它们。此外，#US流条目有一个附加的0x0或0x1，这意味着我们必须将长度加1字节，现在是0xC5。值0xC5在0x80–0x3FFF范围内，因此使用2字节编码该长度。应用公式得到：(0x8000 | 0xC5) = 0x80C5。</p>
+<p>错误的$timestamp没有考虑时间戳以小端格式保存。知道此时间戳是PE头的一部分，我们通过将其放置在PE签名固定偏移处来为模式添加上下文。或者，YARA的&quot;pe&quot;模块解析时间戳——然而解析的缺点是性能可能更差，且只能在足够有效的PE映像上运行，但可能无法检测嵌入文件、内存转储或损坏文件中的恶意软件。因此，更通用的选择是基于模式的解决方案。</p>
+<p>最后，我们更改$forms字符串，因为&quot;WindowsFormsApp54&quot;、&ldquo;Program&quot;和&quot;Main&quot;是命名空间、类和方法，作为单独条目放在#Strings堆中。它们的连接编码在元数据表中，无法用单个模式覆盖。我们从YARA规则中完全移除&quot;Program&quot;和&quot;Main&rdquo;，因为它们是相对常见的字符串。&ldquo;WindowsFormsApp54&quot;是Visual Studio使用的默认名称。除了编程练习外，它在干净文件中应该不常见，加上时间戳我们可能会找到用于截图的样本。由于&quot;WindowsFormsApp54&quot;保存在#Strings中，它被零字节包围。</p>
+<p>一个警告：特别是对于威胁狩猎规则，通常必须在没有样本的情况下编写，手动计算压缩长度等细节可能容易出错。但了解.NET流中使用的底层结构和编码有助于避免我们在错误狩猎规则中看到的典型错误。当您为生产环境制作实际检测规则时，这些结构细节很容易提取，并且能很好地避免误报。</p>
+<h2 id="案例2检测方法和il代码">案例2：检测方法和IL代码
+</h2><p>对于简单情况，恶意.NET样本的字符串列表提供足够信息来编写YARA规则。然而，混淆使这种方法无法使用，如果它对用户定义字符串进行编码并替换方法、字段和类名。要成功为此类文件创建规则，多才多艺的分析师可能需要查看实际IL代码和方法签名。</p>
+<p>我们将为案例2查看的方法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">byte</span><span class="p">[]</span> <span class="n">Buffer</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span><span class="p">[]</span> <span class="n">array</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[</span><span class="m">256</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">byte</span><span class="p">&gt;</span> <span class="n">dictionary</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">byte</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="k">in</span> <span class="n">Enumerable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">256</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">array</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="p">=</span> <span class="n">num</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">&#34;X2&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dictionary</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">num</span><span class="p">],</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ... 其余代码 ...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="令牌">令牌
+</h2><p>任何为x86代码编写规则的人都知道，函数或数据位置的地址通常应该被通配以创建鲁棒的特征模式。这是因为对代码的小改动（如额外变量、函数和指令）也会在重新编译后影响这些地址。</p>
+<p>.NET令牌在这方面类似于x86中的地址。就像地址一样，它们的值可能随重新编译而改变。然而，它们并不完全相同，通配整个令牌不建议。</p>
+<p>.NET程序集中有两种令牌：编码令牌和非编码令牌。非编码令牌是IL代码的一部分。</p>
+<p>.NET元数据由许多表组成，这些表定义类、参数、方法等。令牌引用元数据表中的一行。这意味着它们描述两个数据点：指定使用哪行的记录标识符和指示引用哪个表的表索引。</p>
+<p>每个令牌由4字节组成。第一个字节是表索引，也称为令牌类型。剩余的2-4字节是记录标识符(RID)。第一个字节定义元数据表，RID定义该表中的哪个条目被使用。</p>
+<p>为什么表索引也称为令牌类型？这是因为每个元数据表负责存储某种类型的条目。例如，方法保存在mdtMethodDef表中，这意味着指向该表的任何令牌都是方法定义引用，令牌类型为0x06。</p>
+<p>令牌类型本身在每个.NET程序集中具有相同的值，使其成为编写规则时的重要数据点。下表列出它们的值（参见[2]第76页）。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>令牌类型</th>
+          <th>值 (RID</th>
+          <th>(Type &laquo; 24))</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mdtModule</td>
+          <td>0x00000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtTypeRef</td>
+          <td>0x01000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtTypeDef</td>
+          <td>0x02000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtFieldDef</td>
+          <td>0x04000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtMethodDef</td>
+          <td>0x06000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtParamDef</td>
+          <td>0x08000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtInterfaceDef</td>
+          <td>0x09000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtMemberRef</td>
+          <td>0x0A000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtCustomAttribute</td>
+          <td>0x0C000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtPermission</td>
+          <td>0x0E000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtSignature</td>
+          <td>0x11000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtEvent</td>
+          <td>0x14000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtProperty</td>
+          <td>0x17000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtModuleRef</td>
+          <td>0x1A000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtTypeSpec</td>
+          <td>0x1B000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtAssembly</td>
+          <td>0x20000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtAssemblyRef</td>
+          <td>0x23000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtFile</td>
+          <td>0x26000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtExportedType</td>
+          <td>0x27000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtManifestResource</td>
+          <td>0x28000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtGenericParam</td>
+          <td>0x2A000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtMethodSpec</td>
+          <td>0x2B000000</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>mdtGenericParamConstraint</td>
+          <td>0x2C000000</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>另一方面，RID更应该被通配，因为与x86中的地址类似，当添加或删除表条目并重新编译样本时，它们的值可能会改变。</p>
+<h2 id="il代码模式与通配符">IL代码模式与通配符
+</h2><p>让我们利用关于令牌的知识创建IL代码规则。要查看操作码，请在dnSpy中打开样本并选择&quot;IL代码&quot;作为语言。然后复制并粘贴要添加到规则中的代码序列。</p>
+<p>我们Buffer方法的部分输出如下。此代码初始化大小为256的数组和字典，然后使用Enumerable.Range(0, 256)迭代数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* 0x00000378 2000010000   */ IL_0000: ldc.i4    256 
+</span></span><span class="line"><span class="cl">/* 0x0000037D 8D19000001   */ IL_0005: newarr    [mscorlib]System.String 
+</span></span><span class="line"><span class="cl">/* 0x00000382 0A           */ IL_000A: stloc.0 
+</span></span><span class="line"><span class="cl">/* 0x00000383 731F00000A   */ IL_000B: newobj    instance void class [mscorlib]System.Collections.Generic.Dictionary`2&lt;string, uint8&gt;::.ctor() 
+</span></span><span class="line"><span class="cl">/* 0x00000388 0B           */ IL_0010: stloc.1 
+</span></span><span class="line"><span class="cl">/* 0x00000389 16           */ IL_0011: ldc.i4.0 
+</span></span><span class="line"><span class="cl">/* 0x0000038A 2000010000   */ IL_0012: ldc.i4    256 
+</span></span><span class="line"><span class="cl">/* 0x0000038F 282000000A   */ IL_0017: call      class [mscorlib] System.Collections.Generic.IEnumerable`1&lt;int32&gt; [System.Core]System.Linq.Enumerable::Range(int32, int32)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>操作码部分是此列表中的第二列。例如，最后一个调用Range(0,256)的指令有以下十六进制字节序列：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">28 20 00 00 0A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一个字节0x28是call指令的操作码。接下来的三个字节0x20 0x00 0x00是RID，因为令牌以小端格式保存。最后一个字节0x0A是令牌类型mdtMemberRef。</p>
+<p>这意味着对于此call指令，我们通配2-4字节，因为我们想保留调用成员引用的信息。生成的子模式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">28 ?? ?? ?? 0A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>IL代码的完整YARA规则可能如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rule IL_Code_Signature {
+</span></span><span class="line"><span class="cl">    strings:
+</span></span><span class="line"><span class="cl">        $op1 = { 20 00 01 00 00 }  // ldc.i4 256
+</span></span><span class="line"><span class="cl">        $op2 = { 8D 19 00 00 01 }  // newarr [mscorlib]System.String
+</span></span><span class="line"><span class="cl">        $op3 = { 28 ?? ?? ?? 0A }  // call System.Linq.Enumerable::Range(int32, int32)
+</span></span><span class="line"><span class="cl">    condition:
+</span></span><span class="line"><span class="cl">        all of them
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意我们保留了数组大小和Range(0,256)调用的整数值。根据上下文和这些值变化的概率，可能需要通配这些值。表示加密密钥、活动ID或版本号的值经常变化。</p>
+<p>一些文章建议通配包括令牌类型在内的完整令牌，然而这样做通常没有优势。相反，除了丢失类型信息外，如果剩余的字节序列长度不足，这可能导致性能不佳。对于YARA模式，建议至少4个连续字节没有通配符，因为YARA的搜索算法首先用4字节子字符串（称为原子）进行扫描（见[4]）。</p>
+<h2 id="检测方法的每个部分">检测方法的每个部分
+</h2><p>方法由主体、方法名、参数名和签名组成。在.NET程序集中，这些保存在不同的流中，因此位于程序集的不同位置。</p>
+<p>假设我们想为YARA规则使用所有这些信息。</p>
+<p>首先，方法名和参数名保存在#Strings流中。因此我们知道方法名和参数名将被零字节包围并以UTF-8格式保存。这不仅在我们需要仅基于截图编写规则时有用，而且在有样本时也能节省时间，因为我们不需要在十六进制编辑器中查找这些名称的表示形式。</p>
+<p>其次，IL代码引用的任何字符串都以UTF-16编码存储在#US堆中。我们已经在案例1中讨论了#String和#US字符串。</p>
+<p>第三，方法主体是实际的IL代码。我们在上一节讨论了这部分。</p>
+<p>最后，方法签名保存在#Blob流中。上下文中的方法签名指方法期望的调用约定、参数类型和返回类型，不应与检测规则混淆。此类方法签名的构建如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">method_sig ::= &lt;callconven_method&gt; &lt;num_of_args&gt; &lt;return_type&gt; [&lt;arg_type&gt;[,&lt;arg_type&gt;]*]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ildasm.exe显示方法签名的字节序列。使用方法完全限定名，显示字节序列的合适命令是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ILDasm.exe /text /bytes /nobar /item=&#34;ns11.Class9::method_22&#34; sample
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下示例输出显示最后一行中的方法签名字节序列：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.method public hidebysig instance void 
+</span></span><span class="line"><span class="cl">          method_22(class [System.Drawing]System.Drawing.Imaging.BitmapData Param_55, 
+</span></span><span class="line"><span class="cl">                    class [mscorlib]System.IO.MemoryStream Param_56) cil managed 
+</span></span><span class="line"><span class="cl">SIG: 20 02 01 12 29 12 2D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法签名含义如下：</p>
+<ul>
+<li>0x20是调用约定IMAGE_CEE_CS_CALLCONV_HASTHIS，表示这是一个实例方法</li>
+<li>0x02是参数数量，即2</li>
+<li>0x01是返回类型VOID</li>
+<li>0x12 0x29是第一个参数，0x12引用CLASS类型，0x29是类引用的编码令牌</li>
+<li>0x12 0x2D是第二个参数，0x12引用CLASS类型，0x2D是类引用的编码令牌</li>
+</ul>
+<p>正如我们在IL代码模式中通配RID一样，我们也应该通配方法签名中的编码令牌。编码令牌是令牌的压缩形式，允许比4字节更小的尺寸。它们不用于IL代码，但用于内部结构如方法签名。</p>
+<p>此外，我们在模式前添加长度0x07，因为每个#Blob条目都需要它。</p>
+<p>此方法签名的最终十六进制模式是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">07 20 02 01 12 ?? 12 ??
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法签名模式本身是一个弱数据点。此外，除非扫描引擎解析.NET元数据，否则方法签名不能与方法主体和名称关联。因此，对于纯模式搜索，任何具有相同方法签名的方法都会匹配。因此，它对为YARA规则添加上下文很有用，但肯定不足以独立使用。</p>
+<h2 id="案例2的最终规则">案例2的最终规则
+</h2><p>基于上一节的知识，我们为Buffer方法的YARA规则添加更多字符串：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">rule</span> <span class="n">Buffer_Method_Signature</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">strings</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">method_name</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">Buffer</span><span class="se">\x00</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">param_name</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">input</span><span class="se">\x00</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">us_string</span> <span class="o">=</span> <span class="p">{</span> <span class="n">C5</span> <span class="mi">80</span> <span class="mi">00</span> <span class="mi">58</span> <span class="mi">00</span> <span class="mi">32</span> <span class="mi">00</span> <span class="mi">00</span> <span class="p">}</span>  <span class="o">//</span> <span class="s2">&#34;X2&#34;</span> <span class="n">with</span> <span class="n">length</span> <span class="ow">and</span> <span class="n">trailing</span> <span class="n">byte</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">class_name</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">Small</span><span class="se">\x00</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">namespace</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">WindowsFormsApp54</span><span class="se">\x00</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">il_code1</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">20</span> <span class="mi">00</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="p">}</span>  <span class="o">//</span> <span class="n">ldc</span><span class="o">.</span><span class="n">i4</span> <span class="mi">256</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">il_code2</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">28</span> <span class="err">??</span> <span class="err">??</span> <span class="err">??</span> <span class="mi">0</span><span class="n">A</span> <span class="p">}</span>  <span class="o">//</span> <span class="n">call</span> <span class="n">Enumerable</span><span class="o">.</span><span class="n">Range</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">method_sig</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">05</span> <span class="mi">00</span> <span class="mi">01</span> <span class="mi">1</span><span class="n">D</span> <span class="mi">05</span> <span class="mi">0</span><span class="n">E</span> <span class="p">}</span>  <span class="o">//</span> <span class="n">byte</span><span class="p">[]</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">condition</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">3</span> <span class="n">of</span> <span class="p">(</span><span class="o">$</span><span class="n">method_name</span><span class="p">,</span> <span class="o">$</span><span class="n">param_name</span><span class="p">,</span> <span class="o">$</span><span class="n">us_string</span><span class="p">)</span> <span class="ow">and</span>
+</span></span><span class="line"><span class="cl">        <span class="n">all</span> <span class="n">of</span> <span class="p">(</span><span class="o">$</span><span class="n">il_code1</span><span class="p">,</span> <span class="o">$</span><span class="n">il_code2</span><span class="p">,</span> <span class="o">$</span><span class="n">method_sig</span><span class="p">)</span> <span class="ow">and</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span> <span class="n">of</span> <span class="p">(</span><span class="o">$</span><span class="n">class_name</span><span class="p">,</span> <span class="o">$</span><span class="n">namespace</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码引用字符串&quot;X2&rdquo;。虽然它只有2个字符，但我们利用#US元素有前置长度和尾随0的知识，适当增加了$us_string模式长度。</p>
+<p>此外，我们为此练习包含类名和命名空间。</p>
+<p>我们通过以下命令提取方法签名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ildasm.exe /text /bytes /nobar /item=&#34;WindowsFormsApp54.Small::Buffer&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法签名的字节序列0x05 0x00 0x01 0x1D 0x05 0x0E组成如下：</p>
+<ul>
+<li>0x05是前置长度5</li>
+<li>0x00是默认调用约定IMAGE_CEE_CS_CALLCONV_DEFAULT</li>
+<li>0x01是参数数量</li>
+<li>0x1D表示返回类型是SZARRAY</li>
+<li>0x05表示数组基础类型是byte</li>
+<li>0x0E表示第一个参数是string类型</li>
+</ul>
+<p>不需要通配符，因为没有编码令牌存在。</p>
+<h2 id="net-yara规则技巧">.NET YARA规则技巧
+</h2><p>了解内部结构有助于为规则添加上下文。这会产生更准确和鲁棒的检测规则，因为我们增加了模式嵌入正确结构的可能性。</p>
+<p>此外，它增加了我们在YARA中的表达能力，在处理缺失信息时带来更多灵活性和更少错误。它还提高了效率，因为我们不需要在十六进制编辑器中查找正确格式。</p>
+<p>这不仅适用于.NET。其他类型的规则，如CPython字节码的规则，也能从考虑其文件和数据结构中受益。</p>
+<p>可读性和可维护性的价值不应低估。需要逆向工程样本代码以确定其检测内容的规则，通常需要与从头编写类似规则相同的质量检查和时间维护。IL代码的YARA字节模式应始终包含检测到的IL代码的反汇编或反编译注释。</p>
+<h2 id="参考文献">参考文献
+</h2><p>[1] Brian Wallace, 2015, &ldquo;使用.NET GUID帮助搜寻恶意软件&rdquo;, VirusBulletin<br>
+[2] Serge Lidin, 2014, &ldquo;.NET IL汇编器&rdquo;, Apress<br>
+[3] <a class="link" href="https://learn.microsoft.com/en-us/dotnet/framework/unmanaged-api/metadata/corcallingconvention-enumeration"  target="_blank" rel="noopener"
+    >https://learn.microsoft.com/en-us/dotnet/framework/unmanaged-api/metadata/corcallingconvention-enumeration</a></p>
+<h2 id="样本哈希">样本哈希
+</h2><p>f9ee3eff3345ea280c01d5fce5461b24c537cf6c3dfadc626ef73eed815c2008</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/yara/">YARA</a>
+        
+            <a href="/tags/.net/">.NET</a>
+        
+            <a href="/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90/">恶意软件分析</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
