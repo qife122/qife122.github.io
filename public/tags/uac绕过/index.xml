@@ -6,13 +6,14 @@
         <description>Recent content in UAC绕过 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/uac%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 23:30:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/uac%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>以最复杂方式绕过UAC：Kerberos协议漏洞利用详解</title>
         <link>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 23:30:05 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
-        <description>&lt;img src="https://example.com/kerberos-bypass.jpg" alt="Featured image of post 以最复杂方式绕过UAC：Kerberos协议漏洞利用详解" /&gt;&lt;h1 id=&#34;以最复杂方式绕过uac&#34;&gt;以最复杂方式绕过UAC
+        <description>&lt;h1 id=&#34;以最复杂方式绕过uac&#34;&gt;以最复杂方式绕过UAC
 &lt;/h1&gt;&lt;p&gt;虽然我不常研究这个，但发现新的UAC绕过方法总是很有趣。在阅读Rubeus工具的功能时，我意识到可以滥用Kerberos协议绕过UAC——至少在域加入系统中可行。不清楚之前是否有人记录过这种方法，有篇帖子讨论过类似技术但需要从其他系统发起攻击，而本文将描述本地实现的方案。&lt;/p&gt;
 &lt;h2 id=&#34;技术背景&#34;&gt;技术背景
 &lt;/h2&gt;&lt;p&gt;系统默认会通过LSASS过滤网络身份验证令牌，移除本地管理员的权限。但存在关键例外：如果用户是域用户兼本地管理员，LSASS会允许网络认证使用完整管理员令牌。这在通过Kerberos进行本地认证时会产生问题——难道这不是简单的UAC绕过吗？&lt;/p&gt;

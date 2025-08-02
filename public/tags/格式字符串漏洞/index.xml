@@ -6,13 +6,14 @@
         <description>Recent content in 格式字符串漏洞 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E6%A0%BC%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 02:11:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A0%BC%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析，以Uber为例</title>
         <link>http://localhost:1313/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 02 Aug 2025 02:11:51 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E6%94%BB%E5%87%BBssl-vpn%E7%B3%BB%E5%88%97%E4%B8%80palo-alto-globalprotect%E9%A2%84%E8%AE%A4%E8%AF%81rce%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%A5uber%E4%B8%BA%E4%BE%8B/</guid>
-        <description>&lt;img src="https://example.com/ssl-vpn-attack.jpg" alt="Featured image of post 攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析，以Uber为例" /&gt;&lt;h1 id=&#34;攻击ssl-vpn系列一palo-alto-globalprotect预认证rce漏洞分析&#34;&gt;攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析
+        <description>&lt;h1 id=&#34;攻击ssl-vpn系列一palo-alto-globalprotect预认证rce漏洞分析&#34;&gt;攻击SSL VPN系列(一)：Palo Alto GlobalProtect预认证RCE漏洞分析
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;: Orange Tsai(@orange_8361) 和 Meh Chang(@mehqq_)&lt;/p&gt;
 &lt;p&gt;SSL VPN用于保护企业资产免受互联网暴露，但如果SSL VPN本身存在漏洞会怎样？它们暴露在互联网上，被信任为保护内网入口的唯一屏障。一旦SSL VPN服务器被攻破，攻击者就能渗透内网甚至控制所有连接到该VPN的用户！基于其重要性，过去几个月我们启动了对主流SSL VPN产品安全性的研究。&lt;/p&gt;
 &lt;p&gt;我们计划分三篇文章发布研究成果。本文将作为首篇，因为它是一个有趣的故事，非常适合作为我们在Black Hat USA和DEFCON演讲的开胃菜：&lt;/p&gt;

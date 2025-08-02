@@ -6,13 +6,14 @@
         <description>Recent content in 游戏安全 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 06:54:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 02 Aug 2025 06:54:57 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
-        <description>&lt;img src="https://phoenhex.re/img/logo.png" alt="Featured image of post 使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践" /&gt;&lt;h1 id=&#34;使用afl模糊测试反恐精英全球攻势地图文件&#34;&gt;使用AFL模糊测试《反恐精英：全球攻势》地图文件
+        <description>&lt;h1 id=&#34;使用afl模糊测试反恐精英全球攻势地图文件&#34;&gt;使用AFL模糊测试《反恐精英：全球攻势》地图文件
 &lt;/h1&gt;&lt;p&gt;RealWorldCTF 2018有一个非常有趣的挑战叫做&amp;quot;P90 Rush B&amp;quot;，这是对Valve游戏《反恐精英：全球攻势》中一种战术的影射。该挑战要求发现并利用CS:GO服务器使用的地图文件加载器中的漏洞。&lt;/p&gt;
 &lt;p&gt;在CTF期间，我利用了一个栈缓冲区溢出漏洞，后来另一个团队在他们的报告中很好地描述了这个漏洞。由于这个漏洞也影响了官方的CS:GO Windows客户端，符合Valve的漏洞赏金计划条件，实际上它只是一个旧报告的小变种，所以我在CTF结束后很快报告了它，并迅速得到了修复。&lt;/p&gt;
 &lt;h2 id=&#34;bsp文件格式与攻击面&#34;&gt;BSP文件格式与攻击面

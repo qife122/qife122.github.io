@@ -6,24 +6,15 @@
         <description>Recent content in 嵌入式系统 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 00:02:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>系统内提取嵌入式多媒体卡(eMMC)内容的技术指南</title>
         <link>http://localhost:1313/p/%E7%B3%BB%E7%BB%9F%E5%86%85%E6%8F%90%E5%8F%96%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%8D%A1emmc%E5%86%85%E5%AE%B9%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 02 Aug 2025 00:02:01 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E7%B3%BB%E7%BB%9F%E5%86%85%E6%8F%90%E5%8F%96%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%8D%A1emmc%E5%86%85%E5%AE%B9%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://example.com/emmc-chip.jpg" alt="Featured image of post 系统内提取嵌入式多媒体卡(eMMC)内容的技术指南" /&gt;&lt;h1 id=&#34;系统内提取嵌入式多媒体卡emmc内容&#34;&gt;系统内提取嵌入式多媒体卡(eMMC)内容
-&lt;/h1&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/emmc-adapter.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图1 - 焊接在microSD转SD适配器上的BGA153封装eMMC芯片&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+        <description>&lt;h1 id=&#34;系统内提取嵌入式多媒体卡emmc内容&#34;&gt;系统内提取嵌入式多媒体卡(eMMC)内容
+&lt;/h1&gt;&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
 &lt;/h2&gt;&lt;p&gt;现代复杂设备需要非易失性存储来保存断电时的程序和配置数据。当前市场主流方案包括串行Flash、原始NAND芯片、(micro)SD卡和嵌入式多媒体卡(eMMC)。本文重点探讨eMMC芯片的系统内交互技术，避免物理移除芯片带来的风险。&lt;/p&gt;
 &lt;h2 id=&#34;技术挑战与解决方案&#34;&gt;技术挑战与解决方案
 &lt;/h2&gt;&lt;h3 id=&#34;问题1定位电路板上的emmc信号&#34;&gt;问题1：定位电路板上的eMMC信号
@@ -38,16 +29,6 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/emmc-signal.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图5 - 典型的低速CLK信号波形&#34;
-	
-	
-&gt;&lt;/p&gt;
 &lt;h3 id=&#34;问题2emmc芯片供电方案&#34;&gt;问题2：eMMC芯片供电方案
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;供电选择&lt;/strong&gt;：
@@ -82,16 +63,6 @@
 &lt;/ol&gt;
 &lt;h2 id=&#34;延伸阅读&#34;&gt;延伸阅读
 &lt;/h2&gt;&lt;p&gt;建议进一步研究侵入式技术方案。可通过Mastodon(@InfoSecDJ)联系作者获取更多技术细节。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/level-shifter.jpg&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图7 - TXS0108E电平转换器扩展板&#34;
-	
-	
-&gt;&lt;/p&gt;
 </description>
         </item>
         

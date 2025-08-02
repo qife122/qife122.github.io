@@ -6,13 +6,14 @@
         <description>Recent content in Terraform on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/terraform/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 05:27:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/terraform/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>错误但快速的云基础设施配置方式 - 安全风险警示</title>
         <link>http://localhost:1313/p/%E9%94%99%E8%AF%AF%E4%BD%86%E5%BF%AB%E9%80%9F%E7%9A%84%E4%BA%91%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 02 Aug 2025 05:27:39 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E9%94%99%E8%AF%AF%E4%BD%86%E5%BF%AB%E9%80%9F%E7%9A%84%E4%BA%91%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</guid>
-        <description>&lt;img src="https://blog.trailofbits.com/images/cloud-infra.jpg" alt="Featured image of post 错误但快速的云基础设施配置方式 - 安全风险警示" /&gt;&lt;p&gt;今天我们将以&amp;quot;Max Power&amp;quot;方式配置云基础设施：将自动化与未经检查的AI输出相结合。不幸的是，这种方法产生的云基础设施代码虽然能用，但具有可怕的安全特性。&lt;/p&gt;
+        <description>&lt;p&gt;今天我们将以&amp;quot;Max Power&amp;quot;方式配置云基础设施：将自动化与未经检查的AI输出相结合。不幸的是，这种方法产生的云基础设施代码虽然能用，但具有可怕的安全特性。&lt;/p&gt;
 &lt;p&gt;简而言之，像Claude和ChatGPT这样的AI工具会轻易提供极其糟糕的云基础设施配置代码，比如使用常见硬编码密码的代码。这些工具还会&amp;quot;热心&amp;quot;地建议你使用&amp;quot;随机&amp;quot;密码，但由于LLM生成输出的本质，这些密码根本谈不上随机。即使你试图聪明地要求这些工具提供密码生成代码，这些代码也充满严重的安全漏洞。&lt;/p&gt;
 &lt;p&gt;显然，不要盲目信任AI工具的输出。云服务提供商应该努力识别本文中提到的不良模式（和硬编码凭证），并在基础设施层进行拦截（就像他们在GitHub提交API密钥时做的那样）。LLM供应商应该考虑让生成存在明显安全问题的云基础设施代码变得不那么容易。&lt;/p&gt;
 &lt;h3 id=&#34;创建一个windows-vm&#34;&gt;创建一个Windows VM

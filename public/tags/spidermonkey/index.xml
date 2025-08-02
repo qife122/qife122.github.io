@@ -6,13 +6,14 @@
         <description>Recent content in SpiderMonkey on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/spidermonkey/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 04:33:34 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/spidermonkey/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2spidermonkey%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 02 Aug 2025 04:33:34 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2spidermonkey%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</guid>
-        <description>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1200px-Firefox_logo%2C_2019.svg.png" alt="Featured image of post 深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术" /&gt;&lt;h1 id=&#34;引言&#34;&gt;引言
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/02/HiwQc.png" alt="Featured image of post 深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术" /&gt;&lt;h1 id=&#34;引言&#34;&gt;引言
 &lt;/h1&gt;&lt;p&gt;本文记录了从未接触过浏览器漏洞利用的开发人员针对SpiderMonkey JavaScript Shell解释器和Mozilla Firefox（在Windows 10 RS5 64位系统上）开发三个漏洞利用的过程。近年来，浏览器利用引起了广泛关注，几乎每个主要CTF比赛都包含浏览器挑战，每月都有相关技术文章发布。&lt;/p&gt;
 &lt;p&gt;我选择了Firefox的SpiderMonkey JavaScript引擎及其zn13编写的Blazefox挑战作为研究对象。本文展示了在这次探索中的发现和编写的三个漏洞利用：&lt;/p&gt;
 &lt;ol&gt;

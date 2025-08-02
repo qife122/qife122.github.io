@@ -6,13 +6,14 @@
         <description>Recent content in 阈值签名 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 22:54:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>深度解析Silent Shard DKLs23阈值签名库的安全审计发现</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 22:54:49 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</guid>
-        <description>&lt;img src="https://example.com/secure-crypto.jpg" alt="Featured image of post 深度解析Silent Shard DKLs23阈值签名库的安全审计发现" /&gt;&lt;h1 id=&#34;我们如何审查首批dkls23库之一来自silence-laboratories的silent-shard&#34;&gt;我们如何审查首批DKLs23库之一——来自Silence Laboratories的Silent Shard
+        <description>&lt;h1 id=&#34;我们如何审查首批dkls23库之一来自silence-laboratories的silent-shard&#34;&gt;我们如何审查首批DKLs23库之一——来自Silence Laboratories的Silent Shard
 &lt;/h1&gt;&lt;p&gt;2023年10月，我们审计了Silence Laboratories基于DKLs23阈值签名方案(TSS)的库Silent Shard——这是当时首个采用茫然传输(OT)替代传统Paillier密码学的生产级实现。我们的审查发现了可能导致密钥销毁攻击的严重缺陷，Silence Laboratories已及时修复。&lt;/p&gt;
 &lt;h2 id=&#34;审计三大核心发现&#34;&gt;审计三大核心发现
 &lt;/h2&gt;&lt;ol&gt;
@@ -34,16 +35,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/protocol-spec.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;图1：横跨四页的DKLs23主协议规范&#34;
-	
-	
-&gt;&lt;/p&gt;
 &lt;h2 id=&#34;关键安全发现&#34;&gt;关键安全发现
 &lt;/h2&gt;&lt;h3 id=&#34;高危漏洞&#34;&gt;高危漏洞
 &lt;/h3&gt;&lt;ul&gt;

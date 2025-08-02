@@ -6,13 +6,89 @@
         <description>Recent content in 二进制分析 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 03:22:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2017年度回顾：自动化漏洞挖掘、符号执行与区块链安全的技术突破</title>
+        <link>http://localhost:1313/p/2017%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/</link>
+        <pubDate>Sat, 02 Aug 2025 03:22:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2017%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4/</guid>
+        <description>&lt;h1 id=&#34;2017年度回顾---trail-of-bits博客&#34;&gt;2017年度回顾 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;2017年是技术突破的一年！我们在自动化漏洞发现、符号执行和二进制翻译等领域发布了创新研究，并改进了安全研究人员依赖的基础工具。我们在智能合约安全领域扩大影响力，成为顶尖的区块链安全公司。&lt;/p&gt;
+&lt;h2 id=&#34;创新研究&#34;&gt;创新研究
+&lt;/h2&gt;&lt;h3 id=&#34;自动化漏洞发现进入现实世界&#34;&gt;自动化漏洞发现进入现实世界
+&lt;/h3&gt;&lt;p&gt;2017年该领域发展迅猛。我们与洛克希德·马丁和国防部DIUx签订合同，应用我们的网络推理系统(Cyber Reasoning System)。同时我们将CGC挑战二进制文件移植到Windows、macOS和Linux平台，为工具评估提供客观基准。&lt;/p&gt;
+&lt;h3 id=&#34;manticore提升符号执行工具可用性&#34;&gt;Manticore提升符号执行工具可用性
+&lt;/h3&gt;&lt;p&gt;我们开源了高度灵活的符号执行工具Manticore，它已成为DARPA LADS项目的重要组成部分。我们将其应用于以太坊虚拟机(EVM)字节码分析，可自动发现合约函数、生成触发合约状态的交易并检查失败状态。&lt;/p&gt;
+&lt;h3 id=&#34;mcsema-20实现二进制文件近似源代码处理&#34;&gt;McSema 2.0实现二进制文件近似源代码处理
+&lt;/h3&gt;&lt;p&gt;我们对二进制翻译工具McSema进行了重大升级：代码清理、性能提升，并分离指令语义与控制流恢复创建Remill库。演示用例包括二进制补丁修改、与KLEE的符号执行，以及重用基于LLVM的工具(如libFuzzer)。&lt;/p&gt;
+&lt;h2 id=&#34;基础工具&#34;&gt;基础工具
+&lt;/h2&gt;&lt;h3 id=&#34;巩固以太坊基础设施&#34;&gt;巩固以太坊基础设施
+&lt;/h3&gt;&lt;p&gt;我们开发了行业领先的智能合约安全工具套件，包括适配Manticore用于以太坊安全审计。我们加入了企业以太坊联盟(EEA)，并公开了RSK和DappHub Sai的安全审计报告。&lt;/p&gt;
+&lt;h3 id=&#34;osquery扩展功能边界&#34;&gt;osquery扩展功能边界
+&lt;/h3&gt;&lt;p&gt;我们在2016年将Facebook的开源终端监控代理移植到Windows后，继续增强osquery框架：重新设计基于auditd的文件完整性监控，添加CCleaner恶意软件检测功能，并创建扩展仓库。&lt;/p&gt;
+&lt;h3 id=&#34;iverify满足iphone用户基本需求&#34;&gt;iVerify满足iPhone用户基本需求
+&lt;/h3&gt;&lt;p&gt;我们发布了包含最全面iOS越狱检测的iVerify库，可检测iOS 10和11的越狱状态，并承诺随iOS更新持续维护。&lt;/p&gt;
+&lt;h3 id=&#34;algo普及自托管vpn服务&#34;&gt;Algo普及自托管VPN服务
+&lt;/h3&gt;&lt;p&gt;我们2016年发布的自托管个人VPN服务器Algo在2017年获得广泛关注。它采用现代协议和密码，包含最小化软件集，并得到70名Github贡献者的704次提交。&lt;/p&gt;
+&lt;h2 id=&#34;学习与分享&#34;&gt;学习与分享
+&lt;/h2&gt;&lt;h3 id=&#34;推动漏洞缓解措施部署&#34;&gt;推动漏洞缓解措施部署
+&lt;/h3&gt;&lt;p&gt;我们比较了clang的CFI与Visual Studio的CFG实现，创建了Windows Defender的&amp;quot;Flying Sandbox Monster&amp;quot;——首个Windows平台沙盒化反病毒扫描器，使用Rust框架在AppContainers中隔离不可信应用。&lt;/p&gt;
+&lt;h3 id=&#34;聚焦binary-ninja&#34;&gt;聚焦Binary Ninja
+&lt;/h3&gt;&lt;p&gt;我们通过多种方式展示Vector35逆向平台的能力：解释其低级中间语言(LLIL)基础、演示如何开发平台无关工具、分享DEF CON CTF挑战分析模块。&lt;/p&gt;
+&lt;h3 id=&#34;支持重要事业&#34;&gt;支持重要事业
+&lt;/h3&gt;&lt;p&gt;我们赞助UIUC CTF等竞赛，支持GreHack等会议，并赞助Risky Business播客分享安全洞见。&lt;/p&gt;
+&lt;h2 id=&#34;2018年展望&#34;&gt;2018年展望
+&lt;/h2&gt;&lt;p&gt;我们将继续推进国防部DIUx的Voltron项目、深化区块链安全研究、增强开源项目支持(osquery、Google Santa等)、发布iVerify独立版、优化Algo的易用性，并通过DeepState等工具使先进技术更易获取。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>四月渗透季 - Trail of Bits博客聚焦二进制分析与漏洞研究</title>
+        <link>http://localhost:1313/p/%E5%9B%9B%E6%9C%88%E6%B8%97%E9%80%8F%E5%AD%A3-trail-of-bits%E5%8D%9A%E5%AE%A2%E8%81%9A%E7%84%A6%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90%E4%B8%8E%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/</link>
+        <pubDate>Fri, 01 Aug 2025 21:58:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9B%9B%E6%9C%88%E6%B8%97%E9%80%8F%E5%AD%A3-trail-of-bits%E5%8D%9A%E5%AE%A2%E8%81%9A%E7%84%A6%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90%E4%B8%8E%E6%BC%8F%E6%B4%9E%E7%A0%94%E7%A9%B6/</guid>
+        <description>&lt;h2 id=&#34;突破传统黑客极限&#34;&gt;突破传统黑客极限
+&lt;/h2&gt;&lt;p&gt;穿上你的瓜亚贝拉衬衫，Infiltrate盛会即将开启。Trail of Bits自2015年起持续赞助并全员参与这一顶尖会议（今年多达18人！）。除了交换纪念品，我们更期待见证最新安全研究成果——包括我们自己的突破性贡献。&lt;/p&gt;
+&lt;h2 id=&#34;技术亮点前瞻&#34;&gt;技术亮点前瞻
+&lt;/h2&gt;&lt;h3 id=&#34;二进制摇滚明星进阶&#34;&gt;二进制摇滚明星进阶
+&lt;/h3&gt;&lt;p&gt;Sophia d&amp;rsquo;Antoine将联合Binary Ninja开发者呈现《成为二进制摇滚明星：漏洞研究中的高阶静态分析》，基于其先前将抽象解释引入Binary Ninja的研究成果进行深度扩展。&lt;/p&gt;
+&lt;h3 id=&#34;manticore实战体验&#34;&gt;Manticore实战体验
+&lt;/h3&gt;&lt;p&gt;我们将展示CGC机器人的核心——&lt;strong&gt;Manticore二进制符号执行引擎&lt;/strong&gt;（支持x86/x86-64/ARM架构）。参会者可通过解决挑战任务提前体验这一即将开源的工具，并赢取专属马克杯。&lt;/p&gt;
+&lt;h2 id=&#34;往届技术回眸&#34;&gt;往届技术回眸
+&lt;/h2&gt;&lt;p&gt;2016年我们曾分享：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;《构建可扩展的自动化黑客系统》&lt;/li&gt;
+&lt;li&gt;《Swift逆向工程实践》&lt;/li&gt;
+&lt;li&gt;NOP认证竞赛中与ImmunityDbg的激烈对抗（7分33秒弹出计算器）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;本届重磅议题&#34;&gt;本届重磅议题
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Justin Schuh：《四面楚歌：防御战壕中的现实视角》&lt;/li&gt;
+&lt;li&gt;Vasilis团队：《安卓libc分配器的堆利用辅助技术》&lt;/li&gt;
+&lt;li&gt;Jean-Philippe：《Signal应用漏洞狩猎》&lt;/li&gt;
+&lt;li&gt;Ralf-Phillip：《基带处理器中的shellcode踪迹》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;会议独特价值&#34;&gt;会议独特价值
+&lt;/h2&gt;&lt;p&gt;Infiltrate以浓缩顶级会议精华内容著称，其特色包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与演讲者/顶尖研究者的深度交流（&amp;ldquo;强力大厅会议&amp;quot;文化）&lt;/li&gt;
+&lt;li&gt;全包式优质餐饮活动&lt;/li&gt;
+&lt;li&gt;严禁无票蹭会（笑）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;拉斯维加斯已成过往，真正的盛宴在迈阿密&amp;rdquo;——我们现场见！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;本文提及的所有技术工具与研究均可在Trail of Bits开源项目库中找到对应实现。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>McSema二进制转LLVM比特码工具重大升级</title>
         <link>http://localhost:1313/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 21:24:22 +0800</pubDate>
         
         <guid>http://localhost:1313/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</guid>
-        <description>&lt;img src="https://blog.trailofbits.com/images/mcsema-hackathon.png" alt="Featured image of post McSema二进制转LLVM比特码工具重大升级" /&gt;&lt;h1 id=&#34;mcsema二进制转llvm比特码工具重大升级&#34;&gt;McSema：二进制转LLVM比特码工具重大升级
+        <description>&lt;h1 id=&#34;mcsema二进制转llvm比特码工具重大升级&#34;&gt;McSema：二进制转LLVM比特码工具重大升级
 &lt;/h1&gt;&lt;p&gt;我们的x86机器码转LLVM比特码工具McSema刚刚完成全面升级。上周举办的开发马拉松显著改善了McSema的易用性、文档质量和代码质量，现在使用McSema分析和逆向工程二进制文件比以往任何时候都更容易。&lt;/p&gt;
 &lt;h2 id=&#34;发展阶段&#34;&gt;发展阶段
 &lt;/h2&gt;&lt;p&gt;McSema已成为我们日常工作中不可或缺的工具，它能帮助我们发现并加固二进制程序的安全漏洞、独立验证供应商源代码，以及生成高代码覆盖率的应用测试。该工具不仅应用于学术研究，还参与DARPA项目。自2014年开源以来，我们（及其他贡献者）持续扩展其功能以分析日益复杂的程序。&lt;/p&gt;

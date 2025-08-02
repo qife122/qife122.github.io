@@ -6,13 +6,14 @@
         <description>Recent content in AI代理 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/ai%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 23:09:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E4%BB%A3%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>利用Amazon Cognito为AI代理赋予用户上下文权限的技术解析</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8amazon-cognito%E4%B8%BAai%E4%BB%A3%E7%90%86%E8%B5%8B%E4%BA%88%E7%94%A8%E6%88%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 23:09:07 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8amazon-cognito%E4%B8%BAai%E4%BB%A3%E7%90%86%E8%B5%8B%E4%BA%88%E7%94%A8%E6%88%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
-        <description>&lt;img src="https://d1.awsstatic.com/logos/aws-logo-lockups/poweredbyaws/PB_AWS_logo_RGB_stacked_REV_SQ.91cd4af40773cbfbd15577a3c2b8a346fe3e8fa2.png" alt="Featured image of post 利用Amazon Cognito为AI代理赋予用户上下文权限的技术解析" /&gt;&lt;h1 id=&#34;利用amazon-cognito为ai代理赋予用户上下文权限&#34;&gt;利用Amazon Cognito为AI代理赋予用户上下文权限
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/01/HNnbm.png" alt="Featured image of post 利用Amazon Cognito为AI代理赋予用户上下文权限的技术解析" /&gt;&lt;h1 id=&#34;利用amazon-cognito为ai代理赋予用户上下文权限&#34;&gt;利用Amazon Cognito为AI代理赋予用户上下文权限
 &lt;/h1&gt;&lt;p&gt;Amazon Cognito是一项托管的客户身份和访问管理（CIAM）服务，可为Web和移动应用程序提供无缝的用户注册和登录功能。通过用户池，Amazon Cognito提供了具有强大身份验证功能的用户目录，包括密码、与外部身份提供商（IdP）的联合以及用于安全机器对机器（M2M）授权的OAuth 2.0流。&lt;/p&gt;
 &lt;p&gt;Amazon Cognito颁发标准的JSON Web令牌（JWT），并支持使用预令牌生成Lambda触发器自定义身份和访问令牌以进行用户身份验证。Amazon Cognito扩展了令牌定制功能，支持M2M的访问令牌定制以及在M2M授权期间从客户端传递元数据的能力。应用程序构建者可以利用这两个功能来支持多种用例，包括基于唯一运行时策略、权限、环境或传递的元数据定制访问令牌。这可以简化和丰富M2M身份验证和授权场景，并为新兴用例（如AI代理的身份和访问管理）开辟新的可能性。&lt;/p&gt;
 &lt;h2 id=&#34;解决方案概述和参考架构&#34;&gt;解决方案概述和参考架构

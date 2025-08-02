@@ -6,13 +6,656 @@
         <description>Recent content in 网络安全 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 02 Aug 2025 07:45:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Cloudbric WMS强化AWS安全：构建强大Web应用防火墙的五大关键点</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8cloudbric-wms%E5%BC%BA%E5%8C%96aws%E5%AE%89%E5%85%A8%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7web%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BA%94%E5%A4%A7%E5%85%B3%E9%94%AE%E7%82%B9/</link>
+        <pubDate>Sat, 02 Aug 2025 07:45:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8cloudbric-wms%E5%BC%BA%E5%8C%96aws%E5%AE%89%E5%85%A8%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7web%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BA%94%E5%A4%A7%E5%85%B3%E9%94%AE%E7%82%B9/</guid>
+        <description>&lt;h3 id=&#34;在日益数字化的生态系统中保护在线资产不仅是建议更是必需随着web应用复杂度提升和网络威胁日益精密企业需要多层次的安全防护aws通过其web应用防火墙waf提供了坚实基础但需专业管理才能最大化其潜力cloudbric-wmswaf托管服务应运而生精准提升aws安全态势并解决关键漏洞&#34;&gt;在日益数字化的生态系统中，保护在线资产不仅是建议，更是必需。随着Web应用复杂度提升和网络威胁日益精密，企业需要多层次的安全防护。AWS通过其Web应用防火墙（WAF）提供了坚实基础，但需专业管理才能最大化其潜力。Cloudbric WMS（WAF托管服务）应运而生，精准提升AWS安全态势并解决关键漏洞。
+&lt;/h3&gt;&lt;p&gt;Cloudbric WMS旨在通过简化管理、专业支持和主动防御策略来扩展AWS原生功能。本文将深入探讨五大核心议题：&lt;strong&gt;OWASP Top 10防护、恶意流量缓解、API安全、实时流量监控和误报减少&lt;/strong&gt;。了解这些领域的重要性及Cloudbric WMS的解决方案，助您抵御最复杂的攻击。&lt;/p&gt;
+&lt;h3 id=&#34;1-owasp-top-10防护web安全的基石&#34;&gt;1. OWASP Top 10防护：Web安全的基石
+&lt;/h3&gt;&lt;p&gt;OWASP Top 10是全球公认的Web应用必防安全风险清单，如SQL注入、跨站脚本（XSS）和配置错误等实际漏洞可能导致严重数据泄露。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为何重要？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心安全基础&lt;/strong&gt;：Cloudbric WMS通过持续威胁情报更新确保过滤机制符合最新OWASP标准。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实战攻击缓解&lt;/strong&gt;：针对常见编码错误优化规则，有效拦截攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合规与信任&lt;/strong&gt;：满足监管要求，增强客户信任。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实现方式&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动化规则集部署，专家团队持续维护更新。&lt;/li&gt;
+&lt;li&gt;透明化安全分析，提供漏洞尝试与拦截数据，助力策略优化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-恶意流量缓解抵御自动化威胁&#34;&gt;2. 恶意流量缓解：抵御自动化威胁
+&lt;/h3&gt;&lt;p&gt;自动化机器人可实施凭据填充、内容爬取和DDoS攻击，危害应用性能与安全。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;威胁现状&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;凭据填充与欺诈&lt;/strong&gt;：利用弱密码批量登录，导致数据泄露。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容爬取&lt;/strong&gt;：窃取定价或知识产权，削弱竞争优势。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;行为分析&lt;/strong&gt;：实时识别异常流量模式（如单IP高频访问）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁情报整合&lt;/strong&gt;：动态更新恶意IP库。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自适应学习&lt;/strong&gt;：通过机器学习应对不断演变的机器人策略。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-api安全守护数字门户&#34;&gt;3. API安全：守护数字门户
+&lt;/h3&gt;&lt;p&gt;API已成为主要攻击向量，需专业防护以避免数据暴露或服务中断。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键挑战&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;攻击面扩大&lt;/strong&gt;：API是现代应用的通信核心，也是潜在弱点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;专用防护&lt;/strong&gt;：Cloudbric WMS针对注入攻击、身份验证缺陷等定制规则，确保仅合法请求访问后端。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实践效果&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;结合AWS WAF分析API调用模式，实时拦截恶意流量。&lt;/li&gt;
+&lt;li&gt;最小化误报，保障用户体验与性能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-实时流量监控主动防御的眼睛&#34;&gt;4. 实时流量监控：主动防御的“眼睛”
+&lt;/h3&gt;&lt;p&gt;即时洞察流量是检测和缓解威胁的关键。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心价值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;瞬时威胁发现&lt;/strong&gt;：秒级延迟可能决定事件影响范围。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据驱动决策&lt;/strong&gt;：仪表盘展示请求量、IP信誉等指标，支持快速策略调整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Cloudbric WMS优势&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直观面板呈现威胁拦截、可疑活动等数据。&lt;/li&gt;
+&lt;li&gt;详细日志支持事件溯源与策略优化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-误报减少提升devsecops效率&#34;&gt;5. 误报减少：提升DevSecOps效率
+&lt;/h3&gt;&lt;p&gt;过度误报会阻塞系统，增加团队负担。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;影响&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运营效率&lt;/strong&gt;：误拦截需手动处理，拖慢响应速度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户体验&lt;/strong&gt;：错误阻拦导致客户流失。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;优化措施&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;机器学习结合历史流量模式，精准区分异常与合法请求。&lt;/li&gt;
+&lt;li&gt;基于实时反馈调整规则，降低误报率，释放团队精力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;结语cloudbric-wms赋能aws安全&#34;&gt;结语：Cloudbric WMS赋能AWS安全
+&lt;/h3&gt;&lt;p&gt;面对日新月异的威胁，Cloudbric WMS以OWASP防护、机器人防御、API安全、实时监控和误报控制五大核心，为企业提供动态、精准的保护。通过自动化与专家分析的结合，构建适应未来威胁的弹性安全环境。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/marketplace/pp/prodview-xxx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;立即体验Cloudbric WMS免费试用&lt;/a&gt;，开启您的全方位Web应用安全之旅。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式</title>
+        <link>http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sat, 02 Aug 2025 07:29:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;h1 id=&#34;宣布aes-gem带伽罗瓦扩展模式的aes&#34;&gt;宣布AES-GEM（带伽罗瓦扩展模式的AES）
+&lt;/h1&gt;&lt;p&gt;今天，AES-GCM是TLS 1.3使用的两种加密模式之一（另一种是ChaCha20-Poly1305），也是FIPS验证模块中加密数据的首选方法。但尽管取得了巨大成功，AES-GCM也曾导致一些灾难性故障：例如Hanno Böck和Sean Devlin利用nonce重用漏洞将他们的Black Hat USA幻灯片注入MI5网站。&lt;/p&gt;
+&lt;p&gt;多年来，安全研究人员一直在警告AES-GCM的弱点。19年前，Niels Ferguson向NIST提交论文指出AES-GCM存在的认证弱点（尽管NIST最终将其标准化）。今年早些时候，亚马逊发布论文详细说明了AES-GCM的实际挑战，并认为AES的128位块大小已不再足够，更倾向于使用256位块密码（即Rijndael-256）。&lt;/p&gt;
+&lt;p&gt;为解决这些问题，我提出了一种名为Galois Extended Mode（简称GEM）的新块密码模式，上个月已在NIST关于手风琴模式密码需求的研讨会上展示。AES-GEM以最小的性能开销在各个方面提升了GCM的安全性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;重要提示&lt;/strong&gt;：当前AES-GEM设计尚未准备好投入生产使用，因为某些细节可能会在未来发生变化。要理解当前设计，让我们先了解AES-GCM的不足，然后讨论如何用GEM做得更好。&lt;/p&gt;
+&lt;h2 id=&#34;aes工作原理&#34;&gt;AES工作原理
+&lt;/h2&gt;&lt;p&gt;在深入之前，有必要为部分读者解释本文中使用的一些术语和概念。&lt;/p&gt;
+&lt;p&gt;AES（高级加密标准）是一种广泛用于加密信息的块密码。它支持多种密钥大小（128位、192位和256位密钥），但始终操作128位块。AES是Rijndael块密码家族的标准化形式。Rijndael支持其他块大小，但NIST仅标准化了128位块。现代处理器提供专用硬件指令加速AES操作，但AES密钥调度仍可能对性能产生负面影响。&lt;/p&gt;
+&lt;p&gt;ECB（电子密码本）模式是没有块密码操作模式的情况。它涉及直接在数据块上计算块密码。正如许多密码学家所证明的，ECB模式不是语义安全的。为提高安全性，像AES这样的块密码通常与操作模式一起使用。（如果没有，几乎肯定应该这样做。如果您认为正在使用ECB加密敏感数据，请联系我们的密码学团队。）&lt;/p&gt;
+&lt;p&gt;CTR（计数器模式）是一种块密码操作模式，其中递增的值序列通过块密码加密以产生伪随机密钥流。要加密数据，只需计算每个明文字节与相应密钥流字节的XOR。&lt;/p&gt;
+&lt;p&gt;GCM（伽罗瓦/计数器模式）是一种提供认证加密的块密码操作模式。密码学家称之为AEAD模式：带附加数据的认证加密。GCM可以为敏感数据提供机密性，为敏感和公共数据提供完整性。&lt;/p&gt;
+&lt;p&gt;AEAD模式对于设计密码系统非常重要，这些系统能够抵抗试图改变加密数据以研究系统行为从而希望获得密码分析有用信息的攻击者。&lt;/p&gt;
+&lt;p&gt;GCM是用于加密明文的计数器模式（CTR）和用于认证密文（以及如果提供，附加关联数据）的伽罗瓦域消息认证码（GMAC）的组合。GMAC使用称为GHASH的函数定义，该函数是在认证数据上评估的多项式。GHASH的输出与加密计数器块的XOR产生最终认证标签。认证密钥H通过加密128位零块计算得出。&lt;/p&gt;
+&lt;p&gt;POLYVAL是GHASH的替代方案，用于AES-GCM-SIV。POLYVAL使用的不可约多项式是GHASH不可约多项式的反转。&lt;/p&gt;
+&lt;p&gt;许多密码模式（包括GCM和CTR）要求每个消息使用一个仅使用一次的数字。这个永远不应重复的公共数字称为nonce。&lt;/p&gt;
+&lt;p&gt;最后，生日边界是概率论中的一个概念，表示一组随机值中冲突的可能性。在密码学中，它意味着如果随机选择nonce，随着使用更多nonce，两个nonce冲突的概率显著增加。对于具有96位nonce的AES-GCM，大约232条消息后，有1/232的nonce冲突概率，这可能导致诸如伪造消息等安全漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;aes-gcm当前的实际挑战&#34;&gt;AES-GCM当前的实际挑战
+&lt;/h2&gt;&lt;p&gt;正如其他人指出的那样，AES-GCM的最大挑战是AES只有128位块大小。这有两个主要后果：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;公共nonce和内部计数器的大小被限制为总共128位。实际上，nonce大小通常为96位，计数器为32位。如果选择更大的nonce，它会被哈希压缩到适当大小，这对安全性几乎没有改善。如果重用nonce，则会泄漏认证子密钥，因此可以无限期伪造消息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在相同密钥下加密超过一定数量的块后，攻击者可以以显著概率区分密文和随机字节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当您理解我们处理的是2的幂时，96位nonce空间可能听起来很多，但如果随机选择nonce，只能加密232条消息，然后有2-32的冲突概率。使用具有更大块大小的密码可以缓解这一点，但这不是唯一的解决方法。&lt;/p&gt;
+&lt;p&gt;AES块大小不是AES-GCM实践中唯一的问题。正如Niels Ferguson在2005年指出的那样，针对短标签的成功伪造会揭示认证子密钥。&lt;/p&gt;
+&lt;p&gt;此外，我们还了解到AES-GCM具有一个意外属性，即多个密钥可以解密相同的密文+认证标签。其发现者将这个问题称为&amp;quot;隐形蝾螈&amp;quot;，因为它允许他们在一款加密消息应用程序的滥用报告工具中隐藏蝾螈图片。在使用AES-GCM的协议中防止隐形蝾螈需要对使用的密钥进行某种单向承诺。&lt;/p&gt;
+&lt;p&gt;最后，AES-GCM中单个消息的最大明文长度相对较小：略低于64 GiB。为应对此最大长度，软件通常将较大消息分解为适合此长度限制的较短帧。这导致生日边界前的有限nonce空间比如果容忍较长消息时更快耗尽。&lt;/p&gt;
+&lt;h2 id=&#34;介绍aes-gem&#34;&gt;介绍AES-GEM
+&lt;/h2&gt;&lt;p&gt;我们的提案Galois Extended Mode是对GCM（伽罗瓦/计数器模式）的修改，目前解决了大多数这些弱点。然而，关于我们想要采用哪种策略来缓解最后一点，仍然存在一个开放性问题，我将在稍后解释。&lt;/p&gt;
+&lt;p&gt;在高层次上，我们提出了两种变体：AES-128-GEM和AES-256-GEM。我们还使用标准AEAD接口指定了两种AEAD构造。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥长度：128位&lt;/li&gt;
+&lt;li&gt;子密钥长度：128位&lt;/li&gt;
+&lt;li&gt;Nonce长度：192位&lt;/li&gt;
+&lt;li&gt;最大明文长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;最大AAD长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;标签长度：48字节（AEAD）或16字节（无承诺）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥长度：256位&lt;/li&gt;
+&lt;li&gt;子密钥长度：256位&lt;/li&gt;
+&lt;li&gt;Nonce长度：256位&lt;/li&gt;
+&lt;li&gt;最大明文长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;最大AAD长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;标签长度：48字节（AEAD）或16字节（无承诺）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;从gcm到gem的道路&#34;&gt;从GCM到GEM的道路
+&lt;/h2&gt;&lt;p&gt;如果您从AES-GCM的现有设计开始并进行以下更改，您将得到GEM的当前草案。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nonce扩展&lt;/strong&gt;
+首先，我们需要一个更长的nonce，我们将在下一步中用于子密钥派生。&lt;/p&gt;
+&lt;p&gt;对于256位密钥，256位nonce是一个很好的整数。对于128位密钥，我们最终需要192位。&lt;/p&gt;
+&lt;p&gt;无论哪种情况，最右边的64位将保留用于实际底层加密。剩余的位（AES-256为192位，AES-128为128位）将用于子密钥派生。&lt;/p&gt;
+&lt;p&gt;这使我们能够分摊密钥派生的成本，并在多个消息上设置AES密钥调度，前提是nonce和密钥的前（n – 64）位相同。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;子密钥派生&lt;/strong&gt;
+使用AES进行密钥派生有多种策略。在Real World Cryptography 2024上，Shay Gueron展示了DNDK-GCM，它使用了一种有趣的结构来实现子密钥派生。&lt;/p&gt;
+&lt;p&gt;我们希望保持简单和易于理解。因此，我们基于CBC-MAC构建了密钥派生策略，因为CMAC已经是FIPS批准的MAC（即用于AES-CCM）。&lt;/p&gt;
+&lt;p&gt;在AES-256的情况下，我们使用两个CBC-MAC输出来派生256位子密钥。然而，这种方法有一个微妙恼人的特性：两半永远不会产生相同的输出，因此严格来说，可能的输出少于2256个。&lt;/p&gt;
+&lt;p&gt;在GEM的两种变体中，我们借用了Salsa20设计中的一个技巧：将输出与输入密钥进行XOR，以确保子密钥对于任何不知道输入密钥的攻击者来说与均匀随机无法区分。如果您不知道此密钥，则输出与适当长度的随机密钥无法区分。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;支持更长的消息&lt;/strong&gt;
+我们需要64位剩余nonce而不是GCM典型的96位的原因是我们的内部计数器大小不是32位长。相反，它是64位长。&lt;/p&gt;
+&lt;p&gt;否则，如当前所写，GEM的行为与您对GCM的期望相同：它使用计数器模式进行批量数据加密。让我们暂时搁置这一点，稍后再讨论。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;改进的认证安全性&lt;/strong&gt;
+我们的现有设计AES-GCM按以下方式构建：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过用密钥加密全清零块派生认证子密钥H。&lt;/li&gt;
+&lt;li&gt;计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。&lt;/li&gt;
+&lt;li&gt;将步骤2的输出与计数器块的AES-CTR加密进行XOR。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们的设计大致相同，但有一个重要的调整：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过用子密钥加密全置位块派生认证子密钥H。&lt;/li&gt;
+&lt;li&gt;计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。&lt;/li&gt;
+&lt;li&gt;使用输入密钥通过AES-ECB加密步骤2的输出。&lt;/li&gt;
+&lt;li&gt;将步骤3的输出与计数器块的AES-CTR加密进行XOR。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;步骤3直接解决了Niels Ferguson在2005年指出的AES-GCM弱点。其他更改是实现细节。&lt;/p&gt;
+&lt;p&gt;此调整为短标签提供了更好的安全性，因为原始GHASH输出位的AES加密是一种非线性变换，没有密钥无法反转。我们使用输入密钥而不是子密钥，因为唯一其他使用输入密钥加密数据的地方（即子密钥派生）永远不会直接暴露。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;密钥承诺&lt;/strong&gt;
+在我们解决GEM对隐形蝾螈式攻击的保护之前，我们需要分析设计中的其他一些微妙之处。&lt;/p&gt;
+&lt;p&gt;GCM和GEM的最终块中的组件长度都以位而非字节表示，并且每个都限制为264。这意味着，尽管由于内部计数器，GEM理论上可以允许每条消息最多264块（或268字节）的明文，但我们必须调整最终的GHASH步骤以适应这种额外开销。&lt;/p&gt;
+&lt;p&gt;相反，内部计数器的不可达值保留用于密码的内部使用。具体来说，内部计数器值以0x02000000 00000000到0xFFFFFFFF FFFFFFFF结尾的无法在尊重明文261 – 1字节限制的同时达到。&lt;/p&gt;
+&lt;p&gt;全置位块（0xFFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF）已在GEM中用于认证子密钥，而64位尾部nonce + 0xFFFFFFFF 0xFFFFFFFE用于计数器块，用于最终认证标签计算。&lt;/p&gt;
+&lt;p&gt;为提供密钥承诺，接下来的两个块，nonce + 0xFFFFFFFF 0xFFFFFFFC和0xFFFFFFFF 0xFFFFFFFD将用作密钥和nonce的承诺值。&lt;/p&gt;
+&lt;p&gt;我们指定两个块是因为在此处使用一个AES块是不够的。考虑AES-256的情况，它具有256位密钥和128位块：根据鸽巢原理，我们预计有2128个不同的密钥将给定的固定明文值映射到固定密文值。因此，单个块不足以进行承诺。然而，假设块密码是安全的，对于两个连续块，不需要这种鸽巢考虑。&lt;/p&gt;
+&lt;p&gt;通过这种方式，我们可以快速生成给定密钥和nonce的承诺值。&lt;/p&gt;
+&lt;p&gt;在AEAD接口中，承诺附加到认证标签。解密消息时，必须以恒定时间将两者与其重新计算的值进行比较。&lt;/p&gt;
+&lt;h2 id=&#34;aes-gem的性能特征&#34;&gt;AES-GEM的性能特征
+&lt;/h2&gt;&lt;p&gt;尽管我们已经解决了GCM的大部分痛点，但GEM的实际性能影响很小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于如今AES由于硬件加速非常快，这种性能影响在除最性能敏感的应用外的所有应用中应该几乎不明显。在这些情况下，如果派生子密钥被缓存，密钥派生性能成本可以在多达232条不同消息中分摊。&lt;/p&gt;
+&lt;h2 id=&#34;完善aes-gem&#34;&gt;完善AES-GEM
+&lt;/h2&gt;&lt;p&gt;当前GEM草案未充分解决的一个最终问题，但我们希望在NIST研讨会上讨论此问题，并肯定会在最终设计中解决。&lt;/p&gt;
+&lt;p&gt;尽管我们的GEM草案构造允许比GCM更长的消息，但AES块大小使其按原样使用存在风险。主要担忧是加密非常长的消息会给攻击者带来显著优势，以区分AES-GEM密文与随机字节序列。（这是亚马逊2024年论文中提出的一个担忧。）&lt;/p&gt;
+&lt;p&gt;我们可以通过几种方式完善GEM以解决此弱点，这些方式具有不同的性能特征和权衡。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;宽块PRP&lt;/strong&gt;
+多年来，许多密码设计使用宽块PRP（如XTS模式中的AES）安全加密超过AES块大小通常允许的范围。由于XTS广泛用于磁盘加密，这种方法可能会证明是安全的。&lt;/p&gt;
+&lt;p&gt;然而，XTS模式目前尚未标准化用于磁盘加密以外的用例。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分层密钥派生&lt;/strong&gt;
+如果不直接使用子密钥，而是使用内部计数器的高32位从保留的nonce空间中选择不同的值，加密该值，并每236字节派生一个新的子密钥呢？然后，我们仅使用此子密钥加密计数器的剩余32位，这与AES-GCM几十年来所做的类似。&lt;/p&gt;
+&lt;p&gt;此子子密钥派生可以类似于密钥承诺构建：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于AES-256-GEM，加密来自保留nonce空间的32字节，并将其用作实际CTR密钥。&lt;/li&gt;
+&lt;li&gt;对于AES-128-GEM，加密来自保留nonce空间的16字节（但与AES-256-GEM选择的不同nonce空间），并将其用作实际底层CTR密钥。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这是一个有吸引力的选择，原因有很多。最重要的是，这种策略将以非常直接的方式规避PRP区分器问题。它也不依赖于任何非标准设计（如XTS模式）。您可以使用FIPS批准的组件构建整个东西，就像我们对AES-GEM的其余草案设计所做的那样。&lt;/p&gt;
+&lt;p&gt;缺点？这种方法确实会在每236字节明文时产生另一个密钥调度。这可能仍然很好地分摊，但值得记住。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;带分层密钥派生的AES-GEM的总性能成本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;每236字节明文的额外密钥派生：两个额外的AES加密块，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;1 GB明文的额外总开销：七个AES-256块，两个额外的AES-256密钥调度&lt;/li&gt;
+&lt;li&gt;1 TB明文的额外总开销：37个AES-256块，17个额外的AES-256密钥调度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;每236字节明文的额外密钥派生：一个额外的AES加密块，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;1 GB明文的额外总开销：五个AES-128块，两个额外的AES-128密钥调度&lt;/li&gt;
+&lt;li&gt;1 TB明文的额外总开销：21个AES-128块，17个额外的AES-128密钥调度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;其他想法&lt;/strong&gt;
+可能还有我们尚未想象的另一种选择。找到最佳权衡，特别是在考虑硬件设计时，是我们在NIST研讨会上展示GEM的原因之一。&lt;/p&gt;
+&lt;h2 id=&#34;切割gem&#34;&gt;切割GEM
+&lt;/h2&gt;&lt;p&gt;IETF的CFRG目前正在讨论一种修改后的AES-GCM变体的RFC草案，称为GCM-SST，它对短标签是安全的。他们的设计出于性能原因使用POLYVAL而不是GHASH，并使用带有第二个POLYVAL的第二个认证密钥（Q），所有这些都进行XOR。&lt;/p&gt;
+&lt;p&gt;不出所料，这种额外的XOR并不能显著保护AES-GCM中短标签的弱点（尽管它确实使通常的攻击更昂贵）。&lt;/p&gt;
+&lt;p&gt;我们对GEM的初始设计使用AES块密码置换GHASH输出，而不是简单地在多项式输出中引入额外的线性操作（XOR）。&lt;/p&gt;
+&lt;p&gt;我们有兴趣与其他行业领导者合作，提供一种强调短标签用例（即WebRTC）的GEM变体。这种假设的变体（暂定名为CUT-GEM）可以使用POLYVAL代替GHASH，并使用基于时期的子密钥派生计划来减少每个数据包的性能影响。&lt;/p&gt;
+&lt;h2 id=&#34;在哪里可以了解更多关于aes-gem的信息&#34;&gt;在哪里可以了解更多关于AES-GEM的信息？
+&lt;/h2&gt;&lt;p&gt;有关AES-GEM的更多信息可在我们的GitHub上找到！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ServiceNow管理员注意：立即修复访问控制列表漏洞</title>
+        <link>http://localhost:1313/p/servicenow%E7%AE%A1%E7%90%86%E5%91%98%E6%B3%A8%E6%84%8F%E7%AB%8B%E5%8D%B3%E4%BF%AE%E5%A4%8D%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sat, 02 Aug 2025 05:44:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/servicenow%E7%AE%A1%E7%90%86%E5%91%98%E6%B3%A8%E6%84%8F%E7%AB%8B%E5%8D%B3%E4%BF%AE%E5%A4%8D%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;warning-to-servicenow-admins-fix-your-access-control-lists-now&#34;&gt;Warning to ServiceNow admins: Fix your access control lists now
+&lt;/h1&gt;&lt;p&gt;安全厂商警告称，ServiceNow管理用户访问控制列表(ACL)的方式存在漏洞，攻击者可轻松窃取敏感数据。研究人员敦促管理员立即检查自定义和标准数据配置表以加强安全防护。&lt;/p&gt;
+&lt;p&gt;Varonis研究人员一年前就向ServiceNow报告了这个漏洞，使其能够悄悄修补平台并在5月向客户发布安全更新。随着ServiceNow本周发布通用漏洞披露(CVE-2025-3648)，Varonis公开了漏洞细节。&lt;/p&gt;
+&lt;p&gt;IDC总裁Crawford Del Prete表示：&amp;ldquo;ServiceNow的更新修复了可能允许低权限用户访问受限数据的漏洞。考虑到ServiceNow处理的数据类型，这种情况总是可能很严重。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Forrester Research企业架构首席分析师Charles Betz称这是&amp;quot;相当严重的漏洞&amp;quot;，敦促管理员&amp;quot;立即采取行动&amp;quot;。他指出：&amp;ldquo;随着CVE公开，攻击者很可能开始针对这些数据。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节
+&lt;/h2&gt;&lt;p&gt;该访问控制漏洞允许未经认证或已认证用户在某些条件下通过查询请求访问未授权数据。Varonis安全研究经理Yogev Madar指出，攻击者可以利用以下方式实施攻击：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仅依赖数据或脚本条件的ACL可能被滥用&lt;/li&gt;
+&lt;li&gt;未使用新的&amp;quot;Deny else&amp;quot;ACL机制&lt;/li&gt;
+&lt;li&gt;未应用Query ACL规则限制查询操作符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ServiceNow已在Xanadu和Yokohama平台版本中引入额外的访问控制列表框架。Varonis在博客中表示：&amp;ldquo;该漏洞相对容易利用，只需要最小的表访问权限，如实例中的弱用户账户甚至自注册匿名用户。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;数据存储架构风险&#34;&gt;数据存储架构风险
+&lt;/h2&gt;&lt;p&gt;ServiceNow将所有信息组织到表中，包括事件、请求、实例属性、用户数据、应用凭证等。这些表通过引用字段相互关联，而访问主要通过ACL规则控制。一个ServiceNow实例可能包含数万个ACL规则。&lt;/p&gt;
+&lt;p&gt;ACL规则包含四个访问条件，按以下顺序评估：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;必需角色&lt;/li&gt;
+&lt;li&gt;安全属性条件&lt;/li&gt;
+&lt;li&gt;数据条件&lt;/li&gt;
+&lt;li&gt;脚本条件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Varonis发现，如果访问因前两个条件被拒绝，系统会完全拒绝访问；但如果因数据或脚本条件被拒，用户仍能看到查询返回的记录总数，攻击者可利用查询参数通过枚举推断详细数据。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;ServiceNow提供了新的ACL规则供管理员实施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Query ACL：限制用户可执行的查询&lt;/li&gt;
+&lt;li&gt;新的安全数据过滤器：基于角色或安全属性限制记录访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Reco首席产品官Gal Nakash强调：&amp;ldquo;这提醒我们即使成熟平台在访问控制方面也可能存在危险盲点。组织必须采用&amp;rsquo;最小权限&amp;rsquo;原则配置ACL，绝不能让角色和安全属性留空或过于宽泛。&amp;rdquo;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Burp Suite入门与Web应用渗透测试实战指南</title>
+        <link>http://localhost:1313/p/burp-suite%E5%85%A5%E9%97%A8%E4%B8%8Eweb%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sat, 02 Aug 2025 04:49:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/burp-suite%E5%85%A5%E9%97%A8%E4%B8%8Eweb%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;webcast-burp-suite入门与web应用渗透测试&#34;&gt;Webcast: Burp Suite入门与Web应用渗透测试
+&lt;/h1&gt;&lt;p&gt;你是否负责Web应用的安全工作？是否好奇渗透测试人员如何发现其中的漏洞？&lt;br&gt;
+Burp Suite是众多Web应用渗透测试者和漏洞赏金猎人的首选工具。虽然入门简单，但其部分高级功能却难以快速掌握。如果你曾观摩他人使用Burp，定能从中获益——每位专家都有独到的使用技巧。&lt;/p&gt;
+&lt;p&gt;在这段Black Hills信息安全团队(BHIS)的直播教学中，BB King将演示：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;环境配置&lt;/strong&gt;：针对Web应用和API测试的Burp初始化设置（0:32:33）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心功能&lt;/strong&gt;：全工具链快速导览（0:45:25）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;效率提升&lt;/strong&gt;：推荐配置、BApp商店扩展及实战技巧（1:22:08）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;无论你是安全工程师、开发人员还是IT管理者，本教程都能帮助你更高效地使用Burp Suite进行安全评估。&lt;/p&gt;
+&lt;h2 id=&#34;资源索引&#34;&gt;资源索引
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/wp-content/uploads/2020/12/SLIDES_GettingStartedWithBurpSuiteOutline.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;演示大纲下载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/snoopysecurity/awesome-burp-extensions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Awesome Burp扩展合集&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FoxyProxy火狐插件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://portswigger.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PortSwigger官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别提示：本课程包含Innocent Lives基金会公益宣传环节，支持儿童网络安全保护事业。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>将防御者的困境转化为防御者的优势：网络安全新思维</title>
+        <link>http://localhost:1313/p/%E5%B0%86%E9%98%B2%E5%BE%A1%E8%80%85%E7%9A%84%E5%9B%B0%E5%A2%83%E8%BD%AC%E5%8C%96%E4%B8%BA%E9%98%B2%E5%BE%A1%E8%80%85%E7%9A%84%E4%BC%98%E5%8A%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E6%80%9D%E7%BB%B4/</link>
+        <pubDate>Sat, 02 Aug 2025 03:55:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%B0%86%E9%98%B2%E5%BE%A1%E8%80%85%E7%9A%84%E5%9B%B0%E5%A2%83%E8%BD%AC%E5%8C%96%E4%B8%BA%E9%98%B2%E5%BE%A1%E8%80%85%E7%9A%84%E4%BC%98%E5%8A%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E6%80%9D%E7%BB%B4/</guid>
+        <description>&lt;h1 id=&#34;将防御者的困境转化为防御者的优势&#34;&gt;将防御者的困境转化为防御者的优势
+&lt;/h1&gt;&lt;p&gt;网络安全防御者处于天然劣势的观点——即所谓的&amp;quot;防御者困境&amp;quot;——不仅是错误的，而且具有反作用。与其只关注如何应对攻击者的策略，我们更应该识别并利用防御者身份的固有优势。本文将阐述防御者思维的内涵，以及它如何帮助强化安全体系。&lt;/p&gt;
+&lt;h2 id=&#34;什么是防御者困境&#34;&gt;什么是防御者困境？
+&lt;/h2&gt;&lt;p&gt;多年来，安全专业人士一直用&amp;quot;防御者困境&amp;quot;来解释为何企业在防范网络攻击时处于劣势。其核心观点是：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;防御者处于劣势，因为我们必须时刻保持正确，而攻击者只需成功一次。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;按照这种观点，防御者需要关注所有可能的攻击路径并全面防护。我们必须艰难地选择重点防御哪些攻击路径（这就是困境所在），这使我们处于不利地位。这种劣势还源于我们需要全面应对每一次攻击，这意味着有时会漏掉某些攻击。&lt;/p&gt;
+&lt;p&gt;防御者困境的概念不仅令人沮丧，而且并不正确。防御者完全可以获得相对于攻击者的优势。&lt;/p&gt;
+&lt;h2 id=&#34;防御者困境的谬误&#34;&gt;防御者困境的谬误
+&lt;/h2&gt;&lt;p&gt;防御者困境之所以是谬误，部分原因在于它过度简化了网络攻击的复杂性。以MITRE ATT&amp;amp;CK框架为例，它展示了攻击者为达成目标必须遵循的多步骤过程。根据ATT&amp;amp;CK，攻击者通常从侦察开始，进展到资源开发，再到初始访问，之后还必须突破多个阶段才能实现目标。&lt;/p&gt;
+&lt;p&gt;攻击者必须成功完成每个阶段才能达成任务。而防御者只需干扰其中一个环节就能挫败攻击，迫使攻击者调整策略。行业资深人士Richard Bejtlich早在2009年就在入侵检测背景下观察到这点，创造了&amp;quot;入侵者困境&amp;quot;一词。他指出：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;防御者只需检测到入侵者存在的一个指标，就能在企业内部启动事件响应。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;另一位备受尊敬的网络安全专家David J. Bianco在2023年扩展了这一观点，提出了&amp;quot;攻击者困境&amp;quot;的概念。除了指出&amp;quot;攻击者必须在整个攻击生命周期中都做对&amp;quot;，他还强调：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;攻击者通常在不完全了解目标环境的情况下行动。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;我们的固有优势——防御者优势——在于我们能够比攻击者更深入地了解自身环境。通过前瞻性规划和设计，我们可以创建改变与攻击者互动方式的安全架构。&lt;/p&gt;
+&lt;h2 id=&#34;获取防御者优势&#34;&gt;获取防御者优势
+&lt;/h2&gt;&lt;p&gt;防御者困境假设防御者只能被动等待攻击发生然后响应。这种被动立场让攻击者掌握了主动权，使防御者总是处于追赶状态。为改变这种态势，行业分析师强调防御者需要实践&amp;quot;主动安全&amp;quot;。Omdia的Eric Parizo用这个术语鼓励企业：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;在可能的威胁对扩展IT环境构成危险之前，就主动寻找并消除它们。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Forrester的Erik Nost认为，实践主动安全意味着通过强大的可见性、优先级排序和修复来控制安全态势并减少违规。这一过程始于对环境的深入了解，这样我们才能知道需要保护的资源和需要解决的安全弱点。&lt;/p&gt;
+&lt;p&gt;地形认知并非网络安全独有，这个概念适用于各个领域的攻击者和防御者，包括历史上的战场。例如，在1450年的阿金库尔战役中，英军将自己部署在两侧有树林的狭窄战场上，将法国骑士引入受限空间。通过收窄战线，英军击败了规模大得多的法军。&lt;/p&gt;
+&lt;p&gt;就像阿金库尔战役一样，在网络安全防御中创建瓶颈点是建立防御者优势的一种方式。例如，通过单点登录(SSO)提供商集中SaaS登录，可以让组织应用可靠的安全措施，如双因素认证和异常检测。SSO迫使攻击者通过防御者控制的瓶颈点来攻击SaaS目标，使他们处于劣势。&lt;/p&gt;
+&lt;p&gt;更广泛地说，要获得防御者优势，我们应该：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;了解我们的环境&lt;/strong&gt;：持续更新所有资产的清单，包括硬件、软件、SaaS平台和用户账户。了解每项资源的业务目的。这一基础步骤让我们明确知道需要保护什么以及潜在的安全改进点在哪里。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最小化攻击面&lt;/strong&gt;：定期修补漏洞软件，关闭不需要的系统，禁用或停用不需要的服务，并强制使用SSO来减少入口点。这些行动共同减少了潜在的攻击向量数量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;基于上下文优先修复&lt;/strong&gt;：根据系统关键性、业务流程和敏感性评估每个漏洞的风险。优先解决最重大的风险。这种有针对性的方法确保资源被有效分配到最高优先级的领域。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;有节制地修复&lt;/strong&gt;：制定并执行修复计划，以可控和实际的方式实施变更。监控修复工作的进展和效果，使用指标跟踪改进并在需要时干预。这确保安全改进项目能达到预期效果。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;要获得防御者优势，首先需要彻底了解你的环境，这使你能够识别和修复弱点，部署自动化响应措施，并设计将攻击引导至防御最严密环节的架构。通过减少攻击面和优先处理安全改进机会来最小化攻击路径可能。监督修复工作以确保进展。通过从被动思维转向主动思维，彻底扭转攻击者的优势。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>DEP与EMET防护最新IE漏洞攻击的技术解析</title>
+        <link>http://localhost:1313/p/dep%E4%B8%8Eemet%E9%98%B2%E6%8A%A4%E6%9C%80%E6%96%B0ie%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 02:33:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/dep%E4%B8%8Eemet%E9%98%B2%E6%8A%A4%E6%9C%80%E6%96%B0ie%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;今天我们发布了安全公告2458511，通报了利用Internet Explorer漏洞的有限攻击事件。IE9测试版不受影响，而IE6、7、8存在风险。目前发现的攻击仅针对Windows XP系统上的IE6和7版本，IE8用户不会受到成功攻击。本文将解析漏洞原理、说明IE8风险降低的原因，并提供防护建议。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;p&gt;IE在解析HTML时对特定CSS标签组合的内存分配不足，可能导致虚表指针最低有效字节被覆盖。攻击者通过特定模式的内存喷射（heap spray）可能实现代码执行。数据执行保护（DEP）正是防御此类堆喷射攻击的有效手段。&lt;/p&gt;
+&lt;h3 id=&#34;dep的防护作用&#34;&gt;DEP的防护作用
+&lt;/h3&gt;&lt;p&gt;当前所有攻击均被DEP阻断。IE8默认启用DEP，早期版本也可手动开启（详见公告）。由于该漏洞非典型释放后使用（use-after-free）类型，攻击者难以绕过DEP防护。现有DEP绕过技术无法直接应用，因为内存破坏属于部分虚表指针覆盖。我们预计任何绕过DEP的利用尝试都将极不稳定（导致IE崩溃），特别是在支持地址空间布局随机化（ASLR）的系统上。&lt;/p&gt;
+&lt;h3 id=&#34;增强防护措施&#34;&gt;增强防护措施
+&lt;/h3&gt;&lt;p&gt;除启用DEP外，最佳解决方案是通过用户自定义CSS文件覆盖网站提供的CSS样式。该方法能阻止所有IE版本进入漏洞代码路径，且应用兼容性风险极低。公告中详细描述了在HKEY_CURRENT_USER注册表项中配置用户CSS的方法。&lt;/p&gt;
+&lt;h3 id=&#34;emet的进阶防护&#34;&gt;EMET的进阶防护
+&lt;/h3&gt;&lt;p&gt;今年发布的EMET 2.0工具集通过多种安全缓解技术防御漏洞利用。除强制启用DEP外，EMET还包含强制性ASLR和EAT访问过滤（EAF）等防护机制。需注意安装EMET后需单独配置应用防护（详见公告和用户手册）。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;致谢Fermin J. Serna对本问题和EMET工作的贡献。&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MSRC工程团队：Andrew Roths、Jonathan Ness、Chengyun Chu&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>curl库doh_write_cb函数内存泄漏漏洞分析</title>
+        <link>http://localhost:1313/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 02 Aug 2025 01:29:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;内存泄漏来自doh_write_cb函数&#34;&gt;内存泄漏来自doh_write_cb函数
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;curl_fuzzer_http发现了一个内存泄漏问题&lt;/p&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;p&gt;curl 8.13.0-DEV (x86_64-apple-darwin23.6.0)&lt;br&gt;
+libcurl/8.13.0-DEV OpenSSL/1.0.2n zlib/1.2.11 libidn2/2.0.4 libpsl/0.19.1 nghttp2/1.55.1 librtmp/2.3&lt;br&gt;
+发布日期: [未发布]&lt;br&gt;
+协议支持: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns ldap ldaps mqtt pop3 pop3s rtmp rtsp smb smbs smtp smtps telnet tftp ws wss&lt;br&gt;
+功能特性: alt-svc AsynchDNS HSTS HTTP2 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe TLS-SRP UnixSockets&lt;/p&gt;
+&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;p&gt;使用复现程序运行fuzzer&lt;/p&gt;
+&lt;h2 id=&#34;支持材料参考&#34;&gt;支持材料/参考
+&lt;/h2&gt;&lt;p&gt;堆栈跟踪如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ERROR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LeakSanitizer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;detected&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;memory&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;leaks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Direct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;leak&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;107&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;byte&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;allocated&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#0 0x55da4969379c in realloc /src/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:82:3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#1 0x55da496ff27b in curl_dbg_realloc /src/curl/lib/memdebug.c:265:9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#2 0x55da497fc6f3 in dyn_nappend /src/curl/lib/dynbuf.c:111:15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#3 0x55da497faee5 in doh_write_cb /src/curl/lib/doh.c:183:6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#4 0x55da497f2636 in cw_out_ptr_flush /src/curl/lib/cw-out.c:224:16&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#5 0x55da497f1644 in cw_out_do_write /src/curl/lib/cw-out.c:383:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#6 0x55da497f0ab6 in cw_out_write /src/curl/lib/cw-out.c:416:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#7 0x55da497f2f62 in cw_pause_write /src/curl/lib/cw-pause.c:192:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#8 0x55da497476e1 in Curl_cwriter_write /src/curl/lib/sendf.c:184:10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#9 0x55da497476e1 in cw_download_write /src/curl/lib/sendf.c:312:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#10 0x55da497415b9 in Curl_cwriter_write /src/curl/lib/sendf.c:184:10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#11 0x55da497415b9 in Curl_client_write /src/curl/lib/sendf.c:92:12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#12 0x55da498363a5 in Curl_http_write_resp /src/curl/lib/http.c:4201:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#13 0x55da49762635 in Curl_xfer_write_resp /src/curl/lib/transfer.c:862:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#14 0x55da4975e364 in sendrecv_dl /src/curl/lib/transfer.c:342:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#15 0x55da4975e364 in Curl_sendrecv /src/curl/lib/transfer.c:441:14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#16 0x55da497250f5 in state_performing /src/curl/lib/multi.c:1733:12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#17 0x55da497250f5 in multi_runsingle /src/curl/lib/multi.c:2423:12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#18 0x55da497222f2 in curl_multi_perform /src/curl/lib/multi.c:2599:16&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#19 0x55da496d3e98 in fuzz_handle_transfer(fuzz_data*) /src/curl_fuzzer/curl_fuzzer.cc:419:5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;#20 0x55da496d2e47 in LLVMFuzzerTestOneInput /src/curl_fuzzer/curl_fuzzer.cc:97:3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;需要传递-runs=100参数，如：&lt;code&gt;/out/curl_fuzzer_http /out/leak-247f5201c537eecc44d9f44dd815fd43f19a8a72 -runs=100&lt;/code&gt;，因为并非每次都会出现该问题&lt;/p&gt;
+&lt;h2 id=&#34;影响&#34;&gt;影响
+&lt;/h2&gt;&lt;p&gt;内存泄漏可能最终导致拒绝服务(DOS)&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;后续讨论&#34;&gt;后续讨论
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;报告者认为这可能不是安全问题而是信息性问题&lt;/li&gt;
+&lt;li&gt;curl团队确认该问题存在于DNS over HTTPS(doh.c)处理过程中，泄漏量小且不频繁&lt;/li&gt;
+&lt;li&gt;团队提供了修复PR(#16834)并确认已合并&lt;/li&gt;
+&lt;li&gt;报告者验证修复后确认问题已解决&lt;/li&gt;
+&lt;li&gt;最终该报告被标记为&amp;quot;Informative&amp;quot;而非安全漏洞&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>REST API认证的5种基础策略及其演进方法</title>
+        <link>http://localhost:1313/p/rest-api%E8%AE%A4%E8%AF%81%E7%9A%845%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%AD%96%E7%95%A5%E5%8F%8A%E5%85%B6%E6%BC%94%E8%BF%9B%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Sat, 02 Aug 2025 00:39:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rest-api%E8%AE%A4%E8%AF%81%E7%9A%845%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%AD%96%E7%95%A5%E5%8F%8A%E5%85%B6%E6%BC%94%E8%BF%9B%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;h1 id=&#34;rest-api认证的5种基础策略&#34;&gt;REST API认证的5种基础策略
+&lt;/h1&gt;&lt;p&gt;作为现代应用的支柱，REST API在实现数据层与表现层分离的同时，也需要通过认证机制保护敏感数据。以下是五种基础认证方法及其特点：&lt;/p&gt;
+&lt;h2 id=&#34;基础认证basic-authentication&#34;&gt;基础认证（Basic Authentication）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用Base64编码格式在HTTP头中存储用户名密码&lt;/li&gt;
+&lt;li&gt;优势：开发工具链广泛支持，实现轻量简单&lt;/li&gt;
+&lt;li&gt;风险：凭证以明文传输，必须配合SSL/TLS通道使用&lt;/li&gt;
+&lt;li&gt;局限：缺乏原生多因素认证支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api密钥&#34;&gt;API密钥
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过机器生成的字符串创建凭证-令牌对&lt;/li&gt;
+&lt;li&gt;部署方式：可嵌入载荷、HTTP头或查询字符串&lt;/li&gt;
+&lt;li&gt;特点：支持凭证与访问令牌解耦，便于权限变更时撤销&lt;/li&gt;
+&lt;li&gt;风险：与基础认证同样存在凭证拦截可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hmac加密&#34;&gt;HMAC加密
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用对称加密验证数据载荷完整性&lt;/li&gt;
+&lt;li&gt;适用场景：客户端和服务端均由单方控制的场景&lt;/li&gt;
+&lt;li&gt;挑战：移动端密钥存储安全问题，特别是URL嵌入密钥时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;oauth-20黄金标准&#34;&gt;OAuth 2.0（黄金标准）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;五大授权类型：
+&lt;ol&gt;
+&lt;li&gt;授权码模式&lt;/li&gt;
+&lt;li&gt;PKCE扩展&lt;/li&gt;
+&lt;li&gt;客户端凭证&lt;/li&gt;
+&lt;li&gt;设备码&lt;/li&gt;
+&lt;li&gt;刷新令牌&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;核心特性：
+&lt;ul&gt;
+&lt;li&gt;支持动态令牌刷新&lt;/li&gt;
+&lt;li&gt;通过scope概念实现精细权限控制&lt;/li&gt;
+&lt;li&gt;可结合JWT实现载荷完整性检查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;openid-connect&#34;&gt;OpenID Connect
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于OAuth 2.0的开源认证协议&lt;/li&gt;
+&lt;li&gt;三大授权类型：
+&lt;ol&gt;
+&lt;li&gt;授权码模式&lt;/li&gt;
+&lt;li&gt;隐式模式&lt;/li&gt;
+&lt;li&gt;混合模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;特点：简化第三方应用的用户身份验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;新兴认证方案&#34;&gt;新兴认证方案
+&lt;/h1&gt;&lt;h2 id=&#34;令牌认证otp魔法链接&#34;&gt;令牌认证（OTP/魔法链接）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OTP&lt;/strong&gt;：基于TOTP/HOTP算法生成临时密码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;魔法链接&lt;/strong&gt;：含时效性验证码的URL&lt;/li&gt;
+&lt;li&gt;优势：无需记忆密码&lt;/li&gt;
+&lt;li&gt;风险：依赖传输通道安全性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;通行密钥passkeys&#34;&gt;通行密钥（Passkeys）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于WebAuthn标准的无密码方案&lt;/li&gt;
+&lt;li&gt;双重验证机制：
+&lt;ol&gt;
+&lt;li&gt;设备本地认证（生物识别/PIN）&lt;/li&gt;
+&lt;li&gt;公私钥加密挑战&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;特点：抗钓鱼攻击，但存在设备依赖风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;方案选型建议&#34;&gt;方案选型建议
+&lt;/h1&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方案&lt;/th&gt;
+          &lt;th&gt;适用场景&lt;/th&gt;
+          &lt;th&gt;注意事项&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;基础认证&lt;/td&gt;
+          &lt;td&gt;低风险数据的访问控制&lt;/td&gt;
+          &lt;td&gt;必须启用SSL/TLS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;API密钥&lt;/td&gt;
+          &lt;td&gt;需识别消费方的场景&lt;/td&gt;
+          &lt;td&gt;避免URL嵌入凭证&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HMAC&lt;/td&gt;
+          &lt;td&gt;数据完整性要求高的封闭系统&lt;/td&gt;
+          &lt;td&gt;注意密钥存储安全&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OAuth 2.0&lt;/td&gt;
+          &lt;td&gt;企业级复杂应用&lt;/td&gt;
+          &lt;td&gt;妥善管理对称密钥分发&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OpenID Connect&lt;/td&gt;
+          &lt;td&gt;需平衡安全与简易性的第三方集成&lt;/td&gt;
+          &lt;td&gt;控制RP权限范围&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;最佳实践：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;始终通过SSL/TLS通道暴露API&lt;/li&gt;
+&lt;li&gt;避免在URL/查询字符串中传输敏感凭证&lt;/li&gt;
+&lt;li&gt;采用强化的密钥管理系统&lt;/li&gt;
+&lt;li&gt;实现自动化密钥轮换机制&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>比特币热潮下的隐秘威胁：加密货币劫持技术剖析</title>
+        <link>http://localhost:1313/p/%E6%AF%94%E7%89%B9%E5%B8%81%E7%83%AD%E6%BD%AE%E4%B8%8B%E7%9A%84%E9%9A%90%E7%A7%98%E5%A8%81%E8%83%81%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%8A%AB%E6%8C%81%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</link>
+        <pubDate>Fri, 01 Aug 2025 22:47:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%AF%94%E7%89%B9%E5%B8%81%E7%83%AD%E6%BD%AE%E4%B8%8B%E7%9A%84%E9%9A%90%E7%A7%98%E5%A8%81%E8%83%81%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%8A%AB%E6%8C%81%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;加密货币劫持的技术实现&#34;&gt;加密货币劫持的技术实现
+&lt;/h3&gt;&lt;p&gt;随着比特币价值暴涨，网络安全专家警告称加密货币劫持攻击可能将用户设备变为非法挖矿工具。该技术通过未经授权在网站访问者浏览器中运行加密货币挖矿脚本实现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无恶意软件入侵&lt;/strong&gt;：攻击者将Coinhive等挖矿脚本植入网站，当用户访问时自动加载JavaScript&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;资源劫持机制&lt;/strong&gt;：脚本会消耗用户设备的CPU算力和电能进行加密货币挖掘&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐蔽性特征&lt;/strong&gt;：当前主要针对门罗币（Monero）进行挖掘，相比比特币更不易被察觉&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击规模实证数据&#34;&gt;攻击规模实证数据
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;移动安全厂商Wandera分析10万+移动设备发现：29%的企业至少有一台智能设备运行门罗币挖矿脚本&lt;/li&gt;
+&lt;li&gt;独立研究员Willem de Groot发现：2,500个热门网站存在加密货币劫持脚本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术演变关键问题&#34;&gt;技术演变关键问题
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;比特币价值飙升会否导致针对比特币的劫持攻击增加？&lt;/li&gt;
+&lt;li&gt;鉴于挖矿对计算资源的高消耗，攻击者会否开发新型系统入侵手段？&lt;/li&gt;
+&lt;li&gt;终端用户应采取哪些技术防护措施？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文源自TechTarget《Risk &amp;amp; Repeat》播客的技术讨论，完整分析包含浏览器脚本注入、资源监控防御等专业技术细节。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>州和地方政府网络安全现代化转型</title>
+        <link>http://localhost:1313/p/%E5%B7%9E%E5%92%8C%E5%9C%B0%E6%96%B9%E6%94%BF%E5%BA%9C%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%8E%B0%E4%BB%A3%E5%8C%96%E8%BD%AC%E5%9E%8B/</link>
+        <pubDate>Fri, 01 Aug 2025 21:17:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%B7%9E%E5%92%8C%E5%9C%B0%E6%96%B9%E6%94%BF%E5%BA%9C%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%8E%B0%E4%BB%A3%E5%8C%96%E8%BD%AC%E5%9E%8B/</guid>
+        <description>&lt;h1 id=&#34;州和地方政府网络安全现代化转型&#34;&gt;州和地方政府网络安全现代化转型
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Darren Estridge 和 Thomas MacLellan&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;：2025年7月8日&lt;/p&gt;
+&lt;p&gt;州政府的网络安全领导者们深知，地方机构正日益成为网络攻击的主要目标。从破坏州卫生系统的勒索软件到针对政府员工的钓鱼攻击，威胁不断升级，造成的财务和运营影响也愈发严重。根据《2023年K-12教育系统六年回顾报告》，近80个学区（涉及2000多所学校）遭受勒索软件攻击，导致停课、教学中断及学生数据泄露。然而，许多州机构仍在过度采购功能重复且缺乏整合的网络安全工具，无法匹配攻击的速度和规模。&lt;/p&gt;
+&lt;h2 id=&#34;防御现代化的新思路&#34;&gt;防御现代化的新思路
+&lt;/h2&gt;&lt;p&gt;州IT领导者需要改变防御现代化的方法。与联邦层面类似，单纯增加工具数量并不等同于增强防护。零散的采购会耗尽有限资源、增加操作复杂性并延缓响应速度。出路在于通过战略性的公私合作实现效率提升、系统整合和更智能的投资，借助私营部门的创新能力强化政府防护体系。&lt;/p&gt;
+&lt;h2 id=&#34;州it网络安全新战略&#34;&gt;州IT网络安全新战略
+&lt;/h2&gt;&lt;p&gt;各州机构（无论是公共安全、医疗还是教育部门）的孤立系统会导致重复劳动、响应迟缓以及纳税人资金使用效率低下。州首席信息官（CIO）和安全官（CISO）正意识到必须摆脱这种碎片化模式。Palo Alto Networks通过将安全运营整合至统一的AI驱动平台来支持这一转型——该模式已在联邦机构和财富100强企业中得到验证。&lt;/p&gt;
+&lt;p&gt;但任何机构都不应孤军奋战。与私营网络安全供应商的战略合作能带来州IT部门内部无法获取的专业知识和威胁情报。公私合作可实现可扩展、可持续的安全现代化，确保州机构在有效管理资源的同时应对威胁。&lt;/p&gt;
+&lt;h2 id=&#34;成功现代化的关键考量&#34;&gt;成功现代化的关键考量
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;成本优化&lt;/strong&gt;：减少工具数量可降低许可、维护和培训成本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简化运营&lt;/strong&gt;：统一安全平台减轻管理负担&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全利用AI&lt;/strong&gt;：跟踪监控每位员工的AI使用情况&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加速威胁响应&lt;/strong&gt;：AI驱动自动化提升检测与处置速度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改进合规性&lt;/strong&gt;：集中化可视性实现持续监控以满足报告和合规要求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过与可信行业伙伴合作，各州可部署跨机构无缝协作的整体平台化解决方案，在降低复杂性的同时提升韧性。这种平台化战略能使州政府将预算从重复浪费转向主动防御。&lt;/p&gt;
+&lt;h2 id=&#34;规模化ai驱动的防御体系&#34;&gt;规模化AI驱动的防御体系
+&lt;/h2&gt;&lt;p&gt;该战略的核心是Precision AI®——每日可识别和分类900万次威胁的自动化防御引擎。面对人手不足或身兼多职的州IT团队，AI与自动化能显著改善平均检测时间（MTTD）和平均响应时间（MTTR）等关键指标。在Palo Alto Networks的安全运营中心（SOC），MTTR已缩短至检测后一分钟内，确保在威胁升级前快速精准响应。这些成果正是公共机构与私营创新紧密协作的体现。&lt;/p&gt;
+&lt;h2 id=&#34;云迁移中的安全保障&#34;&gt;云迁移中的安全保障
+&lt;/h2&gt;&lt;p&gt;随着各州将财务系统到应急服务全面转向&amp;quot;云优先&amp;quot;策略，网络安全必须同步演进。通过FedRAMP和GovRAMP High认证的Prisma® Cloud为多云和混合环境提供从开发到部署的端到端防护。云创新的速度使州机构难以独自确保安全，与可信供应商合作能在保证合规性和敏捷性的同时避免复杂性增加或出现可视性缺口。&lt;/p&gt;
+&lt;h2 id=&#34;专为州it需求打造&#34;&gt;专为州IT需求打造
+&lt;/h2&gt;&lt;p&gt;Palo Alto Networks的公共部门团队深入理解各州环境的特殊性——从治理约束、采购流程到多机构协作。我们提供定制化解决方案消除低效环节，在全州生态系统中降低风险并提升服务交付能力。团队通过案例研究和行业基准提供可量化的关键绩效指标（KPI），确保解决方案直接对接管理层优先级。&lt;/p&gt;
+&lt;p&gt;通过采用统一的AI驱动方案并发挥公私合作优势，州政府能有效保护公民数据、优化成本，构建更具韧性的数字未来。&lt;/p&gt;
+&lt;h2 id=&#34;美国制造为政府而生&#34;&gt;美国制造·为政府而生
+&lt;/h2&gt;&lt;p&gt;总部位于加州的Palo Alto Networks拥有20年网络安全创新领导经验。我们在全美49个州拥有8,800多名员工，硬件防火墙全部在美国德克萨斯州主装配中心生产。每年投入超过18亿美元的研发资金，持续推动美国技术领导力发展。&lt;/p&gt;
+&lt;p&gt;Palo Alto Networks已准备好帮助各州IT机构实现网络安全现代化，共同构建更安全、更智能的未来。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Ivanti EPMM漏洞组合实现未授权远程代码执行攻击</title>
         <link>http://localhost:1313/p/ivanti-epmm%E6%BC%8F%E6%B4%9E%E7%BB%84%E5%90%88%E5%AE%9E%E7%8E%B0%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%94%BB%E5%87%BB/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 20:57:30 +0800</pubDate>
         
         <guid>http://localhost:1313/p/ivanti-epmm%E6%BC%8F%E6%B4%9E%E7%BB%84%E5%90%88%E5%AE%9E%E7%8E%B0%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%94%BB%E5%87%BB/</guid>
-        <description>&lt;img src="https://example.com/ivanti-epmm-rce.jpg" alt="Featured image of post Ivanti EPMM漏洞组合实现未授权远程代码执行攻击" /&gt;&lt;h1 id=&#34;摘要&#34;&gt;摘要
+        <description>&lt;h1 id=&#34;摘要&#34;&gt;摘要
 &lt;/h1&gt;&lt;p&gt;3月13日，Ivanti披露了影响其本地部署版Endpoint Manager Mobile产品的两个漏洞：CVE-2025-4427（认证绕过）和CVE-2025-4428（认证后RCE漏洞）。虽然单个漏洞严重性不高（CVSS评分分别为5.3和7.2），但组合利用后可使未认证攻击者在受影响EPMM实例上执行恶意代码。Ivanti确认在初始披露前已发现有限的实际攻击案例，GreyNoise和Wiz等多家机构证实自5月16日起出现大规模攻击活动，这与漏洞验证代码的公开时间基本吻合。&lt;/p&gt;
 &lt;h1 id=&#34;受影响系统和或应用&#34;&gt;受影响系统和/或应用
 &lt;/h1&gt;&lt;p&gt;以下版本的Ivanti Endpoint Manager Mobile：&lt;/p&gt;

@@ -6,13 +6,14 @@
         <description>Recent content in IE8 on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/ie8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 22:11:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ie8/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MS11-018修复IE8 pwn2own漏洞的技术分析</title>
         <link>http://localhost:1313/p/ms11-018%E4%BF%AE%E5%A4%8Die8-pwn2own%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 22:11:32 +0800</pubDate>
         
         <guid>http://localhost:1313/p/ms11-018%E4%BF%AE%E5%A4%8Die8-pwn2own%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
-        <description>&lt;img src="https://www.microsoft.com/favicon.ico" alt="Featured image of post MS11-018修复IE8 pwn2own漏洞的技术分析" /&gt;&lt;p&gt;今天微软发布了MS11-018安全更新，修复了上个月CanSecWest 2011 Pwn2Own竞赛中用于攻破IE8的三个漏洞之一。成功入侵IE8需要组合利用这三个漏洞才能满足主办方的全部要求。&lt;/p&gt;
+        <description>&lt;p&gt;今天微软发布了MS11-018安全更新，修复了上个月CanSecWest 2011 Pwn2Own竞赛中用于攻破IE8的三个漏洞之一。成功入侵IE8需要组合利用这三个漏洞才能满足主办方的全部要求。&lt;/p&gt;
 &lt;p&gt;本次修复的漏洞是一个不影响IE9的释放后使用(UAF)漏洞，攻击者主要利用该漏洞实现代码执行。第二个漏洞用于提高攻击可靠性，第三个漏洞则用于突破IE保护模式。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;IE9为何不受影响？&lt;/strong&gt;
 在IE9开发过程中，团队内置了多项安全功能以尽早发现安全问题。该漏洞通过模糊测试发现，IE团队在10个月前就已修复。竞赛中用作信息泄露的另一个漏洞同样在IE9开发阶段被发现并修复。&lt;/p&gt;

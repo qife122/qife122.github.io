@@ -6,13 +6,14 @@
         <description>Recent content in Exchange Server on 办公AI智能小助手</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/exchange-server/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 23:01:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/exchange-server/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>微软2024年2月安全更新：修复多款产品高危漏洞</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 01 Aug 2025 23:01:47 +0800</pubDate>
         
         <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</guid>
-        <description>&lt;img src="https://www.microsoft.com/favicon.ico" alt="Featured image of post 微软2024年2月安全更新：修复多款产品高危漏洞" /&gt;&lt;p&gt;2024年2月13日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新涉及Windows、Exchange Server、Office等多款产品，共修复73个漏洞，其中5个漏洞在更新发布前已被公开利用，3个漏洞CVSS评分高达9.8分。&lt;/p&gt;
+        <description>&lt;p&gt;2024年2月13日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新涉及Windows、Exchange Server、Office等多款产品，共修复73个漏洞，其中5个漏洞在更新发布前已被公开利用，3个漏洞CVSS评分高达9.8分。&lt;/p&gt;
 &lt;h3 id=&#34;关键漏洞警示&#34;&gt;关键漏洞警示
 &lt;/h3&gt;&lt;p&gt;以下漏洞需优先处理：&lt;/p&gt;
 &lt;ul&gt;
@@ -27,9 +28,12 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;重要更新说明&#34;&gt;重要更新说明
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Exchange Server&lt;/strong&gt;：安装CU14后默认启用扩展保护功能&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Windows Server&lt;/strong&gt;：证书映射策略变更，采用更严格的X509IssuerSerialNumber验证&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;安全启动&lt;/strong&gt;：新增UEFI CA信任锚点，4月开始分阶段部署&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exchange Server&lt;/strong&gt;：安装CU14后默认启用扩展保护功能&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全启动&lt;/strong&gt;：新增UEFI CA信任锚点，4月开始分阶段部署&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;受影响产品清单&#34;&gt;受影响产品清单
 &lt;/h3&gt;&lt;table&gt;
@@ -74,8 +78,6 @@
 &lt;/ol&gt;
 &lt;p&gt;下次安全更新计划于2024年3月12日发布。建议通过&lt;a class=&#34;link&#34; href=&#34;https://github.com/microsoft/MSRC-Security-Update-API&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;安全更新指南API&lt;/a&gt;建立定制化监控方案。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注：本文档于2024年2月15日更新Exchange Server CU14相关信息，2月16日补充安全启动密钥更新细节。&lt;/p&gt;&lt;/blockquote&gt;
 </description>
         </item>
         
