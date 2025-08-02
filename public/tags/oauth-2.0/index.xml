@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>OAuth 2.0 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/oauth-2.0/</link>
+        <description>Recent content in OAuth 2.0 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/oauth-2.0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用Amazon Cognito为AI代理赋予用户上下文权限的技术解析</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8amazon-cognito%E4%B8%BAai%E4%BB%A3%E7%90%86%E8%B5%8B%E4%BA%88%E7%94%A8%E6%88%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8amazon-cognito%E4%B8%BAai%E4%BB%A3%E7%90%86%E8%B5%8B%E4%BA%88%E7%94%A8%E6%88%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;img src="https://d1.awsstatic.com/logos/aws-logo-lockups/poweredbyaws/PB_AWS_logo_RGB_stacked_REV_SQ.91cd4af40773cbfbd15577a3c2b8a346fe3e8fa2.png" alt="Featured image of post 利用Amazon Cognito为AI代理赋予用户上下文权限的技术解析" /&gt;&lt;h1 id=&#34;利用amazon-cognito为ai代理赋予用户上下文权限&#34;&gt;利用Amazon Cognito为AI代理赋予用户上下文权限
+&lt;/h1&gt;&lt;p&gt;Amazon Cognito是一项托管的客户身份和访问管理（CIAM）服务，可为Web和移动应用程序提供无缝的用户注册和登录功能。通过用户池，Amazon Cognito提供了具有强大身份验证功能的用户目录，包括密码、与外部身份提供商（IdP）的联合以及用于安全机器对机器（M2M）授权的OAuth 2.0流。&lt;/p&gt;
+&lt;p&gt;Amazon Cognito颁发标准的JSON Web令牌（JWT），并支持使用预令牌生成Lambda触发器自定义身份和访问令牌以进行用户身份验证。Amazon Cognito扩展了令牌定制功能，支持M2M的访问令牌定制以及在M2M授权期间从客户端传递元数据的能力。应用程序构建者可以利用这两个功能来支持多种用例，包括基于唯一运行时策略、权限、环境或传递的元数据定制访问令牌。这可以简化和丰富M2M身份验证和授权场景，并为新兴用例（如AI代理的身份和访问管理）开辟新的可能性。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案概述和参考架构&#34;&gt;解决方案概述和参考架构
+&lt;/h2&gt;&lt;p&gt;在一个示例架构中（图1），用户通过Amazon Cognito用户池登录到Web或移动应用程序，并将令牌返回给客户端。在这里，应用程序可以是一个使用Amazon Bedrock代理的无服务器数字助手，需要收集和处理驻留在第三方跨域服务中的数据。AI代理通过执行OAuth 2.0客户端凭证授权来获取自己的访问令牌，同时使用&lt;code&gt;aws_client_metadata&lt;/code&gt;请求参数传递用户的访问令牌作为上下文。AI代理接收用户上下文化的访问令牌，并调用一个信任Amazon Cognito用户池颁发者与受众的外部、第三方或跨域服务。跨域服务可以获取JSON Web密钥集（JWKS）以验证令牌并提取表示AI代理和底层用户的声明。授权在跨域服务中使用定制访问令牌的声明进行，对于细粒度授权，使用Amazon Verified Permissions。&lt;/p&gt;
+&lt;h2 id=&#34;实现细节&#34;&gt;实现细节
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AI代理获取OAuth 2.0访问令牌&lt;/strong&gt;&lt;br&gt;
+AI代理使用Amazon Bedrock代理，配置为使用Lambda的自定义编排。当应用程序与Amazon Bedrock代理交互时，自定义编排器将用户的访问令牌传递给Lambda函数作为自定义编排的一部分。Lambda函数验证用户的令牌以确保其未过期且未被篡改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amazon Cognito预令牌生成Lambda触发器&lt;/strong&gt;&lt;br&gt;
+在AI代理使用有效的客户端ID和密钥调用Amazon Cognito的&lt;code&gt;/token&lt;/code&gt;端点后，Cognito调用预令牌生成Lambda触发器。Lambda函数验证用户的访问令牌，并定制返回给AI代理的访问令牌。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨域资源服务器授权检查&lt;/strong&gt;&lt;br&gt;
+跨域服务作为资源服务器需要执行授权检查。使用&lt;code&gt;aws-jwt-verify&lt;/code&gt;库验证AI代理的访问令牌的有效性。对于细粒度授权，可以使用Amazon Verified Permissions的&lt;code&gt;IsAuthorizedWithToken&lt;/code&gt; API。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Amazon Cognito的M2M访问令牌定制和支持传递客户端元数据的功能为您提供了解决复杂用例的扩展能力，并支持如AI代理身份和访问管理等新兴用例。随着组织越来越多地探索AI代理的使用，拥有一个安全、可扩展的身份管理解决方案对于保持控制和问责制变得至关重要。通过使用这些新功能，您可以构建更安全和可扩展的解决方案，为自主AI代理用例的未来做好准备。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JIT利用 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/jit%E5%88%A9%E7%94%A8/</link>
+        <description>Recent content in JIT利用 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/jit%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2spidermonkey%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2spidermonkey%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1200px-Firefox_logo%2C_2019.svg.png" alt="Featured image of post 深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术" /&gt;&lt;h1 id=&#34;引言&#34;&gt;引言
+&lt;/h1&gt;&lt;p&gt;本文记录了从未接触过浏览器漏洞利用的开发人员针对SpiderMonkey JavaScript Shell解释器和Mozilla Firefox（在Windows 10 RS5 64位系统上）开发三个漏洞利用的过程。近年来，浏览器利用引起了广泛关注，几乎每个主要CTF比赛都包含浏览器挑战，每月都有相关技术文章发布。&lt;/p&gt;
+&lt;p&gt;我选择了Firefox的SpiderMonkey JavaScript引擎及其zn13编写的Blazefox挑战作为研究对象。本文展示了在这次探索中的发现和编写的三个漏洞利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;basic.js&lt;/strong&gt;：针对特定JavaScript解释器构建的漏洞利用，包含大量硬编码偏移&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kaizen.js&lt;/strong&gt;：改进版本，动态解析各种信息并使用基线JIT生成ROP gadget&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ifrit.js&lt;/strong&gt;：最终针对Firefox浏览器的漏洞利用，利用JIT编译整个原生代码payload&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;环境设置&#34;&gt;环境设置
+&lt;/h1&gt;&lt;p&gt;首先需要设置调试环境，建议在虚拟机中进行。获取Mozilla的代码仓库（使用Git镜像）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone --depth &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; https://github.com/mozilla/gecko-dev.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;应用漏洞补丁文件blaze.patch后，安装Mozilla-Build工具链并配置x64调试构建：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;autoconf-2.13
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mkdir build.asserts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; build.asserts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;../configure --host&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-mingw32 --target&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-mingw32 --enable-debug
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mozmake -j2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;spidermonkey内部机制&#34;&gt;SpiderMonkey内部机制
+&lt;/h1&gt;&lt;h2 id=&#34;jsvalues和jsobjects&#34;&gt;JS::Values和JSObjects
+&lt;/h2&gt;&lt;p&gt;SpiderMonkey使用JS::Value作为JavaScript值的内部表示，其中高17位（JSVAL_TAG）用于编码类型信息，低47位（payload_）存储实际值或对象指针。&lt;/p&gt;
+&lt;p&gt;JavaScript对象在内存中的布局：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原生对象（NativeObject）包含shapeOrExpando_指针（描述对象属性）和存储元素/属性值的空间&lt;/li&gt;
+&lt;li&gt;数组对象（ArrayObject）继承自NativeObject，使用ObjectElements存储长度等信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;形状shapes&#34;&gt;形状（Shapes）
+&lt;/h2&gt;&lt;p&gt;形状对象描述对象的属性，可以看作是一个哈希表，其中键是属性名，值是该属性值存储的槽位号。形状对象通过parent字段链接在一起形成属性链。&lt;/p&gt;
+&lt;h1 id=&#34;漏洞利用开发&#34;&gt;漏洞利用开发
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞分析&#34;&gt;漏洞分析
+&lt;/h2&gt;&lt;p&gt;漏洞源于添加的array_blaze方法，该方法将数组内部大小字段修改为420，从而允许越界访问：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;blz&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;blz&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 0
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;blz&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;blaze&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;undefined&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// false
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;blz&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 420
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;basicjs漏洞利用&#34;&gt;basic.js漏洞利用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;构建内存访问原语&lt;/strong&gt;：通过相邻数组和TypedArray，将有限的内存读写转换为任意内存访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对象地址泄露原语&lt;/strong&gt;：通过操作相邻对象的属性存储槽位泄露对象地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制流劫持&lt;/strong&gt;：覆盖js::Class的cOps函数指针&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;栈转移&lt;/strong&gt;：使用ntdll中的gadget实现栈转移&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ntdll基址泄露&lt;/strong&gt;：通过kernel32导入表获取ntdll地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行原生代码&lt;/strong&gt;：通过ROP链调用VirtualProtect使shellcode可执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;kaizenjs改进&#34;&gt;kaizen.js改进
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;提高内存原语可靠性&lt;/strong&gt;：使用Tenured堆中的ArrayBuffer替代Nursery堆中的对象&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态解析函数地址&lt;/strong&gt;：通过PE结构解析导出函数地址&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JIT gadget生成&lt;/strong&gt;：强制JIT编译特定函数生成所需ROP gadget&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;ifritjs高级利用&#34;&gt;ifrit.js高级利用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;编译Firefox&lt;/strong&gt;：构建64位Firefox用于漏洞研究&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置开发环境&lt;/strong&gt;：禁用沙箱和多进程模式便于调试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JIT完整payload&lt;/strong&gt;：通过精心构造的JavaScript函数，使JIT编译器生成完整的原生payload&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;结论&#34;&gt;结论
+&lt;/h1&gt;&lt;p&gt;本文详细介绍了从基础的漏洞利用到高级的JIT代码重用技术的演进过程。通过三种逐步改进的漏洞利用方法，展示了如何克服现代浏览器安全机制的挑战。虽然这些技术针对特定版本的SpiderMonkey，但其中涉及的概念和方法对理解现代浏览器漏洞利用具有普遍意义。&lt;/p&gt;
+&lt;p&gt;完整代码和材料可在&lt;a class=&#34;link&#34; href=&#34;https://github.com/0vercl0k/blazefox&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;blazefox GitHub仓库&lt;/a&gt;获取，包括调试扩展、漏洞利用代码、构建的二进制文件和脚本等。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

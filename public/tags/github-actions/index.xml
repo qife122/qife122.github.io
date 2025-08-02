@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>GitHub Actions on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/github-actions/</link>
+        <description>Recent content in GitHub Actions on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/github-actions/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Homebrew构建溯源技术解析：提升软件供应链安全</title>
+        <link>http://localhost:1313/p/homebrew%E6%9E%84%E5%BB%BA%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E6%8F%90%E5%8D%87%E8%BD%AF%E4%BB%B6%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/homebrew%E6%9E%84%E5%BB%BA%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E6%8F%90%E5%8D%87%E8%BD%AF%E4%BB%B6%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8/</guid>
+        <description>&lt;img src="https://blog.trailofbits.com/images/homebrew-provenance.png" alt="Featured image of post Homebrew构建溯源技术解析：提升软件供应链安全" /&gt;&lt;h3 id=&#34;homebrew构建溯源初探&#34;&gt;Homebrew构建溯源初探
+&lt;/h3&gt;&lt;p&gt;去年11月，我们宣布与Alpha-Omega、OpenSSF合作，为Homebrew添加构建溯源功能。现在，我们很高兴地宣布核心功能已进入公测阶段：homebrew-core现对所有官方CI构建的bottle（预编译二进制包）提供密码学证明。用户可通过我们开发的&lt;code&gt;brew verify&lt;/code&gt;命令（当前为第三方插件，即将合并到上游）进行验证：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew tap trailofbits/homebrew-brew-verify
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew verify &amp;lt;package&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;技术实现原理&#34;&gt;技术实现原理
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构建身份绑定&lt;/strong&gt;&lt;br&gt;
+每个bottle现在附带可验证的声明，将其内容与构建工作流元数据（包括Git提交哈希、GitHub Actions运行ID等）进行密码学绑定，形成符合SLSA Build L2标准的证明。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;防御供应链攻击&lt;/strong&gt;&lt;br&gt;
+该机制可防止两种威胁场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击者直接上传恶意构建到bottle存储库&lt;/li&gt;
+&lt;li&gt;维护者同时替换bottle及其校验值的&amp;quot;沉默攻击&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;历史包回填方案&lt;/strong&gt;&lt;br&gt;
+针对旧版本bottle的兼容性问题，我们创新性地采用双验证策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优先检查主仓库（Homebrew/homebrew-core）的正式构建证明&lt;/li&gt;
+&lt;li&gt;若不存在，则检查由trailofbits/homebrew-brew-verify提供的回填签名&lt;/li&gt;
+&lt;li&gt;设置截止日期防止签名滥用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;验证工具使用&#34;&gt;验证工具使用
+&lt;/h3&gt;&lt;p&gt;当前提供两种实验性验证方式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 方式1：独立验证命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew tap trailofbits/homebrew-brew-verify
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew verify bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 方式2：安装时自动验证&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;HOMEBREW_VERIFY_ATTESTATIONS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install cowsay
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;技术架构细节&#34;&gt;技术架构细节
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;底层依赖&lt;/strong&gt;&lt;br&gt;
+基于GitHub的构件证明新特性（artifact attestations），包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;generate-build-provenance&lt;/code&gt; Action&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gh attestation&lt;/code&gt; CLI工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;元数据结构&lt;/strong&gt;&lt;br&gt;
+采用in-toto声明格式封装以下元数据：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub仓库及所有者信息&lt;/li&gt;
+&lt;li&gt;触发工作流的分支/事件&lt;/li&gt;
+&lt;li&gt;构建时的精确git commit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;未来规划&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将验证工具上游化到brew核心&lt;/li&gt;
+&lt;li&gt;开发纯Ruby验证器替代gh CLI依赖&lt;/li&gt;
+&lt;li&gt;扩展支持第三方tap仓库的构建证明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安全边界说明&#34;&gt;安全边界说明
+&lt;/h3&gt;&lt;p&gt;构建证明虽不能防御以下场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;软件本身的恶意代码&lt;/li&gt;
+&lt;li&gt;应用层的降级攻击
+但能显著提升供应链透明度：&lt;/li&gt;
+&lt;li&gt;强制攻击行为公开化&lt;/li&gt;
+&lt;li&gt;减少攻击者可利用的隐蔽转换环节&lt;/li&gt;
+&lt;li&gt;有效应对类似xz-utils后门的分发篡改攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（注：本文为技术内容节选，完整实现细节请参考原文GitHub仓库及Homebrew官方文档）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>面试 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%9D%A2%E8%AF%95/</link>
+        <description>Recent content in 面试 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Angular面试必备：15个常见问题与解答</title>
+        <link>http://localhost:1313/p/angular%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%8715%E4%B8%AA%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/angular%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%8715%E4%B8%AA%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94/</guid>
+        <description>&lt;img src="https://simpleprogrammer.com/wp-content/uploads/2020/08/angular-interview-questions-1200x628.png" alt="Featured image of post Angular面试必备：15个常见问题与解答" /&gt;&lt;h1 id=&#34;top-15-angular面试问题与答案&#34;&gt;Top 15 Angular面试问题与答案
+&lt;/h1&gt;&lt;p&gt;现代软件开发行业需要精通各种流行框架（特别是JavaScript）的技能型开发者。在所有流行的JavaScript框架中，Angular是当前市场上最受欢迎的平台之一。&lt;/p&gt;
+&lt;p&gt;Angular体系庞大且难以全面掌握，因此基于该框架的面试问题可能颇具挑战性。本文将引导你了解基础到高级的Angular面试问题，助你备战Angular开发岗位。&lt;/p&gt;
+&lt;h2 id=&#34;q-1-什么是angular&#34;&gt;Q-1. 什么是Angular？
+&lt;/h2&gt;&lt;p&gt;Angular是由Google于2016年创建的开源免费JavaScript框架，通过HTML、CSS和JavaScript等技术帮助构建现代Web和移动应用。其核心编程语言是TypeScript，作为开源前端框架特别适合创建企业级应用，支持代码重用且易于维护。&lt;/p&gt;
+&lt;h2 id=&#34;q-2-angular使用了哪些技术&#34;&gt;Q-2. Angular使用了哪些技术？
+&lt;/h2&gt;&lt;p&gt;作为开发者首选的JavaScript框架，Angular通过多种技术实现特定功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用TypeScript（JavaScript的超集）&lt;/li&gt;
+&lt;li&gt;基于组件化架构&lt;/li&gt;
+&lt;li&gt;采用依赖注入设计模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-3-angular有哪些优势&#34;&gt;Q-3. Angular有哪些优势？
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;MVC架构&lt;/strong&gt;：模型管理数据，视图处理展示，控制器作为桥梁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖注入&lt;/strong&gt;：简化开发流程，实现任务分治&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;双向数据绑定&lt;/strong&gt;：自动同步模型与视图，减少开发时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自定义指令&lt;/strong&gt;：通过DOM属性改变元素行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RESTful服务支持&lt;/strong&gt;：通过ngResource模块创建可扩展API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码生成&lt;/strong&gt;：工具自动生成元数据和可用代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证支持&lt;/strong&gt;：自动运行验证并显示错误&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板支持&lt;/strong&gt;：支持静态模板和Angular模板&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLI工具&lt;/strong&gt;：通过命令行初始化和管理应用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动画等高级功能&lt;/strong&gt;：简化复杂动画实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;q-4-angular的主要特性是什么&#34;&gt;Q-4. Angular的主要特性是什么？
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;跨平台开发&lt;/strong&gt;：支持Windows/Mac/Linux桌面应用和移动开发&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码分割&lt;/strong&gt;：通过懒加载优化性能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动画支持&lt;/strong&gt;：基于Web动画API实现复杂效果&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLI工具&lt;/strong&gt;：自动化项目搭建和配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;声明式UI&lt;/strong&gt;：使用HTML定义界面降低复杂度&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无障碍支持&lt;/strong&gt;：遵循ARIA标准&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Material组件&lt;/strong&gt;：提供现成的UI组件库&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;差异化加载&lt;/strong&gt;：根据浏览器版本发送不同代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高性能&lt;/strong&gt;：懒加载机制提升运行效率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-5-angular的核心基础是什么&#34;&gt;Q-5. Angular的核心基础是什么？
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;组件&lt;/strong&gt;：UI构建的基本单元&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Angular元素&lt;/strong&gt;：符合Web Components标准的组件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指令&lt;/strong&gt;：扩展HTML元素行为的类&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原生移动支持&lt;/strong&gt;：通过Ionic等方案实现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模块&lt;/strong&gt;：应用的逻辑组织单元(NgModules)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖注入&lt;/strong&gt;：提升灵活性和模块化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板&lt;/strong&gt;：定义组件渲染方式的HTML&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路由&lt;/strong&gt;：实现视图导航&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据绑定&lt;/strong&gt;：组件间数据共享机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务&lt;/strong&gt;：可复用的业务逻辑单元&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-6-什么是数据绑定&#34;&gt;Q-6. 什么是数据绑定？
+&lt;/h2&gt;&lt;p&gt;数据绑定建立应用UI与业务数据的连接，包含四种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;双向数据绑定&lt;/li&gt;
+&lt;li&gt;字符串插值&lt;/li&gt;
+&lt;li&gt;属性绑定&lt;/li&gt;
+&lt;li&gt;事件绑定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-7-什么是dom&#34;&gt;Q-7. 什么是DOM？
+&lt;/h2&gt;&lt;p&gt;文档对象模型(DOM)以树形结构表示页面内容，Angular指令可将应用数据绑定到DOM元素属性。&lt;/p&gt;
+&lt;h2 id=&#34;q-8-angular与angularjs的区别&#34;&gt;Q-8. Angular与AngularJS的区别？
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;参数&lt;/th&gt;
+          &lt;th&gt;Angular&lt;/th&gt;
+          &lt;th&gt;AngularJS&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;架构&lt;/td&gt;
+          &lt;td&gt;指令/组件&lt;/td&gt;
+          &lt;td&gt;MVC&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;支持&lt;/td&gt;
+          &lt;td&gt;持续更新&lt;/td&gt;
+          &lt;td&gt;停止维护&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;速度&lt;/td&gt;
+          &lt;td&gt;更快&lt;/td&gt;
+          &lt;td&gt;较慢&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;移动支持&lt;/td&gt;
+          &lt;td&gt;支持&lt;/td&gt;
+          &lt;td&gt;不支持&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;语言&lt;/td&gt;
+          &lt;td&gt;TypeScript&lt;/td&gt;
+          &lt;td&gt;JavaScript&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;q-9-解释mvvm架构&#34;&gt;Q-9. 解释MVVM架构
+&lt;/h2&gt;&lt;p&gt;包含三个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Model&lt;/strong&gt;：业务逻辑和数据&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;View&lt;/strong&gt;：用户界面层&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ViewModel&lt;/strong&gt;：连接View和Model的抽象层&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-10-什么是指令&#34;&gt;Q-10. 什么是指令？
+&lt;/h2&gt;&lt;p&gt;指令是通过属性扩展HTML行为的特性，分为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;结构指令&lt;/li&gt;
+&lt;li&gt;属性指令&lt;/li&gt;
+&lt;li&gt;组件指令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-11-什么是angular-cli&#34;&gt;Q-11. 什么是Angular CLI？
+&lt;/h2&gt;&lt;p&gt;命令行工具支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目初始化&lt;/li&gt;
+&lt;li&gt;组件生成&lt;/li&gt;
+&lt;li&gt;测试执行&lt;/li&gt;
+&lt;li&gt;依赖管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-12-解释依赖注入&#34;&gt;Q-12. 解释依赖注入
+&lt;/h2&gt;&lt;p&gt;设计模式特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;类从外部获取依赖而非自行创建&lt;/li&gt;
+&lt;li&gt;提高灵活性和模块化&lt;/li&gt;
+&lt;li&gt;注入器负责解析和提供依赖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-13-认证与授权如何实现&#34;&gt;Q-13. 认证与授权如何实现？
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;认证：验证用户凭证获取访问令牌&lt;/li&gt;
+&lt;li&gt;授权：基于令牌控制资源访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;q-14-什么是http拦截器&#34;&gt;Q-14. 什么是HTTP拦截器？
+&lt;/h2&gt;&lt;p&gt;示例代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-typescript&#34; data-lang=&#34;typescript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;@Injectable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;TokenInterceptor&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;HttpInterceptor&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;intercept&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;request&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;HttpRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;HttpHandler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;authToken&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;localStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getItem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;authToken&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;authToken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nx&#34;&gt;request&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;clone&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nx&#34;&gt;setHeaders&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Authorization&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;authToken&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;handle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;q-15-什么是服务端渲染&#34;&gt;Q-15. 什么是服务端渲染？
+&lt;/h2&gt;&lt;p&gt;解决大型应用加载慢的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务端返回完整渲染页面&lt;/li&gt;
+&lt;li&gt;浏览器接管后续交互&lt;/li&gt;
+&lt;li&gt;提升首屏加载性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;掌握这些核心知识将助你在Angular面试中脱颖而出。除了技术问题，别忘了准备开发者所需的软技能。如有疑问，欢迎在评论区提出。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

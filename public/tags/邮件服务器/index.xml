@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>邮件服务器 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+        <description>Recent content in 邮件服务器 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 30 Jul 2025 21:00:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>请勿在DNS MX记录中直接使用IP地址 - 邮件服务器配置指南</title>
+        <link>http://localhost:1313/p/%E8%AF%B7%E5%8B%BF%E5%9C%A8dns-mx%E8%AE%B0%E5%BD%95%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ip%E5%9C%B0%E5%9D%80-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Wed, 30 Jul 2025 21:00:38 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%AF%B7%E5%8B%BF%E5%9C%A8dns-mx%E8%AE%B0%E5%BD%95%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ip%E5%9C%B0%E5%9D%80-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;请勿在dns-mx记录中直接使用ip地址&#34;&gt;请勿在DNS MX记录中直接使用IP地址
+&lt;/h1&gt;&lt;p&gt;我想强调邮件服务器DNS记录中一个常见的错误配置。&lt;/p&gt;
+&lt;p&gt;当域名配置接收邮件时，通常需要设置指向邮件服务器主机名的MX类型DNS记录。值得注意的是，根据RFC 1035规范，MX记录必须包含域名而&lt;strong&gt;不能直接指向IP地址&lt;/strong&gt;。但某些邮件服务器仍会错误配置IP地址。多数邮件服务器对此类配置错误较为宽容仍能投递邮件，导致问题难以被发现。&lt;/p&gt;
+&lt;p&gt;我使用的邮件服务器（Courier）对此限制较严格，因此时常因此无法发送邮件。虽然发生频率不高，但确实存在。若您的邮件服务器存在此类配置，可能会错过部分合法邮件。&lt;/p&gt;
+&lt;p&gt;希望通过本文提高认知并推动修复。具体建议如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;邮件/DNS服务器管理员&lt;/strong&gt;：请严格使用域名配置MX记录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IT服务提供商&lt;/strong&gt;：应将此检查纳入定期审计清单（&lt;a class=&#34;link&#34; href=&#34;https://example.com/script.py&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;附Python检测脚本&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检测工具开发者&lt;/strong&gt;：建议增加MX记录IP地址检测功能。目前仅Hardenize和IntoDNS等少数服务会警告此类问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我对Alexa Top 100万网站进行了快速扫描，约0.06%存在此问题（如果您认识相关责任人，请分享本文）。后续可能通过postmaster别名联系这些域名管理者。&lt;/p&gt;
+&lt;p&gt;（图片来源：nohat.cc / CC0协议）&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;技术讨论精选&#34;&gt;技术讨论精选
+&lt;/h2&gt;&lt;h3 id=&#34;评论1---erwin-hoffmann&#34;&gt;评论#1 - Erwin Hoffmann
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;配置错误实际源于DNS负责人而非邮件服务器&lt;/li&gt;
+&lt;li&gt;仅IPv4地址可能被误用（语法与域名相似）&lt;/li&gt;
+&lt;li&gt;DNS软件应增加输入验证机制&lt;/li&gt;
+&lt;li&gt;完整MX配置需包含：
+&lt;ul&gt;
+&lt;li&gt;域名&lt;/li&gt;
+&lt;li&gt;权重值&lt;/li&gt;
+&lt;li&gt;对应A/AAAA记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;现代互联网还需配置：
+&lt;ul&gt;
+&lt;li&gt;反向DNS&lt;/li&gt;
+&lt;li&gt;SPF记录&lt;/li&gt;
+&lt;li&gt;TLSA记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;评论2---spongebob&#34;&gt;评论#2 - Spongebob
+&lt;/h3&gt;&lt;p&gt;使用IP地址将导致无法配置DKIM/DMARC（MX名称需匹配SSL证书）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;作者回复&lt;/strong&gt;：此问题实际与MTA-STS相关（需验证主机名证书）&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

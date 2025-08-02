@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>用户态安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%94%A8%E6%88%B7%E6%80%81%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 用户态安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E7%94%A8%E6%88%B7%E6%80%81%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Sinter：macOS全新用户态安全执行框架解析</title>
+        <link>http://localhost:1313/p/sintermacos%E5%85%A8%E6%96%B0%E7%94%A8%E6%88%B7%E6%80%81%E5%AE%89%E5%85%A8%E6%89%A7%E8%A1%8C%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/sintermacos%E5%85%A8%E6%96%B0%E7%94%A8%E6%88%B7%E6%80%81%E5%AE%89%E5%85%A8%E6%89%A7%E8%A1%8C%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;sintermacos全新用户态安全执行框架&#34;&gt;Sinter：macOS全新用户态安全执行框架
+&lt;/h1&gt;&lt;h2 id=&#34;简单开源且基于swift&#34;&gt;简单、开源且基于Swift
+&lt;/h2&gt;&lt;p&gt;Sinter是我们用Swift编写的开源macOS端点安全执行代理（支持10.15及以上系统）。它完全基于用户态构建，利用新的EndpointSecurity API接收macOS内核发出的安全事件回调。通过简单规则即可控制事件允许/拒绝，无需传统杀毒软件的全盘扫描或特征检测。&lt;/p&gt;
+&lt;h2 id=&#34;纯用户态安全代理的探索&#34;&gt;纯用户态安全代理的探索
+&lt;/h2&gt;&lt;p&gt;实现端点安全解决方案需要实时拦截和授权OS级事件。过去这意味着使用内核态回调API或直接挂钩内核代码。苹果在2019年末宣布将弃用所有第三方内核扩展，引入EndpointSecurity API作为替代方案。&lt;/p&gt;
+&lt;h2 id=&#34;endpointsecurity-api解析&#34;&gt;EndpointSecurity API解析
+&lt;/h2&gt;&lt;p&gt;该API实现了macOS内核的实时回调机制，支持NOTIFY（通知）和AUTH（授权）两种事件类型。它取代了原有的Kauth KPI等内核态方案，成为macOS 11 Big Sur后唯一合法的实时监控接口。&lt;/p&gt;
+&lt;h2 id=&#34;sinter开发中的关键技术挑战&#34;&gt;Sinter开发中的关键技术挑战
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实时决策不影响系统性能&lt;/strong&gt;&lt;br&gt;
+采用异步处理架构，通过&lt;code&gt;es_copy_message&lt;/code&gt;解耦消息处理，建立双优先级队列（常规程序和大程序分离），确保系统响应能力。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;防范TOCTOU竞态条件&lt;/strong&gt;&lt;br&gt;
+针对&amp;quot;检查时-使用时&amp;quot;时间差攻击，实现文件事件监控机制。当检测到执行文件被篡改时立即清除缓存（已向苹果提交改进建议FB8352031）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;应用包代码签名验证&lt;/strong&gt;&lt;br&gt;
+macOS可执行文件存在于应用包（.app）中，需验证整个包的签名。Sinter创新性地实现双缓存机制：EndpointSecurity原生缓存+自定义应用包验证缓存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;系统扩展安装优势&lt;/strong&gt;&lt;br&gt;
+作为System Extension部署可获得系统级保护（包括SIP扩展防护），防止root用户卸载。未来版本将迁移到此模式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;证书签名与公证流程&lt;/strong&gt;&lt;br&gt;
+建立自动化CMake工作流处理苹果严格的代码签名、公证和权限申请（EndpointSecurity权限需6周人工审核）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;Sinter将持续增强规则引擎灵活性，整合文件完整性监控、内存注入防护（通过mmap事件分析）及NetworkExtension网络流量控制。我们欢迎社区通过GitHub或Empire Hacking Slack频道参与贡献。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;随着内核扩展的弃用，苹果为端点防护建立了统一用户态API标准，这将提升系统稳定性并减少攻击面，而Swift语言的选择确保了长期兼容性优势。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

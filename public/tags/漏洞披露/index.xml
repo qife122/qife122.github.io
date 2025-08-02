@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>漏洞披露 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/</link>
+        <description>Recent content in 漏洞披露 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>用零知识证明重塑漏洞披露机制 - 突破性技术解析</title>
+        <link>http://localhost:1313/p/%E7%94%A8%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E%E9%87%8D%E5%A1%91%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2%E6%9C%BA%E5%88%B6-%E7%AA%81%E7%A0%B4%E6%80%A7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%A8%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E%E9%87%8D%E5%A1%91%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2%E6%9C%BA%E5%88%B6-%E7%AA%81%E7%A0%B4%E6%80%A7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;img src="https://blog.trailofbits.com/images/zk-exploit.png" alt="Featured image of post 用零知识证明重塑漏洞披露机制 - 突破性技术解析" /&gt;&lt;h1 id=&#34;用零知识证明重塑漏洞披露机制&#34;&gt;用零知识证明重塑漏洞披露机制
+&lt;/h1&gt;&lt;p&gt;我们与约翰霍普金斯大学的合作伙伴Matthew Green正在利用零知识证明（ZK）技术建立一个可信环境，使科技公司与漏洞研究者能够安全沟通而不必担心破坏或纠纷。这项为期四年的研究将推动ZK证明从理论走向实践，为研究者提供能生成漏洞可利用性ZK证明的软件工具。该研究隶属于DARPA&amp;quot;加密验证与评估信息保护&amp;quot;（SIEVE）计划。&lt;/p&gt;
+&lt;h2 id=&#34;为什么需要漏洞可利用性的zk证明&#34;&gt;为什么需要漏洞可利用性的ZK证明？
+&lt;/h2&gt;&lt;p&gt;软件厂商与漏洞研究者之间常因漏洞报告产生矛盾。研究者过度披露漏洞细节可能丧失奖励，而过早披露则可能损害企业声誉。更严重的是，当企业忽视安全团队警告时，研究者面临两难选择：保持沉默让用户处于风险，或公开漏洞迫使企业行动——后者可能反而帮助攻击者。&lt;/p&gt;
+&lt;p&gt;ZK证明将彻底改变这种局面，允许企业明确定义漏洞赏金范围，研究者则能无可辩驳地证明其拥有有效漏洞利用方案，同时避免公开披露风险。&lt;/p&gt;
+&lt;h2 id=&#34;zk证明的设计原理&#34;&gt;ZK证明的设计原理
+&lt;/h2&gt;&lt;p&gt;在ZK证明中，证明者无需透露具体信息即可验证陈述真实性。例如证明知道SHA256原像而不泄露原像本身。目前最著名的工业应用是Zcash等隐私区块链，用户通过ZK证明交易合法性而不暴露任何敏感信息。&lt;/p&gt;
+&lt;p&gt;开发高效ZK系统需权衡三个指标：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;证明生成时间&lt;/li&gt;
+&lt;li&gt;验证时间&lt;/li&gt;
+&lt;li&gt;通信带宽（证明数据量）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;核心挑战在于将待证明陈述转换为无循环的布尔/算术电路。这对缺乏明确数学表述的问题尤为困难，例如包含数据依赖循环的程序必须展开处理。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞可利用性证明技术实现&#34;&gt;漏洞可利用性证明技术实现
+&lt;/h2&gt;&lt;p&gt;由于ZK证明接受布尔电路表述，我们需要构建仅在漏洞利用成功时返回&amp;quot;真&amp;quot;的电路。关键挑战包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;处理器建模&lt;/strong&gt;：需精确模拟目标程序的编译架构。初始方案是对处理器单步运行建模，但会导致电路规模爆炸（50MB内存的100条指令轨迹将产生5GB电路）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存验证优化&lt;/strong&gt;：采用SNARKs for C的方案，将证明分为核心逻辑与内存正确性两部分。逻辑验证通过检查指令序列状态转移实现，内存验证则通过内存排序轨迹的线性扫描完成，避免直接处理整个RAM。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;防伪造机制&lt;/strong&gt;：通过&amp;quot;置换检查器&amp;quot;电路确保内存排序轨迹的真实性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;x86架构的特殊挑战&#34;&gt;x86架构的特殊挑战
+&lt;/h2&gt;&lt;p&gt;从简易的MSP430 RISC架构转向复杂x86架构面临巨大挑战：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RISC处理器每周期约1-10k逻辑门&lt;/li&gt;
+&lt;li&gt;基础x86模型处理10,000条指令可能产生48GB证明数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们的解决方案是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;动态子集生成&lt;/strong&gt;：通过程序分析确定二进制文件实际使用的x86指令子集（通常仅数百条）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;静态二进制转换&lt;/strong&gt;：对repz等运行时依赖指令，转换为可验证的子集指令&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组合电路优化&lt;/strong&gt;：避免硬编码复杂指令处理逻辑&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞披露新范式&#34;&gt;漏洞披露新范式
+&lt;/h2&gt;&lt;p&gt;这项技术将实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;企业精确定义漏洞赏金范围&lt;/li&gt;
+&lt;li&gt;研究者安全提交漏洞证明&lt;/li&gt;
+&lt;li&gt;消费者保护机制：研究者可警示风险而不公开漏洞细节&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们正推动ZK证明从学术走向工业应用。如果您有特殊应用场景，欢迎联系我们——我们在ZK证明方案和电路编译器领域拥有丰富经验。&lt;/p&gt;
+&lt;p&gt;（原文包含技术架构图表示例和论文引用，此处保留技术要点翻译）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

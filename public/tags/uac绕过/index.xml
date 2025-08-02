@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>UAC绕过 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/uac%E7%BB%95%E8%BF%87/</link>
+        <description>Recent content in UAC绕过 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/uac%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>以最复杂方式绕过UAC：Kerberos协议漏洞利用详解</title>
+        <link>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%A5%E6%9C%80%E5%A4%8D%E6%9D%82%E6%96%B9%E5%BC%8F%E7%BB%95%E8%BF%87uackerberos%E5%8D%8F%E8%AE%AE%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;img src="https://example.com/kerberos-bypass.jpg" alt="Featured image of post 以最复杂方式绕过UAC：Kerberos协议漏洞利用详解" /&gt;&lt;h1 id=&#34;以最复杂方式绕过uac&#34;&gt;以最复杂方式绕过UAC
+&lt;/h1&gt;&lt;p&gt;虽然我不常研究这个，但发现新的UAC绕过方法总是很有趣。在阅读Rubeus工具的功能时，我意识到可以滥用Kerberos协议绕过UAC——至少在域加入系统中可行。不清楚之前是否有人记录过这种方法，有篇帖子讨论过类似技术但需要从其他系统发起攻击，而本文将描述本地实现的方案。&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;系统默认会通过LSASS过滤网络身份验证令牌，移除本地管理员的权限。但存在关键例外：如果用户是域用户兼本地管理员，LSASS会允许网络认证使用完整管理员令牌。这在通过Kerberos进行本地认证时会产生问题——难道这不是简单的UAC绕过吗？&lt;/p&gt;
+&lt;p&gt;实际上Kerberos有专门机制阻止这种攻击。去年我阅读了微软工程师Steve Syfuhs关于Kerberos如何防止本地UAC绕过的文章。简而言之：当用户请求服务票据时，LSASS会在TGS-REQ请求中嵌入本地安全信息，这些信息会被编码到生成的票据中。当该票据用于本地系统认证时，Kerberos会提取这些信息进行验证。&lt;/p&gt;
+&lt;p&gt;通过分析Kerberos票据，我们发现两个关键字段：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Authorization&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KERB_AD_RESTRICTION_ENTRY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Flags&lt;/span&gt;           &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LimitedToken&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Integrity&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Level&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Medium&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Machine&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;6640665F&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Authorization&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KERB_LOCAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Security&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Context&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;60CE03337E01000025FC763900000000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;核心绕过机制&#34;&gt;核心绕过机制
+&lt;/h2&gt;&lt;p&gt;LSASS通过&lt;code&gt;LsaISetSupplementalTokenInfo&lt;/code&gt;函数处理这些字段，主要检查包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;比较票据中的MachineID与LSASS内存中的值&lt;/li&gt;
+&lt;li&gt;检查未公开的LSA网络令牌过滤标志&lt;/li&gt;
+&lt;li&gt;验证用户SID是否属于本地账户域&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当满足以下任一条件时过滤将失效：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户SID不属于本地账户域&lt;/li&gt;
+&lt;li&gt;LocalAccountTokenFilterPolicy策略非零&lt;/li&gt;
+&lt;li&gt;系统是域控制器(NtProductLanManNt)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;两种具体利用方法&#34;&gt;两种具体利用方法
+&lt;/h2&gt;&lt;h3 id=&#34;方法一票据重用攻击&#34;&gt;方法一：票据重用攻击
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;获取本地系统的服务票据并保存&lt;/li&gt;
+&lt;li&gt;重启系统使LSASS重新初始化&lt;/li&gt;
+&lt;li&gt;重新加载旧票据，此时MachineID不匹配导致过滤失效&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;klist&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RPC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$env:COMPUTERNAME&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rubeus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dump&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$env:COMPUTERNAME&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nowrap&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 保存Base64票据后重启&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Rubeus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptt&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ticket&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BASE64&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TICKET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;方法二票据伪造攻击&#34;&gt;方法二：票据伪造攻击
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;利用Benjamin Delpy在kekeo中发现的非约束委派漏洞获取本地TGT&lt;/li&gt;
+&lt;li&gt;向KDC请求新的本地服务票据，填充伪造的MachineID&lt;/li&gt;
+&lt;li&gt;将伪造票据导入缓存实现UAC绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;kerb-local的奥秘&#34;&gt;KERB-LOCAL的奥秘
+&lt;/h2&gt;&lt;p&gt;这个字段设计用于凭证重用，但实际使用频率很低，因为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仅当服务端使用Negotiate包时有效&lt;/li&gt;
+&lt;li&gt;本地Negotiate认证默认会选择NTLM协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;有趣的是，KERB-LOCAL中的值实际是LSASS堆中KERB_CREDENTIAL结构的地址和票据计数。虽然Kerberos会验证PAC中的SID匹配性，但这种实现方式可能存在安全隐患。&lt;/p&gt;
+&lt;p&gt;[更新] 文末提供了修改Win32 SCM API以强制使用Kerberos本地认证的C++代码示例。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

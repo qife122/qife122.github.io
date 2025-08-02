@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>网络安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 网络安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ivanti EPMM漏洞组合实现未授权远程代码执行攻击</title>
+        <link>http://localhost:1313/p/ivanti-epmm%E6%BC%8F%E6%B4%9E%E7%BB%84%E5%90%88%E5%AE%9E%E7%8E%B0%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/ivanti-epmm%E6%BC%8F%E6%B4%9E%E7%BB%84%E5%90%88%E5%AE%9E%E7%8E%B0%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;img src="https://example.com/ivanti-epmm-rce.jpg" alt="Featured image of post Ivanti EPMM漏洞组合实现未授权远程代码执行攻击" /&gt;&lt;h1 id=&#34;摘要&#34;&gt;摘要
+&lt;/h1&gt;&lt;p&gt;3月13日，Ivanti披露了影响其本地部署版Endpoint Manager Mobile产品的两个漏洞：CVE-2025-4427（认证绕过）和CVE-2025-4428（认证后RCE漏洞）。虽然单个漏洞严重性不高（CVSS评分分别为5.3和7.2），但组合利用后可使未认证攻击者在受影响EPMM实例上执行恶意代码。Ivanti确认在初始披露前已发现有限的实际攻击案例，GreyNoise和Wiz等多家机构证实自5月16日起出现大规模攻击活动，这与漏洞验证代码的公开时间基本吻合。&lt;/p&gt;
+&lt;h1 id=&#34;受影响系统和或应用&#34;&gt;受影响系统和/或应用
+&lt;/h1&gt;&lt;p&gt;以下版本的Ivanti Endpoint Manager Mobile：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;11.12.0.4及之前版本&lt;/li&gt;
+&lt;li&gt;12.3.0.1及之前版本&lt;/li&gt;
+&lt;li&gt;12.4.0.1及之前版本&lt;/li&gt;
+&lt;li&gt;12.5.0.0及之前版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h1&gt;&lt;p&gt;Wiz对漏洞技术细节进行了精要总结：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;CVE-2025-4428是EPMM设备功能使用报告查询验证器(DeviceFeatureUsageReportQueryRequestValidator)中的认证后远程代码执行漏洞。该漏洞源于Spring框架的AbstractMessageSource在处理错误消息时对用户输入的不安全处理，导致攻击者可通过EL表达式注入实现任意Java代码执行。精心构造/api/v2/featureusage端点中的format参数即可触发命令注入（如Runtime.exec()）。&lt;/p&gt;
+&lt;p&gt;CVE-2025-4427是EPMM路由配置中的认证绕过漏洞。由于Spring Security配置缺少&lt;intercept-url&gt;规则，导致/rs/api/v2/featureusage等路由意外暴露。这使得攻击者无需认证即可访问RCE触发点，在与CVE-2025-4428组合后实现完全的预认证RCE。但如watchTowr所指出的，这更准确地说是一个操作顺序缺陷，因为验证器逻辑在认证检查之前执行。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Wiz还分享了从Sliver植入案例中提取的威胁指标：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;IOC&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1b1dda5e8e26da568559e0577769697c624df30e&lt;/td&gt;
+          &lt;td&gt;Sliver Beacon (SHA1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ac389c8b7f3d2fcf4fd73891f881b12b8343665b&lt;/td&gt;
+          &lt;td&gt;Sliver Beacon (SHA1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;79.96.45[.]181&lt;/td&gt;
+          &lt;td&gt;Sliver C2 IP地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;该C2 IP目前仍处于活跃状态，根据共享证书判断，以下服务器可能也由同一攻击者控制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;185.174.137[.]26&lt;/li&gt;
+&lt;li&gt;46.41.134[.]8&lt;/li&gt;
+&lt;li&gt;79.96.45[.]181&lt;/li&gt;
+&lt;li&gt;elektrobohater[.]pl&lt;/li&gt;
+&lt;li&gt;wagodirect[.]pl&lt;/li&gt;
+&lt;li&gt;e-wago[.]pl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h1&gt;&lt;p&gt;将EPMM实例升级至以下版本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;11.12.0.5&lt;/li&gt;
+&lt;li&gt;12.3.0.2&lt;/li&gt;
+&lt;li&gt;12.4.0.2&lt;/li&gt;
+&lt;li&gt;12.5.0.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在打补丁前，建议限制对受认证绕过影响的端点（/rs/api/v2/* 和 /mifs/rs/api/v2/*）的网络访问。&lt;/p&gt;
+&lt;h1 id=&#34;网络融合中心采取的措施&#34;&gt;网络融合中心采取的措施
+&lt;/h1&gt;&lt;p&gt;CFC将持续监控事态发展，必要时发布安全通告更新。除IOC检测外，正在研究更多威胁狩猎可能性。订阅漏洞扫描服务的客户将在扫描提供商发布相关插件后立即获得关键漏洞扫描结果。&lt;/p&gt;
+&lt;p&gt;Qualys ID：530061, 732523&lt;br&gt;
+Tenable ID：235860&lt;/p&gt;
+&lt;h1 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://forums.ivanti.com/s/article/Security-Advisory-Ivanti-Endpoint-Manager-Mobile-EPMM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://forums.ivanti.com/s/article/Security-Advisory-Ivanti-Endpoint-Manager-Mobile-EPMM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ivanti.com/blog/epmm-security-update&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.ivanti.com/blog/epmm-security-update&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.greynoise.io/blog/ivanti-epmm-zero-days-reconnaissance-exploitation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.greynoise.io/blog/ivanti-epmm-zero-days-reconnaissance-exploitation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.wiz.io/blog/ivanti-epmm-rce-vulnerability-chain-exploited-in-the-wil-cve-2025-4427-cve-2025-4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.wiz.io/blog/ivanti-epmm-rce-vulnerability-chain-exploited-in-the-wil-cve-2025-4427-cve-2025-4&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://labs.watchtowr.com/expression-payloads-meet-mayhem-cve-2025-4427-and-cve-2025-4428/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://labs.watchtowr.com/expression-payloads-meet-mayhem-cve-2025-4427-and-cve-2025-4428/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

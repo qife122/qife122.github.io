@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>红队技术 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/</link>
+        <description>Recent content in 红队技术 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用个人账户密码重复问题获取域凭证：无需接入目标网络的攻击方法（第一部分）</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E4%B8%AA%E4%BA%BA%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E9%87%8D%E5%A4%8D%E9%97%AE%E9%A2%98%E8%8E%B7%E5%8F%96%E5%9F%9F%E5%87%AD%E8%AF%81%E6%97%A0%E9%9C%80%E6%8E%A5%E5%85%A5%E7%9B%AE%E6%A0%87%E7%BD%91%E7%BB%9C%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E4%B8%AA%E4%BA%BA%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%E9%87%8D%E5%A4%8D%E9%97%AE%E9%A2%98%E8%8E%B7%E5%8F%96%E5%9F%9F%E5%87%AD%E8%AF%81%E6%97%A0%E9%9C%80%E6%8E%A5%E5%85%A5%E7%9B%AE%E6%A0%87%E7%BD%91%E7%BB%9C%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+        <description>&lt;img src="https://www.blackhillsinfosec.com/wp-content/uploads/2016/02/password-reuse-featured.png" alt="Featured image of post 利用个人账户密码重复问题获取域凭证：无需接入目标网络的攻击方法（第一部分）" /&gt;&lt;h1 id=&#34;利用个人账户密码重复问题获取域凭证无需接入目标网络的攻击方法第一部分&#34;&gt;利用个人账户密码重复问题获取域凭证：无需接入目标网络的攻击方法（第一部分）
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者：Beau Bullock&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在本系列文章中，我将详细介绍无需接入目标组织网络即可获取域用户凭证的多种方法。第一部分重点探讨如何利用员工在个人账户重复使用企业密码的行为；第二部分将介绍通过发现目标组织的用户名架构，并对外部服务（如Outlook Web Access门户）实施密码喷洒攻击的更复杂技术。&lt;/p&gt;
+&lt;h2 id=&#34;本文不涉及便利贴密码问题&#34;&gt;本文不涉及便利贴密码问题
+&lt;/h2&gt;&lt;h3 id=&#34;个人账户的凭证重用现象&#34;&gt;个人账户的凭证重用现象
+&lt;/h3&gt;&lt;p&gt;用户在多个网络服务中重复使用相同密码是普遍存在的安全隐患。当某个网站遭到入侵时，若员工在个人账户和企业账户使用相同密码，攻击者获取个人凭证后即可间接获得企业账户访问权限。&lt;/p&gt;
+&lt;h3 id=&#34;突破传统分析思路&#34;&gt;突破传统分析思路
+&lt;/h3&gt;&lt;p&gt;常规的凭证泄露分析通常仅关注目标组织拥有的域名。更有效的方法是尝试定位企业员工在第三方服务中泄露的个人账户。当目标组织本身提供个人账户服务时（如Google员工可能拥有gmail.com账户），这种关联会变得更容易。&lt;/p&gt;
+&lt;h3 id=&#34;实战案例从5万条泄露数据中定位员工凭证&#34;&gt;实战案例：从5万条泄露数据中定位员工凭证
+&lt;/h3&gt;&lt;p&gt;在一次测试中，作者通过Pwnedlist.com发现目标组织的客户域名存在超过50,000个近期泄露账户。通过与组织沟通，确认员工可能使用这些&amp;quot;技术上的个人账户&amp;quot;。&lt;/p&gt;
+&lt;p&gt;关键步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用Pipl.com搜索引擎关联泄露邮箱与员工身份&lt;/li&gt;
+&lt;li&gt;通过Burp Suite Intruder批量提交50,000个邮箱&lt;/li&gt;
+&lt;li&gt;筛选包含目标公司名称的&amp;quot;Career&amp;quot;字段&lt;/li&gt;
+&lt;li&gt;最终定位到252个疑似员工个人账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;凭证转换与验证&#34;&gt;凭证转换与验证
+&lt;/h3&gt;&lt;p&gt;通过侦察获取企业邮箱命名规则（如firstname.lastname@格式）后：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将个人账户信息转换为企业邮箱格式&lt;/li&gt;
+&lt;li&gt;使用泄露的密码尝试登录企业外部门户（如OWA）&lt;/li&gt;
+&lt;li&gt;成功访问重复使用密码的员工企业邮箱&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击流程总结&#34;&gt;攻击流程总结
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;通过Pwnedlist等平台收集目标组织关联的个人账户泄露凭证&lt;/li&gt;
+&lt;li&gt;使用Pipl验证账户持有人的雇主信息&lt;/li&gt;
+&lt;li&gt;根据企业邮箱规则转换个人账户信息&lt;/li&gt;
+&lt;li&gt;尝试凭证重用攻击&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;p&gt;推行密码管理工具，杜绝员工在多平台重复使用密码的行为。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下篇将详细介绍如何通过发现用户名架构实施密码喷洒攻击。&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/password-spraying-outlook-web-access/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击此处阅读第二部分&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

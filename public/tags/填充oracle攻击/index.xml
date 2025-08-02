@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>填充Oracle攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%A1%AB%E5%85%85oracle%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in 填充Oracle攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E5%A1%AB%E5%85%85oracle%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Azure Storage SDK客户端加密填充Oracle漏洞缓解方案</title>
+        <link>http://localhost:1313/p/azure-storage-sdk%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8A%A0%E5%AF%86%E5%A1%AB%E5%85%85oracle%E6%BC%8F%E6%B4%9E%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/azure-storage-sdk%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8A%A0%E5%AF%86%E5%A1%AB%E5%85%85oracle%E6%BC%8F%E6%B4%9E%E7%BC%93%E8%A7%A3%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;img src="https://msrc-blog.microsoft.com/wp-content/uploads/2022/07/azure-storage-security.jpg" alt="Featured image of post Azure Storage SDK客户端加密填充Oracle漏洞缓解方案" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;谷歌根据协调漏洞披露(CVD)向微软报告了可能影响使用Azure Storage SDK(Python/.NET/Java版)客户端加密功能的填充Oracle漏洞(CVE-2022-30187)。微软已于2022年7月12日发布客户端加密功能v2正式版(GA)进行修复。目前未发现该漏洞在Azure服务中被利用的案例。&lt;/p&gt;
+&lt;h2 id=&#34;客户影响&#34;&gt;客户影响
+&lt;/h2&gt;&lt;p&gt;使用受影响版本客户端加密功能的应用需升级至v2版本以确保安全。客户可通过Azure Storage博客中的&amp;quot;如何验证是否使用客户端加密功能&amp;quot;章节确认影响范围。迁移v2需要：a)更新代码使用v2加密方案；b)迁移v1加密数据至v2。替代方案可考虑使用Azure存储服务端加密。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;Azure Storage SDK原v1版本使用CBC分组加密模式，当攻击者具有blob写入权限并能观测解密失败时，可能实施填充Oracle攻击。研究表明攻击者需对每个明文字节执行大量密钥操作才能解密blob内容。微软感谢谷歌通过CVD流程报告该漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;参考资源&#34;&gt;参考资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://azure.microsoft.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Azure Storage博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2022-30187&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;技术支持：通过Azure门户提交支持案例(aka.ms/azsupt)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

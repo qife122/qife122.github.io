@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>漏洞分析 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <description>Recent content in 漏洞分析 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深度解析Silent Shard DKLs23阈值签名库的安全审计发现</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90silent-shard-dkls23%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E5%BA%93%E7%9A%84%E5%AE%89%E5%85%A8%E5%AE%A1%E8%AE%A1%E5%8F%91%E7%8E%B0/</guid>
+        <description>&lt;img src="https://example.com/secure-crypto.jpg" alt="Featured image of post 深度解析Silent Shard DKLs23阈值签名库的安全审计发现" /&gt;&lt;h1 id=&#34;我们如何审查首批dkls23库之一来自silence-laboratories的silent-shard&#34;&gt;我们如何审查首批DKLs23库之一——来自Silence Laboratories的Silent Shard
+&lt;/h1&gt;&lt;p&gt;2023年10月，我们审计了Silence Laboratories基于DKLs23阈值签名方案(TSS)的库Silent Shard——这是当时首个采用茫然传输(OT)替代传统Paillier密码学的生产级实现。我们的审查发现了可能导致密钥销毁攻击的严重缺陷，Silence Laboratories已及时修复。&lt;/p&gt;
+&lt;h2 id=&#34;审计三大核心发现&#34;&gt;审计三大核心发现
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;协议实现的自由度&lt;/strong&gt;：DKLs23规范赋予实现者选择子协议（基础OT、OT扩展、成对乘法）的极大自由度，需同时研究规范文档和具体实现选择&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OT系统的优势&lt;/strong&gt;：基于OT的系统通常比Paillier系统更不易出错，只需防范选择性中止攻击就能简化安全验证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TSS基础要素&lt;/strong&gt;：所有TSS方案都需要关注安全P2P通信、广播和共识验证等基础机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;创新库silent-shard&#34;&gt;创新库Silent Shard
+&lt;/h2&gt;&lt;p&gt;Silence Laboratories由学术和工业界科学家组成，其开发的Silent Shard库支持包括MetaMask加密货币钱包在内的多种应用场景。该库基于创新的DKLs23协议构建，采用茫然传输(OT)而非Paillier加密系统来实现ECDSA签名，这种OT方案因其性能优势和Paillier系统的脆弱性（如BitForge和TSShock漏洞）近年备受关注。&lt;/p&gt;
+&lt;h2 id=&#34;审计方法论&#34;&gt;审计方法论
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;文档审查&lt;/strong&gt;：人工审查技术文档并与开发团队定期沟通&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动化分析&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用cargo-audit检查依赖漏洞&lt;/li&gt;
+&lt;li&gt;通过Clippy识别Rust常见错误&lt;/li&gt;
+&lt;li&gt;采用cargo-llvm-cov分析测试覆盖率&lt;/li&gt;
+&lt;li&gt;运用定制工具Dylint检测代码质量问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/protocol-spec.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图1：横跨四页的DKLs23主协议规范&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;关键安全发现&#34;&gt;关键安全发现
+&lt;/h2&gt;&lt;h3 id=&#34;高危漏洞&#34;&gt;高危漏洞
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;TOB-SILA-6&lt;/strong&gt;：通信通道nonce复用问题&lt;br&gt;
+可能允许恶意方篡改协议消息导致密钥销毁攻击。修复方案：为通道双向通信使用不同密钥。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;TOB-SILA-12&lt;/strong&gt;：选择性中止攻击处理缺陷&lt;br&gt;
+错误处理导致程序panic，无法正确识别恶意方。修复方案：明确返回包含被禁方ID的AbortProtocolAndBanReceiver错误。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;侧信道分析&#34;&gt;侧信道分析
+&lt;/h2&gt;&lt;p&gt;代码库通过subtle等crate实现恒定时间操作，有效防御了大多数侧信道攻击。仅在eval_pprf函数中发现存在时序信息泄露风险（实际攻击难度较高）。Silence Laboratories已提交补丁消除该泄漏。&lt;/p&gt;
+&lt;h2 id=&#34;长期建议&#34;&gt;长期建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;完善文档&lt;/strong&gt;：特别是关于错误处理的文档，这对TSS系统至关重要&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强负面测试&lt;/strong&gt;：可提前发现如TOB-SILA-1/2等问题，覆盖率分析也证实该需求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;审计结束后，Silence Laboratories已修复14/15的安全问题，并持续改进文档和测试体系。&lt;/p&gt;
+&lt;h2 id=&#34;关于tss协议安全&#34;&gt;关于TSS协议安全
+&lt;/h2&gt;&lt;p&gt;我们的密码学团队现已完成对ECDSA、Schnorr和BLS等所有主流TSS协议的安全评估，并为相关签名方案提供Go/Rust实现服务。如需TSS协议安全审查或工程实现，欢迎联系我们获取免费咨询服务。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

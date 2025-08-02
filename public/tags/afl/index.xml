@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>AFL on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/afl/</link>
+        <description>Recent content in AFL on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/afl/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;img src="https://phoenhex.re/img/logo.png" alt="Featured image of post 使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践" /&gt;&lt;h1 id=&#34;使用afl模糊测试反恐精英全球攻势地图文件&#34;&gt;使用AFL模糊测试《反恐精英：全球攻势》地图文件
+&lt;/h1&gt;&lt;p&gt;RealWorldCTF 2018有一个非常有趣的挑战叫做&amp;quot;P90 Rush B&amp;quot;，这是对Valve游戏《反恐精英：全球攻势》中一种战术的影射。该挑战要求发现并利用CS:GO服务器使用的地图文件加载器中的漏洞。&lt;/p&gt;
+&lt;p&gt;在CTF期间，我利用了一个栈缓冲区溢出漏洞，后来另一个团队在他们的报告中很好地描述了这个漏洞。由于这个漏洞也影响了官方的CS:GO Windows客户端，符合Valve的漏洞赏金计划条件，实际上它只是一个旧报告的小变种，所以我在CTF结束后很快报告了它，并迅速得到了修复。&lt;/p&gt;
+&lt;h2 id=&#34;bsp文件格式与攻击面&#34;&gt;BSP文件格式与攻击面
+&lt;/h2&gt;&lt;p&gt;CS:GO（可能所有Source引擎游戏）使用的地图文件格式称为BSP，是二进制空间分割的缩写，这是一种方便的n维空间对象表示方法。然而，这种格式支持的远不止3D信息。BSP文件由服务器和客户端共同处理，因为两者都需要地图信息的某个子集来执行各自的任务。这是一个远程攻击面，因为客户端会在服务器发起的地图变更时从服务器下载未知地图。&lt;/p&gt;
+&lt;h2 id=&#34;模糊测试设置&#34;&gt;模糊测试设置
+&lt;/h2&gt;&lt;p&gt;为了简单起见，我决定模糊测试Linux服务器二进制文件，而不是实际的客户端（也可以在Linux上运行）。用这种方法显然无法发现客户端特有的问题，但我希望能找到共享代码中的低悬果实。&lt;/p&gt;
+&lt;p&gt;我编写了一个简单的包装器来处理服务器二进制文件使用的共享库，最重要的几个是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;engine.so - 主要Source引擎代码（包含BSP解析器）&lt;/li&gt;
+&lt;li&gt;dedicated.so - 专用服务器实现（包含应用程序入口点）&lt;/li&gt;
+&lt;li&gt;libtier0.so - 可能与Steam/应用程序管理相关&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;afl修改&#34;&gt;AFL修改
+&lt;/h2&gt;&lt;p&gt;我对AFL做了一些简单的修改：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入文件必须以.bsp结尾才能被GetModelForName正确解析&lt;/li&gt;
+&lt;li&gt;需要能够指定自定义的fork服务器启动点&lt;/li&gt;
+&lt;li&gt;增加等待fork时的超时乘数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞分类与根因分析&#34;&gt;漏洞分类与根因分析
+&lt;/h2&gt;&lt;p&gt;我们需要将&amp;quot;好&amp;quot;的漏洞与不感兴趣的漏洞（如纯越界读取）分开。我基于调用栈进行了简单的去重，然后在Valgrind中运行每个独特样本。&lt;/p&gt;
+&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;p&gt;从这个小型项目中我学到了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AFL在QEMU模式下非常灵活，可以攻击特定代码段&lt;/li&gt;
+&lt;li&gt;输入文件大小非常重要，从300KB降到16KB后性能至少提高了5倍&lt;/li&gt;
+&lt;li&gt;分类对于筛选以前未经过模糊测试的代码库非常重要&lt;/li&gt;
+&lt;li&gt;堆上的内存损坏不是一个安全问题 :)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;示例漏洞cvirtualterrainlevelinit中的堆缓冲区溢出&#34;&gt;示例漏洞：CVirtualTerrain::LevelInit中的堆缓冲区溢出
+&lt;/h2&gt;&lt;p&gt;在CVirtualTerrain::LevelInit中发生堆缓冲区溢出，因为dphysdisp_t::numDisplacements变量可能大于g_DispCollTreeCount，而检查这种情况的断言在发布版本中不存在。攻击者可以很大程度上控制堆内容，因此很可能被利用，特别是在Windows 7上许多模块没有启用ASLR的情况下。&lt;/p&gt;
+&lt;p&gt;[附上一个BSP文件，其中numDisplacements = 0xffff且g_DispCollTreeCount = 2，可以可靠地使csgo.exe崩溃]&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>逆向工程 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</link>
+        <description>Recent content in 逆向工程 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>McSema二进制转LLVM比特码工具重大升级</title>
+        <link>http://localhost:1313/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</guid>
+        <description>&lt;img src="https://blog.trailofbits.com/images/mcsema-hackathon.png" alt="Featured image of post McSema二进制转LLVM比特码工具重大升级" /&gt;&lt;h1 id=&#34;mcsema二进制转llvm比特码工具重大升级&#34;&gt;McSema：二进制转LLVM比特码工具重大升级
+&lt;/h1&gt;&lt;p&gt;我们的x86机器码转LLVM比特码工具McSema刚刚完成全面升级。上周举办的开发马拉松显著改善了McSema的易用性、文档质量和代码质量，现在使用McSema分析和逆向工程二进制文件比以往任何时候都更容易。&lt;/p&gt;
+&lt;h2 id=&#34;发展阶段&#34;&gt;发展阶段
+&lt;/h2&gt;&lt;p&gt;McSema已成为我们日常工作中不可或缺的工具，它能帮助我们发现并加固二进制程序的安全漏洞、独立验证供应商源代码，以及生成高代码覆盖率的应用测试。该工具不仅应用于学术研究，还参与DARPA项目。自2014年开源以来，我们（及其他贡献者）持续扩展其功能以分析日益复杂的程序。&lt;/p&gt;
+&lt;h2 id=&#34;性能优化&#34;&gt;性能优化
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;构建速度&lt;/strong&gt;：通过清理死代码、移除冗余库及优化目录结构，构建系统更简洁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;比特码生成&lt;/strong&gt;：改进控制流图遍历算法，移除Boost依赖，简化比特码生成流程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;比特码质量&lt;/strong&gt;：取消函数入口/出口的寄存器上下文存储，改用原生位宽操作处理标志位，新增惰性生成比特码优化功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;现代化改造&#34;&gt;现代化改造
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;升级至标准版LLVM 3.8（原使用定制版LLVM 3.5）&lt;/li&gt;
+&lt;li&gt;完全移除Boost依赖，改用C++11现代特性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;功能简化&#34;&gt;功能简化
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;统一命令行接口：&lt;code&gt;mcsema-disass&lt;/code&gt;负责反汇编，&lt;code&gt;mcsema-lift&lt;/code&gt;执行比特码转换&lt;/li&gt;
+&lt;li&gt;弃用定制反汇编器bin_descend，统一采用IDA Pro作为反汇编引擎&lt;/li&gt;
+&lt;li&gt;重构代码结构，精简CMake构建脚本&lt;/li&gt;
+&lt;li&gt;采用无外部依赖的集成测试框架&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;新增特性&#34;&gt;新增特性
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;支持更多指令集（提供指令添加指南）&lt;/li&gt;
+&lt;li&gt;新增&lt;code&gt;--list-supported&lt;/code&gt;命令查看支持指令列表&lt;/li&gt;
+&lt;li&gt;集成测试框架支持快速添加全面翻译测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;文档完善&#34;&gt;文档完善
+&lt;/h2&gt;&lt;p&gt;全新文档详细说明安装流程、使用方法、测试方案、功能扩展和调试技巧，并包含常见错误解决方案，显著降低第三方开发者的参与门槛。&lt;/p&gt;
+&lt;h2 id=&#34;运行时增强&#34;&gt;运行时增强
+&lt;/h2&gt;&lt;p&gt;提升运行效率，大幅降低内存占用，改进与原生Windows/Linux代码的复杂交互能力，使转换后的比特码不仅能用于静态分析，还可重新编译为可执行程序。&lt;/p&gt;
+&lt;h2 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;扩展对复杂软件的支持&lt;/li&gt;
+&lt;li&gt;计划采用Binary Ninja替代IDA Pro进行控制流恢复&lt;/li&gt;
+&lt;li&gt;新增ARM架构二进制转LLVM比特码功能&lt;/li&gt;
+&lt;li&gt;拓展移动应用和嵌入式固件分析场景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们正在招募对McSema开发感兴趣的实习生。入门者可先尝试&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/mcsema/blob/master/docs/Converting.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux二进制转换教程&lt;/a&gt;，了解如何使libFuzzer等工具作用于二进制文件。如有创新构想，欢迎联系我们——若方案可行，我们将提供资金支持实现。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>漏洞防护 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E6%8A%A4/</link>
+        <description>Recent content in 漏洞防护 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>DEP与EMET防护最新IE漏洞攻击的技术解析</title>
+        <link>http://localhost:1313/p/dep%E4%B8%8Eemet%E9%98%B2%E6%8A%A4%E6%9C%80%E6%96%B0ie%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/dep%E4%B8%8Eemet%E9%98%B2%E6%8A%A4%E6%9C%80%E6%96%B0ie%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;img src="https://www.microsoft.com/favicon.ico" alt="Featured image of post DEP与EMET防护最新IE漏洞攻击的技术解析" /&gt;&lt;p&gt;今天我们发布了安全公告2458511，通报了利用Internet Explorer漏洞的有限攻击事件。IE9测试版不受影响，而IE6、7、8存在风险。目前发现的攻击仅针对Windows XP系统上的IE6和7版本，IE8用户不会受到成功攻击。本文将解析漏洞原理、说明IE8风险降低的原因，并提供防护建议。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;p&gt;IE在解析HTML时对特定CSS标签组合的内存分配不足，可能导致虚表指针最低有效字节被覆盖。攻击者通过特定模式的内存喷射（heap spray）可能实现代码执行。数据执行保护（DEP）正是防御此类堆喷射攻击的有效手段。&lt;/p&gt;
+&lt;h3 id=&#34;dep的防护作用&#34;&gt;DEP的防护作用
+&lt;/h3&gt;&lt;p&gt;当前所有攻击均被DEP阻断。IE8默认启用DEP，早期版本也可手动开启（详见公告）。由于该漏洞非典型释放后使用（use-after-free）类型，攻击者难以绕过DEP防护。现有DEP绕过技术无法直接应用，因为内存破坏属于部分虚表指针覆盖。我们预计任何绕过DEP的利用尝试都将极不稳定（导致IE崩溃），特别是在支持地址空间布局随机化（ASLR）的系统上。&lt;/p&gt;
+&lt;h3 id=&#34;增强防护措施&#34;&gt;增强防护措施
+&lt;/h3&gt;&lt;p&gt;除启用DEP外，最佳解决方案是通过用户自定义CSS文件覆盖网站提供的CSS样式。该方法能阻止所有IE版本进入漏洞代码路径，且应用兼容性风险极低。公告中详细描述了在HKEY_CURRENT_USER注册表项中配置用户CSS的方法。&lt;/p&gt;
+&lt;h3 id=&#34;emet的进阶防护&#34;&gt;EMET的进阶防护
+&lt;/h3&gt;&lt;p&gt;今年发布的EMET 2.0工具集通过多种安全缓解技术防御漏洞利用。除强制启用DEP外，EMET还包含强制性ASLR和EAT访问过滤（EAF）等防护机制。需注意安装EMET后需单独配置应用防护（详见公告和用户手册）。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;致谢Fermin J. Serna对本问题和EMET工作的贡献。&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MSRC工程团队：Andrew Roths、Jonathan Ness、Chengyun Chu&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

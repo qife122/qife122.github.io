@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Windows安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/windows%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in Windows安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/windows%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软2024年2月安全更新：修复多款产品高危漏洞</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2024%E5%B9%B42%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E6%AC%BE%E4%BA%A7%E5%93%81%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;img src="https://www.microsoft.com/favicon.ico" alt="Featured image of post 微软2024年2月安全更新：修复多款产品高危漏洞" /&gt;&lt;p&gt;2024年2月13日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新涉及Windows、Exchange Server、Office等多款产品，共修复73个漏洞，其中5个漏洞在更新发布前已被公开利用，3个漏洞CVSS评分高达9.8分。&lt;/p&gt;
+&lt;h3 id=&#34;关键漏洞警示&#34;&gt;关键漏洞警示
+&lt;/h3&gt;&lt;p&gt;以下漏洞需优先处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-21351&lt;/strong&gt;：Windows SmartScreen安全功能绕过漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-21412&lt;/strong&gt;：互联网快捷方式文件安全功能绕过漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-21410&lt;/strong&gt;：Exchange Server权限提升漏洞（CVSS 9.8）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;高危漏洞&#34;&gt;高危漏洞
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-21413&lt;/strong&gt;：Outlook远程代码执行漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-21401&lt;/strong&gt;：Microsoft Entra Jira单点登录插件权限提升漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重要更新说明&#34;&gt;重要更新说明
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Exchange Server&lt;/strong&gt;：安装CU14后默认启用扩展保护功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows Server&lt;/strong&gt;：证书映射策略变更，采用更严格的X509IssuerSerialNumber验证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全启动&lt;/strong&gt;：新增UEFI CA信任锚点，4月开始分阶段部署&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;受影响产品清单&#34;&gt;受影响产品清单
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;产品系列&lt;/th&gt;
+          &lt;th&gt;最高严重等级&lt;/th&gt;
+          &lt;th&gt;主要影响&lt;/th&gt;
+          &lt;th&gt;KB编号/链接&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows 11/10&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;远程代码执行&lt;/td&gt;
+          &lt;td&gt;5034765/5034763&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Exchange Server&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;权限提升&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/exchange&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;更新指南&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.NET Framework&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;服务拒绝&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/dotnet&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;详情&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;更新建议&#34;&gt;更新建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;企业用户应立即评估Exchange Server漏洞风险&lt;/li&gt;
+&lt;li&gt;启用自动更新或通过&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南&lt;/a&gt;手动下载&lt;/li&gt;
+&lt;li&gt;关注&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/SSU-ADV&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ADV990001&lt;/a&gt;获取服务堆栈更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;下次安全更新计划于2024年3月12日发布。建议通过&lt;a class=&#34;link&#34; href=&#34;https://github.com/microsoft/MSRC-Security-Update-API&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南API&lt;/a&gt;建立定制化监控方案。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：本文档于2024年2月15日更新Exchange Server CU14相关信息，2月16日补充安全启动密钥更新细节。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

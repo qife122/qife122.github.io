@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>REST API on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/rest-api/</link>
+        <description>Recent content in REST API on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/rest-api/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>REST API认证的5种基础策略及其演进方法</title>
+        <link>http://localhost:1313/p/rest-api%E8%AE%A4%E8%AF%81%E7%9A%845%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%AD%96%E7%95%A5%E5%8F%8A%E5%85%B6%E6%BC%94%E8%BF%9B%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/rest-api%E8%AE%A4%E8%AF%81%E7%9A%845%E7%A7%8D%E5%9F%BA%E7%A1%80%E7%AD%96%E7%95%A5%E5%8F%8A%E5%85%B6%E6%BC%94%E8%BF%9B%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;img src="https://cdn.ttgtmedia.com/rms/onlineImages/app_architecture-rest_api_authentication_strategies.jpg" alt="Featured image of post REST API认证的5种基础策略及其演进方法" /&gt;&lt;h1 id=&#34;rest-api认证的5种基础策略&#34;&gt;REST API认证的5种基础策略
+&lt;/h1&gt;&lt;p&gt;作为现代应用的支柱，REST API在实现数据层与表现层分离的同时，也需要通过认证机制保护敏感数据。以下是五种基础认证方法及其特点：&lt;/p&gt;
+&lt;h2 id=&#34;基础认证basic-authentication&#34;&gt;基础认证（Basic Authentication）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用Base64编码格式在HTTP头中存储用户名密码&lt;/li&gt;
+&lt;li&gt;优势：开发工具链广泛支持，实现轻量简单&lt;/li&gt;
+&lt;li&gt;风险：凭证以明文传输，必须配合SSL/TLS通道使用&lt;/li&gt;
+&lt;li&gt;局限：缺乏原生多因素认证支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api密钥&#34;&gt;API密钥
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过机器生成的字符串创建凭证-令牌对&lt;/li&gt;
+&lt;li&gt;部署方式：可嵌入载荷、HTTP头或查询字符串&lt;/li&gt;
+&lt;li&gt;特点：支持凭证与访问令牌解耦，便于权限变更时撤销&lt;/li&gt;
+&lt;li&gt;风险：与基础认证同样存在凭证拦截可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hmac加密&#34;&gt;HMAC加密
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用对称加密验证数据载荷完整性&lt;/li&gt;
+&lt;li&gt;适用场景：客户端和服务端均由单方控制的场景&lt;/li&gt;
+&lt;li&gt;挑战：移动端密钥存储安全问题，特别是URL嵌入密钥时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;oauth-20黄金标准&#34;&gt;OAuth 2.0（黄金标准）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;五大授权类型：
+&lt;ol&gt;
+&lt;li&gt;授权码模式&lt;/li&gt;
+&lt;li&gt;PKCE扩展&lt;/li&gt;
+&lt;li&gt;客户端凭证&lt;/li&gt;
+&lt;li&gt;设备码&lt;/li&gt;
+&lt;li&gt;刷新令牌&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;核心特性：
+&lt;ul&gt;
+&lt;li&gt;支持动态令牌刷新&lt;/li&gt;
+&lt;li&gt;通过scope概念实现精细权限控制&lt;/li&gt;
+&lt;li&gt;可结合JWT实现载荷完整性检查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;openid-connect&#34;&gt;OpenID Connect
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于OAuth 2.0的开源认证协议&lt;/li&gt;
+&lt;li&gt;三大授权类型：
+&lt;ol&gt;
+&lt;li&gt;授权码模式&lt;/li&gt;
+&lt;li&gt;隐式模式&lt;/li&gt;
+&lt;li&gt;混合模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;特点：简化第三方应用的用户身份验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;新兴认证方案&#34;&gt;新兴认证方案
+&lt;/h1&gt;&lt;h2 id=&#34;令牌认证otp魔法链接&#34;&gt;令牌认证（OTP/魔法链接）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OTP&lt;/strong&gt;：基于TOTP/HOTP算法生成临时密码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;魔法链接&lt;/strong&gt;：含时效性验证码的URL&lt;/li&gt;
+&lt;li&gt;优势：无需记忆密码&lt;/li&gt;
+&lt;li&gt;风险：依赖传输通道安全性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;通行密钥passkeys&#34;&gt;通行密钥（Passkeys）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于WebAuthn标准的无密码方案&lt;/li&gt;
+&lt;li&gt;双重验证机制：
+&lt;ol&gt;
+&lt;li&gt;设备本地认证（生物识别/PIN）&lt;/li&gt;
+&lt;li&gt;公私钥加密挑战&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;特点：抗钓鱼攻击，但存在设备依赖风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;方案选型建议&#34;&gt;方案选型建议
+&lt;/h1&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方案&lt;/th&gt;
+          &lt;th&gt;适用场景&lt;/th&gt;
+          &lt;th&gt;注意事项&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;基础认证&lt;/td&gt;
+          &lt;td&gt;低风险数据的访问控制&lt;/td&gt;
+          &lt;td&gt;必须启用SSL/TLS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;API密钥&lt;/td&gt;
+          &lt;td&gt;需识别消费方的场景&lt;/td&gt;
+          &lt;td&gt;避免URL嵌入凭证&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HMAC&lt;/td&gt;
+          &lt;td&gt;数据完整性要求高的封闭系统&lt;/td&gt;
+          &lt;td&gt;注意密钥存储安全&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OAuth 2.0&lt;/td&gt;
+          &lt;td&gt;企业级复杂应用&lt;/td&gt;
+          &lt;td&gt;妥善管理对称密钥分发&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OpenID Connect&lt;/td&gt;
+          &lt;td&gt;需平衡安全与简易性的第三方集成&lt;/td&gt;
+          &lt;td&gt;控制RP权限范围&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;最佳实践：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;始终通过SSL/TLS通道暴露API&lt;/li&gt;
+&lt;li&gt;避免在URL/查询字符串中传输敏感凭证&lt;/li&gt;
+&lt;li&gt;采用强化的密钥管理系统&lt;/li&gt;
+&lt;li&gt;实现自动化密钥轮换机制&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>区块链安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 区块链安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式</title>
+        <link>http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%A3%E5%B8%83aes-gem%E5%B8%A6%E4%BC%BD%E7%BD%97%E7%93%A6%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%E7%9A%84aes%E5%A2%9E%E5%BC%BAaes-gcm%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E6%96%B0%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;img src="https://blog.trailofbits.com/images/aes-gem-announcement.png" alt="Featured image of post 宣布AES-GEM（带伽罗瓦扩展模式的AES）——增强AES-GCM安全性的新加密模式" /&gt;&lt;h1 id=&#34;宣布aes-gem带伽罗瓦扩展模式的aes&#34;&gt;宣布AES-GEM（带伽罗瓦扩展模式的AES）
+&lt;/h1&gt;&lt;p&gt;今天，AES-GCM是TLS 1.3使用的两种加密模式之一（另一种是ChaCha20-Poly1305），也是FIPS验证模块中加密数据的首选方法。但尽管取得了巨大成功，AES-GCM也曾导致一些灾难性故障：例如Hanno Böck和Sean Devlin利用nonce重用漏洞将他们的Black Hat USA幻灯片注入MI5网站。&lt;/p&gt;
+&lt;p&gt;多年来，安全研究人员一直在警告AES-GCM的弱点。19年前，Niels Ferguson向NIST提交论文指出AES-GCM存在的认证弱点（尽管NIST最终将其标准化）。今年早些时候，亚马逊发布论文详细说明了AES-GCM的实际挑战，并认为AES的128位块大小已不再足够，更倾向于使用256位块密码（即Rijndael-256）。&lt;/p&gt;
+&lt;p&gt;为解决这些问题，我提出了一种名为Galois Extended Mode（简称GEM）的新块密码模式，上个月已在NIST关于手风琴模式密码需求的研讨会上展示。AES-GEM以最小的性能开销在各个方面提升了GCM的安全性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;重要提示&lt;/strong&gt;：当前AES-GEM设计尚未准备好投入生产使用，因为某些细节可能会在未来发生变化。要理解当前设计，让我们先了解AES-GCM的不足，然后讨论如何用GEM做得更好。&lt;/p&gt;
+&lt;h2 id=&#34;aes工作原理&#34;&gt;AES工作原理
+&lt;/h2&gt;&lt;p&gt;在深入之前，有必要为部分读者解释本文中使用的一些术语和概念。&lt;/p&gt;
+&lt;p&gt;AES（高级加密标准）是一种广泛用于加密信息的块密码。它支持多种密钥大小（128位、192位和256位密钥），但始终操作128位块。AES是Rijndael块密码家族的标准化形式。Rijndael支持其他块大小，但NIST仅标准化了128位块。现代处理器提供专用硬件指令加速AES操作，但AES密钥调度仍可能对性能产生负面影响。&lt;/p&gt;
+&lt;p&gt;ECB（电子密码本）模式是没有块密码操作模式的情况。它涉及直接在数据块上计算块密码。正如许多密码学家所证明的，ECB模式不是语义安全的。为提高安全性，像AES这样的块密码通常与操作模式一起使用。（如果没有，几乎肯定应该这样做。如果您认为正在使用ECB加密敏感数据，请联系我们的密码学团队。）&lt;/p&gt;
+&lt;p&gt;CTR（计数器模式）是一种块密码操作模式，其中递增的值序列通过块密码加密以产生伪随机密钥流。要加密数据，只需计算每个明文字节与相应密钥流字节的XOR。&lt;/p&gt;
+&lt;p&gt;GCM（伽罗瓦/计数器模式）是一种提供认证加密的块密码操作模式。密码学家称之为AEAD模式：带附加数据的认证加密。GCM可以为敏感数据提供机密性，为敏感和公共数据提供完整性。&lt;/p&gt;
+&lt;p&gt;AEAD模式对于设计密码系统非常重要，这些系统能够抵抗试图改变加密数据以研究系统行为从而希望获得密码分析有用信息的攻击者。&lt;/p&gt;
+&lt;p&gt;GCM是用于加密明文的计数器模式（CTR）和用于认证密文（以及如果提供，附加关联数据）的伽罗瓦域消息认证码（GMAC）的组合。GMAC使用称为GHASH的函数定义，该函数是在认证数据上评估的多项式。GHASH的输出与加密计数器块的XOR产生最终认证标签。认证密钥H通过加密128位零块计算得出。&lt;/p&gt;
+&lt;p&gt;POLYVAL是GHASH的替代方案，用于AES-GCM-SIV。POLYVAL使用的不可约多项式是GHASH不可约多项式的反转。&lt;/p&gt;
+&lt;p&gt;许多密码模式（包括GCM和CTR）要求每个消息使用一个仅使用一次的数字。这个永远不应重复的公共数字称为nonce。&lt;/p&gt;
+&lt;p&gt;最后，生日边界是概率论中的一个概念，表示一组随机值中冲突的可能性。在密码学中，它意味着如果随机选择nonce，随着使用更多nonce，两个nonce冲突的概率显著增加。对于具有96位nonce的AES-GCM，大约232条消息后，有1/232的nonce冲突概率，这可能导致诸如伪造消息等安全漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;aes-gcm当前的实际挑战&#34;&gt;AES-GCM当前的实际挑战
+&lt;/h2&gt;&lt;p&gt;正如其他人指出的那样，AES-GCM的最大挑战是AES只有128位块大小。这有两个主要后果：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;公共nonce和内部计数器的大小被限制为总共128位。实际上，nonce大小通常为96位，计数器为32位。如果选择更大的nonce，它会被哈希压缩到适当大小，这对安全性几乎没有改善。如果重用nonce，则会泄漏认证子密钥，因此可以无限期伪造消息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在相同密钥下加密超过一定数量的块后，攻击者可以以显著概率区分密文和随机字节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当您理解我们处理的是2的幂时，96位nonce空间可能听起来很多，但如果随机选择nonce，只能加密232条消息，然后有2-32的冲突概率。使用具有更大块大小的密码可以缓解这一点，但这不是唯一的解决方法。&lt;/p&gt;
+&lt;p&gt;AES块大小不是AES-GCM实践中唯一的问题。正如Niels Ferguson在2005年指出的那样，针对短标签的成功伪造会揭示认证子密钥。&lt;/p&gt;
+&lt;p&gt;此外，我们还了解到AES-GCM具有一个意外属性，即多个密钥可以解密相同的密文+认证标签。其发现者将这个问题称为&amp;quot;隐形蝾螈&amp;quot;，因为它允许他们在一款加密消息应用程序的滥用报告工具中隐藏蝾螈图片。在使用AES-GCM的协议中防止隐形蝾螈需要对使用的密钥进行某种单向承诺。&lt;/p&gt;
+&lt;p&gt;最后，AES-GCM中单个消息的最大明文长度相对较小：略低于64 GiB。为应对此最大长度，软件通常将较大消息分解为适合此长度限制的较短帧。这导致生日边界前的有限nonce空间比如果容忍较长消息时更快耗尽。&lt;/p&gt;
+&lt;h2 id=&#34;介绍aes-gem&#34;&gt;介绍AES-GEM
+&lt;/h2&gt;&lt;p&gt;我们的提案Galois Extended Mode是对GCM（伽罗瓦/计数器模式）的修改，目前解决了大多数这些弱点。然而，关于我们想要采用哪种策略来缓解最后一点，仍然存在一个开放性问题，我将在稍后解释。&lt;/p&gt;
+&lt;p&gt;在高层次上，我们提出了两种变体：AES-128-GEM和AES-256-GEM。我们还使用标准AEAD接口指定了两种AEAD构造。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥长度：128位&lt;/li&gt;
+&lt;li&gt;子密钥长度：128位&lt;/li&gt;
+&lt;li&gt;Nonce长度：192位&lt;/li&gt;
+&lt;li&gt;最大明文长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;最大AAD长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;标签长度：48字节（AEAD）或16字节（无承诺）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥长度：256位&lt;/li&gt;
+&lt;li&gt;子密钥长度：256位&lt;/li&gt;
+&lt;li&gt;Nonce长度：256位&lt;/li&gt;
+&lt;li&gt;最大明文长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;最大AAD长度：261 – 1字节&lt;/li&gt;
+&lt;li&gt;标签长度：48字节（AEAD）或16字节（无承诺）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;从gcm到gem的道路&#34;&gt;从GCM到GEM的道路
+&lt;/h2&gt;&lt;p&gt;如果您从AES-GCM的现有设计开始并进行以下更改，您将得到GEM的当前草案。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nonce扩展&lt;/strong&gt;
+首先，我们需要一个更长的nonce，我们将在下一步中用于子密钥派生。&lt;/p&gt;
+&lt;p&gt;对于256位密钥，256位nonce是一个很好的整数。对于128位密钥，我们最终需要192位。&lt;/p&gt;
+&lt;p&gt;无论哪种情况，最右边的64位将保留用于实际底层加密。剩余的位（AES-256为192位，AES-128为128位）将用于子密钥派生。&lt;/p&gt;
+&lt;p&gt;这使我们能够分摊密钥派生的成本，并在多个消息上设置AES密钥调度，前提是nonce和密钥的前（n – 64）位相同。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;子密钥派生&lt;/strong&gt;
+使用AES进行密钥派生有多种策略。在Real World Cryptography 2024上，Shay Gueron展示了DNDK-GCM，它使用了一种有趣的结构来实现子密钥派生。&lt;/p&gt;
+&lt;p&gt;我们希望保持简单和易于理解。因此，我们基于CBC-MAC构建了密钥派生策略，因为CMAC已经是FIPS批准的MAC（即用于AES-CCM）。&lt;/p&gt;
+&lt;p&gt;在AES-256的情况下，我们使用两个CBC-MAC输出来派生256位子密钥。然而，这种方法有一个微妙恼人的特性：两半永远不会产生相同的输出，因此严格来说，可能的输出少于2256个。&lt;/p&gt;
+&lt;p&gt;在GEM的两种变体中，我们借用了Salsa20设计中的一个技巧：将输出与输入密钥进行XOR，以确保子密钥对于任何不知道输入密钥的攻击者来说与均匀随机无法区分。如果您不知道此密钥，则输出与适当长度的随机密钥无法区分。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;支持更长的消息&lt;/strong&gt;
+我们需要64位剩余nonce而不是GCM典型的96位的原因是我们的内部计数器大小不是32位长。相反，它是64位长。&lt;/p&gt;
+&lt;p&gt;否则，如当前所写，GEM的行为与您对GCM的期望相同：它使用计数器模式进行批量数据加密。让我们暂时搁置这一点，稍后再讨论。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;改进的认证安全性&lt;/strong&gt;
+我们的现有设计AES-GCM按以下方式构建：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过用密钥加密全清零块派生认证子密钥H。&lt;/li&gt;
+&lt;li&gt;计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。&lt;/li&gt;
+&lt;li&gt;将步骤2的输出与计数器块的AES-CTR加密进行XOR。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们的设计大致相同，但有一个重要的调整：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过用子密钥加密全置位块派生认证子密钥H。&lt;/li&gt;
+&lt;li&gt;计算密文、关联数据和包含两者长度（以位为单位）的块的GHASH()。&lt;/li&gt;
+&lt;li&gt;使用输入密钥通过AES-ECB加密步骤2的输出。&lt;/li&gt;
+&lt;li&gt;将步骤3的输出与计数器块的AES-CTR加密进行XOR。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;步骤3直接解决了Niels Ferguson在2005年指出的AES-GCM弱点。其他更改是实现细节。&lt;/p&gt;
+&lt;p&gt;此调整为短标签提供了更好的安全性，因为原始GHASH输出位的AES加密是一种非线性变换，没有密钥无法反转。我们使用输入密钥而不是子密钥，因为唯一其他使用输入密钥加密数据的地方（即子密钥派生）永远不会直接暴露。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;密钥承诺&lt;/strong&gt;
+在我们解决GEM对隐形蝾螈式攻击的保护之前，我们需要分析设计中的其他一些微妙之处。&lt;/p&gt;
+&lt;p&gt;GCM和GEM的最终块中的组件长度都以位而非字节表示，并且每个都限制为264。这意味着，尽管由于内部计数器，GEM理论上可以允许每条消息最多264块（或268字节）的明文，但我们必须调整最终的GHASH步骤以适应这种额外开销。&lt;/p&gt;
+&lt;p&gt;相反，内部计数器的不可达值保留用于密码的内部使用。具体来说，内部计数器值以0x02000000 00000000到0xFFFFFFFF FFFFFFFF结尾的无法在尊重明文261 – 1字节限制的同时达到。&lt;/p&gt;
+&lt;p&gt;全置位块（0xFFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF）已在GEM中用于认证子密钥，而64位尾部nonce + 0xFFFFFFFF 0xFFFFFFFE用于计数器块，用于最终认证标签计算。&lt;/p&gt;
+&lt;p&gt;为提供密钥承诺，接下来的两个块，nonce + 0xFFFFFFFF 0xFFFFFFFC和0xFFFFFFFF 0xFFFFFFFD将用作密钥和nonce的承诺值。&lt;/p&gt;
+&lt;p&gt;我们指定两个块是因为在此处使用一个AES块是不够的。考虑AES-256的情况，它具有256位密钥和128位块：根据鸽巢原理，我们预计有2128个不同的密钥将给定的固定明文值映射到固定密文值。因此，单个块不足以进行承诺。然而，假设块密码是安全的，对于两个连续块，不需要这种鸽巢考虑。&lt;/p&gt;
+&lt;p&gt;通过这种方式，我们可以快速生成给定密钥和nonce的承诺值。&lt;/p&gt;
+&lt;p&gt;在AEAD接口中，承诺附加到认证标签。解密消息时，必须以恒定时间将两者与其重新计算的值进行比较。&lt;/p&gt;
+&lt;h2 id=&#34;aes-gem的性能特征&#34;&gt;AES-GEM的性能特征
+&lt;/h2&gt;&lt;p&gt;尽管我们已经解决了GCM的大部分痛点，但GEM的实际性能影响很小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于如今AES由于硬件加速非常快，这种性能影响在除最性能敏感的应用外的所有应用中应该几乎不明显。在这些情况下，如果派生子密钥被缓存，密钥派生性能成本可以在多达232条不同消息中分摊。&lt;/p&gt;
+&lt;h2 id=&#34;完善aes-gem&#34;&gt;完善AES-GEM
+&lt;/h2&gt;&lt;p&gt;当前GEM草案未充分解决的一个最终问题，但我们希望在NIST研讨会上讨论此问题，并肯定会在最终设计中解决。&lt;/p&gt;
+&lt;p&gt;尽管我们的GEM草案构造允许比GCM更长的消息，但AES块大小使其按原样使用存在风险。主要担忧是加密非常长的消息会给攻击者带来显著优势，以区分AES-GEM密文与随机字节序列。（这是亚马逊2024年论文中提出的一个担忧。）&lt;/p&gt;
+&lt;p&gt;我们可以通过几种方式完善GEM以解决此弱点，这些方式具有不同的性能特征和权衡。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;宽块PRP&lt;/strong&gt;
+多年来，许多密码设计使用宽块PRP（如XTS模式中的AES）安全加密超过AES块大小通常允许的范围。由于XTS广泛用于磁盘加密，这种方法可能会证明是安全的。&lt;/p&gt;
+&lt;p&gt;然而，XTS模式目前尚未标准化用于磁盘加密以外的用例。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分层密钥派生&lt;/strong&gt;
+如果不直接使用子密钥，而是使用内部计数器的高32位从保留的nonce空间中选择不同的值，加密该值，并每236字节派生一个新的子密钥呢？然后，我们仅使用此子密钥加密计数器的剩余32位，这与AES-GCM几十年来所做的类似。&lt;/p&gt;
+&lt;p&gt;此子子密钥派生可以类似于密钥承诺构建：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于AES-256-GEM，加密来自保留nonce空间的32字节，并将其用作实际CTR密钥。&lt;/li&gt;
+&lt;li&gt;对于AES-128-GEM，加密来自保留nonce空间的16字节（但与AES-256-GEM选择的不同nonce空间），并将其用作实际底层CTR密钥。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这是一个有吸引力的选择，原因有很多。最重要的是，这种策略将以非常直接的方式规避PRP区分器问题。它也不依赖于任何非标准设计（如XTS模式）。您可以使用FIPS批准的组件构建整个东西，就像我们对AES-GEM的其余草案设计所做的那样。&lt;/p&gt;
+&lt;p&gt;缺点？这种方法确实会在每236字节明文时产生另一个密钥调度。这可能仍然很好地分摊，但值得记住。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;带分层密钥派生的AES-GEM的总性能成本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AES-256-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：四个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;每236字节明文的额外密钥派生：两个额外的AES加密块，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;1 GB明文的额外总开销：七个AES-256块，两个额外的AES-256密钥调度&lt;/li&gt;
+&lt;li&gt;1 TB明文的额外总开销：37个AES-256块，17个额外的AES-256密钥调度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AES-128-GEM：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥派生：两个额外的AES加密块，一些XOR，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;每236字节明文的额外密钥派生：一个额外的AES加密块，一个额外的密钥调度&lt;/li&gt;
+&lt;li&gt;认证：一个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;密钥承诺：两个额外的AES加密块&lt;/li&gt;
+&lt;li&gt;1 GB明文的额外总开销：五个AES-128块，两个额外的AES-128密钥调度&lt;/li&gt;
+&lt;li&gt;1 TB明文的额外总开销：21个AES-128块，17个额外的AES-128密钥调度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;其他想法&lt;/strong&gt;
+可能还有我们尚未想象的另一种选择。找到最佳权衡，特别是在考虑硬件设计时，是我们在NIST研讨会上展示GEM的原因之一。&lt;/p&gt;
+&lt;h2 id=&#34;切割gem&#34;&gt;切割GEM
+&lt;/h2&gt;&lt;p&gt;IETF的CFRG目前正在讨论一种修改后的AES-GCM变体的RFC草案，称为GCM-SST，它对短标签是安全的。他们的设计出于性能原因使用POLYVAL而不是GHASH，并使用带有第二个POLYVAL的第二个认证密钥（Q），所有这些都进行XOR。&lt;/p&gt;
+&lt;p&gt;不出所料，这种额外的XOR并不能显著保护AES-GCM中短标签的弱点（尽管它确实使通常的攻击更昂贵）。&lt;/p&gt;
+&lt;p&gt;我们对GEM的初始设计使用AES块密码置换GHASH输出，而不是简单地在多项式输出中引入额外的线性操作（XOR）。&lt;/p&gt;
+&lt;p&gt;我们有兴趣与其他行业领导者合作，提供一种强调短标签用例（即WebRTC）的GEM变体。这种假设的变体（暂定名为CUT-GEM）可以使用POLYVAL代替GHASH，并使用基于时期的子密钥派生计划来减少每个数据包的性能影响。&lt;/p&gt;
+&lt;h2 id=&#34;在哪里可以了解更多关于aes-gem的信息&#34;&gt;在哪里可以了解更多关于AES-GEM的信息？
+&lt;/h2&gt;&lt;p&gt;有关AES-GEM的更多信息可在我们的GitHub上找到！&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
