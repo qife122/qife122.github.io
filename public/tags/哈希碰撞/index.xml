@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>哈希碰撞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E/</link>
+        <description>Recent content in 哈希碰撞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 09:45:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>V8引擎中的HashDoS漏洞分析 - Node.js v24.0.0安全风险警示</title>
+        <link>http://localhost:1313/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
+        <pubDate>Sun, 03 Aug 2025 09:45:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</guid>
+        <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要
+&lt;/h2&gt;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本修改了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞——攻击者通过控制待哈希字符串可制造大量哈希碰撞，甚至无需知晓hash-seed即可实现碰撞攻击。&lt;/p&gt;
+&lt;p&gt;此漏洞影响所有Node.js v24.x版本用户。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2025年5月6日&lt;/strong&gt; sharp_edged 向Node.js提交漏洞报告&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025年5月7日&lt;/strong&gt; Node.js团队成员mcollina确认漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025年5月9日&lt;/strong&gt; 漏洞状态变更为&amp;quot;Triaged&amp;quot;（已分类）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025年6月12日&lt;/strong&gt; 安全研究员snek加入调查&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025年7月8日&lt;/strong&gt; 漏洞获得CVE编号CVE-2025-27209&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2025年7月15日&lt;/strong&gt; 漏洞状态变更为&amp;quot;Resolved&amp;quot;（已修复）并公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;关键信息&#34;&gt;关键信息
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;详情&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;报告ID&lt;/td&gt;
+          &lt;td&gt;#3131758&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;严重程度&lt;/td&gt;
+          &lt;td&gt;高危 (7.5)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;漏洞类型&lt;/td&gt;
+          &lt;td&gt;加密问题 - 通用型&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;影响版本&lt;/td&gt;
+          &lt;td&gt;Node.js v24.x全系列&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;赏金金额&lt;/td&gt;
+          &lt;td&gt;无&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

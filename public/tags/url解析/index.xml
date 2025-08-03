@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>URL解析 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/url%E8%A7%A3%E6%9E%90/</link>
+        <description>Recent content in URL解析 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 09:28:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/url%E8%A7%A3%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用协议相对URL(//)绕过个人简介&#34;禁止链接&#34;限制的技术分析</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 09:28:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;绕过禁止链接限制的技术分析报告&#34;&gt;绕过&amp;quot;禁止链接&amp;quot;限制的技术分析报告
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;在addons.allizom.org平台的个人简介编辑功能中，虽然系统明确声明&amp;quot;Links are forbidden&amp;quot;（禁止链接），但攻击者可以通过协议相对URL语法&lt;code&gt;&amp;lt;a href=&amp;quot;//evil.com&amp;quot;&amp;gt;click&amp;lt;/a&amp;gt;&lt;/code&gt;成功植入可点击的超链接。这违反了应用声明的安全策略，可能被用于钓鱼攻击、恶意软件传播等场景。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;漏洞复现步骤&#34;&gt;漏洞复现步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;登录 &lt;a class=&#34;link&#34; href=&#34;https://addons.allizom.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://addons.allizom.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;进入个人资料编辑页面&lt;/li&gt;
+&lt;li&gt;在个人简介字段插入Payload：&lt;code&gt;&amp;lt;a href=&amp;quot;//evil.com&amp;quot;&amp;gt;click&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;保存后，点击生成的&amp;quot;click&amp;quot;链接将跳转到http://evil.com/&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;限制绕过原理&#34;&gt;限制绕过原理
+&lt;/h3&gt;&lt;p&gt;系统未正确过滤协议相对URL（以双斜杠&amp;quot;//&amp;ldquo;开头的URL），这种URL会继承当前页面的协议（HTTP/HTTPS）。相比完整URL，协议相对URL能绕过简单的链接检测机制。&lt;/p&gt;
+&lt;h2 id=&#34;影响评估&#34;&gt;影响评估
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;违反应用声明的安全策略，破坏用户信任&lt;/li&gt;
+&lt;li&gt;攻击者可嵌入：
+&lt;ul&gt;
+&lt;li&gt;钓鱼网站链接&lt;/li&gt;
+&lt;li&gt;恶意软件下载地址&lt;/li&gt;
+&lt;li&gt;社会工程攻击载体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;官方回应&#34;&gt;官方回应
+&lt;/h2&gt;&lt;p&gt;Mozilla安全团队确认：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该限制主要为防垃圾信息而非安全控制&lt;/li&gt;
+&lt;li&gt;漏洞评级为&amp;quot;低危&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;根本原因是&amp;quot;Improper Input Validation&amp;quot;（输入验证不充分）&lt;/li&gt;
+&lt;li&gt;已向报告者发放漏洞奖金&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025-06-03 漏洞提交&lt;/li&gt;
+&lt;li&gt;2025-06-13 确认为有效漏洞并修复&lt;/li&gt;
+&lt;li&gt;2025-07-29 公开披露&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

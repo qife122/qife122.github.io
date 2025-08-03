@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>后量子密码 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81/</link>
+        <description>Recent content in 后量子密码 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 15:49:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>后量子密码学：超越量子计算威胁的密码革新</title>
+        <link>http://localhost:1313/p/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81%E5%AD%A6%E8%B6%85%E8%B6%8A%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E5%A8%81%E8%83%81%E7%9A%84%E5%AF%86%E7%A0%81%E9%9D%A9%E6%96%B0/</link>
+        <pubDate>Sun, 03 Aug 2025 15:49:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81%E5%AD%A6%E8%B6%85%E8%B6%8A%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E5%A8%81%E8%83%81%E7%9A%84%E5%AF%86%E7%A0%81%E9%9D%A9%E6%96%B0/</guid>
+        <description>&lt;h3 id=&#34;量子计算无关紧要的后量子密码学&#34;&gt;量子计算无关紧要的后量子密码学
+&lt;/h3&gt;&lt;p&gt;最近你可能经常听到后量子（PQ）密码学的讨论。尽管没人真正见过量子计算机，但新的PQ标准比传统算法更安全、更具弹性且更灵活——即使量子计算机永远无法建成。&lt;/p&gt;
+&lt;p&gt;关于量子计算机的争论众说纷纭：有人认为它将颠覆现有公钥密码体系，也有人认为具有密码破解能力的量子计算机只是幻想。真相是，在真正见到之前，我们无法确定其出现时间。&lt;/p&gt;
+&lt;p&gt;但关键在于：&lt;strong&gt;抗量子特性并非后量子密码学的主要价值&lt;/strong&gt;。当前研究和标准化工作将催生基于多样化数学问题的更安全算法，这些算法汲取了过去40年的实践经验，并提供了用例灵活性。&lt;/p&gt;
+&lt;h3 id=&#34;孤注一掷的风险&#34;&gt;孤注一掷的风险
+&lt;/h3&gt;&lt;p&gt;当前广泛使用的公钥密码体系（如RSA、Diffie-Hellman和椭圆曲线算法）都基于隐藏子群问题的特例——而量子计算机恰好擅长解决这类问题。更严峻的是，即使不考虑量子计算机，互联网已将绝大多数加密方案都押注在这个单一数学问题上。过去40年的历史证明，这个&amp;quot;篮子&amp;quot;的安全性始终低于预期。&lt;/p&gt;
+&lt;h3 id=&#34;持续升级的密钥长度&#34;&gt;持续升级的密钥长度
+&lt;/h3&gt;&lt;p&gt;为应对因数分解和离散对数算法的进步，我们只能不断增大密钥长度：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1987年认为664位RSA密钥100年内无法破解&lt;/li&gt;
+&lt;li&gt;如今NIST评估664位密钥仅提供65位安全性&lt;/li&gt;
+&lt;li&gt;现代典型RSA密钥已达2048-4096位&lt;/li&gt;
+&lt;li&gt;要达到256位AES的安全性需15360位RSA密钥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;椭圆曲线密码虽未经历类似密钥增长，但仍面临离散对数研究的新挑战。&lt;/p&gt;
+&lt;h3 id=&#34;实现陷阱&#34;&gt;实现陷阱
+&lt;/h3&gt;&lt;p&gt;当前算法存在诸多实现隐患：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RSA充满&amp;quot;地雷&amp;quot;般的陷阱&lt;/li&gt;
+&lt;li&gt;有限域Diffie-Hellman存在参数选择问题&lt;/li&gt;
+&lt;li&gt;椭圆曲线系统易受离曲线攻击等威胁&lt;/li&gt;
+&lt;li&gt;所有算法都需要严防时序侧信道攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;尽管标准制定缓解了部分问题（如Curve25519专为恒定时间实现设计），但底层设计缺陷仍使这些系统成为开发者的&amp;quot;危险品&amp;quot;（hazmat）。&lt;/p&gt;
+&lt;h3 id=&#34;后量子密码的优势&#34;&gt;后量子密码的优势
+&lt;/h3&gt;&lt;p&gt;观察NIST的后量子密码标准化进程可见显著改进：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题多样性&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CRYSTALS系列基于格问题（SIS/LWE）&lt;/li&gt;
+&lt;li&gt;SPHINCS+基于哈希函数抗第二原像攻击&lt;/li&gt;
+&lt;li&gt;未来可能加入基于椭圆曲线同源、纠错码等的新算法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;现代设计&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;易于实现恒定时间操作&lt;/li&gt;
+&lt;li&gt;减少对RNG的依赖&lt;/li&gt;
+&lt;li&gt;完全指定的随机采样技术&lt;/li&gt;
+&lt;li&gt;确定性输入设计避免随机数复用问题&lt;/li&gt;
+&lt;li&gt;预定义安全参数集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;用例灵活性&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;哈希签名（小公钥/大签名）&lt;/li&gt;
+&lt;li&gt;McEliece（小密文/快解密/大公钥）&lt;/li&gt;
+&lt;li&gt;不同场景可选用不同参数集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;后量子密码的不确定性&#34;&gt;后量子密码的不确定性
+&lt;/h3&gt;&lt;p&gt;新算法确实存在被攻破的风险（如RAINBOW和SIKE在标准化过程中被破解），但传统密码同样面临未证伪的安全假设。值得注意的是，GNFS算法已使1990年代的RSA和Diffie-Hellman密钥实际上&amp;quot;被攻破&amp;quot;，只是通过持续增加密钥长度掩盖了这一事实。&lt;/p&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;无论量子计算机威胁是否被夸大，后量子密码研究的真正价值在于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将加密方案从单一数学问题中解放&lt;/li&gt;
+&lt;li&gt;用现代设计消除常见实现错误&lt;/li&gt;
+&lt;li&gt;提供多样化的算法选择&lt;/li&gt;
+&lt;li&gt;为数学突破准备备用方案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这本质上是一次密码学体系的&lt;strong&gt;多元化与现代化革新&lt;/strong&gt;。对于担心新算法风险的场景，混合密码系统（结合后量子与传统算法）仍是可行选择。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

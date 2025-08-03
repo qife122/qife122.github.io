@@ -7,7 +7,38 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 10:34:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 11:45:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/azure/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Azure容器实例服务漏洞协同披露</title>
+        <link>http://localhost:1313/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</link>
+        <pubDate>Sun, 03 Aug 2025 11:45:52 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</guid>
+        <description>&lt;p&gt;微软近期修复了由Palo Alto Networks安全研究员报告的Azure容器实例(ACI)服务漏洞，该漏洞可能允许用户访问ACI服务中其他客户的信息。调查显示未发生客户数据未经授权访问的情况。出于谨慎考虑，我们已通过Azure门户的服务健康通知告知与研究员容器运行在同一集群的客户。若未收到通知则无需采取任何措施。&lt;/p&gt;
+&lt;h3 id=&#34;哪些azure容器实例账户可能受影响&#34;&gt;哪些Azure容器实例账户可能受影响？
+&lt;/h3&gt;&lt;p&gt;目前没有迹象表明该漏洞导致任何客户数据被访问。作为预防措施，微软已向可能受研究员活动影响的客户发送通知，建议其撤销2021年8月31日前部署到平台的所有特权凭证。若未收到服务健康通知则无需操作，漏洞已修复且其他集群未发现未授权访问。如有疑问可联系Azure支持，定期轮换特权凭证是有效的预防措施。&lt;/p&gt;
+&lt;h3 id=&#34;如何保护aci&#34;&gt;如何保护ACI？
+&lt;/h3&gt;&lt;p&gt;尽管无数据泄露证据，我们建议客户采用以下安全实践：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若收到通知，建议撤销2021年8月31日前部署的特权凭证。常见配置和密钥存储位置包括：
+&lt;ul&gt;
+&lt;li&gt;环境变量&lt;/li&gt;
+&lt;li&gt;密钥卷&lt;/li&gt;
+&lt;li&gt;Azure文件共享&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;参考安全最佳实践文档：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;Azure容器实例安全基线&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;Azure容器实例安全注意事项&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;定期撤销特权凭证&lt;/li&gt;
+&lt;li&gt;配置Azure服务健康警报获取安全通知&lt;/li&gt;
+&lt;li&gt;如有疑问请联系Azure支持&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>使用Azure实验室进行Impacket攻击基础教程</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8azure%E5%AE%9E%E9%AA%8C%E5%AE%A4%E8%BF%9B%E8%A1%8Cimpacket%E6%94%BB%E5%87%BB%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</link>
         <pubDate>Sat, 02 Aug 2025 10:34:24 +0800</pubDate>

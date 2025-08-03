@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>路径遍历 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/</link>
+        <description>Recent content in 路径遍历 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 08:33:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Lila项目路径遍历漏洞分析：从漏洞发现到修复全过程</title>
+        <link>http://localhost:1313/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+        <pubDate>Sun, 03 Aug 2025 08:33:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;lichess漏洞报告3181066---lila项目路径遍历漏洞&#34;&gt;Lichess漏洞报告#3181066 - Lila项目路径遍历漏洞
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;在Lila项目中发现一个路径遍历漏洞，攻击者可通过操纵用户输入来访问服务器上的任意文件，突破预期目录结构限制。该漏洞可能暴露应用源代码、配置文件等敏感信息。&lt;/p&gt;
+&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;通过构造特殊URL访问受限文件：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://lichess.org/assets/../build.sbt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://lichess.org/assets/../.git/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞影响&#34;&gt;漏洞影响
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;任意文件读取：可能泄露.git配置、应用配置(含密钥/凭证)、服务端源码&lt;/li&gt;
+&lt;li&gt;信息泄露：暴露内部逻辑、部署细节、管理员配置&lt;/li&gt;
+&lt;li&gt;间接提权：通过读取访问控制相关文件可能衍生其他攻击&lt;/li&gt;
+&lt;li&gt;攻击侦察：了解内部文件结构有助于发现RCE或IDOR等漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修复过程&#34;&gt;修复过程
+&lt;/h2&gt;&lt;p&gt;开发团队采用Nginx配置修复方案：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$request_uri&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;~&lt;/span&gt; &lt;span class=&#34;sr&#34;&gt;&amp;#34;\.\./&amp;#34;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# 防止路径遍历 https://hackerone.com/reports/3181066
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;kn&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;404&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;生产环境配置&#34;&gt;生产环境配置
+&lt;/h2&gt;&lt;p&gt;实际生产环境中/assets/请求由Nginx处理：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/assets/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;expires&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;1M&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;add_header&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;Cache-Control&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;public&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;add_header&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;Service-Worker-Allowed&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;add_header&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;Cross-Origin-Embedder-Policy&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;require-corp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;rewrite&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;^/assets/_\w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;6}/(.+)$&amp;#34;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/assets/&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kn&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/home/lichess-deploy/public/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025-06-06 11:16 UTC：漏洞提交&lt;/li&gt;
+&lt;li&gt;2025-06-07 09:24 UTC：确认为有效漏洞&lt;/li&gt;
+&lt;li&gt;2025-06-09 07:39 UTC：提出初步修复方案&lt;/li&gt;
+&lt;li&gt;2025-06-09 11:30 UTC：漏洞修复完成并公开&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

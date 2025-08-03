@@ -7,7 +7,230 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 16:13:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 13:50:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软2023年12月安全更新：关键漏洞修复与技术指南</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2023%E5%B9%B412%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sun, 03 Aug 2025 13:50:20 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2023%E5%B9%B412%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h3 id=&#34;安全更新概要&#34;&gt;安全更新概要
+&lt;/h3&gt;&lt;p&gt;2023年12月12日（UTC时间），微软发布月度安全更新，修复影响多款产品的安全漏洞。本次更新涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Windows全系列&lt;/strong&gt;（11/10/Server）：修复远程代码执行漏洞（CVE-2023-20588等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Microsoft Office&lt;/strong&gt;：信息泄露漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure云平台&lt;/strong&gt;：特权提升风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恶意软件防护引擎&lt;/strong&gt;：服务拒绝漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键技术细节&#34;&gt;关键技术细节
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;已公开漏洞紧急修复&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AMD推测执行漏洞（CVE-2023-20588）存在野外利用&lt;/li&gt;
+&lt;li&gt;Visual Studio编译错误（C2471）通过KB5029365补丁解决&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;更新部署方式&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| 产品系列          | 最高严重性 | 影响范围       | KB编号        |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|-------------------|------------|----------------|---------------|
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Windows 11 23H2   | 紧急       | 远程代码执行   | 5033375       |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;| Windows Server 2022 | 紧急    | 服务拒绝       | 5033118       |
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开发者注意事项&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务堆栈更新(SSU)需参照ADV990001&lt;/li&gt;
+&lt;li&gt;安全更新指南API支持自定义报表生成（含GitHub示例代码）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;后续计划&#34;&gt;后续计划
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;下次更新预计2024年1月9日发布&lt;/li&gt;
+&lt;li&gt;建议通过安全更新指南订阅RSS或创建通知配置文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：Windows Server 2019/2016用户需优先安装5033371/5033373补丁以缓解关键风险。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>2014年4月安全更新风险评估：微软紧急修复11个漏洞</title>
+        <link>http://localhost:1313/p/2014%E5%B9%B44%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D11%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 03 Aug 2025 13:28:49 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2014%E5%B9%B44%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D11%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h2 id=&#34;2014年4月安全更新风险评估&#34;&gt;2014年4月安全更新风险评估
+&lt;/h2&gt;&lt;p&gt;本日，微软发布了4个安全公告，共修复11个CVE漏洞。其中2个公告评级为&amp;quot;紧急&amp;quot;，2个为&amp;quot;重要&amp;quot;。以下风险评估表可帮助用户确定补丁优先级：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;安全公告&lt;/th&gt;
+          &lt;th&gt;最可能攻击方式&lt;/th&gt;
+          &lt;th&gt;严重等级&lt;/th&gt;
+          &lt;th&gt;漏洞利用指数&lt;/th&gt;
+          &lt;th&gt;30天内影响预测&lt;/th&gt;
+          &lt;th&gt;平台缓解措施及备注&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS14-017(Word)&lt;/td&gt;
+          &lt;td&gt;受害者打开RTF或DOC/DOCX文件&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;预计CVE-2014-1761漏洞会持续被利用&lt;/td&gt;
+          &lt;td&gt;修复了安全公告2953095中描述的&amp;quot;目标攻击漏洞&amp;quot;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS14-018(IE)&lt;/td&gt;
+          &lt;td&gt;受害者访问恶意网页&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;30天内可能出现漏洞利用代码&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS14-020(Publisher)&lt;/td&gt;
+          &lt;td&gt;受害者打开恶意.PUB文件&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能快速出现利用代码，但Publisher使用范围有限&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS14-019(Windows文件操作)&lt;/td&gt;
+          &lt;td&gt;攻击者在共享网络放置恶意.bat/.cmd文件，诱骗用户执行&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;虽可被利用但历史上未见大规模攻击&lt;/td&gt;
+          &lt;td&gt;类似DLL预加载攻击向量&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;技术要点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Word漏洞(CVE-2014-1761)通过特殊格式文档触发&lt;/li&gt;
+&lt;li&gt;IE漏洞需要结合恶意网页利用&lt;/li&gt;
+&lt;li&gt;Publisher漏洞受限于软件部署范围&lt;/li&gt;
+&lt;li&gt;Windows文件操作漏洞需特定执行环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;建议用户优先部署MS14-017和MS14-018两个紧急更新。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux内核v4.15安全技术深度解析</title>
+        <link>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 10:07:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;linux内核v415安全技术解析&#34;&gt;Linux内核v4.15安全技术解析
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;发布日期&lt;/strong&gt;：2018年2月5日&lt;br&gt;
+&lt;strong&gt;分类&lt;/strong&gt;：Chrome OS, Debian, 内核, 安全, Ubuntu, Ubuntu-Server&lt;/p&gt;
+&lt;p&gt;[前情提要：v4.14版本]&lt;/p&gt;
+&lt;p&gt;上周发布的Linux内核v4.15包含多项重要安全改进：&lt;/p&gt;
+&lt;h2 id=&#34;内核页表隔离pti&#34;&gt;内核页表隔离(PTI)
+&lt;/h2&gt;&lt;p&gt;虽然PTI已获广泛报道，但简而言之，它主要用于防御CPU缓存时序侧信道攻击（CVE-2017-5754，即推测执行的&amp;quot;恶意数据缓存加载&amp;quot;或&amp;quot;Meltdown&amp;quot;漏洞）。x86_64架构（通过CONFIG_PAGE_TABLE_ISOLATION配置）的PTI实现涉及大量工作，数十人参与开发数月。PowerPC也已加入缓解措施，arm64（通过CONFIG_UNMAP_KERNEL_AT_EL0配置）将在v4.16支持PTI（仅Cortex-A75受影响）。x86_32架构的支持正在开发中。&lt;/p&gt;
+&lt;p&gt;x86_64 PTI的额外优势是：由于现在存在两份页表副本，内核模式的用户空间映射可完全标记为不可执行，这意味着前SMEP硬件现在获得SMEP模拟功能。试图跳转到用户空间内存继续执行恶意代码的内核攻击将失效（即使攻击者先关闭了SMEP）。通过进一步工作，还可引入SMAP模拟（阻止读取恶意用户空间内存），从而关闭这些常见攻击向量。值得注意的是，arm64自v4.10起就具备等效功能（PAN模拟）。&lt;/p&gt;
+&lt;h2 id=&#34;retpoline防御机制&#34;&gt;Retpoline防御机制
+&lt;/h2&gt;&lt;p&gt;除PTI外，针对CVE-2017-5715（&amp;ldquo;分支目标注入&amp;quot;或&amp;quot;Spectre变种2&amp;rdquo;）的retpoline内核缓解措施开始落地。（注意：要获得完整retpoline支持，需要打补丁的编译器，如gcc 7.3/8+版本，目前clang也已排队等待发布。）&lt;/p&gt;
+&lt;p&gt;这项工作仍在演进，清理工作将持续到v4.16。v4.16还将包含针对其他推测执行变种（CVE-2017-5753，&amp;ldquo;边界检查绕过&amp;quot;或&amp;quot;Spectre变种1&amp;rdquo;）的缓解措施。&lt;/p&gt;
+&lt;h2 id=&#34;x86快速refcount_t溢出保护&#34;&gt;x86快速refcount_t溢出保护
+&lt;/h2&gt;&lt;p&gt;v4.13引入了CONFIG_REFCOUNT_FULL代码来阻止多种引用计数缺陷（伴随微小性能损失）。v4.14为x86快速溢出专用refcount_t保护（基于grsecurity的PAX_REFCOUNT）奠定了基础，但因bug推迟到v4.15修复。由于改动很小，快速refcount_t保护已反向移植并在长期维护内核v4.14.5中启用。从atomic_t到refcount_t的转换持续进行，目前已超过168处，仅剩少量待转换。&lt;/p&gt;
+&lt;h2 id=&#34;p地址哈希化&#34;&gt;%p地址哈希化
+&lt;/h2&gt;&lt;p&gt;内核信息泄露的众多来源之一是%p格式说明符。这些字符串最终出现在各种位置（dmesg、/sys文件、/proc文件等），且使用分散在整个内核中，使其成为难以修复的泄露源。早期像kptr_restrict的%pK这样的方案效果有限，因为它是选择加入的。虽然最近有人尝试（如William C Roberts、Greg KH等）提供让%p像%pK一样工作的开关，但Linus最终介入并声明%p应该极少使用以至于根本不该使用。Tobin Harding承担了寻找正确路径的任务，最终实现用每启动随机密钥对%p输出进行哈希处理。结果是简单调试仍可工作（相同哈希值的两个报告可以确认相同地址而不泄露实际地址），但阻碍了攻击者利用此类信息泄露作为漏洞利用构建块的能力。&lt;/p&gt;
+&lt;p&gt;对于需要未哈希%p的开发者，引入了%px，但如Linus警告：要么你的%p在哈希后仍有用，要么你的%p原本就无用应该删除，要么你需要用合理权限充分证明使用%px的正当性。&lt;/p&gt;
+&lt;h2 id=&#34;timer_list结构重构&#34;&gt;timer_list结构重构
+&lt;/h2&gt;&lt;p&gt;内核定时器（struct timer_list）基础设施用于创建在特定时间后执行的回调。作为内核更基础的部分之一，它已存在很长时间，有超过1000个调用点。虽然API随时间改进，但旧方式仍然存在。现代内核回调接收指向与回调关联结构的参数，以便回调知道哪个实例被触发。定时器回调没有这样做，而是接收unsigned long参数，该参数被强制转换回代码设置定时器时想要关联回调的任何上下文，并且该变量与回调函数指针一起存储在struct timer_list中。这为试图利用内存破坏漏洞（如堆溢出）的攻击者创造了机会，他们不仅能覆盖函数指针，还能覆盖内存中存储的参数。这将攻击提升为弱ROP，并已被用作现代漏洞利用中禁用SMEP的基础（参见retire_blk_timer）。为消除内核设计中的这一弱点，我重构了定时器回调API及其所有调用者，改动规模达：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1128 files changed, 4834 insertions(+), 5926 deletions(-)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重构的另一好处是：一旦内核开始由支持控制流完整性(CFI)的编译器构建，定时器回调将不会与所有其他接收单个unsigned long参数的函数混为一谈。（换句话说，某些CFI实现不会捕获上述攻击，因为攻击者的目标函数仍匹配其原始原型。）&lt;/p&gt;
+&lt;p&gt;目前就这些；如有遗漏请告知。v4.16合并窗口现已开启！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;评论精选&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Nick提问&lt;/strong&gt;：关于KPTI，是否建议为AMD CPU启用？特别是考虑到KPTI本应更好地保护KASLR，而且用户空间和内核空间的分离本质上更好，尽管有性能损失。&lt;br&gt;
+&lt;strong&gt;kees回复&lt;/strong&gt;：对于没有SMEP的CPU，我建议无条件保持KPTI开启。对于SMEP机器，我仍会启用它，因为它为各种缓存时序攻击（包括许多常见的KASLR泄漏）提供了良好的隔离。最终取决于你的工作负载。如果能承受微小性能变化，就启用它。&lt;br&gt;
+&lt;strong&gt;Nick补充&lt;/strong&gt;：这也是我的第一想法，在安全方面不做半吊子措施。即使AMD CPU默认排除在KPTI之外。可以预期未来会有进一步优化来减少KPTI性能损失。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;许可声明&lt;/strong&gt;：本文采用知识共享署名-相同方式共享4.0国际许可协议授权。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2025年7月安全更新深度解析：微软与Adobe关键漏洞修复指南</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Sun, 03 Aug 2025 09:56:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;2025年7月安全更新综述&#34;&gt;2025年7月安全更新综述
+&lt;/h1&gt;&lt;p&gt;2025年7月8日 | Dustin Childs&lt;/p&gt;
+&lt;p&gt;每月第二个星期二，Adobe和微软如期发布了最新安全补丁。本文将详细分析这两家公司的安全更新内容。&lt;/p&gt;
+&lt;h2 id=&#34;adobe-2025年7月补丁&#34;&gt;Adobe 2025年7月补丁
+&lt;/h2&gt;&lt;p&gt;本月Adobe共发布13个公告，修复了ColdFusion、After Effects等产品中的60个独特CVE漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ColdFusion&lt;/strong&gt;：优先级1的更新，修复13个CVE（5个关键级），建议考虑迁移到现代替代方案&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FrameMaker&lt;/strong&gt;：修复15个CVE（13个可导致代码执行的关键漏洞）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Illustrator&lt;/strong&gt;：修复10个漏洞，最严重者可导致代码执行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;其他产品&lt;/strong&gt;：包括After Effects（2个重要漏洞）、Substance 3D Viewer（1关键+2重要漏洞）、InDesign（6个关键漏洞）等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所有漏洞在发布时均未被公开披露或检测到主动攻击。除ColdFusion外，所有更新部署优先级均为3级。&lt;/p&gt;
+&lt;h2 id=&#34;微软2025年7月补丁&#34;&gt;微软2025年7月补丁
+&lt;/h2&gt;&lt;p&gt;微软本月共发布130个新CVE，涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows及组件&lt;/li&gt;
+&lt;li&gt;Office及组件&lt;/li&gt;
+&lt;li&gt;.NET和Visual Studio&lt;/li&gt;
+&lt;li&gt;Azure&lt;/li&gt;
+&lt;li&gt;Teams&lt;/li&gt;
+&lt;li&gt;Hyper-V&lt;/li&gt;
+&lt;li&gt;BitLocker&lt;/li&gt;
+&lt;li&gt;Edge浏览器等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中10个被评为关键级，120个为重要级。值得关注的高危漏洞包括：&lt;/p&gt;
+&lt;h3 id=&#34;关键漏洞&#34;&gt;关键漏洞
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2025-47981&lt;/strong&gt;：SPNEGO扩展协商安全机制RCE漏洞（蠕虫级，最高可利用指数）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2025-49717&lt;/strong&gt;：SQL Server堆缓冲区溢出RCE（需更新OLE DB驱动）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2025-49704&lt;/strong&gt;：SharePoint RCE（源自Pwn2Own柏林比赛）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2025-49695&lt;/strong&gt;：Office RCE（连续第三个月出现关键级Office漏洞）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他重要修复&#34;&gt;其他重要修复
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RRAS服务&lt;/strong&gt;：14个远程代码执行漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BitLocker&lt;/strong&gt;：5个安全功能绕过漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hyper-V&lt;/strong&gt;：本地代码执行漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Monitor Agent&lt;/strong&gt;：相邻网络RCE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整CVE列表参见原文表格。&lt;/p&gt;
+&lt;h2 id=&#34;后续行动建议&#34;&gt;后续行动建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;优先修复SPNEGO、SQL Server等关键漏洞&lt;/li&gt;
+&lt;li&gt;Office用户考虑禁用预览窗格&lt;/li&gt;
+&lt;li&gt;SQL Server管理员需手动更新OLE DB驱动&lt;/li&gt;
+&lt;li&gt;关注8月12日的下一次补丁星期二更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：部分漏洞修复需要额外管理操作，请仔细阅读各公告详情。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>MS09-012补丁：修复&#34;令牌劫持&#34;漏洞的技术解析</title>
         <link>http://localhost:1313/p/ms09-012%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D%E4%BB%A4%E7%89%8C%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 16:13:46 +0800</pubDate>

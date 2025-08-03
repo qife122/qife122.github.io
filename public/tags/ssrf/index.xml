@@ -7,7 +7,79 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 00:32:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ssrf/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 10:41:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ssrf/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>URL验证绕过速查表：全面解析SSRF与CORS绕过技术</title>
+        <link>http://localhost:1313/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sun, 03 Aug 2025 10:41:06 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;引入url验证绕过速查表&#34;&gt;引入URL验证绕过速查表
+&lt;/h1&gt;&lt;p&gt;URL验证绕过是众多漏洞的根本原因，包括许多SSRF（服务器端请求伪造）、CORS（跨源资源共享）配置错误和开放重定向实例。这些漏洞通过使用模糊URL触发URL解析差异并绕过验证。然而，许多这些技术由于缺乏文档而被忽视。为了解决这个问题，我们创建了一个速查表，整合所有已知的有效载荷，节省您从互联网上搜索和收集信息的时间和精力。今天，我们很高兴推出一个新工具：URL验证绕过速查表。&lt;/p&gt;
+&lt;p&gt;我们希望您觉得它有用！这是一个频繁更新的存储库，包含所有已知技术，让您快速生成符合需求的单词列表。&lt;/p&gt;
+&lt;h2 id=&#34;如何开始使用&#34;&gt;如何开始使用
+&lt;/h2&gt;&lt;p&gt;URL验证绕过速查表是一个全新的交互式Web应用程序，根据您的上下文自动调整其设置。目前有三种上下文可用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;完全限定的绝对URL&lt;/strong&gt; - 适用于URL用于请求查询参数等情况。所有有效载荷都设计为与Burp Suite Intruder兼容，因此您无需担心正确的编码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;仅主机名&lt;/strong&gt; - 直接输入域名，例如在Host头值中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CORS Origin&lt;/strong&gt; - 主机名用于有效的浏览器Origin头。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最初，速查表提供六种类型的有效载荷单词列表。高级设置允许您选择特定的单词列表或同时使用所有列表。以下是最重要的一些概述：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;域名允许列表绕过&lt;/strong&gt;：专为域名混淆攻击设计。您可以通过输入允许的域名和攻击者域名来自定义测试域名。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;伪造相对URL&lt;/strong&gt;：包括浏览器有效的绝对URL，这些URL可能会被客户端代码错误地验证。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环回地址&lt;/strong&gt;：此单词列表包括IPv4、IPv6地址的各种表示及其规范化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;编码&#34;&gt;编码
+&lt;/h2&gt;&lt;p&gt;URL验证速查表支持几种类型的字符串编码：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Intruder的百分比编码&lt;/strong&gt;：此选项通过将某些字符替换为代表字符UTF-8编码的一到四个转义序列来编码有效载荷字符串。它排除了Burp Suite Intruder的默认字符，并默认启用，使其与Burp Suite轻松兼容。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全部编码&lt;/strong&gt;：此选项对所有非字母数字字符进行百分比编码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特殊字符&lt;/strong&gt;：编码除以下字符之外的所有字符：&lt;code&gt;[&amp;quot;!&amp;quot;,&amp;quot;$&amp;quot;,&amp;quot;&#39;&amp;quot;,&amp;quot;\&amp;quot;&amp;quot;,&amp;quot;(&amp;quot;,&amp;quot;)&amp;quot;,&amp;quot;*&amp;quot;,&amp;quot;,&amp;quot;,&amp;quot;-&amp;quot;,&amp;quot;.&amp;quot;,&amp;quot;/&amp;quot;,&amp;quot;\\&amp;quot;,&amp;quot;:&amp;quot;,&amp;quot;;&amp;quot;,&amp;quot;[&amp;quot;,&amp;quot;]&amp;quot;,&amp;quot;^&amp;quot;,&amp;quot;_&amp;quot;,&amp;quot;{&amp;quot;,&amp;quot;}&amp;quot;,&amp;quot;|&amp;quot;,&amp;quot;~&amp;quot;]&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unicode转义&lt;/strong&gt;：此选项将有效载荷字符串表示为六字符转义序列&lt;code&gt;\uXXXX&lt;/code&gt;，除了以下字符：&lt;code&gt;[&#39;&amp;quot;&#39;,&#39;\\&#39;,&#39;\b&#39;,&#39;\f&#39;,&#39;\n&#39;,&#39;\r&#39;,&#39;\t&#39;]&lt;/code&gt;和范围&lt;code&gt;[0x0020 - 0x007f]&lt;/code&gt;内的字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：未编码的字符串应谨慎使用，因为Unicode值可能无法正确传输。&lt;/p&gt;
+&lt;h2 id=&#34;高级设置&#34;&gt;高级设置
+&lt;/h2&gt;&lt;h3 id=&#34;ipv4地址表示&#34;&gt;IPv4地址表示
+&lt;/h3&gt;&lt;p&gt;在处理Web应用程序时，将IP地址编码为不同格式对于测试、验证和安全目的至关重要。速查表支持标准IPv4地址作为攻击者IP输入，并返回一系列编码表示，包括八进制、十六进制、二进制和十进制格式。它还将IPv4地址转换为其IPv6映射地址格式。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;编码细节&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;八进制&lt;/strong&gt;：IP地址的每个段转换为八进制数并填充到4位。例如，环回IP地址&lt;code&gt;127.0.0.1&lt;/code&gt;将表示为&lt;code&gt;0177.0000.0000.0001&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;十六进制&lt;/strong&gt;：每个段转换为十六进制数，前缀为&lt;code&gt;0x&lt;/code&gt;，并填充到2位。相同的环回IP地址将为&lt;code&gt;0x7F.0x00.0x00.0x01&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;二进制&lt;/strong&gt;：每个段转换为8位二进制数。示例IP地址将为&lt;code&gt;01111111.00000000.00000000.00000001&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;部分十进制&lt;/strong&gt;：将IP地址的第三和第四部分组合成一个十进制数：&lt;code&gt;127.0.1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DWORD表示法&lt;/strong&gt;：整个IP地址转换为无符号32位整数：&lt;code&gt;2130706433&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;带溢出的DWORD表示法&lt;/strong&gt;：将先前转换的结果加上&lt;code&gt;2^32 * 10 = 45080379393&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IPv6映射地址&lt;/strong&gt;：将IPv4段转换为十六进制并格式化为标准IPv6映射地址。环回IP地址可以表示为&lt;code&gt;[::FFFF:7F00:0001]&lt;/code&gt;或&lt;code&gt;::FFFF:127.0.0.1&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;规范化&#34;&gt;规范化
+&lt;/h3&gt;&lt;p&gt;单词列表包括许多利用Unicode字符串规范化的有效载荷。例如，以下字符的规范化会导致空字符串：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ZeroWidthSpace&lt;/code&gt;、&lt;code&gt;NegativeVeryThinSpace&lt;/code&gt;、&lt;code&gt;NegativeThinSpace&lt;/code&gt;、&lt;code&gt;NegativeMediumSpace&lt;/code&gt;、&lt;code&gt;NegativeThickSpace&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Word Joiner (U+2060)&lt;/code&gt;（&lt;code&gt;&amp;amp;NoBreak;&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Soft Hyphen Character U+00AD&lt;/code&gt;（&lt;code&gt;&amp;amp;shy;&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些技术可用于绕过Web应用程序防火墙（WAF）。另一个允许域名绕过的例子是当验证正则表达式允许多行字符串时。例如，如果使用正则表达式&lt;code&gt;^allowed_domain$&lt;/code&gt;，以下内容可以绕过验证：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;attacker_domain(U+2028)allowed_domain&lt;/code&gt;（行分隔符）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attacker_domain(U+2029)allowed_domain&lt;/code&gt;（段落分隔符）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;这个速查表离不开分享研究的Web安全社区。特别感谢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Gareth Heyes、&lt;/li&gt;
+&lt;li&gt;James Kettle、&lt;/li&gt;
+&lt;li&gt;Jann Horn、&lt;/li&gt;
+&lt;li&gt;Liv Matan、&lt;/li&gt;
+&lt;li&gt;Takeshi Terada、&lt;/li&gt;
+&lt;li&gt;Orange Tsai、&lt;/li&gt;
+&lt;li&gt;Nicolas Grégoire。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们在GitHub账户上发布了所有有效载荷：&lt;a class=&#34;link&#34; href=&#34;https://github.com/PortSwigger/url-cheatsheet-data&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/PortSwigger/url-cheatsheet-data&lt;/a&gt;，您可以通过创建新问题或更新JSON文件并提交拉取请求来为此速查表做出贡献。&lt;/p&gt;
+&lt;p&gt;我们期待您使用我们的新URL验证绕过速查表发现有趣的内容！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>GitHub Enterprise漏洞链：从SSRF到RCE的四个漏洞利用</title>
         <link>http://localhost:1313/p/github-enterprise%E6%BC%8F%E6%B4%9E%E9%93%BE%E4%BB%8Essrf%E5%88%B0rce%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
         <pubDate>Sun, 03 Aug 2025 00:32:56 +0800</pubDate>

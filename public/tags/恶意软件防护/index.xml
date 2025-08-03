@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>恶意软件防护 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E9%98%B2%E6%8A%A4/</link>
+        <description>Recent content in 恶意软件防护 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 14:38:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软安全情报报告第14版：实时防护效果深度解析</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%83%85%E6%8A%A5%E6%8A%A5%E5%91%8A%E7%AC%AC14%E7%89%88%E5%AE%9E%E6%97%B6%E9%98%B2%E6%8A%A4%E6%95%88%E6%9E%9C%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 14:38:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%83%85%E6%8A%A5%E6%8A%A5%E5%91%8A%E7%AC%AC14%E7%89%88%E5%AE%9E%E6%97%B6%E9%98%B2%E6%8A%A4%E6%95%88%E6%9E%9C%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;实时防护缺失导致感染率激增5倍&#34;&gt;实时防护缺失导致感染率激增5倍
+&lt;/h3&gt;&lt;p&gt;2012年下半年数据显示，未启用恶意软件防护产品实时保护功能的计算机，其感染恶意软件和垃圾软件的概率是受保护设备的&lt;strong&gt;5.5倍&lt;/strong&gt;（图1）。该结论基于微软恶意软件删除工具(MSRT)在用户授权前提下收集的全球6亿台设备数据，通过交叉分析防护状态与感染情况得出。&lt;/p&gt;
+&lt;h3 id=&#34;windows-8展现显著防护优势&#34;&gt;Windows 8展现显著防护优势
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;**24%**的计算机未运行有效防护产品或使用过期软件（图2）&lt;/li&gt;
+&lt;li&gt;Windows 8设备未防护比例最低（32位8.1%/64位7.0%），归功于内置Windows Defender的自动保护机制（图3）&lt;/li&gt;
+&lt;li&gt;相应感染率仅为&lt;strong&gt;0.8%(32位)和0.2%(64位)&lt;/strong&gt;，远低于Windows 7 RTM等旧系统（图4）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防护失效的三大技术成因&#34;&gt;防护失效的三大技术成因
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;预装安软试用期过期&lt;/strong&gt;（占比最高）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恶意软件强制禁用安全产品&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户主动关闭防护&lt;/strong&gt;（性能考量/错误认知）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防护体系技术建议&#34;&gt;防护体系技术建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;保持实时防护产品更新可降低**80%**感染风险&lt;/li&gt;
+&lt;li&gt;Windows 8的&lt;strong&gt;安全启动&lt;/strong&gt;机制可阻止rootkit等底层恶意代码加载&lt;/li&gt;
+&lt;li&gt;企业应部署具备未防护设备自动保护功能的解决方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;技术注解&lt;/strong&gt;：Windows Defender采用动态签名更新和行为监控技术，在检测到设备无有效防护时自动激活，其与UEFI安全启动的协同设计构成Windows 8防护体系的核心架构。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

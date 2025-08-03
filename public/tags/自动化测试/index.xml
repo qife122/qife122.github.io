@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>自动化测试 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/</link>
+        <description>Recent content in 自动化测试 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 15:17:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>智能模糊测试革命 - 自动化漏洞挖掘的技术演进</title>
+        <link>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E9%9D%A9%E5%91%BD-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
+        <pubDate>Sun, 03 Aug 2025 15:17:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E9%9D%A9%E5%91%BD-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
+        <description>&lt;h2 id=&#34;智能模糊测试革命&#34;&gt;智能模糊测试革命
+&lt;/h2&gt;&lt;p&gt;我最近有幸在BSidesLisbon大会上发表主题演讲。会议非常精彩，特别感谢Bruno Morisson的邀请。如果你喜欢波特酒，这个会议绝对不容错过！我建议附近地区的人明年都来参加。&lt;/p&gt;
+&lt;p&gt;我认为有必要将自动化漏洞发现的最新进展置于更广阔的背景下审视。如果你没有密切关注，可能会错过网络大挑战（Cyber Grand Challenge）、AFL和libFuzzer等重要进展，但它们对我们行业的潜在影响是巨大的。&lt;/p&gt;
+&lt;p&gt;在IT Defense会议上再次演讲后，我现在想与互联网分享这个主题。你可以通过下方视频了解我对该研究领域发展历程、现状和未来方向的见解。请欣赏！&lt;/p&gt;
+&lt;h3 id=&#34;技术突破&#34;&gt;技术突破
+&lt;/h3&gt;&lt;p&gt;过去两年在自动化安全测试领域取得的进步，超过了之前十年的总和。AFL将业界最佳实践集成到一个易用工具中，DARPA网络大挑战提供了可靠的竞争基准和新研究资金，而Project Springfield（即SAGE）现已向公众开放。这些新技术的普及可能对我们行业产生巨大影响。&lt;/p&gt;
+&lt;p&gt;这些工具如何工作？与过去的方法有何不同？它们的优势和局限在哪里？现在如何使用这些工具？这些技术将如何发展？还需要哪些进一步开发？最后，人类在安全开发生命周期中还能主导多久？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;点击此处查看完整幻灯片&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;威斯康星大学模糊测试课程项目(1988)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://pages.cs.wisc.edu/~bart/fuzz/CS736-Projects-f1988.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://pages.cs.wisc.edu/~bart/fuzz/CS736-Projects-f1988.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;PROTOS - 消除软件漏洞的系统方法(2002)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.ee.oulu.fi/roles/ouspg/PROTOS_MSR2002-protos&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.ee.oulu.fi/roles/ouspg/PROTOS_MSR2002-protos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;基于块的协议分析在安全测试中的优势(2002)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://www.immunitysec.com/downloads/advantages_of_block_based_analysis.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://www.immunitysec.com/downloads/advantages_of_block_based_analysis.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DART: 定向自动化随机测试(2005)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://wkr.io/public/ref/godefroid2005dart.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wkr.io/public/ref/godefroid2005dart.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;EXE: 自动生成致命输入(2006)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://web.stanford.edu/~engler/exe-ccs-06.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://web.stanford.edu/~engler/exe-ccs-06.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;EXE: 十年后(2016)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://ccadar.blogspot.com/2016/11/exe-10-years-later.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://ccadar.blogspot.com/2016/11/exe-10-years-later.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;自动化白盒模糊测试(2008)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://patricegodefroid.github.io/public_psfiles/ndss2008.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://patricegodefroid.github.io/public_psfiles/ndss2008.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;American Fuzzy Lop (AFL)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://lcamtuf.coredump.cx/afl/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://lcamtuf.coredump.cx/afl/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DARPA网络大挑战参赛者门户(2013)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://archive.darpa.mil/CyberGrandChallenge_CompetitorSite/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://archive.darpa.mil/CyberGrandChallenge_CompetitorSite/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;漏洞利用与状态机(2011)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://archives.scovetta.com/pub/conferences/infiltrate_2011/Fundamentals_of_exploitation_revisited.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://archives.scovetta.com/pub/conferences/infiltrate_2011/Fundamentals_of_exploitation_revisited.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;你的工具比我的好？证明它(2016)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.trailofbits.com/2016/08/01/your-tool-works-better-than-mine-prove-it/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.trailofbits.com/2016/08/01/your-tool-works-better-than-mine-prove-it/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;微软Springfield(2016)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/en-us/springfield/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.microsoft.com/en-us/springfield/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Google OSS-Fuzz(2016)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/google/oss-fuzz&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/google/oss-fuzz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LLVM libFuzzer&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://llvm.org/docs/LibFuzzer.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://llvm.org/docs/LibFuzzer.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GRR - DECREE二进制文件的高通量模糊测试器和模拟器&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/grr&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/trailofbits/grr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Manticore - Python符号执行平台&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/manticore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/trailofbits/manticore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McSema - x86到机器码翻译框架&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/mcsema&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/trailofbits/mcsema&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DARPA多操作系统挑战集&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/cb-multios&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/trailofbits/cb-multios&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Trail of Bits关于网络大挑战的出版物&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.trailofbits.com/category/cyber-grand-challenge/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.trailofbits.com/category/cyber-grand-challenge/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;勘误&#34;&gt;勘误
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;奥卢大学位于芬兰&lt;/li&gt;
+&lt;li&gt;威斯康星大学在1988年就布置了模糊测试作业&lt;/li&gt;
+&lt;li&gt;SV-Comp用于软件验证，也存在机器学习竞赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你喜欢这篇文章，请分享至：
+[Twitter] [LinkedIn] [GitHub] [Mastodon] [Hacker News]&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

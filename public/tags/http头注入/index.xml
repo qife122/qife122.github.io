@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>HTTP头注入 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/http%E5%A4%B4%E6%B3%A8%E5%85%A5/</link>
+        <description>Recent content in HTTP头注入 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 14:11:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/http%E5%A4%B4%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金</title>
+        <link>http://localhost:1313/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+        <pubDate>Sun, 03 Aug 2025 14:11:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+        <description>&lt;h1 id=&#34;从429到200利用x-overwriting头实现速率限制绕过与漏洞赏金&#34;&gt;从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金
+&lt;/h1&gt;&lt;p&gt;Akwaaba！朋友们。在本报告中，我将展示如何绕过某组织匆忙实施的速率限制机制。如果你对我的其他研究感兴趣，可以参考我之前关于《如何绕过Google验证码实现CSRF与XSS链式攻击》的文章，或者关于《Android Intent重定向攻击》的移动端渗透测试文章。&lt;/p&gt;
+&lt;h2 id=&#34;速率限制技术解析&#34;&gt;速率限制技术解析
+&lt;/h2&gt;&lt;p&gt;速率限制是开发者用来控制用户/系统在特定时间范围内请求次数的技术。在API中，标准响应状态码为429（请求过多），但许多开发者会采用非标准实现。常见实现方式包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于IP地址的限制&lt;/li&gt;
+&lt;li&gt;基于电子邮件的限制&lt;/li&gt;
+&lt;li&gt;基于设备/会话的限制&lt;/li&gt;
+&lt;li&gt;基于地理位置的限制&lt;/li&gt;
+&lt;li&gt;端点专用限制等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如微软会在多次错误登录后给予冷却期，而Snapchat则会直接临时锁定账户。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;在某HackerOne项目的测试中，我最初发现其应用存在速率限制缺失问题。在厂商修复后，我重新检测登录端点发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;5次错误登录触发429状态码&lt;/li&gt;
+&lt;li&gt;响应体中包含用户公网IP参数&lt;/li&gt;
+&lt;li&gt;确认采用IP基础的计数机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;利用x-overwriting头绕过&#34;&gt;利用X-Overwriting头绕过
+&lt;/h2&gt;&lt;p&gt;为绕过IP限制，除了VPN切换外，更有效的方法是使用下列HTTP覆盖头：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;X-HTTP-Method-Override&lt;/code&gt;：覆盖HTTP方法&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;X-Original-URL/X-Rewrite-URL&lt;/code&gt;：URL重写&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;X-Forwarded-For&lt;/code&gt;：声明原始客户端IP&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;X-Real-IP&lt;/code&gt;：替代IP传递方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过Burp Suite测试：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注入&lt;code&gt;X-Forwarded-For: 127.0.0.1&lt;/code&gt;头&lt;/li&gt;
+&lt;li&gt;观察到状态码从429变为401&lt;/li&gt;
+&lt;li&gt;响应体显示伪造IP与剩余尝试次数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;自动化暴力破解配置&#34;&gt;自动化暴力破解配置
+&lt;/h2&gt;&lt;p&gt;使用Burp Intruder进行自动化攻击：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;采用Sniper攻击模式&lt;/li&gt;
+&lt;li&gt;对IP地址某个字节设置数字载荷（1-500）&lt;/li&gt;
+&lt;li&gt;每个请求自动变更X-Forwarded-For值&lt;/li&gt;
+&lt;li&gt;利用无效IP（如256+字节值）实现无限尝试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防护方案建议&#34;&gt;防护方案建议
+&lt;/h2&gt;&lt;p&gt;针对IP基础速率限制的防护措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仅信任已知内部代理的X-Forwarded-For头&lt;/li&gt;
+&lt;li&gt;优先使用网络层REMOTE_ADDR值&lt;/li&gt;
+&lt;li&gt;在应用前置反向代理/WAF（如Cloudflare、AWS WAF）&lt;/li&gt;
+&lt;li&gt;实施多因素速率限制策略（IP+会话+行为）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别说明：本文所有技术细节已获得相关厂商授权披露，仅供学习防御技术使用。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;通过Twitter @tinopreter或LinkedIn Clement Osei-Somuah与我交流更多安全研究。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

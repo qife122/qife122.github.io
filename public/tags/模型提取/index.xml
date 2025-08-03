@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>模型提取 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96/</link>
+        <description>Recent content in 模型提取 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 10:57:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PrivacyRaven：深度学习隐私攻击模拟工具全面解析</title>
+        <link>http://localhost:1313/p/privacyraven%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9A%90%E7%A7%81%E6%94%BB%E5%87%BB%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 10:57:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/privacyraven%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9A%90%E7%A7%81%E6%94%BB%E5%87%BB%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;深度学习系统的隐私危机&#34;&gt;深度学习系统的隐私危机
+&lt;/h3&gt;&lt;p&gt;深度学习技术已广泛应用于欺诈检测、医疗诊断、自动驾驶等敏感领域，但这类系统存在严重隐私漏洞：攻击者可能窃取训练数据（成员推理攻击）、复制模型知识产权（模型提取攻击），甚至重建原始输入数据（模型反转攻击）。医疗CAT扫描诊断系统案例显示，即便仅返回&amp;quot;是/否&amp;quot;预测结果，攻击者仍能通过PrivacyRaven完整复现患者扫描影像。&lt;/p&gt;
+&lt;h3 id=&#34;工具设计理念&#34;&gt;工具设计理念
+&lt;/h3&gt;&lt;p&gt;PrivacyRaven通过三层设计解决现有安全工具易用性不足的问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;可用性&lt;/strong&gt;：支持自动化流程与手动控制双模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活性&lt;/strong&gt;：模块化架构允许自由组合不同论文中的攻击技术&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高效性&lt;/strong&gt;：15行代码即可发起完整攻击流程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;核心攻击模拟&#34;&gt;核心攻击模拟
+&lt;/h3&gt;&lt;h4 id=&#34;1-模型提取攻击&#34;&gt;1. 模型提取攻击
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;高精度模式&lt;/strong&gt;：用于商业窃取（如绕过MLaaS计费）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高保真模式&lt;/strong&gt;：用于后续攻击侦查&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;三阶段流程&lt;/strong&gt;：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 合成阶段：利用对抗样本生成数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 训练阶段：构建替代模型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 再训练阶段：优化数据质量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-成员推理攻击&#34;&gt;2. 成员推理攻击
+&lt;/h4&gt;&lt;p&gt;集成模型提取API实现标签推断攻击，可检测特定数据是否存在于训练集，医疗场景下可能泄露患者参与信息。&lt;/p&gt;
+&lt;h4 id=&#34;3-模型反转攻击开发中&#34;&gt;3. 模型反转攻击（开发中）
+&lt;/h4&gt;&lt;p&gt;通过逆向神经网络重建训练数据，如还原医疗影像原始数据集。&lt;/p&gt;
+&lt;h3 id=&#34;技术实现特征&#34;&gt;技术实现特征
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 典型攻击示例（PyTorch Lightning模型）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;query_fn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wrap_model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;victim_model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 蓝框：模型封装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;emnist_data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get_dataset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;EMNIST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 红框：种子数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;attack&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ModelExtractionAttack&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;copycat_synthesizer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ImageNetTLClassifier&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 绿框：攻击配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;未来路线图&#34;&gt;未来路线图
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;可视化指标界面开发&lt;/li&gt;
+&lt;li&gt;集成Optuna超参数优化&lt;/li&gt;
+&lt;li&gt;联邦学习专用攻击模块&lt;/li&gt;
+&lt;li&gt;差分隐私验证工具&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防御新思路&#34;&gt;防御新思路
+&lt;/h3&gt;&lt;p&gt;当前防御手段如差分隐私和状态检测仍不完善，PrivacyRaven的测试结果可能催生新型防护机制。该工具已开源，欢迎通过GitHub贡献代码（合成技术改进/攻击函数优化等）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;项目地址：&lt;code&gt;https://github.com/trailofbits/PrivacyRaven&lt;/code&gt;&lt;br&gt;
+技术咨询：suha.hussain@trailofbits.com | @suhackerr&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

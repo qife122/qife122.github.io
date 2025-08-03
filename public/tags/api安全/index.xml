@@ -7,7 +7,37 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 13:55:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+        <pubDate>Sun, 03 Aug 2025 13:55:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+        <description>&lt;h1 id=&#34;通过swagger-ui进行钓鱼攻击利用错误配置获取漏洞赏金&#34;&gt;通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;Swagger UI是一个开源工具，帮助开发者可视化和交互由OpenAPI规范定义的API端点。虽然它对测试和文档非常有用，但暴露或错误配置的Swagger实例可能导致严重的安全问题，如DOM XSS、HTML注入和开放重定向。随着漏洞赏金平台对此类漏洞的奖励，保护Swagger UI不仅至关重要，也是道德黑客的宝贵目标。&lt;/p&gt;
+&lt;h2 id=&#34;为什么swagger-ui可能很危险&#34;&gt;为什么Swagger UI可能很危险
+&lt;/h2&gt;&lt;p&gt;问题不在于Swagger本身，而在于开发者部署它的方式——有时公开部署，有时包含敏感端点，并且经常没有身份验证和输入清理。常见问题包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在互联网上暴露Swagger UI，包含生产端点。&lt;/li&gt;
+&lt;li&gt;文档缺乏访问控制。&lt;/li&gt;
+&lt;li&gt;输入清理不当，允许XSS和HTML注入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;侦察阶段寻找swagger-ui&#34;&gt;侦察阶段——寻找Swagger UI
+&lt;/h2&gt;&lt;p&gt;使用Subfinder收集所有子域名。关键技巧如下：&lt;/p&gt;
+&lt;p&gt;命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;subfinder -d example&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;com --all &amp;gt;&amp;gt; subs.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;总是寻找类似&lt;code&gt;grafana.example.com&lt;/code&gt;的子域名，如果你找到这样的子域名，那么你就走运了！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
         <link>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
         <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>

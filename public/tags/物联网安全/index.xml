@@ -7,7 +7,26 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 21:04:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 12:29:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>BadAlloc漏洞：内存分配漏洞可能影响工业、医疗和企业网络中的广泛IoT和OT设备</title>
+        <link>http://localhost:1313/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</link>
+        <pubDate>Sun, 03 Aug 2025 12:29:02 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</guid>
+        <description>&lt;p&gt;微软Azure Defender for IoT安全研究团队Section 52最近发现了一系列存在于IoT和OT设备中的关键内存分配漏洞，攻击者可能利用这些漏洞绕过安全控制执行恶意代码或导致系统崩溃。&lt;/p&gt;
+&lt;p&gt;这些远程代码执行(RCE)漏洞涉及超过25个CVE编号，潜在影响范围从消费级和医疗IoT到工业物联网(IIoT)、运营技术(OT)和工业控制系统。漏洞存在于广泛使用的实时操作系统(RTOS)、嵌入式软件开发套件(SDK)和C标准库(libc)实现的标准内存分配函数中。这些发现已通过微软安全响应中心(MSRC)和国土安全部(DHS)领导的责任披露流程与供应商共享，使供应商能够调查并修补漏洞。&lt;/p&gt;
+&lt;p&gt;鉴于IoT和OT设备的普遍性，这些漏洞如果被成功利用，将对各类组织构成重大潜在风险。截至目前，微软尚未发现这些漏洞被利用的迹象。但我们强烈建议组织尽快修补系统。&lt;/p&gt;
+&lt;p&gt;对于无法立即修补的设备，我们建议采取以下缓解措施：通过最小化或消除漏洞设备对互联网的暴露来减少攻击面；实施网络安全监控以检测入侵行为指标；加强网络分段以保护关键资产。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;BadAlloc&amp;quot;是微软Section 52为嵌入式IoT和OT操作系统及软件中发现的内存溢出漏洞家族命名的名称。所有这些漏洞都源于使用易受攻击的内存函数，如malloc、calloc、realloc等。我们的研究表明，多年来作为IoT设备和嵌入式软件一部分编写的内存分配实现没有包含适当的输入验证。没有这些输入验证，攻击者可能利用内存分配函数执行堆溢出，从而在目标设备上执行恶意代码。&lt;/p&gt;
+&lt;p&gt;我们建议拥有IoT和OT设备的组织采取以下缓解措施：
+• 打补丁：按照供应商说明为受影响产品应用补丁
+• 无法打补丁时进行监控：使用Azure Defender for IoT等IoT/OT感知的网络检测和响应(NDR)解决方案
+• 通过消除OT控制系统的不必要互联网连接来减少攻击面
+• 实施网络分段：使用防火墙将IoT设备和OT网络与企业IT网络隔离&lt;/p&gt;
+&lt;p&gt;微软Section 52是Azure Defender for IoT的安全研究团队，由在IoT/OT威胁追踪、恶意软件逆向工程、事件响应和数据分析方面具有深厚专业知识的安全研究人员和数据科学家组成。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>欢迎参与Azure Sphere安全研究——现已正式发布</title>
         <link>http://localhost:1313/p/%E6%AC%A2%E8%BF%8E%E5%8F%82%E4%B8%8Eazure-sphere%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E7%8E%B0%E5%B7%B2%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</link>
         <pubDate>Fri, 01 Aug 2025 21:04:07 +0800</pubDate>

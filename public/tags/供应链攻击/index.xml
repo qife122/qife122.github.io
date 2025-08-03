@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>供应链攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in 供应链攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 12:12:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Earth Ammit组织通过多波次协同攻击破坏台湾无人机供应链</title>
+        <link>http://localhost:1313/p/earth-ammit%E7%BB%84%E7%BB%87%E9%80%9A%E8%BF%87%E5%A4%9A%E6%B3%A2%E6%AC%A1%E5%8D%8F%E5%90%8C%E6%94%BB%E5%87%BB%E7%A0%B4%E5%9D%8F%E5%8F%B0%E6%B9%BE%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%BE%9B%E5%BA%94%E9%93%BE/</link>
+        <pubDate>Sun, 03 Aug 2025 12:12:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/earth-ammit%E7%BB%84%E7%BB%87%E9%80%9A%E8%BF%87%E5%A4%9A%E6%B3%A2%E6%AC%A1%E5%8D%8F%E5%90%8C%E6%94%BB%E5%87%BB%E7%A0%B4%E5%9D%8F%E5%8F%B0%E6%B9%BE%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%BE%9B%E5%BA%94%E9%93%BE/</guid>
+        <description>&lt;img src="https://example.com/earth_ammit_attack.jpg" alt="Featured image of post Earth Ammit组织通过多波次协同攻击破坏台湾无人机供应链" /&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;Earth Ammit是一个与中文APT组织有关联的威胁行为体，在2023-2024年发动了两波攻击。第一波VENOM主要针对软件服务提供商，第二波TIDRONE针对军事工业。在VENOM行动中，攻击者重点渗透无人机供应链上游。&lt;/p&gt;
+&lt;h2 id=&#34;攻击活动分析&#34;&gt;攻击活动分析
+&lt;/h2&gt;&lt;h3 id=&#34;venom行动&#34;&gt;VENOM行动
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;主要依赖开源工具（成本低且难以追踪）&lt;/li&gt;
+&lt;li&gt;使用定制化工具VENFRPC（配置直接嵌入文件）&lt;/li&gt;
+&lt;li&gt;通过Webshell初始访问，使用开源代理工具维持持久性&lt;/li&gt;
+&lt;li&gt;窃取NTDS数据用于下游攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tidrone行动&#34;&gt;TIDRONE行动
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;使用定制化后门CXCLNT和CLNTEND&lt;/li&gt;
+&lt;li&gt;采用光纤技术（FlsAlloc等）规避检测&lt;/li&gt;
+&lt;li&gt;通过供应链攻击传播（图3展示两种供应链攻击路径）&lt;/li&gt;
+&lt;li&gt;执行权限提升、持久化、凭证窃取等后期攻击行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术演进&#34;&gt;技术演进
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;加载器技术从ConvertThreadToFiber发展到FlsAlloc和异常处理&lt;/li&gt;
+&lt;li&gt;后门从CXCLNT（EXE内存加载）演进到CLNTEND（DLL形式）&lt;/li&gt;
+&lt;li&gt;新增反分析技术：入口点验证和执行顺序依赖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;实施第三方风险管理计划&lt;/li&gt;
+&lt;li&gt;强制代码签名&lt;/li&gt;
+&lt;li&gt;监控光纤相关API使用&lt;/li&gt;
+&lt;li&gt;采用零信任架构&lt;/li&gt;
+&lt;li&gt;加强EDR和行为监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;趋势科技Vision One平台可检测和阻止相关恶意活动，客户可通过威胁情报报告获取最新IOC和狩猎查询。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Linux内核 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/linux%E5%86%85%E6%A0%B8/</link>
+        <description>Recent content in Linux内核 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 10:07:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux%E5%86%85%E6%A0%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux内核v4.15安全技术深度解析</title>
+        <link>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 10:07:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;linux内核v415安全技术解析&#34;&gt;Linux内核v4.15安全技术解析
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;发布日期&lt;/strong&gt;：2018年2月5日&lt;br&gt;
+&lt;strong&gt;分类&lt;/strong&gt;：Chrome OS, Debian, 内核, 安全, Ubuntu, Ubuntu-Server&lt;/p&gt;
+&lt;p&gt;[前情提要：v4.14版本]&lt;/p&gt;
+&lt;p&gt;上周发布的Linux内核v4.15包含多项重要安全改进：&lt;/p&gt;
+&lt;h2 id=&#34;内核页表隔离pti&#34;&gt;内核页表隔离(PTI)
+&lt;/h2&gt;&lt;p&gt;虽然PTI已获广泛报道，但简而言之，它主要用于防御CPU缓存时序侧信道攻击（CVE-2017-5754，即推测执行的&amp;quot;恶意数据缓存加载&amp;quot;或&amp;quot;Meltdown&amp;quot;漏洞）。x86_64架构（通过CONFIG_PAGE_TABLE_ISOLATION配置）的PTI实现涉及大量工作，数十人参与开发数月。PowerPC也已加入缓解措施，arm64（通过CONFIG_UNMAP_KERNEL_AT_EL0配置）将在v4.16支持PTI（仅Cortex-A75受影响）。x86_32架构的支持正在开发中。&lt;/p&gt;
+&lt;p&gt;x86_64 PTI的额外优势是：由于现在存在两份页表副本，内核模式的用户空间映射可完全标记为不可执行，这意味着前SMEP硬件现在获得SMEP模拟功能。试图跳转到用户空间内存继续执行恶意代码的内核攻击将失效（即使攻击者先关闭了SMEP）。通过进一步工作，还可引入SMAP模拟（阻止读取恶意用户空间内存），从而关闭这些常见攻击向量。值得注意的是，arm64自v4.10起就具备等效功能（PAN模拟）。&lt;/p&gt;
+&lt;h2 id=&#34;retpoline防御机制&#34;&gt;Retpoline防御机制
+&lt;/h2&gt;&lt;p&gt;除PTI外，针对CVE-2017-5715（&amp;ldquo;分支目标注入&amp;quot;或&amp;quot;Spectre变种2&amp;rdquo;）的retpoline内核缓解措施开始落地。（注意：要获得完整retpoline支持，需要打补丁的编译器，如gcc 7.3/8+版本，目前clang也已排队等待发布。）&lt;/p&gt;
+&lt;p&gt;这项工作仍在演进，清理工作将持续到v4.16。v4.16还将包含针对其他推测执行变种（CVE-2017-5753，&amp;ldquo;边界检查绕过&amp;quot;或&amp;quot;Spectre变种1&amp;rdquo;）的缓解措施。&lt;/p&gt;
+&lt;h2 id=&#34;x86快速refcount_t溢出保护&#34;&gt;x86快速refcount_t溢出保护
+&lt;/h2&gt;&lt;p&gt;v4.13引入了CONFIG_REFCOUNT_FULL代码来阻止多种引用计数缺陷（伴随微小性能损失）。v4.14为x86快速溢出专用refcount_t保护（基于grsecurity的PAX_REFCOUNT）奠定了基础，但因bug推迟到v4.15修复。由于改动很小，快速refcount_t保护已反向移植并在长期维护内核v4.14.5中启用。从atomic_t到refcount_t的转换持续进行，目前已超过168处，仅剩少量待转换。&lt;/p&gt;
+&lt;h2 id=&#34;p地址哈希化&#34;&gt;%p地址哈希化
+&lt;/h2&gt;&lt;p&gt;内核信息泄露的众多来源之一是%p格式说明符。这些字符串最终出现在各种位置（dmesg、/sys文件、/proc文件等），且使用分散在整个内核中，使其成为难以修复的泄露源。早期像kptr_restrict的%pK这样的方案效果有限，因为它是选择加入的。虽然最近有人尝试（如William C Roberts、Greg KH等）提供让%p像%pK一样工作的开关，但Linus最终介入并声明%p应该极少使用以至于根本不该使用。Tobin Harding承担了寻找正确路径的任务，最终实现用每启动随机密钥对%p输出进行哈希处理。结果是简单调试仍可工作（相同哈希值的两个报告可以确认相同地址而不泄露实际地址），但阻碍了攻击者利用此类信息泄露作为漏洞利用构建块的能力。&lt;/p&gt;
+&lt;p&gt;对于需要未哈希%p的开发者，引入了%px，但如Linus警告：要么你的%p在哈希后仍有用，要么你的%p原本就无用应该删除，要么你需要用合理权限充分证明使用%px的正当性。&lt;/p&gt;
+&lt;h2 id=&#34;timer_list结构重构&#34;&gt;timer_list结构重构
+&lt;/h2&gt;&lt;p&gt;内核定时器（struct timer_list）基础设施用于创建在特定时间后执行的回调。作为内核更基础的部分之一，它已存在很长时间，有超过1000个调用点。虽然API随时间改进，但旧方式仍然存在。现代内核回调接收指向与回调关联结构的参数，以便回调知道哪个实例被触发。定时器回调没有这样做，而是接收unsigned long参数，该参数被强制转换回代码设置定时器时想要关联回调的任何上下文，并且该变量与回调函数指针一起存储在struct timer_list中。这为试图利用内存破坏漏洞（如堆溢出）的攻击者创造了机会，他们不仅能覆盖函数指针，还能覆盖内存中存储的参数。这将攻击提升为弱ROP，并已被用作现代漏洞利用中禁用SMEP的基础（参见retire_blk_timer）。为消除内核设计中的这一弱点，我重构了定时器回调API及其所有调用者，改动规模达：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1128 files changed, 4834 insertions(+), 5926 deletions(-)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重构的另一好处是：一旦内核开始由支持控制流完整性(CFI)的编译器构建，定时器回调将不会与所有其他接收单个unsigned long参数的函数混为一谈。（换句话说，某些CFI实现不会捕获上述攻击，因为攻击者的目标函数仍匹配其原始原型。）&lt;/p&gt;
+&lt;p&gt;目前就这些；如有遗漏请告知。v4.16合并窗口现已开启！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;评论精选&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Nick提问&lt;/strong&gt;：关于KPTI，是否建议为AMD CPU启用？特别是考虑到KPTI本应更好地保护KASLR，而且用户空间和内核空间的分离本质上更好，尽管有性能损失。&lt;br&gt;
+&lt;strong&gt;kees回复&lt;/strong&gt;：对于没有SMEP的CPU，我建议无条件保持KPTI开启。对于SMEP机器，我仍会启用它，因为它为各种缓存时序攻击（包括许多常见的KASLR泄漏）提供了良好的隔离。最终取决于你的工作负载。如果能承受微小性能变化，就启用它。&lt;br&gt;
+&lt;strong&gt;Nick补充&lt;/strong&gt;：这也是我的第一想法，在安全方面不做半吊子措施。即使AMD CPU默认排除在KPTI之外。可以预期未来会有进一步优化来减少KPTI性能损失。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;许可声明&lt;/strong&gt;：本文采用知识共享署名-相同方式共享4.0国际许可协议授权。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

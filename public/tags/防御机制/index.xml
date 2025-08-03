@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>防御机制 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6/</link>
+        <description>Recent content in 防御机制 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 12:56:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sun, 03 Aug 2025 12:56:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;通过ms13-063缓解ldrhotpatchroutine-depaslr绕过技术&#34;&gt;通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术
+&lt;/h1&gt;&lt;p&gt;今天，我们发布了MS13-063安全更新，其中包含一项深度防御变更，用于解决可能被用来绕过两个重要平台防护措施的技术：地址空间布局随机化（ASLR）和数据执行保护（DEP）。正如我们过去所述，这些防护措施在增加攻击者利用漏洞的难度和成本方面发挥着重要作用。MS13-063所解决的绕过技术是由NSFocus安全实验室的Yang Yu在今年早些时候的CanSecWest安全会议上描述的。该绕过技术也被其他研究人员独立发现，并被VUPEN用于他们在Pwn2Own 2013比赛中的一个漏洞利用中。几个月前，我们发布了EMET 4.0，其中包含针对这一特定绕过技术的防护措施。在这篇博客文章中，我们希望提供一些关于该绕过技术如何工作以及MS13-063如何解决它的背景信息。&lt;/p&gt;
+&lt;h2 id=&#34;绕过技术的工作原理&#34;&gt;绕过技术的工作原理
+&lt;/h2&gt;&lt;p&gt;该绕过技术利用了名为SharedUserData的可预测内存区域，该区域存在于每个受支持Windows版本的每个进程中的固定位置（0x7ffe0000）。在Windows 8之前的64位Windows版本上，该区域包含指向WOW64进程使用的32位NTDLL中多个函数的指针，如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SharedUserData中的函数指针&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这些指针存在于内存中的可预测位置，使得攻击者如果能够在内存中任意读取，就可以绕过ASLR。在这种情况下，绕过技术更进一步，利用了上述函数之一：LdrHotPatchRoutine。该函数是Windows提供的热补丁支持的一部分，其被调用时的一个显著行为是加载一个DLL，该DLL的路径作为第一个参数的字段传入。这意味着，如果攻击者能够利用漏洞调用LdrHotPatchRoutine，他们可以通过加载他们选择的恶意DLL（例如来自UNC路径）来执行任意代码，从而隐式绕过DEP。&lt;/p&gt;
+&lt;p&gt;根据被利用的漏洞类型，攻击者可以相对简单地通过SharedUserData中的LdrHotPatchRoutine指针触发调用，并控制参数，从而绕过ASLR和DEP。涉及带有虚表指针的C++对象的释放后使用漏洞特别适合应用此技术。这些漏洞近年来已成为漏洞利用编写者的首选漏洞类别。释放后使用问题特别适合的原因在于，攻击者通常在虚方法调用之前控制已释放的C++对象的全部内容。因此，攻击者只需要一个虚方法调用点，可以控制被调用的虚表指针和传递给虚方法的第一个参数。例如，假设EDX指向攻击者控制的内存：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov ecx, [edx+0x4] ; 将指向伪造对象的指针加载到ECX
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov eax, [ecx] ; 将伪造的虚表指针0x7ffe0344加载到EAX
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;push ecx ; 将指向受控内容的指针作为第一个参数压栈
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;call [eax+0xc] ; 调用指向LdrHotPatchRoutine的指针
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由于上述序列，LdrHotPatchRoutine将被调用，并且作为第一个参数传递的伪造结构中引用的DLL路径将被加载，从而绕过ASLR和DEP。&lt;/p&gt;
+&lt;h2 id=&#34;修复措施的工作原理&#34;&gt;修复措施的工作原理
+&lt;/h2&gt;&lt;p&gt;上述绕过技术依赖于可以在内存中的可预测位置找到指向LdrHotPatchRoutine的指针。因此，缓解此绕过的一种方法是简单地从SharedUserData中消除可预测的LdrHotPatchRoutine指针。这是在MS13-063安全更新中采取的方法。在64位Windows 7上安装此更新后，我们可以看到不仅指向LdrHotPatchRoutine的指针被消除，而且所有其他映像指针也被消除：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;修复后的SharedUserData&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;因此，不仅LdrHotPatchRoutine绕过被缓解，任何依赖利用64位Windows上SharedUserData中存在的映像指针的绕过也被缓解。在Windows 8的开发过程中，我们已经意识到滥用这些指针的可能性，因此在Windows 8的32位和64位版本中，我们从SharedUserData中消除了所有映像指针。这就是为什么Windows 8不受此绕过技术影响的原因。需要注意的是，尽管MS13-063在64位Windows 7上从SharedUserData中移除了所有映像指针，但在32位Windows 7及更早版本中，SharedUserData中仍然存在一个映像指针（SystemCall函数指针）。&lt;/p&gt;
+&lt;p&gt;对于那些好奇的人来说，最初存储在SharedUserData中的指针现在已被移动到一个名为LdrSystemDllInitBlock的NTDLL中的导出全局数据结构中。该数据结构在进程初始化期间填充所需的指针。由于NTDLL通过ASLR随机化，攻击者无法可靠地预测这些指针在内存中的存储位置。&lt;/p&gt;
+&lt;h2 id=&#34;赏金计划&#34;&gt;赏金计划
+&lt;/h2&gt;&lt;p&gt;尽管在公开描述之前我们已经了解了此绕过技术的基础，但它是一个很好的例子，说明了一种可能符合我们最近宣布的“绕过防护赏金计划”的技术。该赏金计划为影响我们产品最新版本的新颖漏洞利用技术提供丰厚的奖励（高达100,000美元）。在这种情况下，该绕过技术是通用的，可以变得可靠，具有合理的要求，适用于高影响的用户模式应用程序域，并且具有使其新颖的元素。发现和缓解这种性质的漏洞利用技术可以帮助我们通过打破攻击者依赖开发可靠漏洞利用的技术，使我们的平台更安全。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Matt Miller和William Peteroy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特别感谢Windows持续工程团队的同事们在发布这一深度防御更新中所做的工作。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

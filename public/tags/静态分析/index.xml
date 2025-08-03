@@ -7,7 +7,40 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 00:44:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 17:17:36 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Trail of Bits发布《测试手册》——聚焦Semgrep静态分析工具与CI/CD优化</title>
+        <link>http://localhost:1313/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</link>
+        <pubDate>Sun, 03 Aug 2025 17:17:36 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</guid>
+        <description>&lt;h3 id=&#34;为什么编写测试手册&#34;&gt;为什么编写《测试手册》？
+&lt;/h3&gt;&lt;p&gt;在Trail of Bits，我们投入了大量时间研究、实验和优化各类静态与动态安全工具。实践中发现，现有文档虽然全面但过于庞杂。标准文档试图提供所有答案，而我们的《测试手册》只提供经过实战验证的最有效方案。&lt;/p&gt;
+&lt;p&gt;手册不仅是配置指南，更是CI/CD流水线中工具优化的蓝图。许多组织能搭建安全工具却难以优化，最终导致工具维护成本远超其价值。我们的目标是直击核心价值，剔除噪音，指引您掌握工具最具影响力的功能。&lt;/p&gt;
+&lt;h3 id=&#34;首章发布semgrep专项&#34;&gt;首章发布：Semgrep专项
+&lt;/h3&gt;&lt;p&gt;首章聚焦高效静态分析工具Semgrep，专精于低复杂度缺陷和特定代码模式检测。本章将帮助您：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解Semgrep的优势与适用场景&lt;/li&gt;
+&lt;li&gt;完成初始配置并定制优化规则集&lt;/li&gt;
+&lt;li&gt;编写/测试自定义规则，运用自动修复功能&lt;/li&gt;
+&lt;li&gt;实现CI/CD集成（含推荐配置方案）&lt;/li&gt;
+&lt;li&gt;获取外部资源库（规则模板/技术文章/视频教程）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.trailofbits.com/testing-handbook-semgrep&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;立即查阅Semgrep章节&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;近期文章推荐&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;《非常规创新者奖学金》&lt;/li&gt;
+&lt;li&gt;《PajaMAS多智能体系统劫持技术》&lt;/li&gt;
+&lt;li&gt;《构建MCP亟需的安全层》&lt;/li&gt;
+&lt;li&gt;《废弃硬件中的零日漏洞利用》&lt;/li&gt;
+&lt;li&gt;《EthCC[8]实录：如何成为智能合约审计师》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;© 2025 Trail of Bits&lt;br&gt;
+Hugo构建 | Mainroad主题&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用Binary Ninja进行反向污点分析 - 追踪程序崩溃根源</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8binary-ninja%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90-%E8%BF%BD%E8%B8%AA%E7%A8%8B%E5%BA%8F%E5%B4%A9%E6%BA%83%E6%A0%B9%E6%BA%90/</link>
         <pubDate>Sun, 03 Aug 2025 00:44:21 +0800</pubDate>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JavaScript安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/javascript%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in JavaScript安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 09:01:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/javascript%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过GitHub进行JavaScript侦察：在访问应用前发现敏感信息</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</link>
+        <pubDate>Sun, 03 Aug 2025 09:01:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</guid>
+        <description>&lt;p&gt;“大多数敏感信息并不在前端——它们隐藏在版本控制的坟墓中。”&lt;/p&gt;
+&lt;h3 id=&#34;-github为何是js侦察的金矿&#34;&gt;⚡ GitHub为何是JS侦察的金矿
+&lt;/h3&gt;&lt;p&gt;现代Web应用通常由庞大的前端JavaScript包驱动——这些文件通过CDN分发、嵌入HTML或由现代框架（React、Vue、Angular）构建。而这些JS文件并非凭空产生。&lt;/p&gt;
+&lt;p&gt;它们诞生、演变并在GitHub仓库中被意外错误配置——这正是价值所在。因此，与其从Burp或浏览器开发者工具开始，您可以直接从源头GitHub展开侦察。&lt;/p&gt;
+&lt;h3 id=&#34;-在github进行js侦察时的关键目标&#34;&gt;🔍 在GitHub进行JS侦察时的关键目标
+&lt;/h3&gt;&lt;h4 id=&#34;1-泄露的内部js文件&#34;&gt;1️⃣ 泄露的内部JS文件
+&lt;/h4&gt;&lt;p&gt;重点查找：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin.js&lt;/code&gt;, &lt;code&gt;internal.js&lt;/code&gt;, &lt;code&gt;beta.js&lt;/code&gt;, &lt;code&gt;staging.bundle.js&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;debug.js&lt;/code&gt;, &lt;code&gt;test.js&lt;/code&gt;, &lt;code&gt;monitor.js&lt;/code&gt;, &lt;code&gt;analytics.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些文件通常包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;未在生产环境暴露的内部API路径&lt;/li&gt;
+&lt;li&gt;功能开关&lt;/li&gt;
+&lt;li&gt;暴露逻辑路径的JS条件语句（例如&lt;code&gt;if (user.isAdmin)&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-暴露的端点&#34;&gt;2️⃣ 暴露的端点
+&lt;/h4&gt;&lt;p&gt;检查以下调用内部：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;axios.get&lt;/code&gt;, &lt;code&gt;fetch()&lt;/code&gt;, &lt;code&gt;$.ajax&lt;/code&gt;, &lt;code&gt;XMLHttpRequest&lt;/code&gt;或自定义&lt;code&gt;apiClient.get&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Python工具链 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/python%E5%B7%A5%E5%85%B7%E9%93%BE/</link>
+        <description>Recent content in Python工具链 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 17:39:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/python%E5%B7%A5%E5%85%B7%E9%93%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Trail of Bits 2021开源贡献盘点：编译器加固、macOS安全监控与Python工具链升级</title>
+        <link>http://localhost:1313/p/trail-of-bits-2021%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E7%9B%98%E7%82%B9%E7%BC%96%E8%AF%91%E5%99%A8%E5%8A%A0%E5%9B%BAmacos%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E4%B8%8Epython%E5%B7%A5%E5%85%B7%E9%93%BE%E5%8D%87%E7%BA%A7/</link>
+        <pubDate>Sun, 03 Aug 2025 17:39:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/trail-of-bits-2021%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E7%9B%98%E7%82%B9%E7%BC%96%E8%AF%91%E5%99%A8%E5%8A%A0%E5%9B%BAmacos%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E4%B8%8Epython%E5%B7%A5%E5%85%B7%E9%93%BE%E5%8D%87%E7%BA%A7/</guid>
+        <description>&lt;h3 id=&#34;开源使命宣言&#34;&gt;开源使命宣言
+&lt;/h3&gt;&lt;p&gt;在Trail of Bits，我们以开源核心工具为荣（如algo、manticore和graphtage）。本文重点不在于我们的工具，而是我们在外部项目中的贡献——2021年，团队提交的190多个PR被非自有仓库合并，体现了我们对整个软件生态安全的承诺。&lt;/p&gt;
+&lt;h3 id=&#34;关键技术贡献&#34;&gt;关键技术贡献
+&lt;/h3&gt;&lt;h4 id=&#34;llvm编译器基础设施&#34;&gt;LLVM编译器基础设施
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;作为clang/rustc/swiftc的后端，我们修复了包括：
+&lt;ul&gt;
+&lt;li&gt;修正clang AST dump模式的JSON输出有效性&lt;/li&gt;
+&lt;li&gt;强化bitcode格式校验&lt;/li&gt;
+&lt;li&gt;文档错误修正&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;nixpkgs软件集合&#34;&gt;Nixpkgs软件集合
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;对80,000+软件包的改进：
+&lt;ul&gt;
+&lt;li&gt;Go/Protobuf/SBV等核心包修复&lt;/li&gt;
+&lt;li&gt;libff在ARM架构的构建修复&lt;/li&gt;
+&lt;li&gt;Haskell工具链hevm的兼容性修正&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;osquery系统监控框架&#34;&gt;Osquery系统监控框架
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;macOS深度集成：
+&lt;ul&gt;
+&lt;li&gt;基于Endpoint Security API实现进程事件监控&lt;/li&gt;
+&lt;li&gt;全面重构代码签名与CI系统&lt;/li&gt;
+&lt;li&gt;原生支持Apple Silicon（ARM架构）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;安全增强：
+&lt;ul&gt;
+&lt;li&gt;禁用TLS 1.0/1.1&lt;/li&gt;
+&lt;li&gt;OpenSSL升级至1.1.1k&lt;/li&gt;
+&lt;li&gt;修复Windows SID API内存泄漏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;python工具链生态&#34;&gt;Python工具链生态
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;关键包增强：
+&lt;ul&gt;
+&lt;li&gt;pyelftools新增DWARFv5支持&lt;/li&gt;
+&lt;li&gt;pip-api增加全局包过滤功能&lt;/li&gt;
+&lt;li&gt;Warehouse漏洞响应文档完善&lt;/li&gt;
+&lt;li&gt;mypy类型系统改进&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;调试工具pwndbg&#34;&gt;调试工具Pwndbg
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;GDB插件优化：
+&lt;ul&gt;
+&lt;li&gt;匿名内存页映射显示&lt;/li&gt;
+&lt;li&gt;命令解析器重构&lt;/li&gt;
+&lt;li&gt;缓存调试机制改进&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;完整贡献清单精选&#34;&gt;完整贡献清单（精选）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;1.&lt;/span&gt; LLVM
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [BitcodeReader] 修复向量类型校验逻辑错误 (D109655)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [clang] 修正带过滤器的JSON AST输出 (D108441)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;2.&lt;/span&gt; Osquery
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 进程事件监控 (&lt;span class=&#34;ni&#34;&gt;#7046&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; Apple Silicon支持 (&lt;span class=&#34;ni&#34;&gt;#7330&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; OpenSSL 1.1.1l升级 (&lt;span class=&#34;ni&#34;&gt;#7293&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;3.&lt;/span&gt; Python生态
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; pyelftools DWARFv5支持 (&lt;span class=&#34;ni&#34;&gt;#363&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; pip-api URL需求解析 (&lt;span class=&#34;ni&#34;&gt;#109&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;4.&lt;/span&gt; 其他
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; rust-clippy新增格式字符串检测 (&lt;span class=&#34;ni&#34;&gt;#7743&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; Solana虚拟机溢出修复 (&lt;span class=&#34;ni&#34;&gt;#212&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;开源协作哲学&#34;&gt;开源协作哲学
+&lt;/h3&gt;&lt;p&gt;我们深知PR提交只是开源协作的起点：代码审查、长期维护和测试覆盖同样重要。这些贡献既源于技术热爱，也因这些项目切实推动了行业进步。在此向开源社区致以诚挚谢意，祝2022年高效安全！&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

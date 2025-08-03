@@ -7,7 +7,36 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 12:20:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E7%BC%93%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 08:56:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E7%BC%93%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>EMET 5.5 发布：增强Windows系统安全防护的新利器</title>
+        <link>http://localhost:1313/p/emet-5.5-%E5%8F%91%E5%B8%83%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E7%9A%84%E6%96%B0%E5%88%A9%E5%99%A8/</link>
+        <pubDate>Sun, 03 Aug 2025 08:56:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/emet-5.5-%E5%8F%91%E5%B8%83%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E7%9A%84%E6%96%B0%E5%88%A9%E5%99%A8/</guid>
+        <description>&lt;h1 id=&#34;增强缓解体验工具包emet55版本现已发布&#34;&gt;增强缓解体验工具包(EMET)5.5版本现已发布
+&lt;/h1&gt;&lt;p&gt;增强缓解体验工具包(EMET)通过预测、转移、终止、阻止或使攻击者常用的入侵技术失效，帮助企业和所有计算机用户防范可能破坏业务和日常生活的安全威胁。这种方式使EMET能在安全更新和反恶意软件正式应对前，就为计算机系统提供针对新型未知威胁的保护。&lt;/p&gt;
+&lt;p&gt;今天我们很高兴宣布EMET 5.5的发布，包含以下新功能和更新：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 10兼容性支持&lt;/li&gt;
+&lt;li&gt;通过组策略改进多种缓解措施的配置&lt;/li&gt;
+&lt;li&gt;优化缓解措施写入注册表的方式，便于利用现有工具通过组策略管理EMET&lt;/li&gt;
+&lt;li&gt;EAF/EAF+伪缓解性能改进&lt;/li&gt;
+&lt;li&gt;支持Windows 10中的不受信任字体缓解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;windows-10中的缓解措施&#34;&gt;Windows 10中的缓解措施
+&lt;/h2&gt;&lt;p&gt;EMET于2009年作为独立工具发布，通过提供管理内置Windows安全缓解措施的界面，并附加干扰常见恶意软件攻击向量的功能，帮助企业更好地保护Windows客户端。随着时间推移，我们对浏览器和核心操作系统的安全性做出了重大改进。在Windows 10中，我们实现了许多可能使EMET变得不必要的功能和缓解措施。EMET在保护旧版系统、遗留应用程序以及为尚未使用控制流防护(CFG)重新编译的第三方软件提供CFG保护方面最为有用。&lt;/p&gt;
+&lt;p&gt;Windows 10中提供与EMET相当(或更好)缓解措施的功能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;设备防护(Device Guard)&lt;/strong&gt;：结合企业级硬件和软件安全功能，将设备锁定为仅可运行受信任的应用程序。为内核模式下的所有软件提供基于硬件的零日防护。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制流防护(CFG)&lt;/strong&gt;：在编译新应用时分析每个间接调用指令可达的位置，并在运行时检查每个间接调用的目标是否为预期安全位置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用程序控制(AppLocker)&lt;/strong&gt;：Windows 7引入的应用程序控制功能，可防止组织中运行不需要和未知的应用程序。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;emet-55与edge浏览器&#34;&gt;EMET 5.5与Edge浏览器
+&lt;/h2&gt;&lt;p&gt;鉴于Microsoft Edge采用的先进保护技术(包括行业领先的沙盒、编译器和内存管理技术)，EMET 5.5的缓解措施不适用于Edge。&lt;/p&gt;
+&lt;p&gt;如需EMET 5.5的使用支持，请访问：https://support.microsoft.com/en-us/kb/2458544&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>谷歌工程师提出方案缓解JavaScript原型污染漏洞</title>
         <link>http://localhost:1313/p/%E8%B0%B7%E6%AD%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%8F%90%E5%87%BA%E6%96%B9%E6%A1%88%E7%BC%93%E8%A7%A3javascript%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/</link>
         <pubDate>Sat, 02 Aug 2025 12:20:23 +0800</pubDate>

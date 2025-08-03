@@ -7,7 +7,75 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 08:00:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 13:07:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>IMDSv2强制实施：即将登陆您所在的区域！</title>
+        <link>http://localhost:1313/p/imdsv2%E5%BC%BA%E5%88%B6%E5%AE%9E%E6%96%BD%E5%8D%B3%E5%B0%86%E7%99%BB%E9%99%86%E6%82%A8%E6%89%80%E5%9C%A8%E7%9A%84%E5%8C%BA%E5%9F%9F/</link>
+        <pubDate>Sun, 03 Aug 2025 13:07:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/imdsv2%E5%BC%BA%E5%88%B6%E5%AE%9E%E6%96%BD%E5%8D%B3%E5%B0%86%E7%99%BB%E9%99%86%E6%82%A8%E6%89%80%E5%9C%A8%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
+        <description>&lt;h3 id=&#34;imdsv2强制实施即将登陆您所在的区域&#34;&gt;IMDSv2强制实施：即将登陆您所在的区域！
+&lt;/h3&gt;&lt;p&gt;3月25日，AWS发布了一项新功能，默认对新启动的EC2实例实施IMDSv2（Instance Metadata Service Version 2）。这项期待已久的功能虽然仍有改进空间，但标志着云安全的重要进步。&lt;/p&gt;
+&lt;h4 id=&#34;imdsv2简介&#34;&gt;IMDSv2简介
+&lt;/h4&gt;&lt;p&gt;IMDSv2是AWS于2019年11月推出的安全机制，旨在应对Capital One数据泄露事件。该事件由SSRF（服务器端请求伪造）漏洞引发，促使美国参议员致信AWS询问防护措施。IMDSv2能有效防止攻击者通过SSRF漏洞从实例元数据服务窃取凭证。&lt;/p&gt;
+&lt;p&gt;2021-2022年的研究表明，此类漏洞是公开云安全事件最常见的原因之一。Nick Frichette的《保护EC2实例元数据服务》对此有深度解析。&lt;/p&gt;
+&lt;h4 id=&#34;演进历程&#34;&gt;演进历程
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;初始阶段&lt;/strong&gt;：需在实例或启动模板中手动设置&lt;code&gt;metadata_options.http_tokens=&amp;quot;required&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2022年10月&lt;/strong&gt;：支持在AMI注册时指定&lt;code&gt;--imds-support v2.0&lt;/code&gt;参数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2023年3月&lt;/strong&gt;：Amazon Linux 2023默认启用IMDSv2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2023年11月&lt;/strong&gt;：EC2控制台&amp;quot;快速启动&amp;quot;界面默认启用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2024年3月&lt;/strong&gt;：推出区域级默认设置功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;新api详解&#34;&gt;新API详解
+&lt;/h4&gt;&lt;p&gt;新增的两个API允许在区域级别设置元数据默认值：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;modify_instance_metadata_defaults&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;HttpTokens&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;required&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 关键参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;HttpPutResponseHopLimit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;HttpEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;enabled&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;InstanceMetadataTags&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;disabled&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;优先级规则：实例设置 &amp;gt; 区域设置 &amp;gt; AMI设置 &amp;gt; 默认不启用。&lt;/p&gt;
+&lt;h4 id=&#34;terraform集成&#34;&gt;Terraform集成
+&lt;/h4&gt;&lt;p&gt;通过&lt;code&gt;aws_ec2_instance_metadata_defaults&lt;/code&gt;资源实现：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-hcl&#34; data-lang=&#34;hcl&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;resource&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;aws_ec2_instance_metadata_defaults&amp;#34; &amp;#34;imdsv2&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;  http_tokens&lt;/span&gt;                 &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;required&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;  instance_metadata_tags&lt;/span&gt;      &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;disabled&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;  http_endpoint&lt;/span&gt;               &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;  http_put_response_hop_limit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;2024年中起，新型EC2实例将默认仅支持IMDSv2&lt;/li&gt;
+&lt;li&gt;该功能仅设置默认值，仍需配合SCP或&lt;code&gt;ec2:MetadataHttpTokens&lt;/code&gt;条件键进行强制管控&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这项功能为云安全实践者提供了重要的管控工具，但AWS仍需进一步改进默认安全配置。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>我在re:Invent大会上的技术诉求：从跨AZ带宽定价到CHERI实例</title>
         <link>http://localhost:1313/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</link>
         <pubDate>Sun, 03 Aug 2025 08:00:39 +0800</pubDate>

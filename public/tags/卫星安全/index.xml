@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>卫星安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8D%AB%E6%98%9F%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 卫星安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 10:29:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8D%AB%E6%98%9F%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>卫星黑客攻防实战：从历史漏洞到现代攻击链</title>
+        <link>http://localhost:1313/p/%E5%8D%AB%E6%98%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E4%BB%8E%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E%E5%88%B0%E7%8E%B0%E4%BB%A3%E6%94%BB%E5%87%BB%E9%93%BE/</link>
+        <pubDate>Sun, 03 Aug 2025 10:29:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8D%AB%E6%98%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E4%BB%8E%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E%E5%88%B0%E7%8E%B0%E4%BB%A3%E6%94%BB%E5%87%BB%E9%93%BE/</guid>
+        <description>&lt;h1 id=&#34;卫星黑客攻防&#34;&gt;卫星黑客攻防
+&lt;/h1&gt;&lt;p&gt;作者：Austin Kaiser // 实习生&lt;/p&gt;
+&lt;p&gt;卫星黑客攻击并非新鲜事。自1957年苏联发射首颗人造卫星Sputnik 1以来，卫星技术已从简单的无线电信号发射发展到量子加密通信。但伴随技术进步，安全威胁也日益严峻。&lt;/p&gt;
+&lt;h2 id=&#34;历史重大攻击事件&#34;&gt;历史重大攻击事件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;英国天空广播系统入侵&lt;/strong&gt;：攻击者组合使用后门植入、定制恶意软件和数据包嗅探技术，通过多层代理链掩盖行踪，造成数据泄露和业务中断&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;星链网络干扰战&lt;/strong&gt;：2022年俄罗斯对乌克兰星链服务实施干扰攻击，SpaceX通过紧急固件更新增强抗干扰能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前沿攻防技术&#34;&gt;前沿攻防技术
+&lt;/h2&gt;&lt;h3 id=&#34;电压毛刺攻击&#34;&gt;电压毛刺攻击
+&lt;/h3&gt;&lt;p&gt;SpaceX安全研究员Lennert Wouters通过自制modchip实施电压毛刺攻击，成功绕过星链终端的安全启动机制。该技术通过精确控制芯片供电电压，诱发异常行为从而获取root权限。&lt;/p&gt;
+&lt;h3 id=&#34;空间系统虚拟靶场&#34;&gt;空间系统虚拟靶场
+&lt;/h3&gt;&lt;p&gt;Antisyphon培训课程《空间系统网络安全入门》(ICSS)提供包含以下组件的虚拟环境：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地面站模拟&lt;/strong&gt;：使用COSMOS开源系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;卫星模拟&lt;/strong&gt;：基于NASA核心飞行系统(cFS)和Hackstar构建容器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击工具链&lt;/strong&gt;：Python脚本实现完整RF攻击链&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实战攻击演示&#34;&gt;实战攻击演示
+&lt;/h2&gt;&lt;h3 id=&#34;欺骗攻击&#34;&gt;欺骗攻击
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改卫星遥测数据转发地址的Python代码片段&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;spoof_telemetry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;original_packet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;hijacked_packet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;original_packet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;destination_ip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.1.100&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 原地面站IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;new_ip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;10.0.0.50&amp;#34;&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;# 攻击者IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;transmit_to_satellite&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hijacked_packet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;干扰攻击&#34;&gt;干扰攻击
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 生成干扰信号的Python实现&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;random&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;generate_jamming_signal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;randint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;send_radio_packet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;rf攻击链组合&#34;&gt;RF攻击链组合
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;第一阶段&lt;/strong&gt;：欺骗攻击劫持下行链路（卫星→地面）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第二阶段&lt;/strong&gt;：干扰攻击阻断上行链路（地面→卫星）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最终效果&lt;/strong&gt;：完全控制卫星通信信道&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防御现状警示&#34;&gt;防御现状警示
+&lt;/h2&gt;&lt;p&gt;对17种卫星型号的调研显示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;18% (3/17) 完全无防护措施&lt;/li&gt;
+&lt;li&gt;29% (5/17) 拒绝说明防护情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;当前卫星安全最大隐患在于工程师过度依赖&amp;rsquo;隐蔽即安全&amp;rsquo;的错误假设&amp;rdquo; —— ICSS课程导师Tim Fowler&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整攻击演示及防御方案详见&lt;a class=&#34;link&#34; href=&#34;https://www.antisyphontraining.com/icss&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;空间系统网络安全入门课程&lt;/a&gt;。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

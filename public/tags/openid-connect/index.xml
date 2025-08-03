@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>OpenID Connect on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/openid-connect/</link>
+        <description>Recent content in OpenID Connect on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 16:44:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/openid-connect/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>可信发布：软件包安全的新标杆——基于OpenID Connect的无密钥认证机制</title>
+        <link>http://localhost:1313/p/%E5%8F%AF%E4%BF%A1%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B0%E6%A0%87%E6%9D%86%E5%9F%BA%E4%BA%8Eopenid-connect%E7%9A%84%E6%97%A0%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sun, 03 Aug 2025 16:44:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8F%AF%E4%BF%A1%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B0%E6%A0%87%E6%9D%86%E5%9F%BA%E4%BA%8Eopenid-connect%E7%9A%84%E6%97%A0%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;h1 id=&#34;可信发布软件包安全的新标杆&#34;&gt;可信发布：软件包安全的新标杆
+&lt;/h1&gt;&lt;p&gt;作者：William Woodruff&lt;br&gt;
+日期：2023年5月23日&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;过去一年，我们与Python包索引(PyPI)合作开发了名为&amp;quot;可信发布&amp;quot;的新型认证机制。该技术通过消除长期API令牌和密码的使用，在降低供应链攻击和凭证泄露风险的同时，简化了发布工作流。目前PyPI上关键软件包已采用该技术强化发布安全。&lt;/p&gt;
+&lt;h2 id=&#34;openid-connect与环境凭证&#34;&gt;OpenID Connect与&amp;quot;环境凭证&amp;quot;
+&lt;/h2&gt;&lt;p&gt;可信发布的核心是建立在OpenID Connect(OIDC)标准之上的认证方案。OIDC身份提供者(IdP)能生成可验证的JWT凭证，其中包含如GitHub仓库、工作流名称等声明信息。与传统的API令牌不同，这些凭证具有以下特性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;动态生成&lt;/strong&gt;：由CI平台(如GitHub Actions)在运行时自动提供&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;细粒度控制&lt;/strong&gt;：可精确绑定到特定代码库、工作流文件甚至CI环境&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;密码学验证&lt;/strong&gt;：通过IdP的公钥进行签名验证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;典型的工作流凭证声明示例如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;repository&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hamilcar/cartago&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;workflow&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;release.yml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;environment&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;production&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;零密钥发布流程&#34;&gt;零密钥发布流程
+&lt;/h2&gt;&lt;p&gt;完整的可信发布流程包含七个关键步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开发者触发GitHub Actions发布工作流&lt;/li&gt;
+&lt;li&gt;执行常规构建过程(python -m build等)&lt;/li&gt;
+&lt;li&gt;工作流从GitHub OIDC IdP获取身份凭证&lt;/li&gt;
+&lt;li&gt;将OIDC令牌提交至PyPI&lt;/li&gt;
+&lt;li&gt;PyPI验证后颁发短期API令牌&lt;/li&gt;
+&lt;li&gt;返回令牌至工作流&lt;/li&gt;
+&lt;li&gt;使用twine等工具完成发布&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实际配置仅需在PyPI项目设置中建立信任关系：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;trusted_publishers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;identity_provider&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;github&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;repository&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;hamilcar/cartago&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;workflow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;release.yml&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;安全优势分析&#34;&gt;安全优势分析
+&lt;/h2&gt;&lt;p&gt;与传统API令牌相比，可信发布在三个维度实现突破：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用便捷性&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无需手动管理令牌&lt;/li&gt;
+&lt;li&gt;支持未创建项目的预配置&lt;/li&gt;
+&lt;li&gt;消除凭证传递风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;事前防护&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击者需同时控制CI环境和发布流程&lt;/li&gt;
+&lt;li&gt;细粒度的环境隔离(通过GitHub Environments)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;事后恢复&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;凭证有效期仅数分钟&lt;/li&gt;
+&lt;li&gt;自动失效无需人工干预&lt;/li&gt;
+&lt;li&gt;防止持久化威胁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;新型威胁应对&#34;&gt;新型威胁应对
+&lt;/h2&gt;&lt;p&gt;技术设计时特别考虑了两种新型攻击场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;账户复活攻击&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过绑定GitHub用户唯一ID而非用户名&lt;/li&gt;
+&lt;li&gt;防止攻击者接管废弃用户名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;恶意提交者风险&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可选环境限制实现&amp;quot;提交≠发布&amp;quot;的权限分离&lt;/li&gt;
+&lt;li&gt;示例：仅main分支的production环境可发布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;跨生态应用前景&#34;&gt;跨生态应用前景
+&lt;/h2&gt;&lt;p&gt;该技术框架具有语言无关性，可应用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust的Crates.io&lt;/li&gt;
+&lt;li&gt;Ruby的RubyGems&lt;/li&gt;
+&lt;li&gt;JavaScript的NPM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们预见这类技术将如同2019年的双因素认证，成为开源软件供应链的基础安全组件。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
