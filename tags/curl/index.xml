@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 01:29:19 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 05:15:26 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/curl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞</title>
+      <link>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 05:15:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;在这篇文章中，我们将探讨curl中一个鲜为人知的特性，该特性导致了Burp Suite Pro和Google Chrome的本地文件泄露漏洞。虽然我们早已为Burp Suite发布了补丁，但怀疑该技术可能对利用其他具有&amp;quot;复制为curl命令&amp;quot;功能或从命令行调用curl的应用程序有所帮助。该漏洞由Paul Mutton通过我们的漏洞赏金计划私下报告，并慷慨地允许我们发布这篇分析报告。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl netrc文件CRLF注入漏洞分析</title>
+      <link>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 04:08:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;curl-netrc-crlf注入漏洞报告&#34;&gt;curl netrc crlf注入漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;curl允许在netrc文件的登录和密码字段中编码CR和LF字符。当攻击者能够影响netrc文件内容时，可通过在登录名或密码中注入CRLF来实现FTP命令注入。POP3协议同样可能受影响但未经测试。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>curl库doh_write_cb函数内存泄漏漏洞分析</title>
       <link>https://qife122.github.io/p/curl%E5%BA%93doh_write_cb%E5%87%BD%E6%95%B0%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>恶意软件检测 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%A3%80%E6%B5%8B/</link>
+    <description>Recent content in 恶意软件检测 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 06:54:27 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%A3%80%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用osquery追踪被盗代码签名证书的技术解析</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 06:54:27 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;使用osquery追踪被盗代码签名证书&#34;&gt;使用osquery追踪被盗代码签名证书&lt;/h1&gt;&#xA;&lt;p&gt;近期，270万台Windows计算机因运行了通过CCleaner软件更新机制分发的恶意软件而感染，该恶意软件使用了从CCleaner开发者处窃取的代码签名证书进行签名。幸运的是，得益于同事Alessandro Gario提交的拉取请求（为osquery新增了Windows可执行文件代码签名验证功能，即Authenticode），检测此类签名恶意软件现已变得简单。本文将探讨代码签名在事件响应中的重要性，并通过实际案例演示这一新功能的用途。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows终端防御技术全景：初始访问攻防实战（第一部分）</title>
+      <link>https://qife122.github.io/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+      <pubDate>Sun, 03 Aug 2025 00:55:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+      <description>&lt;h3 id=&#34;windows终端防御技术现状&#34;&gt;Windows终端防御技术现状&lt;/h3&gt;&#xA;&lt;p&gt;当今Windows桌面平台的终端防御生态已发展出高度成熟的能力体系。除传统杀毒软件外，扩展检测响应(XDR)技术和行为分析方法的结合，可全面覆盖初始访问阶段的恶意软件技术及入侵后活动检测。参与红队演练的专业人员普遍认为，如今通过二进制文件执行获取初始访问权限比以往任何时候都更加困难。即便成功入侵Windows平台，成熟防御环境对常见C2平台的入侵后活动也有完善的监测响应机制。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Outlook漏洞 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/outlook%E6%BC%8F%E6%B4%9E/</link>
+    <description>Recent content in Outlook漏洞 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 01:07:04 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/outlook%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Microsoft Outlook远程代码执行漏洞(CVE-2025-47176)技术分析</title>
+      <link>https://qife122.github.io/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 01:07:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;microsoft-outlook---远程代码执行rce&#34;&gt;Microsoft Outlook - 远程代码执行(RCE)&lt;/h1&gt;&#xA;&lt;h1 id=&#34;作者-nu11secur1ty&#34;&gt;作者: nu11secur1ty&lt;/h1&gt;&#xA;&lt;h1 id=&#34;日期-2025-07-08&#34;&gt;日期: 2025-07-08&lt;/h1&gt;&#xA;&lt;h1 id=&#34;厂商-microsoft&#34;&gt;厂商: Microsoft&lt;/h1&gt;&#xA;&lt;h1 id=&#34;软件&#34;&gt;软件: &lt;a href=&#34;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&#34;&gt;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h1 id=&#34;参考&#34;&gt;参考:&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&#34;&gt;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&lt;/a&gt; &amp;gt;&#xA;&lt;a href=&#34;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&#34;&gt;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;cve-2025-47176&#34;&gt;CVE-2025-47176&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;本概念验证(PoC)演示了CVE-2025-47176漏洞的模拟利用。它通过向Outlook注入特制邮件项，其中包含恶意同步路径，在扫描过程中触发特定操作。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

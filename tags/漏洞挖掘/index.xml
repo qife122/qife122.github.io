@@ -7,8 +7,36 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 20:25:35 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+      <link>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节&lt;/h3&gt;&#xA;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞</title>
+      <link>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 05:15:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;在这篇文章中，我们将探讨curl中一个鲜为人知的特性，该特性导致了Burp Suite Pro和Google Chrome的本地文件泄露漏洞。虽然我们早已为Burp Suite发布了补丁，但怀疑该技术可能对利用其他具有&amp;quot;复制为curl命令&amp;quot;功能或从命令行调用curl的应用程序有所帮助。该漏洞由Paul Mutton通过我们的漏洞赏金计划私下报告，并慷慨地允许我们发布这篇分析报告。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl netrc文件CRLF注入漏洞分析</title>
+      <link>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 04:08:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;curl-netrc-crlf注入漏洞报告&#34;&gt;curl netrc crlf注入漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;curl允许在netrc文件的登录和密码字段中编码CR和LF字符。当攻击者能够影响netrc文件内容时，可通过在登录名或密码中注入CRLF来实现FTP命令注入。POP3协议同样可能受影响但未经测试。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>漏洞利用实验室：Blackhat 2016漏洞实验课程 - 课前教程与破解挑战</title>
+      <link>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</link>
+      <pubDate>Sun, 03 Aug 2025 03:03:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;blackhat-2016漏洞实验课程&#34;&gt;Blackhat 2016漏洞实验课程&lt;/h1&gt;&#xA;&lt;h2 id=&#34;课前教程模块&#34;&gt;课前教程模块&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;基础缓冲区溢出&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;32位栈溢出原理与实践&lt;/li&gt;&#xA;&lt;li&gt;通过恶意输入覆盖EIP寄存器&lt;/li&gt;&#xA;&lt;li&gt;使用坏字符检测定位内存冲突&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;现代绕过技术&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;DEP/NX保护机制的ROP链构造&lt;/li&gt;&#xA;&lt;li&gt;绕过ASLR的内存地址泄露技术&lt;/li&gt;&#xA;&lt;li&gt;使用JIT喷射对抗控制流保护&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;crackme挑战集&#34;&gt;Crackme挑战集&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Level1&lt;/strong&gt;&lt;br&gt;&#xA;基础栈溢出（无保护机制）&lt;br&gt;&#xA;要求：通过覆盖返回地址执行shellcode&lt;/p&gt;</description>
+    </item>
     <item>
       <title>RSKJ服务器拒绝服务漏洞分析与修复</title>
       <link>https://qife122.github.io/p/rskj%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>

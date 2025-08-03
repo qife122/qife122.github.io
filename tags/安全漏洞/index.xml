@@ -7,8 +7,36 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 05:27:39 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 07:49:35 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>苹果技术上有能力配合FBI解锁iPhone 5C——深入解析iOS安全机制</title>
+      <link>https://qife122.github.io/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Sun, 03 Aug 2025 07:49:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;h1 id=&#34;fbi的技术要求&#34;&gt;FBI的技术要求&lt;/h1&gt;&#xA;&lt;p&gt;在枪击案调查中，FBI发现一部属于袭击者的iPhone 5C。该设备属于圣贝纳迪诺县公共卫生部（袭击者工作单位），FBI已获得搜查许可。但由于iOS设备的加密机制，FBI无法通过猜测密码解锁设备。在iOS设备中，几乎所有重要文件都采用设备密码和出厂时嵌入的硬件密钥组合加密。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>踩到DeFi乐高积木：yVault漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Sun, 03 Aug 2025 07:27:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;意外踩到defi乐高积木---trail-of-bits博客&#34;&gt;意外踩到DeFi乐高积木 - Trail of Bits博客&lt;/h1&gt;&#xA;&lt;p&gt;yVault的初始版本包含了一个可被攻击者操纵的yUSDC价格计算逻辑，可能导致资金池资产被耗尽。幸运的是，开发者Andre反应迅速，禁用了问题代码，保住了当时约40万美元的资金。这个漏洞凸显了DeFi领域因组合性带来的复杂性风险。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Discord桌面应用远程代码执行漏洞分析</title>
+      <link>https://qife122.github.io/p/discord%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 03:25:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/discord%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;discord桌面应用rce漏洞分析&#34;&gt;Discord桌面应用RCE漏洞分析&lt;/h1&gt;&#xA;&lt;p&gt;几个月前，我在Discord桌面应用中发现了一个远程代码执行漏洞，并通过其漏洞赏金计划进行了报告。这个RCE漏洞的有趣之处在于它需要组合多个漏洞才能实现。本文将分享详细的技术细节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PGP签名与Linux包管理的安全隐患解析</title>
+      <link>https://qife122.github.io/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 02:07:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;pgp签名与linux包管理的安全隐患&#34;&gt;PGP签名与Linux包管理的安全隐患&lt;/h3&gt;&#xA;&lt;p&gt;在关于PGP生态系统的讨论中，我经常听到一种观点：尽管PGP存在问题，但它对Linux发行版的软件包签名至关重要。本文将重点讨论PGP在Linux包管理环境中暴露的几个系统性安全问题。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>错误但快速的云基础设施配置方式 - 安全风险警示</title>
       <link>https://qife122.github.io/p/%E9%94%99%E8%AF%AF%E4%BD%86%E5%BF%AB%E9%80%9F%E7%9A%84%E4%BA%91%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>

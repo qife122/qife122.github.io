@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROP on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/rop/</link>
+    <description>Recent content in ROP on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 05:53:54 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/rop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二进制安全优化实践：消除编译器引入的代码重用攻击隐患</title>
+      <link>https://qife122.github.io/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</link>
+      <pubDate>Sun, 03 Aug 2025 05:53:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</guid>
+      <description>&lt;h1 id=&#34;二进制安全优化实践&#34;&gt;二进制安全优化实践&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;这样存在毫无意义，安全地存在才有价值&amp;rdquo;（《麦克白》3.1）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;编译器不仅要生成高效代码，还必须生成安全代码。尽管编译器开发过程中经过严格测试和正确性认证，但其优化过程可能意外引入信息泄漏或删除程序员编写的安全关键操作。图1展示了CWE-733漏洞实例：编译器通过&amp;quot;死存储消除&amp;quot;优化移除了加密密钥清零操作，导致密钥可能被攻击者恢复。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 18:15:58 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+      <link>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节&lt;/h3&gt;&#xA;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>API安全测试清单：7个关键步骤</title>
+      <link>https://qife122.github.io/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</link>
+      <pubDate>Sun, 03 Aug 2025 03:42:17 +0800</pubDate>
+      <guid>https://qife122.github.io/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</guid>
+      <description>&lt;h1 id=&#34;api安全测试清单7个关键步骤&#34;&gt;API安全测试清单：7个关键步骤&lt;/h1&gt;&#xA;&lt;p&gt;API是恶意攻击者的常见攻击载体。使用我们的API安全测试清单和最佳实践来保护您的组织及其数据。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Dave Shackleford（Voodoo Security）、Michael Cobb&lt;br&gt;&#xA;&lt;strong&gt;发布日期&lt;/strong&gt;：2024年11月1日&lt;/p&gt;</description>
+    </item>
     <item>
       <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
       <link>https://qife122.github.io/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>

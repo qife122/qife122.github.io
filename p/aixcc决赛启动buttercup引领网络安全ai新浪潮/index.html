@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍DARPA AI网络挑战赛决赛阶段的技术变革，包括自定义AI模型开发、弹性计算资源配置、多类型安全挑战设计等关键技术架构，展现网络安全AI系统Buttercup的实战能力提升。">
+<title>AIxCC决赛启动：Buttercup引领网络安全AI新浪潮</title>
+
+<link rel='canonical' href='http://localhost:1313/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="AIxCC决赛启动：Buttercup引领网络安全AI新浪潮">
+<meta property='og:description' content="本文详细介绍DARPA AI网络挑战赛决赛阶段的技术变革，包括自定义AI模型开发、弹性计算资源配置、多类型安全挑战设计等关键技术架构，展现网络安全AI系统Buttercup的实战能力提升。">
+<meta property='og:url' content='http://localhost:1313/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AIxCC' /><meta property='article:tag' content='DARPA' /><meta property='article:tag' content='机器学习' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-03T00:20:05&#43;08:00'/><meta property='article:modified_time' content='2025-08-03T00:20:05&#43;08:00'/>
+<meta name="twitter:title" content="AIxCC决赛启动：Buttercup引领网络安全AI新浪潮">
+<meta name="twitter:description" content="本文详细介绍DARPA AI网络挑战赛决赛阶段的技术变革，包括自定义AI模型开发、弹性计算资源配置、多类型安全挑战设计等关键技术架构，展现网络安全AI系统Buttercup的实战能力提升。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#预算与时间扩展">预算与时间扩展</a></li>
+    <li><a href="#多轮竞赛机制">多轮竞赛机制</a></li>
+    <li><a href="#多样化挑战类型">多样化挑战类型</a></li>
+    <li><a href="#支持自定义ai模型开发">支持自定义AI模型开发</a></li>
+    <li><a href="#弹性计算资源配置">弹性计算资源配置</a></li>
+    <li><a href="#评分算法革新">评分算法革新</a></li>
+    <li><a href="#buttercup的下一步">Buttercup的下一步</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/">AIxCC决赛启动：Buttercup引领网络安全AI新浪潮</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍DARPA AI网络挑战赛决赛阶段的技术变革，包括自定义AI模型开发、弹性计算资源配置、多类型安全挑战设计等关键技术架构，展现网络安全AI系统Buttercup的实战能力提升。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="以buttercup开启aixcc决赛征程">以Buttercup开启AIxCC决赛征程
+</h1><p>DARPA人工智能网络挑战赛（AIxCC）决赛正式启动，我们的网络推理系统Buttercup已整装待发！这项最初限制严格的赛事现已变得更加雄心勃勃。参赛团队现在可以构建自定义AI模型、自主控制基础设施，并同时应对多种类型的安全挑战。伴随新挑战而来的是更多资源——每项挑战的预算从半决赛的100美元提升至1000美元以上。</p>
+<p>这些改变不仅是数字上的增长，更是让参赛者能够构建更接近实用安全工具的系统，而非学术概念验证。技术方法的弹性扩展也意味着我们将看到AI在网络安全问题上更创新的应用——这些在半决赛限制下根本无法实现。</p>
+<h2 id="预算与时间扩展">预算与时间扩展
+</h2><p>决赛最显著的改变是每支团队可用资源的大幅增加。半决赛中，参赛系统在严格限制下运行：</p>
+<ul>
+<li><strong>时间</strong>：每项挑战仅4小时分析时间</li>
+<li><strong>AI预算</strong>：每项挑战仅100美元用于商业AI API调用（如ChatGPT、Claude）</li>
+<li><strong>计算预算</strong>：固定分配的虚拟机资源，扩展选项有限</li>
+</ul>
+<p>决赛阶段的约束条件（可能调整）现已变为：</p>
+<ul>
+<li><strong>时间</strong>：每项挑战8+小时</li>
+<li><strong>AI预算</strong>：每轮10,000美元用于商业AI API调用（每轮含多项挑战）</li>
+<li><strong>计算预算</strong>：每轮20,000美元用于Azure资源（服务器、VM、GPU）</li>
+</ul>
+<p>这些新增资源让我们能在更实际的时间框架内进行更彻底的分析。Buttercup现在能够：</p>
+<ul>
+<li>执行更深入的动态分析并对补丁进行更全面的测试</li>
+<li>扩展资源密集型任务（如模糊测试）的规模</li>
+<li>使用更多样化的商业AI模型处理更广泛的任务</li>
+</ul>
+<h2 id="多轮竞赛机制">多轮竞赛机制
+</h2><p>与半决赛单轮评分不同，决赛包含三轮不计分的展示赛，让团队能在最终评分轮前迭代改进其CRS系统：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>轮次</th>
+          <th>开放时间</th>
+          <th>计分</th>
+          <th>关键参数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>展示赛1</td>
+          <td>4月1日</td>
+          <td>不计分</td>
+          <td>2万计算预算+1万AI预算，2项挑战，最多2项并发，48小时窗口（仅差异扫描挑战）</td>
+      </tr>
+      <tr>
+          <td>展示赛2</td>
+          <td>5月6日</td>
+          <td>不计分</td>
+          <td>同预算，15-30项挑战，最多4项并发，8小时差异扫描/24小时全扫描窗口</td>
+      </tr>
+      <tr>
+          <td>展示赛3</td>
+          <td>6月3日</td>
+          <td>不计分</td>
+          <td>参数待定（提前30天公布）</td>
+      </tr>
+      <tr>
+          <td>决赛轮</td>
+          <td>6月24日</td>
+          <td>计分</td>
+          <td>参数待定（提前30天公布）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><em>表1：决赛阶段竞赛结构</em></p>
+<p>这种渐进式设计鼓励系统适应变化的需求——这是现实世界安全工具的关键品质。参赛者还能基于前几轮反馈迭代优化方案，使DEFCON 2025亮相的最终系统更加健壮。</p>
+<h2 id="多样化挑战类型">多样化挑战类型
+</h2><p>最具技术意义的变革是引入多种挑战类型。半决赛仅有一种挑战模式——提供少于100次提交的精简git历史的真实开源软件。决赛挑战仍基于真实开源软件，但现包含：</p>
+<ol>
+<li>
+<p><strong>差异扫描挑战</strong><br>
+提供代码库和引入漏洞的单个diff文件。代码库包含初始模糊测试工具，diff文件则为CRS提供识别和修补漏洞的额外起点。</p>
+</li>
+<li>
+<p><strong>全扫描挑战</strong><br>
+呈现已包含漏洞的扁平化代码库。没有diff文件作为起点，CRS必须仅依靠模糊测试工具对代码库进行全面分析。</p>
+</li>
+<li>
+<p><strong>SARIF广播挑战</strong><br>
+提供SARIF格式的静态分析警报（可能为真阳性或假阳性）。CRS需评估警报是否代表真实漏洞，并可选择提供补丁。</p>
+</li>
+</ol>
+<p>这种多样化至关重要，因为现实漏洞可能通过代码审查、静态分析工具、模糊测试和运行时监控等多种渠道发现。能处理所有这些输入的系统在实际安全环境中将更具价值。</p>
+<h2 id="支持自定义ai模型开发">支持自定义AI模型开发
+</h2><p>这项赛事政策的最大变革是DARPA现在允许使用自定义AI/ML模型。半决赛中系统仅能使用Anthropic、OpenAI和Google的第三方模型。现在参赛者可开发部署自己的专用模型（需通过竞赛审核且可复现）。</p>
+<p>团队现在能够：</p>
+<ul>
+<li>微调专门用于安全漏洞检测的模型</li>
+<li>为漏洞分析的不同环节创建专用模型</li>
+<li>开发轻量级高效模型处理重复性任务</li>
+</ul>
+<p>为确保公平竞争仍有限制：自定义模型不能预训练记忆开源软件历史漏洞信息。这防止团队简单教授模型已知问题，确保系统展示真正的推理能力。</p>
+<h2 id="弹性计算资源配置">弹性计算资源配置
+</h2><p>另一重大技术转变是赋予参赛者基础设施的直接控制权。团队现在获得Azure订阅，仅受轮次计算预算约束，而非半决赛的固定计算资源分配。</p>
+<p>这意味着团队能基于每项挑战的独特需求制定资源分配策略：</p>
+<ul>
+<li>为计算密集型模糊测试分配更强硬件</li>
+<li>为运行自定义AI模型配置昂贵GPU实例</li>
+<li>根据挑战复杂度动态扩展资源</li>
+<li>并行运行多个分析管道</li>
+</ul>
+<p>这种弹性让团队能在不计分轮次试验不同分配策略，确定哪种方案最适合各类挑战。</p>
+<h2 id="评分算法革新">评分算法革新
+</h2><p>AIxCC决赛保留&quot;补丁价值远高于单纯漏洞发现&quot;的核心评分原则，但新增维度：</p>
+<p><strong>新增得分机会</strong>：</p>
+<ul>
+<li>SARIF分类：正确标记静态分析警报的真/假阳性</li>
+<li>捆绑提交：将SARIF广播与漏洞和补丁关联</li>
+</ul>
+<p><strong>新评分修正项</strong>：</p>
+<ul>
+<li>早鸟奖励：越早提交得分越高</li>
+<li>跨团队验证：补丁必须能抵御所有团队发现的崩溃输入才能得分</li>
+</ul>
+<p>这些改变激励团队构建能快速通过不同方法发现漏洞的系统，并创建真正解决漏洞根源而非过滤特定崩溃输入的补丁。</p>
+<h2 id="buttercup的下一步">Buttercup的下一步
+</h2><p>Buttercup 2.0正在参与展示赛，团队利用反馈优化方案。我们的工作将在6月下旬的决赛轮达到高潮，结果于8月DEF CON 2025公布。这项赛事诞生的系统将代表自动化漏洞发现与修复领域的重大飞跃。</p>
+<p>敬请关注Buttercup在AIxCC决赛中的更多进展！</p>
+<p><em>免责声明：本文涉及的AIxCC规则、评分指南、基础设施和活动信息可能变更。本文非权威文档，请以DARPA官网和官方文件为准。</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/aixcc/">AIxCC</a>
+        
+            <a href="/tags/darpa/">DARPA</a>
+        
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

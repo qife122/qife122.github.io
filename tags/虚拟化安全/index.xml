@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>虚拟化安全 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in 虚拟化安全 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 04:31:08 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+      <pubDate>Sun, 03 Aug 2025 04:31:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
+      <description>&lt;h1 id=&#34;攻击虚拟机工作进程--msrc博客&#34;&gt;攻击虚拟机工作进程 | MSRC博客&lt;/h1&gt;&#xA;&lt;p&gt;在过去一年中，我们投入了大量时间使Hyper-V研究更易于开展。首篇博客《Hyper-V研究第一步》描述了调试管理程序的工具和设置，并分析了虚拟化堆栈组件的攻击面。随后发表的《Hyper-V中准虚拟化设备的模糊测试》聚焦于VSPs-VSCs通过VMBus的通信机制，披露了根分区内核(vpcivsp.sys)中vPCI VSP的客户机到主机漏洞。八月，Joe Bialek在Black Hat上的精彩演讲展示了如何利用虚拟机工作进程(VMWP)中IDE模拟器的另一个漏洞。现在，让我们深入探究VMWP内部机制。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

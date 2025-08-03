@@ -7,8 +7,288 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 23:40:15 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 08:12:00 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入解析V8引擎TurboFan的漏洞利用技术</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90v8%E5%BC%95%E6%93%8Eturbofan%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 08:12:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90v8%E5%BC%95%E6%93%8Eturbofan%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;引言&#34;&gt;引言&lt;/h1&gt;&#xA;&lt;p&gt;很久以前我写过一篇关于内核池的博客文章，今年我们要在节点的海洋中畅游！当前趋势是攻击JavaScript引擎，特别是优化JIT编译器，如V8的TurboFan、SpiderMonkey的IonMonkey、JavaScriptCore的DFG &amp;amp; FTL或Chakra的SimpleJIT &amp;amp; FullJIT。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>我在re:Invent大会上的技术诉求：从跨AZ带宽定价到CHERI实例</title>
+      <link>https://qife122.github.io/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</link>
+      <pubDate>Sun, 03 Aug 2025 08:00:39 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</guid>
+      <description>&lt;p&gt;作为AWS Hero，我获得了免费参加AWS re:Invent大会的机会。虽然我很少对多数演讲感兴趣——往年我参加过一些&amp;quot;高级&amp;quot;讲座，但内容都未超出已发布的文档范围——但我发现这是与亚马逊员工交流的绝佳机会。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>苹果技术上有能力配合FBI解锁iPhone 5C——深入解析iOS安全机制</title>
+      <link>https://qife122.github.io/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Sun, 03 Aug 2025 07:49:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;h1 id=&#34;fbi的技术要求&#34;&gt;FBI的技术要求&lt;/h1&gt;&#xA;&lt;p&gt;在枪击案调查中，FBI发现一部属于袭击者的iPhone 5C。该设备属于圣贝纳迪诺县公共卫生部（袭击者工作单位），FBI已获得搜查许可。但由于iOS设备的加密机制，FBI无法通过猜测密码解锁设备。在iOS设备中，几乎所有重要文件都采用设备密码和出厂时嵌入的硬件密钥组合加密。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+      <link>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节&lt;/h3&gt;&#xA;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>踩到DeFi乐高积木：yVault漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Sun, 03 Aug 2025 07:27:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;意外踩到defi乐高积木---trail-of-bits博客&#34;&gt;意外踩到DeFi乐高积木 - Trail of Bits博客&lt;/h1&gt;&#xA;&lt;p&gt;yVault的初始版本包含了一个可被攻击者操纵的yUSDC价格计算逻辑，可能导致资金池资产被耗尽。幸运的是，开发者Andre反应迅速，禁用了问题代码，保住了当时约40万美元的资金。这个漏洞凸显了DeFi领域因组合性带来的复杂性风险。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[CVE-2025-32461] Tiki Wiki CMS Groupware &lt;=28.3版本存在两个SSTI漏洞</title>
+      <link>https://qife122.github.io/p/cve-2025-32461-tiki-wiki-cms-groupware-28.3%E7%89%88%E6%9C%AC%E5%AD%98%E5%9C%A8%E4%B8%A4%E4%B8%AAssti%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 07:16:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/cve-2025-32461-tiki-wiki-cms-groupware-28.3%E7%89%88%E6%9C%AC%E5%AD%98%E5%9C%A8%E4%B8%A4%E4%B8%AAssti%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;[CVE-2025-32461] Tiki Wiki CMS Groupware &amp;lt;=28.3版本的两个SSTI漏洞&lt;/p&gt;&#xA;&lt;p&gt;安全研究人员在Tiki Wiki CMS Groupware内容管理系统28.3及更早版本中发现了两处严重的服务器端模板注入(Server-Side Template Injection)漏洞。这些漏洞存在于系统的模板处理组件中，未经认证的攻击者可能通过精心构造的恶意输入实现远程代码执行。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>攻击面资产分类实践指南：从DNS记录到HTML分析的全面技术解析</title>
+      <link>https://qife122.github.io/p/%E6%94%BB%E5%87%BB%E9%9D%A2%E8%B5%84%E4%BA%A7%E5%88%86%E7%B1%BB%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97%E4%BB%8Edns%E8%AE%B0%E5%BD%95%E5%88%B0html%E5%88%86%E6%9E%90%E7%9A%84%E5%85%A8%E9%9D%A2%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 07:05:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%94%BB%E5%87%BB%E9%9D%A2%E8%B5%84%E4%BA%A7%E5%88%86%E7%B1%BB%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97%E4%BB%8Edns%E8%AE%B0%E5%BD%95%E5%88%B0html%E5%88%86%E6%9E%90%E7%9A%84%E5%85%A8%E9%9D%A2%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;攻击面中每项资产的分类实践指南&#34;&gt;攻击面中每项资产的分类实践指南&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;TLDR&lt;/strong&gt;：本文详述了从业者可用于分类攻击面中每个Web应用和资产的方法与工具（从DNS记录、IP地址到HTTP分析和HTML内容）。您将学习从攻击者视角审视资产，不仅能识别资产存在，还能精确判断其性质。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用osquery追踪被盗代码签名证书的技术解析</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 06:54:27 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;使用osquery追踪被盗代码签名证书&#34;&gt;使用osquery追踪被盗代码签名证书&lt;/h1&gt;&#xA;&lt;p&gt;近期，270万台Windows计算机因运行了通过CCleaner软件更新机制分发的恶意软件而感染，该恶意软件使用了从CCleaner开发者处窃取的代码签名证书进行签名。幸运的是，得益于同事Alessandro Gario提交的拉取请求（为osquery新增了Windows可执行文件代码签名验证功能，即Authenticode），检测此类签名恶意软件现已变得简单。本文将探讨代码签名在事件响应中的重要性，并通过实际案例演示这一新功能的用途。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2024年AI预测与思考：技术趋势与安全隐忧</title>
+      <link>https://qife122.github.io/p/2024%E5%B9%B4ai%E9%A2%84%E6%B5%8B%E4%B8%8E%E6%80%9D%E8%80%83%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF%E4%B8%8E%E5%AE%89%E5%85%A8%E9%9A%90%E5%BF%A7/</link>
+      <pubDate>Sun, 03 Aug 2025 06:42:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2024%E5%B9%B4ai%E9%A2%84%E6%B5%8B%E4%B8%8E%E6%80%9D%E8%80%83%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF%E4%B8%8E%E5%AE%89%E5%85%A8%E9%9A%90%E5%BF%A7/</guid>
+      <description>&lt;h2 id=&#34;企业全员开发化时代来临&#34;&gt;企业全员开发化时代来临&lt;/h2&gt;&#xA;&lt;p&gt;ChatGPT带来的问题将愈演愈烈。任何员工都能轻松复制Python代码调用API，而GPTs、微软Copilot Studio等工具的涌现将进一步降低技术门槛。这些工具的核心价值在于让非技术人员通过自然语言编程并部署应用，但随之而来的是严重的安全隐患：缺乏开发经验的员工可能无意中暴露数据、违反合规要求，而安全团队甚至无从知晓这些&amp;quot;影子应用&amp;quot;的存在。传统开发安全流程已无法应对这种分布式开发浪潮。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编程理想显示器配置方案（已解决！）</title>
+      <link>https://qife122.github.io/p/%E7%BC%96%E7%A8%8B%E7%90%86%E6%83%B3%E6%98%BE%E7%A4%BA%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88%E5%B7%B2%E8%A7%A3%E5%86%B3/</link>
+      <pubDate>Sun, 03 Aug 2025 06:31:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BC%96%E7%A8%8B%E7%90%86%E6%83%B3%E6%98%BE%E7%A4%BA%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88%E5%B7%B2%E8%A7%A3%E5%86%B3/</guid>
+      <description>&lt;h1 id=&#34;编程理想显示器配置方案已解决&#34;&gt;编程理想显示器配置方案（已解决！）&lt;/h1&gt;&#xA;&lt;p&gt;最优屏幕配置的承诺在于：如果能同时显示编程项目的所有相关部分，就能节省切换工作区域所需的时间和脑力——从而成为效率更高的程序员。但：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果屏幕过大导致查看边缘区域时需要扭动脖子——这是负面影响&lt;/li&gt;&#xA;&lt;li&gt;使用曲面超宽屏获取更多空间——也可能带来弊端&lt;/li&gt;&#xA;&lt;li&gt;拼接过多独立显示器——光标移动会变得麻烦&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;黄金配置方案&#34;&gt;黄金配置方案&lt;/h2&gt;&#xA;&lt;p&gt;推荐采用&amp;quot;1+2&amp;quot;三屏布局：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>深度解析SUCURI《2018被黑网站趋势报告》：CMS漏洞与恶意软件攻防实录</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/</link>
+      <pubDate>Sun, 03 Aug 2025 06:20:59 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/</guid>
+      <description>&lt;h3 id=&#34;cms安全态势分析&#34;&gt;CMS安全态势分析&lt;/h3&gt;&#xA;&lt;p&gt;报告显示56%被黑网站的核心CMS平台已安装最新补丁。但深入分析各CMS版本状态后发现问题依然严峻：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;WordPress&lt;/strong&gt;：虽然36.7%的受感染站点存在版本滞后（较2016年下降24.3%），但其仍占被黑网站的60%，反映出第三方生态的安全隐患&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;电商平台&lt;/strong&gt;：Magento(83.1%)、OpenCart(91.3%)和PrestaShop(97.2%)的版本滞后率惊人，这些处理支付交易的系统存在核心漏洞风险，且升级过程存在兼容性难题&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;主要攻击向量&#34;&gt;主要攻击向量&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;凭证填充攻击&lt;/strong&gt;：通过暴力破解获取管理员权限&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;第三方组件漏洞&lt;/strong&gt;：2018年发现196个漏洞，其中：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;WordPress插件116个漏洞（17%为高危）&lt;/li&gt;&#xA;&lt;li&gt;Joomla!扩展28个高危漏洞&lt;/li&gt;&#xA;&lt;li&gt;Magento第三方模块正成为新兴攻击入口&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;黑名单机制缺陷&#34;&gt;黑名单机制缺陷&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;仅11%的被黑网站触发黑名单（同比下降6%）&lt;/li&gt;&#xA;&lt;li&gt;各平台检测率差异显著：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Norton：46.1%&lt;/li&gt;&#xA;&lt;li&gt;Google：10.4%&lt;/li&gt;&#xA;&lt;li&gt;McAfee：下降4%&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;恶意软件家族分布&#34;&gt;恶意软件家族分布&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;后门程序&lt;/strong&gt;：68%的感染站点存在（主要用于维持持久访问）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;SEO垃圾注入&lt;/strong&gt;：同比增长78%，主要篡改：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;index.php（34.5%）：隐藏文件包含攻击&lt;/li&gt;&#xA;&lt;li&gt;functions.php（13.5%）：SEO垃圾注入器&lt;/li&gt;&#xA;&lt;li&gt;wp-config.php（10.6%）：数据库凭证窃取&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;加密货币挖矿&lt;/strong&gt;：33%为服务端PHP矿工，67%为客户端JS矿工（如CoinHive）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;关键防御建议&#34;&gt;关键防御建议&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;建立多黑名单平台监控（Google/Norton/Yandex等）&lt;/li&gt;&#xA;&lt;li&gt;对核心文件（如wp-config.php）实施完整性校验&lt;/li&gt;&#xA;&lt;li&gt;采用深度扫描清除隐藏后门&lt;/li&gt;&#xA;&lt;li&gt;电商站点需严格遵守PCI DSS 6.2条款（关键补丁30天内部署）&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;报告完整数据见&lt;a href=&#34;https://sucuri.net/reports/2018-hacked-website-report&#34;&gt;SUCURI 2018被黑网站报告&lt;/a&gt;，技术团队另提供&lt;a href=&#34;https://blog.sucuri.net/2019/03/how-to-clean-a-hacked-wordpress-website.html&#34;&gt;恶意文件清理指南&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI编程助手风险分析与应对策略</title>
+      <link>https://qife122.github.io/p/ai%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E9%A3%8E%E9%99%A9%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E5%AF%B9%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Sun, 03 Aug 2025 06:10:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ai%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E9%A3%8E%E9%99%A9%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E5%AF%B9%E7%AD%96%E7%95%A5/</guid>
+      <description>&lt;p&gt;随着ChatGPT等大型语言模型（LLM）的兴起，开发者正将这些工具实际应用于代码编写和理解场景。编程语言虽然结构严谨，但AI辅助编码仍存在多重风险，这正是我们撰写本技术白皮书的核心动因。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>二进制安全优化实践：消除编译器引入的代码重用攻击隐患</title>
+      <link>https://qife122.github.io/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</link>
+      <pubDate>Sun, 03 Aug 2025 05:53:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</guid>
+      <description>&lt;h1 id=&#34;二进制安全优化实践&#34;&gt;二进制安全优化实践&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;这样存在毫无意义，安全地存在才有价值&amp;rdquo;（《麦克白》3.1）&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;编译器不仅要生成高效代码，还必须生成安全代码。尽管编译器开发过程中经过严格测试和正确性认证，但其优化过程可能意外引入信息泄漏或删除程序员编写的安全关键操作。图1展示了CWE-733漏洞实例：编译器通过&amp;quot;死存储消除&amp;quot;优化移除了加密密钥清零操作，导致密钥可能被攻击者恢复。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OSINT利器Buscador：开源情报收集的瑞士军刀</title>
+      <link>https://qife122.github.io/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</link>
+      <pubDate>Sun, 03 Aug 2025 05:42:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</guid>
+      <description>&lt;h1 id=&#34;toolsmith-130---使用buscador进行osint调查&#34;&gt;toolsmith #130 - 使用Buscador进行OSINT调查&lt;/h1&gt;&#xA;&lt;p&gt;首先，新年快乐！希望您拥有高效成功的2018年。作为开年之作，我将再次探讨开源情报(OSINT)技术。除微软信息安全主管的本职工作外，我还荣幸担任华盛顿国民警卫队J-2情报部门成员，结合J-6网络作战职能，OSINT在识别对手指标和红队评估目标方面具有重要价值。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Amazon FSx for OpenZFS现支持直接访问Amazon S3数据（无需迁移）</title>
+      <link>https://qife122.github.io/p/amazon-fsx-for-openzfs%E7%8E%B0%E6%94%AF%E6%8C%81%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AEamazon-s3%E6%95%B0%E6%8D%AE%E6%97%A0%E9%9C%80%E8%BF%81%E7%A7%BB/</link>
+      <pubDate>Sun, 03 Aug 2025 05:26:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/amazon-fsx-for-openzfs%E7%8E%B0%E6%94%AF%E6%8C%81%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AEamazon-s3%E6%95%B0%E6%8D%AE%E6%97%A0%E9%9C%80%E8%BF%81%E7%A7%BB/</guid>
+      <description>&lt;h2 id=&#34;技术架构突破&#34;&gt;技术架构突破&lt;/h2&gt;&#xA;&lt;p&gt;即日起，您可将Amazon S3访问点挂载至Amazon FSx for OpenZFS文件系统，使存储在文件系统中的数据能够通过Amazon S3标准API（如GetObject/PutObject/ListObjectsV2）进行访问。该功能具有以下核心特性：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞</title>
+      <link>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 05:15:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;在这篇文章中，我们将探讨curl中一个鲜为人知的特性，该特性导致了Burp Suite Pro和Google Chrome的本地文件泄露漏洞。虽然我们早已为Burp Suite发布了补丁，但怀疑该技术可能对利用其他具有&amp;quot;复制为curl命令&amp;quot;功能或从命令行调用curl的应用程序有所帮助。该漏洞由Paul Mutton通过我们的漏洞赏金计划私下报告，并慷慨地允许我们发布这篇分析报告。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Shadowpad恶意软件升级导致勒索软件部署：新型攻击手法深度分析</title>
+      <link>https://qife122.github.io/p/shadowpad%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AF%BC%E8%87%B4%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 05:04:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/shadowpad%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AF%BC%E8%87%B4%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;关键发现&#34;&gt;关键发现&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;欧洲两起事件响应案例涉及与中国高级威胁组织关联的Shadowpad恶意软件。研究发现该恶意软件在7个月内攻击了全球15个国家的21家企业，其中制造业占比超50%。&lt;/li&gt;&#xA;&lt;li&gt;攻击者通过弱密码爆破VPN并绕过证书型多因素认证（具体方法未知）入侵网络，最终在域控制器部署Shadowpad。&lt;/li&gt;&#xA;&lt;li&gt;部分案例中，攻击者部署了此前未公开的新型勒索软件家族，其加密算法与Kodex Evil Extractor工具有显著差异，可能是攻击者的误导手段。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;攻击链分析&#34;&gt;攻击链分析&lt;/h3&gt;&#xA;&lt;h4 id=&#34;初始入侵&#34;&gt;初始入侵&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;攻击路径：VPN → 弱密码爆破/多因素认证绕过 → 获取管理员权限 → 部署Shadowpad&lt;/li&gt;&#xA;&lt;li&gt;特殊手段：在证书型MFA环境下仍成功突破（可能通过预先获取有效证书）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;恶意工具集&#34;&gt;恶意工具集&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Shadowpad变种&lt;/strong&gt;：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>在Linux上运行原版Intercepter-NG网络嗅探工具</title>
+      <link>https://qife122.github.io/p/%E5%9C%A8linux%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Sun, 03 Aug 2025 04:53:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9C%A8linux%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</guid>
+      <description>&lt;h1 id=&#34;在linux上运行原版intercepter-ng&#34;&gt;在Linux上运行原版Intercepter-NG&lt;/h1&gt;&#xA;&lt;h2 id=&#34;操作指南已更新&#34;&gt;操作指南（已更新！）&lt;/h2&gt;&#xA;&lt;p&gt;[1] 下载Wine用的WinPcap封装库及libpcap-dev&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget http://sniff.su/wine_pcap_dlls.tar.gz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install libpcap-dev&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;如果是i386版Kali系统，直接跳转至步骤[3]。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;[2] Kali x64系统需执行以下命令：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Trail of Bits 2020冬季实习项目亮点：从反编译器到智能合约安全</title>
+      <link>https://qife122.github.io/p/trail-of-bits-2020%E5%86%AC%E5%AD%A3%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9%E4%BB%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%99%A8%E5%88%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Sun, 03 Aug 2025 04:42:16 +0800</pubDate>
+      <guid>https://qife122.github.io/p/trail-of-bits-2020%E5%86%AC%E5%AD%A3%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9%E4%BB%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%99%A8%E5%88%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/</guid>
+      <description>&lt;h3 id=&#34;aaron-yoo--anvill反编译器&#34;&gt;Aaron Yoo — Anvill反编译器&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;加州大学洛杉矶分校&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我在Anvill反编译器中添加了一个生成LLVM位码函数&amp;quot;JSON规范&amp;quot;的工具。这些规范告知Anvill函数参数和返回值等重要值的物理位置（寄存器或内存）。典型规范示例如下：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+      <pubDate>Sun, 03 Aug 2025 04:31:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
+      <description>&lt;h1 id=&#34;攻击虚拟机工作进程--msrc博客&#34;&gt;攻击虚拟机工作进程 | MSRC博客&lt;/h1&gt;&#xA;&lt;p&gt;在过去一年中，我们投入了大量时间使Hyper-V研究更易于开展。首篇博客《Hyper-V研究第一步》描述了调试管理程序的工具和设置，并分析了虚拟化堆栈组件的攻击面。随后发表的《Hyper-V中准虚拟化设备的模糊测试》聚焦于VSPs-VSCs通过VMBus的通信机制，披露了根分区内核(vpcivsp.sys)中vPCI VSP的客户机到主机漏洞。八月，Joe Bialek在Black Hat上的精彩演讲展示了如何利用虚拟机工作进程(VMWP)中IDE模拟器的另一个漏洞。现在，让我们深入探究VMWP内部机制。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>统计目录中Java代码行数的简便方法</title>
+      <link>https://qife122.github.io/p/%E7%BB%9F%E8%AE%A1%E7%9B%AE%E5%BD%95%E4%B8%ADjava%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0%E7%9A%84%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Sun, 03 Aug 2025 04:19:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BB%9F%E8%AE%A1%E7%9B%AE%E5%BD%95%E4%B8%ADjava%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0%E7%9A%84%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/</guid>
+      <description>&lt;h1 id=&#34;统计目录中java代码行数&#34;&gt;统计目录中Java代码行数&lt;/h1&gt;&#xA;&lt;p&gt;我最近需要统计一个目录中所有Java代码文件的总行数（包括子目录）。通过组合Linux的&lt;code&gt;find&lt;/code&gt;和&lt;code&gt;wc&lt;/code&gt;命令，可以轻松实现这个需求：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;find . -type f -name &lt;span class=&#34;s1&#34;&gt;&amp;#39;*java&amp;#39;&lt;/span&gt; -print0 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; wc -l --files0-from&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;-&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;这个命令的工作原理是：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl netrc文件CRLF注入漏洞分析</title>
+      <link>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 04:08:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;curl-netrc-crlf注入漏洞报告&#34;&gt;curl netrc crlf注入漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;curl允许在netrc文件的登录和密码字段中编码CR和LF字符。当攻击者能够影响netrc文件内容时，可通过在登录名或密码中注入CRLF来实现FTP命令注入。POP3协议同样可能受影响但未经测试。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>API安全测试清单：7个关键步骤</title>
+      <link>https://qife122.github.io/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</link>
+      <pubDate>Sun, 03 Aug 2025 03:42:17 +0800</pubDate>
+      <guid>https://qife122.github.io/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</guid>
+      <description>&lt;h1 id=&#34;api安全测试清单7个关键步骤&#34;&gt;API安全测试清单：7个关键步骤&lt;/h1&gt;&#xA;&lt;p&gt;API是恶意攻击者的常见攻击载体。使用我们的API安全测试清单和最佳实践来保护您的组织及其数据。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Dave Shackleford（Voodoo Security）、Michael Cobb&lt;br&gt;&#xA;&lt;strong&gt;发布日期&lt;/strong&gt;：2024年11月1日&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Discord桌面应用远程代码执行漏洞分析</title>
+      <link>https://qife122.github.io/p/discord%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 03:25:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/discord%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;discord桌面应用rce漏洞分析&#34;&gt;Discord桌面应用RCE漏洞分析&lt;/h1&gt;&#xA;&lt;p&gt;几个月前，我在Discord桌面应用中发现了一个远程代码执行漏洞，并通过其漏洞赏金计划进行了报告。这个RCE漏洞的有趣之处在于它需要组合多个漏洞才能实现。本文将分享详细的技术细节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>漏洞利用实验室：Blackhat 2016漏洞实验课程 - 课前教程与破解挑战</title>
+      <link>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</link>
+      <pubDate>Sun, 03 Aug 2025 03:03:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;blackhat-2016漏洞实验课程&#34;&gt;Blackhat 2016漏洞实验课程&lt;/h1&gt;&#xA;&lt;h2 id=&#34;课前教程模块&#34;&gt;课前教程模块&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;基础缓冲区溢出&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;32位栈溢出原理与实践&lt;/li&gt;&#xA;&lt;li&gt;通过恶意输入覆盖EIP寄存器&lt;/li&gt;&#xA;&lt;li&gt;使用坏字符检测定位内存冲突&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;现代绕过技术&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;DEP/NX保护机制的ROP链构造&lt;/li&gt;&#xA;&lt;li&gt;绕过ASLR的内存地址泄露技术&lt;/li&gt;&#xA;&lt;li&gt;使用JIT喷射对抗控制流保护&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;crackme挑战集&#34;&gt;Crackme挑战集&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Level1&lt;/strong&gt;&lt;br&gt;&#xA;基础栈溢出（无保护机制）&lt;br&gt;&#xA;要求：通过覆盖返回地址执行shellcode&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>为AKS VMSS配置主机级审计日志记录</title>
+      <link>https://qife122.github.io/p/%E4%B8%BAaks-vmss%E9%85%8D%E7%BD%AE%E4%B8%BB%E6%9C%BA%E7%BA%A7%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sun, 03 Aug 2025 02:52:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%B8%BAaks-vmss%E9%85%8D%E7%BD%AE%E4%B8%BB%E6%9C%BA%E7%BA%A7%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;本文指导您如何在Azure Kubernetes Service (AKS)虚拟机规模集(VMSS)上使用Linux审计子系统（也称为auditd）启用和配置Linux审计日志记录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>主动防御Active Directory入门指南：打造蜜罐账户与虚假SMB共享</title>
+      <link>https://qife122.github.io/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</link>
+      <pubDate>Sun, 03 Aug 2025 02:40:31 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</guid>
+      <description>&lt;h3 id=&#34;webcast-active-directory主动防御adad入门指南&#34;&gt;WEBCAST: Active Directory主动防御(ADAD)入门指南&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;John Strand&lt;/strong&gt; //&lt;br&gt;&#xA;本次网络研讨会中，John将讲解如何通过Active Defense Harbinger Distribution (ADHD)工具集配置Active Directory主动防御系统，并探讨《主动网络防御确定性法案》(ACDC)等法律框架。内容包括：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bucket Finder工具：探测亚马逊S3存储桶的安全利器</title>
+      <link>https://qife122.github.io/p/bucket-finder%E5%B7%A5%E5%85%B7%E6%8E%A2%E6%B5%8B%E4%BA%9A%E9%A9%AC%E9%80%8As3%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%A9%E5%99%A8/</link>
+      <pubDate>Sun, 03 Aug 2025 02:29:34 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bucket-finder%E5%B7%A5%E5%85%B7%E6%8E%A2%E6%B5%8B%E4%BA%9A%E9%A9%AC%E9%80%8As3%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%A9%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;bucket-finder&#34;&gt;Bucket Finder&lt;/h1&gt;&#xA;&lt;p&gt;该项目与我的博客文章《Whats In Amazon&amp;rsquo;s Buckets》相关联，更多后台原理请参考该博文。&lt;/p&gt;&#xA;&lt;p&gt;这是一个使用简单的工具，仅需提供字典文件即可自动检测每个单词是否对应亚马逊S3系统中的有效存储桶。对于发现的存储桶，工具会检测其权限状态（公开/私有/重定向）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软服务不受OpenSSL「Heartbleed」漏洞影响 | MSRC官方声明</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%97opensslheartbleed%E6%BC%8F%E6%B4%9E%E5%BD%B1%E5%93%8D-msrc%E5%AE%98%E6%96%B9%E5%A3%B0%E6%98%8E/</link>
+      <pubDate>Sun, 03 Aug 2025 02:18:38 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%97opensslheartbleed%E6%BC%8F%E6%B4%9E%E5%BD%B1%E5%93%8D-msrc%E5%AE%98%E6%96%B9%E5%A3%B0%E6%98%8E/</guid>
+      <description>&lt;p&gt;2014年4月8日，安全研究人员披露了OpenSSL加密软件库中存在重大缺陷，该漏洞被命名为「Heartbleed」，可能允许攻击者利用通信加密密钥访问网站用户数据。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PGP签名与Linux包管理的安全隐患解析</title>
+      <link>https://qife122.github.io/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 02:07:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;pgp签名与linux包管理的安全隐患&#34;&gt;PGP签名与Linux包管理的安全隐患&lt;/h3&gt;&#xA;&lt;p&gt;在关于PGP生态系统的讨论中，我经常听到一种观点：尽管PGP存在问题，但它对Linux发行版的软件包签名至关重要。本文将重点讨论PGP在Linux包管理环境中暴露的几个系统性安全问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>探索AWS Batch权限提升漏洞的技术分析</title>
+      <link>https://qife122.github.io/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 01:56:38 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;从上一期说起您解决cloudsectidbit第2期的iac实验了吗&#34;&gt;从上一期说起&amp;hellip;您解决CloudSecTidbit第2期的IaC实验了吗？&lt;/h3&gt;&#xA;&lt;p&gt;[解决方案]&#xA;AWS Cognito挑战的核心是通过权限提升获取管理员权限并读取内部用户列表。应用程序使用AWS Cognito颁发的会话令牌（保存为名为&lt;code&gt;aws-cognito-app-access-token&lt;/code&gt;的cookie），攻击者可以通过以下步骤实现提权：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过Cloudflare实现域名伪装(ESNI技术解析)</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 01:39:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;通过cloudflare实现域名伪装&#34;&gt;通过Cloudflare实现域名伪装&lt;/h1&gt;&#xA;&lt;p&gt;在开始本文之前，我认为有必要先讨论&amp;quot;域名伪装&amp;quot;(Domain Fronting)这个术语及其可能的定义。如果您只关心如何隐藏通信内容，可以直接跳过本节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Petya勒索软件攻击事件技术分析与防护措施</title>
+      <link>https://qife122.github.io/p/petya%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%8E%AA%E6%96%BD/</link>
+      <pubDate>Sun, 03 Aug 2025 01:18:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/petya%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%8E%AA%E6%96%BD/</guid>
+      <description>&lt;h3 id=&#34;petya勒索软件攻击事件更新&#34;&gt;Petya勒索软件攻击事件更新&lt;/h3&gt;&#xA;&lt;p&gt;与近期WannaCrypt事件类似，我们再次遭遇名为Petya的勒索软件攻击。早期报告中存在大量相互矛盾的信息，包括对无关数据和误导性内容的混淆。微软团队迅速展开调查分析，使我们的恶意软件防护团队能够发布检测签名。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft Outlook远程代码执行漏洞(CVE-2025-47176)技术分析</title>
+      <link>https://qife122.github.io/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 01:07:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;microsoft-outlook---远程代码执行rce&#34;&gt;Microsoft Outlook - 远程代码执行(RCE)&lt;/h1&gt;&#xA;&lt;h1 id=&#34;作者-nu11secur1ty&#34;&gt;作者: nu11secur1ty&lt;/h1&gt;&#xA;&lt;h1 id=&#34;日期-2025-07-08&#34;&gt;日期: 2025-07-08&lt;/h1&gt;&#xA;&lt;h1 id=&#34;厂商-microsoft&#34;&gt;厂商: Microsoft&lt;/h1&gt;&#xA;&lt;h1 id=&#34;软件&#34;&gt;软件: &lt;a href=&#34;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&#34;&gt;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h1 id=&#34;参考&#34;&gt;参考:&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&#34;&gt;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&lt;/a&gt; &amp;gt;&#xA;&lt;a href=&#34;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&#34;&gt;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;cve-2025-47176&#34;&gt;CVE-2025-47176&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;本概念验证(PoC)演示了CVE-2025-47176漏洞的模拟利用。它通过向Outlook注入特制邮件项，其中包含恶意同步路径，在扫描过程中触发特定操作。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows终端防御技术全景：初始访问攻防实战（第一部分）</title>
+      <link>https://qife122.github.io/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+      <pubDate>Sun, 03 Aug 2025 00:55:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+      <description>&lt;h3 id=&#34;windows终端防御技术现状&#34;&gt;Windows终端防御技术现状&lt;/h3&gt;&#xA;&lt;p&gt;当今Windows桌面平台的终端防御生态已发展出高度成熟的能力体系。除传统杀毒软件外，扩展检测响应(XDR)技术和行为分析方法的结合，可全面覆盖初始访问阶段的恶意软件技术及入侵后活动检测。参与红队演练的专业人员普遍认为，如今通过二进制文件执行获取初始访问权限比以往任何时候都更加困难。即便成功入侵Windows平台，成熟防御环境对常见C2平台的入侵后活动也有完善的监测响应机制。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用Binary Ninja进行反向污点分析 - 追踪程序崩溃根源</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8binary-ninja%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90-%E8%BF%BD%E8%B8%AA%E7%A8%8B%E5%BA%8F%E5%B4%A9%E6%BA%83%E6%A0%B9%E6%BA%90/</link>
+      <pubDate>Sun, 03 Aug 2025 00:44:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8binary-ninja%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90-%E8%BF%BD%E8%B8%AA%E7%A8%8B%E5%BA%8F%E5%B4%A9%E6%BA%83%E6%A0%B9%E6%BA%90/</guid>
+      <description>&lt;h1 id=&#34;反向污点分析原理&#34;&gt;反向污点分析原理&lt;/h1&gt;&#xA;&lt;p&gt;在Trail of Bits暑期实习期间，我开发了KRFAnalysis工具集，用于分析系统调用故障注入工具KRF产生的崩溃。KRF能有效引发程序崩溃，但难以确定具体是哪个故障系统调用导致了崩溃。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitHub Enterprise漏洞链：从SSRF到RCE的四个漏洞利用</title>
+      <link>https://qife122.github.io/p/github-enterprise%E6%BC%8F%E6%B4%9E%E9%93%BE%E4%BB%8Essrf%E5%88%B0rce%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Sun, 03 Aug 2025 00:32:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/github-enterprise%E6%BC%8F%E6%B4%9E%E9%93%BE%E4%BB%8Essrf%E5%88%B0rce%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;github-enterprise漏洞链从ssrf到rce的四个漏洞利用&#34;&gt;GitHub Enterprise漏洞链：从SSRF到RCE的四个漏洞利用&lt;/h1&gt;&#xA;&lt;p&gt;大家好，我是Orange。距离我上次写博客已经有一段时间了。&lt;/p&gt;&#xA;&lt;p&gt;在过去的几个月里，我花了很多时间准备Black Hat USA 2017和DEF CON 25的演讲。成为Black Hat和DEFCON的演讲者一直是我的人生目标之一。这也是我在如此正式的会议上第一次用英语演讲，真是一次难忘的经历:P&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AIxCC决赛启动：Buttercup引领网络安全AI新浪潮</title>
+      <link>https://qife122.github.io/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/</link>
+      <pubDate>Sun, 03 Aug 2025 00:20:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/</guid>
+      <description>&lt;h1 id=&#34;以buttercup开启aixcc决赛征程&#34;&gt;以Buttercup开启AIxCC决赛征程&lt;/h1&gt;&#xA;&lt;p&gt;DARPA人工智能网络挑战赛（AIxCC）决赛正式启动，我们的网络推理系统Buttercup已整装待发！这项最初限制严格的赛事现已变得更加雄心勃勃。参赛团队现在可以构建自定义AI模型、自主控制基础设施，并同时应对多种类型的安全挑战。伴随新挑战而来的是更多资源——每项挑战的预算从半决赛的100美元提升至1000美元以上。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>深入解析CVE-2021-1758（CoreText越界读取漏洞）</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2021-1758coretext%E8%B6%8A%E7%95%8C%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 00:08:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2021-1758coretext%E8%B6%8A%E7%95%8C%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;h1 id=&#34;cve-2021-1758coretext越界读取分析&#34;&gt;CVE-2021-1758（CoreText越界读取）分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;mac资源派生字体文件&#34;&gt;Mac资源派生字体文件&lt;/h2&gt;&#xA;&lt;h3 id=&#34;资源派生结构&#34;&gt;资源派生结构&lt;/h3&gt;&#xA;&lt;p&gt;现代macOS系统可以加载称为Mac资源派生（Resource Fork）的字体文件。这种遗留结构包含：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;资源头&lt;/strong&gt;（16字节）：记录数据偏移/大小&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;资源数据&lt;/strong&gt;：多个资源条目（4字节长度+可变数据）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;资源映射表&lt;/strong&gt;：包含类型列表、引用列表和名称列表&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;关键数据结构&#34;&gt;关键数据结构&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 示例资源头结构&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;res_header&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data_offset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map_offset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data_len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map_len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 资源类型列表项&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;type_entry&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;FOND&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;res_count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ref_list_offset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;h2 id=&#34;目标分析&#34;&gt;目标分析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;测试环境搭建&#34;&gt;测试环境搭建&lt;/h3&gt;&#xA;&lt;p&gt;使用CoreText框架的测试工具：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pwn2Own Safari沙箱逃逸第一部分：获取root shell的技术分析</title>
+      <link>https://qife122.github.io/p/pwn2own-safari%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E8%8E%B7%E5%8F%96root-shell%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 02 Aug 2025 23:56:55 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pwn2own-safari%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E8%8E%B7%E5%8F%96root-shell%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;pwn2own-safari沙箱逃逸第一部分---获取root-shell&#34;&gt;Pwn2Own: Safari沙箱逃逸第一部分 - 获取root shell&lt;/h1&gt;&#xA;&lt;p&gt;今天我们将介绍CVE-2017-2533/ZDI-17-357漏洞，这是macOS系统服务中的一个竞争条件漏洞，可用于从本地管理员权限提升至root权限。我们在今年的Pwn2Own比赛中结合其他逻辑漏洞利用它来逃逸Safari沙箱。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>HPE网络交换机基础配置指南</title>
       <link>https://qife122.github.io/p/hpe%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link>

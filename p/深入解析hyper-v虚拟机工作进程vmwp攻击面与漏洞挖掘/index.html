@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细剖析了Hyper-V虚拟机工作进程(VMWP)的技术架构，包括其与虚拟化基础设施驱动(VID)的通信机制、指令模拟器工作原理、虚拟设备仿真实现，并通过CVE-2018-0888等实际案例演示了漏洞挖掘方法，最后介绍了微软为强化VMWP安全实施的CFG/ACG/CIG等缓解措施。">
+<title>深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘">
+<meta property='og:description' content="本文详细剖析了Hyper-V虚拟机工作进程(VMWP)的技术架构，包括其与虚拟化基础设施驱动(VID)的通信机制、指令模拟器工作原理、虚拟设备仿真实现，并通过CVE-2018-0888等实际案例演示了漏洞挖掘方法，最后介绍了微软为强化VMWP安全实施的CFG/ACG/CIG等缓解措施。">
+<meta property='og:url' content='http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Hyper-V' /><meta property='article:tag' content='虚拟机逃逸' /><meta property='article:tag' content='漏洞分析' /><meta property='article:tag' content='虚拟化安全' /><meta property='article:published_time' content='2025-08-03T04:31:08&#43;08:00'/><meta property='article:modified_time' content='2025-08-03T04:31:08&#43;08:00'/>
+<meta name="twitter:title" content="深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘">
+<meta name="twitter:description" content="本文详细剖析了Hyper-V虚拟机工作进程(VMWP)的技术架构，包括其与虚拟化基础设施驱动(VID)的通信机制、指令模拟器工作原理、虚拟设备仿真实现，并通过CVE-2018-0888等实际案例演示了漏洞挖掘方法，最后介绍了微软为强化VMWP安全实施的CFG/ACG/CIG等缓解措施。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#虚拟机工作进程是什么">虚拟机工作进程是什么？</a></li>
+    <li><a href="#vmwp内部机制">VMWP内部机制</a>
+      <ol>
+        <li><a href="#整体架构">整体架构</a></li>
+        <li><a href="#关键组件">关键组件</a>
+          <ol>
+            <li><a href="#指令模拟器">指令模拟器</a></li>
+            <li><a href="#虚拟设备">虚拟设备</a></li>
+            <li><a href="#pci配置访问示例">PCI配置访问示例</a></li>
+          </ol>
+        </li>
+        <li><a href="#调试实践">调试实践</a></li>
+      </ol>
+    </li>
+    <li><a href="#漏洞案例研究">漏洞案例研究</a>
+      <ol>
+        <li><a href="#cve-2018-0888">CVE-2018-0888</a></li>
+      </ol>
+    </li>
+    <li><a href="#vmwp加固措施">VMWP加固措施</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细剖析了Hyper-V虚拟机工作进程(VMWP)的技术架构，包括其与虚拟化基础设施驱动(VID)的通信机制、指令模拟器工作原理、虚拟设备仿真实现，并通过CVE-2018-0888等实际案例演示了漏洞挖掘方法，最后介绍了微软为强化VMWP安全实施的CFG/ACG/CIG等缓解措施。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 03, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="攻击虚拟机工作进程--msrc博客">攻击虚拟机工作进程 | MSRC博客
+</h1><p>在过去一年中，我们投入了大量时间使Hyper-V研究更易于开展。首篇博客《Hyper-V研究第一步》描述了调试管理程序的工具和设置，并分析了虚拟化堆栈组件的攻击面。随后发表的《Hyper-V中准虚拟化设备的模糊测试》聚焦于VSPs-VSCs通过VMBus的通信机制，披露了根分区内核(vpcivsp.sys)中vPCI VSP的客户机到主机漏洞。八月，Joe Bialek在Black Hat上的精彩演讲展示了如何利用虚拟机工作进程(VMWP)中IDE模拟器的另一个漏洞。现在，让我们深入探究VMWP内部机制。</p>
+<h2 id="虚拟机工作进程是什么">虚拟机工作进程是什么？
+</h2><p>虚拟化堆栈中最大的攻击面之一就实现在根分区的用户空间——虚拟机工作进程(VMWP.exe)。每个虚拟机对应一个VMWP.exe进程实例，其主要组件包括：</p>
+<ul>
+<li>vSMB服务器</li>
+<li>Plan9文件系统</li>
+<li>集成组件(IC)</li>
+<li>虚拟设备（模拟器/非模拟设备）</li>
+</ul>
+<p>VMWP可视为微软的&quot;QEMU&quot;式进程，负责实现模拟/非模拟设备。这类组件通常非常复杂，而复杂实现往往容易出错&hellip;</p>
+<h2 id="vmwp内部机制">VMWP内部机制
+</h2><h3 id="整体架构">整体架构
+</h3><p>工作进程通过虚拟化基础设施驱动(vid.sys)与hypervisor通信。VID使用hypercall向hypervisor发送管理命令，包括：</p>
+<ul>
+<li>创建/删除分区</li>
+<li>挂起/恢复分区</li>
+<li>动态内存管理</li>
+<li>添加/删除虚拟处理器</li>
+</ul>
+<p>VID通知分发器(VND)是关键组件，允许客户端注册并接收来自客户机的动作通知。x64架构支持的VID通知类型包括：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="nc">_VID_MESSAGE_TYPE</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VidMessageMbpAccess</span> <span class="o">=</span> <span class="mh">0x0001</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VidMessageException</span> <span class="o">=</span> <span class="mh">0x0002</span> <span class="o">|</span> <span class="n">VID_MESSAGE_TYPE_FLAG_INTERCEPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VidMessageTripleFault</span> <span class="o">=</span> <span class="mh">0x0003</span> <span class="o">|</span> <span class="n">VID_MESSAGE_TYPE_FLAG_INTERCEPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VidMessageExecuteInstruction</span> <span class="o">=</span> <span class="mh">0x0004</span> <span class="o">|</span> <span class="n">VID_MESSAGE_TYPE_FLAG_INTERCEPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VidMessageMmio</span> <span class="o">=</span> <span class="mh">0x0005</span> <span class="o">|</span> <span class="n">VID_MESSAGE_TYPE_FLAG_INTERCEPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...共18种消息类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="n">VID_MESSAGE_TYPE</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="关键组件">关键组件
+</h3><h4 id="指令模拟器">指令模拟器
+</h4><p>EmulatorVP类实现了x86/x64指令模拟，包含约250个函数，主要分为：</p>
+<ul>
+<li><code>EmulatorVp::Execute*Instruction</code>：指令执行模拟入口</li>
+<li><code>EmulatorVP::Execute*Op</code>：具体操作处理</li>
+<li><code>EmulatorVp::ExecuteIs*</code>：RFLAGS状态检查</li>
+<li><code>EmulatorVP::Decode*</code>：指令解码器</li>
+</ul>
+<p>典型调用栈示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">VndCompletionThread
+</span></span><span class="line"><span class="cl">└─VndCompletionHandler::HandleVndCallback
+</span></span><span class="line"><span class="cl">  └─EmulatorVp::DispatchMmioOperation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      └─EmulatorVp::ExecuteGEInstruction
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="虚拟设备">虚拟设备
+</h4><p>虚拟设备分为三类：</p>
+<ol>
+<li><strong>模拟设备</strong>：完整模拟硬件设备（如e1000网卡）</li>
+<li><strong>准虚拟化设备</strong>：专为虚拟环境设计的虚拟设备</li>
+<li><strong>直通设备</strong>：允许客户机直接访问物理硬件</li>
+</ol>
+<p>主要设备模拟DLL及其功能：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>DLL名称</th>
+          <th>功能范围</th>
+          <th>模拟设备示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>VmEmulatedDevices.dll</td>
+          <td>1500+函数</td>
+          <td>PIIX芯片组、DMA控制器、PS/2键盘</td>
+      </tr>
+      <tr>
+          <td>vmuidevices.dll</td>
+          <td>1500+函数</td>
+          <td>视频设备、输入管理器、HID设备</td>
+      </tr>
+      <tr>
+          <td>vmEmulatedNic.dll</td>
+          <td>网络设备</td>
+          <td>DEC 21041/21140A/21143网卡</td>
+      </tr>
+      <tr>
+          <td>VmEmulatedStorage.dll</td>
+          <td>存储设备</td>
+          <td>IDE控制器、光驱、软盘驱动器</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="pci配置访问示例">PCI配置访问示例
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">STDMETHOD</span><span class="p">(</span><span class="n">NotifyPciConfigAccess</span><span class="p">)(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_In_</span> <span class="n">PCI_BUS_NUMBER</span>         <span class="n">Bus</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_In_</span> <span class="n">PCI_DEVICE_NUMBER</span>      <span class="n">DeviceNumber</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_In_</span> <span class="n">PCI_FUNCTION_NUMBER</span>    <span class="n">FunctionNumber</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_In_</span> <span class="n">UINT16</span>                 <span class="n">InRegAddress</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_In_</span> <span class="n">BOOLEAN</span>                <span class="n">InIsWrite</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_Inout_</span> <span class="n">UINT32</span><span class="o">*</span>             <span class="n">IoData</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该接口由多个设备类实现，包括：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vmchipset!VmEmu::WCL::PciHandler::NotifyPciConfigAccess
+</span></span><span class="line"><span class="cl">VmEmulatedStorage!IdeControllerDevice::NotifyPciConfigAccess
+</span></span><span class="line"><span class="cl">vmemulateddevices!VideoS3Device::NotifyPciConfigAccess
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="调试实践">调试实践
+</h3><p>通过内核调试器执行<code>out 0x1f0, 0x41414141</code>指令，在VMWP中设置断点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bp vmemulatedstorage!IdeControllerDevice::NotifyIoPortWrite
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可观察到完整的IO端口写入调用链。</p>
+<h2 id="漏洞案例研究">漏洞案例研究
+</h2><h3 id="cve-2018-0888">CVE-2018-0888
+</h3><p>电池模拟器中的未初始化内存漏洞：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">BatteryEmulator</span><span class="o">::</span><span class="n">MmioRead</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kt">uint64_t</span> <span class="cm">/* RangeBase */</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kt">uint64_t</span> <span class="n">RangeOffset</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kt">uint64_t</span> <span class="n">NumberOfBytes</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_Out_writes_bytes_</span><span class="p">(</span><span class="n">NumberOfBytes</span><span class="p">)</span> <span class="kt">void</span><span class="o">*</span> <span class="n">ReadBuffer</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="k">noexcept</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">UINT32</span> <span class="n">readValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">NumberOfBytes</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span> <span class="c1">// 未初始化ReadBuffer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>攻击者可利用此漏洞读取主机内存敏感信息。</p>
+<h2 id="vmwp加固措施">VMWP加固措施
+</h2><p>微软实施了以下安全防护：</p>
+<ol>
+<li><strong>控制流防护(CFG)</strong>：
+<ul>
+<li>启用CFG导出抑制</li>
+<li>强制CFG校验</li>
+</ul>
+</li>
+<li><strong>任意代码防护(ACG)</strong>：
+<ul>
+<li>禁止分配/映射可执行页面</li>
+<li>禁止修改可执行页面保护</li>
+</ul>
+</li>
+<li><strong>代码完整性防护(CIG)</strong>：
+<ul>
+<li>禁止加载未签名DLL</li>
+</ul>
+</li>
+<li>移除SeImpersonatePrivilege权限</li>
+</ol>
+<p>尽管有这些缓解措施，攻击者仍可能通过ROP链或文件系统API等途径实现利用。</p>
+<p>通过本文分析，我们希望研究人员能更深入地探索虚拟化堆栈安全。如有问题，欢迎通过Twitter(@AmarSaar)联系作者Saar Amar。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hyper-v/">Hyper-V</a>
+        
+            <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%83%E9%80%B8/">虚拟机逃逸</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a>
+        
+            <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8/">虚拟化安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
