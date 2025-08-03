@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 08:12:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 09:23:22 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用SUID逻辑漏洞：Readline信息泄露攻击解析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 09:23:22 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;利用suid逻辑漏洞readline信息泄露攻击&#34;&gt;利用SUID逻辑漏洞：Readline信息泄露攻击&lt;/h1&gt;&#xA;&lt;p&gt;我在readline依赖库中发现了一个逻辑漏洞，当解析INPUTRC环境变量指定的文件时，会部分泄露文件信息。在满足以下条件时，攻击者可能利用该漏洞进行横向移动：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>深入解析V8引擎TurboFan的漏洞利用技术</title>
       <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90v8%E5%BC%95%E6%93%8Eturbofan%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>

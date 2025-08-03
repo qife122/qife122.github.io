@@ -7,8 +7,316 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 08:12:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 17:56:39 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>智能合约验证变得更简单 - Manticore验证工具详解</title>
+      <link>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%AA%8C%E8%AF%81%E5%8F%98%E5%BE%97%E6%9B%B4%E7%AE%80%E5%8D%95-manticore%E9%AA%8C%E8%AF%81%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Sun, 03 Aug 2025 17:56:39 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%AA%8C%E8%AF%81%E5%8F%98%E5%BE%97%E6%9B%B4%E7%AE%80%E5%8D%95-manticore%E9%AA%8C%E8%AF%81%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;智能合约验证变得更简单&#34;&gt;智能合约验证变得更简单&lt;/h1&gt;&#xA;&lt;p&gt;智能合约开发者现在可以使用他们编写代码的语言（Solidity）来表达安全属性，我们的新工具manticore-verifier会自动验证这些不变量。更棒的是，Echidna和Manticore现在共享相同的属性测试规范格式。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Trail of Bits 2021开源贡献盘点：编译器加固、macOS安全监控与Python工具链升级</title>
+      <link>https://qife122.github.io/p/trail-of-bits-2021%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E7%9B%98%E7%82%B9%E7%BC%96%E8%AF%91%E5%99%A8%E5%8A%A0%E5%9B%BAmacos%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E4%B8%8Epython%E5%B7%A5%E5%85%B7%E9%93%BE%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Sun, 03 Aug 2025 17:39:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/trail-of-bits-2021%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E7%9B%98%E7%82%B9%E7%BC%96%E8%AF%91%E5%99%A8%E5%8A%A0%E5%9B%BAmacos%E5%AE%89%E5%85%A8%E7%9B%91%E6%8E%A7%E4%B8%8Epython%E5%B7%A5%E5%85%B7%E9%93%BE%E5%8D%87%E7%BA%A7/</guid>
+      <description>&lt;h3 id=&#34;开源使命宣言&#34;&gt;开源使命宣言&lt;/h3&gt;&#xA;&lt;p&gt;在Trail of Bits，我们以开源核心工具为荣（如algo、manticore和graphtage）。本文重点不在于我们的工具，而是我们在外部项目中的贡献——2021年，团队提交的190多个PR被非自有仓库合并，体现了我们对整个软件生态安全的承诺。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>共识协议中的全局稳定时间(GST)假设及其实际意义</title>
+      <link>https://qife122.github.io/p/%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E5%85%A8%E5%B1%80%E7%A8%B3%E5%AE%9A%E6%97%B6%E9%97%B4gst%E5%81%87%E8%AE%BE%E5%8F%8A%E5%85%B6%E5%AE%9E%E9%99%85%E6%84%8F%E4%B9%89/</link>
+      <pubDate>Sun, 03 Aug 2025 17:23:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E5%85%A8%E5%B1%80%E7%A8%B3%E5%AE%9A%E6%97%B6%E9%97%B4gst%E5%81%87%E8%AE%BE%E5%8F%8A%E5%85%B6%E5%AE%9E%E9%99%85%E6%84%8F%E4%B9%89/</guid>
+      <description>&lt;h1 id=&#34;激励全局稳定性---trail-of-bits博客&#34;&gt;激励全局稳定性 - Trail of Bits博客&lt;/h1&gt;&#xA;&lt;p&gt;共识协议在许多应用中扮演着关键角色。Fischer、Lynch和Paterson的经典不可能性结果表明，在合理假设下，协议可能无法达成共识。Dwork、Lynch和Stockmeyer的论文《部分同步环境下的共识》(DLS论文)通过引入以下&amp;quot;全局稳定时间&amp;quot;(GST)假设规避了这一不可能性结果：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Trail of Bits发布《测试手册》——聚焦Semgrep静态分析工具与CI/CD优化</title>
+      <link>https://qife122.github.io/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 03 Aug 2025 17:17:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</guid>
+      <description>&lt;h3 id=&#34;为什么编写测试手册&#34;&gt;为什么编写《测试手册》？&lt;/h3&gt;&#xA;&lt;p&gt;在Trail of Bits，我们投入了大量时间研究、实验和优化各类静态与动态安全工具。实践中发现，现有文档虽然全面但过于庞杂。标准文档试图提供所有答案，而我们的《测试手册》只提供经过实战验证的最有效方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GDB Python API的冬季优化：增强消息提示与类型支持</title>
+      <link>https://qife122.github.io/p/gdb-python-api%E7%9A%84%E5%86%AC%E5%AD%A3%E4%BC%98%E5%8C%96%E5%A2%9E%E5%BC%BA%E6%B6%88%E6%81%AF%E6%8F%90%E7%A4%BA%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%94%AF%E6%8C%81/</link>
+      <pubDate>Sun, 03 Aug 2025 17:01:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gdb-python-api%E7%9A%84%E5%86%AC%E5%AD%A3%E4%BC%98%E5%8C%96%E5%A2%9E%E5%BC%BA%E6%B6%88%E6%81%AF%E6%8F%90%E7%A4%BA%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%94%AF%E6%8C%81/</guid>
+      <description>&lt;h1 id=&#34;gdb-python-api的冬季优化增强消息提示与类型支持&#34;&gt;GDB Python API的冬季优化：增强消息提示与类型支持&lt;/h1&gt;&#xA;&lt;p&gt;作为Trail of Bits的冬季实习生，我的目标是改进GNU调试器(GDB)的两方面性能：提升运行速度并增强其Python API，以更好地支持Pwndbg等依赖工具。主要工作包括实现符号解析的并行处理，最终完成了三项核心改进。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Trail of Bits 2022开源贡献亮点回顾：从Rust优化到区块链安全</title>
+      <link>https://qife122.github.io/p/trail-of-bits-2022%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E4%BA%AE%E7%82%B9%E5%9B%9E%E9%A1%BE%E4%BB%8Erust%E4%BC%98%E5%8C%96%E5%88%B0%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Sun, 03 Aug 2025 16:50:16 +0800</pubDate>
+      <guid>https://qife122.github.io/p/trail-of-bits-2022%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E4%BA%AE%E7%82%B9%E5%9B%9E%E9%A1%BE%E4%BB%8Erust%E4%BC%98%E5%8C%96%E5%88%B0%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/</guid>
+      <description>&lt;h3 id=&#34;开源协作的技术价值&#34;&gt;开源协作的技术价值&lt;/h3&gt;&#xA;&lt;p&gt;去年此时，我们曾汇报2021年向非Trail of Bits仓库提交的190+个合并PR。2022年，这一数字突破400！这种持续投入源于我们对生态互惠的深刻理解：虽然我们为自己的工具感到自豪，但同样受益于社区维护的项目。当遇到工具不符合预期时，我们选择修复它；当功能存在缺口时，我们主动完善它。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>可信发布：软件包安全的新标杆——基于OpenID Connect的无密钥认证机制</title>
+      <link>https://qife122.github.io/p/%E5%8F%AF%E4%BF%A1%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B0%E6%A0%87%E6%9D%86%E5%9F%BA%E4%BA%8Eopenid-connect%E7%9A%84%E6%97%A0%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Sun, 03 Aug 2025 16:44:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%8F%AF%E4%BF%A1%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B0%E6%A0%87%E6%9D%86%E5%9F%BA%E4%BA%8Eopenid-connect%E7%9A%84%E6%97%A0%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/</guid>
+      <description>&lt;h1 id=&#34;可信发布软件包安全的新标杆&#34;&gt;可信发布：软件包安全的新标杆&lt;/h1&gt;&#xA;&lt;p&gt;作者：William Woodruff&lt;br&gt;&#xA;日期：2023年5月23日&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术背景&#34;&gt;技术背景&lt;/h2&gt;&#xA;&lt;p&gt;过去一年，我们与Python包索引(PyPI)合作开发了名为&amp;quot;可信发布&amp;quot;的新型认证机制。该技术通过消除长期API令牌和密码的使用，在降低供应链攻击和凭证泄露风险的同时，简化了发布工作流。目前PyPI上关键软件包已采用该技术强化发布安全。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>戴尔遭勒索组织入侵 坚称泄露数据为&#34;伪造&#34;测试数据</title>
+      <link>https://qife122.github.io/p/%E6%88%B4%E5%B0%94%E9%81%AD%E5%8B%92%E7%B4%A2%E7%BB%84%E7%BB%87%E5%85%A5%E4%BE%B5-%E5%9D%9A%E7%A7%B0%E6%B3%84%E9%9C%B2%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BC%AA%E9%80%A0%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Sun, 03 Aug 2025 16:33:22 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%88%B4%E5%B0%94%E9%81%AD%E5%8B%92%E7%B4%A2%E7%BB%84%E7%BB%87%E5%85%A5%E4%BE%B5-%E5%9D%9A%E7%A7%B0%E6%B3%84%E9%9C%B2%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BC%AA%E9%80%A0%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/</guid>
+      <description>&lt;h1 id=&#34;戴尔遭勒索组织入侵-坚称泄露数据为伪造&#34;&gt;戴尔遭勒索组织入侵 坚称泄露数据为&amp;quot;伪造&amp;quot;&lt;/h1&gt;&#xA;&lt;p&gt;World Leaks组织访问并发布了戴尔客户解决方案中心的数据。戴尔声明称，该中心与客户及合作伙伴系统隔离，主要存储用于演示和测试的&amp;quot;合成&amp;quot;数据集。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>YOLO哈希构造的致命缺陷：密码学安全实践指南</title>
+      <link>https://qife122.github.io/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 16:06:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h2 id=&#34;yolomultihash&#34;&gt;YoloMultiHash&lt;/h2&gt;&#xA;&lt;p&gt;在Trail of Bits的审计工作中，YoloMultiHash是最常见的危险构造。当客户需要处理复杂数据结构或值数组时，常误用这种构造来实现Fiat-Shamir转录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>后量子密码学：超越量子计算威胁的密码革新</title>
+      <link>https://qife122.github.io/p/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81%E5%AD%A6%E8%B6%85%E8%B6%8A%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E5%A8%81%E8%83%81%E7%9A%84%E5%AF%86%E7%A0%81%E9%9D%A9%E6%96%B0/</link>
+      <pubDate>Sun, 03 Aug 2025 15:49:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%90%8E%E9%87%8F%E5%AD%90%E5%AF%86%E7%A0%81%E5%AD%A6%E8%B6%85%E8%B6%8A%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E5%A8%81%E8%83%81%E7%9A%84%E5%AF%86%E7%A0%81%E9%9D%A9%E6%96%B0/</guid>
+      <description>&lt;h3 id=&#34;量子计算无关紧要的后量子密码学&#34;&gt;量子计算无关紧要的后量子密码学&lt;/h3&gt;&#xA;&lt;p&gt;最近你可能经常听到后量子（PQ）密码学的讨论。尽管没人真正见过量子计算机，但新的PQ标准比传统算法更安全、更具弹性且更灵活——即使量子计算机永远无法建成。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用飞行模式绕过未成年账户锁定：Worldcoin iOS应用逻辑漏洞分析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E9%A3%9E%E8%A1%8C%E6%A8%A1%E5%BC%8F%E7%BB%95%E8%BF%87%E6%9C%AA%E6%88%90%E5%B9%B4%E8%B4%A6%E6%88%B7%E9%94%81%E5%AE%9Aworldcoin-ios%E5%BA%94%E7%94%A8%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 15:33:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E9%A3%9E%E8%A1%8C%E6%A8%A1%E5%BC%8F%E7%BB%95%E8%BF%87%E6%9C%AA%E6%88%90%E5%B9%B4%E8%B4%A6%E6%88%B7%E9%94%81%E5%AE%9Aworldcoin-ios%E5%BA%94%E7%94%A8%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h3&gt;&#xA;&lt;p&gt;当iOS用户修改出生日期为未成年(如2015年)时，Worldcoin应用会锁定账户并要求联系客服解锁。但研究者发现通过以下步骤可绕过限制：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>智能模糊测试革命 - 自动化漏洞挖掘的技术演进</title>
+      <link>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E9%9D%A9%E5%91%BD-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
+      <pubDate>Sun, 03 Aug 2025 15:17:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E9%9D%A9%E5%91%BD-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
+      <description>&lt;h2 id=&#34;智能模糊测试革命&#34;&gt;智能模糊测试革命&lt;/h2&gt;&#xA;&lt;p&gt;我最近有幸在BSidesLisbon大会上发表主题演讲。会议非常精彩，特别感谢Bruno Morisson的邀请。如果你喜欢波特酒，这个会议绝对不容错过！我建议附近地区的人明年都来参加。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>如何通过CAA记录限制证书颁发机构(CA)签发SSL证书</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87caa%E8%AE%B0%E5%BD%95%E9%99%90%E5%88%B6%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84ca%E7%AD%BE%E5%8F%91ssl%E8%AF%81%E4%B9%A6/</link>
+      <pubDate>Sun, 03 Aug 2025 14:55:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87caa%E8%AE%B0%E5%BD%95%E9%99%90%E5%88%B6%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84ca%E7%AD%BE%E5%8F%91ssl%E8%AF%81%E4%B9%A6/</guid>
+      <description>&lt;h1 id=&#34;限制证书颁发机构ca签发ssl证书启用dns中的caa记录&#34;&gt;限制证书颁发机构(CA)签发SSL证书：启用DNS中的CAA记录&lt;/h1&gt;&#xA;&lt;h2 id=&#34;什么是caa&#34;&gt;什么是CAA？&lt;/h2&gt;&#xA;&lt;p&gt;CAA（证书颁发机构授权）是一种DNS记录类型，用于指定哪些证书颁发机构(CA)有权为特定域名签发证书。该记录通过公开可查的DNS记录声明，CA在颁发证书前必须进行验证。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软安全情报报告第14版：实时防护效果深度解析</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%83%85%E6%8A%A5%E6%8A%A5%E5%91%8A%E7%AC%AC14%E7%89%88%E5%AE%9E%E6%97%B6%E9%98%B2%E6%8A%A4%E6%95%88%E6%9E%9C%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 14:38:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%83%85%E6%8A%A5%E6%8A%A5%E5%91%8A%E7%AC%AC14%E7%89%88%E5%AE%9E%E6%97%B6%E9%98%B2%E6%8A%A4%E6%95%88%E6%9E%9C%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;实时防护缺失导致感染率激增5倍&#34;&gt;实时防护缺失导致感染率激增5倍&lt;/h3&gt;&#xA;&lt;p&gt;2012年下半年数据显示，未启用恶意软件防护产品实时保护功能的计算机，其感染恶意软件和垃圾软件的概率是受保护设备的&lt;strong&gt;5.5倍&lt;/strong&gt;（图1）。该结论基于微软恶意软件删除工具(MSRT)在用户授权前提下收集的全球6亿台设备数据，通过交叉分析防护状态与感染情况得出。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金</title>
+      <link>https://qife122.github.io/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+      <pubDate>Sun, 03 Aug 2025 14:11:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+      <description>&lt;h1 id=&#34;从429到200利用x-overwriting头实现速率限制绕过与漏洞赏金&#34;&gt;从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金&lt;/h1&gt;&#xA;&lt;p&gt;Akwaaba！朋友们。在本报告中，我将展示如何绕过某组织匆忙实施的速率限制机制。如果你对我的其他研究感兴趣，可以参考我之前关于《如何绕过Google验证码实现CSRF与XSS链式攻击》的文章，或者关于《Android Intent重定向攻击》的移动端渗透测试文章。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+      <pubDate>Sun, 03 Aug 2025 13:55:41 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+      <description>&lt;h1 id=&#34;通过swagger-ui进行钓鱼攻击利用错误配置获取漏洞赏金&#34;&gt;通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;Swagger UI是一个开源工具，帮助开发者可视化和交互由OpenAPI规范定义的API端点。虽然它对测试和文档非常有用，但暴露或错误配置的Swagger实例可能导致严重的安全问题，如DOM XSS、HTML注入和开放重定向。随着漏洞赏金平台对此类漏洞的奖励，保护Swagger UI不仅至关重要，也是道德黑客的宝贵目标。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软2023年12月安全更新：关键漏洞修复与技术指南</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF2023%E5%B9%B412%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 13:50:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF2023%E5%B9%B412%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h3 id=&#34;安全更新概要&#34;&gt;安全更新概要&lt;/h3&gt;&#xA;&lt;p&gt;2023年12月12日（UTC时间），微软发布月度安全更新，修复影响多款产品的安全漏洞。本次更新涉及：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Windows全系列&lt;/strong&gt;（11/10/Server）：修复远程代码执行漏洞（CVE-2023-20588等）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Microsoft Office&lt;/strong&gt;：信息泄露漏洞&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Azure云平台&lt;/strong&gt;：特权提升风险&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;恶意软件防护引擎&lt;/strong&gt;：服务拒绝漏洞&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;关键技术细节&#34;&gt;关键技术细节&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;已公开漏洞紧急修复&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2014年4月安全更新风险评估：微软紧急修复11个漏洞</title>
+      <link>https://qife122.github.io/p/2014%E5%B9%B44%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D11%E4%B8%AA%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sun, 03 Aug 2025 13:28:49 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2014%E5%B9%B44%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D11%E4%B8%AA%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;h2 id=&#34;2014年4月安全更新风险评估&#34;&gt;2014年4月安全更新风险评估&lt;/h2&gt;&#xA;&lt;p&gt;本日，微软发布了4个安全公告，共修复11个CVE漏洞。其中2个公告评级为&amp;quot;紧急&amp;quot;，2个为&amp;quot;重要&amp;quot;。以下风险评估表可帮助用户确定补丁优先级：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IMDSv2强制实施：即将登陆您所在的区域！</title>
+      <link>https://qife122.github.io/p/imdsv2%E5%BC%BA%E5%88%B6%E5%AE%9E%E6%96%BD%E5%8D%B3%E5%B0%86%E7%99%BB%E9%99%86%E6%82%A8%E6%89%80%E5%9C%A8%E7%9A%84%E5%8C%BA%E5%9F%9F/</link>
+      <pubDate>Sun, 03 Aug 2025 13:07:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/imdsv2%E5%BC%BA%E5%88%B6%E5%AE%9E%E6%96%BD%E5%8D%B3%E5%B0%86%E7%99%BB%E9%99%86%E6%82%A8%E6%89%80%E5%9C%A8%E7%9A%84%E5%8C%BA%E5%9F%9F/</guid>
+      <description>&lt;h3 id=&#34;imdsv2强制实施即将登陆您所在的区域&#34;&gt;IMDSv2强制实施：即将登陆您所在的区域！&lt;/h3&gt;&#xA;&lt;p&gt;3月25日，AWS发布了一项新功能，默认对新启动的EC2实例实施IMDSv2（Instance Metadata Service Version 2）。这项期待已久的功能虽然仍有改进空间，但标志着云安全的重要进步。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 12:56:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;通过ms13-063缓解ldrhotpatchroutine-depaslr绕过技术&#34;&gt;通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术&lt;/h1&gt;&#xA;&lt;p&gt;今天，我们发布了MS13-063安全更新，其中包含一项深度防御变更，用于解决可能被用来绕过两个重要平台防护措施的技术：地址空间布局随机化（ASLR）和数据执行保护（DEP）。正如我们过去所述，这些防护措施在增加攻击者利用漏洞的难度和成本方面发挥着重要作用。MS13-063所解决的绕过技术是由NSFocus安全实验室的Yang Yu在今年早些时候的CanSecWest安全会议上描述的。该绕过技术也被其他研究人员独立发现，并被VUPEN用于他们在Pwn2Own 2013比赛中的一个漏洞利用中。几个月前，我们发布了EMET 4.0，其中包含针对这一特定绕过技术的防护措施。在这篇博客文章中，我们希望提供一些关于该绕过技术如何工作以及MS13-063如何解决它的背景信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MS08-036漏洞解析：Windows中的PGM协议安全风险</title>
+      <link>https://qife122.github.io/p/ms08-036%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90windows%E4%B8%AD%E7%9A%84pgm%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Sun, 03 Aug 2025 12:39:49 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ms08-036%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90windows%E4%B8%AD%E7%9A%84pgm%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;p&gt;今天我们发布了MS08-036补丁，修复了Windows实现中Pragmatic General Multicast(PGM)协议(RFC 3208)的两个拒绝服务漏洞。您可能从未听说过PGM——我们团队中只有一位曾在核心网络组件测试组工作过的工程师了解它。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BadAlloc漏洞：内存分配漏洞可能影响工业、医疗和企业网络中的广泛IoT和OT设备</title>
+      <link>https://qife122.github.io/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Sun, 03 Aug 2025 12:29:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</guid>
+      <description>&lt;p&gt;微软Azure Defender for IoT安全研究团队Section 52最近发现了一系列存在于IoT和OT设备中的关键内存分配漏洞，攻击者可能利用这些漏洞绕过安全控制执行恶意代码或导致系统崩溃。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Earth Ammit组织通过多波次协同攻击破坏台湾无人机供应链</title>
+      <link>https://qife122.github.io/p/earth-ammit%E7%BB%84%E7%BB%87%E9%80%9A%E8%BF%87%E5%A4%9A%E6%B3%A2%E6%AC%A1%E5%8D%8F%E5%90%8C%E6%94%BB%E5%87%BB%E7%A0%B4%E5%9D%8F%E5%8F%B0%E6%B9%BE%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%BE%9B%E5%BA%94%E9%93%BE/</link>
+      <pubDate>Sun, 03 Aug 2025 12:12:51 +0800</pubDate>
+      <guid>https://qife122.github.io/p/earth-ammit%E7%BB%84%E7%BB%87%E9%80%9A%E8%BF%87%E5%A4%9A%E6%B3%A2%E6%AC%A1%E5%8D%8F%E5%90%8C%E6%94%BB%E5%87%BB%E7%A0%B4%E5%9D%8F%E5%8F%B0%E6%B9%BE%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%BE%9B%E5%BA%94%E9%93%BE/</guid>
+      <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;Earth Ammit是一个与中文APT组织有关联的威胁行为体，在2023-2024年发动了两波攻击。第一波VENOM主要针对软件服务提供商，第二波TIDRONE针对军事工业。在VENOM行动中，攻击者重点渗透无人机供应链上游。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Guard-GBDT：面向垂直数据集的隐私保护高效GBDT训练框架</title>
+      <link>https://qife122.github.io/p/guard-gbdt%E9%9D%A2%E5%90%91%E5%9E%82%E7%9B%B4%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E9%AB%98%E6%95%88gbdt%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Sun, 03 Aug 2025 11:56:50 +0800</pubDate>
+      <guid>https://qife122.github.io/p/guard-gbdt%E9%9D%A2%E5%90%91%E5%9E%82%E7%9B%B4%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E9%AB%98%E6%95%88gbdt%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6/</guid>
+      <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;随着隐私关注度提升和法规日益严格，基于安全多方计算（MPC）的协作式GBDT模型训练受到广泛关注。现有MPC方案面临通信成本高和非线性运算（如除法/Sigmoid）计算负担重的效率瓶颈。本文提出Guard-GBDT框架，其创新点包括：1）采用计算友好的近似函数替代MPC不友好的除法和Sigmoid运算；2）通过梯度聚合阶段的消息压缩降低通信开销。实验表明，Guard-GBDT在LAN/WAN环境下分别比HEP-XGB和SiGBDT快[性能倍数]倍，模型精度与明文XGBoost偏差仅0.1%-0.3%。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Azure容器实例服务漏洞协同披露</title>
+      <link>https://qife122.github.io/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</link>
+      <pubDate>Sun, 03 Aug 2025 11:45:52 +0800</pubDate>
+      <guid>https://qife122.github.io/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</guid>
+      <description>&lt;p&gt;微软近期修复了由Palo Alto Networks安全研究员报告的Azure容器实例(ACI)服务漏洞，该漏洞可能允许用户访问ACI服务中其他客户的信息。调查显示未发生客户数据未经授权访问的情况。出于谨慎考虑，我们已通过Azure门户的服务健康通知告知与研究员容器运行在同一集群的客户。若未收到通知则无需采取任何措施。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>基于T-Mobile数据泄露事件的企业安全事件分析与防御对策</title>
+      <link>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Et-mobile%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AF%B9%E7%AD%96/</link>
+      <pubDate>Sun, 03 Aug 2025 11:35:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Et-mobile%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AF%B9%E7%AD%96/</guid>
+      <description>&lt;h1 id=&#34;企业安全事件分析与防御对策基于t-mobile数据泄露案例研究&#34;&gt;企业安全事件分析与防御对策——基于T-Mobile数据泄露案例研究&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;本文系统分析了T-Mobile在2021年与2023年发生的重大数据泄露事件，通过对其系统、基础设施及公开端点的全维度安全审计，结合案例驱动的漏洞评估与主动式道德黑客技术（包括Shodan侦察、API滥用模拟、VNC暴力破解、固件逆向工程及Web应用扫描），揭示了初始泄露事件后仍持续存在的结构性安全缺陷。基于这些发现，我们提出包含以下要素的多层防御策略：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl漏洞报告：带空格前缀的-H参数与--proxy联用导致HTTP头注入</title>
+      <link>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Sun, 03 Aug 2025 11:24:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</guid>
+      <description>&lt;h1 id=&#34;curl漏洞报告带空格前缀的-h参数与proxy联用导致http头注入&#34;&gt;curl漏洞报告：带空格前缀的-H参数与&amp;ndash;proxy联用导致HTTP头注入&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;报告人&lt;/strong&gt;: spongebhav&lt;br&gt;&#xA;&lt;strong&gt;提交时间&lt;/strong&gt;: 2024年11月25日&lt;br&gt;&#xA;&lt;strong&gt;影响版本&lt;/strong&gt;: curl 8.11.0 (macOS Sequoia 15.1)&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;当curl同时使用&lt;code&gt;-H &amp;quot;[space]header:value&amp;quot;&lt;/code&gt;和&lt;code&gt;--proxy&lt;/code&gt;参数时，会导致HTTP头注入到前一个头部字段中。该行为仅在启用代理时出现。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bloom Paris TV：当精致艺术指导遇上世界级制作技术</title>
+      <link>https://qife122.github.io/p/bloom-paris-tv%E5%BD%93%E7%B2%BE%E8%87%B4%E8%89%BA%E6%9C%AF%E6%8C%87%E5%AF%BC%E9%81%87%E4%B8%8A%E4%B8%96%E7%95%8C%E7%BA%A7%E5%88%B6%E4%BD%9C%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 11:08:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bloom-paris-tv%E5%BD%93%E7%B2%BE%E8%87%B4%E8%89%BA%E6%9C%AF%E6%8C%87%E5%AF%BC%E9%81%87%E4%B8%8A%E4%B8%96%E7%95%8C%E7%BA%A7%E5%88%B6%E4%BD%9C%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h3 id=&#34;技术栈解析&#34;&gt;技术栈解析&lt;/h3&gt;&#xA;&lt;p&gt;在视觉冲击力之下，网站由强大技术组合精心构建：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;WordPress&lt;/strong&gt;作为高度可定制的内容管理系统，为Bloom提供全面的内容策略控制&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GSAP&lt;/strong&gt;实现电影级流畅动画和无缝页面过渡效果&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;定制SVG遮罩技术&lt;/strong&gt;实现优雅的内容区块过渡&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;全响应式前端架构&lt;/strong&gt;确保跨设备性能优化&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;加载与页面过渡设计&#34;&gt;加载与页面过渡设计&lt;/h3&gt;&#xA;&lt;p&gt;从概念阶段就确立的影院级过渡体验：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PrivacyRaven：深度学习隐私攻击模拟工具全面解析</title>
+      <link>https://qife122.github.io/p/privacyraven%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9A%90%E7%A7%81%E6%94%BB%E5%87%BB%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 10:57:12 +0800</pubDate>
+      <guid>https://qife122.github.io/p/privacyraven%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%9A%90%E7%A7%81%E6%94%BB%E5%87%BB%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;深度学习系统的隐私危机&#34;&gt;深度学习系统的隐私危机&lt;/h3&gt;&#xA;&lt;p&gt;深度学习技术已广泛应用于欺诈检测、医疗诊断、自动驾驶等敏感领域，但这类系统存在严重隐私漏洞：攻击者可能窃取训练数据（成员推理攻击）、复制模型知识产权（模型提取攻击），甚至重建原始输入数据（模型反转攻击）。医疗CAT扫描诊断系统案例显示，即便仅返回&amp;quot;是/否&amp;quot;预测结果，攻击者仍能通过PrivacyRaven完整复现患者扫描影像。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>URL验证绕过速查表：全面解析SSRF与CORS绕过技术</title>
+      <link>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 10:41:06 +0800</pubDate>
+      <guid>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;引入url验证绕过速查表&#34;&gt;引入URL验证绕过速查表&lt;/h1&gt;&#xA;&lt;p&gt;URL验证绕过是众多漏洞的根本原因，包括许多SSRF（服务器端请求伪造）、CORS（跨源资源共享）配置错误和开放重定向实例。这些漏洞通过使用模糊URL触发URL解析差异并绕过验证。然而，许多这些技术由于缺乏文档而被忽视。为了解决这个问题，我们创建了一个速查表，整合所有已知的有效载荷，节省您从互联网上搜索和收集信息的时间和精力。今天，我们很高兴推出一个新工具：URL验证绕过速查表。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>卫星黑客攻防实战：从历史漏洞到现代攻击链</title>
+      <link>https://qife122.github.io/p/%E5%8D%AB%E6%98%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E4%BB%8E%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E%E5%88%B0%E7%8E%B0%E4%BB%A3%E6%94%BB%E5%87%BB%E9%93%BE/</link>
+      <pubDate>Sun, 03 Aug 2025 10:29:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%8D%AB%E6%98%9F%E9%BB%91%E5%AE%A2%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E4%BB%8E%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E%E5%88%B0%E7%8E%B0%E4%BB%A3%E6%94%BB%E5%87%BB%E9%93%BE/</guid>
+      <description>&lt;h1 id=&#34;卫星黑客攻防&#34;&gt;卫星黑客攻防&lt;/h1&gt;&#xA;&lt;p&gt;作者：Austin Kaiser // 实习生&lt;/p&gt;&#xA;&lt;p&gt;卫星黑客攻击并非新鲜事。自1957年苏联发射首颗人造卫星Sputnik 1以来，卫星技术已从简单的无线电信号发射发展到量子加密通信。但伴随技术进步，安全威胁也日益严峻。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Electron应用安全测试工具化指南</title>
+      <link>https://qife122.github.io/p/electron%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8C%96%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 10:18:30 +0800</pubDate>
+      <guid>https://qife122.github.io/p/electron%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8C%96%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;electron应用安全测试工具化指南&#34;&gt;Electron应用安全测试工具化指南&lt;/h1&gt;&#xA;&lt;p&gt;随着Electron框架的流行，我们总结了以下技术手段用于对Electron应用进行工具化改造、行为修改和深度安全评估。&lt;/p&gt;&#xA;&lt;h2 id=&#34;electron进程架构&#34;&gt;Electron进程架构&lt;/h2&gt;&#xA;&lt;p&gt;Electron框架使用HTML、JavaScript和CSS开发跨平台桌面应用，其核心由Node.js和Chromium的libchromiumcontent模块组成。主进程运行package.json的主脚本，负责启动其他进程；渲染进程则用于显示网页内容。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux内核v4.15安全技术深度解析</title>
+      <link>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 10:07:35 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;linux内核v415安全技术解析&#34;&gt;Linux内核v4.15安全技术解析&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;发布日期&lt;/strong&gt;：2018年2月5日&lt;br&gt;&#xA;&lt;strong&gt;分类&lt;/strong&gt;：Chrome OS, Debian, 内核, 安全, Ubuntu, Ubuntu-Server&lt;/p&gt;&#xA;&lt;p&gt;[前情提要：v4.14版本]&lt;/p&gt;&#xA;&lt;p&gt;上周发布的Linux内核v4.15包含多项重要安全改进：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2025年7月安全更新深度解析：微软与Adobe关键漏洞修复指南</title>
+      <link>https://qife122.github.io/p/2025%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 09:56:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2025%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E5%85%B3%E9%94%AE%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;2025年7月安全更新综述&#34;&gt;2025年7月安全更新综述&lt;/h1&gt;&#xA;&lt;p&gt;2025年7月8日 | Dustin Childs&lt;/p&gt;&#xA;&lt;p&gt;每月第二个星期二，Adobe和微软如期发布了最新安全补丁。本文将详细分析这两家公司的安全更新内容。&lt;/p&gt;&#xA;&lt;h2 id=&#34;adobe-2025年7月补丁&#34;&gt;Adobe 2025年7月补丁&lt;/h2&gt;&#xA;&lt;p&gt;本月Adobe共发布13个公告，修复了ColdFusion、After Effects等产品中的60个独特CVE漏洞：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>V8引擎中的HashDoS漏洞分析 - Node.js v24.0.0安全风险警示</title>
+      <link>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
+      <pubDate>Sun, 03 Aug 2025 09:45:12 +0800</pubDate>
+      <guid>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</guid>
+      <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本修改了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞——攻击者通过控制待哈希字符串可制造大量哈希碰撞，甚至无需知晓hash-seed即可实现碰撞攻击。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenSSL HTTP/3漏洞分析：CURLINFO_TLS_SSL_PTR指针错误导致的潜在RCE风险</title>
+      <link>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Sun, 03 Aug 2025 09:39:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;h1 id=&#34;openssl-http3漏洞分析&#34;&gt;OpenSSL HTTP/3漏洞分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;curl_easy_getinfo&lt;/code&gt;的&lt;code&gt;CURLINFO_TLS_SSL_PTR&lt;/code&gt;在OpenSSL HTTP/3连接中返回了无效的SSL连接指针。使用此SSL连接会导致崩溃，并可能产生其他影响。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用协议相对URL(//)绕过个人简介&#34;禁止链接&#34;限制的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 09:28:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;绕过禁止链接限制的技术分析报告&#34;&gt;绕过&amp;quot;禁止链接&amp;quot;限制的技术分析报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;在addons.allizom.org平台的个人简介编辑功能中，虽然系统明确声明&amp;quot;Links are forbidden&amp;quot;（禁止链接），但攻击者可以通过协议相对URL语法&lt;code&gt;&amp;lt;a href=&amp;quot;//evil.com&amp;quot;&amp;gt;click&amp;lt;/a&amp;gt;&lt;/code&gt;成功植入可点击的超链接。这违反了应用声明的安全策略，可能被用于钓鱼攻击、恶意软件传播等场景。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用SUID逻辑漏洞：Readline信息泄露攻击解析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 09:23:22 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;利用suid逻辑漏洞readline信息泄露攻击&#34;&gt;利用SUID逻辑漏洞：Readline信息泄露攻击&lt;/h1&gt;&#xA;&lt;p&gt;我在readline依赖库中发现了一个逻辑漏洞，当解析INPUTRC环境变量指定的文件时，会部分泄露文件信息。在满足以下条件时，攻击者可能利用该漏洞进行横向移动：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>软件开发类比：用造车工厂解释编程原理</title>
+      <link>https://qife122.github.io/p/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%B1%BB%E6%AF%94%E7%94%A8%E9%80%A0%E8%BD%A6%E5%B7%A5%E5%8E%82%E8%A7%A3%E9%87%8A%E7%BC%96%E7%A8%8B%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sun, 03 Aug 2025 09:12:16 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%B1%BB%E6%AF%94%E7%94%A8%E9%80%A0%E8%BD%A6%E5%B7%A5%E5%8E%82%E8%A7%A3%E9%87%8A%E7%BC%96%E7%A8%8B%E5%8E%9F%E7%90%86/</guid>
+      <description>&lt;h1 id=&#34;软件开发类比&#34;&gt;软件开发类比&lt;/h1&gt;&#xA;&lt;p&gt;作者：Max Kanat-Alexander | 2025年3月7日&lt;/p&gt;&#xA;&lt;p&gt;向非技术人员解释软件开发时，我常使用这个类比：想象你运营着一家定制汽车工厂。客户只需在纸上描述想要的汽车，工厂就能自动建造。但这里的关键在于——建造者不是人类，而是只能严格遵循指令的机器人。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过GitHub进行JavaScript侦察：在访问应用前发现敏感信息</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 09:01:24 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;“大多数敏感信息并不在前端——它们隐藏在版本控制的坟墓中。”&lt;/p&gt;&#xA;&lt;h3 id=&#34;-github为何是js侦察的金矿&#34;&gt;⚡ GitHub为何是JS侦察的金矿&lt;/h3&gt;&#xA;&lt;p&gt;现代Web应用通常由庞大的前端JavaScript包驱动——这些文件通过CDN分发、嵌入HTML或由现代框架（React、Vue、Angular）构建。而这些JS文件并非凭空产生。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>EMET 5.5 发布：增强Windows系统安全防护的新利器</title>
+      <link>https://qife122.github.io/p/emet-5.5-%E5%8F%91%E5%B8%83%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E7%9A%84%E6%96%B0%E5%88%A9%E5%99%A8/</link>
+      <pubDate>Sun, 03 Aug 2025 08:56:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/emet-5.5-%E5%8F%91%E5%B8%83%E5%A2%9E%E5%BC%BAwindows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E7%9A%84%E6%96%B0%E5%88%A9%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;增强缓解体验工具包emet55版本现已发布&#34;&gt;增强缓解体验工具包(EMET)5.5版本现已发布&lt;/h1&gt;&#xA;&lt;p&gt;增强缓解体验工具包(EMET)通过预测、转移、终止、阻止或使攻击者常用的入侵技术失效，帮助企业和所有计算机用户防范可能破坏业务和日常生活的安全威胁。这种方式使EMET能在安全更新和反恶意软件正式应对前，就为计算机系统提供针对新型未知威胁的保护。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Netflix如何用Java和微服务架构支撑2.7亿用户</title>
+      <link>https://qife122.github.io/p/netflix%E5%A6%82%E4%BD%95%E7%94%A8java%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%94%AF%E6%92%912.7%E4%BA%BF%E7%94%A8%E6%88%B7/</link>
+      <pubDate>Sun, 03 Aug 2025 08:45:07 +0800</pubDate>
+      <guid>https://qife122.github.io/p/netflix%E5%A6%82%E4%BD%95%E7%94%A8java%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%94%AF%E6%92%912.7%E4%BA%BF%E7%94%A8%E6%88%B7/</guid>
+      <description>&lt;h1 id=&#34;netflix如何用java和微服务支撑27亿用户&#34;&gt;Netflix如何用Java和微服务支撑2.7亿用户&lt;/h1&gt;&#xA;&lt;p&gt;当你在Netflix点击&amp;quot;播放&amp;quot;时，这个操作会触发跨越各大洲、数据中心和数千个微服务的复杂流程。Netflix不仅是流媒体平台，更是服务全球2.7亿用户的分布式工程奇迹。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lila项目路径遍历漏洞分析：从漏洞发现到修复全过程</title>
+      <link>https://qife122.github.io/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Sun, 03 Aug 2025 08:33:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+      <description>&lt;h1 id=&#34;lichess漏洞报告3181066---lila项目路径遍历漏洞&#34;&gt;Lichess漏洞报告#3181066 - Lila项目路径遍历漏洞&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h2&gt;&#xA;&lt;p&gt;在Lila项目中发现一个路径遍历漏洞，攻击者可通过操纵用户输入来访问服务器上的任意文件，突破预期目录结构限制。该漏洞可能暴露应用源代码、配置文件等敏感信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>数据库敏感数据探测技术解析</title>
+      <link>https://qife122.github.io/p/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%B5%8B%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 08:23:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%B5%8B%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;发现有趣的数据库数据&#34;&gt;发现有趣的数据库数据&lt;/h1&gt;&#xA;&lt;p&gt;最近我开始阅读Justin Clarke的经典著作《SQL注入攻击与防御》。在开篇章节中，作者详细分析了Asprox僵尸网络的工作机制：它会扫描所有可访问的数据库，寻找文本类型的字段，并在现有数据中注入恶意JavaScript代码。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>深入解析V8引擎TurboFan的漏洞利用技术</title>
       <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90v8%E5%BC%95%E6%93%8Eturbofan%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>

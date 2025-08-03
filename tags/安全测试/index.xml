@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 21:15:46 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 17:17:36 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Trail of Bits发布《测试手册》——聚焦Semgrep静态分析工具与CI/CD优化</title>
+      <link>https://qife122.github.io/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 03 Aug 2025 17:17:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</guid>
+      <description>&lt;h3 id=&#34;为什么编写测试手册&#34;&gt;为什么编写《测试手册》？&lt;/h3&gt;&#xA;&lt;p&gt;在Trail of Bits，我们投入了大量时间研究、实验和优化各类静态与动态安全工具。实践中发现，现有文档虽然全面但过于庞杂。标准文档试图提供所有答案，而我们的《测试手册》只提供经过实战验证的最有效方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Electron应用安全测试工具化指南</title>
+      <link>https://qife122.github.io/p/electron%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8C%96%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 10:18:30 +0800</pubDate>
+      <guid>https://qife122.github.io/p/electron%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8C%96%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;electron应用安全测试工具化指南&#34;&gt;Electron应用安全测试工具化指南&lt;/h1&gt;&#xA;&lt;p&gt;随着Electron框架的流行，我们总结了以下技术手段用于对Electron应用进行工具化改造、行为修改和深度安全评估。&lt;/p&gt;&#xA;&lt;h2 id=&#34;electron进程架构&#34;&gt;Electron进程架构&lt;/h2&gt;&#xA;&lt;p&gt;Electron框架使用HTML、JavaScript和CSS开发跨平台桌面应用，其核心由Node.js和Chromium的libchromiumcontent模块组成。主进程运行package.json的主脚本，负责启动其他进程；渲染进程则用于显示网页内容。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>以太坊智能合约的可复用属性测试指南</title>
       <link>https://qife122.github.io/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97/</link>

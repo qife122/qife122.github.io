@@ -7,8 +7,64 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 14:11:57 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金</title>
+      <link>https://qife122.github.io/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+      <pubDate>Sun, 03 Aug 2025 14:11:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+      <description>&lt;h1 id=&#34;从429到200利用x-overwriting头实现速率限制绕过与漏洞赏金&#34;&gt;从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金&lt;/h1&gt;&#xA;&lt;p&gt;Akwaaba！朋友们。在本报告中，我将展示如何绕过某组织匆忙实施的速率限制机制。如果你对我的其他研究感兴趣，可以参考我之前关于《如何绕过Google验证码实现CSRF与XSS链式攻击》的文章，或者关于《Android Intent重定向攻击》的移动端渗透测试文章。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+      <pubDate>Sun, 03 Aug 2025 13:55:41 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+      <description>&lt;h1 id=&#34;通过swagger-ui进行钓鱼攻击利用错误配置获取漏洞赏金&#34;&gt;通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;Swagger UI是一个开源工具，帮助开发者可视化和交互由OpenAPI规范定义的API端点。虽然它对测试和文档非常有用，但暴露或错误配置的Swagger实例可能导致严重的安全问题，如DOM XSS、HTML注入和开放重定向。随着漏洞赏金平台对此类漏洞的奖励，保护Swagger UI不仅至关重要，也是道德黑客的宝贵目标。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BadAlloc漏洞：内存分配漏洞可能影响工业、医疗和企业网络中的广泛IoT和OT设备</title>
+      <link>https://qife122.github.io/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Sun, 03 Aug 2025 12:29:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/badalloc%E6%BC%8F%E6%B4%9E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%BD%B1%E5%93%8D%E5%B7%A5%E4%B8%9A%E5%8C%BB%E7%96%97%E5%92%8C%E4%BC%81%E4%B8%9A%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%B9%BF%E6%B3%9Biot%E5%92%8Cot%E8%AE%BE%E5%A4%87/</guid>
+      <description>&lt;p&gt;微软Azure Defender for IoT安全研究团队Section 52最近发现了一系列存在于IoT和OT设备中的关键内存分配漏洞，攻击者可能利用这些漏洞绕过安全控制执行恶意代码或导致系统崩溃。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>curl漏洞报告：带空格前缀的-H参数与--proxy联用导致HTTP头注入</title>
+      <link>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Sun, 03 Aug 2025 11:24:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</guid>
+      <description>&lt;h1 id=&#34;curl漏洞报告带空格前缀的-h参数与proxy联用导致http头注入&#34;&gt;curl漏洞报告：带空格前缀的-H参数与&amp;ndash;proxy联用导致HTTP头注入&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;报告人&lt;/strong&gt;: spongebhav&lt;br&gt;&#xA;&lt;strong&gt;提交时间&lt;/strong&gt;: 2024年11月25日&lt;br&gt;&#xA;&lt;strong&gt;影响版本&lt;/strong&gt;: curl 8.11.0 (macOS Sequoia 15.1)&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;当curl同时使用&lt;code&gt;-H &amp;quot;[space]header:value&amp;quot;&lt;/code&gt;和&lt;code&gt;--proxy&lt;/code&gt;参数时，会导致HTTP头注入到前一个头部字段中。该行为仅在启用代理时出现。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>URL验证绕过速查表：全面解析SSRF与CORS绕过技术</title>
+      <link>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 10:41:06 +0800</pubDate>
+      <guid>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;引入url验证绕过速查表&#34;&gt;引入URL验证绕过速查表&lt;/h1&gt;&#xA;&lt;p&gt;URL验证绕过是众多漏洞的根本原因，包括许多SSRF（服务器端请求伪造）、CORS（跨源资源共享）配置错误和开放重定向实例。这些漏洞通过使用模糊URL触发URL解析差异并绕过验证。然而，许多这些技术由于缺乏文档而被忽视。为了解决这个问题，我们创建了一个速查表，整合所有已知的有效载荷，节省您从互联网上搜索和收集信息的时间和精力。今天，我们很高兴推出一个新工具：URL验证绕过速查表。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用协议相对URL(//)绕过个人简介&#34;禁止链接&#34;限制的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 09:28:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;绕过禁止链接限制的技术分析报告&#34;&gt;绕过&amp;quot;禁止链接&amp;quot;限制的技术分析报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;在addons.allizom.org平台的个人简介编辑功能中，虽然系统明确声明&amp;quot;Links are forbidden&amp;quot;（禁止链接），但攻击者可以通过协议相对URL语法&lt;code&gt;&amp;lt;a href=&amp;quot;//evil.com&amp;quot;&amp;gt;click&amp;lt;/a&amp;gt;&lt;/code&gt;成功植入可点击的超链接。这违反了应用声明的安全策略，可能被用于钓鱼攻击、恶意软件传播等场景。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过GitHub进行JavaScript侦察：在访问应用前发现敏感信息</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 09:01:24 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87github%E8%BF%9B%E8%A1%8Cjavascript%E4%BE%A6%E5%AF%9F%E5%9C%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8%E5%89%8D%E5%8F%91%E7%8E%B0%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF/</guid>
+      <description>&lt;p&gt;“大多数敏感信息并不在前端——它们隐藏在版本控制的坟墓中。”&lt;/p&gt;&#xA;&lt;h3 id=&#34;-github为何是js侦察的金矿&#34;&gt;⚡ GitHub为何是JS侦察的金矿&lt;/h3&gt;&#xA;&lt;p&gt;现代Web应用通常由庞大的前端JavaScript包驱动——这些文件通过CDN分发、嵌入HTML或由现代框架（React、Vue、Angular）构建。而这些JS文件并非凭空产生。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lila项目路径遍历漏洞分析：从漏洞发现到修复全过程</title>
+      <link>https://qife122.github.io/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Sun, 03 Aug 2025 08:33:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/lila%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%BB%8E%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%88%B0%E4%BF%AE%E5%A4%8D%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+      <description>&lt;h1 id=&#34;lichess漏洞报告3181066---lila项目路径遍历漏洞&#34;&gt;Lichess漏洞报告#3181066 - Lila项目路径遍历漏洞&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h2&gt;&#xA;&lt;p&gt;在Lila项目中发现一个路径遍历漏洞，攻击者可通过操纵用户输入来访问服务器上的任意文件，突破预期目录结构限制。该漏洞可能暴露应用源代码、配置文件等敏感信息。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
       <link>https://qife122.github.io/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>

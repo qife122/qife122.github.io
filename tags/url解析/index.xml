@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>URL解析 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/url%E8%A7%A3%E6%9E%90/</link>
+    <description>Recent content in URL解析 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 09:28:54 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/url%E8%A7%A3%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用协议相对URL(//)绕过个人简介&#34;禁止链接&#34;限制的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 09:28:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%AF%B9url/%E7%BB%95%E8%BF%87%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B%E7%A6%81%E6%AD%A2%E9%93%BE%E6%8E%A5%E9%99%90%E5%88%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;绕过禁止链接限制的技术分析报告&#34;&gt;绕过&amp;quot;禁止链接&amp;quot;限制的技术分析报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;在addons.allizom.org平台的个人简介编辑功能中，虽然系统明确声明&amp;quot;Links are forbidden&amp;quot;（禁止链接），但攻击者可以通过协议相对URL语法&lt;code&gt;&amp;lt;a href=&amp;quot;//evil.com&amp;quot;&amp;gt;click&amp;lt;/a&amp;gt;&lt;/code&gt;成功植入可点击的超链接。这违反了应用声明的安全策略，可能被用于钓鱼攻击、恶意软件传播等场景。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

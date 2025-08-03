@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 00:32:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 10:41:06 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/ssrf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>URL验证绕过速查表：全面解析SSRF与CORS绕过技术</title>
+      <link>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 10:41:06 +0800</pubDate>
+      <guid>https://qife122.github.io/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;引入url验证绕过速查表&#34;&gt;引入URL验证绕过速查表&lt;/h1&gt;&#xA;&lt;p&gt;URL验证绕过是众多漏洞的根本原因，包括许多SSRF（服务器端请求伪造）、CORS（跨源资源共享）配置错误和开放重定向实例。这些漏洞通过使用模糊URL触发URL解析差异并绕过验证。然而，许多这些技术由于缺乏文档而被忽视。为了解决这个问题，我们创建了一个速查表，整合所有已知的有效载荷，节省您从互联网上搜索和收集信息的时间和精力。今天，我们很高兴推出一个新工具：URL验证绕过速查表。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>GitHub Enterprise漏洞链：从SSRF到RCE的四个漏洞利用</title>
       <link>https://qife122.github.io/p/github-enterprise%E6%BC%8F%E6%B4%9E%E9%93%BE%E4%BB%8Essrf%E5%88%B0rce%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>

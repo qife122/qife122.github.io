@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>哈希碰撞 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E/</link>
+    <description>Recent content in 哈希碰撞 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 09:45:12 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>V8引擎中的HashDoS漏洞分析 - Node.js v24.0.0安全风险警示</title>
+      <link>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
+      <pubDate>Sun, 03 Aug 2025 09:45:12 +0800</pubDate>
+      <guid>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</guid>
+      <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本修改了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞——攻击者通过控制待哈希字符串可制造大量哈希碰撞，甚至无需知晓hash-seed即可实现碰撞攻击。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 02:18:38 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 09:39:47 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenSSL HTTP/3漏洞分析：CURLINFO_TLS_SSL_PTR指针错误导致的潜在RCE风险</title>
+      <link>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Sun, 03 Aug 2025 09:39:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;h1 id=&#34;openssl-http3漏洞分析&#34;&gt;OpenSSL HTTP/3漏洞分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;&lt;code&gt;curl_easy_getinfo&lt;/code&gt;的&lt;code&gt;CURLINFO_TLS_SSL_PTR&lt;/code&gt;在OpenSSL HTTP/3连接中返回了无效的SSL连接指针。使用此SSL连接会导致崩溃，并可能产生其他影响。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>微软服务不受OpenSSL「Heartbleed」漏洞影响 | MSRC官方声明</title>
       <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%97opensslheartbleed%E6%BC%8F%E6%B4%9E%E5%BD%B1%E5%93%8D-msrc%E5%AE%98%E6%96%B9%E5%A3%B0%E6%98%8E/</link>

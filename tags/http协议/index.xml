@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP协议 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/http%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in HTTP协议 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 11:24:04 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/http%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>curl漏洞报告：带空格前缀的-H参数与--proxy联用导致HTTP头注入</title>
+      <link>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Sun, 03 Aug 2025 11:24:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</guid>
+      <description>&lt;h1 id=&#34;curl漏洞报告带空格前缀的-h参数与proxy联用导致http头注入&#34;&gt;curl漏洞报告：带空格前缀的-H参数与&amp;ndash;proxy联用导致HTTP头注入&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;报告人&lt;/strong&gt;: spongebhav&lt;br&gt;&#xA;&lt;strong&gt;提交时间&lt;/strong&gt;: 2024年11月25日&lt;br&gt;&#xA;&lt;strong&gt;影响版本&lt;/strong&gt;: curl 8.11.0 (macOS Sequoia 15.1)&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;当curl同时使用&lt;code&gt;-H &amp;quot;[space]header:value&amp;quot;&lt;/code&gt;和&lt;code&gt;--proxy&lt;/code&gt;参数时，会导致HTTP头注入到前一个头部字段中。该行为仅在启用代理时出现。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

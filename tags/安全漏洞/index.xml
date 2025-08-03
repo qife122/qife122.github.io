@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 07:49:35 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Aug 2025 16:06:32 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>YOLO哈希构造的致命缺陷：密码学安全实践指南</title>
+      <link>https://qife122.github.io/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sun, 03 Aug 2025 16:06:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h2 id=&#34;yolomultihash&#34;&gt;YoloMultiHash&lt;/h2&gt;&#xA;&lt;p&gt;在Trail of Bits的审计工作中，YoloMultiHash是最常见的危险构造。当客户需要处理复杂数据结构或值数组时，常误用这种构造来实现Fiat-Shamir转录。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 12:56:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ms13-063%E7%BC%93%E8%A7%A3ldrhotpatchroutine-dep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;通过ms13-063缓解ldrhotpatchroutine-depaslr绕过技术&#34;&gt;通过MS13-063缓解LdrHotPatchRoutine DEP/ASLR绕过技术&lt;/h1&gt;&#xA;&lt;p&gt;今天，我们发布了MS13-063安全更新，其中包含一项深度防御变更，用于解决可能被用来绕过两个重要平台防护措施的技术：地址空间布局随机化（ASLR）和数据执行保护（DEP）。正如我们过去所述，这些防护措施在增加攻击者利用漏洞的难度和成本方面发挥着重要作用。MS13-063所解决的绕过技术是由NSFocus安全实验室的Yang Yu在今年早些时候的CanSecWest安全会议上描述的。该绕过技术也被其他研究人员独立发现，并被VUPEN用于他们在Pwn2Own 2013比赛中的一个漏洞利用中。几个月前，我们发布了EMET 4.0，其中包含针对这一特定绕过技术的防护措施。在这篇博客文章中，我们希望提供一些关于该绕过技术如何工作以及MS13-063如何解决它的背景信息。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>V8引擎中的HashDoS漏洞分析 - Node.js v24.0.0安全风险警示</title>
+      <link>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
+      <pubDate>Sun, 03 Aug 2025 09:45:12 +0800</pubDate>
+      <guid>https://qife122.github.io/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</guid>
+      <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本修改了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞——攻击者通过控制待哈希字符串可制造大量哈希碰撞，甚至无需知晓hash-seed即可实现碰撞攻击。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>苹果技术上有能力配合FBI解锁iPhone 5C——深入解析iOS安全机制</title>
       <link>https://qife122.github.io/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</link>
