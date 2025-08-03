@@ -7,7 +7,32 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 04:49:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 07:16:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CVE-2025-32461] Tiki Wiki CMS Groupware &lt;=28.3版本存在两个SSTI漏洞</title>
+        <link>http://localhost:1313/p/cve-2025-32461-tiki-wiki-cms-groupware-28.3%E7%89%88%E6%9C%AC%E5%AD%98%E5%9C%A8%E4%B8%A4%E4%B8%AAssti%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 03 Aug 2025 07:16:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cve-2025-32461-tiki-wiki-cms-groupware-28.3%E7%89%88%E6%9C%AC%E5%AD%98%E5%9C%A8%E4%B8%A4%E4%B8%AAssti%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;p&gt;[CVE-2025-32461] Tiki Wiki CMS Groupware &amp;lt;=28.3版本的两个SSTI漏洞&lt;/p&gt;
+&lt;p&gt;安全研究人员在Tiki Wiki CMS Groupware内容管理系统28.3及更早版本中发现了两处严重的服务器端模板注入(Server-Side Template Injection)漏洞。这些漏洞存在于系统的模板处理组件中，未经认证的攻击者可能通过精心构造的恶意输入实现远程代码执行。&lt;/p&gt;
+&lt;p&gt;技术细节显示，第一个漏洞(CVE-2025-32461-1)影响Smarty模板引擎的特定过滤逻辑，而第二个漏洞(CVE-2025-32461-2)则涉及系统对用户提供数据的处理方式。当攻击者向特定端点提交特制payload时，系统会错误地将其解析为可执行代码。&lt;/p&gt;
+&lt;p&gt;研究人员已在karmainsecurity.com发布完整的技术分析报告，包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;漏洞触发条件的具体调用栈分析&lt;/li&gt;
+&lt;li&gt;受影响版本的完整列表&lt;/li&gt;
+&lt;li&gt;概念验证(PoC)利用代码片段&lt;/li&gt;
+&lt;li&gt;临时缓解措施建议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;目前Tiki Wiki开发团队尚未发布官方补丁。建议所有使用受影响版本的用户立即采取以下措施：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁用不必要的模板编辑功能&lt;/li&gt;
+&lt;li&gt;对用户输入实施更严格的过滤&lt;/li&gt;
+&lt;li&gt;监控服务器日志中的可疑模板解析行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该漏洞的CVSSv3评分为9.8(严重级别)，特别需要注意的是，利用这些漏洞不需要任何先验认证。安全社区正在密切关注该漏洞的进一步发展和官方修复进度。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Burp Suite入门与Web应用渗透测试实战指南</title>
         <link>http://localhost:1313/p/burp-suite%E5%85%A5%E9%97%A8%E4%B8%8Eweb%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
         <pubDate>Sat, 02 Aug 2025 04:49:48 +0800</pubDate>

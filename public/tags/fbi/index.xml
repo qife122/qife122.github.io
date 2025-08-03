@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>FBI on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/fbi/</link>
+        <description>Recent content in FBI on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 07:49:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/fbi/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>苹果技术上有能力配合FBI解锁iPhone 5C——深入解析iOS安全机制</title>
+        <link>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sun, 03 Aug 2025 07:49:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;h1 id=&#34;fbi的技术要求&#34;&gt;FBI的技术要求
+&lt;/h1&gt;&lt;p&gt;在枪击案调查中，FBI发现一部属于袭击者的iPhone 5C。该设备属于圣贝纳迪诺县公共卫生部（袭击者工作单位），FBI已获得搜查许可。但由于iOS设备的加密机制，FBI无法通过猜测密码解锁设备。在iOS设备中，几乎所有重要文件都采用设备密码和出厂时嵌入的硬件密钥组合加密。&lt;/p&gt;
+&lt;p&gt;iPhone密码猜测面临三大障碍：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;多次错误输入后iOS可能完全擦除用户数据&lt;/li&gt;
+&lt;li&gt;必须通过物理设备手动逐个输入PIN码&lt;/li&gt;
+&lt;li&gt;每次错误输入后iOS会引入延迟&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为此，FBI通过法院命令向苹果提出三项技术协助要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;绕过或禁用自动擦除功能&lt;/li&gt;
+&lt;li&gt;允许通过物理端口/蓝牙/Wi-Fi等电子方式提交密码&lt;/li&gt;
+&lt;li&gt;消除密码尝试之间的人为延迟&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;简言之，FBI希望实现：无限次密码尝试、硬件允许的最快尝试速度、通过外部设备自动提交密码。&lt;/p&gt;
+&lt;h1 id=&#34;技术实现方案&#34;&gt;技术实现方案
+&lt;/h1&gt;&lt;p&gt;FBI要求苹果提供特殊签名的iOS软件镜像(SIF)，该镜像将：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅在目标设备上运行&lt;/li&gt;
+&lt;li&gt;通过DFU模式加载到设备RAM&lt;/li&gt;
+&lt;li&gt;实现上述三项功能&lt;/li&gt;
+&lt;li&gt;在政府或苹果设施执行解锁操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这相当于要求苹果开发一个定制版iOS（可戏称为FBiOS），该版本将：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;忽略密码输入延迟&lt;/li&gt;
+&lt;li&gt;不限制错误尝试次数&lt;/li&gt;
+&lt;li&gt;允许外接设备辅助密码猜测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;安全飞地secure-enclave的挑战&#34;&gt;安全飞地(Secure Enclave)的挑战
+&lt;/h1&gt;&lt;p&gt;配备A7及以上处理器的设备包含独立的安全飞地(SE)，它：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管理数据保护API、Apple Pay等的加密密钥访问&lt;/li&gt;
+&lt;li&gt;采用类似核武器发射的双密钥系统（密码+硬件密钥）&lt;/li&gt;
+&lt;li&gt;自主维护错误尝试计数器并实施延迟（最长1小时）&lt;/li&gt;
+&lt;li&gt;完全独立于iOS操作系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但涉案的iPhone 5C（A6处理器）没有安全飞地，其密码保护完全由iOS软件实现，因此单个固件更新即可绕过安全限制。&lt;/p&gt;
+&lt;h1 id=&#34;技术可行性结论&#34;&gt;技术可行性结论
+&lt;/h1&gt;&lt;p&gt;对于iPhone 5C：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;密码延迟和擦除功能由软件实现，可通过固件更新修改&lt;/li&gt;
+&lt;li&gt;苹果可添加对外设密码输入的支持&lt;/li&gt;
+&lt;li&gt;硬件密钥虽不可读取，但iOS可高速查询（每80ms一次尝试）
+&lt;ul&gt;
+&lt;li&gt;4位PIN码：约30分钟破解&lt;/li&gt;
+&lt;li&gt;6位PIN码：数小时&lt;/li&gt;
+&lt;li&gt;6位字母数字密码：数年&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;苹果可通过以下方式降低滥用风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将定制固件锁定到特定设备&lt;/li&gt;
+&lt;li&gt;自行执行恢复操作而不向FBI提供固件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;更新说明&#34;&gt;更新说明
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;软件更新安全飞地不会擦除用户数据&lt;/li&gt;
+&lt;li&gt;苹果同样可通过软件更新绕过配备安全飞地设备的安全措施&lt;/li&gt;
+&lt;li&gt;自iOS 8起，大多数应用数据默认加密，必须猜测密码才能访问&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

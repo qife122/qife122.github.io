@@ -7,7 +7,82 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 18:15:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+        <link>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节
+&lt;/h3&gt;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始请求&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;GET /v2/:city_id/bookings&lt;/code&gt; 获取城市预订信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;位置更新&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;PUT /api/v2/driver/update/location&lt;/code&gt; 携带任意&lt;code&gt;trip_id&lt;/code&gt;更新司机位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;报价提交&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;POST /api/v2/offer/bid&lt;/code&gt; 提交行程报价&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这种调用链，负余额司机可重置其可用状态并成功提交报价，从而绕过钱包余额限制非法获取行程订单。&lt;/p&gt;
+&lt;h3 id=&#34;时间线摘要&#34;&gt;时间线摘要
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;2024-11-27 17:43 UTC 漏洞提交&lt;/li&gt;
+&lt;li&gt;2024-11-28 07:19 UTC 获得赏金&lt;/li&gt;
+&lt;li&gt;初始评级8.6（高危）后调整为6.5（中危）&lt;/li&gt;
+&lt;li&gt;2025-06-13 漏洞报告公开&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术影响&#34;&gt;技术影响
+&lt;/h3&gt;&lt;p&gt;该漏洞属于&lt;strong&gt;业务逻辑错误&lt;/strong&gt;类别，暴露了三个关键问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;端点权限校验不完善&lt;/li&gt;
+&lt;li&gt;状态管理机制存在缺陷&lt;/li&gt;
+&lt;li&gt;负余额检测逻辑可被绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;平台最终通过增强钱包状态校验机制修复该漏洞。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>API安全测试清单：7个关键步骤</title>
+        <link>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</link>
+        <pubDate>Sun, 03 Aug 2025 03:42:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</guid>
+        <description>&lt;h1 id=&#34;api安全测试清单7个关键步骤&#34;&gt;API安全测试清单：7个关键步骤
+&lt;/h1&gt;&lt;p&gt;API是恶意攻击者的常见攻击载体。使用我们的API安全测试清单和最佳实践来保护您的组织及其数据。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Dave Shackleford（Voodoo Security）、Michael Cobb&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;：2024年11月1日&lt;/p&gt;
+&lt;p&gt;API使应用程序能够交换和消费数据及服务。由于其能够访问组织的敏感数据，API成为恶意黑客和威胁行为者的诱人目标。组织必须保护其API，以保护企业资源以及使用API的其他应用程序和组织。&lt;/p&gt;
+&lt;p&gt;团队应进行API安全测试，以确保API在负载下保持可用。测试还必须确定API暴露的数据和资源的机密性、完整性和可用性。API安全测试应全面且持续，以便解决漏洞发现和修复问题，并增强对攻击者的抵御能力。测试应证明安全控制的有效性，并在必要时提供需要修复的领域的见解。组织应将API测试与OpenAPI规范对齐，以确保其完整和彻底。&lt;/p&gt;
+&lt;h2 id=&#34;api安全测试清单&#34;&gt;API安全测试清单
+&lt;/h2&gt;&lt;p&gt;以下最佳实践可帮助确保API安全测试计划足够彻底，以有效防范API安全风险。&lt;/p&gt;
+&lt;h3 id=&#34;1-确定谁对测试和维护api安全负总责&#34;&gt;1. 确定谁对测试和维护API安全负总责
+&lt;/h3&gt;&lt;p&gt;许多团队参与API生命周期，项目在进展过程中会经历大量快速变化和迭代。重要的是指定一个人记录所有API，确保所有测试完成并采取行动。&lt;/p&gt;
+&lt;p&gt;随着对云服务和Web应用程序环境的日益重视，与过去相比，可能有更多的业务部门和其他应用程序所有者参与API安全治理。这使得有一个中央联系点变得更加重要。&lt;/p&gt;
+&lt;h3 id=&#34;2-为安全测试预算时间和资源&#34;&gt;2. 为安全测试预算时间和资源
+&lt;/h3&gt;&lt;p&gt;安全测试需要时间和金钱，因此组织在启动新项目时需要考虑这些因素。威胁建模突出了需要缓解的潜在API风险和常见漏洞，但请注意，项目上线后维护和更新API测试的预算也是必要的。&lt;/p&gt;
+&lt;p&gt;请注意，由第三方提供商开发和维护的任何API可能随时更改。安全和应用程序团队应确保在规划和项目周期中考虑动态API测试。&lt;/p&gt;
+&lt;h3 id=&#34;3-注册分类并记录每个api的用途及其功能&#34;&gt;3. 注册、分类并记录每个API的用途及其功能
+&lt;/h3&gt;&lt;p&gt;记录API及其用途。这些信息有助于测试评估API是否可以处理可接受的操作和有效数据，以及不可接受的操作或无效数据。诸如OpenAPI规范、AsyncAPI和GraphQL Introspection等标准使人类和机器能够发现和理解API的响应和能力。许多API工具使用这些规范来加速API的开发生命周期。&lt;/p&gt;
+&lt;h3 id=&#34;4-尽早运行测试并尽可能自动化&#34;&gt;4. 尽早运行测试并尽可能自动化
+&lt;/h3&gt;&lt;p&gt;如果在开发生命周期的早期发现安全问题，每个人都可以节省时间和金钱。有许多API安全工具可用，无论是开源还是许可的，都可以集成到现有的工作流程和持续集成/持续交付管道中。具有模拟服务的工具消除了构建生产系统全规模复制的需要。&lt;/p&gt;
+&lt;p&gt;此外，确定谁将执行测试——开发人员、安全团队或外部渗透测试人员（如果内部缺乏技能）——以及何时运行测试。理想情况下，应在应用程序的每个构建上运行测试。许多API测试工具现在可以完全集成，以便按需进行持续或触发的测试。&lt;/p&gt;
+&lt;h3 id=&#34;5-定义要运行的测试类型&#34;&gt;5. 定义要运行的测试类型
+&lt;/h3&gt;&lt;p&gt;对API安全评估进行以下测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无效输入&lt;/strong&gt;：API的输入应被视为来自不受信任的源，并相应地进行清理和验证。模糊测试可用于向API发送随机数据，以查看其是否可以在不崩溃的情况下处理意外数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注入攻击&lt;/strong&gt;：使用这些测试攻击来确保API拒绝尝试操纵后端数据库或在服务器上执行OS命令的请求，而不暴露任何敏感信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参数篡改&lt;/strong&gt;：通过API请求发送的参数（如购物车中商品的价格）容易被攻击者更改。参数篡改检查API在处理参数之前是否验证和检查参数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;未处理的HTTP方法&lt;/strong&gt;：使用所有八种HTTP方法发送请求，以确保不必要的&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
         <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 18:15:58 +0800</pubDate>

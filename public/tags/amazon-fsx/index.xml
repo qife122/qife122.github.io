@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Amazon FSx on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/amazon-fsx/</link>
+        <description>Recent content in Amazon FSx on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 05:26:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/amazon-fsx/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Amazon FSx for OpenZFS现支持直接访问Amazon S3数据（无需迁移）</title>
+        <link>http://localhost:1313/p/amazon-fsx-for-openzfs%E7%8E%B0%E6%94%AF%E6%8C%81%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AEamazon-s3%E6%95%B0%E6%8D%AE%E6%97%A0%E9%9C%80%E8%BF%81%E7%A7%BB/</link>
+        <pubDate>Sun, 03 Aug 2025 05:26:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/amazon-fsx-for-openzfs%E7%8E%B0%E6%94%AF%E6%8C%81%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AEamazon-s3%E6%95%B0%E6%8D%AE%E6%97%A0%E9%9C%80%E8%BF%81%E7%A7%BB/</guid>
+        <description>&lt;h2 id=&#34;技术架构突破&#34;&gt;技术架构突破
+&lt;/h2&gt;&lt;p&gt;即日起，您可将Amazon S3访问点挂载至Amazon FSx for OpenZFS文件系统，使存储在文件系统中的数据能够通过Amazon S3标准API（如GetObject/PutObject/ListObjectsV2）进行访问。该功能具有以下核心特性：&lt;/p&gt;
+&lt;h3 id=&#34;统一数据访问层&#34;&gt;统一数据访问层
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;双协议支持&lt;/strong&gt;：数据持续驻留FSx文件系统，同时支持NFS协议与S3 API并行访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限控制&lt;/strong&gt;：每个S3访问点可配置独立IAM策略，支持VPC网络隔离和Block Public Access&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无拷贝操作&lt;/strong&gt;：消除传统ETL流程，直接对接S3生态的AI/ML服务（如Amazon Bedrock/SageMaker）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实现机制&#34;&gt;实现机制
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;访问点配置&lt;/strong&gt;：通过FSx控制台/AWS CLI创建S3访问点，系统自动生成桶别名（替代传统S3桶名）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务集成&lt;/strong&gt;：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 示例：通过S3 API读取FSx数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;boto3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;s3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;boto3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;client&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Bucket&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;fsx-access-point-alias&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;report.pdf&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;性能表现&lt;/strong&gt;：首字节延迟保持在毫秒级，吞吐量取决于FSx文件系统的预配置容量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;典型应用场景&#34;&gt;典型应用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RAG工作流&lt;/strong&gt;：将FSx中的PDF文档直接作为Amazon Bedrock知识库源&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据分析&lt;/strong&gt;：通过Athena/Glue查询文件系统数据，无需转换为S3存储格式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spark处理&lt;/strong&gt;：开源框架可直接使用S3 API访问FSx数据集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术参数&#34;&gt;技术参数
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;访问点数量&lt;/td&gt;
+          &lt;td&gt;单个文件系统支持数百个访问点&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;延迟水平&lt;/td&gt;
+          &lt;td&gt;与原生S3访问性能一致（毫秒级）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;区域支持&lt;/td&gt;
+          &lt;td&gt;覆盖北美/欧洲/亚太8个区域&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：该功能会产生额外的S3请求计费，但免除数据迁移产生的传输费用。详细定价参见&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/fsx/openzfs/pricing/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FSx for OpenZFS定价页&lt;/a&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

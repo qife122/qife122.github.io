@@ -7,7 +7,123 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 01 Aug 2025 21:44:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%94%BB%E9%98%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 00:55:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%94%BB%E9%98%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows终端防御技术全景：初始访问攻防实战（第一部分）</title>
+        <link>http://localhost:1313/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+        <pubDate>Sun, 03 Aug 2025 00:55:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows%E7%BB%88%E7%AB%AF%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF%E5%85%A8%E6%99%AF%E5%88%9D%E5%A7%8B%E8%AE%BF%E9%97%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+        <description>&lt;h3 id=&#34;windows终端防御技术现状&#34;&gt;Windows终端防御技术现状
+&lt;/h3&gt;&lt;p&gt;当今Windows桌面平台的终端防御生态已发展出高度成熟的能力体系。除传统杀毒软件外，扩展检测响应(XDR)技术和行为分析方法的结合，可全面覆盖初始访问阶段的恶意软件技术及入侵后活动检测。参与红队演练的专业人员普遍认为，如今通过二进制文件执行获取初始访问权限比以往任何时候都更加困难。即便成功入侵Windows平台，成熟防御环境对常见C2平台的入侵后活动也有完善的监测响应机制。&lt;/p&gt;
+&lt;p&gt;这种强化的终端防御态势促使红队和威胁分子转向其他脆弱领域，包括云资源配置错误、团队协作工具漏洞、软件供应链攻击，以及各类IT解决方案中普遍存在的凭证管理问题。&lt;/p&gt;
+&lt;h3 id=&#34;核心防御技术剖析&#34;&gt;核心防御技术剖析
+&lt;/h3&gt;&lt;p&gt;本文重点探讨以下防御产品技术（含部分Windows原生功能集成）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;静态文件分析&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高熵值文件（含大量加密数据）会触发多数产品的即时检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows事件追踪(ETW)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;架构组成：
+&lt;ul&gt;
+&lt;li&gt;控制器：启停追踪会话&lt;/li&gt;
+&lt;li&gt;提供程序：生成事件数据&lt;/li&gt;
+&lt;li&gt;消费者：处理事件数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;提供三种提供程序类型：MOF、WPP和TraceLogging&lt;/li&gt;
+&lt;li&gt;可捕获近乎所有Windows API调用，形成数据洪流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Windows内核通知回调&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;演进背景：微软通过Patch Guard禁止SSDT挂钩后提供的替代方案&lt;/li&gt;
+&lt;li&gt;关键回调类型：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PsSetCreateProcessNotifyRoutine&lt;/code&gt;：进程创建事件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PsSetCreateThreadNotifyRoutine&lt;/code&gt;：线程创建事件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PsSetLoadImageNotifyRoutine&lt;/code&gt;：镜像加载事件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ObRegisterCallbacks&lt;/code&gt;：对象句柄操作&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CmRegisterCallback&lt;/code&gt;：注册表操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DLL API挂钩技术&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;典型挂钩目标：ntdll.dll中的Native API&lt;/li&gt;
+&lt;li&gt;挂钩流程示例：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-asm&#34; data-lang=&#34;asm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;r10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;rcx&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;; 保存RCX值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;syscall&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; 设置系统调用号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;test&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;syscall_mode&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 检测调用约定
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;防御产品可通过JMP指令重定向API调用流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;进程树分析&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过父子进程关系识别异常行为（如Excel生成PowerShell子进程）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存页扫描&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;检测特征：
+&lt;ul&gt;
+&lt;li&gt;同时具备RWX权限的内存页&lt;/li&gt;
+&lt;li&gt;无镜像文件背书的可执行内存&lt;/li&gt;
+&lt;li&gt;Cobalt Strike等工具的已知内存模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用栈追踪&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用线程栈帧分析非模块化代码执行&lt;/li&gt;
+&lt;li&gt;攻击者可伪造栈帧逃避检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;硬件强制栈保护（Win10/11）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于Intel CET/AMD影子栈技术&lt;/li&gt;
+&lt;li&gt;比较常规栈与影子栈的返回地址&lt;/li&gt;
+&lt;li&gt;有效防御ROP攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内核驱动阻止列表&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应对BYOVD（自带漏洞驱动）攻击&lt;/li&gt;
+&lt;li&gt;微软每半年更新官方阻止列表&lt;/li&gt;
+&lt;li&gt;现存漏洞驱动资源：loldrivers.io&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻防演进趋势&#34;&gt;攻防演进趋势
+&lt;/h3&gt;&lt;p&gt;现代Windows终端的高强度防御使得在成熟环境中建立持久据点变得极具挑战性。成功的初始访问操作越来越依赖精密的攻击工件生成技术，这需要采用进攻性DevOps方法（将在本系列第二部分详述）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别预告：2月29日EST下午1点将举办专题研讨会《Windows下Python psutil模块深度解析》&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>远程红队行动安全基础 - 操作安全核心要点解析</title>
         <link>http://localhost:1313/p/%E8%BF%9C%E7%A8%8B%E7%BA%A2%E9%98%9F%E8%A1%8C%E5%8A%A8%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-%E6%93%8D%E4%BD%9C%E5%AE%89%E5%85%A8%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Fri, 01 Aug 2025 21:44:07 +0800</pubDate>

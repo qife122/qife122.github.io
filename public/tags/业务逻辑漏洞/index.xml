@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>业务逻辑漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in 业务逻辑漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+        <link>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节
+&lt;/h3&gt;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始请求&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;GET /v2/:city_id/bookings&lt;/code&gt; 获取城市预订信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;位置更新&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;PUT /api/v2/driver/update/location&lt;/code&gt; 携带任意&lt;code&gt;trip_id&lt;/code&gt;更新司机位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;报价提交&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;POST /api/v2/offer/bid&lt;/code&gt; 提交行程报价&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这种调用链，负余额司机可重置其可用状态并成功提交报价，从而绕过钱包余额限制非法获取行程订单。&lt;/p&gt;
+&lt;h3 id=&#34;时间线摘要&#34;&gt;时间线摘要
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;2024-11-27 17:43 UTC 漏洞提交&lt;/li&gt;
+&lt;li&gt;2024-11-28 07:19 UTC 获得赏金&lt;/li&gt;
+&lt;li&gt;初始评级8.6（高危）后调整为6.5（中危）&lt;/li&gt;
+&lt;li&gt;2025-06-13 漏洞报告公开&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术影响&#34;&gt;技术影响
+&lt;/h3&gt;&lt;p&gt;该漏洞属于&lt;strong&gt;业务逻辑错误&lt;/strong&gt;类别，暴露了三个关键问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;端点权限校验不完善&lt;/li&gt;
+&lt;li&gt;状态管理机制存在缺陷&lt;/li&gt;
+&lt;li&gt;负余额检测逻辑可被绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;平台最终通过增强钱包状态校验机制修复该漏洞。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

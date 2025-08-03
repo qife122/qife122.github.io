@@ -7,7 +7,97 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 19:42:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 01:07:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Microsoft Outlook远程代码执行漏洞(CVE-2025-47176)技术分析</title>
+        <link>http://localhost:1313/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 01:07:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/microsoft-outlook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2025-47176%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;microsoft-outlook---远程代码执行rce&#34;&gt;Microsoft Outlook - 远程代码执行(RCE)
+&lt;/h1&gt;&lt;h1 id=&#34;作者-nu11secur1ty&#34;&gt;作者: nu11secur1ty
+&lt;/h1&gt;&lt;h1 id=&#34;日期-2025-07-08&#34;&gt;日期: 2025-07-08
+&lt;/h1&gt;&lt;h1 id=&#34;厂商-microsoft&#34;&gt;厂商: Microsoft
+&lt;/h1&gt;&lt;h1 id=&#34;软件&#34;&gt;软件: &lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.microsoft.com/en-us/microsoft-365/outlook/log-in&lt;/a&gt;
+&lt;/h1&gt;&lt;h1 id=&#34;参考&#34;&gt;参考:
+&lt;/h1&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47176&lt;/a&gt; &amp;gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cloudflare.com/learning/security/what-is-remote-code-execution/&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;cve-2025-47176&#34;&gt;CVE-2025-47176
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述
+&lt;/h2&gt;&lt;p&gt;本概念验证(PoC)演示了CVE-2025-47176漏洞的模拟利用。它通过向Outlook注入特制邮件项，其中包含恶意同步路径，在扫描过程中触发特定操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;重要提示:&lt;/strong&gt;
+此PoC模拟了Outlook存在漏洞的路径解析功能，当检测到恶意路径时会触发&lt;strong&gt;系统重启&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;使用maliciousprf进行附加测试&#34;&gt;使用malicious.prf进行附加测试
+&lt;/h2&gt;&lt;p&gt;您也可以通过导入特制的Outlook配置文件(&lt;code&gt;malicious.prf&lt;/code&gt;)来测试此PoC:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;将&lt;code&gt;malicious.prf&lt;/code&gt;放在与&lt;code&gt;PoC.py&lt;/code&gt;相同的目录下&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用导入命令运行Outlook:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;importprf&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;malicious&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;prf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;确保Windows机器上已安装并配置Outlook&lt;/li&gt;
+&lt;li&gt;使用Python 3.x运行PoC脚本(需要&lt;code&gt;pywin32&lt;/code&gt;包):
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pip&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pywin32&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;python&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PoC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;脚本将执行以下操作:
+&lt;ul&gt;
+&lt;li&gt;注入带有恶意同步路径的邮件项&lt;/li&gt;
+&lt;li&gt;等待10秒让Outlook处理邮件&lt;/li&gt;
+&lt;li&gt;扫描收件箱和草稿文件夹&lt;/li&gt;
+&lt;li&gt;检测到恶意路径后，规范化路径并触发系统重启(&lt;code&gt;shutdown /r /t 5&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;警告&#34;&gt;警告
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;此脚本在触发有效载荷后&lt;strong&gt;将在5秒后重启您的计算机&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;运行前请保存所有工作&lt;/li&gt;
+&lt;li&gt;仅在受控或虚拟化环境中测试&lt;/li&gt;
+&lt;li&gt;请勿在生产或重要系统上运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;文件说明&#34;&gt;文件说明
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PoC.py&lt;/code&gt; - Python概念验证脚本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;许可声明&#34;&gt;许可声明
+&lt;/h2&gt;&lt;p&gt;本PoC仅用于教育和研究目的。&lt;/p&gt;
+&lt;p&gt;请负责任且符合道德地使用。&lt;/p&gt;
+&lt;h1 id=&#34;演示视频&#34;&gt;演示视频:
+&lt;/h1&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=nac3kUe_d1c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;链接&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;源代码&#34;&gt;源代码:
+&lt;/h1&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/nu11secur1ty/CVE-mitre/tree/main/2025/CVE-2025-47176&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;链接&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>SonicWall SMA 100系列管理界面多重漏洞可能导致远程代码执行</title>
         <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
         <pubDate>Sat, 02 Aug 2025 19:42:30 +0800</pubDate>

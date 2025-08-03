@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>OSINT on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/osint/</link>
+        <description>Recent content in OSINT on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 05:42:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/osint/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>OSINT利器Buscador：开源情报收集的瑞士军刀</title>
+        <link>http://localhost:1313/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</link>
+        <pubDate>Sun, 03 Aug 2025 05:42:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</guid>
+        <description>&lt;h1 id=&#34;toolsmith-130---使用buscador进行osint调查&#34;&gt;toolsmith #130 - 使用Buscador进行OSINT调查
+&lt;/h1&gt;&lt;p&gt;首先，新年快乐！希望您拥有高效成功的2018年。作为开年之作，我将再次探讨开源情报(OSINT)技术。除微软信息安全主管的本职工作外，我还荣幸担任华盛顿国民警卫队J-2情报部门成员，结合J-6网络作战职能，OSINT在识别对手指标和红队评估目标方面具有重要价值。&lt;/p&gt;
+&lt;p&gt;Buscador是由OSINT专家Michael Bazzell和David Wescott开发的Linux虚拟机预配置平台，集成了我们曾讨论过的Recon-ng、Spiderfoot等工具。1.1版本包含以下核心工具集：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地理定位工具&lt;/strong&gt;：Creepy（支持Twitter/Flickr等插件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;元数据分析&lt;/strong&gt;：Metagoofil/ExifTool/pyExifToolGui&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;域名枚举&lt;/strong&gt;：Knock/SubBrute&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;社交媒体挖掘&lt;/strong&gt;：Tinfoleak/Instalooter&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网页镜像&lt;/strong&gt;：HTTrack/Wayback Exporter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实战测试&#34;&gt;实战测试
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Creepy定位分析&lt;/strong&gt;&lt;br&gt;
+配置Twitter插件搜索&amp;quot;holisticinfosec&amp;quot;，虽未获取精确坐标，但成功关联西雅图地区信息（图1-2）。对于开启地理标记的目标，该工具可绘制活动热力图。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tinfoleak深度报告&lt;/strong&gt;&lt;br&gt;
+生成包含时间线、设备类型、话题标签的完整Twitter活动分析报告（图3），比原生API提供更丰富的元数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Metagoofil文档情报&lt;/strong&gt;&lt;br&gt;
+对目标域扫描50份公开文档，输出作者/公司/修改记录等元数据（图6），堪称红队侦察必备工具，其效率超越传统Foca工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;虚拟化支持&lt;/strong&gt;：提供OVA镜像和ISO两种部署方式，通过QEMU转换后可在Hyper-V快速部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工作流集成&lt;/strong&gt;：所有工具通过左侧菜单栏统一调用，支持Instalooter采集图片→ExifTool解析→BleachBit清理的完整链条&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;即将更新&lt;/strong&gt;：1.2版本将重构Firefox适配并新增特性，开发者透露正在筹备新作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;重要提示：虽然OSINT工具威力强大，但务必遵守道德准则。公开文档中的元数据可能暴露敏感信息，建议发布前进行清理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;该平台将分散的OSINT工具整合为标准化工作环境，极大提升了网络侦察效率。对于需要持续进行威胁情报分析的专业人员，Buscador堪称&amp;quot;一站式解决方案&amp;quot;。期待1.2版本带来更多创新功能。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

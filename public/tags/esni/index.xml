@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>ESNI on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/esni/</link>
+        <description>Recent content in ESNI on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 01:39:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/esni/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过Cloudflare实现域名伪装(ESNI技术解析)</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 01:39:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87cloudflare%E5%AE%9E%E7%8E%B0%E5%9F%9F%E5%90%8D%E4%BC%AA%E8%A3%85esni%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;通过cloudflare实现域名伪装&#34;&gt;通过Cloudflare实现域名伪装
+&lt;/h1&gt;&lt;p&gt;在开始本文之前，我认为有必要先讨论&amp;quot;域名伪装&amp;quot;(Domain Fronting)这个术语及其可能的定义。如果您只关心如何隐藏通信内容，可以直接跳过本节。&lt;/p&gt;
+&lt;h2 id=&#34;定义域名伪装&#34;&gt;定义&amp;quot;域名伪装&amp;quot;
+&lt;/h2&gt;&lt;p&gt;从红队视角来看，域名伪装意味着将一个恶意网站的请求隐藏在看似访问无害网站的请求中。从技术角度，这可以描述为将网络层设置与特定虚拟主机的应用层请求解耦。如果观察者只能看到网络层指向&amp;quot;好&amp;quot;域名(或未被标记为恶意的域名)，那么攻击就成功了。&lt;/p&gt;
+&lt;h2 id=&#34;实际技术内容&#34;&gt;实际技术内容
+&lt;/h2&gt;&lt;p&gt;当我发布关于域名伪装的基础文章时，@sehnaoui在推特上分享了链接，并收到Cloudflare解决方案工程团队负责人Suzanne的回复：&lt;/p&gt;
+&lt;p&gt;首先，我并未声称该技术在Cloudflare上有效，文中对Cloudflare的唯一提及是将其作为CDN的示例。&lt;/p&gt;
+&lt;p&gt;以下是使用文章中讨论的技术在Cloudflare上实现域名伪装的演示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; http://digininja.org.uk
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;p&amp;gt;Vuln Demo site fronted by Cloudflare&amp;lt;/p&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;设置过程相当简单：我注册了Cloudflare账户，添加了digininja.org.uk域名并完成设置流程(包括将域名的NS记录转移到Cloudflare)。同时添加了vuln-demo.com账户但未完成设置，该域名保持&amp;quot;Pending Nameserver Update&amp;quot;状态。&lt;/p&gt;
+&lt;p&gt;为了证明这不是因为两个域名在同一账户下，我们尝试另一个由Cloudflare托管的知名域名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; http://cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;p&amp;gt;Vuln Demo site fronted by Cloudflare&amp;lt;/p&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;是的，我确实通过Cloudflare实现了域名伪装！&lt;/p&gt;
+&lt;h2 id=&#34;https场景下的挑战&#34;&gt;HTTPS场景下的挑战
+&lt;/h2&gt;&lt;p&gt;当我尝试在HTTPS上实现相同效果时，遇到了问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -s -H &lt;span class=&#34;s1&#34;&gt;$&amp;#39;Host: frontmecf.vuln-demo.com&amp;#39;&lt;/span&gt; https://cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;403 Forbidden&amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;body &lt;span class=&#34;nv&#34;&gt;bgcolor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;white&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;center&amp;gt;&amp;lt;h1&amp;gt;403 Forbidden&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;hr&amp;gt;&amp;lt;center&amp;gt;cloudflare&amp;lt;/center&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/body&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/html&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;经过分析发现，Cloudflare在建立连接时会检查SNI(Server Name Indication)字段和Host头是否匹配。SNI在TLS握手过程中以明文形式发送，告知服务器应提供哪个证书。&lt;/p&gt;
+&lt;h2 id=&#34;使用esni技术突破限制&#34;&gt;使用ESNI技术突破限制
+&lt;/h2&gt;&lt;p&gt;ESNI(Encrypted SNI)作为TLS 1.3规范的一部分，可以加密SNI信息。虽然ESNI是新兴技术，但OpenSSL开发者Stephen Farrell已经实现了相关功能。&lt;/p&gt;
+&lt;p&gt;以下是使用ESNI成功实现域名伪装的示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/robin/src/openssl
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nv&#34;&gt;ESNIRR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;dig +short txt _esni.www.cloudflare.com &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sed -e &lt;span class=&#34;s1&#34;&gt;&amp;#39;s/&amp;#34;//g&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;cat get_digininja.org&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;sleep 5&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; /home/robin/src/openssl/apps/openssl s_client &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;-CApath /etc/ssl/certs/ -tls1_3 -connect www.cloudflare.com:443 -esni digininja.org.uk &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;-esnirr &lt;span class=&#34;nv&#34;&gt;$ESNIRR&lt;/span&gt; -esni_strict -servername www.cloudflare.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过Wireshark抓包分析确认，ESNI扩展(0xFFCE)中的信息确实被加密，不再暴露真实域名。&lt;/p&gt;
+&lt;h2 id=&#34;防御视角的启示&#34;&gt;防御视角的启示
+&lt;/h2&gt;&lt;p&gt;对于防御者而言，如果仅依赖DNS查询和SNI主机名进行监控，这些信息已不再可信，因为它们完全处于攻击者控制之下。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;无论您称之为域名伪装、域名隐藏还是其他名称，本文展示了如何利用ESNI和自定义Host头将&amp;quot;恶意&amp;quot;HTTP请求隐藏在看似&amp;quot;良性&amp;quot;的请求中。由于ESNI受到隐私倡导者的支持，这项技术可能会长期有效。同时能够在监控系统日志中留下虚假标记也是一个额外优势。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

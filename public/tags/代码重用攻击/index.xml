@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>代码重用攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in 代码重用攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 05:53:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>二进制安全优化实践：消除编译器引入的代码重用攻击隐患</title>
+        <link>http://localhost:1313/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 05:53:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5%E6%B6%88%E9%99%A4%E7%BC%96%E8%AF%91%E5%99%A8%E5%BC%95%E5%85%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E6%94%BB%E5%87%BB%E9%9A%90%E6%82%A3/</guid>
+        <description>&lt;h1 id=&#34;二进制安全优化实践&#34;&gt;二进制安全优化实践
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;这样存在毫无意义，安全地存在才有价值&amp;rdquo;（《麦克白》3.1）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;编译器不仅要生成高效代码，还必须生成安全代码。尽管编译器开发过程中经过严格测试和正确性认证，但其优化过程可能意外引入信息泄漏或删除程序员编写的安全关键操作。图1展示了CWE-733漏洞实例：编译器通过&amp;quot;死存储消除&amp;quot;优化移除了加密密钥清零操作，导致密钥可能被攻击者恢复。&lt;/p&gt;
+&lt;h2 id=&#34;代码重用攻击的构建原理&#34;&gt;代码重用攻击的构建原理
+&lt;/h2&gt;&lt;p&gt;攻击者使用返回导向编程（ROP）和跳转导向编程（JOP）等技术绕过恶意代码注入防御。这些技术通过复用目标程序中的代码片段（gadgets）构建攻击载荷。每个gadget包含有效计算指令和终止分支指令（如ret/jmp），攻击者通过链式调用gadgets编写漏洞利用程序。图2展示了一个简单的ROP攻击链：&lt;/p&gt;
+&lt;h2 id=&#34;研究发现总结&#34;&gt;研究发现总结
+&lt;/h2&gt;&lt;p&gt;通过分析GCC/clang编译的20个程序的1000多个变体，我们发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;85%的优化案例增加了gadget集合规模、效用或可组合性&lt;/li&gt;
+&lt;li&gt;主要根源来自两种行为：间接分支指令复制和代码布局变更&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;间接分支指令复制&#34;&gt;间接分支指令复制
+&lt;/h3&gt;&lt;p&gt;GCC的帧指针省略优化会复制返回指令（retn），如图3所示。虽然减少了代码大小和执行时间，但会引入更多可能被利用的gadgets。&lt;/p&gt;
+&lt;h3 id=&#34;二进制布局变更&#34;&gt;二进制布局变更
+&lt;/h3&gt;&lt;p&gt;优化导致的控制流指令位移变化可能意外编码间接分支指令（如0xC3对应retn）。如图4所示，x86_64的非对齐变长指令特性使得这些位移可能被解码为有效gadgets。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案二进制安全优化&#34;&gt;解决方案：二进制安全优化
+&lt;/h2&gt;&lt;p&gt;我们在Egalito二进制重编译器中实现了五种优化方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;返回指令合并：合并函数内所有返回指令到单个实例&lt;/li&gt;
+&lt;li&gt;间接跳转合并：合并同目标寄存器的间接跳转&lt;/li&gt;
+&lt;li&gt;指令屏障扩展：消除跨预期指令的特殊用途gadgets&lt;/li&gt;
+&lt;li&gt;位移填充：消除跳转位移中的gadgets&lt;/li&gt;
+&lt;li&gt;函数重排序：消除调用偏移中的gadgets&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实际效果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平均消除31.8%有用gadgets&lt;/li&gt;
+&lt;li&gt;78%变体中降低gadget集合整体效用&lt;/li&gt;
+&lt;li&gt;75%变体中消除至少一类特殊用途gadgets&lt;/li&gt;
+&lt;li&gt;零性能影响，平均仅增加6.1kB代码大小&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;编译器行为显著影响二进制gadget集合，但当前设计缺乏对潜在安全属性的关注。通过二进制重编译技术可以在不牺牲性能的前提下消除这些安全隐患。未来将研究寄存器分配等更多问题，并探索其对控制流完整性（CFI）等防御机制的辅助优化效果。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

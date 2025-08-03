@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>DeFi on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/defi/</link>
+        <description>Recent content in DeFi on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 07:27:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/defi/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>踩到DeFi乐高积木：yVault漏洞分析与修复</title>
+        <link>http://localhost:1313/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+        <pubDate>Sun, 03 Aug 2025 07:27:45 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B8%A9%E5%88%B0defi%E4%B9%90%E9%AB%98%E7%A7%AF%E6%9C%A8yvault%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+        <description>&lt;h1 id=&#34;意外踩到defi乐高积木---trail-of-bits博客&#34;&gt;意外踩到DeFi乐高积木 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;yVault的初始版本包含了一个可被攻击者操纵的yUSDC价格计算逻辑，可能导致资金池资产被耗尽。幸运的是，开发者Andre反应迅速，禁用了问题代码，保住了当时约40万美元的资金。这个漏洞凸显了DeFi领域因组合性带来的复杂性风险。&lt;/p&gt;
+&lt;h2 id=&#34;什么是yvault&#34;&gt;什么是yVault？
+&lt;/h2&gt;&lt;p&gt;2020年7月25日，yEarn推出了名为yVault的新服务：用户可将代币存入金库，金库会将这些代币提供给能最大化利息的DeFi协议。初始版本支持USDC并与USDC/MUSD Balancer池集成。金库持有的任何USDC都将作为流动性提供给Balancer池，并获得BPT代币作为回报。&lt;/p&gt;
+&lt;p&gt;用户存入USDC可获得yUSDC，反之销毁yUSDC可提取USDC。这两种操作依赖于动态计算的汇率，定义为合约持有的BPT价值与yUSDC总供应量的比率。由于交易者支付费用时BPT价值上升，每个yUSDC代币的价值会随时间缓慢增长。&lt;/p&gt;
+&lt;p&gt;yVault发布一小时内，用户已存入约40万USDC，这促使我立即查看了其代码。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞是什么&#34;&gt;漏洞是什么？
+&lt;/h2&gt;&lt;p&gt;由于初始版本与Balancer集成，我们需要了解Balancer的工作原理。Balancer通过激励理性市场参与者来消除流动性提供者手动重新平衡投资组合的需求。如果代币价格上涨，资金池将失去平衡。&lt;/p&gt;
+&lt;p&gt;图1展示了基于Balancer池状态和发送代币数量计算接收代币数量的公式。我们以MUSD/USDC 50/50池为例，交换费率为0.05%。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-solidity&#34; data-lang=&#34;solidity&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/**********************************************************************************************
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// calcOutGivenIn                                                          //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// aO = tokenAmountOut                                                     //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// bO = tokenBalanceOut                                                    //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// bI = tokenBalanceIn              /      /            bI             \    (wI / wO) \      //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// aI = tokenAmountIn    aO = bO * |  1 - | --------------------------  | ^            |     //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// wI = tokenWeightIn               \      \ ( bI + ( aI * ( 1 - sF )) /              /      //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// wO = tokenWeightOut                                                    //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;// sF = swapFee                                                           //
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;**********************************************************************************************/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;假设资金池当前失衡，包含1,100,000 USDC和900,000 MUSD。如果理性市场参与者支付90,000 MUSD，他们将获得99,954 USDC，盈利9,954 USDC。而当资金池平衡时(1,000,000 USDC和1,000,000 MUSD)，非理性市场参与者支付100,000 USDC将仅获得90,867 MUSD，亏损9,133 MUSD。&lt;/p&gt;
+&lt;p&gt;将这两笔交易配对会产生有趣的现象。用户先进行&amp;quot;坏交易&amp;quot;(100,000 USDC→90,867 MUSD，亏损9,133 USD)，再进行&amp;quot;好交易&amp;quot;(90,867 MUSD→99,908 USDC，盈利9,041 USD)，净亏损仅92 USD。在此过程中，BPT估值会出现瞬间峰值，这正是漏洞的关键所在。&lt;/p&gt;
+&lt;p&gt;将此过程应用于yVault：在&amp;quot;坏交易&amp;quot;前，金库持有价值X美元的BPT；&amp;ldquo;好交易&amp;quot;后，BPT价值略增至X+Δ。但在两笔交易之间，BPT价值会短暂激增。由于yUSDC价值与BPT直接相关，如果在&amp;quot;坏交易&amp;quot;前买入yUSDC并在&amp;quot;好交易&amp;quot;前卖出，就能瞬时获利。重复此操作可耗尽金库。&lt;/p&gt;
+&lt;h2 id=&#34;如何修复&#34;&gt;如何修复？
+&lt;/h2&gt;&lt;p&gt;准确计算BPT真实价值并防止攻击者从滑点中获利是个难题。开发者Andre部署了新策略，简单地将USDC转换为MUSD并存入mStable储蓄账户。&lt;/p&gt;
+&lt;h2 id=&#34;未来建议&#34;&gt;未来建议
+&lt;/h2&gt;&lt;p&gt;DeFi组合性很复杂，容易意外暴露新协议于风险中。集成多个代币时，任一代币都可能危及整个平台安全；集成多个平台时，协议可能遭受复杂交互影响。&lt;/p&gt;
+&lt;p&gt;安全工具可帮助预防大多数简单代码漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Crytic使用高级版Slither自动检测多达90种漏洞类型&lt;/li&gt;
+&lt;li&gt;Echidna通过模糊测试断言特定属性&lt;/li&gt;
+&lt;li&gt;Manticore可对代码进行符号分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然，工具不是安全的万能药。研究表明即使技术显著改进，近50%的问题仍难以通过工具检测。对于复杂代码库和DeFi项目，建议安排安全评估或参加我们的以太坊安全办公时间。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

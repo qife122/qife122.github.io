@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>虚拟机逃逸 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%83%E9%80%B8/</link>
+        <description>Recent content in 虚拟机逃逸 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 04:31:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%80%83%E9%80%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深入解析Hyper-V虚拟机工作进程(VMWP)攻击面与漏洞挖掘</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+        <pubDate>Sun, 03 Aug 2025 04:31:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90hyper-v%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%B7%A5%E4%BD%9C%E8%BF%9B%E7%A8%8Bvmwp%E6%94%BB%E5%87%BB%E9%9D%A2%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
+        <description>&lt;h1 id=&#34;攻击虚拟机工作进程--msrc博客&#34;&gt;攻击虚拟机工作进程 | MSRC博客
+&lt;/h1&gt;&lt;p&gt;在过去一年中，我们投入了大量时间使Hyper-V研究更易于开展。首篇博客《Hyper-V研究第一步》描述了调试管理程序的工具和设置，并分析了虚拟化堆栈组件的攻击面。随后发表的《Hyper-V中准虚拟化设备的模糊测试》聚焦于VSPs-VSCs通过VMBus的通信机制，披露了根分区内核(vpcivsp.sys)中vPCI VSP的客户机到主机漏洞。八月，Joe Bialek在Black Hat上的精彩演讲展示了如何利用虚拟机工作进程(VMWP)中IDE模拟器的另一个漏洞。现在，让我们深入探究VMWP内部机制。&lt;/p&gt;
+&lt;h2 id=&#34;虚拟机工作进程是什么&#34;&gt;虚拟机工作进程是什么？
+&lt;/h2&gt;&lt;p&gt;虚拟化堆栈中最大的攻击面之一就实现在根分区的用户空间——虚拟机工作进程(VMWP.exe)。每个虚拟机对应一个VMWP.exe进程实例，其主要组件包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;vSMB服务器&lt;/li&gt;
+&lt;li&gt;Plan9文件系统&lt;/li&gt;
+&lt;li&gt;集成组件(IC)&lt;/li&gt;
+&lt;li&gt;虚拟设备（模拟器/非模拟设备）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;VMWP可视为微软的&amp;quot;QEMU&amp;quot;式进程，负责实现模拟/非模拟设备。这类组件通常非常复杂，而复杂实现往往容易出错&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;vmwp内部机制&#34;&gt;VMWP内部机制
+&lt;/h2&gt;&lt;h3 id=&#34;整体架构&#34;&gt;整体架构
+&lt;/h3&gt;&lt;p&gt;工作进程通过虚拟化基础设施驱动(vid.sys)与hypervisor通信。VID使用hypercall向hypervisor发送管理命令，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建/删除分区&lt;/li&gt;
+&lt;li&gt;挂起/恢复分区&lt;/li&gt;
+&lt;li&gt;动态内存管理&lt;/li&gt;
+&lt;li&gt;添加/删除虚拟处理器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;VID通知分发器(VND)是关键组件，允许客户端注册并接收来自客户机的动作通知。x64架构支持的VID通知类型包括：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;_VID_MESSAGE_TYPE&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VidMessageMbpAccess&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0001&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VidMessageException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0002&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VID_MESSAGE_TYPE_FLAG_INTERCEPT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VidMessageTripleFault&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0003&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VID_MESSAGE_TYPE_FLAG_INTERCEPT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VidMessageExecuteInstruction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0004&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VID_MESSAGE_TYPE_FLAG_INTERCEPT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VidMessageMmio&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0005&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VID_MESSAGE_TYPE_FLAG_INTERCEPT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//...共18种消息类型
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VID_MESSAGE_TYPE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;关键组件&#34;&gt;关键组件
+&lt;/h3&gt;&lt;h4 id=&#34;指令模拟器&#34;&gt;指令模拟器
+&lt;/h4&gt;&lt;p&gt;EmulatorVP类实现了x86/x64指令模拟，包含约250个函数，主要分为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EmulatorVp::Execute*Instruction&lt;/code&gt;：指令执行模拟入口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EmulatorVP::Execute*Op&lt;/code&gt;：具体操作处理&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EmulatorVp::ExecuteIs*&lt;/code&gt;：RFLAGS状态检查&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EmulatorVP::Decode*&lt;/code&gt;：指令解码器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;典型调用栈示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;VndCompletionThread
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└─VndCompletionHandler::HandleVndCallback
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  └─EmulatorVp::DispatchMmioOperation
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      └─EmulatorVp::ExecuteGEInstruction
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;虚拟设备&#34;&gt;虚拟设备
+&lt;/h4&gt;&lt;p&gt;虚拟设备分为三类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模拟设备&lt;/strong&gt;：完整模拟硬件设备（如e1000网卡）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;准虚拟化设备&lt;/strong&gt;：专为虚拟环境设计的虚拟设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;直通设备&lt;/strong&gt;：允许客户机直接访问物理硬件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要设备模拟DLL及其功能：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;DLL名称&lt;/th&gt;
+          &lt;th&gt;功能范围&lt;/th&gt;
+          &lt;th&gt;模拟设备示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;VmEmulatedDevices.dll&lt;/td&gt;
+          &lt;td&gt;1500+函数&lt;/td&gt;
+          &lt;td&gt;PIIX芯片组、DMA控制器、PS/2键盘&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vmuidevices.dll&lt;/td&gt;
+          &lt;td&gt;1500+函数&lt;/td&gt;
+          &lt;td&gt;视频设备、输入管理器、HID设备&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vmEmulatedNic.dll&lt;/td&gt;
+          &lt;td&gt;网络设备&lt;/td&gt;
+          &lt;td&gt;DEC 21041/21140A/21143网卡&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;VmEmulatedStorage.dll&lt;/td&gt;
+          &lt;td&gt;存储设备&lt;/td&gt;
+          &lt;td&gt;IDE控制器、光驱、软盘驱动器&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;pci配置访问示例&#34;&gt;PCI配置访问示例
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;STDMETHOD&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NotifyPciConfigAccess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_In_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PCI_BUS_NUMBER&lt;/span&gt;         &lt;span class=&#34;n&#34;&gt;Bus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_In_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PCI_DEVICE_NUMBER&lt;/span&gt;      &lt;span class=&#34;n&#34;&gt;DeviceNumber&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_In_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PCI_FUNCTION_NUMBER&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;FunctionNumber&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_In_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UINT16&lt;/span&gt;                 &lt;span class=&#34;n&#34;&gt;InRegAddress&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_In_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BOOLEAN&lt;/span&gt;                &lt;span class=&#34;n&#34;&gt;InIsWrite&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_Inout_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UINT32&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;             &lt;span class=&#34;n&#34;&gt;IoData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该接口由多个设备类实现，包括：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vmchipset!VmEmu::WCL::PciHandler::NotifyPciConfigAccess
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;VmEmulatedStorage!IdeControllerDevice::NotifyPciConfigAccess
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vmemulateddevices!VideoS3Device::NotifyPciConfigAccess
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;调试实践&#34;&gt;调试实践
+&lt;/h3&gt;&lt;p&gt;通过内核调试器执行&lt;code&gt;out 0x1f0, 0x41414141&lt;/code&gt;指令，在VMWP中设置断点：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;bp vmemulatedstorage!IdeControllerDevice::NotifyIoPortWrite
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可观察到完整的IO端口写入调用链。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞案例研究&#34;&gt;漏洞案例研究
+&lt;/h2&gt;&lt;h3 id=&#34;cve-2018-0888&#34;&gt;CVE-2018-0888
+&lt;/h3&gt;&lt;p&gt;电池模拟器中的未初始化内存漏洞：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BatteryEmulator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MmioRead&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* RangeBase */&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RangeOffset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NumberOfBytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;_Out_writes_bytes_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NumberOfBytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ReadBuffer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;noexcept&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;UINT32&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;readValue&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NumberOfBytes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 未初始化ReadBuffer
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;攻击者可利用此漏洞读取主机内存敏感信息。&lt;/p&gt;
+&lt;h2 id=&#34;vmwp加固措施&#34;&gt;VMWP加固措施
+&lt;/h2&gt;&lt;p&gt;微软实施了以下安全防护：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;控制流防护(CFG)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;启用CFG导出抑制&lt;/li&gt;
+&lt;li&gt;强制CFG校验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;任意代码防护(ACG)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;禁止分配/映射可执行页面&lt;/li&gt;
+&lt;li&gt;禁止修改可执行页面保护&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代码完整性防护(CIG)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;禁止加载未签名DLL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;移除SeImpersonatePrivilege权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;尽管有这些缓解措施，攻击者仍可能通过ROP链或文件系统API等途径实现利用。&lt;/p&gt;
+&lt;p&gt;通过本文分析，我们希望研究人员能更深入地探索虚拟化堆栈安全。如有问题，欢迎通过Twitter(@AmarSaar)联系作者Saar Amar。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

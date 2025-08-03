@@ -7,7 +7,116 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 06:54:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 04:42:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Trail of Bits 2020冬季实习项目亮点：从反编译器到智能合约安全</title>
+        <link>http://localhost:1313/p/trail-of-bits-2020%E5%86%AC%E5%AD%A3%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9%E4%BB%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%99%A8%E5%88%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/</link>
+        <pubDate>Sun, 03 Aug 2025 04:42:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/trail-of-bits-2020%E5%86%AC%E5%AD%A3%E5%AE%9E%E4%B9%A0%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9%E4%BB%8E%E5%8F%8D%E7%BC%96%E8%AF%91%E5%99%A8%E5%88%B0%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/</guid>
+        <description>&lt;h3 id=&#34;aaron-yoo--anvill反编译器&#34;&gt;Aaron Yoo — Anvill反编译器
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;加州大学洛杉矶分校&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我在Anvill反编译器中添加了一个生成LLVM位码函数&amp;quot;JSON规范&amp;quot;的工具。这些规范告知Anvill函数参数和返回值等重要值的物理位置（寄存器或内存）。典型规范示例如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;arch&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;amd64&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;#34;functions&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;demangled_name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;test(long, long)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;_Z4testll&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;#34;parameters&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;nt&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;param1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;nt&#34;&gt;&amp;#34;register&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;RDI&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;nt&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;l&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过该项目，我深入了解了ABI规范，并解决了高级参数分散在多个机器寄存器中的技术难题。&lt;/p&gt;
+&lt;h3 id=&#34;paweł-płatek--deepstate与python&#34;&gt;Paweł Płatek — DeepState与Python
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;AGH科技大学&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我主要修复了DeepState Python部分的构建问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CMake&lt;/strong&gt;：修正构建选项，增加仅构建示例的选项&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker&lt;/strong&gt;：采用多阶段构建，支持Honggfuzz和Angora&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模糊测试执行器&lt;/strong&gt;：统一参数处理，重新实现日志系统和运行时统计&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试体系&lt;/strong&gt;：创建基础测试用例验证执行器功能&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文档&lt;/strong&gt;：拆分文档结构，新增模糊测试使用指南&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;philip-zhengyuan-wang--manticore&#34;&gt;Philip Zhengyuan Wang — Manticore
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;马里兰大学&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我开发了&amp;quot;mcorepv&amp;quot;工具实现Manticore的云化部署：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过Ansible自动配置DigitalOcean云主机&lt;/li&gt;
+&lt;li&gt;使用Protobuf协议实时传输分析状态&lt;/li&gt;
+&lt;li&gt;开发终端用户界面(TUI)监控运行状态&lt;/li&gt;
+&lt;li&gt;实现工作目录自动同步和日志回传&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当前待解决问题包括SSH端口转发优化和TUI信息展示改进。&lt;/p&gt;
+&lt;h3 id=&#34;samuel-caccavale--go代码分析&#34;&gt;Samuel Caccavale — Go代码分析
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;东北大学&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;开发基于AST和SSA的Go代码扫描器，可检测以下模式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;unsafe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ok&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ok&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;unsafe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 危险的类型断言使用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;相比GoSec等工具，能更精确识别类型断言值的上下文使用安全。&lt;/p&gt;
+&lt;h3 id=&#34;taylor-pothast--mishegos&#34;&gt;Taylor Pothast — Mishegos
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;范德堡大学&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将x86_64解码器模糊测试工具Mishegos的输出格式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从JSON改为紧凑二进制格式&lt;/li&gt;
+&lt;li&gt;开发mish2jsonl转换工具保持向后兼容&lt;/li&gt;
+&lt;li&gt;更新分析工具处理新增的符号字段&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;thomas-quig--crytic与slither&#34;&gt;Thomas Quig — Crytic与Slither
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;伊利诺伊大学香槟分校&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将Slither的智能合约升级检查集成到Crytic CI服务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实现合约版本选择界面&lt;/li&gt;
+&lt;li&gt;检查代理合约模式的风险点（如存储变量对齐）&lt;/li&gt;
+&lt;li&gt;输出标准化JSON格式的检测结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;william-wang--openssl与anselm&#34;&gt;William Wang — OpenSSL与Anselm
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;加州大学洛杉矶分校&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;开发OpenSSL API误用检测工具Anselm：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编写LLVM Pass构建API调用图&lt;/li&gt;
+&lt;li&gt;实现基础启发式规则（如密码上下文初始化检查）&lt;/li&gt;
+&lt;li&gt;支持跨语言OpenSSL绑定分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;未来计划增强参数/返回值分析能力，完善开发者接口。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用AFL模糊测试《反恐精英：全球攻势》地图文件的技术实践</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8afl%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF%E5%9C%B0%E5%9B%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
         <pubDate>Sat, 02 Aug 2025 06:54:57 +0800</pubDate>

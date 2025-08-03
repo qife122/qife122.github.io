@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PGP on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/pgp/</link>
+        <description>Recent content in PGP on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 02:07:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pgp/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PGP签名与Linux包管理的安全隐患解析</title>
+        <link>http://localhost:1313/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 02:07:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pgp%E7%AD%BE%E5%90%8D%E4%B8%8Elinux%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;pgp签名与linux包管理的安全隐患&#34;&gt;PGP签名与Linux包管理的安全隐患
+&lt;/h3&gt;&lt;p&gt;在关于PGP生态系统的讨论中，我经常听到一种观点：尽管PGP存在问题，但它对Linux发行版的软件包签名至关重要。本文将重点讨论PGP在Linux包管理环境中暴露的几个系统性安全问题。&lt;/p&gt;
+&lt;h4 id=&#34;示例分析ubuntu的hhvm安装流程&#34;&gt;示例分析：Ubuntu的HHVM安装流程
+&lt;/h4&gt;&lt;p&gt;以Ubuntu系统安装HHVM（Facebook开发的HACK语言运行时）的官方指导为例，其关键步骤包含从Ubuntu密钥服务器获取PGP签名密钥：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;攻击手段1签名洪水攻击&#34;&gt;攻击手段1：签名洪水攻击
+&lt;/h4&gt;&lt;p&gt;PGP密钥服务器采用&amp;quot;只追加&amp;quot;设计，任何人可向目标密钥添加大量签名。近期已有攻击者利用该特性，通过添加数万签名使密钥体积膨胀至MB级别，导致GnuPG导入过程极度缓慢甚至失败。理论上攻击者可制造GB级密钥彻底瘫痪安装流程。&lt;/p&gt;
+&lt;h4 id=&#34;攻击手段2密钥id碰撞攻击&#34;&gt;攻击手段2：密钥ID碰撞攻击
+&lt;/h4&gt;&lt;p&gt;安装脚本中使用的64位密钥ID（截取公钥SHA1哈希值）存在碰撞风险。研究者曾通过&amp;quot;Evil32&amp;quot;攻击演示了对PGP强集合密钥的ID碰撞，云GPU环境下实施64位ID碰撞的成本约为12万美元。中间人攻击者可拦截非加密的密钥服务器连接，注入碰撞密钥从而部署恶意软件包。&lt;/p&gt;
+&lt;h4 id=&#34;攻击手段3http明文传输风险&#34;&gt;攻击手段3：HTTP明文传输风险
+&lt;/h4&gt;&lt;p&gt;某些厂商（如Dropbox历史安装指南）通过HTTP分发仓库密钥和软件包，使网络攻击者可轻易替换密钥和软件包。值得注意的是，Debian/Ubuntu默认仍使用HTTP协议更新官方仓库。&lt;/p&gt;
+&lt;h4 id=&#34;系统性缺陷与改进建议&#34;&gt;系统性缺陷与改进建议
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;密钥服务器设计缺陷&lt;/strong&gt;：追加式架构导致密钥洪水攻击无法根治&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;过时技术未淘汰&lt;/strong&gt;：尽管32/64位密钥ID风险已知多年，社区仍未强制迁移&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;避免使用公共密钥服务器，改为HTTPS托管自有密钥&lt;/li&gt;
+&lt;li&gt;完全弃用短密钥ID标识&lt;/li&gt;
+&lt;li&gt;参考Debian Wiki的第三方仓库安全规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

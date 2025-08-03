@@ -7,7 +7,38 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 23:13:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 02:18:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软服务不受OpenSSL「Heartbleed」漏洞影响 | MSRC官方声明</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%97opensslheartbleed%E6%BC%8F%E6%B4%9E%E5%BD%B1%E5%93%8D-msrc%E5%AE%98%E6%96%B9%E5%A3%B0%E6%98%8E/</link>
+        <pubDate>Sun, 03 Aug 2025 02:18:38 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%9C%8D%E5%8A%A1%E4%B8%8D%E5%8F%97opensslheartbleed%E6%BC%8F%E6%B4%9E%E5%BD%B1%E5%93%8D-msrc%E5%AE%98%E6%96%B9%E5%A3%B0%E6%98%8E/</guid>
+        <description>&lt;p&gt;2014年4月8日，安全研究人员披露了OpenSSL加密软件库中存在重大缺陷，该漏洞被命名为「Heartbleed」，可能允许攻击者利用通信加密密钥访问网站用户数据。&lt;/p&gt;
+&lt;p&gt;经深入调查，微软确认以下服务不受此漏洞影响：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Microsoft账户&lt;/li&gt;
+&lt;li&gt;Microsoft Azure&lt;/li&gt;
+&lt;li&gt;Office 365&lt;/li&gt;
+&lt;li&gt;Yammer&lt;/li&gt;
+&lt;li&gt;Skype&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;技术细节补充&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;所有2014年4月14日前受支持的Windows版本均内置免疫机制&lt;/li&gt;
+&lt;li&gt;Windows系统默认使用Schannel组件实现SSL/TLS协议栈（而非OpenSSL），具体技术说明参见&lt;a class=&#34;link&#34; href=&#34;https://techcommunity.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;《Information about HeartBleed and IIS》&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;用户安全建议&lt;/strong&gt;：
+微软始终建议用户定期更新复杂密码，相关指南可参考安全中心的&lt;a class=&#34;link&#34; href=&#34;https://support.microsoft.com/security&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;密码强度检查工具&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2014年4月22日更新说明&lt;/em&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;补注1：涵盖当时所有受支持的Windows版本&lt;/li&gt;
+&lt;li&gt;补注2：微软产品默认采用Windows原生Schannel实现，与OpenSSL实现存在架构级差异&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>MS13-051漏洞分析：Office PNG解析漏洞的技术细节与攻击模式</title>
         <link>http://localhost:1313/p/ms13-051%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90office-png%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E4%B8%8E%E6%94%BB%E5%87%BB%E6%A8%A1%E5%BC%8F/</link>
         <pubDate>Sat, 02 Aug 2025 23:13:07 +0800</pubDate>

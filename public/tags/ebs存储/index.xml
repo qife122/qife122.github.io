@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>EBS存储 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/ebs%E5%AD%98%E5%82%A8/</link>
+        <description>Recent content in EBS存储 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 08:00:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ebs%E5%AD%98%E5%82%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>我在re:Invent大会上的技术诉求：从跨AZ带宽定价到CHERI实例</title>
+        <link>http://localhost:1313/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</link>
+        <pubDate>Sun, 03 Aug 2025 08:00:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E5%9C%A8reinvent%E5%A4%A7%E4%BC%9A%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E8%AF%89%E6%B1%82%E4%BB%8E%E8%B7%A8az%E5%B8%A6%E5%AE%BD%E5%AE%9A%E4%BB%B7%E5%88%B0cheri%E5%AE%9E%E4%BE%8B/</guid>
+        <description>&lt;p&gt;作为AWS Hero，我获得了免费参加AWS re:Invent大会的机会。虽然我很少对多数演讲感兴趣——往年我参加过一些&amp;quot;高级&amp;quot;讲座，但内容都未超出已发布的文档范围——但我发现这是与亚马逊员工交流的绝佳机会。&lt;/p&gt;
+&lt;p&gt;今年我有一长串诉求清单，考虑到可能引起亚马逊员工（甚至非亚马逊人士）的兴趣，我决定在此公开分享：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;增加re:Invent大会上的亚马逊开源开发者数量&lt;/strong&gt;&lt;br&gt;
+我期待周三与Valkey开发者会面，但对Firecracker开发者无人参会感到失望。亚马逊有不派工程师参会除非他们演讲的政策（我希望能改变这一政策），但对开源开发者而言，参会结识潜在贡献者至关重要。如果你的开源团队不参加会议，无论代码采用什么许可证，都不算真正在做开源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;降低跨可用区(AZ)带宽定价&lt;/strong&gt;&lt;br&gt;
+我甚至不太在意成本本身，但人们对跨AZ带宽的担忧导致他们设计出糟糕的系统架构。亚马逊&amp;quot;良好架构框架&amp;quot;中的一条准则是将工作负载部署到多个位置，并明确指出使用单一可用区是个问题——但对跨AZ带宽的担忧（即使最终证明是多余的）阻碍了人们遵循这一准则。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;机架级EBS存储&lt;/strong&gt;&lt;br&gt;
+当前&amp;quot;SSD&amp;quot;EBS卷的I/O延迟表明它们与访问的EC2实例相距甚远。而某些EC2实例类型直接附加SSD，I/O性能显著提升——但耐久性低（实例终止数据即丢失）且缺乏弹性。将EBS存储部署在与EC2节点相同的机架上，可提供介于两者之间的解决方案，实现比跨数据中心更低的延迟，同时保持卷大小的灵活性。用户需接受&amp;quot;在此实例同机架创建卷&amp;quot;可能返回&amp;quot;该机架磁盘已满&amp;quot;的情况，但至少在实例启动时可以寻找有足够本地磁盘的机架。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;支持CHERI的安全实例&lt;/strong&gt;&lt;br&gt;
+这是我长期以来的愿望清单项目。CHERI在安全性方面具有巨大优势，哪家云厂商率先实现将遥遥领先竞争对手。我知道亚马逊（和其他云厂商）拥有用于研究的Morello开发板。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Marketplace支持&amp;quot;待发布&amp;quot;版本&lt;/strong&gt;&lt;br&gt;
+当我在AWS Marketplace添加新的FreeBSD版本时，需经过审批流程并复制到所有EC2区域，然后Marketplace更新产品列表并发送新版本邮件通知。这常导致亚马逊发送新FreeBSD版本邮件比我官方发布公告还早几天。我希望能够预先告知Marketplace即将发布的FreeBSD版本，让他们准备就绪但暂不更新网站或发送邮件，直到我准备好官方公告（通常会给镜像和云服务几天同步时间）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;此外，我还向Zoom提出改进建议：当从FreeBSD笔记本电脑加入会议时，Zoom网站应能通过用户代理字符串识别没有客户端，直接提供在浏览器中开会的选项，而不是反复尝试打开客户端。Zoom团队立即理解问题，甚至考虑将Linux客户端移植到FreeBSD。&lt;/p&gt;
+&lt;p&gt;关于透明度说明：除了提供免费参会和差旅，亚马逊还赞助我的FreeBSD工作。他们资助的内容约一半是EC2相关，另一半是FreeBSD发布工程。没有他们的支持，许多重要功能将无法出现在FreeBSD 14.2-RELEASE中。感谢亚马逊。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
