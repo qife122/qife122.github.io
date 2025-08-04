@@ -7,8 +7,43 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 09:23:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 19:06:14 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gladinet Centrestack硬编码加密密钥漏洞利用分析(CVE-2025-30406)</title>
+      <link>https://qife122.github.io/p/gladinet-centrestack%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90cve-2025-30406/</link>
+      <pubDate>Mon, 04 Aug 2025 19:06:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gladinet-centrestack%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90cve-2025-30406/</guid>
+      <description>&lt;h1 id=&#34;cve-2025-30406-viewstate漏洞利用验证&#34;&gt;CVE-2025-30406 ViewState漏洞利用验证&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;这是一个针对ASP.NET应用中&lt;strong&gt;CVE-2025-30406&lt;/strong&gt;的ViewState反序列化漏洞验证脚本(PoC)。该脚本利用ysoserial生成恶意ViewState载荷，向指定URL发送以执行任意命令。建议将命令输出通过自定义HTTP服务器(&lt;code&gt;server.py&lt;/code&gt;)回传至VPS，该服务器会以带时间戳的绿色提示符和白色输出文本的格式化方式展示结果。本脚本仅限&lt;strong&gt;教育用途&lt;/strong&gt;，必须在获得&lt;strong&gt;明确授权&lt;/strong&gt;的系统上使用安全测试。未经授权使用属违法行为。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析</title>
+      <link>https://qife122.github.io/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 17:48:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;binary-ninja实战2000个二进制文件的自动化破解之旅&#34;&gt;Binary Ninja实战：2000个二进制文件的自动化破解之旅&lt;/h3&gt;&#xA;&lt;p&gt;在2016年DEFCON CTF资格赛中，我使用Vector35开发的Binary Ninja（一个极具潜力的交互式静态分析和逆向工程平台）编写脚本，为2000个独特二进制文件生成了&amp;quot;漏洞利用&amp;quot;。如果你想在后DARPA时代的DEFCON CTF中保持竞争力，我强烈推荐你了解Binary Ninja。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Wing FTP Server 7.4.3 - 未授权远程代码执行漏洞分析与利用</title>
+      <link>https://qife122.github.io/p/wing-ftp-server-7.4.3-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Mon, 04 Aug 2025 15:58:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/wing-ftp-server-7.4.3-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;漏洞标题-wing-ftp-server-743---未授权远程代码执行rce&#34;&gt;漏洞标题: Wing FTP Server 7.4.3 - 未授权远程代码执行(RCE)&lt;/h1&gt;&#xA;&lt;h1 id=&#34;cve-cve-2025-47812&#34;&gt;CVE: CVE-2025-47812&lt;/h1&gt;&#xA;&lt;h1 id=&#34;日期-2025-06-30&#34;&gt;日期: 2025-06-30&lt;/h1&gt;&#xA;&lt;h1 id=&#34;漏洞作者-sheikh-mohammad-hasan-aka-4m3rr0r-&#34;&gt;漏洞作者: Sheikh Mohammad Hasan aka 4m3rr0r (&lt;a href=&#34;https://github.com/4m3rr0r&#34;&gt;https://github.com/4m3rr0r&lt;/a&gt;)&lt;/h1&gt;&#xA;&lt;h1 id=&#34;厂商主页&#34;&gt;厂商主页: &lt;a href=&#34;https://www.wftpserver.com/&#34;&gt;https://www.wftpserver.com/&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h1 id=&#34;受影响版本-wing-ftp-server--743&#34;&gt;受影响版本: Wing FTP Server &amp;lt;= 7.4.3&lt;/h1&gt;&#xA;&lt;h1 id=&#34;测试环境-linuxroot权限-windowssystem权限&#34;&gt;测试环境: Linux(Root权限), Windows(SYSTEM权限)&lt;/h1&gt;&#xA;&lt;h1 id=&#34;漏洞描述&#34;&gt;漏洞描述:&lt;/h1&gt;&#xA;&lt;p&gt;Wing FTP Server 7.4.4之前版本存在未授权远程代码执行漏洞(CVE-2025-47812)。该漏洞源于登录过程中对&amp;rsquo;username&amp;rsquo;参数中的NULL字节处理不当，导致Lua代码被注入到会话文件中。当访问认证功能(如/dir.html)时，这些恶意构造的会话文件会被执行，从而在服务器上以高权限(root/Linux或SYSTEM/Windows)执行任意命令。漏洞利用了c_CheckUser()函数(在NULL处截断)和会话创建逻辑(使用未过滤完整用户名)之间的处理差异。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft虚拟硬盘(VHDX)漏洞利用：远程代码执行(RCE) CVE-2025-49683详解</title>
+      <link>https://qife122.github.io/p/microsoft%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98vhdx%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Crce-cve-2025-49683%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Mon, 04 Aug 2025 04:47:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/microsoft%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98vhdx%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Crce-cve-2025-49683%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;microsoft-virtual-hard-disk-vhdx-11---远程代码执行rce-cve-2025-49683&#34;&gt;Microsoft Virtual Hard Disk (VHDX) 11 - 远程代码执行(RCE) CVE-2025-49683&lt;/h1&gt;&#xA;&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;这个PowerShell脚本(&lt;code&gt;vdh.ps1&lt;/code&gt;)演示了Windows虚拟硬盘(VHDX)处理中的一个&lt;strong&gt;软损坏漏洞&lt;/strong&gt;，涉及&lt;strong&gt;CVE-2025-49683&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用海象运算符简化Python反序列化漏洞利用</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6%E7%AE%80%E5%8C%96python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Mon, 04 Aug 2025 02:19:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6%E7%AE%80%E5%8C%96python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;利用海象运算符简化反序列化载荷构造&#34;&gt;利用海象运算符简化反序列化载荷构造&lt;/h1&gt;&#xA;&lt;p&gt;在利用Python反序列化（特别是Pickle）漏洞时，通常需要构造包含参数集合和服务器端可用可调用对象的载荷。最常见的方法是使用&lt;code&gt;eval&lt;/code&gt;函数配合待执行的字符串，这种方案非常灵活——通常可以导入&lt;code&gt;os&lt;/code&gt;模块并调用&lt;code&gt;os.system&lt;/code&gt;执行任意命令。但某些场景下会存在限制，例如无法直接获取应用输出或出站连接被阻断导致反向Shell失效。有时甚至需要反序列化操作返回具有特定属性的对象。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用SUID逻辑漏洞：Readline信息泄露攻击解析</title>
       <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</link>

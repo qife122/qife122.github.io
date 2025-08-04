@@ -7,8 +7,50 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 09:39:47 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 21:19:00 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于允许程序性剔除随机值的安全隐患分析</title>
+      <link>https://qife122.github.io/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 21:19:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;关于允许程序性剔除随机值的安全隐患分析&#34;&gt;关于允许程序性剔除随机值的安全隐患分析&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;报告编号：#3262848&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;提交者：lyb_unaffiliated&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;提交时间：2025年7月21日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;报告正文&#34;&gt;报告正文&lt;/h2&gt;&#xA;&lt;p&gt;尊敬的团队：&lt;br&gt;&#xA;我是Lorentso Youriévitch Bogdanov。我注意到贵项目需要更高质量的代码审查。近期合格黑客的短缺和江湖骗子的涌现并非偶然，这在某种程度上是由法律和技术环境共同造成的。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Eternal Synergy漏洞分析：SMBv1认证漏洞的深度剖析</title>
+      <link>https://qife122.github.io/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 15:41:09 +0800</pubDate>
+      <guid>https://qife122.github.io/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景&lt;/h2&gt;&#xA;&lt;p&gt;2017年4月ShadowBrokers泄露的Eternal Synergy是利用SMBv1协议认证漏洞（CVE-2017-0143）的攻击工具，该漏洞影响Windows 8及以下系统，微软在MS17-010补丁中修复。与常规漏洞不同，该漏洞主要通过数据包层面的操作实现利用。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bludit v3.16.2存储型XSS漏洞分析：通过&#34;添加新内容&#34;功能实现攻击</title>
+      <link>https://qife122.github.io/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</link>
+      <pubDate>Mon, 04 Aug 2025 14:01:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</guid>
+      <description>&lt;h1 id=&#34;漏洞标题bludit-v3162添加新内容功能存储型xss漏洞&#34;&gt;漏洞标题：Bludit v3.16.2&amp;quot;添加新内容&amp;quot;功能存储型XSS漏洞&lt;/h1&gt;&#xA;&lt;h1 id=&#34;日期2025年7月&#34;&gt;日期：2025年7月&lt;/h1&gt;&#xA;&lt;h1 id=&#34;漏洞作者andrey-stoykov&#34;&gt;漏洞作者：Andrey Stoykov&lt;/h1&gt;&#xA;&lt;h1 id=&#34;版本3162&#34;&gt;版本：3.16.2&lt;/h1&gt;&#xA;&lt;h1 id=&#34;测试环境debian-12&#34;&gt;测试环境：Debian 12&lt;/h1&gt;&#xA;&lt;h1 id=&#34;博客httpsmsecureltdblogspotcom&#34;&gt;博客：https://msecureltd.blogspot.com/&lt;/h1&gt;&#xA;&lt;p&gt;存储型XSS&amp;quot;添加新内容&amp;quot;功能漏洞#1：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>libcurl HTTP/3 POST请求处理中的栈释放后使用漏洞分析</title>
+      <link>https://qife122.github.io/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 00:21:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;stack-use-after-scope-in-http3-post-request-processing-via-curlopt_postfields&#34;&gt;Stack use-after-scope in HTTP/3 POST request processing via CURLOPT_POSTFIELDS&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;libcurl的HTTP/3请求处理在使用CURLOPT_POSTFIELDS与栈分配缓冲区时存在栈释放后使用漏洞。libcurl保留了用户提供的POST数据指针，但在原始栈帧销毁后仍访问该指针，导致内存损坏和潜在拒绝服务。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2021年云安全漏洞与数据泄露回顾：从凭证泄露到S3配置错误</title>
+      <link>https://qife122.github.io/p/2021%E5%B9%B4%E4%BA%91%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E5%9B%9E%E9%A1%BE%E4%BB%8E%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2%E5%88%B0s3%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF/</link>
+      <pubDate>Sun, 03 Aug 2025 23:09:59 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2021%E5%B9%B4%E4%BA%91%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E5%9B%9E%E9%A1%BE%E4%BB%8E%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2%E5%88%B0s3%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF/</guid>
+      <description>&lt;h1 id=&#34;2021年云安全漏洞与数据泄露回顾&#34;&gt;2021年云安全漏洞与数据泄露回顾&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;云安全事件的实际数据往往缺乏细节，且存在幸存者偏差。本文聚焦2021年公开披露的云安全事件，不包括云服务提供商自身的漏洞。&lt;/p&gt;&#xA;&lt;h2 id=&#34;2021年趋势&#34;&gt;2021年趋势&lt;/h2&gt;&#xA;&lt;h3 id=&#34;静态凭证仍是主要初始访问途径&#34;&gt;静态凭证仍是主要初始访问途径&lt;/h3&gt;&#xA;&lt;p&gt;静态长期凭证的泄露风险极高。计算表明：假设组织有10个静态凭证，每个每天有0.01%泄露风险，2年内至少一个凭证泄露的概率达52%。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes镜像构建器漏洞分析：CVE-2024-9486与CVE-2024-9594技术详解</title>
+      <link>https://qife122.github.io/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Sun, 03 Aug 2025 18:35:15 +0800</pubDate>
+      <guid>https://qife122.github.io/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;近期披露的两个漏洞（CVE-2024-9486 CVSS 9.8和CVE-2024-9594 CVSS 6.3）影响Kubernetes镜像构建器，攻击者在特定条件下可利用这些漏洞获取Kubernetes节点的root权限。部分镜像构建提供商未在构建完成后禁用默认管理凭证，导致节点部署后可能被入侵。该问题已在Image Builder v0.1.38版本修复，建议用户重建并重新部署受影响镜像。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>OpenSSL HTTP/3漏洞分析：CURLINFO_TLS_SSL_PTR指针错误导致的潜在RCE风险</title>
       <link>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</link>

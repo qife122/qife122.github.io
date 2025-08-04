@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 09:23:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 20:24:21 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/linux%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入解析Kubernetes安全配置：allowPrivilegeEscalation的真相与误区</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</link>
+      <pubDate>Mon, 04 Aug 2025 20:24:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</guid>
+      <description>&lt;h1 id=&#34;停止对allowprivilegeescalation的过度担忧&#34;&gt;停止对&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;的过度担忧&lt;/h1&gt;&#xA;&lt;p&gt;Kubernetes安全上下文允许您在pod或容器级别配置安全选项。虽然某些参数已被充分理解，但其他参数可能更加晦涩难懂。本文将揭穿关于allowPrivilegeEscalation选项的迷思。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用SUID逻辑漏洞：Readline信息泄露攻击解析</title>
       <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8suid%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9Ereadline%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90/</link>

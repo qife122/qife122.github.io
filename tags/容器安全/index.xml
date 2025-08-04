@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 11:45:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 20:24:21 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入解析Kubernetes安全配置：allowPrivilegeEscalation的真相与误区</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</link>
+      <pubDate>Mon, 04 Aug 2025 20:24:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</guid>
+      <description>&lt;h1 id=&#34;停止对allowprivilegeescalation的过度担忧&#34;&gt;停止对&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;的过度担忧&lt;/h1&gt;&#xA;&lt;p&gt;Kubernetes安全上下文允许您在pod或容器级别配置安全选项。虽然某些参数已被充分理解，但其他参数可能更加晦涩难懂。本文将揭穿关于allowPrivilegeEscalation选项的迷思。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kubernetes镜像构建器漏洞分析：CVE-2024-9486与CVE-2024-9594技术详解</title>
+      <link>https://qife122.github.io/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Sun, 03 Aug 2025 18:35:15 +0800</pubDate>
+      <guid>https://qife122.github.io/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;近期披露的两个漏洞（CVE-2024-9486 CVSS 9.8和CVE-2024-9594 CVSS 6.3）影响Kubernetes镜像构建器，攻击者在特定条件下可利用这些漏洞获取Kubernetes节点的root权限。部分镜像构建提供商未在构建完成后禁用默认管理凭证，导致节点部署后可能被入侵。该问题已在Image Builder v0.1.38版本修复，建议用户重建并重新部署受影响镜像。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Azure容器实例服务漏洞协同披露</title>
       <link>https://qife122.github.io/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</link>

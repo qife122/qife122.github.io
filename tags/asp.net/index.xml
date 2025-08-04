@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ASP.NET on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/asp.net/</link>
+    <description>Recent content in ASP.NET on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Mon, 04 Aug 2025 19:06:14 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/asp.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gladinet Centrestack硬编码加密密钥漏洞利用分析(CVE-2025-30406)</title>
+      <link>https://qife122.github.io/p/gladinet-centrestack%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90cve-2025-30406/</link>
+      <pubDate>Mon, 04 Aug 2025 19:06:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gladinet-centrestack%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90cve-2025-30406/</guid>
+      <description>&lt;h1 id=&#34;cve-2025-30406-viewstate漏洞利用验证&#34;&gt;CVE-2025-30406 ViewState漏洞利用验证&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;这是一个针对ASP.NET应用中&lt;strong&gt;CVE-2025-30406&lt;/strong&gt;的ViewState反序列化漏洞验证脚本(PoC)。该脚本利用ysoserial生成恶意ViewState载荷，向指定URL发送以执行任意命令。建议将命令输出通过自定义HTTP服务器(&lt;code&gt;server.py&lt;/code&gt;)回传至VPS，该服务器会以带时间戳的绿色提示符和白色输出文本的格式化方式展示结果。本脚本仅限&lt;strong&gt;教育用途&lt;/strong&gt;，必须在获得&lt;strong&gt;明确授权&lt;/strong&gt;的系统上使用安全测试。未经授权使用属违法行为。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

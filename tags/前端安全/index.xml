@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端安全 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in 前端安全 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Sun, 03 Aug 2025 22:31:29 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>██████网站customerId参数反射型XSS漏洞技术分析</title>
+      <link>https://qife122.github.io/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 03 Aug 2025 22:31:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;网站customerid参数反射型xss漏洞&#34;&gt;██████网站customerId参数反射型XSS漏洞&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;在██████网站发现一个反射型跨站脚本(XSS)漏洞，该漏洞位于customerId参数中。由于该参数在HTTP响应返回用户前未经过充分净化处理，当参数被恶意JavaScript代码操纵时，注入的脚本会在用户浏览器上下文中执行。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

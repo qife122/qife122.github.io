@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 16:06:32 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 21:40:49 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用CodeQL捕捉OpenSSL误用漏洞 - 关键加密API安全实践</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codeql%E6%8D%95%E6%8D%89openssl%E8%AF%AF%E7%94%A8%E6%BC%8F%E6%B4%9E-%E5%85%B3%E9%94%AE%E5%8A%A0%E5%AF%86api%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Mon, 04 Aug 2025 21:40:49 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codeql%E6%8D%95%E6%8D%89openssl%E8%AF%AF%E7%94%A8%E6%BC%8F%E6%B4%9E-%E5%85%B3%E9%94%AE%E5%8A%A0%E5%AF%86api%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;h1 id=&#34;使用codeql捕捉openssl误用漏洞&#34;&gt;使用CodeQL捕捉OpenSSL误用漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者：Damien Santiago&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;日期：2023年12月22日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我开发了五个CodeQL查询，用于捕捉OpenSSL libcrypto API中潜在的高危漏洞。这个被广泛采用但容错性低的API，一旦误用可能导致内存泄漏、认证绕过等加密实现问题。这些查询（在导师Fredrik Dahlgren和Filipe Casal指导下完成）通过确保正确的密钥处理、熵初始化和大数清除检查来预防误用。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>阈值签名方案中的共享密钥破解漏洞分析</title>
+      <link>https://qife122.github.io/p/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 11:34:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;打破阈值签名方案中的共享密钥---trail-of-bits博客&#34;&gt;打破阈值签名方案中的共享密钥 - Trail of Bits博客&lt;/h1&gt;&#xA;&lt;p&gt;今天我们将披露一个拒绝服务漏洞，该漏洞影响基于Frost、DMZ21、GG20和GG18协议的多个阈值签名方案实现中的Pedersen分布式密钥生成(DKG)阶段。该漏洞允许单个恶意参与者秘密提高重构共享密钥所需的阈值，可能导致使用共享密钥生成的签名无效。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>YOLO哈希构造的致命缺陷：密码学安全实践指南</title>
       <link>https://qife122.github.io/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>

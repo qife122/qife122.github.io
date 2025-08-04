@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 09:39:47 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 00:21:29 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/http/3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>libcurl HTTP/3 POST请求处理中的栈释放后使用漏洞分析</title>
+      <link>https://qife122.github.io/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 00:21:29 +0800</pubDate>
+      <guid>https://qife122.github.io/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;stack-use-after-scope-in-http3-post-request-processing-via-curlopt_postfields&#34;&gt;Stack use-after-scope in HTTP/3 POST request processing via CURLOPT_POSTFIELDS&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;libcurl的HTTP/3请求处理在使用CURLOPT_POSTFIELDS与栈分配缓冲区时存在栈释放后使用漏洞。libcurl保留了用户提供的POST数据指针，但在原始栈帧销毁后仍访问该指针，导致内存损坏和潜在拒绝服务。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>OpenSSL HTTP/3漏洞分析：CURLINFO_TLS_SSL_PTR指针错误导致的潜在RCE风险</title>
       <link>https://qife122.github.io/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</link>

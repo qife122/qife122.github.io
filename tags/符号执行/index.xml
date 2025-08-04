@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 17:56:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 11:55:58 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用符号执行与区块链尸检——Trail of Bits在Devcon IV的技术实践</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Mon, 04 Aug 2025 11:55:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;h3 id=&#34;使用manticore和符号执行发现智能合约漏洞&#34;&gt;使用Manticore和符号执行发现智能合约漏洞&lt;/h3&gt;&#xA;&lt;p&gt;在该工作坊中，Josselin Feist演示了如何运用开源符号执行引擎Manticore。该工具不仅能即时发现代码缺陷，还可验证代码正确性。120名参与者通过实践掌握了形式化验证方法，这些技术能确保智能合约严格遵循设计规范。&lt;br&gt;&#xA;&lt;a href=&#34;&#34;&gt;获取工作坊幻灯片与练习材料&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Manticore 0.3.0发布：符号执行引擎的重大升级</title>
+      <link>https://qife122.github.io/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Mon, 04 Aug 2025 03:03:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</guid>
+      <description>&lt;h1 id=&#34;执行器重构&#34;&gt;执行器重构&lt;/h1&gt;&#xA;&lt;p&gt;Felipe Manzano完成了Manticore状态机的重大重构，现在采用多进程模块（multiprocessing），为未来实现分布式符号执行奠定了基础。该重构引入了少量API变更：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>智能合约验证变得更简单 - Manticore验证工具详解</title>
       <link>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%AA%8C%E8%AF%81%E5%8F%98%E5%BE%97%E6%9B%B4%E7%AE%80%E5%8D%95-manticore%E9%AA%8C%E8%AF%81%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3/</link>

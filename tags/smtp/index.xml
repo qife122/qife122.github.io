@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SMTP on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/smtp/</link>
+    <description>Recent content in SMTP on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Mon, 04 Aug 2025 08:19:36 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/smtp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Django通过SMTP服务器发送电子邮件的完整指南</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8django%E9%80%9A%E8%BF%87smtp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 04 Aug 2025 08:19:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8django%E9%80%9A%E8%BF%87smtp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;如何通过django使用smtp服务器发送邮件&#34;&gt;如何通过Django使用SMTP服务器发送邮件&lt;/h1&gt;&#xA;&lt;h2 id=&#34;关键要点&#34;&gt;关键要点&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;配置SMTP设置&lt;/strong&gt;：在settings.py中设置EMAIL_BACKEND、EMAIL_HOST等参数&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;使用Django Environ保护凭证&lt;/strong&gt;：通过环境变量管理敏感信息&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;生成应用专用密码&lt;/strong&gt;：为Gmail启用两步验证并创建应用密码&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;send_mail函数&lt;/strong&gt;：使用Django内置函数发送邮件&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;构建自动联系表单&lt;/strong&gt;：集成Django表单与邮件发送功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;smtp服务器工作原理&#34;&gt;SMTP服务器工作原理&lt;/h2&gt;&#xA;&lt;p&gt;SMTP（简单邮件传输协议）是发送电子邮件的标准协议。Gmail的SMTP服务器地址为smtp.gmail.com，端口587。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

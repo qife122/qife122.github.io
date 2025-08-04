@@ -2,17 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>自动化工具 on 办公AI智能小助手</title>
-    <link>http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/</link>
+    <link>https://qife122.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 自动化工具 on 办公AI智能小助手</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Mon, 04 Aug 2025 07:35:36 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>如何通过自动化工具发现10&#43;SQL注入和30&#43;XSS漏洞</title>
-      <link>http://localhost:1313/post/deepseekcontent/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/deepseekcontent/</guid>
-      <description>&lt;h1 id=&#34;如何通过自动化工具发现10sql注入和30xss漏洞&#34;&gt;如何通过自动化工具发现10+SQL注入和30+XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;大家好，我是Mahmoud Attia（又名0xelkot），本文将分享如何自动化渗透测试流程并发现更多漏洞。&lt;/p&gt;&#xA;&lt;h2 id=&#34;传统漏洞挖掘的困境&#34;&gt;传统漏洞挖掘的困境&lt;/h2&gt;&#xA;&lt;p&gt;大多数安全研究人员都在重复相同的流程：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;收集子域名&lt;/li&gt;&#xA;&lt;li&gt;筛选存活主机&lt;/li&gt;&#xA;&lt;li&gt;使用Nuclei扫描&lt;/li&gt;&#xA;&lt;li&gt;处理重复结果&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;突破性解决方案&#34;&gt;突破性解决方案&lt;/h2&gt;&#xA;&lt;p&gt;通过组合多款工具实现自动化漏洞挖掘流水线：&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-子域名收集&#34;&gt;1. 子域名收集&lt;/h3&gt;&#xA;&lt;p&gt;使用以下工具组合进行子域名枚举：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;subfinder -d $1 -silent | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;assetfinder -subs-only $1 | anew /root/$1/subs.txt  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;amass enum -passive -d $1 | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python sublist3r.py -d $1| anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;github-subdomains -t &amp;lt;github token&amp;gt; -d $1 | anew /root/$1/subs.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-存活检测&#34;&gt;2. 存活检测&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /root/$1/subs.txt | naabu -p — -silent | anew open-ports.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat open-ports.txt | httpx -silent | anew alive.txt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-漏洞扫描&#34;&gt;3. 漏洞扫描&lt;/h3&gt;&#xA;&lt;h4 id=&#34;31-cve和配置错误检测&#34;&gt;3.1 CVE和配置错误检测&lt;/h4&gt;&#xA;&lt;p&gt;使用Cent工具整合GitHub上所有Nuclei模板：&lt;/p&gt;</description>
+      <title>AI能否取代Web开发者：当前工具与局限性的实践探讨</title>
+      <link>https://qife122.github.io/p/ai%E8%83%BD%E5%90%A6%E5%8F%96%E4%BB%A3web%E5%BC%80%E5%8F%91%E8%80%85%E5%BD%93%E5%89%8D%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%8E%A2%E8%AE%A8/</link>
+      <pubDate>Mon, 04 Aug 2025 07:35:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ai%E8%83%BD%E5%90%A6%E5%8F%96%E4%BB%A3web%E5%BC%80%E5%8F%91%E8%80%85%E5%BD%93%E5%89%8D%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%8E%A2%E8%AE%A8/</guid>
+      <description>&lt;h2 id=&#34;ai在web开发中的当前角色&#34;&gt;AI在Web开发中的当前角色&lt;/h2&gt;&#xA;&lt;p&gt;AI作为具有惊人能力的前沿技术，正在通过其卓越的应用案例改变世界并提升各行业生产效率。如今每位开发者都倾向于使用AI工具，以便在更短时间内为客户交付更多解决方案。但这也引发了一个严肃的问题：AI能否完全取代Web开发者？&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
