@@ -7,7 +7,88 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 06:10:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 16:31:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>开源AI威胁建模工具——快速、情境感知且开发者友好</title>
+        <link>http://localhost:1313/p/%E5%BC%80%E6%BA%90ai%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%E5%B7%A5%E5%85%B7%E5%BF%AB%E9%80%9F%E6%83%85%E5%A2%83%E6%84%9F%E7%9F%A5%E4%B8%94%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8B%E5%A5%BD/</link>
+        <pubDate>Mon, 04 Aug 2025 16:31:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BC%80%E6%BA%90ai%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%E5%B7%A5%E5%85%B7%E5%BF%AB%E9%80%9F%E6%83%85%E5%A2%83%E6%84%9F%E7%9F%A5%E4%B8%94%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8B%E5%A5%BD/</guid>
+        <description>&lt;h1 id=&#34;开源ai威胁建模工具快速情境感知且开发者友好&#34;&gt;开源AI威胁建模工具——快速、情境感知且开发者友好
+&lt;/h1&gt;&lt;p&gt;人工智能正在变革各行各业，但随之而来的安全风险也日益复杂。传统安全方法（如STRIDE框架）难以应对AI特有的威胁场景，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;提示注入&lt;/strong&gt;：通过恶意输入操纵生成式AI行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;训练数据投毒&lt;/strong&gt;：污染数据集导致模型预测偏差&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型窃取&lt;/strong&gt;：通过API交互窃取模型参数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组件链风险&lt;/strong&gt;：向量数据库、API网关等组件的协同攻击面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;工具核心能力&#34;&gt;工具核心能力
+&lt;/h2&gt;&lt;p&gt;这款基于Streamlit构建的开源工具通过两阶段工作流实现威胁建模：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;交互式问卷&lt;/strong&gt;&lt;br&gt;
+收集AI系统关键信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模型类型（分类/生成/集成）&lt;/li&gt;
+&lt;li&gt;数据来源（内部/爬取/用户生成）&lt;/li&gt;
+&lt;li&gt;部署模式（SaaS/混合云）&lt;/li&gt;
+&lt;li&gt;第三方依赖（开源模型/向量数据库）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规则引擎&lt;/strong&gt;&lt;br&gt;
+基于300+条确定性规则生成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;映射到MITRE ATLAS的攻击战术&lt;/li&gt;
+&lt;li&gt;NIST CIA+Abuse分类&lt;/li&gt;
+&lt;li&gt;合规缺口提示（GDPR/HIPAA）&lt;/li&gt;
+&lt;li&gt;可操作的修复建议（如输入过滤、结构化提示）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;前端&lt;/strong&gt;：Streamlit构建的渐进式问卷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后端&lt;/strong&gt;：Python规则引擎，示例规则逻辑：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;match&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;unfiltered_user_input&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;llm_used&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;threat&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;用户输入导致的提示注入&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;mitre_atlas&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Prompt Injection&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;mitigations&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;输入消毒&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;结构化提示&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;适用场景&#34;&gt;适用场景
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;开发中的AI系统架构评审&lt;/li&gt;
+&lt;li&gt;安全团队评估LLM应用风险&lt;/li&gt;
+&lt;li&gt;产品经理向管理层解释AI风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;项目已在GitHub开源，支持本地部署：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pip install -r requirements.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;streamlit run main.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;未来版本计划集成OWASP LLM Top 10威胁图谱和团队协作功能。开发者可通过提交PR扩展威胁规则库，共同构建更安全的AI生态。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>AI编程助手风险分析与应对策略</title>
         <link>http://localhost:1313/p/ai%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B%E9%A3%8E%E9%99%A9%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E5%AF%B9%E7%AD%96%E7%95%A5/</link>
         <pubDate>Sun, 03 Aug 2025 06:10:03 +0800</pubDate>

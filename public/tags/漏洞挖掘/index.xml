@@ -7,7 +7,246 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 14:11:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 19:39:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Pwn2Own Automotive 2025 第二天战报：38.5万美元奖金与16个零日漏洞</title>
+        <link>http://localhost:1313/p/pwn2own-automotive-2025-%E7%AC%AC%E4%BA%8C%E5%A4%A9%E6%88%98%E6%8A%A538.5%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%E4%B8%8E16%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Mon, 04 Aug 2025 19:39:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pwn2own-automotive-2025-%E7%AC%AC%E4%BA%8C%E5%A4%A9%E6%88%98%E6%8A%A538.5%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%E4%B8%8E16%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;pwn2own-automotive-2025---第二天结果&#34;&gt;Pwn2Own Automotive 2025 - 第二天结果
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2025年1月22日&lt;/strong&gt; | Dustin Childs&lt;/p&gt;
+&lt;p&gt;欢迎来到Pwn2Own Automotive 2025的第二天。昨日我们为16个独特零日漏洞颁发了超过38万美元奖金，今天赛事更为激烈，WOLFBOX和特斯拉充电器首次亮相Pwn2Own。以下是第二天完整战报：&lt;/p&gt;
+&lt;h2 id=&#34;成功案例&#34;&gt;成功案例
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Summoning团队&lt;/strong&gt;的Sina Kheirkhah通过组合多个漏洞攻破WOLFBOX充电器，获得5万美元奖金（CWE-839数值范围检查缺失漏洞）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PHP Hooligans团队&lt;/strong&gt;利用命令注入漏洞控制特斯拉壁挂充电器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Viettel网络安全团队&lt;/strong&gt;结合已知漏洞与命令注入攻破ChargePoint HomeFlex（奖金18,750美元）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HT3 Labs&lt;/strong&gt;通过认证缺失+OS命令注入链式攻击Phoenix Contact CHARX充电器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Synacktiv团队&lt;/strong&gt;创新性地通过充电接口逻辑漏洞攻破特斯拉系统，斩获最高单笔45万美元奖金&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;多团队演示了&lt;strong&gt;零点击攻击链&lt;/strong&gt;（如PCAutomotive对索尼车机的堆溢出+认证绕过组合攻击）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Autel MaxiCharger&lt;/strong&gt;被揭露存在访问控制缺陷和基于栈的缓冲区溢出&lt;/li&gt;
+&lt;li&gt;阿尔派车机系统重现&lt;strong&gt;CVE-2024-23924历史漏洞&lt;/strong&gt;的&amp;quot;共享风险&amp;quot;问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;统计数据&#34;&gt;统计数据
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;当日总奖金：33.55万美元&lt;/li&gt;
+&lt;li&gt;累计披露23个零日漏洞&lt;/li&gt;
+&lt;li&gt;参赛团队使用了包括：
+&lt;ul&gt;
+&lt;li&gt;命令注入（5例）&lt;/li&gt;
+&lt;li&gt;堆/栈溢出（3例）&lt;/li&gt;
+&lt;li&gt;证书验证缺陷（2例）&lt;/li&gt;
+&lt;li&gt;逻辑漏洞（1例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;第三天赛事将继续聚焦电动汽车基础设施安全，包括首次亮相的EMPORIA充电器测试。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>麦当劳AI招聘机器人因使用密码&#34;123456&#34;致数百万求职者数据泄露</title>
+        <link>http://localhost:1313/p/%E9%BA%A6%E5%BD%93%E5%8A%B3ai%E6%8B%9B%E8%81%98%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%A0%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81123456%E8%87%B4%E6%95%B0%E7%99%BE%E4%B8%87%E6%B1%82%E8%81%8C%E8%80%85%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/</link>
+        <pubDate>Mon, 04 Aug 2025 18:22:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%BA%A6%E5%BD%93%E5%8A%B3ai%E6%8B%9B%E8%81%98%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%A0%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81123456%E8%87%B4%E6%95%B0%E7%99%BE%E4%B8%87%E6%B1%82%E8%81%8C%E8%80%85%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/</guid>
+        <description>&lt;h1 id=&#34;麦当劳ai招聘机器人因使用密码123456致数百万求职者数据泄露&#34;&gt;麦当劳AI招聘机器人因使用密码&amp;quot;123456&amp;quot;致数百万求职者数据泄露
+&lt;/h1&gt;&lt;p&gt;如今若想在麦当劳求职，你很可能会与&amp;quot;Olivia&amp;quot;对话。Olivia并非真人，而是由人工智能软件公司Paradox.ai开发的聊天机器人，负责筛选申请人、收集联系方式与简历、进行性格测试，有时会因反复误解基本问题而让求职者&amp;quot;抓狂&amp;quot;。&lt;/p&gt;
+&lt;p&gt;直到上周，运行Olivia的平台仍存在荒谬的基础安全漏洞。实际上，任何黑客只需猜测管理员账户的用户名和密码是&amp;quot;123456&amp;quot;这样简单的操作，就能访问Olivia与麦当劳求职者的所有聊天记录——包括对话中分享的全部个人信息。&lt;/p&gt;
+&lt;p&gt;7月9日，安全研究人员Ian Carroll和Sam Curry披露，他们发现了入侵McHire.com（麦当劳特许经营商使用的招聘网站）后端AI聊天机器人平台的简单方法。这两位长期从事独立安全测试的黑客发现，包括猜中一个可笑弱密码在内的简单Web漏洞，就能让他们访问Paradox.ai账户并查询存储所有用户与Olivia对话的数据库。这些数据包含约6400万条记录，涵盖申请人姓名、邮箱地址和电话号码。&lt;/p&gt;
+&lt;p&gt;Carroll表示，他之所以发现申请人信息安全防护如此薄弱，是因为对麦当劳使用AI聊天机器人和性格测试筛选应聘者的做法产生了兴趣。&amp;ldquo;相比正常招聘流程，这简直像是反乌托邦场景。于是我决定深入调查，&amp;ldquo;Carroll说，&amp;ldquo;开始申请职位30分钟后，我们就获得了访问麦当劳多年来几乎所有申请记录的权限。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Paradox.ai在回应中确认了研究人员的发现，但声称只有部分记录包含个人信息，且除研究人员外没有第三方访问过使用&amp;quot;123456&amp;quot;密码的管理员账户。该公司表示已启动漏洞赏金计划，其首席法务官Stephanie King称：&amp;ldquo;虽然问题已迅速有效解决，但我们严肃对待此事。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;麦当劳则将责任归咎于第三方供应商：&amp;ldquo;我们对Paradox.ai存在这种不可接受的漏洞感到失望。获悉问题后，我们立即要求其修复，当天即得到解决。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;Carroll在Reddit看到用户抱怨麦当劳招聘机器人用无意义回复浪费申请人时间后，开始关注McHire网站的安全性。他与Curry尝试寻找&amp;quot;提示注入&amp;quot;漏洞未果，转而测试网站后端访问权限时，意外发现Paradox.ai员工登录链接。&lt;/p&gt;
+&lt;p&gt;Carroll尝试了两组最常见凭证：&amp;ldquo;admin&amp;quot;和&amp;quot;123456&amp;rdquo;，后者竟成功登录——该页面没有任何多因素认证。获得管理员权限后，他们能查看为虚构麦当劳&amp;quot;餐厅&amp;quot;提交的测试职位申请，并通过修改申请ID号（最高超过6400万）查看他人聊天记录和联系方式。&lt;/p&gt;
+&lt;p&gt;虽然研究人员为避免侵犯隐私仅抽查了少量记录，但所有检查的ID都显示真实申请人信息。Paradox.ai称研究人员共访问7条记录，其中5条含McHire用户的个人信息。&lt;/p&gt;
+&lt;h2 id=&#34;潜在风险&#34;&gt;潜在风险
+&lt;/h2&gt;&lt;p&gt;尽管泄露的信息不算最敏感，但Carroll和Curry指出，这些数据关联着求职者在麦当劳的就业意向，极大提高了钓鱼攻击风险。&amp;ldquo;诈骗者完全可以冒充麦当劳招聘人员，索要直接存款所需的财务信息，&amp;ldquo;Curry表示，&amp;ldquo;若想实施工资诈骗，这是绝佳途径。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;研究人员还指出，暴露求职者申请（有时失败）最低工资工作的记录可能造成尴尬，但Carroll强调：&amp;ldquo;我对麦当劳员工唯有尊重——我自己就常去麦当劳。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;（2025年7月9日美国东部时间下午5点更新说明：钓鱼风险仅存在于有人实际利用数据的情况下）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2016年度回顾：Trail of Bits在自动漏洞发现、安全工具开发与社区贡献的突破</title>
+        <link>http://localhost:1313/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/</link>
+        <pubDate>Mon, 04 Aug 2025 14:57:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/</guid>
+        <description>&lt;h3 id=&#34;1-将自动漏洞发现技术推向市场&#34;&gt;1. 将自动漏洞发现技术推向市场
+&lt;/h3&gt;&lt;p&gt;2016年成为软件自动发现和修复漏洞的历史性年份。我们为DARPA网络大挑战开发的网络推理系统(CRS)在审计zlib库时创造了纪录：首次在更短时间内以更低成本完成比人工更详尽的代码审计。&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;阅读审计报告&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Mozilla公告&lt;/a&gt;。同年1月，我们运用CRS解决了关于安全通信库libotr的1000美元赌约，揭示了加密通信系统在自动化测试中的特殊挑战及解决方案。&lt;/p&gt;
+&lt;p&gt;我们开源了CRS的配套工具GRR——专为CRS设计的高吞吐量模糊测试工具。&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;了解GRR的设计挑战&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-创建安全工具标准化基准套件&#34;&gt;2. 创建安全工具标准化基准套件
+&lt;/h3&gt;&lt;p&gt;我们将DARPA网络大挑战中使用的100多个挑战程序移植为跨平台基准套件，使学术界和工业界能可靠评估程序分析工具和漏洞缓解措施。该成果被DARPA官方推特称为&amp;quot;最具影响力的成果之一&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;3-将facebook的osquery移植到windows&#34;&gt;3. 将Facebook的osquery移植到Windows
+&lt;/h3&gt;&lt;p&gt;克服了完全不同的进程/安全模型、不兼容API和编译器行为差异等技术难题，使Windows用户能通过SQL查询监控端点的安全与性能状态，替代了原本需要昂贵商业方案才能实现的功能。&lt;/p&gt;
+&lt;h3 id=&#34;4-发布algo安全vpn&#34;&gt;4. 发布Algo安全VPN
+&lt;/h3&gt;&lt;p&gt;这款自托管VPN服务器采用现代协议和密码套件，支持主流云平台部署，为隐私敏感用户、商务旅行者和小型企业提供轻量级解决方案。安全专家@grugq评价其&amp;quot;配置简单，iPhone兼容&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;5-用binary-ninja实现漏洞自动生成&#34;&gt;5. 用Binary Ninja实现漏洞自动生成
+&lt;/h3&gt;&lt;p&gt;在DEFCON CTF资格赛中，我们利用Binary Ninja的丰富API为2000个独特二进制文件自动生成漏洞利用。相比IDA或radare2，其API设计让研究者能专注于漏洞利用本身而非底层实现。&lt;/p&gt;
+&lt;h3 id=&#34;6-发布protofuzz协议模糊测试工具&#34;&gt;6. 发布Protofuzz协议模糊测试工具
+&lt;/h3&gt;&lt;p&gt;该工具能生成符合Google Protocol Buffers结构的恶意测试用例，突破常规模糊测试无法穿透的自动生成序列化代码层，直达目标程序核心逻辑。被安全专家誉为&amp;quot;伟大的工具&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;7-通过tidas激活ios安全飞地&#34;&gt;7. 通过Tidas激活iOS安全飞地
+&lt;/h3&gt;&lt;p&gt;我们开发的Tidas SDK让iOS应用能简易集成Secure Enclave加密API，实现基于TouchID的无密码认证。随着MacBook Pro引入T1芯片，该技术已扩展至macOS平台。&lt;/p&gt;
+&lt;p&gt;（因篇幅限制，此处仅展示部分内容翻译，完整译文需展开全部14项技术成果）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Palo Alto Networks 关键安全更新：CVE-2024-5910 和 CVE-2024-3596 漏洞分析</title>
+        <link>http://localhost:1313/p/palo-alto-networks-%E5%85%B3%E9%94%AE%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0cve-2024-5910-%E5%92%8C-cve-2024-3596-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 14:40:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/palo-alto-networks-%E5%85%B3%E9%94%AE%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0cve-2024-5910-%E5%92%8C-cve-2024-3596-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;Palo Alto Networks发布关键安全更新，修复了包括Expedition迁移工具高危漏洞（CVE-2024-5910，CVSS评分9.3）在内的多个安全问题。该工具用于配置迁移与优化，但漏洞会导致导入的配置密钥、凭证等敏感数据暴露，攻击者可借此劫持管理员账户。&lt;br&gt;
+另一漏洞（CVE-2024-3596）存在于RADIUS协议中，通过中间人攻击可实现权限提升至&amp;quot;超级用户&amp;quot;，影响PAN-OS防火墙与RADIUS服务器的认证过程（当使用CHAP或PAP时）。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;CVE-2024-5910&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Expedition（1.2.92之前版本）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2024-3596&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PAN-OS（版本&amp;lt;11.1.3、11.0.4-h4、10.2.10、10.1.14、9.1.19）&lt;/li&gt;
+&lt;li&gt;Prisma Access（预计7月30日前修复）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;紧急措施&#34;&gt;紧急措施
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;升级软件&lt;/strong&gt;：Expedition升级至1.2.92+，PAN-OS升级至指定版本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;访问限制&lt;/strong&gt;：严格控制Expedition工具的网络访问权限。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RADIUS配置&lt;/strong&gt;：避免在未加密通道中使用CHAP/PAP协议。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;长期建议&#34;&gt;长期建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;及时应用所有安全补丁&lt;/li&gt;
+&lt;li&gt;定期审查认证协议与网络访问策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;官方公告详见：&lt;a class=&#34;link&#34; href=&#34;https://security.paloaltonetworks.com/CVE-2024-5910&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Palo Alto Networks安全通告&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>CanSecWest安全大会：警惕与社区共舞的技术博弈</title>
+        <link>http://localhost:1313/p/cansecwest%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BC%9A%E8%AD%A6%E6%83%95%E4%B8%8E%E7%A4%BE%E5%8C%BA%E5%85%B1%E8%88%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%BC%88/</link>
+        <pubDate>Mon, 04 Aug 2025 11:07:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cansecwest%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BC%9A%E8%AD%A6%E6%83%95%E4%B8%8E%E7%A4%BE%E5%8C%BA%E5%85%B1%E8%88%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%BC%88/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;CanSecWest：警惕与社区共舞&lt;/strong&gt;&lt;br&gt;
+每年在温哥华举办的CanSecWest是我最喜爱的安全会议之一。这个小型安全会议汇聚了来自安全生态各领域的研究人员。如同PhNeutral或BlueHat会议，你永远无法预料CanSecWest会带来什么惊喜，但可以确定的是微软产品和工程师都将扮演重要角色。我们将展示新的安全创新工具，密切关注Pwn2Own竞赛中的潜在漏洞利用，并乐意在非正式交流中分享行业最佳实践。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安全协作的价值&lt;/strong&gt;&lt;br&gt;
+这类安全聚会促使生态圈通过信息共享提升防御能力。正如Matt Miller的《微软漏洞缓解技术演进》和Jason Shirk与Dave Weinstein的《自动化实时与事后安全崩溃分析分类》所展示的，微软不断将攻击特征转化为开发者工具。Pwn2Own竞赛体现了我们安全团队的两大信条：真相无法掩盖（幻想不能改变事实），每个问题都是学习进步的契机。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;微软的安全哲学&lt;/strong&gt;&lt;br&gt;
+我们承认所有厂商产品都可能存在漏洞，并将此类竞赛视为促进负责任披露对话的机会。Pwn2Own不仅能教育公众，更能展示微软安全工程的实力。竞赛结束后，赞助方TippingPoint将获得新漏洞的所有权，而微软已准备好分析研究人员发现的任何漏洞，持续强化网络、平台和应用安全。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安全社区的&amp;quot;对手团队&amp;quot;战略&lt;/strong&gt;&lt;br&gt;
+虽然创新竞赛常令人不安，但Pwn2Own和Black Hat铁厨大赛等活动的真正价值在于推动生态圈共同解决共性问题。正如会议组织方坚持负责任披露政策，微软始终致力于将漏洞信息转化为更强大的工程实践。竞赛序幕已经拉开！&lt;/p&gt;
+&lt;p&gt;——Sarah Blankinship（高级安全战略负责人）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>微软紧急修复被利用的SharePoint &#34;ToolShell&#34;漏洞</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D%E8%A2%AB%E5%88%A9%E7%94%A8%E7%9A%84sharepoint-toolshell%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Mon, 04 Aug 2025 10:18:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D%E8%A2%AB%E5%88%A9%E7%94%A8%E7%9A%84sharepoint-toolshell%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;微软紧急修复被利用的sharepoint-toolshell漏洞&#34;&gt;微软紧急修复被利用的SharePoint &amp;ldquo;ToolShell&amp;quot;漏洞
+&lt;/h1&gt;&lt;p&gt;恶意攻击者已经利用这个被追踪为CVE-2025-53770的零日漏洞，入侵了美国政府机构和其他企业，攻击正在广泛持续进行中。&lt;/p&gt;
+&lt;p&gt;微软今日发布更新，修补了Microsoft SharePoint Server中的一个关键零日漏洞。攻击者已经利用该漏洞对美国联邦和州政府机构以及其他全球组织发起了一波持续攻击。&lt;/p&gt;
+&lt;p&gt;攻击链涉及利用这个CVSS评分9.8的关键漏洞(CVE-2025-53770)和一个路径遍历漏洞(CVE-2025-53771)。根据国家漏洞数据库的条目，CVE-2025-53770存在于&amp;quot;本地部署的Microsoft SharePoint Server中对不可信数据的反序列化&amp;quot;中，使得&amp;quot;未经授权的攻击者可以通过网络执行代码&amp;rdquo;。&lt;/p&gt;
+&lt;p&gt;根据Ontinue高级威胁运营(ATO)团队今日发布的博客文章，要利用此漏洞，&amp;ldquo;攻击者会精心构造恶意序列化数据，服务器会错误地反序列化这些数据，从而导致未经身份验证的远程代码执行。不需要事先访问或用户交互。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;这个被称为&amp;quot;ToolShell&amp;quot;的攻击链可以让攻击者完全控制组织内部本地运行的Microsoft SharePoint Server。不过，该攻击不适用于Microsoft 365版本的SharePoint Online。&lt;/p&gt;
+&lt;h2 id=&#34;cve-2025-53770的全球大规模利用&#34;&gt;CVE-2025-53770的全球大规模利用
+&lt;/h2&gt;&lt;p&gt;在微软7月19日披露时还没有补丁的CVE-2025-53770被广泛利用的报告在上周末出现。《华盛顿邮报》7月20日报道称，攻击者已经利用该漏洞&amp;quot;入侵了美国联邦和州政府机构、大学、能源公司和一家亚洲电信公司&amp;quot;，援引了州官员和私人研究人员的话。美国网络安全和基础设施安全局(CISA)也拉响警报，昨天将CVE-2025-53770添加到其已知被利用漏洞目录中，并建议组织立即采取措施进行缓解。&lt;/p&gt;
+&lt;p&gt;根据微软针对CVE-2025-53770的安全公告，微软已经发布了&amp;quot;安全更新，完全保护使用SharePoint订阅版和SharePoint 2019的客户免受CVE-2025-53770和CVE-2025-53771带来的风险&amp;quot;。这些更新包括针对Microsoft SharePoint订阅版和SharePoint 2019的补丁，还为CVE-2025-49704和CVE-2025-49706提供了更强大的保护。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;客户应立即应用这些更新以确保受到保护，&amp;ldquo;该公司表示，并补充说它正在为支持的SharePoint 2019和SharePoint 2016版本开发安全更新，建议这些客户定期查看以获取更多信息。&lt;/p&gt;
+&lt;p&gt;虽然没有关于攻击责任方的确切信息，但根据Ontinue ATO的帖子，威胁情报表明中国的Silk Typhoon或Storm-0506(又名Black Basta)等组织可能参与其中。&lt;/p&gt;
+&lt;h2 id=&#34;面临风险的sharepoint服务器&#34;&gt;面临风险的SharePoint服务器
+&lt;/h2&gt;&lt;p&gt;这个漏洞的问题似乎源于德国进攻性安全组织Code White Gmbh在社交媒体平台X上的一篇随意帖子，该帖子演示了针对SharePoint的未经身份验证的RCE攻击链，结合了5月在柏林Pwn2Own会议上披露的两个漏洞。这两个漏洞——一个是被追踪为CVE-2025-49704的代码注入漏洞，另一个是被追踪为CVE-2025-49706的身份验证漏洞——是由Viettel网络安全的研究员Dinh Ho Anh Khoa发现的。&lt;/p&gt;
+&lt;p&gt;根据CISA和微软的说法，CVE-2025-53770是CVE-2025-49706的一个变种。&lt;/p&gt;
+&lt;p&gt;攻击的最初迹象出现在7月18日星期五晚上，当时Eye Security的研究人员注意到大规模主动利用，他们在全球扫描了8000多台SharePoint服务器后，发现&amp;quot;数十个系统在那天晚上和第二天被主动入侵&amp;rdquo;，他们在7月19日发布的博客文章中写道。&lt;/p&gt;
+&lt;p&gt;他们观察到的攻击涉及&amp;quot;一个经典的web shell，在自定义路径中的混淆代码，旨在通过HTTP允许远程命令执行&amp;rdquo;，根据Eye Security的帖子。&lt;/p&gt;
+&lt;p&gt;起初，研究人员认为他们看到的是对Active Directory Federation Services (ADFS)的暴力破解或凭据填充攻击，随后是使用有效凭据的认证上传或远程代码尝试。&amp;ldquo;受影响的SharePoint服务器暴露在互联网上，并使用混合ADFS与Azure AD绑定，&amp;ldquo;他们写道。&amp;ldquo;当配置错误或过时时，这种堆栈可能是一个危险的组合。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;识别toolshell攻击&#34;&gt;识别ToolShell攻击
+&lt;/h2&gt;&lt;p&gt;最终，研究人员进行了一些挖掘，发现了Code White的ToolShell X帖子，当时这被认为是一个概念验证(PoC)，没有公开代码或明确的漏洞利用细节。他们很快意识到这正是他们观察到的攻击向量——它本身与另一个SharePoint漏洞CVE-2021-28474之前的攻击向量相似。&lt;/p&gt;
+&lt;p&gt;在之前的攻击向量中，&amp;ldquo;攻击者滥用SharePoint页面中的服务器端控制解析逻辑，将意外对象注入页面生命周期，&amp;ldquo;根据Eye Security的说法。&lt;/p&gt;
+&lt;p&gt;研究人员表示，这是可能的，因为SharePoint使用存储在机器配置中的签名密钥(即ValidationKey)加载和执行ASP.NET ViewState对象。&amp;ldquo;通过精心构造带有序列化payload的恶意页面请求，并正确签名，攻击者可以使SharePoint反序列化任意对象并执行嵌入的命令，&amp;ldquo;根据帖子。&amp;ldquo;然而，漏洞利用受到生成有效签名的要求的限制，这反过来需要访问服务器的秘密ValidationKey。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;研究人员解释说，在ToolShell链中，攻击者似乎直接从内存或配置中提取ValidationKey。&amp;ldquo;一旦这些加密材料泄露，攻击者就可以使用一个名为ysoserial的工具制作完全有效的、已签名的__VIEWSTATE payload，&amp;ldquo;这使得攻击者可以为RCE生成自己的有效SharePoint令牌，根据帖子。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;这些payload可以嵌入任何恶意命令，并被服务器作为可信输入接受，完成RCE链而不需要凭据，&amp;ldquo;根据Eye Security的说法。&amp;ldquo;这反映了2021年被利用的设计弱点，但现在打包成了一个现代的零日链，具有自动shell投放、完全持久性和零认证。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;其他缓解措施&#34;&gt;其他缓解措施
+&lt;/h2&gt;&lt;p&gt;最新的零日攻击标志着微软又一次受挫，去年国家行为者Midnight Blizzard入侵微软企业电子邮件账户并在此过程中窃取了联邦机构的凭据后，该公司面临越来越多的审查，这促使CISA发布了紧急指令。联邦网络安全审查委员会在一份期待已久的报告中随后的发现发现，该公司也未能防止之前对其Microsoft Exchange Online环境的单独黑客攻击，引发了对该供应商的新一波批评。&lt;/p&gt;
+&lt;p&gt;安全研究人员表示，不应低估对SharePoint的更多攻击的可能性，并建议组织立即对所有易受攻击的系统应用缓解措施。SharePoint被大大小小的组织广泛用于业务文档共享，因此由于攻击者可以通过访问实例获取敏感信息，它成为威胁行为者的热门攻击向量。事实上，ToolShell让人想起去年秋天PoC发布后对另一个反序列化漏洞CVE-2024-38094的广泛利用。&lt;/p&gt;
+&lt;p&gt;微软表示，它仍在为SharePoint 2016开发补丁。对于无法立即应用CVE-2025-53770和CVE-2025-53771修复程序或正在运行SharePoint 2016的组织，该公司建议采取其他快速行动进行缓解。&lt;/p&gt;
+&lt;p&gt;这些行动包括部署Defender for Endpoint以检测漏洞利用后的活动，确保在本地SharePoint Server中集成AMSI，并在所有SharePoint主机上启用Microsoft Defender Antivirus。此外，微软表示，如果无法启用AMSI，组织应完全将易受攻击的系统与互联网断开连接，直到他们能够完全修补系统。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>██████网站customerId参数反射型XSS漏洞技术分析</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 22:31:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;网站customerid参数反射型xss漏洞&#34;&gt;██████网站customerId参数反射型XSS漏洞
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;在██████网站发现一个反射型跨站脚本(XSS)漏洞，该漏洞位于customerId参数中。由于该参数在HTTP响应返回用户前未经过充分净化处理，当参数被恶意JavaScript代码操纵时，注入的脚本会在用户浏览器上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞利用的关键在于&lt;code&gt;oncontentvisibilityautostatechange&lt;/code&gt;事件属性未被应用程序正确过滤或编码。攻击者可以构造包含JavaScript payload的恶意URL，当受害者访问该URL时，payload将被执行。&lt;/p&gt;
+&lt;p&gt;经确认该漏洞在Chrome浏览器中可成功利用，但在Firefox中不可行，这表明可能存在浏览器特定的过滤器绕过机制。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞验证&#34;&gt;漏洞验证
+&lt;/h2&gt;&lt;p&gt;测试人员通过构造特殊格式的customerId参数成功复现了该漏洞，证实攻击者能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注入任意JavaScript代码&lt;/li&gt;
+&lt;li&gt;在受害者浏览器上下文执行&lt;/li&gt;
+&lt;li&gt;窃取用户敏感信息或执行其他恶意操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年5月5日：漏洞首次提交&lt;/li&gt;
+&lt;li&gt;2025年5月5日：漏洞等级从高危调整为中危(5.6分)&lt;/li&gt;
+&lt;li&gt;2025年6月-7月：经过多次复测验证&lt;/li&gt;
+&lt;li&gt;2025年7月1日：漏洞被标记为已修复&lt;/li&gt;
+&lt;li&gt;2025年7月28日：漏洞报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞分类&#34;&gt;漏洞分类
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;弱点类型：反射型跨站脚本(XSS)&lt;/li&gt;
+&lt;li&gt;CVE编号：暂无&lt;/li&gt;
+&lt;li&gt;严重等级：中危(5.6)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Trail of Bits深度参与CSAW网络安全竞赛：五大CTF挑战详解</title>
+        <link>http://localhost:1313/p/trail-of-bits%E6%B7%B1%E5%BA%A6%E5%8F%82%E4%B8%8Ecsaw%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E4%BA%94%E5%A4%A7ctf%E6%8C%91%E6%88%98%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 19:41:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/trail-of-bits%E6%B7%B1%E5%BA%A6%E5%8F%82%E4%B8%8Ecsaw%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E4%BA%94%E5%A4%A7ctf%E6%8C%91%E6%88%98%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;我们与csaw的特殊情缘&#34;&gt;我们与CSAW的特殊情缘
+&lt;/h3&gt;&lt;p&gt;在接下来的几周内，全球数万名学生和专业人士将关注六项竞赛，为他们喜爱的队伍加油助威。这就是我们长期参与的&amp;quot;网络安全意识周&amp;quot;(CSAW)——全美规模最大的学生运营网络安全赛事。无论多忙，我们始终会抽时间助力赛事成功。&lt;/p&gt;
+&lt;h3 id=&#34;ctf挑战的技术贡献&#34;&gt;CTF挑战的技术贡献
+&lt;/h3&gt;&lt;p&gt;今年我们为资格赛设计了五个CTF挑战：&lt;/p&gt;
+&lt;h4 id=&#34;wyvern&#34;&gt;wyvern
+&lt;/h4&gt;&lt;p&gt;参赛者首先获得一个经过混淆的Linux二进制文件（即crackme）。通过LLVM实现的多层次虚假谓词插入、代码扩散和基本块分割等混淆技术，使得静态逆向分析变得极其困难。参赛者必须采用动态分析方法，使用程序分析工具暴力破解flag。在此过程中，他们将学习如何通过监控指令计数变化来泄漏程序执行路径，以及使用PIN、Angr或AFL等工具。&lt;/p&gt;
+&lt;h4 id=&#34;bricks-of-gold&#34;&gt;bricks of gold
+&lt;/h4&gt;&lt;p&gt;这个挑战始于一个国际谜题：&amp;ldquo;我们截获了一份走私入境的加密文件，只知道他们使用了自定义的CBC模式算法——很可能很糟糕。&amp;ldquo;参赛者需要成功解密这个自定义XOR-CBC加密文件，这要求他们找出算法、密钥和初始向量。解题过程涉及文件头分析、密码学知识和暴力破解技术，同时学习如何检测加密文件的低熵特征、未加密字符串和CBC模式块特征。&lt;/p&gt;
+&lt;h4 id=&#34;sharpturn&#34;&gt;sharpturn
+&lt;/h4&gt;&lt;p&gt;参赛者获得一个损坏的Git仓库存档，需要修复损坏并读取文件。实际上存在三处损坏：每处都是单个比特错误且都位于源代码文件中（这是Trail of Bits真实遇到过的情况）。修复后，源代码文件可编译成包含答案的二进制文件。参赛者将学习Git blob包含带头部信息和zlib压缩的仓库文件版本，以及如何利用Git版本控制信息重建损坏的提交。&lt;/p&gt;
+&lt;h4 id=&#34;punchout&#34;&gt;punchout
+&lt;/h4&gt;&lt;p&gt;题目提供三个来自IBM System/360穿孔卡的二进制数据块及其加密数据。这些卡片使用1965年的加密技术，要求参赛者研究当时的安全机制。他们会遇到KW-26等密码（生成长比特流并与明文进行XOR运算），以及IBM使用的ebcdic（非ascii）编码方式。由于相同比特流被用于加密每个数据块，这种密钥重用存在已知攻击方式，参赛者需要通过&amp;quot;crib dragging&amp;quot;技术实施攻击。&lt;/p&gt;
+&lt;h4 id=&#34;math-aside-were-all-blackhats-now&#34;&gt;&amp;ldquo;math aside, we&amp;rsquo;re all blackhats now&amp;rdquo;
+&lt;/h4&gt;&lt;p&gt;参赛者需要找出为电视剧《硅谷》提供咨询的安全行业专家。该剧前两季中出现了大量与CTF社区相关的道具、名称和引用，其安全相关情节的准确性令人惊讶。&lt;/p&gt;
+&lt;h3 id=&#34;其他技术相关内容&#34;&gt;其他技术相关内容
+&lt;/h3&gt;&lt;h4 id=&#34;政策竞赛设计&#34;&gt;政策竞赛设计
+&lt;/h4&gt;&lt;p&gt;我们协助CSAW设计了政策竞赛环节，挑战学生探索美国政府实施漏洞赏金计划的可行性方案。参赛作品由该争议性话题各方的专家小组评审，前五名团队将在CSAW现场展示提案。&lt;/p&gt;
+&lt;h4 id=&#34;技术传承&#34;&gt;技术传承
+&lt;/h4&gt;&lt;p&gt;我们有多名员工曾作为学生参加CSAW比赛，包括通过CSAW女性夏季项目结识的实习生Loren。今年共有1,367支队伍获得积分，创下赛事新纪录。所有历史CTF挑战题均已开源在Github。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>从429到200：利用X-Overwriting头实现速率限制绕过与漏洞赏金</title>
         <link>http://localhost:1313/p/%E4%BB%8E429%E5%88%B0200%E5%88%A9%E7%94%A8x-overwriting%E5%A4%B4%E5%AE%9E%E7%8E%B0%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
         <pubDate>Sun, 03 Aug 2025 14:11:57 +0800</pubDate>

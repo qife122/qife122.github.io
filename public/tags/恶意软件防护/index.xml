@@ -7,7 +7,90 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 14:38:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 04:14:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软应对App Installer滥用问题 | 安全技术深度解析</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9app-installer%E6%BB%A5%E7%94%A8%E9%97%AE%E9%A2%98-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 04:14:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9app-installer%E6%BB%A5%E7%94%A8%E9%97%AE%E9%A2%98-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;微软应对app-installer滥用问题&#34;&gt;微软应对App Installer滥用问题
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;2024年10月28日更新&lt;/strong&gt;&lt;br&gt;
+微软于2023年12月28日默认禁用App Installer中的ms-appinstaller URI协议处理程序，以应对攻击者对CVE-2021-43890漏洞防护措施的绕过技术。现宣布在1.24.2411.0及以上版本中新增以下安全防护机制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更新的用户安装体验流程&lt;/li&gt;
+&lt;li&gt;对目标下载URL执行SmartScreen信誉检查&lt;/li&gt;
+&lt;li&gt;增强的企业IT管理控制策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;技术细节请参阅&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/app-installer-security&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;App Installer安全功能文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;用户操作指南&#34;&gt;用户操作指南
+&lt;/h4&gt;&lt;p&gt;必须将App Installer升级至1.24.2411.0或更高版本。更新方法参见&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/install-update-app-installer&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安装和更新App Installer&lt;/a&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;技术背景分析&#34;&gt;技术背景分析
+&lt;/h3&gt;&lt;p&gt;微软威胁情报团队发现攻击者通过社会工程学手段，诱导Windows用户触发ms-appinstaller协议安装恶意软件。我们已采取以下技术措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;默认禁用协议处理程序&lt;/li&gt;
+&lt;li&gt;协调证书颁发机构吊销被滥用的代码签名证书&lt;/li&gt;
+&lt;li&gt;在Microsoft Defender for Endpoint和Defender for Office部署专项检测规则&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;协议演进与风险&#34;&gt;协议演进与风险
+&lt;/h3&gt;&lt;p&gt;ms-appinstaller协议最初在v1.0.12271.0版本引入，用于优化MSIX/MSIXBundle安装体验。近期攻击者通过伪造网页诱导用户直接执行恶意安装包。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;技术缓解方案&#34;&gt;技术缓解方案
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;措施类型&lt;/th&gt;
+          &lt;th&gt;技术实现细节&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;默认禁用&lt;/td&gt;
+          &lt;td&gt;2023年12月28日起，所有安装请求需先下载MSIX文件，触发本地杀毒软件扫描&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;版本控制&lt;/td&gt;
+          &lt;td&gt;受影响版本范围：v1.18.2691至v1.21.3421&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业策略&lt;/td&gt;
+          &lt;td&gt;组策略&lt;code&gt;EnableMSAppInstallerProtocol&lt;/code&gt;可强制禁用协议&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;风险检测命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Get-AppxPackage&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DesktopAppInstaller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Version&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;受影响系统补丁&#34;&gt;受影响系统补丁
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;KB5023773 (19042.2788/19044.2788/19045.2788)&lt;/li&gt;
+&lt;li&gt;KB5028171 (20348.1850)&lt;/li&gt;
+&lt;li&gt;KB5023774 (22000.1761)&lt;/li&gt;
+&lt;li&gt;KB5018496 (22621.755)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;技术参考&#34;&gt;技术参考
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/msix-web-install&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MSIX网页安装原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43890&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2021-43890详情&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/threat-intelligence&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;攻击技术分析报告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>微软安全情报报告第14版：实时防护效果深度解析</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%83%85%E6%8A%A5%E6%8A%A5%E5%91%8A%E7%AC%AC14%E7%89%88%E5%AE%9E%E6%97%B6%E9%98%B2%E6%8A%A4%E6%95%88%E6%9E%9C%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sun, 03 Aug 2025 14:38:57 +0800</pubDate>

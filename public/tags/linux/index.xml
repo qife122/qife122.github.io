@@ -7,7 +7,198 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 04:53:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 09:37:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过OSTIF强化开源基础设施安全 - Trail of Bits技术实践</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87ostif%E5%BC%BA%E5%8C%96%E5%BC%80%E6%BA%90%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%AE%89%E5%85%A8-trail-of-bits%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 04 Aug 2025 09:37:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87ostif%E5%BC%BA%E5%8C%96%E5%BC%80%E6%BA%90%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%AE%89%E5%85%A8-trail-of-bits%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;开源基础设施的安全挑战&#34;&gt;开源基础设施的安全挑战
+&lt;/h3&gt;&lt;p&gt;开源技术改进基金（OSTIF）正致力于解决开源生态中一个常被忽视的问题：支撑当今互联网基础设施的关键软件项目，其开发、测试和维护仅依赖&amp;quot;数量惊人的少数贡献者&amp;quot;。正如OSTIF所指出的，&amp;ldquo;由于缺乏利润驱动，核心开源项目资金严重不足，导致关键互联网基础设施暴露在漏洞、文档缺失、性能低下甚至间谍活动的风险中&amp;rdquo;。&lt;/p&gt;
+&lt;h3 id=&#34;我们的安全评估方法论&#34;&gt;我们的安全评估方法论
+&lt;/h3&gt;&lt;p&gt;在Trail of Bits，我们提供多种安全服务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定制化代码审计&lt;/strong&gt;：结合模糊测试工具链开发、静态分析规则集和定向人工审查&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁建模&lt;/strong&gt;：涵盖架构审查、系统思维和威胁场景构建&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI/CD管道强化&lt;/strong&gt;：以及修复方案验证
+我们通常会组建跨领域专家团队，例如先进行威胁建模再开展代码审计，使模糊测试能快速锁定代码库中最脆弱的环节。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重点项目安全评估案例&#34;&gt;重点项目安全评估案例
+&lt;/h3&gt;&lt;h4 id=&#34;linux内核发布签名机制2021年3-4月&#34;&gt;Linux内核发布签名机制（2021年3-4月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;审计重点：签名密钥管理、开发者工作流、加密算法实现&lt;/li&gt;
+&lt;li&gt;关键建议：
+&lt;ul&gt;
+&lt;li&gt;强制使用智能卡存储私钥&lt;/li&gt;
+&lt;li&gt;用ECDSA/Ed25519替代RSA/DSA算法&lt;/li&gt;
+&lt;li&gt;建立密钥管理策略文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;curllibcurl审查2022年9-10月&#34;&gt;curl/libcurl审查（2022年9-10月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;通过威胁建模发现14个问题，包括：
+&lt;ul&gt;
+&lt;li&gt;2个高危内存损坏漏洞（通过并行模糊测试发现）&lt;/li&gt;
+&lt;li&gt;改进后的模糊测试系统后续发现CVE-2022-42915等漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;kubernetes事件驱动扩缩容keda2022年12月&#34;&gt;Kubernetes事件驱动扩缩容（KEDA，2022年12月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;发现Redis通信未启用TLS的中间人攻击风险&lt;/li&gt;
+&lt;li&gt;开发定制Semgrep规则检测编码模式问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;eclipse-mosquitto2023年3月&#34;&gt;Eclipse Mosquitto（2023年3月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;威胁模型暴露架构缺陷：
+&lt;ul&gt;
+&lt;li&gt;缺乏全局速率限制配置&lt;/li&gt;
+&lt;li&gt;无法防御消息循环拒绝服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;代码审计发现：
+&lt;ul&gt;
+&lt;li&gt;可远程触发的堆内存转储漏洞&lt;/li&gt;
+&lt;li&gt;HTTP头解析绕过审计控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术演进与未来计划&#34;&gt;技术演进与未来计划
+&lt;/h3&gt;&lt;p&gt;我们将持续改进评估方法，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发布curl模糊测试基础设施的深度技术解析&lt;/li&gt;
+&lt;li&gt;公开OpenSSL和Mosquitto评估中发现的有趣漏洞技术细节&lt;/li&gt;
+&lt;li&gt;对已完成项目进行修复验证&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>WSL2完全指南：Windows 10和11上的Linux开发环境配置</title>
+        <link>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97windows-10%E5%92%8C11%E4%B8%8A%E7%9A%84linux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+        <pubDate>Mon, 04 Aug 2025 07:58:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97windows-10%E5%92%8C11%E4%B8%8A%E7%9A%84linux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+        <description>&lt;h1 id=&#34;windows-subsystem-for-linux-2-wsl2-windows-10--11完全教程&#34;&gt;Windows Subsystem for Linux 2 (WSL2): Windows 10 &amp;amp; 11完全教程
+&lt;/h1&gt;&lt;h2 id=&#34;核心要点&#34;&gt;核心要点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WSL2实现Windows与Linux环境无缝集成，支持同时使用Linux应用和Windows资源&lt;/li&gt;
+&lt;li&gt;Windows 11的WSL2安装流程比Windows 10更简化，后者需手动启用虚拟机功能&lt;/li&gt;
+&lt;li&gt;可直接在WSL2中运行Linux GUI应用，无需额外X服务器软件&lt;/li&gt;
+&lt;li&gt;Docker在WSL2中运行效率更高，启动更快且无需专用Hyper-V&lt;/li&gt;
+&lt;li&gt;通过挂载和符号链接实现Windows与Linux文件互访&lt;/li&gt;
+&lt;li&gt;VS Code与WSL2深度集成，可直接访问Linux文件和终端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;为什么使用linux&#34;&gt;为什么使用Linux？
+&lt;/h2&gt;&lt;p&gt;Web服务器普遍采用Linux系统，它运行着包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器（Apache、NGINX等）&lt;/li&gt;
+&lt;li&gt;语言环境（PHP、Python、Node.js等）&lt;/li&gt;
+&lt;li&gt;工具库（图像处理、压缩工具等）&lt;/li&gt;
+&lt;li&gt;数据库（MySQL、MongoDB等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;wsl2安装配置&#34;&gt;WSL2安装配置
+&lt;/h2&gt;&lt;h3 id=&#34;系统要求&#34;&gt;系统要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;需启用BIOS中的硬件虚拟化支持（VT-x/SVM）&lt;/li&gt;
+&lt;li&gt;Windows 10需2004版本以上&lt;/li&gt;
+&lt;li&gt;C盘至少1GB可用空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安装步骤&#34;&gt;安装步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;启用WSL功能（PowerShell管理员模式）：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dism&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;online&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;featurename&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Microsoft-Windows&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-Subsystem-Linux&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;all&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dism&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;online&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;featurename&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VirtualMachinePlatform&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;all&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;设置WSL2为默认版本：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-set-default-version&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;安装Linux发行版（如Ubuntu）：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-install&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ubuntu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;高级功能&#34;&gt;高级功能
+&lt;/h2&gt;&lt;h3 id=&#34;文件系统互通&#34;&gt;文件系统互通
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Windows访问Linux文件：&lt;code&gt;\\wsl$\Ubuntu\home\&amp;lt;用户名&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Linux访问Windows文件：&lt;code&gt;/mnt/c/Users/&amp;lt;用户名&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docker集成&#34;&gt;Docker集成
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;安装Docker Desktop for Windows&lt;/li&gt;
+&lt;li&gt;在设置中启用WSL2引擎&lt;/li&gt;
+&lt;li&gt;通过WSL2直接运行docker命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;vs-code集成&#34;&gt;VS Code集成
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;安装&amp;quot;Remote - WSL&amp;quot;扩展&lt;/li&gt;
+&lt;li&gt;在Linux终端中执行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;code .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;即可在Windows中直接编辑Linux文件&lt;/p&gt;
+&lt;h2 id=&#34;图形界面应用&#34;&gt;图形界面应用
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;安装对应GPU驱动（Intel/AMD/NVIDIA）&lt;/li&gt;
+&lt;li&gt;通过apt安装图形应用（如Gedit）：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install gedit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;直接执行&lt;code&gt;gedit&lt;/code&gt;启动应用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;常见问题解答&#34;&gt;常见问题解答
+&lt;/h2&gt;&lt;h3 id=&#34;wsl1与wsl2区别&#34;&gt;WSL1与WSL2区别
+&lt;/h3&gt;&lt;p&gt;WSL2采用完整Linux内核虚拟机，性能提升20倍，兼容性更好&lt;/p&gt;
+&lt;h3 id=&#34;多发行版管理&#34;&gt;多发行版管理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;列出所有发行版：&lt;code&gt;wsl --list&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设置默认发行版：&lt;code&gt;wsl --setdefault Ubuntu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切换发行版：&lt;code&gt;wsl -d Debian&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;端口访问&#34;&gt;端口访问
+&lt;/h3&gt;&lt;p&gt;所有服务都通过localhost访问，注意端口冲突问题&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通过WSL2，开发者可以同时获得Windows的易用性和Linux的强大功能，构建高效的跨平台开发环境。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>在Linux上运行原版Intercepter-NG网络嗅探工具</title>
         <link>http://localhost:1313/p/%E5%9C%A8linux%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 03 Aug 2025 04:53:11 +0800</pubDate>

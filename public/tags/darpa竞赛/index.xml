@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>DARPA竞赛 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/darpa%E7%AB%9E%E8%B5%9B/</link>
+        <description>Recent content in DARPA竞赛 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 19:30:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/darpa%E7%AB%9E%E8%B5%9B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>我们在网络大挑战中的表现 - 自动化漏洞挖掘与修复的技术实践</title>
+        <link>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%8C%91%E6%88%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sun, 03 Aug 2025 19:30:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%8C%91%E6%88%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;我们在网络大挑战中的表现&#34;&gt;我们在网络大挑战中的表现
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Artem Dinaburg&lt;/strong&gt;&lt;br&gt;
+2015年7月15日&lt;/p&gt;
+&lt;p&gt;网络大挑战资格赛于6月3日东部时间中午准时开始。那一刻，我们的网络推理系统(CRS)收到了131个特制的不安全程序。在接下来的24小时里，我们的系统成功识别了其中65个程序的漏洞，并重写了94个程序以消除代码中的缺陷。这无疑证明，将优秀软件审计师的工作自动化不仅是可能的，而且是可以实现的。&lt;/p&gt;
+&lt;p&gt;尽管我们的CRS在发现和修补漏洞方面取得了成功，但最终未能晋级明年的决赛。一个致命缺陷使我们的总分降至第9名，低于晋级所需的第7名门槛。本文将详细解析我们的CRS工作原理、与其他系统的对抗表现、导致失分的原因以及后续计划。&lt;/p&gt;
+&lt;h2 id=&#34;网络大挑战背景&#34;&gt;网络大挑战背景
+&lt;/h2&gt;&lt;p&gt;网络大挑战(CGC)的目标是将自动化的速度和规模与人类专家的推理能力相结合。各参赛团队需要创建能自主分析任意网络程序、证明漏洞存在并自动制定有效防御措施的CRS系统。通过锦标赛形式的对抗来评估这些系统的效能。&lt;/p&gt;
+&lt;p&gt;比赛分为资格赛和决赛两个阶段。资格赛于2015年6月3日举行，决赛定于2016年8月进行。只有资格赛前7名的队伍能晋级决赛。&lt;/p&gt;
+&lt;p&gt;资格赛中，每个参赛队伍获得相同的131个挑战程序（特制含漏洞程序），每个程序至少包含一个故意植入的漏洞。在24小时内，各CRS系统相互对抗，根据四个标准评分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CRS必须无需人工干预运行，违规者取消资格&lt;/li&gt;
+&lt;li&gt;CRS必须修补程序漏洞，成功修补每个漏洞获得积分&lt;/li&gt;
+&lt;li&gt;CRS能证明漏洞存在时，修补得分翻倍&lt;/li&gt;
+&lt;li&gt;修补后的程序需保持原有功能和性能，否则扣分&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;系统架构&#34;&gt;系统架构
+&lt;/h2&gt;&lt;h3 id=&#34;准备工作&#34;&gt;准备工作
+&lt;/h3&gt;&lt;p&gt;作为分布式办公的小型公司，我们选择亚马逊EC2云计算平台。出于谨慎考虑，我们在三个EC2区域部署了三个CRS实例（分别命名为Biggie、Tupac和Dre）。实际比赛中我们过度配置了约17倍的资源（使用297个c4.8xlarge实例而非必需的17个）。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞发现&#34;&gt;漏洞发现
+&lt;/h3&gt;&lt;p&gt;我们的CRS采用多层次漏洞发现策略（图2）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模糊测试&lt;/strong&gt;：使用自定义动态二进制翻译器(DBT)，可在单一64位地址空间运行多个32位挑战程序&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;双重符号执行引擎&lt;/strong&gt;：一个针对原始二进制，另一个作用于mcsema转换后的LLVM代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MinSet系统&lt;/strong&gt;：通过分支覆盖率维护最小最大覆盖输入集，协调模糊测试与符号执行的反馈循环&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该系统表现优异，在已证漏洞数量上排名第二（图1）。大多数崩溃路径呈现为：网络捕获→模糊测试→符号执行→模糊测试→崩溃。&lt;/p&gt;
+&lt;h3 id=&#34;补丁生成&#34;&gt;补丁生成
+&lt;/h3&gt;&lt;p&gt;通过mcsema将挑战程序转换为LLVM字节码后，我们开发了两种补丁策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;通用补丁&lt;/strong&gt;：采用排除法，先假设所有内存访问都需验证，再排除可证明安全的访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;针对性补丁&lt;/strong&gt;：采用包含法，仅验证已发现漏洞的相关内存访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终我们选择了更全面的通用补丁策略，在补丁有效性（安全评分）上排名第四（图3）。&lt;/p&gt;
+&lt;h2 id=&#34;功能与性能&#34;&gt;功能与性能
+&lt;/h2&gt;&lt;h3 id=&#34;功能完整性&#34;&gt;功能完整性
+&lt;/h3&gt;&lt;p&gt;在成功修补的94个挑战中，56个保持完整功能，30个部分功能，8个完全失效。在功能完整性方面我们位列前十名中的第五（图4），问题可能源于mcsema转换过程。&lt;/p&gt;
+&lt;h3 id=&#34;性能表现&#34;&gt;性能表现
+&lt;/h3&gt;&lt;p&gt;性能问题成为我们的致命伤（图5）。技术原因在于LLVM字节码转换过程，操作原因则是我们优化了错误的性能指标（内存而非CPU）。自测显示最差补丁方法的CPU中值开销为33%，而官方测量结果高达76%，这导致我们的实际得分（21.36）远低于自测预估（106）。&lt;/p&gt;
+&lt;h2 id=&#34;未来计划&#34;&gt;未来计划
+&lt;/h2&gt;&lt;p&gt;我们正寻求与决赛队伍合作，将其技术优势与我们强大的漏洞发现能力相结合。若未能达成合作，将专注于将CRS技术应用于真实软件的自动化漏洞修复。我们还将回馈开源社区，贡献在开发过程中对各类开源项目的改进。&lt;/p&gt;
+&lt;p&gt;（全文完）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

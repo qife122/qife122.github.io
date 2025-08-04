@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>企业软件安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BC%81%E4%B8%9A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 企业软件安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 19:22:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BC%81%E4%B8%9A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SAP NetWeaver S/4HANA漏洞分析：通过内部函数WRITE_AND_CALL_DBPROG实现ABAP代码执行</title>
+        <link>http://localhost:1313/p/sap-netweaver-s/4hana%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0write_and_call_dbprog%E5%AE%9E%E7%8E%B0abap%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Mon, 04 Aug 2025 19:22:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sap-netweaver-s/4hana%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0write_and_call_dbprog%E5%AE%9E%E7%8E%B0abap%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;nullfaktor安全公告-20250719&#34;&gt;nullFaktor安全公告 &amp;lt;20250719&amp;gt;
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞标题&#34;&gt;漏洞标题
+&lt;/h2&gt;&lt;p&gt;通过内部函数模块WRITE_AND_CALL_DBPROG实现ABAP代码执行&lt;/p&gt;
+&lt;h2 id=&#34;产品信息&#34;&gt;产品信息
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;受影响产品：SAP NetWeaver S/4HANA&lt;/li&gt;
+&lt;li&gt;主页：http://www.sap.com&lt;/li&gt;
+&lt;li&gt;受影响版本：S/4HANA, SAP_BASIS 757 SP 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险评级&#34;&gt;风险评级
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;影响程度：高&lt;/li&gt;
+&lt;li&gt;CVSS 4.0评分：8.4&lt;/li&gt;
+&lt;li&gt;CWE编号：
+&lt;ul&gt;
+&lt;li&gt;CWE-749：暴露危险方法或功能&lt;/li&gt;
+&lt;li&gt;CWE-94：代码生成控制不当（代码注入）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞详情&#34;&gt;漏洞详情
+&lt;/h2&gt;&lt;p&gt;在SAP S/4HANA的安全研究中，我们发现函数组SDB2中的WRITE_AND_CALL_DBPROG模块存在安全风险。该模块允许用户执行原生SQL语句，并通过INSERT REPORT将SQL代码写入报告后动态执行，整个过程缺乏输入验证和权限检查。&lt;/p&gt;
+&lt;h3 id=&#34;利用前提&#34;&gt;利用前提
+&lt;/h3&gt;&lt;p&gt;攻击者需要具备执行本地函数模块的权限（包含S_DEVELOP授权且ACTVT=16）。虽然SAP声明生产系统不应分配此权限，但实际企业环境中普遍存在权限配置过大的情况。&lt;/p&gt;
+&lt;h3 id=&#34;攻击影响&#34;&gt;攻击影响
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;绕过所有权限限制：可任意读写数据库数据&lt;/li&gt;
+&lt;li&gt;向SAP命名空间注入自定义代码&lt;/li&gt;
+&lt;li&gt;突破系统/客户端的不可修改性锁定&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;日期&lt;/th&gt;
+          &lt;th&gt;事件描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2024-09-06&lt;/td&gt;
+          &lt;td&gt;首次联系SAP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2025-02-05&lt;/td&gt;
+          &lt;td&gt;双方确认在规范配置下不构成安全风险&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2025-07-10&lt;/td&gt;
+          &lt;td&gt;公告发布&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;攻击场景演示&#34;&gt;攻击场景演示
+&lt;/h2&gt;&lt;p&gt;通过SE37执行以下操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建名为Z_HACKED的报告&lt;/li&gt;
+&lt;li&gt;注入SQL语句：&lt;code&gt;UPDATE USREFUS SET REFUSER = &#39;DDIC&#39; WHERE BNAME = &#39;DEVELOPER&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;成功将超级用户DDIC关联到当前用户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;sap官方反馈&#34;&gt;SAP官方反馈
+&lt;/h2&gt;&lt;p&gt;SAP认为生产系统不应分配S_DEVELOP/ACTVT=16权限，故不视作安全漏洞。建议通过SAP Note 3546011配置详细权限控制。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;检查生产系统用户权限&lt;/li&gt;
+&lt;li&gt;禁止SE37与S_DEVELOP/ACTVT=16的组合权限&lt;/li&gt;
+&lt;li&gt;非生产系统需细化对象类型权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关于nullFaktor：奥地利网络安全公司，专注SAP安全测试与咨询服务。&lt;br&gt;
+官网：https://www.nullfaktor.com&lt;br&gt;
+完整技术细节：https://www.nullfaktor.com/blog#Advisory_09-07-25&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>开源安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%BC%80%E6%BA%90%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 开源安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 09:37:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BC%80%E6%BA%90%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>通过OSTIF强化开源基础设施安全 - Trail of Bits技术实践</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87ostif%E5%BC%BA%E5%8C%96%E5%BC%80%E6%BA%90%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%AE%89%E5%85%A8-trail-of-bits%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 04 Aug 2025 09:37:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87ostif%E5%BC%BA%E5%8C%96%E5%BC%80%E6%BA%90%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%AE%89%E5%85%A8-trail-of-bits%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;开源基础设施的安全挑战&#34;&gt;开源基础设施的安全挑战
+&lt;/h3&gt;&lt;p&gt;开源技术改进基金（OSTIF）正致力于解决开源生态中一个常被忽视的问题：支撑当今互联网基础设施的关键软件项目，其开发、测试和维护仅依赖&amp;quot;数量惊人的少数贡献者&amp;quot;。正如OSTIF所指出的，&amp;ldquo;由于缺乏利润驱动，核心开源项目资金严重不足，导致关键互联网基础设施暴露在漏洞、文档缺失、性能低下甚至间谍活动的风险中&amp;rdquo;。&lt;/p&gt;
+&lt;h3 id=&#34;我们的安全评估方法论&#34;&gt;我们的安全评估方法论
+&lt;/h3&gt;&lt;p&gt;在Trail of Bits，我们提供多种安全服务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定制化代码审计&lt;/strong&gt;：结合模糊测试工具链开发、静态分析规则集和定向人工审查&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁建模&lt;/strong&gt;：涵盖架构审查、系统思维和威胁场景构建&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CI/CD管道强化&lt;/strong&gt;：以及修复方案验证
+我们通常会组建跨领域专家团队，例如先进行威胁建模再开展代码审计，使模糊测试能快速锁定代码库中最脆弱的环节。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重点项目安全评估案例&#34;&gt;重点项目安全评估案例
+&lt;/h3&gt;&lt;h4 id=&#34;linux内核发布签名机制2021年3-4月&#34;&gt;Linux内核发布签名机制（2021年3-4月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;审计重点：签名密钥管理、开发者工作流、加密算法实现&lt;/li&gt;
+&lt;li&gt;关键建议：
+&lt;ul&gt;
+&lt;li&gt;强制使用智能卡存储私钥&lt;/li&gt;
+&lt;li&gt;用ECDSA/Ed25519替代RSA/DSA算法&lt;/li&gt;
+&lt;li&gt;建立密钥管理策略文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;curllibcurl审查2022年9-10月&#34;&gt;curl/libcurl审查（2022年9-10月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;通过威胁建模发现14个问题，包括：
+&lt;ul&gt;
+&lt;li&gt;2个高危内存损坏漏洞（通过并行模糊测试发现）&lt;/li&gt;
+&lt;li&gt;改进后的模糊测试系统后续发现CVE-2022-42915等漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;kubernetes事件驱动扩缩容keda2022年12月&#34;&gt;Kubernetes事件驱动扩缩容（KEDA，2022年12月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;发现Redis通信未启用TLS的中间人攻击风险&lt;/li&gt;
+&lt;li&gt;开发定制Semgrep规则检测编码模式问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;eclipse-mosquitto2023年3月&#34;&gt;Eclipse Mosquitto（2023年3月）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;威胁模型暴露架构缺陷：
+&lt;ul&gt;
+&lt;li&gt;缺乏全局速率限制配置&lt;/li&gt;
+&lt;li&gt;无法防御消息循环拒绝服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;代码审计发现：
+&lt;ul&gt;
+&lt;li&gt;可远程触发的堆内存转储漏洞&lt;/li&gt;
+&lt;li&gt;HTTP头解析绕过审计控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术演进与未来计划&#34;&gt;技术演进与未来计划
+&lt;/h3&gt;&lt;p&gt;我们将持续改进评估方法，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发布curl模糊测试基础设施的深度技术解析&lt;/li&gt;
+&lt;li&gt;公开OpenSSL和Mosquitto评估中发现的有趣漏洞技术细节&lt;/li&gt;
+&lt;li&gt;对已完成项目进行修复验证&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,80 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 16:06:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 12:12:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>攻击Active Directory组托管服务账户(GMSA)的技术解析</title>
+        <link>http://localhost:1313/p/%E6%94%BB%E5%87%BBactive-directory%E7%BB%84%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7gmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 12:12:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%94%BB%E5%87%BBactive-directory%E7%BB%84%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7gmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;攻击active-directory组托管服务账户gmsa&#34;&gt;攻击Active Directory组托管服务账户(GMSA)
+&lt;/h1&gt;&lt;p&gt;2020年5月，我在Trimarc网络研讨会&amp;quot;保护Active Directory：解决常见问题&amp;quot;中介绍了AD组托管服务账户(GMSA)的安全问题。本文是研讨会内容的扩展版本。&lt;/p&gt;
+&lt;h2 id=&#34;组托管服务账户gmsa概述&#34;&gt;组托管服务账户(GMSA)概述
+&lt;/h2&gt;&lt;p&gt;传统用作服务账户的用户账户很少更改密码。GMSA(自Windows 2012引入)由AD自动管理密码变更。但关键点在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AD管理GMSA密码&lt;/li&gt;
+&lt;li&gt;托管计算机从AD请求当前密码启动服务&lt;/li&gt;
+&lt;li&gt;需明确配置允许访问密码的计算机账户&lt;/li&gt;
+&lt;li&gt;若攻击者控制托管计算机或有权账户，GMSA即告失陷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gmsa关键属性&#34;&gt;GMSA关键属性
+&lt;/h2&gt;&lt;p&gt;GMSA具有特定对象类和属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;msDS-GroupMSAMembership&lt;/code&gt;：存储可访问密码的安全主体&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msds-ManagedPassword&lt;/code&gt;：包含密码信息的BLOB&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msDS-ManagedPasswordId&lt;/code&gt;：当前密码数据的密钥标识符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msDS-ManagedPasswordInterval&lt;/code&gt;：密码自动变更间隔天数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击技术详解&#34;&gt;攻击技术详解
+&lt;/h2&gt;&lt;h3 id=&#34;方法一入侵托管服务器&#34;&gt;方法一：入侵托管服务器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;通过SPN定位托管服务器(如LCNSQL01)&lt;/li&gt;
+&lt;li&gt;获取服务器管理员权限后：
+&lt;ul&gt;
+&lt;li&gt;使用Mimikatz执行&lt;code&gt;sekurlsa::logonpasswords&lt;/code&gt;获取服务账户凭证&lt;/li&gt;
+&lt;li&gt;发现GMSA密码显示异常(如&amp;quot;&lt;em&gt;SA&lt;/em&gt;{GUID}&amp;ldquo;格式)&lt;/li&gt;
+&lt;li&gt;改用&lt;code&gt;sekurlsa::ekeys&lt;/code&gt;获取正确的Kerberos票据和NT哈希&lt;/li&gt;
+&lt;li&gt;实施哈希传递(PTH)攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方法二入侵有权账户&#34;&gt;方法二：入侵有权账户
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;枚举&lt;code&gt;msDS-GroupMSAMembership&lt;/code&gt;属性中的授权组(如&amp;quot;SVC-LAB-GMSA1 Group&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;通过组成员关系分析发现：
+&lt;ul&gt;
+&lt;li&gt;11个用户账户(其中9个为普通用户)具有密码访问权&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;入侵任一授权账户后：
+&lt;ul&gt;
+&lt;li&gt;使用&lt;code&gt;Get-ADServiceAccount&lt;/code&gt;获取明文密码BLOB&lt;/li&gt;
+&lt;li&gt;通过DSInternals的&lt;code&gt;ConvertTo-NTHash&lt;/code&gt;转换为NT哈希&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;若入侵计算机账户：
+&lt;ul&gt;
+&lt;li&gt;需以SYSTEM权限执行上述操作&lt;/li&gt;
+&lt;li&gt;使用PSEXEC获取SYSTEM上下文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;验证与防御&#34;&gt;验证与防御
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;验证技术&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用DSInternals的&lt;code&gt;Get-ADReplAccount&lt;/code&gt;确认AD中的密码哈希与获取值一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;防御措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实施最小权限原则&lt;/li&gt;
+&lt;li&gt;避免将GMSA加入AD特权组(除非用于域控制器)&lt;/li&gt;
+&lt;li&gt;严格限制GMSA访问权限和使用范围&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别感谢DSInternals的Michael Grafnetter和Mimikatz开发者Benjamin Delpy的技术支持。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>YOLO哈希构造的致命缺陷：密码学安全实践指南</title>
         <link>http://localhost:1313/p/yolo%E5%93%88%E5%B8%8C%E6%9E%84%E9%80%A0%E7%9A%84%E8%87%B4%E5%91%BD%E7%BC%BA%E9%99%B7%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
         <pubDate>Sun, 03 Aug 2025 16:06:32 +0800</pubDate>

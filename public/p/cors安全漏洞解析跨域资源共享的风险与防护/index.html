@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入剖析CORS(跨域资源共享)机制中的安全风险，重点讲解Access-Control-Allow-Origin和Access-Control-Allow-Credentials头部的错误配置如何导致严重安全漏洞，并通过可视化图表展示不同配置场景下的安全影响。">
+<title>CORS安全漏洞解析：跨域资源共享的风险与防护</title>
+
+<link rel='canonical' href='http://localhost:1313/p/cors%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E7%9A%84%E9%A3%8E%E9%99%A9%E4%B8%8E%E9%98%B2%E6%8A%A4/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="CORS安全漏洞解析：跨域资源共享的风险与防护">
+<meta property='og:description' content="本文深入剖析CORS(跨域资源共享)机制中的安全风险，重点讲解Access-Control-Allow-Origin和Access-Control-Allow-Credentials头部的错误配置如何导致严重安全漏洞，并通过可视化图表展示不同配置场景下的安全影响。">
+<meta property='og:url' content='http://localhost:1313/p/cors%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E7%9A%84%E9%A3%8E%E9%99%A9%E4%B8%8E%E9%98%B2%E6%8A%A4/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='CORS' /><meta property='article:tag' content='Web安全' /><meta property='article:tag' content='跨域漏洞' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-04T05:30:32&#43;08:00'/><meta property='article:modified_time' content='2025-08-04T05:30:32&#43;08:00'/>
+<meta name="twitter:title" content="CORS安全漏洞解析：跨域资源共享的风险与防护">
+<meta name="twitter:description" content="本文深入剖析CORS(跨域资源共享)机制中的安全风险，重点讲解Access-Control-Allow-Origin和Access-Control-Allow-Credentials头部的错误配置如何导致严重安全漏洞，并通过可视化图表展示不同配置场景下的安全影响。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#cors基础与安全风险">CORS基础与安全风险</a></li>
+    <li><a href="#危险组合凭证允许头部">危险组合：凭证允许头部</a></li>
+    <li><a href="#安全防护机制与绕过风险">安全防护机制与绕过风险</a></li>
+    <li><a href="#关键安全结论">关键安全结论</a></li>
+    <li><a href="#其他资源">其他资源</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/cors%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E7%9A%84%E9%A3%8E%E9%99%A9%E4%B8%8E%E9%98%B2%E6%8A%A4/">CORS安全漏洞解析：跨域资源共享的风险与防护</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入剖析CORS(跨域资源共享)机制中的安全风险，重点讲解Access-Control-Allow-Origin和Access-Control-Allow-Credentials头部的错误配置如何导致严重安全漏洞，并通过可视化图表展示不同配置场景下的安全影响。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 04, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="cors-lite">CORS Lite
+</h1><p>跨域资源共享(CORS)机制非常复杂，这种复杂性导致了许多可能隐藏安全漏洞的地方。本文将为您提供CORS的&quot;精简版&quot;概述，重点关注我们在测试中最常见的安全漏洞。本文并非完整的CORS入门指南——如果您想深入了解，文末的资源部分会帮助您入门。</p>
+<h2 id="cors基础与安全风险">CORS基础与安全风险
+</h2><p>CORS规范最基本的部分是&quot;Access-Control-Allow-Origin&quot;头部，这是整个机制的基础。该头部告知浏览器允许哪些源访问特定资源。举例来说，如果您的web应用中的JavaScript(从app.example.com加载)向api.example.com发出请求，这个跨域请求默认会被拒绝(即浏览器不会发出请求或会忽略请求结果)，除非api.example.com返回&quot;Access-Control-Allow-Origin&quot;头部告诉浏览器这是允许的。</p>
+<p>对于API而言，Access-Control-Allow-Origin头部经常被设置为&quot;*&quot;，这允许任何域向该API发起跨域请求。这意味着任何地方的任何JavaScript都可以访问您的API。不过幸运的是，即使有Access-Control-Allow-Origin头部，跨域请求也不会传输cookie或其他认证材料，因此这个头部本身实际上是相当安全的。</p>
+<h2 id="危险组合凭证允许头部">危险组合：凭证允许头部
+</h2><p>真正的风险来自另一个CORS头部：Access-Control-Allow-Credentials。当返回这个头部时，跨域请求可以包含cookie和其他认证材料。这才是问题真正开始的地方。如果用户访问example.com，并且example.com在其浏览器中设置了cookie(比如登录后)，Access-Control-Allow-Credentials头部将允许该cookie被来自其他域的请求发送。这意味着这些域可以使用example.com设置的cookie来在example.com上执行操作，无论谁控制着这些域上运行的JavaScript！</p>
+<p>如果对example.com的请求返回Access-Control-Allow-Origin: foo.bar头部和Access-Control-Allow-Credentials: true头部，那么foo.bar上的任何脚本都将拥有与example.com原生脚本相同的权限。这意味着foo.bar上的XSS漏洞等同于example.com上的XSS漏洞！如果您是example.com的所有者，这是对另一个站点所有者的极大信任，在这样做之前应该非常谨慎地考虑。</p>
+<h2 id="安全防护机制与绕过风险">安全防护机制与绕过风险
+</h2><p>由于Access-Control-Allow-Credentials头部非常危险，有一些保护措施可以防止意外使用它。首先，它不能与Access-Control-Allow-Origin: *组合使用。有些站点通过简单地将请求中的Origin头部反射回响应中的Access-Control-Allow-Origin头部来绕过这个限制。如果您考虑这样做，请务必仔细考虑您承担的风险。</p>
+<p>另一个对Access-Control-Allow-Credentials头部的限制是在客户端——XMLHttpRequest必须特意设置&quot;withCredentials&quot;标志才能请求发送凭证，以确保您确实希望浏览器随跨域请求发送cookie和其他敏感材料。</p>
+<h2 id="关键安全结论">关键安全结论
+</h2><p>最重要的结论是：如果您将Origin头部反射到Access-Control-Allow-Origin头部中，并同时设置Access-Control-Allow-Credentials: true，那么任何能够在用户浏览器中执行恶意JavaScript的攻击者(无论该JavaScript位于何处)都可以劫持该用户在您应用中设置的cookie，并以该用户的身份进行操作。</p>
+<p>有些应用尝试折中方案，手动验证origin头部而不是简单地反射它——例如，任何匹配&quot;*.example.com&quot;的来源都被认为是&quot;安全的&quot;，并会返回到Access-Control-Allow-Origin头部中。但这里存在问题：攻击者可以诱使用户访问&quot;example.com.malicious.com&quot;(可能通过钓鱼)，因为该站点匹配模式，就可以发起与之前相同的攻击！</p>
+<h2 id="其他资源">其他资源
+</h2><ul>
+<li><a class="link" href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing"  target="_blank" rel="noopener"
+    >维基百科CORS条目</a></li>
+<li><a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"  target="_blank" rel="noopener"
+    >MDN CORS文档</a></li>
+<li><a class="link" href="https://portswigger.net/blog/exploiting-cors-misconfigurations-for-bitcoins-and-bounties"  target="_blank" rel="noopener"
+    >PortSwigger CORS漏洞利用博客</a></li>
+<li><a class="link" href="https://web-in-security.blogspot.com/2017/07/cors-misconfigurations-on-large-scale.html"  target="_blank" rel="noopener"
+    >大规模CORS配置错误分析</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cors/">CORS</a>
+        
+            <a href="/tags/web%E5%AE%89%E5%85%A8/">Web安全</a>
+        
+            <a href="/tags/%E8%B7%A8%E5%9F%9F%E6%BC%8F%E6%B4%9E/">跨域漏洞</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90ssrf%E4%B8%8Ecors%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">URL验证绕过速查表：全面解析SSRF与CORS绕过技术</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/burp-suite%E5%85%A5%E9%97%A8%E4%B8%8Eweb%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Burp Suite入门与Web应用渗透测试实战指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

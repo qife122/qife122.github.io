@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了SPFv1（发送者策略框架）的配置方法，包括DNS记录语法、机制动作参数、授权机制等，帮助防止邮件伪造和钓鱼攻击，适用于系统管理员和网络安全人员。">
+<title>SPFv1配置指南：全面解析邮件发送者策略框架</title>
+
+<link rel='canonical' href='http://localhost:1313/p/spfv1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E8%80%85%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="SPFv1配置指南：全面解析邮件发送者策略框架">
+<meta property='og:description' content="本文详细介绍了SPFv1（发送者策略框架）的配置方法，包括DNS记录语法、机制动作参数、授权机制等，帮助防止邮件伪造和钓鱼攻击，适用于系统管理员和网络安全人员。">
+<meta property='og:url' content='http://localhost:1313/p/spfv1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E8%80%85%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SPF' /><meta property='article:tag' content='邮件安全' /><meta property='article:tag' content='DNS配置' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-04T14:24:11&#43;08:00'/><meta property='article:modified_time' content='2025-08-04T14:24:11&#43;08:00'/>
+<meta name="twitter:title" content="SPFv1配置指南：全面解析邮件发送者策略框架">
+<meta name="twitter:description" content="本文详细介绍了SPFv1（发送者策略框架）的配置方法，包括DNS记录语法、机制动作参数、授权机制等，帮助防止邮件伪造和钓鱼攻击，适用于系统管理员和网络安全人员。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#防晒系数">防晒系数？</a></li>
+    <li><a href="#营销人员的困境">营销人员的困境</a></li>
+    <li><a href="#前瞻思考">前瞻思考</a></li>
+    <li><a href="#域名服务器记录">域名服务器记录</a></li>
+    <li><a href="#语法详解">语法详解</a>
+      <ol>
+        <li><a href="#机制-动作">机制-动作</a></li>
+        <li><a href="#机制-对象">机制-对象</a></li>
+      </ol>
+    </li>
+    <li><a href="#示例">示例</a></li>
+    <li><a href="#再谈营销">再谈营销</a></li>
+    <li><a href="#spf记录生成工具">SPF记录生成工具</a></li>
+    <li><a href="#相关链接">相关链接</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/spfv1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E8%80%85%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6/">SPFv1配置指南：全面解析邮件发送者策略框架</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了SPFv1（发送者策略框架）的配置方法，包括DNS记录语法、机制动作参数、授权机制等，帮助防止邮件伪造和钓鱼攻击，适用于系统管理员和网络安全人员。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 04, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="如何配置spfv1大众版详解">如何配置SPFv1：大众版详解
+</h1><p><em><em>Kent Ickler和Derrick Rauch</em> //</em>*</p>
+<h2 id="防晒系数">防晒系数？
+</h2><p>等等&hellip;搞错了。
+是<strong>发送者策略框架</strong></p>
+<p>&ldquo;1997届的女士们先生们，记得擦防晒霜&hellip;现在我要给出我的建议：&rdquo;</p>
+<p>当今网络中存在邮件&quot;伪造&quot;现象（感谢@ustayready）。发送者策略框架（SPF）最早可追溯至2005年（RFC 4408），最新版本于2014年更新（RFC 7208），并与DKIM和DMARC共同更新。它试图通过为收件邮件服务器提供一种方法，来判断电子邮件是否来自FROM字段中域名的授权发送者，从而阻止伪造邮件。收件邮件服务器因此能够判断入站邮件更可能是伪造/钓鱼邮件还是合法邮件。</p>
+<ul>
+<li>如果收件服务器收到的邮件FROM地址来自SPF授权服务器，则有理由认为是有效/&ldquo;好&quot;邮件</li>
+<li>如果来自未授权服务器，则有理由认为是无效/恶意邮件</li>
+</ul>
+<p>SPF记录还能&quot;告知&quot;收件服务器如何处理未授权邮件：继续投递、标记为可疑（提高风险评级）或直接拒绝。当然，SPF记录并非金科玉律，收件服务器可自行决定如何权衡SPF记录。</p>
+<h2 id="营销人员的困境">营销人员的困境
+</h2><p>营销人员常为此头疼。这是SendGrid、MailGun、MailChimp等工具带来的难题。他们购买了 fancy 的新营销邮件工具，但人们总把他们的营销邮件标记为垃圾邮件！如果营销团队没有确保FROM域名的SPF记录准确，接收方可能更容易将邮件视为垃圾/恶意邮件，永远消失在垃圾箱中。</p>
+<h2 id="前瞻思考">前瞻思考
+</h2><p>发送者策略框架并未过时，但在反垃圾邮件和反钓鱼领域有了新伙伴。DKIM和DMARC是扩展SPF验证功能的新框架，共同构建域名所有者与收件服务器间的信任网络。请关注我们未来关于DMARC和DKIM的博客文章。</p>
+<h2 id="域名服务器记录">域名服务器记录
+</h2><p>授权邮件服务器/中继发送邮件的SPF记录是DNS TXT记录，必须添加在注册商指定的名称服务器上。由于这涉及域名所有权，它允许域名所有者告知收件方：收到带有其域名的邮件是否来自预期的邮件服务器。</p>
+<p>下文讨论的DNS记录必须在域名注册商的NS记录定义的名称服务器上创建。</p>
+<h2 id="语法详解">语法详解
+</h2><p>虽然有许多工具可帮助构建SPF记录，但您仍需了解其原理。SMTP收件方从左到右读取SPF记录，首次匹配后即停止分析并返回配置结果。</p>
+<p>DNS记录类型 = TXT<br>
+主机 = @（您的主TLD或要保护的域名）<br>
+值 = [语法]!!</p>
+<p>值字段是记录的核心部分，让我们仔细看看：</p>
+<p><code>&quot;v=spf1&quot; [机制-动作] [机制-对象] [机制-动作] [机制-对象]...</code></p>
+<h3 id="机制-动作">机制-动作
+</h3><p>动作参数告知收件服务器如何处理：</p>
+<p><code>+</code> 通过：SPF记录指定主机已授权（接受邮件）<br>
+<code>-</code> 拒绝：SPF记录指定主机未授权（拒绝邮件）<br>
+<code>~</code> 软失败：SPF记录指定主机未授权但&hellip;也许吧（标记/提高风险）<br>
+<code>?</code> 中立：SPF记录表示不清楚（接受邮件）</p>
+<h3 id="机制-对象">机制-对象
+</h3><p>选项众多：</p>
+<p><code>all</code> 所有服务器，任何地方<br>
+<code>ip4:&lt;邮件服务器IP地址&gt;</code><br>
+<code>ip4:&lt;IP地址&gt;/CIDR格式</code><br>
+<code>ip6:&lt;IPv6地址&gt;</code><br>
+<code>ip6:&lt;IP地址&gt;/CIDR格式</code><br>
+<code>a:[域名]</code> 包含[某域名]的所有A记录<br>
+<code>a:[域名]/CIDR</code> 包含[某域名]所有A记录的/CIDR网络<br>
+<code>a</code> 包含本域所有A记录<br>
+<code>a/CIDR</code> 包含本域所有A记录的/CIDR网络<br>
+<code>mx</code> 包含本域所有MX记录<br>
+<code>mx/CIDR</code> 包含本域所有MX记录的/CIDR网络<br>
+<code>mx:[域名]</code> 包含[某域名]所有MX记录<br>
+<code>mx:[域名]/CIDR</code> 包含[某域名]所有MX记录的/CIDR网络<br>
+<code>ptr</code> 包含本域PTR记录的IP<br>
+<code>ptr:[域名]</code> 包含[某域名]PTR记录的IP<br>
+<code>exists:[域名]</code> YES/NO触发器。如果A记录存在=通过<br>
+<code>redirect:[域名]</code> 用[域名]的SPF记录替换整个SPF记录<br>
+<code>include:[域名]</code> 包含[域名]的SPF记录。匹配=通过，不匹配=失败。这种记录通常用于Google、Office等大型邮件提供商，以及SendGrid、MailGun等邮件中继。</p>
+<p><code>include:</code>是一种信任机制，允许您将对域名/组织邮件发送的授权信任代理给您认可的负责发送邮件的另一个域名/组织的SPF记录。这些组织通常会在SPF记录中涵盖其所有可能的邮件服务器。</p>
+<h2 id="示例">示例
+</h2><p><code>v=spf1 +mx -all</code><br>
+接受来自本域MX记录的邮件，拒绝其他所有来源。</p>
+<p><code>v=spf1 +a:AnotherDomain.com ?a:google.com -all</code><br>
+接受来自AnotherDomain.com的A记录，对Google.com的A记录保持中立，拒绝其他所有。</p>
+<p><code>v=spf1 exists:AnotherDomain.com -all</code><br>
+如果AnotherDomain.com存在A记录则接受邮件，否则拒绝。</p>
+<p><code>v=spf1 -all</code><br>
+拒绝来自本域的所有邮件，无论发送者是谁。</p>
+<p><code>v=spf1 include:mailgun.com include:sendgrid.com -all</code><br>
+遵循mailgun.com和sendgrid.com的SPF记录规则，拒绝其他所有。</p>
+<p><code>v=spf1 redirect=AnotherDomain.com</code><br>
+仅遵循AnotherDomain.com的SPF记录规则。</p>
+<h2 id="再谈营销">再谈营销
+</h2><p>回到营销话题，MailChimp、MailGun和SendGrid在做什么？</p>
+<p>有趣的是，如果您使用邮件中继或群发邮件服务，邮件<em>可以</em>被视为已授权，从而突破垃圾邮件箱。但作为红队成员，我不得不问&hellip;</p>
+<p>第三方能否在我不知情的情况下，在我信任的第三方创建账户并以我的名义发送邮件？</p>
+<p>答案是&hellip;既是也不是。</p>
+<p>这些服务可以在您配置SPF记录授权其邮件服务器后代表您发送邮件。它们会采取一些措施确保第三方不能使用您的FROM地址发送邮件，通常要求用户在代表某域名发送邮件前验证该域名。各服务验证方式不同，有些会在其域名上创建DNS记录（如<code>+a:yourdomain.mailrelayservice.com</code>）以提供保证。但最终，您需要信任您的邮件服务器，如果无法信任&hellip;这个世界很残酷，偏执可能会让您寸步难行。</p>
+<h2 id="spf记录生成工具">SPF记录生成工具
+</h2><p>有些平台可帮助构建符合特定需求的SPF记录。大多数工具工作方式相似&hellip;有些甚至收费！我不建议为创建SPF记录付费，但使用免费服务时务必小心。多年来，MXToolbox一直是我的系统管理员和蓝队工具箱中的利器，从未让我失望。</p>
+<p>在线构建SPF：https://mxtoolbox.com/SPFRecordGenerator.aspx</p>
+<h2 id="相关链接">相关链接
+</h2><p>Open Sender Policy Framework：http://www.openspf.org/Project_Overview<br>
+SPF V1: RFC 7208 (替代4408, 6652) <a class="link" href="https://tools.ietf.org/rfc/rfc7208.txt"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/rfc/rfc7208.txt</a><br>
+SPF V1: RFC 6652 (被RFC-7208替代) <a class="link" href="https://tools.ietf.org/html/rfc6652"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/html/rfc6652</a><br>
+SPF V1: RFC 4408 (被RFC-7208替代) (2006) <a class="link" href="https://tools.ietf.org/html/rfc4408"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/html/rfc4408</a></p>
+<p>即将发布的博客：DKIM, DMARC!</p>
+<p>基于域的消息认证、报告和一致性：https://dmarc.org/<br>
+SPF V1: RFC 7960 – DMARC互操作性 <a class="link" href="https://tools.ietf.org/rfc/rfc7960.txt"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/rfc/rfc7960.txt</a><br>
+SPF V1: RFC 7489 – DMARC <a class="link" href="https://tools.ietf.org/rfc/rfc7489.txt"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/rfc/rfc7489.txt</a><br>
+SPF V1: RFC 7372 -DKIM (更新7208) <a class="link" href="https://tools.ietf.org/rfc/rfc7372.txt"  target="_blank" rel="noopener"
+    >https://tools.ietf.org/rfc/rfc7372.txt</a></p>
+<p>&ldquo;但请相信我对防晒霜的建议。&rdquo;</p>
+<hr>
+<p>*Kent和Derrick是我们的系统管理员团队成员——没有他们我们该怎么办？</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/spf/">SPF</a>
+        
+            <a href="/tags/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/">邮件安全</a>
+        
+            <a href="/tags/dns%E9%85%8D%E7%BD%AE/">DNS配置</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

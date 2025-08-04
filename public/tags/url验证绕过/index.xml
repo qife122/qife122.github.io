@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>URL验证绕过 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87/</link>
+        <description>Recent content in URL验证绕过 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 13:44:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>URL验证绕过速查表中新增的疯狂Payload技术解析</title>
+        <link>http://localhost:1313/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E4%B8%AD%E6%96%B0%E5%A2%9E%E7%9A%84%E7%96%AF%E7%8B%82payload%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 13:44:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/url%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E9%80%9F%E6%9F%A5%E8%A1%A8%E4%B8%AD%E6%96%B0%E5%A2%9E%E7%9A%84%E7%96%AF%E7%8B%82payload%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;url验证绕过速查表中新增的疯狂payload&#34;&gt;URL验证绕过速查表中新增的疯狂Payload
+&lt;/h1&gt;&lt;p&gt;我们的URL验证绕过速查表的力量源于网络安全社区的贡献，本次更新也不例外。我们激动地推出全新的IP地址计算器，灵感来自@e1abrador的Encode IP Burp Suite扩展插件等多项技术。&lt;/p&gt;
+&lt;h2 id=&#34;新型ip验证绕过技术&#34;&gt;新型IP验证绕过技术
+&lt;/h2&gt;&lt;p&gt;除了现有的IPv4地址表示方法外，我们新增了以下被Chrome、Firefox、Safari支持的格式。例如云元数据IP地址169.254.169.254现在可以通过这些方式表示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;169.254.43518&lt;/strong&gt; - 部分十进制（B类）格式，将IP地址第三和第四部分合并为十进制数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;169.16689662&lt;/strong&gt; - 部分十进制（A类）格式，合并第二、三、四部分&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;0xA9.254.0251.0376&lt;/strong&gt; - 混合编码：每个段可用十六进制/十进制/八进制不同格式表示（首段十六进制，第二段十进制，后两段八进制）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;速查表现已支持IPv6地址。当攻击者主机名输入有效IPv6地址时，词表将更新为地址的扩展形式。若IPv6包含内嵌IPv4地址，速查表会提取并生成所有前述格式（可在高级设置中禁用）。&lt;/p&gt;
+&lt;p&gt;您还可以使用特殊编码处理结果IP格式，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;圆圈拉丁字母和数字&lt;/li&gt;
+&lt;li&gt;全角形式&lt;/li&gt;
+&lt;li&gt;七段显示字符
+（在高级设置→标准化设置中选择编码选项）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;用户信息解析差异&#34;&gt;用户信息解析差异
+&lt;/h2&gt;&lt;p&gt;我们新增了由@SeanPesce提交的有趣Payload，针对用户信息解析差异：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://example.com[@attacker.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;用户信息段中的左方括号字符&lt;code&gt;[&lt;/code&gt;可能导致Spring的UriComponentsBuilder返回与主流浏览器解析不同的主机名值。这种差异可能引发开放重定向或SSRF漏洞。测试该Payload时，我们还复现了同次更新中修补的另一个漏洞，这完美展示了本速查表识别真实漏洞的能力。&lt;/p&gt;
+&lt;h2 id=&#34;cors验证绕过速查表更新&#34;&gt;CORS验证绕过速查表更新
+&lt;/h2&gt;&lt;p&gt;我们近期更新了CORS绕过速查表，新增包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;localhost正则实现边缘情况&lt;/li&gt;
+&lt;li&gt;Safari特有的域名分割攻击技术（由@t0xodile提交）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些更新解决了攻击者使用特殊字符操纵域名绕过验证的场景，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://example.com.{.web-attacker.com/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://example.com.}.web-attacker.com/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://example.com.`.web-attacker.com/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>动态分析 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90/</link>
+        <description>Recent content in 动态分析 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 03:03:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Manticore 0.3.0发布：符号执行引擎的重大升级</title>
+        <link>http://localhost:1313/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
+        <pubDate>Mon, 04 Aug 2025 03:03:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</guid>
+        <description>&lt;h1 id=&#34;执行器重构&#34;&gt;执行器重构
+&lt;/h1&gt;&lt;p&gt;Felipe Manzano完成了Manticore状态机的重大重构，现在采用多进程模块（multiprocessing），为未来实现分布式符号执行奠定了基础。该重构引入了少量API变更：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须显式调用&lt;code&gt;finalize&lt;/code&gt;方法才能导出测试用例&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;will_start_run&lt;/code&gt;回调更名为&lt;code&gt;will_run&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;需通过&lt;code&gt;Z3Solver.instance()&lt;/code&gt;显式访问求解器单例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;unicorn预加载&#34;&gt;Unicorn预加载
+&lt;/h1&gt;&lt;p&gt;为解决Python原生指令模拟速度瓶颈，新增Unicorn模拟器插件。该插件基于QEMU的JIT引擎，可将不重要初始化代码的执行速度提升高达50倍。&lt;/p&gt;
+&lt;h1 id=&#34;aarch64支持&#34;&gt;AArch64支持
+&lt;/h1&gt;&lt;p&gt;Nikita Karetnikov为静态编译的AArch64 Linux二进制文件添加了支持。虽然当前实现包含调试组件导致性能略低，但该架构可覆盖从嵌入式开发板到服务器集群的广泛ARMv8平台。&lt;/p&gt;
+&lt;h1 id=&#34;系统调用审计&#34;&gt;系统调用审计
+&lt;/h1&gt;&lt;p&gt;本次更新包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增12个系统调用实现&lt;/li&gt;
+&lt;li&gt;为未实现调用添加&amp;quot;存根&amp;quot;机制，避免直接抛出异常&lt;/li&gt;
+&lt;li&gt;遇到未实现调用时会显示&amp;quot;Unimplemented system call&amp;quot;警告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;符号化evm测试&#34;&gt;符号化EVM测试
+&lt;/h1&gt;&lt;p&gt;通过持续集成管道自动运行以太坊Frontier版本VM测试，确保每个指令的符号化实现正确性，维护智能合约分析的可靠性。&lt;/p&gt;
+&lt;h1 id=&#34;代码格式化&#34;&gt;代码格式化
+&lt;/h1&gt;&lt;p&gt;项目现已采用black自动格式化工具，要求开发者提交代码前执行&lt;code&gt;black -t py36 -l 100 .&lt;/code&gt;以保证代码风格统一。&lt;/p&gt;
+&lt;h1 id=&#34;后续计划&#34;&gt;后续计划
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;改进文档和示例仓库&lt;/li&gt;
+&lt;li&gt;开展可用性研究&lt;/li&gt;
+&lt;li&gt;集成crytic-compile以简化智能合约分析&lt;/li&gt;
+&lt;li&gt;支持EVM Constantinople升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/manticore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub下载&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://pypi.org/project/manticore/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PyPI安装&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/r/trailofbits/manticore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker镜像&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

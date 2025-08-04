@@ -7,7 +7,58 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 17:56:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 18:05:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>在Empire Hacking上探讨以太坊安全——Trail of Bits博客</title>
+        <link>http://localhost:1313/p/%E5%9C%A8empire-hacking%E4%B8%8A%E6%8E%A2%E8%AE%A8%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AE%89%E5%85%A8trail-of-bits%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Mon, 04 Aug 2025 18:05:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9C%A8empire-hacking%E4%B8%8A%E6%8E%A2%E8%AE%A8%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AE%89%E5%85%A8trail-of-bits%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;h1 id=&#34;在empire-hacking上探讨以太坊安全&#34;&gt;在Empire Hacking上探讨以太坊安全
+&lt;/h1&gt;&lt;p&gt;如果你正在使用区块链技术构建实际应用并担心安全问题，这次聚会不容错过。加入我们12月12日的Empire Hacking特别活动，全程聚焦以太坊安全。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要参加&#34;&gt;为什么要参加？
+&lt;/h2&gt;&lt;p&gt;四位区块链安全专家将分享如何编写安全的智能合约，以及如何攻击它们。其中两位演讲者来自我们的团队。&lt;/p&gt;
+&lt;p&gt;我们已成为行业最受信任的审计、工具和最佳实践提供商之一，服务涵盖智能合约及其相关技术。我们保障过代币发行、去中心化应用乃至整个区块链平台的安全。与往届Empire Hacking活动一样，我们期待与开发社区分享前沿技术。&lt;/p&gt;
+&lt;h2 id=&#34;演讲嘉宾&#34;&gt;演讲嘉宾
+&lt;/h2&gt;&lt;p&gt;Trail of Bits的Sophia D&amp;rsquo;Antoine将讨论近期CTF比赛中Solidity和以太坊的挑战，以及利用这些漏洞所需的工具。&lt;/p&gt;
+&lt;p&gt;Consensys Diligence的John Maurelian将分享Devcon3会议上关于以太坊安全最新进展的亮点。&lt;/p&gt;
+&lt;p&gt;Mark Mossberg将展示Trail of Bits如何用符号执行引擎Manticore发现EVM字节码中的漏洞。&lt;/p&gt;
+&lt;p&gt;Paul Makowski将介绍他即将推出的安全导向型以太坊代币PolySwarm，该代币利用区块链技术解决威胁情报行业的缺陷。&lt;/p&gt;
+&lt;p&gt;企业以太坊联盟的Amber Baldet和Brian Schroeder将探讨Quorum区块链中应用的威胁建模、保密交易和零知识证明技术。&lt;/p&gt;
+&lt;h2 id=&#34;时间地点&#34;&gt;时间地点
+&lt;/h2&gt;&lt;p&gt;活动将于12月12日下午6点举行，地点在纽约时报大厦的DataDog办公室。需提前报名。照例提供简餐和啤酒。&lt;/p&gt;
+&lt;p&gt;了解更多Empire Hacking信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问官网&lt;/li&gt;
+&lt;li&gt;Meetup报名&lt;/li&gt;
+&lt;li&gt;加入Slack社区&lt;/li&gt;
+&lt;li&gt;关注Twitter @EmpireHacking&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>使用符号执行与区块链尸检——Trail of Bits在Devcon IV的技术实践</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 04 Aug 2025 11:55:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;使用manticore和符号执行发现智能合约漏洞&#34;&gt;使用Manticore和符号执行发现智能合约漏洞
+&lt;/h3&gt;&lt;p&gt;在该工作坊中，Josselin Feist演示了如何运用开源符号执行引擎Manticore。该工具不仅能即时发现代码缺陷，还可验证代码正确性。120名参与者通过实践掌握了形式化验证方法，这些技术能确保智能合约严格遵循设计规范。&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;获取工作坊幻灯片与练习材料&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;区块链尸检&#34;&gt;区块链尸检
+&lt;/h3&gt;&lt;p&gt;Jay Little通过闪电演讲展示了其团队对3万份自毁合约的复原与分析技术。针对以太坊主网200万合约中极少有价值合约被销毁的现象，Jay开发了新型工具链：重新处理区块链账本数据、重建带状态的合约，并利用调用轨迹和启发式方法分析可疑交易。&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;查看可疑自毁交易的筛选技术&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安全现状专家讨论&#34;&gt;安全现状专家讨论
+&lt;/h3&gt;&lt;p&gt;Kevin Seagraves主持的专题讨论聚焦以太坊安全态势：过去一年的重大安全变化、智能合约与传统系统安全差异、漏洞赏金机制效用评估等核心议题。&lt;/p&gt;
+&lt;h3 id=&#34;安全审计深度培训&#34;&gt;安全审计深度培训
+&lt;/h3&gt;&lt;p&gt;JP在为期全天的培训中分享了Trail of Bits的安全评审方法论，强调审计不仅应输出漏洞列表，更需提供项目整体风险评估、架构与开发生命周期指导等完整解决方案。该培训将于12月11日在纽约再次举办。&lt;/p&gt;
+&lt;h3 id=&#34;devcon特别彩蛋&#34;&gt;Devcon特别彩蛋
+&lt;/h3&gt;&lt;p&gt;Evan Sultanik未参会期间开发了以太坊客户端模糊测试工具Etheno。该工具可自动检测各以太坊客户端间的行为差异，仅用2分钟便复现了10月Ropsten测试网出现的共识漏洞。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;© 2025 Trail of Bits&lt;br&gt;
+采用Hugo与Mainroad主题生成&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>智能合约验证变得更简单 - Manticore验证工具详解</title>
         <link>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%AA%8C%E8%AF%81%E5%8F%98%E5%BE%97%E6%9B%B4%E7%AE%80%E5%8D%95-manticore%E9%AA%8C%E8%AF%81%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Sun, 03 Aug 2025 17:56:39 +0800</pubDate>

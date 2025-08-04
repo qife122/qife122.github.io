@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pwn2Own on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/pwn2own/</link>
+        <description>Recent content in Pwn2Own on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 19:39:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pwn2own/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Pwn2Own Automotive 2025 第二天战报：38.5万美元奖金与16个零日漏洞</title>
+        <link>http://localhost:1313/p/pwn2own-automotive-2025-%E7%AC%AC%E4%BA%8C%E5%A4%A9%E6%88%98%E6%8A%A538.5%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%E4%B8%8E16%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Mon, 04 Aug 2025 19:39:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pwn2own-automotive-2025-%E7%AC%AC%E4%BA%8C%E5%A4%A9%E6%88%98%E6%8A%A538.5%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%E4%B8%8E16%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;h1 id=&#34;pwn2own-automotive-2025---第二天结果&#34;&gt;Pwn2Own Automotive 2025 - 第二天结果
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2025年1月22日&lt;/strong&gt; | Dustin Childs&lt;/p&gt;
+&lt;p&gt;欢迎来到Pwn2Own Automotive 2025的第二天。昨日我们为16个独特零日漏洞颁发了超过38万美元奖金，今天赛事更为激烈，WOLFBOX和特斯拉充电器首次亮相Pwn2Own。以下是第二天完整战报：&lt;/p&gt;
+&lt;h2 id=&#34;成功案例&#34;&gt;成功案例
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Summoning团队&lt;/strong&gt;的Sina Kheirkhah通过组合多个漏洞攻破WOLFBOX充电器，获得5万美元奖金（CWE-839数值范围检查缺失漏洞）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PHP Hooligans团队&lt;/strong&gt;利用命令注入漏洞控制特斯拉壁挂充电器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Viettel网络安全团队&lt;/strong&gt;结合已知漏洞与命令注入攻破ChargePoint HomeFlex（奖金18,750美元）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HT3 Labs&lt;/strong&gt;通过认证缺失+OS命令注入链式攻击Phoenix Contact CHARX充电器&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Synacktiv团队&lt;/strong&gt;创新性地通过充电接口逻辑漏洞攻破特斯拉系统，斩获最高单笔45万美元奖金&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;多团队演示了&lt;strong&gt;零点击攻击链&lt;/strong&gt;（如PCAutomotive对索尼车机的堆溢出+认证绕过组合攻击）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Autel MaxiCharger&lt;/strong&gt;被揭露存在访问控制缺陷和基于栈的缓冲区溢出&lt;/li&gt;
+&lt;li&gt;阿尔派车机系统重现&lt;strong&gt;CVE-2024-23924历史漏洞&lt;/strong&gt;的&amp;quot;共享风险&amp;quot;问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;统计数据&#34;&gt;统计数据
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;当日总奖金：33.55万美元&lt;/li&gt;
+&lt;li&gt;累计披露23个零日漏洞&lt;/li&gt;
+&lt;li&gt;参赛团队使用了包括：
+&lt;ul&gt;
+&lt;li&gt;命令注入（5例）&lt;/li&gt;
+&lt;li&gt;堆/栈溢出（3例）&lt;/li&gt;
+&lt;li&gt;证书验证缺陷（2例）&lt;/li&gt;
+&lt;li&gt;逻辑漏洞（1例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;第三天赛事将继续聚焦电动汽车基础设施安全，包括首次亮相的EMPORIA充电器测试。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>CanSecWest安全大会：警惕与社区共舞的技术博弈</title>
+        <link>http://localhost:1313/p/cansecwest%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BC%9A%E8%AD%A6%E6%83%95%E4%B8%8E%E7%A4%BE%E5%8C%BA%E5%85%B1%E8%88%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%BC%88/</link>
+        <pubDate>Mon, 04 Aug 2025 11:07:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cansecwest%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BC%9A%E8%AD%A6%E6%83%95%E4%B8%8E%E7%A4%BE%E5%8C%BA%E5%85%B1%E8%88%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%BC%88/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;CanSecWest：警惕与社区共舞&lt;/strong&gt;&lt;br&gt;
+每年在温哥华举办的CanSecWest是我最喜爱的安全会议之一。这个小型安全会议汇聚了来自安全生态各领域的研究人员。如同PhNeutral或BlueHat会议，你永远无法预料CanSecWest会带来什么惊喜，但可以确定的是微软产品和工程师都将扮演重要角色。我们将展示新的安全创新工具，密切关注Pwn2Own竞赛中的潜在漏洞利用，并乐意在非正式交流中分享行业最佳实践。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安全协作的价值&lt;/strong&gt;&lt;br&gt;
+这类安全聚会促使生态圈通过信息共享提升防御能力。正如Matt Miller的《微软漏洞缓解技术演进》和Jason Shirk与Dave Weinstein的《自动化实时与事后安全崩溃分析分类》所展示的，微软不断将攻击特征转化为开发者工具。Pwn2Own竞赛体现了我们安全团队的两大信条：真相无法掩盖（幻想不能改变事实），每个问题都是学习进步的契机。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;微软的安全哲学&lt;/strong&gt;&lt;br&gt;
+我们承认所有厂商产品都可能存在漏洞，并将此类竞赛视为促进负责任披露对话的机会。Pwn2Own不仅能教育公众，更能展示微软安全工程的实力。竞赛结束后，赞助方TippingPoint将获得新漏洞的所有权，而微软已准备好分析研究人员发现的任何漏洞，持续强化网络、平台和应用安全。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安全社区的&amp;quot;对手团队&amp;quot;战略&lt;/strong&gt;&lt;br&gt;
+虽然创新竞赛常令人不安，但Pwn2Own和Black Hat铁厨大赛等活动的真正价值在于推动生态圈共同解决共性问题。正如会议组织方坚持负责任披露政策，微软始终致力于将漏洞信息转化为更强大的工程实践。竞赛序幕已经拉开！&lt;/p&gt;
+&lt;p&gt;——Sarah Blankinship（高级安全战略负责人）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>CVSS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/cvss/</link>
+        <description>Recent content in CVSS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 04:41:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cvss/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软安全更新指南(Security Update Guide)新手指南</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Mon, 04 Aug 2025 04:41:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;p&gt;2020年11月起，微软安全更新指南门户全面改版。本文将为初次接触或尚未熟悉新界面的用户提供详细操作指引。&lt;/p&gt;
+&lt;h3 id=&#34;安全更新指南是什么&#34;&gt;安全更新指南是什么？
+&lt;/h3&gt;&lt;p&gt;该门户提供微软产品/服务的漏洞和更新信息，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;漏洞详情(CVE)&lt;/li&gt;
+&lt;li&gt;受影响产品清单&lt;/li&gt;
+&lt;li&gt;已知问题列表&lt;/li&gt;
+&lt;li&gt;支持按产品/发布日期筛选&lt;/li&gt;
+&lt;li&gt;支持CVE编号等关键词搜索&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞详情页功能解析&#34;&gt;漏洞详情页功能解析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;CVSS评分&lt;/strong&gt;&lt;br&gt;
+采用通用漏洞评分系统，悬停评分项可查看具体定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可利用性&lt;/strong&gt;&lt;br&gt;
+显示漏洞披露状态及微软独家&amp;quot;可利用性评估&amp;quot;指标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢名单&lt;/strong&gt;&lt;br&gt;
+列出来自漏洞赏金计划的贡献者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;常见问题&lt;/strong&gt;&lt;br&gt;
+包含特殊配置要求、非标准更新方式等补充说明&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全更新列表&lt;/strong&gt;&lt;br&gt;
+提供修复该漏洞的所有更新程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;api数据获取方案&#34;&gt;API数据获取方案
+&lt;/h3&gt;&lt;p&gt;门户数据可通过CVRF格式API获取，具体资源包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[视频] GitHub上的API使用教程&lt;/li&gt;
+&lt;li&gt;[视频] 安全更新API调用演示&lt;/li&gt;
+&lt;li&gt;[视频] 月度更新摘要HTML生成&lt;/li&gt;
+&lt;li&gt;[视频] 数据导出至Excel的方法&lt;/li&gt;
+&lt;li&gt;[视频] CVE/KB列表获取技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：门户将持续迭代改进，功能界面可能调整&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;相关资源&#34;&gt;相关资源
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;新版漏洞详情说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南改进公告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

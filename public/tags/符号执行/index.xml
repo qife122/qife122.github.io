@@ -7,7 +7,71 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 17:56:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 11:55:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用符号执行与区块链尸检——Trail of Bits在Devcon IV的技术实践</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 04 Aug 2025 11:55:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B0%B8%E6%A3%80trail-of-bits%E5%9C%A8devcon-iv%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;使用manticore和符号执行发现智能合约漏洞&#34;&gt;使用Manticore和符号执行发现智能合约漏洞
+&lt;/h3&gt;&lt;p&gt;在该工作坊中，Josselin Feist演示了如何运用开源符号执行引擎Manticore。该工具不仅能即时发现代码缺陷，还可验证代码正确性。120名参与者通过实践掌握了形式化验证方法，这些技术能确保智能合约严格遵循设计规范。&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;获取工作坊幻灯片与练习材料&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;区块链尸检&#34;&gt;区块链尸检
+&lt;/h3&gt;&lt;p&gt;Jay Little通过闪电演讲展示了其团队对3万份自毁合约的复原与分析技术。针对以太坊主网200万合约中极少有价值合约被销毁的现象，Jay开发了新型工具链：重新处理区块链账本数据、重建带状态的合约，并利用调用轨迹和启发式方法分析可疑交易。&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;查看可疑自毁交易的筛选技术&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安全现状专家讨论&#34;&gt;安全现状专家讨论
+&lt;/h3&gt;&lt;p&gt;Kevin Seagraves主持的专题讨论聚焦以太坊安全态势：过去一年的重大安全变化、智能合约与传统系统安全差异、漏洞赏金机制效用评估等核心议题。&lt;/p&gt;
+&lt;h3 id=&#34;安全审计深度培训&#34;&gt;安全审计深度培训
+&lt;/h3&gt;&lt;p&gt;JP在为期全天的培训中分享了Trail of Bits的安全评审方法论，强调审计不仅应输出漏洞列表，更需提供项目整体风险评估、架构与开发生命周期指导等完整解决方案。该培训将于12月11日在纽约再次举办。&lt;/p&gt;
+&lt;h3 id=&#34;devcon特别彩蛋&#34;&gt;Devcon特别彩蛋
+&lt;/h3&gt;&lt;p&gt;Evan Sultanik未参会期间开发了以太坊客户端模糊测试工具Etheno。该工具可自动检测各以太坊客户端间的行为差异，仅用2分钟便复现了10月Ropsten测试网出现的共识漏洞。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;© 2025 Trail of Bits&lt;br&gt;
+采用Hugo与Mainroad主题生成&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Manticore 0.3.0发布：符号执行引擎的重大升级</title>
+        <link>http://localhost:1313/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</link>
+        <pubDate>Mon, 04 Aug 2025 03:03:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/manticore-0.3.0%E5%8F%91%E5%B8%83%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/</guid>
+        <description>&lt;h1 id=&#34;执行器重构&#34;&gt;执行器重构
+&lt;/h1&gt;&lt;p&gt;Felipe Manzano完成了Manticore状态机的重大重构，现在采用多进程模块（multiprocessing），为未来实现分布式符号执行奠定了基础。该重构引入了少量API变更：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须显式调用&lt;code&gt;finalize&lt;/code&gt;方法才能导出测试用例&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;will_start_run&lt;/code&gt;回调更名为&lt;code&gt;will_run&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;需通过&lt;code&gt;Z3Solver.instance()&lt;/code&gt;显式访问求解器单例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;unicorn预加载&#34;&gt;Unicorn预加载
+&lt;/h1&gt;&lt;p&gt;为解决Python原生指令模拟速度瓶颈，新增Unicorn模拟器插件。该插件基于QEMU的JIT引擎，可将不重要初始化代码的执行速度提升高达50倍。&lt;/p&gt;
+&lt;h1 id=&#34;aarch64支持&#34;&gt;AArch64支持
+&lt;/h1&gt;&lt;p&gt;Nikita Karetnikov为静态编译的AArch64 Linux二进制文件添加了支持。虽然当前实现包含调试组件导致性能略低，但该架构可覆盖从嵌入式开发板到服务器集群的广泛ARMv8平台。&lt;/p&gt;
+&lt;h1 id=&#34;系统调用审计&#34;&gt;系统调用审计
+&lt;/h1&gt;&lt;p&gt;本次更新包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增12个系统调用实现&lt;/li&gt;
+&lt;li&gt;为未实现调用添加&amp;quot;存根&amp;quot;机制，避免直接抛出异常&lt;/li&gt;
+&lt;li&gt;遇到未实现调用时会显示&amp;quot;Unimplemented system call&amp;quot;警告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;符号化evm测试&#34;&gt;符号化EVM测试
+&lt;/h1&gt;&lt;p&gt;通过持续集成管道自动运行以太坊Frontier版本VM测试，确保每个指令的符号化实现正确性，维护智能合约分析的可靠性。&lt;/p&gt;
+&lt;h1 id=&#34;代码格式化&#34;&gt;代码格式化
+&lt;/h1&gt;&lt;p&gt;项目现已采用black自动格式化工具，要求开发者提交代码前执行&lt;code&gt;black -t py36 -l 100 .&lt;/code&gt;以保证代码风格统一。&lt;/p&gt;
+&lt;h1 id=&#34;后续计划&#34;&gt;后续计划
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;改进文档和示例仓库&lt;/li&gt;
+&lt;li&gt;开展可用性研究&lt;/li&gt;
+&lt;li&gt;集成crytic-compile以简化智能合约分析&lt;/li&gt;
+&lt;li&gt;支持EVM Constantinople升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/manticore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub下载&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://pypi.org/project/manticore/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PyPI安装&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://hub.docker.com/r/trailofbits/manticore&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Docker镜像&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>智能合约验证变得更简单 - Manticore验证工具详解</title>
         <link>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E9%AA%8C%E8%AF%81%E5%8F%98%E5%BE%97%E6%9B%B4%E7%AE%80%E5%8D%95-manticore%E9%AA%8C%E8%AF%81%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Sun, 03 Aug 2025 17:56:39 +0800</pubDate>

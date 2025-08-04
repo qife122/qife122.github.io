@@ -7,7 +7,34 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 09:23:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/office%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 00:04:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/office%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>协同应对Encapsulated PostScript (EPS)攻击 | MSRC博客</title>
+        <link>http://localhost:1313/p/%E5%8D%8F%E5%90%8C%E5%BA%94%E5%AF%B9encapsulated-postscript-eps%E6%94%BB%E5%87%BB-msrc%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Mon, 04 Aug 2025 00:04:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8D%8F%E5%90%8C%E5%BA%94%E5%AF%B9encapsulated-postscript-eps%E6%94%BB%E5%87%BB-msrc%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;p&gt;今天的安全更新包含三个典型案例，展示了安全生态系统如何协同保护消费者和企业。我们感谢FireEye和ESET的合作。已安装最新安全更新的用户可免受下述攻击。&lt;/p&gt;
+&lt;p&gt;通过微软主动保护计划(MAPP)，合作伙伴向我们预警了高度相关的定向攻击。这些攻击均使用畸形Word文档，通过精准钓鱼邮件针对特定人群。攻击组合利用了Office Encapsulated PostScript (EPS)过滤器的远程代码执行漏洞和Windows权限提升漏洞来突破Office沙箱保护。EPS是当前生态中已较少使用的遗留格式，因此我们在2017年4月通过深度防御保护默认关闭了该代码路径。安装上月Office累积更新的用户已获得防护。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Word EPS + Windows权限提升组合攻击 (CVE-2017-0261 + CVE-2017-0001)&lt;/strong&gt;&lt;br&gt;
+3月下旬接报此攻击，但用户已受3月更新保护。本次更新彻底修复EPS漏洞，并为少数仍需使用EPS过滤器的用户提供额外保护。目前仅观察到有限的攻击尝试，该攻击方式现已失效。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Word EPS + Windows权限提升组合攻击 (CVE-2017-0262 + CVE-2017-0263)&lt;/strong&gt;&lt;br&gt;
+微软4月中旬检测到该攻击，但用户已受4月深度防御更新保护（默认关闭EPS过滤器）。本次更新进一步修复底层过滤器漏洞和权限提升漏洞。攻击尝试同样有限且已失效。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这些更新凸显了保持系统更新对防御新型恶意软件的重要性。企业用户可参考每月发布的漏洞可利用指数来优先评估更新。使用微软主动保护计划合作伙伴的最新反恶意软件也能有效防护。&lt;/p&gt;
+&lt;p&gt;我们长期支持协调漏洞披露机制，欢迎研究人员通过secure@microsoft.com报告漏洞。微软安全响应中心(MSRC)接到报告后会立即启动全面调查，经过详尽测试后发布跨版本更新，在及时性与质量间取得平衡。&lt;/p&gt;
+&lt;p&gt;更多安全更新信息详见&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/security-updates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南&lt;/a&gt;。企业用户可&lt;a class=&#34;link&#34; href=&#34;https://office365-updates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;此处&lt;/a&gt;检查Office 365更新状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;相关链接&lt;/strong&gt;：&lt;br&gt;
+CVE-2017-0261、CVE-2017-0262和CVE-2017-0263漏洞详情&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软扩展漏洞赏金计划 - 针对Windows版Office Insider构建的新奖励计划</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%89%A9%E5%B1%95%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92-%E9%92%88%E5%AF%B9windows%E7%89%88office-insider%E6%9E%84%E5%BB%BA%E7%9A%84%E6%96%B0%E5%A5%96%E5%8A%B1%E8%AE%A1%E5%88%92/</link>
         <pubDate>Sat, 02 Aug 2025 09:23:22 +0800</pubDate>

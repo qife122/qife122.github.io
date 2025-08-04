@@ -7,7 +7,57 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 17:01:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 07:46:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ampere 2024开发者峰会视频回顾：云原生处理器与架构迁移实战</title>
+        <link>http://localhost:1313/p/ampere-2024%E5%BC%80%E5%8F%91%E8%80%85%E5%B3%B0%E4%BC%9A%E8%A7%86%E9%A2%91%E5%9B%9E%E9%A1%BE%E4%BA%91%E5%8E%9F%E7%94%9F%E5%A4%84%E7%90%86%E5%99%A8%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Mon, 04 Aug 2025 07:46:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ampere-2024%E5%BC%80%E5%8F%91%E8%80%85%E5%B3%B0%E4%BC%9A%E8%A7%86%E9%A2%91%E5%9B%9E%E9%A1%BE%E4%BA%91%E5%8E%9F%E7%94%9F%E5%A4%84%E7%90%86%E5%99%A8%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%BF%81%E7%A7%BB%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h3 id=&#34;峰会概览&#34;&gt;峰会概览
+&lt;/h3&gt;&lt;p&gt;Uber云基础设施工程师Vikrant Soman的发言道出峰会主旨：&amp;ldquo;Ampere CPU的主机性能足以提供与现有方案相当或更高的吞吐量，请勿轻信基准测试，务必运行自身工作负载进行总成本分析。&amp;ldquo;这场于2024年9月26日举办的半日虚拟峰会，聚集了全球开发者共同探讨云架构迁移与Ampere®云原生处理器如何重塑计算未来。&lt;/p&gt;
+&lt;h3 id=&#34;核心技术议程&#34;&gt;核心技术议程
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;混合架构构建的挑战与机遇&lt;/strong&gt;&lt;br&gt;
+Ampere公司Pete Baker的主题演讲揭示了使用Ampere平台迁移时优化工具与方法的关键见解。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;云原生处理器的三重优势&lt;/strong&gt;&lt;br&gt;
+首席技术推广官Sean Varley联合Fermyon的Kate Goldenring与ScyllaDB CEO Dor Laor，论证了Ampere高核心密度处理器对Kubernetes及分布式数据库等现代应用的适配性：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;蔡司公司通过转向WebAssembly并增加Ampere Arm节点，在保持性能同时实现60%成本削减&amp;rdquo; —— Kate Goldenring&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最佳工作负载匹配实践&lt;/strong&gt;&lt;br&gt;
+Ampere客户工程副总裁Naren Nayak与Uber/Oracle专家共同解析AI、无状态云负载等场景的性能增益：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Arm生态已与x86指令集并肩发展&amp;rdquo; —— Vikrant Soman&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AI推理成本优化方案&lt;/strong&gt;&lt;br&gt;
+Oracle产品经理Amar Gowda与Wallaroo.AI团队展示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;在OCI A1机器上部署量化模型，推理速度达x.86方案两倍&amp;rdquo; —— Steve Notley&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;混合架构迁移实战&lt;/strong&gt;&lt;br&gt;
+Uber工程师Andreas Winther Lykke分享：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;3000个服务在数周内完成架构迁移与问题修复&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;可持续计算价值&#34;&gt;可持续计算价值
+&lt;/h3&gt;&lt;p&gt;Ampere云原生处理器以可预测的高性能、弹性扩展和能效设计，实现开发效率、成本节约与环保的三重收益。&lt;/p&gt;
+&lt;h3 id=&#34;开发者资源&#34;&gt;开发者资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;与Ampere销售团队洽谈合作&lt;/li&gt;
+&lt;li&gt;通过开发者计划申请系统试用&lt;/li&gt;
+&lt;li&gt;订阅开发者通讯&lt;/li&gt;
+&lt;li&gt;加入技术社区讨论&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>GDB Python API的冬季优化：增强消息提示与类型支持</title>
         <link>http://localhost:1313/p/gdb-python-api%E7%9A%84%E5%86%AC%E5%AD%A3%E4%BC%98%E5%8C%96%E5%A2%9E%E5%BC%BA%E6%B6%88%E6%81%AF%E6%8F%90%E7%A4%BA%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%94%AF%E6%8C%81/</link>
         <pubDate>Sun, 03 Aug 2025 17:01:19 +0800</pubDate>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>编译器 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%BC%96%E8%AF%91%E5%99%A8/</link>
+        <description>Recent content in 编译器 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 03:19:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BC%96%E8%AF%91%E5%99%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>部署安全缓解措施面临的挑战：ClangCFI与CFGuard的实践对比</title>
+        <link>http://localhost:1313/p/%E9%83%A8%E7%BD%B2%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98clangcfi%E4%B8%8Ecfguard%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%AF%B9%E6%AF%94/</link>
+        <pubDate>Mon, 04 Aug 2025 03:19:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%83%A8%E7%BD%B2%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98clangcfi%E4%B8%8Ecfguard%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%AF%B9%E6%AF%94/</guid>
+        <description>&lt;h3 id=&#34;计划实施&#34;&gt;计划实施
+&lt;/h3&gt;&lt;p&gt;我们原计划简单明了：为Windows版osquery启用CFGuard，为Linux版启用ClangCFI。通过对比测试套件结果进行量化评估，最终将补丁贡献给osquery代码库，实现双赢——既产出技术博客又增强安全性。&lt;/p&gt;
+&lt;h3 id=&#34;严格性对比&#34;&gt;严格性对比
+&lt;/h3&gt;&lt;p&gt;ClangCFI在安全性上更为严格：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对每个间接调用，ClangCFI允许的目标地址更少（图1示例）&lt;/li&gt;
+&lt;li&gt;执行更全面的错误检测（如类型转换检查、虚方法调用目标验证等）&lt;/li&gt;
+&lt;li&gt;要求全程序分析，因此必须满足：
+&lt;ol&gt;
+&lt;li&gt;所有链接对象和静态库都需启用CFI&lt;/li&gt;
+&lt;li&gt;必须启用链接时优化(LTO)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CFGuard则采用更宽松的验证标准：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅需验证间接调用目标是否为合法函数入口点&lt;/li&gt;
+&lt;li&gt;支持渐进式部署，允许混合使用受保护和未受保护的代码模块&lt;/li&gt;
+&lt;li&gt;动态链接库(DSO/DLL)完全兼容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工程实践挑战&#34;&gt;工程实践挑战
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;ClangCFI的全有或全无特性&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须为整个依赖树启用CFI（包括libc++等深层依赖）&lt;/li&gt;
+&lt;li&gt;链接器不会检查CFI一致性，但运行时可能失败（表1展示合法链接组合）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;代码兼容性问题&lt;/strong&gt;：
+尝试为strongSwan启用ClangCFI时，其C语言OOP系统因类型签名不匹配触发严格检查。虽然技术上ClangCFI正确，但实际代码中存在大量不符合标准的模式。CFI黑名单功能在此场景下几乎需禁用所有检查点，失去安全意义。&lt;/p&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;从安全角度看，ClangCFI确实优于CFGuard——更严格的检查、全程序保护、更多运行时验证。Google Chrome团队已成功实践该方案。但增强安全的代价是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要大量开发时间投入&lt;/li&gt;
+&lt;li&gt;必须进行严格测试&lt;/li&gt;
+&lt;li&gt;对现有代码库改造难度大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而CFGuard的灵活性使其能快速应用于现有项目。最终我们的Windows版osquery已实装CFGuard，Linux版ClangCFI仍在攻坚中。这种对比深刻揭示了安全措施在理想与现实之间的关键权衡。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;[1] 技术细节补充：CFGuard实际也存在例外情况，如某些被抑制的函数入口点仍属非法目标&lt;br&gt;
+[2] 根据Evgeniy Stepanov的解释，非CFI代码中的函数若仅被直接调用仍可混合链接&lt;br&gt;
+[3] 官方文档明确允许混合CFG/非CFG代码共存&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>深入iOS安全与编译器理论：MAST移动应用安全工具包解析</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5ios%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8%E7%90%86%E8%AE%BAmast%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 21:58:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5ios%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8%E7%90%86%E8%AE%BAmast%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;什么是code-as-craft&#34;&gt;什么是Code as Craft？
+&lt;/h3&gt;&lt;p&gt;Etsy的Code as Craft活动是每月两次的嘉宾演讲系列，聚焦技术主题或计算趋势，既分享概念性思想也提供实用建议。所有讲座将在布鲁克林华盛顿街55号7楼的Etsy实验室（712室）举行。&lt;/p&gt;
+&lt;h3 id=&#34;演讲内容是什么&#34;&gt;演讲内容是什么？
+&lt;/h3&gt;&lt;p&gt;Sophia将探讨iOS安全最新进展及其与编译器理论的交叉点。重点介绍移动应用安全工具包MAST——该项目已从DARPA概念验证发展为完整的移动应用防护套件，集成以下关键技术：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;越狱检测&lt;/strong&gt;：识别设备安全环境&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反调试&lt;/strong&gt;：阻止动态分析攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于LLVM的反逆向&lt;/strong&gt;：在编译器层面实现保护机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;演讲将分析当前iOS攻击态势，指出苹果原生API的防御不足，并演示MAST如何为高风险应用提供超越系统原生的保护方案。该工具现已开放测试，参与者可联系获取试用。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

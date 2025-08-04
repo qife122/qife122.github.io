@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>HTTP头 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/http%E5%A4%B4/</link>
+        <description>Recent content in HTTP头 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 01:41:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/http%E5%A4%B4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何修复网站缺失的Referrer-Policy安全头</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E4%BF%AE%E5%A4%8D%E7%BD%91%E7%AB%99%E7%BC%BA%E5%A4%B1%E7%9A%84referrer-policy%E5%AE%89%E5%85%A8%E5%A4%B4/</link>
+        <pubDate>Mon, 04 Aug 2025 01:41:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E4%BF%AE%E5%A4%8D%E7%BD%91%E7%AB%99%E7%BC%BA%E5%A4%B1%E7%9A%84referrer-policy%E5%AE%89%E5%85%A8%E5%A4%B4/</guid>
+        <description>&lt;h1 id=&#34;如何修复网站缺失的referrer-policy安全头&#34;&gt;如何修复网站缺失的Referrer-Policy安全头
+&lt;/h1&gt;&lt;h2 id=&#34;referrer-policy是什么&#34;&gt;Referrer-Policy是什么？
+&lt;/h2&gt;&lt;p&gt;Referrer-Policy是一种安全头部，应包含在网站服务器与客户端的通信中。该策略指示浏览器当用户点击跳转链接时，如何处理发送给目标站点的来源信息。可配置为不传递任何URL信息、部分信息或完整路径。最佳实践推荐强制设置该策略，可通过PHP等网站代码或Apache配置实现。&lt;/p&gt;
+&lt;h2 id=&#34;检查referrer-policy是否启用&#34;&gt;检查Referrer-Policy是否启用
+&lt;/h2&gt;&lt;p&gt;未主动配置的网站通常缺失该头部，可通过&lt;a class=&#34;link&#34; href=&#34;https://www.securityheaders.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SecurityHeaders.io&lt;/a&gt;扫描检测，或使用FireFox开发者控制台验证。&lt;/p&gt;
+&lt;h2 id=&#34;确定referrer策略需求&#34;&gt;确定Referrer策略需求
+&lt;/h2&gt;&lt;p&gt;用户离开网站时，目标服务器可能需要来源信息（用于广告分析等），但也需防止HTTPS URL泄露到非安全HTTP环境。推荐采用&amp;quot;no-referrer-when-downgrade&amp;quot;策略，确保从HTTPS跳转HTTP时不暴露原始URL路径。&lt;/p&gt;
+&lt;h2 id=&#34;apache配置步骤&#34;&gt;Apache配置步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;httpd.conf&lt;/code&gt;中找到VirtualHost配置段&lt;/li&gt;
+&lt;li&gt;定位或创建&lt;code&gt;&amp;lt;IfModule headers_module&amp;gt;&lt;/code&gt;区块&lt;/li&gt;
+&lt;li&gt;添加头部指令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-apache&#34; data-lang=&#34;apache&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;IfModule&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;headers_module&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;Header&lt;/span&gt; set Referrer-Policy &lt;span class=&#34;s2&#34;&gt;&amp;#34;no-referrer-when-downgrade&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/IfModule&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;重启Apache服务：&lt;code&gt;sudo service apache restart&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;扩展资源&#34;&gt;扩展资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://scotthelme.co.uk/a-new-security-header-referrer-policy/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Scott Helme的Referrer Policy详解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安全头部检测工具：&lt;a class=&#34;link&#34; href=&#34;https://www.securityheaders.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SecurityHeaders.io&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;关联阅读：&lt;a class=&#34;link&#34; href=&#34;#&#34; &gt;内容安全策略(CSP)配置指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

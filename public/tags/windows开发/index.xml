@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Windows开发 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/windows%E5%BC%80%E5%8F%91/</link>
+        <description>Recent content in Windows开发 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 20:52:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何安装Microsoft Visual C&#43;&#43; 2015运行时环境</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85microsoft-visual-c-2015%E8%BF%90%E8%A1%8C%E6%97%B6%E7%8E%AF%E5%A2%83/</link>
+        <pubDate>Sun, 03 Aug 2025 20:52:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85microsoft-visual-c-2015%E8%BF%90%E8%A1%8C%E6%97%B6%E7%8E%AF%E5%A2%83/</guid>
+        <description>&lt;h1 id=&#34;如何安装microsoft-visual-c-2015运行时环境&#34;&gt;如何安装Microsoft Visual C++ 2015运行时环境
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Lawrence Abrams&lt;/strong&gt;&lt;br&gt;
+2020年9月1日&lt;br&gt;
+阅读量：300,772次&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;当您启动程序时若出现&amp;quot;需要Microsoft Visual C++ 2015运行时环境&amp;quot;的错误提示，本教程将指导您安装该组件以恢复程序运行。&lt;/p&gt;
+&lt;p&gt;开发者使用Microsoft Visual Studio 2015创建Windows程序时，会依赖特定的动态链接库(DLL)。这些DLL通过Microsoft Visual C++ 2015运行时环境分发，若未安装该组件，用户将遭遇DLL缺失或需安装运行时的错误提示。&lt;/p&gt;
+&lt;p&gt;以热门游戏《Valorant》为例，其某次更新未包含该运行时组件，导致更新后游戏无法启动并显示错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;运行此程序需要以下组件：Microsoft Visual C++ 2015运行时环境&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;安装步骤&#34;&gt;安装步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/vs/16/release/vc_redist.x64.exe&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Microsoft Visual C++ 2015可再发行组件页面&lt;/a&gt;，点击&amp;quot;下载&amp;quot;按钮&lt;/li&gt;
+&lt;li&gt;选择适用于您系统的版本（32位或64位）。不确定版本？&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/32-bit-or-64-bit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;参考此教程判断&lt;/a&gt;&lt;br&gt;
+&lt;em&gt;建议同时安装x86和x64版本以避免未来兼容性问题&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;下载完成后双击运行&lt;code&gt;vc_redist.x64.exe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;勾选&amp;quot;我同意许可条款&amp;quot;后点击&amp;quot;安装&amp;quot;按钮&lt;/li&gt;
+&lt;li&gt;若出现用户账户控制提示，点击&amp;quot;是&amp;quot;或&amp;quot;允许&amp;quot;&lt;/li&gt;
+&lt;li&gt;安装完成后将显示成功提示&lt;/li&gt;
+&lt;li&gt;重复上述步骤安装&lt;code&gt;vc_redist.x86.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复已安装的运行时&#34;&gt;修复已安装的运行时
+&lt;/h2&gt;&lt;p&gt;若运行时已存在，运行安装程序可选择&amp;quot;修复&amp;quot;选项。完成上述操作后，原先报错的程序应可正常运行。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;延伸阅读&#34;&gt;延伸阅读
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows 10全屏开始菜单设置方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows 11管理员权限PowerShell开启指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;修复VCRUNTIME140.dll缺失错误&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;搜索更多教程：&lt;br&gt;
+• &lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tor浏览器访问暗网指南&lt;/a&gt;&lt;br&gt;
+• &lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows 11内核模式硬件强制堆栈保护启用方法&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

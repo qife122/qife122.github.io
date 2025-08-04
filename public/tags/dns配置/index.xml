@@ -7,7 +7,109 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 30 Jul 2025 21:00:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 14:24:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SPFv1配置指南：全面解析邮件发送者策略框架</title>
+        <link>http://localhost:1313/p/spfv1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E8%80%85%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Mon, 04 Aug 2025 14:24:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/spfv1%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E8%80%85%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;h1 id=&#34;如何配置spfv1大众版详解&#34;&gt;如何配置SPFv1：大众版详解
+&lt;/h1&gt;&lt;p&gt;&lt;em&gt;&lt;em&gt;Kent Ickler和Derrick Rauch&lt;/em&gt; //&lt;/em&gt;*&lt;/p&gt;
+&lt;h2 id=&#34;防晒系数&#34;&gt;防晒系数？
+&lt;/h2&gt;&lt;p&gt;等等&amp;hellip;搞错了。
+是&lt;strong&gt;发送者策略框架&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;1997届的女士们先生们，记得擦防晒霜&amp;hellip;现在我要给出我的建议：&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;当今网络中存在邮件&amp;quot;伪造&amp;quot;现象（感谢@ustayready）。发送者策略框架（SPF）最早可追溯至2005年（RFC 4408），最新版本于2014年更新（RFC 7208），并与DKIM和DMARC共同更新。它试图通过为收件邮件服务器提供一种方法，来判断电子邮件是否来自FROM字段中域名的授权发送者，从而阻止伪造邮件。收件邮件服务器因此能够判断入站邮件更可能是伪造/钓鱼邮件还是合法邮件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果收件服务器收到的邮件FROM地址来自SPF授权服务器，则有理由认为是有效/&amp;ldquo;好&amp;quot;邮件&lt;/li&gt;
+&lt;li&gt;如果来自未授权服务器，则有理由认为是无效/恶意邮件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SPF记录还能&amp;quot;告知&amp;quot;收件服务器如何处理未授权邮件：继续投递、标记为可疑（提高风险评级）或直接拒绝。当然，SPF记录并非金科玉律，收件服务器可自行决定如何权衡SPF记录。&lt;/p&gt;
+&lt;h2 id=&#34;营销人员的困境&#34;&gt;营销人员的困境
+&lt;/h2&gt;&lt;p&gt;营销人员常为此头疼。这是SendGrid、MailGun、MailChimp等工具带来的难题。他们购买了 fancy 的新营销邮件工具，但人们总把他们的营销邮件标记为垃圾邮件！如果营销团队没有确保FROM域名的SPF记录准确，接收方可能更容易将邮件视为垃圾/恶意邮件，永远消失在垃圾箱中。&lt;/p&gt;
+&lt;h2 id=&#34;前瞻思考&#34;&gt;前瞻思考
+&lt;/h2&gt;&lt;p&gt;发送者策略框架并未过时，但在反垃圾邮件和反钓鱼领域有了新伙伴。DKIM和DMARC是扩展SPF验证功能的新框架，共同构建域名所有者与收件服务器间的信任网络。请关注我们未来关于DMARC和DKIM的博客文章。&lt;/p&gt;
+&lt;h2 id=&#34;域名服务器记录&#34;&gt;域名服务器记录
+&lt;/h2&gt;&lt;p&gt;授权邮件服务器/中继发送邮件的SPF记录是DNS TXT记录，必须添加在注册商指定的名称服务器上。由于这涉及域名所有权，它允许域名所有者告知收件方：收到带有其域名的邮件是否来自预期的邮件服务器。&lt;/p&gt;
+&lt;p&gt;下文讨论的DNS记录必须在域名注册商的NS记录定义的名称服务器上创建。&lt;/p&gt;
+&lt;h2 id=&#34;语法详解&#34;&gt;语法详解
+&lt;/h2&gt;&lt;p&gt;虽然有许多工具可帮助构建SPF记录，但您仍需了解其原理。SMTP收件方从左到右读取SPF记录，首次匹配后即停止分析并返回配置结果。&lt;/p&gt;
+&lt;p&gt;DNS记录类型 = TXT&lt;br&gt;
+主机 = @（您的主TLD或要保护的域名）&lt;br&gt;
+值 = [语法]!!&lt;/p&gt;
+&lt;p&gt;值字段是记录的核心部分，让我们仔细看看：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;quot;v=spf1&amp;quot; [机制-动作] [机制-对象] [机制-动作] [机制-对象]...&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;机制-动作&#34;&gt;机制-动作
+&lt;/h3&gt;&lt;p&gt;动作参数告知收件服务器如何处理：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;+&lt;/code&gt; 通过：SPF记录指定主机已授权（接受邮件）&lt;br&gt;
+&lt;code&gt;-&lt;/code&gt; 拒绝：SPF记录指定主机未授权（拒绝邮件）&lt;br&gt;
+&lt;code&gt;~&lt;/code&gt; 软失败：SPF记录指定主机未授权但&amp;hellip;也许吧（标记/提高风险）&lt;br&gt;
+&lt;code&gt;?&lt;/code&gt; 中立：SPF记录表示不清楚（接受邮件）&lt;/p&gt;
+&lt;h3 id=&#34;机制-对象&#34;&gt;机制-对象
+&lt;/h3&gt;&lt;p&gt;选项众多：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;all&lt;/code&gt; 所有服务器，任何地方&lt;br&gt;
+&lt;code&gt;ip4:&amp;lt;邮件服务器IP地址&amp;gt;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;ip4:&amp;lt;IP地址&amp;gt;/CIDR格式&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;ip6:&amp;lt;IPv6地址&amp;gt;&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;ip6:&amp;lt;IP地址&amp;gt;/CIDR格式&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;a:[域名]&lt;/code&gt; 包含[某域名]的所有A记录&lt;br&gt;
+&lt;code&gt;a:[域名]/CIDR&lt;/code&gt; 包含[某域名]所有A记录的/CIDR网络&lt;br&gt;
+&lt;code&gt;a&lt;/code&gt; 包含本域所有A记录&lt;br&gt;
+&lt;code&gt;a/CIDR&lt;/code&gt; 包含本域所有A记录的/CIDR网络&lt;br&gt;
+&lt;code&gt;mx&lt;/code&gt; 包含本域所有MX记录&lt;br&gt;
+&lt;code&gt;mx/CIDR&lt;/code&gt; 包含本域所有MX记录的/CIDR网络&lt;br&gt;
+&lt;code&gt;mx:[域名]&lt;/code&gt; 包含[某域名]所有MX记录&lt;br&gt;
+&lt;code&gt;mx:[域名]/CIDR&lt;/code&gt; 包含[某域名]所有MX记录的/CIDR网络&lt;br&gt;
+&lt;code&gt;ptr&lt;/code&gt; 包含本域PTR记录的IP&lt;br&gt;
+&lt;code&gt;ptr:[域名]&lt;/code&gt; 包含[某域名]PTR记录的IP&lt;br&gt;
+&lt;code&gt;exists:[域名]&lt;/code&gt; YES/NO触发器。如果A记录存在=通过&lt;br&gt;
+&lt;code&gt;redirect:[域名]&lt;/code&gt; 用[域名]的SPF记录替换整个SPF记录&lt;br&gt;
+&lt;code&gt;include:[域名]&lt;/code&gt; 包含[域名]的SPF记录。匹配=通过，不匹配=失败。这种记录通常用于Google、Office等大型邮件提供商，以及SendGrid、MailGun等邮件中继。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;include:&lt;/code&gt;是一种信任机制，允许您将对域名/组织邮件发送的授权信任代理给您认可的负责发送邮件的另一个域名/组织的SPF记录。这些组织通常会在SPF记录中涵盖其所有可能的邮件服务器。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;v=spf1 +mx -all&lt;/code&gt;&lt;br&gt;
+接受来自本域MX记录的邮件，拒绝其他所有来源。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v=spf1 +a:AnotherDomain.com ?a:google.com -all&lt;/code&gt;&lt;br&gt;
+接受来自AnotherDomain.com的A记录，对Google.com的A记录保持中立，拒绝其他所有。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v=spf1 exists:AnotherDomain.com -all&lt;/code&gt;&lt;br&gt;
+如果AnotherDomain.com存在A记录则接受邮件，否则拒绝。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v=spf1 -all&lt;/code&gt;&lt;br&gt;
+拒绝来自本域的所有邮件，无论发送者是谁。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v=spf1 include:mailgun.com include:sendgrid.com -all&lt;/code&gt;&lt;br&gt;
+遵循mailgun.com和sendgrid.com的SPF记录规则，拒绝其他所有。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v=spf1 redirect=AnotherDomain.com&lt;/code&gt;&lt;br&gt;
+仅遵循AnotherDomain.com的SPF记录规则。&lt;/p&gt;
+&lt;h2 id=&#34;再谈营销&#34;&gt;再谈营销
+&lt;/h2&gt;&lt;p&gt;回到营销话题，MailChimp、MailGun和SendGrid在做什么？&lt;/p&gt;
+&lt;p&gt;有趣的是，如果您使用邮件中继或群发邮件服务，邮件&lt;em&gt;可以&lt;/em&gt;被视为已授权，从而突破垃圾邮件箱。但作为红队成员，我不得不问&amp;hellip;&lt;/p&gt;
+&lt;p&gt;第三方能否在我不知情的情况下，在我信任的第三方创建账户并以我的名义发送邮件？&lt;/p&gt;
+&lt;p&gt;答案是&amp;hellip;既是也不是。&lt;/p&gt;
+&lt;p&gt;这些服务可以在您配置SPF记录授权其邮件服务器后代表您发送邮件。它们会采取一些措施确保第三方不能使用您的FROM地址发送邮件，通常要求用户在代表某域名发送邮件前验证该域名。各服务验证方式不同，有些会在其域名上创建DNS记录（如&lt;code&gt;+a:yourdomain.mailrelayservice.com&lt;/code&gt;）以提供保证。但最终，您需要信任您的邮件服务器，如果无法信任&amp;hellip;这个世界很残酷，偏执可能会让您寸步难行。&lt;/p&gt;
+&lt;h2 id=&#34;spf记录生成工具&#34;&gt;SPF记录生成工具
+&lt;/h2&gt;&lt;p&gt;有些平台可帮助构建符合特定需求的SPF记录。大多数工具工作方式相似&amp;hellip;有些甚至收费！我不建议为创建SPF记录付费，但使用免费服务时务必小心。多年来，MXToolbox一直是我的系统管理员和蓝队工具箱中的利器，从未让我失望。&lt;/p&gt;
+&lt;p&gt;在线构建SPF：https://mxtoolbox.com/SPFRecordGenerator.aspx&lt;/p&gt;
+&lt;h2 id=&#34;相关链接&#34;&gt;相关链接
+&lt;/h2&gt;&lt;p&gt;Open Sender Policy Framework：http://www.openspf.org/Project_Overview&lt;br&gt;
+SPF V1: RFC 7208 (替代4408, 6652) &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/rfc/rfc7208.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/rfc/rfc7208.txt&lt;/a&gt;&lt;br&gt;
+SPF V1: RFC 6652 (被RFC-7208替代) &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/html/rfc6652&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/html/rfc6652&lt;/a&gt;&lt;br&gt;
+SPF V1: RFC 4408 (被RFC-7208替代) (2006) &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/html/rfc4408&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/html/rfc4408&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;即将发布的博客：DKIM, DMARC!&lt;/p&gt;
+&lt;p&gt;基于域的消息认证、报告和一致性：https://dmarc.org/&lt;br&gt;
+SPF V1: RFC 7960 – DMARC互操作性 &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/rfc/rfc7960.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/rfc/rfc7960.txt&lt;/a&gt;&lt;br&gt;
+SPF V1: RFC 7489 – DMARC &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/rfc/rfc7489.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/rfc/rfc7489.txt&lt;/a&gt;&lt;br&gt;
+SPF V1: RFC 7372 -DKIM (更新7208) &lt;a class=&#34;link&#34; href=&#34;https://tools.ietf.org/rfc/rfc7372.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tools.ietf.org/rfc/rfc7372.txt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;但请相信我对防晒霜的建议。&amp;rdquo;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;*Kent和Derrick是我们的系统管理员团队成员——没有他们我们该怎么办？&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>请勿在DNS MX记录中直接使用IP地址 - 邮件服务器配置指南</title>
         <link>http://localhost:1313/p/%E8%AF%B7%E5%8B%BF%E5%9C%A8dns-mx%E8%AE%B0%E5%BD%95%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ip%E5%9C%B0%E5%9D%80-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link>
         <pubDate>Wed, 30 Jul 2025 21:00:38 +0800</pubDate>

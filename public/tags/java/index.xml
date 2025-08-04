@@ -7,7 +7,90 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 08:45:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 21:41:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Go语言访问控制指南：Java开发者必读</title>
+        <link>http://localhost:1313/p/go%E8%AF%AD%E8%A8%80%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%8C%87%E5%8D%97java%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E8%AF%BB/</link>
+        <pubDate>Sun, 03 Aug 2025 21:41:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/go%E8%AF%AD%E8%A8%80%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%8C%87%E5%8D%97java%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E8%AF%BB/</guid>
+        <description>&lt;h1 id=&#34;go语言访问控制指南java开发者必读&#34;&gt;Go语言访问控制指南：Java开发者必读
+&lt;/h1&gt;&lt;p&gt;Go支持多种编程范式，包括面向对象编程。但如果你从Java转向Go，可能会感到些许&amp;hellip;呃&amp;hellip;不适应。最明显的差异之一是Go完全没有访问修饰符。你可能会疑惑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;我的&lt;code&gt;public&lt;/code&gt;、&lt;code&gt;protected&lt;/code&gt;和&lt;code&gt;private&lt;/code&gt;关键字去哪了？&lt;/li&gt;
+&lt;li&gt;Go提供了哪些访问控制机制？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;别担心！Go的访问控制比Java更简单。完全不需要访问修饰符！&lt;/p&gt;
+&lt;h2 id=&#34;为什么go只需要两种访问级别&#34;&gt;为什么Go只需要两种访问级别
+&lt;/h2&gt;&lt;p&gt;Java提供了四种访问级别，从最严格到最宽松依次是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;private&lt;/code&gt;：仅限同一类内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-private&lt;/code&gt;：仅限同一包内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protected&lt;/code&gt;：允许同一包及(直接或间接)子类访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;public&lt;/code&gt;：完全开放访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;现在让我们砍掉其中两个！&lt;/p&gt;
+&lt;h3 id=&#34;以包为封装单元&#34;&gt;以包为封装单元
+&lt;/h3&gt;&lt;p&gt;Go允许定义具体类型（相当于Java的类），但：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;封装的基本单位是包，而不是像其他语言中的类型。
+（来源：《Go编程语言》，Donovan &amp;amp; Kernighan，第6.6节）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结构体类型的字段对同一包内的所有代码可见。
+（同上）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因此Go不需要区分&lt;code&gt;private&lt;/code&gt;和&lt;code&gt;package-private&lt;/code&gt;。现在剩下三种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;private&lt;/code&gt;：仅限同一类内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-private&lt;/code&gt;：仅限同一包内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protected&lt;/code&gt;：允许同一包及子类访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;public&lt;/code&gt;：完全开放访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;没有继承机制&#34;&gt;没有继承机制
+&lt;/h3&gt;&lt;p&gt;最重要的是，Go不提供继承机制。因此Go不需要区分&lt;code&gt;package-private&lt;/code&gt;和&lt;code&gt;protected&lt;/code&gt;。最终只剩下两种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;private&lt;/code&gt;：仅限同一类内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;package-private&lt;/code&gt;：仅限同一包内访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protected&lt;/code&gt;：允许同一包及子类访问&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;public&lt;/code&gt;：完全开放访问&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;go的访问控制机制&#34;&gt;Go的访问控制机制
+&lt;/h2&gt;&lt;p&gt;最终Go只需要两种访问级别：公开和包私有。不过Go的术语与Java不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;导出(exported)：相当于public&lt;/li&gt;
+&lt;li&gt;非导出(non-exported)：相当于package-private&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（&amp;ldquo;unexported&amp;quot;是非正式的同义词，但建议使用更正式的&amp;quot;non-exported&amp;rdquo;）&lt;/p&gt;
+&lt;p&gt;Go设计者选择用命名约定而非冗长的关键字来控制访问：&lt;/p&gt;
+&lt;p&gt;标识符被导出的条件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;标识符名称首字母是大写的Unicode字符（Unicode类别&amp;quot;Lu&amp;quot;）&lt;/li&gt;
+&lt;li&gt;标识符在包块中声明，或是字段名/方法名&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;（强调部分）&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;foo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Bar&amp;#34;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 导出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;baz&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;baz&amp;#34;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 不导出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Go的设计追求易读性，其访问控制设计显著提升了代码可读性：不仅摆脱了繁琐的访问修饰符，通过标识符首字母大小写就能判断是否导出。这是阅读Go代码比Java更轻松的原因之一——当然这只是我的个人观点。你怎么看？&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Netflix如何用Java和微服务架构支撑2.7亿用户</title>
         <link>http://localhost:1313/p/netflix%E5%A6%82%E4%BD%95%E7%94%A8java%E5%92%8C%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%94%AF%E6%92%912.7%E4%BA%BF%E7%94%A8%E6%88%B7/</link>
         <pubDate>Sun, 03 Aug 2025 08:45:07 +0800</pubDate>

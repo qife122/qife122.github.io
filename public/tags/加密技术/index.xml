@@ -7,7 +7,142 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 07:49:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 05:57:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>安全浏览协议如何未能保护用户隐私 - k匿名性的缺陷分析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%B5%8F%E8%A7%88%E5%8D%8F%E8%AE%AE%E5%A6%82%E4%BD%95%E6%9C%AA%E8%83%BD%E4%BF%9D%E6%8A%A4%E7%94%A8%E6%88%B7%E9%9A%90%E7%A7%81-k%E5%8C%BF%E5%90%8D%E6%80%A7%E7%9A%84%E7%BC%BA%E9%99%B7%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 05:57:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%B5%8F%E8%A7%88%E5%8D%8F%E8%AE%AE%E5%A6%82%E4%BD%95%E6%9C%AA%E8%83%BD%E4%BF%9D%E6%8A%A4%E7%94%A8%E6%88%B7%E9%9A%90%E7%A7%81-k%E5%8C%BF%E5%90%8D%E6%80%A7%E7%9A%84%E7%BC%BA%E9%99%B7%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;安全浏览协议如何未能保护用户隐私---the-trail-of-bits博客&#34;&gt;安全浏览协议如何未能保护用户隐私 - The Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Trail of Bits&lt;/strong&gt;&lt;br&gt;
+2019年10月30日&lt;br&gt;
+密码学专题&lt;/p&gt;
+&lt;p&gt;近期安全研究人员发现，苹果公司将中国用户的所有安全浏览数据发送给腾讯。这一发现使得安全浏览协议底层的安全与隐私保障机制受到严格审视。该协议声称通过所谓的k匿名性(k-anonymity)来保护用户，但本文将展示这种隐私定义在安全浏览场景下实际形同虚设。&lt;/p&gt;
+&lt;h2 id=&#34;安全浏览协议工作原理&#34;&gt;安全浏览协议工作原理
+&lt;/h2&gt;&lt;p&gt;早期Google通过Lookup API方案，要求用户提交IP地址和待检查URL到谷歌的恶意网站数据库。出于隐私顾虑，现行方案改用Update API（谷歌和腾讯均采用此方案）。&lt;/p&gt;
+&lt;p&gt;核心机制：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;谷歌维护恶意URL及其256位哈希值的列表&lt;/li&gt;
+&lt;li&gt;为节省带宽，仅向浏览器分发32位哈希前缀&lt;/li&gt;
+&lt;li&gt;当匹配发生时，浏览器将32位前缀发送给谷歌&lt;/li&gt;
+&lt;li&gt;谷歌返回包含该前缀的所有黑名单URL完整哈希&lt;/li&gt;
+&lt;li&gt;最终匹配则向用户发出警告&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;什么是k匿名性&#34;&gt;什么是k匿名性
+&lt;/h2&gt;&lt;p&gt;k匿名性传统用于数据库去标识化处理，通过数据泛化使得每条记录在特定属性上与至少k-1条其他记录不可区分。在安全浏览场景中，32位哈希前缀理论上可产生约14757次碰撞（Gerbet等人2015年研究数据），即浏览数据具有14757-匿名性。&lt;/p&gt;
+&lt;h2 id=&#34;k匿名性为何失效&#34;&gt;k匿名性为何失效
+&lt;/h2&gt;&lt;p&gt;尽管满足k匿名性定义，但通过以下技术手段可破解隐私保护：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨查询关联攻击&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用cookie和IP地址关联多次查询&lt;/li&gt;
+&lt;li&gt;例如连续访问amazon.com及其购物车页面时，可推断用户购物行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;URL分解漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;协议要求提交URL层级分解（如http://a.b.c/1/2会同时检查）：
+&lt;ul&gt;
+&lt;li&gt;a.b.c/1/2&lt;/li&gt;
+&lt;li&gt;a.b.c/1/&lt;/li&gt;
+&lt;li&gt;a.b.c/&lt;/li&gt;
+&lt;li&gt;b.c/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;同时提交多个关联前缀会极大降低匿名性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Gerbet等人研究表明，该漏洞甚至可识别用户的色情内容浏览偏好。更严重的是，由于恶意数据库不公开，无法验证是否被人为植入追踪性哈希前缀。&lt;/p&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;安全浏览协议虽提供安全价值，但无法有效防范企业或政府监控。k匿名性和差分隐私等技术并非放之四海皆准的方案，理论满足隐私定义的系统在实际部署中可能完全失效。&lt;/p&gt;
+&lt;p&gt;如需在应用中实施差分隐私或k匿名性等技术，我们的密码学服务团队可协助处理这些系统固有的复杂性——无论是协议设计还是现有代码审计，都能帮助构建值得用户信任的系统。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>苹果技术上可配合FBI解锁iPhone 5C - 安全专家深度解析</title>
+        <link>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E5%8F%AF%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c-%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 19:58:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E5%8F%AF%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c-%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;苹果可以配合fbi法庭命令---trail-of-bits博客&#34;&gt;苹果可以配合FBI法庭命令 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;2016年2月17日&lt;br&gt;
+作者：Dan Guido&lt;br&gt;
+标签：apple, cryptography, policy&lt;/p&gt;
+&lt;p&gt;联邦法官今日命令苹果配合FBI对圣贝纳迪诺枪击案凶手iPhone 5C的技术协助请求。基于对iOS平台的了解，我认为FBI的所有请求在技术上都是可行的。&lt;/p&gt;
+&lt;h2 id=&#34;fbi的技术请求&#34;&gt;FBI的技术请求
+&lt;/h2&gt;&lt;p&gt;调查中发现属于袭击者的iPhone 5C采用了&amp;quot;密码+硬件密钥&amp;quot;的双因素加密机制。FBI面临三个技术障碍：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;多次输错PIN会触发数据擦除&lt;/li&gt;
+&lt;li&gt;必须通过物理设备手动输入PIN&lt;/li&gt;
+&lt;li&gt;每次错误尝试后系统会引入延迟&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;FBI通过法庭令要求苹果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁用自动擦除功能&lt;/li&gt;
+&lt;li&gt;允许通过电子方式提交密码（USB/蓝牙/Wi-Fi）&lt;/li&gt;
+&lt;li&gt;消除密码尝试间的人为延迟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安全飞地se技术解析&#34;&gt;安全飞地(SE)技术解析
+&lt;/h2&gt;&lt;p&gt;搭载A7及以上处理器的设备包含独立的安全飞地协处理器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管理数据保护API、Apple Pay等服务的密钥访问&lt;/li&gt;
+&lt;li&gt;采用&amp;quot;密码+SE内置密钥&amp;quot;的双密钥解密机制&lt;/li&gt;
+&lt;li&gt;独立维护错误尝试计数器并实施延迟惩罚（最高1小时/次）&lt;/li&gt;
+&lt;li&gt;通过硬件级配对防止TouchID传感器伪造&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术实现方案&#34;&gt;技术实现方案
+&lt;/h2&gt;&lt;p&gt;对于无SE的iPhone 5C：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单一iOS固件更新即可绕过所有软件级保护&lt;/li&gt;
+&lt;li&gt;硬件支持每秒12次密码尝试（80ms/次）&lt;/li&gt;
+&lt;li&gt;4位PIN可在半小时内破解，6位需要数小时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;包含SE的设备需要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;iOS固件更新&lt;/li&gt;
+&lt;li&gt;SE固件更新
+才能禁用安全限制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;历史与现状&#34;&gt;历史与现状
+&lt;/h2&gt;&lt;p&gt;iOS 8之前多数文件未加密，简单的UI绕过即可访问。现在必须通过密码猜测流程，这直接导致了当前的技术协助请求。苹果可通过以下方式控制风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;限定定制固件仅适用于特定设备&lt;/li&gt;
+&lt;li&gt;在苹果设施内完成破解流程&lt;/li&gt;
+&lt;li&gt;不向FBI提供固件镜像&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Trail of Bits深度参与CSAW网络安全竞赛：五大CTF挑战详解</title>
+        <link>http://localhost:1313/p/trail-of-bits%E6%B7%B1%E5%BA%A6%E5%8F%82%E4%B8%8Ecsaw%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E4%BA%94%E5%A4%A7ctf%E6%8C%91%E6%88%98%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 19:41:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/trail-of-bits%E6%B7%B1%E5%BA%A6%E5%8F%82%E4%B8%8Ecsaw%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E4%BA%94%E5%A4%A7ctf%E6%8C%91%E6%88%98%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;我们与csaw的特殊情缘&#34;&gt;我们与CSAW的特殊情缘
+&lt;/h3&gt;&lt;p&gt;在接下来的几周内，全球数万名学生和专业人士将关注六项竞赛，为他们喜爱的队伍加油助威。这就是我们长期参与的&amp;quot;网络安全意识周&amp;quot;(CSAW)——全美规模最大的学生运营网络安全赛事。无论多忙，我们始终会抽时间助力赛事成功。&lt;/p&gt;
+&lt;h3 id=&#34;ctf挑战的技术贡献&#34;&gt;CTF挑战的技术贡献
+&lt;/h3&gt;&lt;p&gt;今年我们为资格赛设计了五个CTF挑战：&lt;/p&gt;
+&lt;h4 id=&#34;wyvern&#34;&gt;wyvern
+&lt;/h4&gt;&lt;p&gt;参赛者首先获得一个经过混淆的Linux二进制文件（即crackme）。通过LLVM实现的多层次虚假谓词插入、代码扩散和基本块分割等混淆技术，使得静态逆向分析变得极其困难。参赛者必须采用动态分析方法，使用程序分析工具暴力破解flag。在此过程中，他们将学习如何通过监控指令计数变化来泄漏程序执行路径，以及使用PIN、Angr或AFL等工具。&lt;/p&gt;
+&lt;h4 id=&#34;bricks-of-gold&#34;&gt;bricks of gold
+&lt;/h4&gt;&lt;p&gt;这个挑战始于一个国际谜题：&amp;ldquo;我们截获了一份走私入境的加密文件，只知道他们使用了自定义的CBC模式算法——很可能很糟糕。&amp;ldquo;参赛者需要成功解密这个自定义XOR-CBC加密文件，这要求他们找出算法、密钥和初始向量。解题过程涉及文件头分析、密码学知识和暴力破解技术，同时学习如何检测加密文件的低熵特征、未加密字符串和CBC模式块特征。&lt;/p&gt;
+&lt;h4 id=&#34;sharpturn&#34;&gt;sharpturn
+&lt;/h4&gt;&lt;p&gt;参赛者获得一个损坏的Git仓库存档，需要修复损坏并读取文件。实际上存在三处损坏：每处都是单个比特错误且都位于源代码文件中（这是Trail of Bits真实遇到过的情况）。修复后，源代码文件可编译成包含答案的二进制文件。参赛者将学习Git blob包含带头部信息和zlib压缩的仓库文件版本，以及如何利用Git版本控制信息重建损坏的提交。&lt;/p&gt;
+&lt;h4 id=&#34;punchout&#34;&gt;punchout
+&lt;/h4&gt;&lt;p&gt;题目提供三个来自IBM System/360穿孔卡的二进制数据块及其加密数据。这些卡片使用1965年的加密技术，要求参赛者研究当时的安全机制。他们会遇到KW-26等密码（生成长比特流并与明文进行XOR运算），以及IBM使用的ebcdic（非ascii）编码方式。由于相同比特流被用于加密每个数据块，这种密钥重用存在已知攻击方式，参赛者需要通过&amp;quot;crib dragging&amp;quot;技术实施攻击。&lt;/p&gt;
+&lt;h4 id=&#34;math-aside-were-all-blackhats-now&#34;&gt;&amp;ldquo;math aside, we&amp;rsquo;re all blackhats now&amp;rdquo;
+&lt;/h4&gt;&lt;p&gt;参赛者需要找出为电视剧《硅谷》提供咨询的安全行业专家。该剧前两季中出现了大量与CTF社区相关的道具、名称和引用，其安全相关情节的准确性令人惊讶。&lt;/p&gt;
+&lt;h3 id=&#34;其他技术相关内容&#34;&gt;其他技术相关内容
+&lt;/h3&gt;&lt;h4 id=&#34;政策竞赛设计&#34;&gt;政策竞赛设计
+&lt;/h4&gt;&lt;p&gt;我们协助CSAW设计了政策竞赛环节，挑战学生探索美国政府实施漏洞赏金计划的可行性方案。参赛作品由该争议性话题各方的专家小组评审，前五名团队将在CSAW现场展示提案。&lt;/p&gt;
+&lt;h4 id=&#34;技术传承&#34;&gt;技术传承
+&lt;/h4&gt;&lt;p&gt;我们有多名员工曾作为学生参加CSAW比赛，包括通过CSAW女性夏季项目结识的实习生Loren。今年共有1,367支队伍获得积分，创下赛事新纪录。所有历史CTF挑战题均已开源在Github。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>苹果技术上有能力配合FBI解锁iPhone 5C——深入解析iOS安全机制</title>
         <link>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E8%83%BD%E5%8A%9B%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ios%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/</link>
         <pubDate>Sun, 03 Aug 2025 07:49:35 +0800</pubDate>

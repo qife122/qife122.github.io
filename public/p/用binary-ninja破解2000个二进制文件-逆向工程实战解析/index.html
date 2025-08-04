@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何使用Binary Ninja静态分析工具自动化分析2000个CTF挑战二进制文件，包括逆向工程技巧、自动化脚本编写方法以及如何应对不同保护机制的技术细节。">
+<title>用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析">
+<meta property='og:description' content="本文详细介绍了如何使用Binary Ninja静态分析工具自动化分析2000个CTF挑战二进制文件，包括逆向工程技巧、自动化脚本编写方法以及如何应对不同保护机制的技术细节。">
+<meta property='og:url' content='http://localhost:1313/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='binary-ninja' /><meta property='article:tag' content='逆向工程' /><meta property='article:tag' content='静态分析' /><meta property='article:tag' content='CTF竞赛' /><meta property='article:tag' content='漏洞利用' /><meta property='article:published_time' content='2025-08-04T17:48:54&#43;08:00'/><meta property='article:modified_time' content='2025-08-04T17:48:54&#43;08:00'/>
+<meta name="twitter:title" content="用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析">
+<meta name="twitter:description" content="本文详细介绍了如何使用Binary Ninja静态分析工具自动化分析2000个CTF挑战二进制文件，包括逆向工程技巧、自动化脚本编写方法以及如何应对不同保护机制的技术细节。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#binary-ninja实战2000个二进制文件的自动化破解之旅">Binary Ninja实战：2000个二进制文件的自动化破解之旅</a>
+          <ol>
+            <li><a href="#工具对比binary-ninja-vs-ida">工具对比：Binary Ninja vs IDA</a></li>
+            <li><a href="#挑战1334个二进制文件">挑战1：334个二进制文件</a></li>
+            <li><a href="#逆向工程关键步骤">逆向工程关键步骤</a></li>
+            <li><a href="#构造崩溃字符串">构造崩溃字符串</a></li>
+            <li><a href="#后续挑战666和1000个二进制文件">后续挑战：666和1000个二进制文件</a></li>
+            <li><a href="#binary-ninja的改进空间">Binary Ninja的改进空间</a></li>
+            <li><a href="#结论">结论</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/">用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了如何使用Binary Ninja静态分析工具自动化分析2000个CTF挑战二进制文件，包括逆向工程技巧、自动化脚本编写方法以及如何应对不同保护机制的技术细节。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 04, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="binary-ninja实战2000个二进制文件的自动化破解之旅">Binary Ninja实战：2000个二进制文件的自动化破解之旅
+</h3><p>在2016年DEFCON CTF资格赛中，我使用Vector35开发的Binary Ninja（一个极具潜力的交互式静态分析和逆向工程平台）编写脚本，为2000个独特二进制文件生成了&quot;漏洞利用&quot;。如果你想在后DARPA时代的DEFCON CTF中保持竞争力，我强烈推荐你了解Binary Ninja。</p>
+<h4 id="工具对比binary-ninja-vs-ida">工具对比：Binary Ninja vs IDA
+</h4><p>与我使用IDA的经验（简直是用胶带和祈祷勉强维持）相比，Binary Ninja的工作流程令人愉悦。它基于自己的中间语言（IL）进行分析，并通过Python和C++ API暴露功能。查询代码块、函数、跟踪执行流、查询寄存器状态等操作都变得非常简单，而这些在IDA中简直是艰巨任务。</p>
+<h4 id="挑战1334个二进制文件">挑战1：334个二进制文件
+</h4><p>第一个挑战是&quot;334 cuts&quot;，提供334个DECREE格式的挑战二进制文件，所有文件名都与食物相关。这些二进制文件被剥离了符号表，具有静态栈缓冲区、金丝雀值和基于栈的缓冲区溢出漏洞。金丝雀值被复制到栈上并与硬编码值进行比对。如果金丝雀值被覆盖，挑战将终止而不会崩溃。</p>
+<p>通过Binary Ninja的无界面分析引擎，我们编写Python脚本自动收集以下关键信息：</p>
+<ol>
+<li>需要溢出的缓冲区大小</li>
+<li>金丝雀字符串及其长度</li>
+<li>recvmsg函数中栈缓冲区大小</li>
+<li>writemsg函数每次写循环处理的数据量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">binaryninja</span>
+</span></span><span class="line"><span class="cl"><span class="n">bv</span> <span class="o">=</span> <span class="n">binaryninja</span><span class="o">.</span><span class="n">BinaryViewType</span><span class="p">[</span><span class="s2">&#34;ELF&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">chal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bv</span><span class="o">.</span><span class="n">update_analysis</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="逆向工程关键步骤">逆向工程关键步骤
+</h4><ol>
+<li><strong>定位main函数</strong>：从入口点开始，通过跟踪调用链找到main函数</li>
+<li><strong>识别关键调用</strong>：收集所有call指令，确定memcpy、recvmsg和memcmp调用</li>
+<li><strong>提取金丝雀值</strong>：使用get_parameter_at()函数查询memcmp调用参数</li>
+<li><strong>计算缓冲区大小</strong>：通过栈帧偏移计算可溢出缓冲区大小</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 获取金丝雀参数</span>
+</span></span><span class="line"><span class="cl"><span class="n">canary_frame</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">get_parameter_at</span><span class="p">(</span><span class="n">bv</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span> <span class="n">memcmp</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">canary_address</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">get_parameter_at</span><span class="p">(</span><span class="n">bv</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span> <span class="n">memcmp</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">canary_width</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">get_parameter_at</span><span class="p">(</span><span class="n">bv</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span> <span class="n">memcmp</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">canary</span> <span class="o">=</span> <span class="n">bv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">canary_address</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">canary_width</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="构造崩溃字符串">构造崩溃字符串
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 填充缓冲区</span>
+</span></span><span class="line"><span class="cl"><span class="n">crash_string</span> <span class="o">=</span> <span class="s2">&#34;a&#34;</span> <span class="o">*</span> <span class="n">buffer_size</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加金丝雀前4字节（总是4字节）</span>
+</span></span><span class="line"><span class="cl"><span class="n">crash_string</span> <span class="o">+=</span> <span class="n">canary</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 填充剩余金丝雀缓冲区</span>
+</span></span><span class="line"><span class="cl"><span class="n">crash_string</span> <span class="o">+=</span> <span class="s2">&#34;a&#34;</span> <span class="o">*</span> <span class="p">((</span><span class="n">canary_frame</span><span class="o">.</span><span class="n">offset</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 覆盖保存的寄存器</span>
+</span></span><span class="line"><span class="cl"><span class="n">crash_string</span> <span class="o">+=</span> <span class="s1">&#39;eeee&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="后续挑战666和1000个二进制文件">后续挑战：666和1000个二进制文件
+</h4><p>同样的方法成功应用于&quot;666 cuts&quot;和&quot;1000 cuts&quot;挑战，证明了该解决方案的通用性。最终获得的标志分别是：</p>
+<ul>
+<li>334 cuts: baby&rsquo;s first crs cirvyudta</li>
+<li>666 cuts: you think this is the real quaid DeifCokIj</li>
+<li>1000 cuts: do you want a thousand bandages gruanfir3</li>
+</ul>
+<h4 id="binary-ninja的改进空间">Binary Ninja的改进空间
+</h4><p>虽然Binary Ninja表现出色，但仍需改进：</p>
+<ol>
+<li>添加SSA（静态单赋值）形式</li>
+<li>实现灵活的类型系统</li>
+<li>增强数据流分析能力</li>
+</ol>
+<h4 id="结论">结论
+</h4><p>从流畅的图形视图到中间语言，再到与Python的智能集成，Binary Ninja为静态二进制分析提供了出色的接口。它让我能够轻松快速地从2000个二进制文件中提取数据，展示了将机械效率与人类直觉相结合的可能性。</p>
+<blockquote>
+<p>我的（略微更新的）脚本可在<a class="link" href="https://github.com/trailofbits/binja-ctf"  target="_blank" rel="noopener"
+    >这里</a>获取。Binary Ninja现已公开发售两个版本：商业版（399美元）和个人版（99美元）。本文介绍的脚本使用了仅商业版提供的&quot;无GUI处理&quot;功能。</p></blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/binary-ninja/">Binary-Ninja</a>
+        
+            <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
+        
+            <a href="/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">静态分析</a>
+        
+            <a href="/tags/ctf%E7%AB%9E%E8%B5%9B/">CTF竞赛</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2016年度回顾：Trail of Bits在自动漏洞发现、安全工具开发与社区贡献的突破</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%88%A9%E7%94%A8%E6%9C%AA%E5%85%AC%E5%BC%80%E7%89%B9%E6%80%A7%E4%BC%AA%E9%80%A0pe%E8%8A%82%E5%8C%BA%E5%A4%B4%E9%83%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">利用未公开特性伪造PE节区头部的技术分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mcsema%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%ACllvm%E6%AF%94%E7%89%B9%E7%A0%81%E5%B7%A5%E5%85%B7%E9%87%8D%E5%A4%A7%E5%8D%87%E7%BA%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">McSema二进制转LLVM比特码工具重大升级</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

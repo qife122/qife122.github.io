@@ -7,7 +7,61 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 11:56:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 05:57:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>安全浏览协议如何未能保护用户隐私 - k匿名性的缺陷分析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%B5%8F%E8%A7%88%E5%8D%8F%E8%AE%AE%E5%A6%82%E4%BD%95%E6%9C%AA%E8%83%BD%E4%BF%9D%E6%8A%A4%E7%94%A8%E6%88%B7%E9%9A%90%E7%A7%81-k%E5%8C%BF%E5%90%8D%E6%80%A7%E7%9A%84%E7%BC%BA%E9%99%B7%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 05:57:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%B5%8F%E8%A7%88%E5%8D%8F%E8%AE%AE%E5%A6%82%E4%BD%95%E6%9C%AA%E8%83%BD%E4%BF%9D%E6%8A%A4%E7%94%A8%E6%88%B7%E9%9A%90%E7%A7%81-k%E5%8C%BF%E5%90%8D%E6%80%A7%E7%9A%84%E7%BC%BA%E9%99%B7%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;安全浏览协议如何未能保护用户隐私---the-trail-of-bits博客&#34;&gt;安全浏览协议如何未能保护用户隐私 - The Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Trail of Bits&lt;/strong&gt;&lt;br&gt;
+2019年10月30日&lt;br&gt;
+密码学专题&lt;/p&gt;
+&lt;p&gt;近期安全研究人员发现，苹果公司将中国用户的所有安全浏览数据发送给腾讯。这一发现使得安全浏览协议底层的安全与隐私保障机制受到严格审视。该协议声称通过所谓的k匿名性(k-anonymity)来保护用户，但本文将展示这种隐私定义在安全浏览场景下实际形同虚设。&lt;/p&gt;
+&lt;h2 id=&#34;安全浏览协议工作原理&#34;&gt;安全浏览协议工作原理
+&lt;/h2&gt;&lt;p&gt;早期Google通过Lookup API方案，要求用户提交IP地址和待检查URL到谷歌的恶意网站数据库。出于隐私顾虑，现行方案改用Update API（谷歌和腾讯均采用此方案）。&lt;/p&gt;
+&lt;p&gt;核心机制：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;谷歌维护恶意URL及其256位哈希值的列表&lt;/li&gt;
+&lt;li&gt;为节省带宽，仅向浏览器分发32位哈希前缀&lt;/li&gt;
+&lt;li&gt;当匹配发生时，浏览器将32位前缀发送给谷歌&lt;/li&gt;
+&lt;li&gt;谷歌返回包含该前缀的所有黑名单URL完整哈希&lt;/li&gt;
+&lt;li&gt;最终匹配则向用户发出警告&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;什么是k匿名性&#34;&gt;什么是k匿名性
+&lt;/h2&gt;&lt;p&gt;k匿名性传统用于数据库去标识化处理，通过数据泛化使得每条记录在特定属性上与至少k-1条其他记录不可区分。在安全浏览场景中，32位哈希前缀理论上可产生约14757次碰撞（Gerbet等人2015年研究数据），即浏览数据具有14757-匿名性。&lt;/p&gt;
+&lt;h2 id=&#34;k匿名性为何失效&#34;&gt;k匿名性为何失效
+&lt;/h2&gt;&lt;p&gt;尽管满足k匿名性定义，但通过以下技术手段可破解隐私保护：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨查询关联攻击&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用cookie和IP地址关联多次查询&lt;/li&gt;
+&lt;li&gt;例如连续访问amazon.com及其购物车页面时，可推断用户购物行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;URL分解漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;协议要求提交URL层级分解（如http://a.b.c/1/2会同时检查）：
+&lt;ul&gt;
+&lt;li&gt;a.b.c/1/2&lt;/li&gt;
+&lt;li&gt;a.b.c/1/&lt;/li&gt;
+&lt;li&gt;a.b.c/&lt;/li&gt;
+&lt;li&gt;b.c/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;同时提交多个关联前缀会极大降低匿名性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Gerbet等人研究表明，该漏洞甚至可识别用户的色情内容浏览偏好。更严重的是，由于恶意数据库不公开，无法验证是否被人为植入追踪性哈希前缀。&lt;/p&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;安全浏览协议虽提供安全价值，但无法有效防范企业或政府监控。k匿名性和差分隐私等技术并非放之四海皆准的方案，理论满足隐私定义的系统在实际部署中可能完全失效。&lt;/p&gt;
+&lt;p&gt;如需在应用中实施差分隐私或k匿名性等技术，我们的密码学服务团队可协助处理这些系统固有的复杂性——无论是协议设计还是现有代码审计，都能帮助构建值得用户信任的系统。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Guard-GBDT：面向垂直数据集的隐私保护高效GBDT训练框架</title>
         <link>http://localhost:1313/p/guard-gbdt%E9%9D%A2%E5%90%91%E5%9E%82%E7%9B%B4%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E9%AB%98%E6%95%88gbdt%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6/</link>
         <pubDate>Sun, 03 Aug 2025 11:56:50 +0800</pubDate>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>代理工具 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/</link>
+        <description>Recent content in 代理工具 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 17:10:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何轮换您的源IP地址 - 绕过IP过滤的实用技巧</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E8%BD%AE%E6%8D%A2%E6%82%A8%E7%9A%84%E6%BA%90ip%E5%9C%B0%E5%9D%80-%E7%BB%95%E8%BF%87ip%E8%BF%87%E6%BB%A4%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Mon, 04 Aug 2025 17:10:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E8%BD%AE%E6%8D%A2%E6%82%A8%E7%9A%84%E6%BA%90ip%E5%9C%B0%E5%9D%80-%E7%BB%95%E8%BF%87ip%E8%BF%87%E6%BB%A4%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;h1 id=&#34;如何轮换您的源ip地址&#34;&gt;如何轮换您的源IP地址
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Darin Roberts&lt;/strong&gt;//&lt;/p&gt;
+&lt;h2 id=&#34;ip轮换实战源ip轮换技术&#34;&gt;IP轮换实战——源IP轮换技术
+&lt;/h2&gt;&lt;p&gt;在一次渗透测试中，我发现目标系统会根据IP地址阻止我的密码喷洒攻击。如果从一个IP发出3次错误请求，该IP就会被封禁30分钟。虽然这是种有效的安全防护措施，但它并不能阻止有决心的攻击者。&lt;/p&gt;
+&lt;p&gt;绕过IP过滤的方法之一就是使用轮换源IP技术。ProxyCannon是个出色的工具，它能自动通过多个云服务器路由流量以实现IP多样化（感谢#_shellIntel）。不过我想找更简单的方案，于是发现了ProxyMesh服务。&lt;/p&gt;
+&lt;p&gt;我使用的套餐提供两种代理选项：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;美国本土10个IP的代理&lt;/li&gt;
+&lt;li&gt;包含8,743个IP的&amp;quot;开放&amp;quot;代理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ProxyMesh提供多种付费方案，30天免费试用后最低只需10美元/月。本文测试基于10美元套餐完成。&lt;/p&gt;
+&lt;h2 id=&#34;配置方法&#34;&gt;配置方法
+&lt;/h2&gt;&lt;p&gt;我测试了两种连接方式：&lt;/p&gt;
+&lt;h3 id=&#34;方法一chrome的foxyproxy插件&#34;&gt;方法一：Chrome的FoxyProxy插件
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开FoxyProxy新建代理&lt;/li&gt;
+&lt;li&gt;关键配置（需认证信息）：
+&lt;ul&gt;
+&lt;li&gt;主机名：open.proxymesh.com&lt;/li&gt;
+&lt;li&gt;切换为美国代理只需改为us-wa.proxymesh.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方法二burp-suite-pro&#34;&gt;方法二：Burp Suite Pro
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;配置代理设置&lt;/li&gt;
+&lt;li&gt;故意留空目标主机（会自动添加通配符）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;性能测试&#34;&gt;性能测试
+&lt;/h2&gt;&lt;h3 id=&#34;开放代理测试100次请求&#34;&gt;开放代理测试（100次请求）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;错误率：7%（错误请求或超时）&lt;/li&gt;
+&lt;li&gt;IP重复率：2%&lt;/li&gt;
+&lt;li&gt;耗时：约1.5分钟（5线程）&lt;/li&gt;
+&lt;li&gt;地理分布样例：
+&lt;ul&gt;
+&lt;li&gt;美国：25次&lt;/li&gt;
+&lt;li&gt;俄罗斯：10次&lt;/li&gt;
+&lt;li&gt;泰国/印尼/巴西：各4次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;美国代理测试100次请求&#34;&gt;美国代理测试（100次请求）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;零错误&lt;/li&gt;
+&lt;li&gt;每个IP重复使用6-14次&lt;/li&gt;
+&lt;li&gt;耗时：仅13秒&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;ProxyMesh提供了一种经济高效的IP轮换方案。通过调整线程数可以优化速度（10线程可将耗时降至45秒）。虽然存在少量IP重复和错误，但整体能满足密码喷洒等场景需求。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;您用过其他好用的轮换代理工具吗？欢迎分享交流。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

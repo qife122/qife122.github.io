@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>补丁管理 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/</link>
+        <description>Recent content in 补丁管理 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 05:08:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025年6月补丁星期二：微软修复67个漏洞，包含1个零日漏洞</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B46%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D67%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%8C%85%E5%90%AB1%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Mon, 04 Aug 2025 05:08:49 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B46%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D67%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%8C%85%E5%90%AB1%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;p&gt;微软今日发布安全更新，修复了Windows操作系统及软件中至少67个漏洞。雷德蒙德公司警告称其中一个漏洞已被活跃利用，且本月修复的某个普遍性Windows漏洞的利用蓝图已公开。&lt;/p&gt;
+&lt;p&gt;本月唯一的零日漏洞是CVE-2025-33053，这是Windows WebDAV实现中的远程代码执行漏洞。WebDAV作为HTTP扩展协议，允许用户远程管理服务器上的文件和目录。Automox高级安全工程师Seth Hoyt指出，虽然WebDAV在Windows中默认未启用，但在遗留或专用系统中的存在仍使其成为相关攻击目标。&lt;/p&gt;
+&lt;p&gt;Rapid7首席软件工程师Adam Barnett表示，微软的漏洞公告未提及Windows WebDAV实现自2023年11月起已被列为弃用状态，这意味着WebClient服务默认不再启动。&amp;ldquo;该漏洞的攻击复杂度被评估为低级别，表明攻击者无需准备目标环境即可利用，仅需用户点击恶意链接。&amp;ldquo;Barnett补充道。&lt;/p&gt;
+&lt;p&gt;微软警告称，Windows服务器消息块(SMB)客户端中的权限提升漏洞(CVE-2025-33073)很可能被利用，因为该漏洞的概念验证代码已公开。该漏洞CVSS风险评分为8.8分（满分10分），成功利用可使攻击者获得对受害PC的&amp;quot;SYSTEM&amp;quot;级控制权。Action1联合创始人Alex Vovk强调：&amp;ldquo;最危险的是初始连接后无需进一步用户交互，攻击者通常能在用户无感知的情况下触发漏洞。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;本月修复的漏洞中有10个被微软评为&amp;quot;严重&amp;quot;级别，包含8个远程代码执行漏洞。值得注意的是，本月更新未包含针对Windows Server 2025中&amp;quot;BadSuccessor&amp;quot;漏洞的修复，该漏洞允许攻击者以Active Directory中任意用户权限执行操作。&lt;/p&gt;
+&lt;p&gt;Adobe发布了Acrobat Reader等7款产品的更新，修复至少259个漏洞，其中大部分在Experience Manager的更新中。Mozilla Firefox和Google Chrome均发布了需要重启浏览器生效的安全更新，其中Chrome修复了两个零日漏洞(CVE-2025-5419和CVE-2025-4664)。&lt;/p&gt;
+&lt;p&gt;建议用户在安装补丁前做好系统备份。如需详细更新清单，可参考SANS互联网风暴中心的补丁星期二汇总报告。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

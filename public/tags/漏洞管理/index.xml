@@ -7,7 +7,82 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 22:22:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 04:41:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软安全更新指南(Security Update Guide)新手指南</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Mon, 04 Aug 2025 04:41:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;p&gt;2020年11月起，微软安全更新指南门户全面改版。本文将为初次接触或尚未熟悉新界面的用户提供详细操作指引。&lt;/p&gt;
+&lt;h3 id=&#34;安全更新指南是什么&#34;&gt;安全更新指南是什么？
+&lt;/h3&gt;&lt;p&gt;该门户提供微软产品/服务的漏洞和更新信息，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;漏洞详情(CVE)&lt;/li&gt;
+&lt;li&gt;受影响产品清单&lt;/li&gt;
+&lt;li&gt;已知问题列表&lt;/li&gt;
+&lt;li&gt;支持按产品/发布日期筛选&lt;/li&gt;
+&lt;li&gt;支持CVE编号等关键词搜索&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞详情页功能解析&#34;&gt;漏洞详情页功能解析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;CVSS评分&lt;/strong&gt;&lt;br&gt;
+采用通用漏洞评分系统，悬停评分项可查看具体定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可利用性&lt;/strong&gt;&lt;br&gt;
+显示漏洞披露状态及微软独家&amp;quot;可利用性评估&amp;quot;指标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢名单&lt;/strong&gt;&lt;br&gt;
+列出来自漏洞赏金计划的贡献者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;常见问题&lt;/strong&gt;&lt;br&gt;
+包含特殊配置要求、非标准更新方式等补充说明&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全更新列表&lt;/strong&gt;&lt;br&gt;
+提供修复该漏洞的所有更新程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;api数据获取方案&#34;&gt;API数据获取方案
+&lt;/h3&gt;&lt;p&gt;门户数据可通过CVRF格式API获取，具体资源包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[视频] GitHub上的API使用教程&lt;/li&gt;
+&lt;li&gt;[视频] 安全更新API调用演示&lt;/li&gt;
+&lt;li&gt;[视频] 月度更新摘要HTML生成&lt;/li&gt;
+&lt;li&gt;[视频] 数据导出至Excel的方法&lt;/li&gt;
+&lt;li&gt;[视频] CVE/KB列表获取技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：门户将持续迭代改进，功能界面可能调整&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;相关资源&#34;&gt;相关资源
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;新版漏洞详情说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南改进公告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>效率与影响：Synack集成如何提升安全成果</title>
+        <link>http://localhost:1313/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</link>
+        <pubDate>Sun, 03 Aug 2025 20:35:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</guid>
+        <description>&lt;p&gt;“效率”可能是2025年的年度词汇。安全领导者们面临着在不增加人手的情况下提升影响力的压力，必须更快行动、更智能地修复漏洞。这正是集成的力量所在。&lt;/p&gt;
+&lt;p&gt;通过将Synack的渗透测试即服务(PTaaS)平台与现有安全生态系统（从攻击面管理(ASM)工具到漏洞管理和工单平台）连接起来，组织可以将测试重点放在风险最高的地方，同时充分利用预算。Synack的集成可以自动化关键流程，加速修复，提高补丁效率，而无需增加人手。&lt;/p&gt;
+&lt;p&gt;将Synack集成到更广泛工具集中的组织表现始终优于那些将测试作为独立活动的组织。使用技术集成的Synack客户在第一年内将平均修复时间缩短了63%以上，补丁效率提高了近20%。（补丁效率衡量的是正确修复漏洞所需的次数。）&lt;/p&gt;
+&lt;p&gt;数据不会说谎：孤立的测试无法扩展。传统的渗透测试长期以来一直是一种“打勾”式的年度活动，与负责修复漏洞的工具和团队脱节。Synack的持续测试模式已经是一个飞跃，但集成更进一步。&lt;/p&gt;
+&lt;p&gt;当Synack与Palo Alto Networks Cortex Xpanse ASM和Tenable漏洞管理等工具连接时，组织可以发现更多真实的攻击面，并优先处理最重要的问题。当Synack的结果无缝流入Jira、Splunk和ServiceNow等平台时，漏洞可以更快、更精确地解决，且手动工作量大大减少。&lt;/p&gt;
+&lt;p&gt;以下是实际案例：&lt;/p&gt;
+&lt;h3 id=&#34;敏捷安全从集成开始&#34;&gt;敏捷安全从集成开始
+&lt;/h3&gt;&lt;p&gt;一位金融行业的Synack客户希望简化其软件开发生命周期(SDLC)中安全漏洞的处理方式。通过将Synack与Jira集成，他们将修复工作纳入了敏捷流程，而不是事后补救。结果如何？平均修复时间提高了265%。更重要的是，得益于Synack Red Team（一个由1500多名全球安全研究人员组成的专业团队）的深入指导，漏洞在第一次修复时就得到了正确处理。&lt;/p&gt;
+&lt;h3 id=&#34;从检测到行动一览无余&#34;&gt;从检测到行动——一览无余
+&lt;/h3&gt;&lt;p&gt;另一家企业客户将Synack的测试结果导入其Splunk环境——这是其安全运营中心(SOC)依赖的单一视图。这一集成意味着安全工程师可以立即发现并处理可利用的漏洞，而无需在工具之间切换。与之前的工作流程相比，他们的软件漏洞修复时间缩短了3倍以上。&lt;/p&gt;
+&lt;h3 id=&#34;测试最重要的资产&#34;&gt;测试最重要的资产
+&lt;/h3&gt;&lt;p&gt;安全有效性始于知道该测试什么。一位使用Palo Alto Networks Cortex Xpanse进行攻击面管理的客户将其与Synack PTaaS连接，以弥补可见性差距。集成揭示了1700个额外的、之前未测试的资产，允许快速分类并分配给Synack Red Team。这不仅仅是更多的覆盖范围，而是更智能的基于风险的优先级排序。&lt;/p&gt;
+&lt;h3 id=&#34;集中式漏洞管理真实成果&#34;&gt;集中式漏洞管理，真实成果
+&lt;/h3&gt;&lt;p&gt;对于使用ServiceNow漏洞管理的团队，Synack数据直接流入其中心平台。这意味着不再需要在系统之间切换以关联和协调修复。启用此集成的客户平均修复时间提高了62%，补丁效率提高了26%——证明简化的工作流程可以带来更强的安全性。&lt;/p&gt;
+&lt;h3 id=&#34;集成测试加速成果&#34;&gt;集成测试=加速成果
+&lt;/h3&gt;&lt;p&gt;归根结底，集成不仅仅是一种便利：它是一种催化剂。通过将Synack PTaaS嵌入到安全堆栈中，您可以赋能团队更快、更自信地完成更多工作。随着安全计划的成熟和左移，自动化和集成不再是可选的——它们是必不可少的。&lt;/p&gt;
+&lt;p&gt;准备好了解Synack如何融入您的生态系统并放大您的影响力了吗？&lt;a class=&#34;link&#34; href=&#34;https://www.synack.com/partners/technology-partners/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击此处&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>安全更新程序剖析：微软安全响应中心的内部流程解析</title>
         <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E7%A8%8B%E5%BA%8F%E5%89%96%E6%9E%90%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E7%9A%84%E5%86%85%E9%83%A8%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 22:22:33 +0800</pubDate>

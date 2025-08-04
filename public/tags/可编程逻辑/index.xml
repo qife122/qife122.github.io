@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>可编程逻辑 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8F%AF%E7%BC%96%E7%A8%8B%E9%80%BB%E8%BE%91/</link>
+        <description>Recent content in 可编程逻辑 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 15:14:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8F%AF%E7%BC%96%E7%A8%8B%E9%80%BB%E8%BE%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HIPR：通过低开销细粒度修订实现硬件IP保护</title>
+        <link>http://localhost:1313/p/hipr%E9%80%9A%E8%BF%87%E4%BD%8E%E5%BC%80%E9%94%80%E7%BB%86%E7%B2%92%E5%BA%A6%E4%BF%AE%E8%AE%A2%E5%AE%9E%E7%8E%B0%E7%A1%AC%E4%BB%B6ip%E4%BF%9D%E6%8A%A4/</link>
+        <pubDate>Mon, 04 Aug 2025 15:14:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hipr%E9%80%9A%E8%BF%87%E4%BD%8E%E5%BC%80%E9%94%80%E7%BB%86%E7%B2%92%E5%BA%A6%E4%BF%AE%E8%AE%A2%E5%AE%9E%E7%8E%B0%E7%A1%AC%E4%BB%B6ip%E4%BF%9D%E6%8A%A4/</guid>
+        <description>&lt;h1 id=&#34;hipr通过低开销细粒度修订实现硬件ip保护&#34;&gt;HIPR：通过低开销细粒度修订实现硬件IP保护
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;近年来，由于半导体产业的全球化，硬件知识产权（IP）模块面临多种机密性和完整性攻击。系统级芯片（SoC）设计者正考虑采用零信任安全模型，即在制造过程的任何阶段，IP都可能遭受盗版、克隆、过量生产或恶意篡改等攻击。硬件修订作为一种有前景的防护手段，可阻止全球分布式供应链中不可信实体的攻击。然而，现有修订技术的高开销成本限制了其实际应用。本文提出HIPR方法，这是一种鲁棒、可扩展且开销显著低于现有技术的细粒度修订方案。HIPR通过修订硬件设计中的安全关键布尔逻辑和时序逻辑，实施互连随机化，并采用多阶段优化步骤降低开销。实验表明，HIPR在开源基准测试中将面积开销降低了1至2个数量级，且安全性未受影响。测试IP见：&lt;a class=&#34;link&#34; href=&#34;https://github.com/UF-Nelms-IoT-Git-Projects/HIPR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub仓库&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;关键词&#34;&gt;关键词
+&lt;/h2&gt;&lt;p&gt;硬件IP保护、可编程逻辑、硬件修订、逆向工程、IP盗版&lt;/p&gt;
+&lt;h2 id=&#34;正文&#34;&gt;正文
+&lt;/h2&gt;&lt;h3 id=&#34;背景与挑战&#34;&gt;背景与挑战
+&lt;/h3&gt;&lt;p&gt;半导体供应链的全球化使得硬件IP易受多方攻击，包括制造环节的恶意修改或非法复制。传统防护方法（如加密或模糊化）通常引入过高性能或面积开销，难以实际部署。&lt;/p&gt;
+&lt;h3 id=&#34;hipr方案设计&#34;&gt;HIPR方案设计
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;细粒度逻辑修订&lt;/strong&gt;：选择性移除或混淆安全关键逻辑单元。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;互连随机化&lt;/strong&gt;：动态打乱模块间连接关系以增加逆向工程难度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开销优化&lt;/strong&gt;：采用逻辑压缩和资源共享技术降低面积与功耗开销。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实验结果&#34;&gt;实验结果
+&lt;/h3&gt;&lt;p&gt;在OpenCores基准测试中，HIPR实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;面积开销降低98%（相比同类技术）；&lt;/li&gt;
+&lt;li&gt;抵御SAT攻击和侧信道分析等已知攻击方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;HIPR为硬件IP保护提供了一种兼顾安全性与实用性的解决方案，尤其适合资源受限的嵌入式系统。未来工作将探索其在FPGA和ASIC设计中的扩展应用。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

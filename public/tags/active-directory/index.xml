@@ -7,7 +7,111 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 02:40:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/active-directory/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 12:12:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/active-directory/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>攻击Active Directory组托管服务账户(GMSA)的技术解析</title>
+        <link>http://localhost:1313/p/%E6%94%BB%E5%87%BBactive-directory%E7%BB%84%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7gmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 12:12:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%94%BB%E5%87%BBactive-directory%E7%BB%84%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7gmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;攻击active-directory组托管服务账户gmsa&#34;&gt;攻击Active Directory组托管服务账户(GMSA)
+&lt;/h1&gt;&lt;p&gt;2020年5月，我在Trimarc网络研讨会&amp;quot;保护Active Directory：解决常见问题&amp;quot;中介绍了AD组托管服务账户(GMSA)的安全问题。本文是研讨会内容的扩展版本。&lt;/p&gt;
+&lt;h2 id=&#34;组托管服务账户gmsa概述&#34;&gt;组托管服务账户(GMSA)概述
+&lt;/h2&gt;&lt;p&gt;传统用作服务账户的用户账户很少更改密码。GMSA(自Windows 2012引入)由AD自动管理密码变更。但关键点在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AD管理GMSA密码&lt;/li&gt;
+&lt;li&gt;托管计算机从AD请求当前密码启动服务&lt;/li&gt;
+&lt;li&gt;需明确配置允许访问密码的计算机账户&lt;/li&gt;
+&lt;li&gt;若攻击者控制托管计算机或有权账户，GMSA即告失陷&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gmsa关键属性&#34;&gt;GMSA关键属性
+&lt;/h2&gt;&lt;p&gt;GMSA具有特定对象类和属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;msDS-GroupMSAMembership&lt;/code&gt;：存储可访问密码的安全主体&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msds-ManagedPassword&lt;/code&gt;：包含密码信息的BLOB&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msDS-ManagedPasswordId&lt;/code&gt;：当前密码数据的密钥标识符&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;msDS-ManagedPasswordInterval&lt;/code&gt;：密码自动变更间隔天数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击技术详解&#34;&gt;攻击技术详解
+&lt;/h2&gt;&lt;h3 id=&#34;方法一入侵托管服务器&#34;&gt;方法一：入侵托管服务器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;通过SPN定位托管服务器(如LCNSQL01)&lt;/li&gt;
+&lt;li&gt;获取服务器管理员权限后：
+&lt;ul&gt;
+&lt;li&gt;使用Mimikatz执行&lt;code&gt;sekurlsa::logonpasswords&lt;/code&gt;获取服务账户凭证&lt;/li&gt;
+&lt;li&gt;发现GMSA密码显示异常(如&amp;quot;&lt;em&gt;SA&lt;/em&gt;{GUID}&amp;ldquo;格式)&lt;/li&gt;
+&lt;li&gt;改用&lt;code&gt;sekurlsa::ekeys&lt;/code&gt;获取正确的Kerberos票据和NT哈希&lt;/li&gt;
+&lt;li&gt;实施哈希传递(PTH)攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方法二入侵有权账户&#34;&gt;方法二：入侵有权账户
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;枚举&lt;code&gt;msDS-GroupMSAMembership&lt;/code&gt;属性中的授权组(如&amp;quot;SVC-LAB-GMSA1 Group&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;通过组成员关系分析发现：
+&lt;ul&gt;
+&lt;li&gt;11个用户账户(其中9个为普通用户)具有密码访问权&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;入侵任一授权账户后：
+&lt;ul&gt;
+&lt;li&gt;使用&lt;code&gt;Get-ADServiceAccount&lt;/code&gt;获取明文密码BLOB&lt;/li&gt;
+&lt;li&gt;通过DSInternals的&lt;code&gt;ConvertTo-NTHash&lt;/code&gt;转换为NT哈希&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;若入侵计算机账户：
+&lt;ul&gt;
+&lt;li&gt;需以SYSTEM权限执行上述操作&lt;/li&gt;
+&lt;li&gt;使用PSEXEC获取SYSTEM上下文&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;验证与防御&#34;&gt;验证与防御
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;验证技术&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用DSInternals的&lt;code&gt;Get-ADReplAccount&lt;/code&gt;确认AD中的密码哈希与获取值一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;防御措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实施最小权限原则&lt;/li&gt;
+&lt;li&gt;避免将GMSA加入AD特权组(除非用于域控制器)&lt;/li&gt;
+&lt;li&gt;严格限制GMSA访问权限和使用范围&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别感谢DSInternals的Michael Grafnetter和Mimikatz开发者Benjamin Delpy的技术支持。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>利用Active Directory进行攻击防御的技术解析</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8active-directory%E8%BF%9B%E8%A1%8C%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 03:36:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8active-directory%E8%BF%9B%E8%A1%8C%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;webcast-weaponizing-active-directory&#34;&gt;Webcast: Weaponizing Active Directory
+&lt;/h1&gt;&lt;p&gt;点击时间码跳转到视频的对应部分（在YouTube上）&lt;br&gt;
+本次网络研讨会的幻灯片可以在这里找到：&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/wp-content/uploads/2020/09/SLIDES_WeaponizingActiveDirectory.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;幻灯片链接&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0:54&lt;/strong&gt; 本次网络研讨会的背景、内容和原因&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;7:02&lt;/strong&gt; 在Active Directory中创建资源：用户账户、组和虚拟计算机账户&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18:54&lt;/strong&gt; 工具介绍：ResponderGuard、攻击的一般流程、侦察、欺骗和植入凭证&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;38:12&lt;/strong&gt; 密码喷洒、蜜罐用户、Kerberoasting攻击和组播DNS投毒&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;47:20&lt;/strong&gt; 使用CredDefense工具包进行检测：ResponderGuard、ResponderGuard代理和SQL Server滥用攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;53:43&lt;/strong&gt; 问答环节和总结&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本次网络研讨会最初于2019年8月1日由David Fletcher录制。&lt;br&gt;
+2019年Verizon DBIR报告显示，超过50%的入侵事件需要一个月或更长时间才能被发现。&lt;br&gt;
+本次研讨会涵盖了一些基本技术，旨在通过战术欺骗来捕捉攻击者在环境中尝试横向移动和权限提升的行为，从而缩短平均检测时间（MTTD）。&lt;/p&gt;
+&lt;h3 id=&#34;准备好深入学习了吗&#34;&gt;准备好深入学习了吗？
+&lt;/h3&gt;&lt;p&gt;通过Antisyphon的实惠课程提升你的技能！&lt;br&gt;
+提供“按需付费”培训，支持现场/虚拟和按需学习。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Black Hills Information Security, Inc.&lt;/strong&gt;&lt;br&gt;
+890 Lazelle Street, Sturgis, SD 57785-1611 | 701-484-BHIS (2447)&lt;br&gt;
+© 2008-2024&lt;br&gt;
+[关于我们](About Us) | [BHIS Tribe of Companies](BHIS Tribe of Companies) | [隐私政策](Privacy Policy) | &lt;a class=&#34;link&#34; href=&#34;Contact&#34; &gt;联系我们&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>主动防御Active Directory入门指南：打造蜜罐账户与虚假SMB共享</title>
         <link>http://localhost:1313/p/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-directory%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%E6%89%93%E9%80%A0%E8%9C%9C%E7%BD%90%E8%B4%A6%E6%88%B7%E4%B8%8E%E8%99%9A%E5%81%87smb%E5%85%B1%E4%BA%AB/</link>
         <pubDate>Sun, 03 Aug 2025 02:40:31 +0800</pubDate>

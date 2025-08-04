@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>隐私泄露 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E6%B3%84%E9%9C%B2/</link>
+        <description>Recent content in 隐私泄露 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 13:22:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E6%B3%84%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>BlackVue行车记录仪云功能漏洞：你的位置和实时画面可能正被陌生人窥视</title>
+        <link>http://localhost:1313/p/blackvue%E8%A1%8C%E8%BD%A6%E8%AE%B0%E5%BD%95%E4%BB%AA%E4%BA%91%E5%8A%9F%E8%83%BD%E6%BC%8F%E6%B4%9E%E4%BD%A0%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%AE%9E%E6%97%B6%E7%94%BB%E9%9D%A2%E5%8F%AF%E8%83%BD%E6%AD%A3%E8%A2%AB%E9%99%8C%E7%94%9F%E4%BA%BA%E7%AA%A5%E8%A7%86/</link>
+        <pubDate>Mon, 04 Aug 2025 13:22:45 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/blackvue%E8%A1%8C%E8%BD%A6%E8%AE%B0%E5%BD%95%E4%BB%AA%E4%BA%91%E5%8A%9F%E8%83%BD%E6%BC%8F%E6%B4%9E%E4%BD%A0%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%AE%9E%E6%97%B6%E7%94%BB%E9%9D%A2%E5%8F%AF%E8%83%BD%E6%AD%A3%E8%A2%AB%E9%99%8C%E7%94%9F%E4%BA%BA%E7%AA%A5%E8%A7%86/</guid>
+        <description>&lt;h1 id=&#34;blackvue行车记录仪---这不是漏洞而是功能&#34;&gt;BlackVue行车记录仪 - 这不是漏洞，而是&amp;quot;功能&amp;quot;
+&lt;/h1&gt;&lt;p&gt;BlackVue云联网行车记录仪会泄露你的位置信息，并允许任何注册免费账户的人查看你的实时画面。厂商该重视这个问题了！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;更新&lt;/strong&gt;：经过两年与BlackVue沟通无果后，我认为公开此事符合公共利益。特别是在汽车犯罪率上升的背景下，尽管与BlackVue没有直接关联，但仍需引起人们警惕。&lt;/p&gt;
+&lt;h2 id=&#34;问题发现过程&#34;&gt;问题发现过程
+&lt;/h2&gt;&lt;p&gt;2022年某个周末，我在研究新购买的行车记录仪时，发现了移动应用中的&amp;quot;连接云端&amp;quot;选项。我的设备配有LTE模块以实现&amp;quot;云连接&amp;quot;功能，原本以为这只是用于向手机推送碰撞或移动检测通知的合理功能。&lt;/p&gt;
+&lt;p&gt;但事实令人震惊：任何拥有移动设备的人（浏览器也可实现）只需下载BlackVue应用，选择&amp;quot;连接云端&amp;quot;（无需事先拥有设备），就能看到地图上所有联网行车记录仪的地理位置标识。更糟糕的是，注册账户后（仅需提供邮箱，支持Gmail/Apple Private Relay自动登录），不仅能查看设备位置，还能观看实时画面。&lt;/p&gt;
+&lt;h2 id=&#34;历史投诉记录&#34;&gt;历史投诉记录
+&lt;/h2&gt;&lt;h3 id=&#34;2021年11月&#34;&gt;2021年11月
+&lt;/h3&gt;&lt;p&gt;Antisocial Engineer团队早在2020年11月就向BlackVue报告此问题，但厂商将其辩称为&amp;quot;功能&amp;quot;不予修复。&lt;/p&gt;
+&lt;h3 id=&#34;2021年10月&#34;&gt;2021年10月
+&lt;/h3&gt;&lt;p&gt;安全研究员Colin向BlackVue英国分部提交的投诉邮件显示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;通过APP&amp;gt;连接云端&amp;gt;选择摄像头，我可以监听车内对话，观察可疑驾驶行为，并通过跟踪车辆获取住址和安全信息。&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;厂商回复称：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;这是BlackVue云功能的特性，只有用户在隐私设置中主动选择&amp;rsquo;分享位置&amp;rsquo;才会出现在地图上。默认设置是关闭的。&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;当Colin追问为何能监听对话和跟踪回家路线时，BlackVue最终回应：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;这是个人选择问题&amp;hellip;该&amp;rsquo;功能&amp;rsquo;已存在近五年。&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;2020年1月&#34;&gt;2020年1月
+&lt;/h3&gt;&lt;p&gt;Vice媒体曾报道过相同问题，当时BlackVue仅调整了部分设置，仍拒绝承认其应用的隐私风险。&lt;/p&gt;
+&lt;h2 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h2&gt;&lt;p&gt;最彻底的解决方案是完全不使用BlackVue的云连接功能。如果已在使用，务必在设置中关闭GPS选项以阻止位置访问。这个问题被曝光两年后，BlackVue仍拒绝修复，故撰写本文警示公众。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

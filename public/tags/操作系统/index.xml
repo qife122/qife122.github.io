@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>操作系统 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+        <description>Recent content in 操作系统 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 10:40:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>消失的操作系统：数据中心OS的技术演进与挑战</title>
+        <link>http://localhost:1313/p/%E6%B6%88%E5%A4%B1%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83os%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%8C%91%E6%88%98/</link>
+        <pubDate>Mon, 04 Aug 2025 10:40:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B6%88%E5%A4%B1%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83os%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%8C%91%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;消失的操作系统&#34;&gt;消失的操作系统
+&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;2011年我加入谷歌时，曾引用朋友的一句玩笑：&amp;ldquo;世界上大约有一台半计算机，谷歌拥有其中一台。&amp;ldquo;自2011年以来世界已发生巨变，现在全球可能有五六台这样的&amp;quot;计算机&amp;rdquo;。在下文中，当我说&amp;quot;计算机&amp;quot;时，指的是由大量独立机器连接组成的、能像单台计算机一样运作的超大规模集群。&lt;/p&gt;
+&lt;h2 id=&#34;正文&#34;&gt;正文
+&lt;/h2&gt;&lt;p&gt;现代微服务部署的技术生态令人困惑——变化迅速，大量表面相似的项目声称能实现类似功能。即使对我这样深耕技术领域的人而言，不同项目的精确用途也不总是清晰的。&lt;/p&gt;
+&lt;p&gt;我多次提及&amp;quot;数据中心操作系统&amp;quot;的概念（至少&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a51&#34; &gt;这里&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a52&#34; &gt;这里&lt;/a&gt;），自2015年从谷歌休假以来一直在思考这个问题。最近与一群性能工程师（他们处于开发与运维的交汇点）的交流促使我写下这些思考。这是第一篇相关文章，后续可能还有更多（特别是关于其安全模型的内容）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;警告&lt;/strong&gt;：本文纯属个人观点，包含大量未经科学验证的主张。我经常犯错。&lt;/p&gt;
+&lt;p&gt;我的核心观点是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;计算机发展初期，经过数十年才出现真正的&amp;quot;操作系统&amp;rdquo;。在真正OS出现前，存在许多&amp;quot;原型OS&amp;quot;——需要单独管理拼凑的工具集合。当时全球计算机数量稀少，使用计算机需在大型研究机构工作。这些机器运行着为该计算机专门拼凑的独特OS。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;大约从2007年开始，我们正经历第二个类似时期：&amp;ldquo;单台计算机&amp;quot;模式被&amp;quot;仓库级计算机&amp;quot;取代。最初只有少数财力雄厚的组织能拥有这样的计算机，但云计算使得没有数十亿美元建设完整数据中心的公司也能使用&amp;quot;大量小型独立计算机&amp;rdquo;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;超大规模企业（谷歌、Facebook，也包括腾讯等）内部正在构建&amp;quot;原型数据中心OS&amp;quot;；亚马逊正在将其部分系统外部化；大量构成数据中心OS的独立组件已作为开源项目存在。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;但目前尚不存在一个普通公司可以直接安装的完整数据中心OS&lt;/strong&gt;。存在一个&amp;quot;消失的OS&amp;quot;——安装在大量计算机集合上的软件，将这些计算机集合转变为&amp;quot;一台计算机&amp;quot;。&lt;/p&gt;
+&lt;h2 id=&#34;数据中心os的组成&#34;&gt;数据中心OS的组成
+&lt;/h2&gt;&lt;p&gt;观察现代技术栈会发现一个惊人的趋同现象——不在于人们实际运行的软件，而在于需要实现的&amp;quot;角色&amp;quot;。每个角色通常都有多种不同的实现方案。每个大规模分布式基础设施都包含以下组件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;集群级文件系统&lt;/strong&gt;：谷歌内部使用GFS/Colossus，外部可能是GlusterFS等。许多公司最终使用S3，因为现有方案不够理想。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;水平可扩展键值存储&lt;/strong&gt;：谷歌内部用BigTable，外部可能是Cassandra、Scylla，甚至ElasticSearch（勉强算）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分布式一致性键值存储&lt;/strong&gt;：谷歌内部用Chubby，外部用etcd。大多数应用不直接使用，主要用于集群管理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发布/订阅消息队列系统&lt;/strong&gt;：如PubSub、Kafka、AWS的SQS或RabbitMQ。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;任务调度/容器编排系统&lt;/strong&gt;：根据可用资源、待运行任务和约束条件，解决受限的装箱优化问题以确保资源合理利用。如Borg，某种程度上也包括Kubernetes。可能与MapReduce风格的批量工作负载基础设施集成以利用闲置CPU周期。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;缺失的工具与挑战&#34;&gt;缺失的工具与挑战
+&lt;/h2&gt;&lt;p&gt;思考&amp;quot;单机OS上有哪些组件应该在数据中心OS中存在&amp;quot;非常有价值：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人们通过Prometheus和各种数据收集代理构建了近似&amp;quot;进程管理器&amp;quot;的工具&lt;/li&gt;
+&lt;li&gt;分布式追踪（公认的必需品）实质上是数据中心版的strace&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;数据中心版的syslog是什么&amp;quot;同样是个有趣问题&lt;/li&gt;
+&lt;li&gt;大量可观测性工程实质是将单机自省能力移植到&amp;quot;计算机&amp;quot;上&lt;/li&gt;
+&lt;li&gt;人们谈论的&amp;quot;服务网格&amp;quot;是否只是数据中心版的portmapper？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还有一些功能我们完全不知道如何构建对应方案。比如&amp;quot;计算机&amp;quot;的&amp;quot;调试器&amp;quot;应该是什么样子？显然，在单主机上单步执行不是解决现代分布式系统问题的正确方式——你的服务可能与数十台其他主机交互，这些主机可能同时崩溃（或逐渐停止等），重新启动和单步执行极其困难。&lt;/p&gt;
+&lt;p&gt;除了需要为&amp;quot;计算机&amp;quot;重建的众多监控、开发和调试工具外，还有许多更基础的问题没有满意答案。&lt;strong&gt;安全领域尤其未知&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么是这台&amp;quot;计算机&amp;quot;的&amp;quot;特权进程&amp;rdquo;？&lt;/li&gt;
+&lt;li&gt;权限和信任边界是什么？&lt;/li&gt;
+&lt;li&gt;用户管理如何工作？&lt;/li&gt;
+&lt;li&gt;跨服务认证和凭据委派如何实现？&lt;/li&gt;
+&lt;li&gt;如何避免将James Forshaw在其幻灯片中描述的所有单机权限提升漏洞重新引入我们的新OS和各种服务？&lt;/li&gt;
+&lt;li&gt;是否有办法确保Linux内核的/mm单个漏洞不会导致整个安全模型崩溃？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;简而言之，我认为正在浮现的数据中心OS是计算机科学几十年来最激动人心的发展。有时我希望自己更擅长说服亿万富翁投资几亿美元解决有趣问题——因为如果有我想致力于解决的问题，那就是开发一个FOSS数据中心OS——&amp;ldquo;在N台机器上安装这个，你就拥有了&amp;rsquo;一台计算机&amp;rsquo;&amp;quot;。如果思考&amp;quot;这个特定组件在&amp;rsquo;计算机&amp;rsquo;中实现什么功能？这个项目的单机等价物是什么？&amp;quot;，许多技术景观会更容易理解。&lt;/p&gt;
+&lt;p&gt;本文可能会有后续，因为关于这个话题我还有更多不成熟的想法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据中心OS的安全模型&lt;/li&gt;
+&lt;li&gt;Kubernetes：你想成为调度器还是OS？只能选一个&lt;/li&gt;
+&lt;li&gt;如何获得bash脚本的强大功能，但针对2万台机器的集群？&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

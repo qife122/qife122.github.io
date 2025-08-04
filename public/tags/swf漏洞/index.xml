@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SWF漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/swf%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in SWF漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 12:50:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/swf%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RIA安全协作：微软与Adobe的跨域防御实践</title>
+        <link>http://localhost:1313/p/ria%E5%AE%89%E5%85%A8%E5%8D%8F%E4%BD%9C%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Mon, 04 Aug 2025 12:50:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ria%E5%AE%89%E5%85%A8%E5%8D%8F%E4%BD%9C%E5%BE%AE%E8%BD%AF%E4%B8%8Eadobe%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;协作保障ria安全&#34;&gt;协作保障RIA安全
+&lt;/h3&gt;&lt;p&gt;微软与Adobe长期保持安全合作。在本次BlueHat会议上，我们将共同分享富互联网应用(RIA)安全领域的研究成果。尽管双方各自拥有完善的安全模型，但攻击者常通过技术组合寻找突破口。开发者也可能在不知风险的情况下混合使用不同技术。通过研究共享与信息整合，我们可确保开发者掌握核心技术知识，无论采用何种技术组合都能为用户提供安全体验。&lt;/p&gt;
+&lt;h3 id=&#34;复合页面的安全挑战&#34;&gt;复合页面的安全挑战
+&lt;/h3&gt;&lt;p&gt;单个网页可能由多个开发团队采用不同技术构建。作为站点安全负责人，必须清晰理解内容交互方式才能评估风险。若缺乏对各内容模块权限的明确映射，攻击者可能找到防御体系的隐蔽突破路径。&lt;/p&gt;
+&lt;h4 id=&#34;典型案例分析&#34;&gt;典型案例分析
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨域权限假设错误&lt;/strong&gt;&lt;br&gt;
+研究者发现：当woodgrovebank.com向adatum.com授予XHR2跨域权限时，若adatum.com的SWF广告通过allowScriptAccess参数获得JavaScript访问权，则第三方广告可间接访问银行域名——这可能违背银行的原始授权意图。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;真实世界攻击复现&lt;/strong&gt;&lt;br&gt;
+renren.com蠕虫事件中，恶意SWF利用&amp;quot;always&amp;quot;脚本权限注入SCRIPT标签，再借助站点现有的跨域AJAX架构收集用户社交关系。该攻击模式同样适用于具有EnableHTMLAccess权限的Silverlight内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安全架构建议&#34;&gt;安全架构建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;统一权限视图&lt;/strong&gt;：混合内容架构需建立全局权限视图，通过数据流图标注跨域通信节点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通用防御策略&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;审核所有RIA内容对HTML DOM的访问权限&lt;/li&gt;
+&lt;li&gt;制定兼容多种RIA技术的安全规范&lt;/li&gt;
+&lt;li&gt;限制第三方内容的脚本执行权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术协同价值&#34;&gt;技术协同价值
+&lt;/h3&gt;&lt;p&gt;理解RIA平台的共性与差异，能使开发者：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;准确评估混合技术架构风险&lt;/li&gt;
+&lt;li&gt;设计弹性安全边界&lt;/li&gt;
+&lt;li&gt;在丰富用户体验与安全防护间取得平衡&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

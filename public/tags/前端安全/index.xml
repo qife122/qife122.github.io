@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>前端安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 前端安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 22:31:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>██████网站customerId参数反射型XSS漏洞技术分析</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 22:31:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;网站customerid参数反射型xss漏洞&#34;&gt;██████网站customerId参数反射型XSS漏洞
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;在██████网站发现一个反射型跨站脚本(XSS)漏洞，该漏洞位于customerId参数中。由于该参数在HTTP响应返回用户前未经过充分净化处理，当参数被恶意JavaScript代码操纵时，注入的脚本会在用户浏览器上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞利用的关键在于&lt;code&gt;oncontentvisibilityautostatechange&lt;/code&gt;事件属性未被应用程序正确过滤或编码。攻击者可以构造包含JavaScript payload的恶意URL，当受害者访问该URL时，payload将被执行。&lt;/p&gt;
+&lt;p&gt;经确认该漏洞在Chrome浏览器中可成功利用，但在Firefox中不可行，这表明可能存在浏览器特定的过滤器绕过机制。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞验证&#34;&gt;漏洞验证
+&lt;/h2&gt;&lt;p&gt;测试人员通过构造特殊格式的customerId参数成功复现了该漏洞，证实攻击者能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注入任意JavaScript代码&lt;/li&gt;
+&lt;li&gt;在受害者浏览器上下文执行&lt;/li&gt;
+&lt;li&gt;窃取用户敏感信息或执行其他恶意操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年5月5日：漏洞首次提交&lt;/li&gt;
+&lt;li&gt;2025年5月5日：漏洞等级从高危调整为中危(5.6分)&lt;/li&gt;
+&lt;li&gt;2025年6月-7月：经过多次复测验证&lt;/li&gt;
+&lt;li&gt;2025年7月1日：漏洞被标记为已修复&lt;/li&gt;
+&lt;li&gt;2025年7月28日：漏洞报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞分类&#34;&gt;漏洞分类
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;弱点类型：反射型跨站脚本(XSS)&lt;/li&gt;
+&lt;li&gt;CVE编号：暂无&lt;/li&gt;
+&lt;li&gt;严重等级：中危(5.6)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

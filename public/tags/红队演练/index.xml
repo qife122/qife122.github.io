@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>红队演练 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%BC%94%E7%BB%83/</link>
+        <description>Recent content in 红队演练 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 04:19:59 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%BC%94%E7%BB%83/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Stratus Red Team：专为云环境设计的对抗模拟工具</title>
+        <link>http://localhost:1313/p/stratus-red-team%E4%B8%93%E4%B8%BA%E4%BA%91%E7%8E%AF%E5%A2%83%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%AF%B9%E6%8A%97%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Mon, 04 Aug 2025 04:19:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/stratus-red-team%E4%B8%93%E4%B8%BA%E4%BA%91%E7%8E%AF%E5%A2%83%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%AF%B9%E6%8A%97%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;p&gt;今天，我激动地发布过去几周开发的新开源项目：Stratus Red Team——一款专注于模拟云环境中常见攻击技术的对抗模拟和紫队工具。&lt;/p&gt;
+&lt;h3 id=&#34;开发动机&#34;&gt;开发动机
+&lt;/h3&gt;&lt;p&gt;我的职业经历大量涉及威胁检测。从学校毕业后，我首先在一家专注于终端安全的本地托管检测与响应公司从事威胁检测用例工作。后来当我转到科技公司的云安全岗位时，发现云环境中的恶意活动检测面临着相似挑战。&lt;/p&gt;
+&lt;p&gt;其中一个挑战是在真实环境中复现攻击者的战术、技术和程序(TTPs)，以验证我们的日志管道和检测逻辑是否端到端正常工作。对于传统终端和本地安全，已有多个开源项目如Atomic Red Team™或MITRE Caldera。但这些工具都不是云原生构建的，缺乏对云服务商的专门支持，也缺少足够数量的云环境攻击技术。&lt;/p&gt;
+&lt;h3 id=&#34;stratus-red-team介绍&#34;&gt;Stratus Red Team介绍
+&lt;/h3&gt;&lt;p&gt;这个项目构想始于2021年初。得益于我在Datadog担任云安全研究员的新职位，终于得以实现。我们将其作为100%免费开源软件发布！&lt;/p&gt;
+&lt;p&gt;官网：https://stratus-red-team.cloud/&lt;br&gt;
+GitHub：https://github.com/DataDog/stratus-red-team&lt;/p&gt;
+&lt;h3 id=&#34;技术实现原理&#34;&gt;技术实现原理
+&lt;/h3&gt;&lt;h4 id=&#34;攻击技术即代码&#34;&gt;攻击技术即代码
+&lt;/h4&gt;&lt;p&gt;每个攻击技术由两部分组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Terraform代码：描述执行攻击前需要部署的基础设施&lt;/li&gt;
+&lt;li&gt;Go代码：定义技术元数据及其引爆逻辑&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以&amp;quot;停止CloudTrail日志&amp;quot;攻击技术为例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Terraform代码创建CloudTrail Trail和S3存储桶&lt;/li&gt;
+&lt;li&gt;Go代码包含技术ID、MITRE ATT&amp;amp;CK映射，以及调用cloudtrail:StopLogging API的引爆函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;terraform自动化&#34;&gt;Terraform自动化
+&lt;/h4&gt;&lt;p&gt;项目使用Hashicorp的terraform-exec库动态管理Terraform，无需用户预装：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动下载Terraform二进制到~/.stratus-red-team/terraform&lt;/li&gt;
+&lt;li&gt;通过编程方式调用terraform apply/destroy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;状态存储&#34;&gt;状态存储
+&lt;/h4&gt;&lt;p&gt;工具在本地文件系统维护三种状态：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击技术状态&lt;/li&gt;
+&lt;li&gt;先决条件的Terraform状态&lt;/li&gt;
+&lt;li&gt;Terraform输出值
+存储路径：~/.stratus-red-team/[technique-id]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;架构设计决策&#34;&gt;架构设计决策
+&lt;/h3&gt;&lt;h4 id=&#34;编程语言选择&#34;&gt;编程语言选择
+&lt;/h4&gt;&lt;p&gt;放弃Python选择Go的主要考量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;强类型特性提升开发效率&lt;/li&gt;
+&lt;li&gt;官方Terraform封装库支持&lt;/li&gt;
+&lt;li&gt;编译时错误检查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;代价是牺牲了动态加载用户代码的扩展性，新攻击技术必须打包到主二进制中。&lt;/p&gt;
+&lt;h4 id=&#34;先决设施处理&#34;&gt;先决设施处理
+&lt;/h4&gt;&lt;p&gt;采用内置Terraform代码全自动管理基础设施，当前限制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅支持新建资源测试&lt;/li&gt;
+&lt;li&gt;不支持针对现有基础设施演练&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;合格攻击技术的标准&#34;&gt;合格攻击技术的标准
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;原子性：模拟攻击链中的单一步骤&lt;/li&gt;
+&lt;li&gt;真实性：可推导出有效的威胁检测规则&lt;/li&gt;
+&lt;li&gt;自包含性：不假设AWS账户的初始状态&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;增加更多AWS攻击技术&lt;/li&gt;
+&lt;li&gt;添加Kubernetes支持&lt;/li&gt;
+&lt;li&gt;实现可选遥测功能(默认关闭)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;项目已在GitHub开源，欢迎通过Twitter或邮件提交反馈。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

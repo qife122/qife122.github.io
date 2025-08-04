@@ -7,7 +7,91 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 02:55:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/smb%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 15:41:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/smb%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Eternal Synergy漏洞分析：SMBv1认证漏洞的深度剖析</title>
+        <link>http://localhost:1313/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 15:41:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/eternal-synergy%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90smbv1%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h2&gt;&lt;p&gt;2017年4月ShadowBrokers泄露的Eternal Synergy是利用SMBv1协议认证漏洞（CVE-2017-0143）的攻击工具，该漏洞影响Windows 8及以下系统，微软在MS17-010补丁中修复。与常规漏洞不同，该漏洞主要通过数据包层面的操作实现利用。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h2&gt;&lt;p&gt;核心问题在于SMB协议处理TRANSACTION时未严格校验消息类型：当存在SMB_COM_WRITE_ANDX事务时，若后续收到MID等于该事务FID的SMB_COM_TRANSACTION_SECONDARY消息，系统会错误地将后者纳入当前事务。由于WRITE_ANDX会动态更新InData指针（指向缓冲区末尾），而TRANSACTION_SECONDARY直接使用该指针写入数据，导致缓冲区越界写入。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// srv.sys中的关键判断逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Header&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Command&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SMB_COM_WRITE_ANDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;targetOtherInfo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// WRITE_ANDX使用FID作为标识
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;targetOtherInfo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;SmbGetAlignedUshort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Header&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Mid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 其他消息使用MID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;利用技术&#34;&gt;利用技术
+&lt;/h2&gt;&lt;h3 id=&#34;1-事务劫持&#34;&gt;1. 事务劫持
+&lt;/h3&gt;&lt;p&gt;攻击者通过以下步骤控制事务结构：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建常规TRANSACTION作为控制事务（InData=0xfffff8a00167f110）&lt;/li&gt;
+&lt;li&gt;发送特制WRITE_ANDX消息使InData偏移0x200字节（变为0xfffff8a00167f310）&lt;/li&gt;
+&lt;li&gt;通过TRANSACTION_SECONDARY消息（dataDisplacement=0x5020）覆盖相邻事务的OtherInfo字段&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-内存读写原语&#34;&gt;2. 内存读写原语
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;写原语&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;劫持受害事务的InData指针指向目标地址&lt;/li&gt;
+&lt;li&gt;发送数据包时，内核会将包内容写入被篡改的地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;读原语&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修改受害事务的OutData指针（偏移0x88）&lt;/li&gt;
+&lt;li&gt;设置关键字段：SetupCount=4, MaxSetupCount=0, MaxDataCount=0x20000&lt;/li&gt;
+&lt;li&gt;触发事务响应时，内核会将目标内存内容通过SMB响应返回&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-代码执行&#34;&gt;3. 代码执行
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;泄露srv!SrvTransaction2DispatchTable地址&lt;/li&gt;
+&lt;li&gt;覆盖TRANS2_SESSION_SETUP处理函数指针（dispatchTable[0xe]）&lt;/li&gt;
+&lt;li&gt;发送TRANSACTION2消息触发shellcode执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;现代系统防护&#34;&gt;现代系统防护
+&lt;/h2&gt;&lt;p&gt;该漏洞利用技术受以下防护机制制约：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HVCI&lt;/strong&gt;：阻止执行未签名内核代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CFG&lt;/strong&gt;：防止通过篡改函数指针劫持控制流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;纯数据包层面的漏洞利用，无需本地shellcode&lt;/li&gt;
+&lt;li&gt;通过事务结构泄露实现内核地址嗅探&lt;/li&gt;
+&lt;li&gt;利用ntoskrnl.exe的RWX段（0x271000偏移处）作为暂存区&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;; 攻击使用的shellcode片段
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov rax,qword ptr gs:[20h]  ; 获取_KPRCB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;add rax,8B0h                ; 定位PPNxPagedLookasideList
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;call qword ptr [rax]         ; 调用nt!ExAllocatePoolWithTag
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Eternal Synergy展示了协议状态机漏洞的复杂利用方式，其创新性的纯数据包攻击模式为后续SMB协议安全设计提供了重要参考。微软通过增强事务验证机制和引入硬件级防护有效遏制了此类攻击。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Windows登录会话共享漏洞：突破服务加固隔离的技术分析</title>
         <link>http://localhost:1313/p/windows%E7%99%BB%E5%BD%95%E4%BC%9A%E8%AF%9D%E5%85%B1%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%AA%81%E7%A0%B4%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA%E9%9A%94%E7%A6%BB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 02:55:08 +0800</pubDate>

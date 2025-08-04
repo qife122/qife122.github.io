@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>执法访问 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%89%A7%E6%B3%95%E8%AE%BF%E9%97%AE/</link>
+        <description>Recent content in 执法访问 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 19:58:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%89%A7%E6%B3%95%E8%AE%BF%E9%97%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>苹果技术上可配合FBI解锁iPhone 5C - 安全专家深度解析</title>
+        <link>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E5%8F%AF%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c-%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 19:58:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%8B%B9%E6%9E%9C%E6%8A%80%E6%9C%AF%E4%B8%8A%E5%8F%AF%E9%85%8D%E5%90%88fbi%E8%A7%A3%E9%94%81iphone-5c-%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;苹果可以配合fbi法庭命令---trail-of-bits博客&#34;&gt;苹果可以配合FBI法庭命令 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;2016年2月17日&lt;br&gt;
+作者：Dan Guido&lt;br&gt;
+标签：apple, cryptography, policy&lt;/p&gt;
+&lt;p&gt;联邦法官今日命令苹果配合FBI对圣贝纳迪诺枪击案凶手iPhone 5C的技术协助请求。基于对iOS平台的了解，我认为FBI的所有请求在技术上都是可行的。&lt;/p&gt;
+&lt;h2 id=&#34;fbi的技术请求&#34;&gt;FBI的技术请求
+&lt;/h2&gt;&lt;p&gt;调查中发现属于袭击者的iPhone 5C采用了&amp;quot;密码+硬件密钥&amp;quot;的双因素加密机制。FBI面临三个技术障碍：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;多次输错PIN会触发数据擦除&lt;/li&gt;
+&lt;li&gt;必须通过物理设备手动输入PIN&lt;/li&gt;
+&lt;li&gt;每次错误尝试后系统会引入延迟&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;FBI通过法庭令要求苹果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁用自动擦除功能&lt;/li&gt;
+&lt;li&gt;允许通过电子方式提交密码（USB/蓝牙/Wi-Fi）&lt;/li&gt;
+&lt;li&gt;消除密码尝试间的人为延迟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安全飞地se技术解析&#34;&gt;安全飞地(SE)技术解析
+&lt;/h2&gt;&lt;p&gt;搭载A7及以上处理器的设备包含独立的安全飞地协处理器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管理数据保护API、Apple Pay等服务的密钥访问&lt;/li&gt;
+&lt;li&gt;采用&amp;quot;密码+SE内置密钥&amp;quot;的双密钥解密机制&lt;/li&gt;
+&lt;li&gt;独立维护错误尝试计数器并实施延迟惩罚（最高1小时/次）&lt;/li&gt;
+&lt;li&gt;通过硬件级配对防止TouchID传感器伪造&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术实现方案&#34;&gt;技术实现方案
+&lt;/h2&gt;&lt;p&gt;对于无SE的iPhone 5C：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单一iOS固件更新即可绕过所有软件级保护&lt;/li&gt;
+&lt;li&gt;硬件支持每秒12次密码尝试（80ms/次）&lt;/li&gt;
+&lt;li&gt;4位PIN可在半小时内破解，6位需要数小时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;包含SE的设备需要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;iOS固件更新&lt;/li&gt;
+&lt;li&gt;SE固件更新
+才能禁用安全限制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;历史与现状&#34;&gt;历史与现状
+&lt;/h2&gt;&lt;p&gt;iOS 8之前多数文件未加密，简单的UI绕过即可访问。现在必须通过密码猜测流程，这直接导致了当前的技术协助请求。苹果可通过以下方式控制风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;限定定制固件仅适用于特定设备&lt;/li&gt;
+&lt;li&gt;在苹果设施内完成破解流程&lt;/li&gt;
+&lt;li&gt;不向FBI提供固件镜像&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

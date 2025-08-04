@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SQL Server on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/sql-server/</link>
+        <description>Recent content in SQL Server on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sun, 03 Aug 2025 22:53:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/sql-server/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软2025年7月补丁星期二：修复137个安全漏洞，含14个关键级漏洞</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2025%E5%B9%B47%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E4%BF%AE%E5%A4%8D137%E4%B8%AA%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%90%AB14%E4%B8%AA%E5%85%B3%E9%94%AE%E7%BA%A7%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Sun, 03 Aug 2025 22:53:07 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2025%E5%B9%B47%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E4%BF%AE%E5%A4%8D137%E4%B8%AA%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%90%AB14%E4%B8%AA%E5%85%B3%E9%94%AE%E7%BA%A7%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;p&gt;微软今日发布更新，修复了Windows操作系统及配套软件中至少137个安全漏洞。本月修复的漏洞均未被发现活跃利用迹象，但其中14个被微软评为最严重的&amp;quot;关键&amp;quot;级别——攻击者可在无需或仅需少量用户交互的情况下控制易受攻击的Windows系统。&lt;/p&gt;
+&lt;p&gt;虽然未列为关键漏洞，CVE-2025-49719是一个已公开的SQL Server信息泄露漏洞，影响范围涵盖自SQL Server 2016以来的所有版本。微软评估该漏洞利用可能性较低，但由于概念验证代码已存在，受影响企业应优先处理。Action1联合创始人Mike Walters指出，该漏洞无需认证即可利用，且大量第三方应用依赖SQL Server及其驱动组件，可能引发供应链风险。&lt;/p&gt;
+&lt;p&gt;Rapid7的Adam Barnett特别提醒关注CVSS评分9.8的CVE-2025-47981，这是Windows客户端与服务端在认证机制协商过程中出现的远程代码执行漏洞，影响Windows 10 1607以上所有客户端及当前所有Windows Server版本。微软认为该漏洞极有可能被攻击者利用。&lt;/p&gt;
+&lt;p&gt;Office组件中修复了四个关键远程代码执行漏洞（CVE-2025-49695至49702），其中前两个可通过预览窗格触发且无需用户交互。此外，CVE-2025-49740（CVSS 8.8）允许恶意文件绕过Microsoft Defender SmartScreen检测，而CVE-2025-47178（CVSS 8.0）是Microsoft Configuration Manager中的低权限远程代码执行漏洞，攻击者可借此在企业IT环境中执行任意SQL查询。&lt;/p&gt;
+&lt;p&gt;值得注意的是，SQL Server 2012于今日终止支持，将不再接收任何安全更新。Adobe同期也发布了After Effects、Audition等多款产品的安全更新。企业管理员可参考SANS互联网风暴中心的补丁严重性索引，普通用户建议安装更新前做好数据备份。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

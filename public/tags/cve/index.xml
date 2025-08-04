@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>CVE on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/cve/</link>
+        <description>Recent content in CVE on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 04:47:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cve/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Microsoft虚拟硬盘(VHDX)漏洞利用：远程代码执行(RCE) CVE-2025-49683详解</title>
+        <link>http://localhost:1313/p/microsoft%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98vhdx%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Crce-cve-2025-49683%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Mon, 04 Aug 2025 04:47:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/microsoft%E8%99%9A%E6%8B%9F%E7%A1%AC%E7%9B%98vhdx%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Crce-cve-2025-49683%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/04/JGhTH.png" alt="Featured image of post Microsoft虚拟硬盘(VHDX)漏洞利用：远程代码执行(RCE) CVE-2025-49683详解" /&gt;&lt;h1 id=&#34;microsoft-virtual-hard-disk-vhdx-11---远程代码执行rce-cve-2025-49683&#34;&gt;Microsoft Virtual Hard Disk (VHDX) 11 - 远程代码执行(RCE) CVE-2025-49683
+&lt;/h1&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;这个PowerShell脚本(&lt;code&gt;vdh.ps1&lt;/code&gt;)演示了Windows虚拟硬盘(VHDX)处理中的一个&lt;strong&gt;软损坏漏洞&lt;/strong&gt;，涉及&lt;strong&gt;CVE-2025-49683&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;脚本执行以下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建一个10MB大小的动态VHDX文件(虚拟磁盘)&lt;/li&gt;
+&lt;li&gt;将VHDX挂载为系统新驱动器&lt;/li&gt;
+&lt;li&gt;初始化、分区并用NTFS格式化虚拟磁盘&lt;/li&gt;
+&lt;li&gt;卸载VHDX并在文件8KB偏移处应用&lt;strong&gt;软字节级损坏&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;重新挂载损坏的VHDX观察潜在的文件系统或挂载错误&lt;/li&gt;
+&lt;li&gt;列出损坏卷内容以显示影响&lt;/li&gt;
+&lt;li&gt;在挂载卷内创建&lt;strong&gt;立即重启批处理脚本(&lt;code&gt;your-salaries.bat&lt;/code&gt;)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;提供卸载和删除损坏VHDX文件的清理选项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;目的&#34;&gt;目的
+&lt;/h2&gt;&lt;p&gt;这个PoC专为&lt;strong&gt;安全研究人员和渗透测试人员&lt;/strong&gt;设计：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理解轻微VHDX文件损坏如何导致系统不稳定或漏洞利用&lt;/li&gt;
+&lt;li&gt;演示CVE-2025-49683如何影响VHDX挂载和使用&lt;/li&gt;
+&lt;li&gt;帮助开发针对此类虚拟磁盘损坏攻击的检测和缓解策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;使用说明&#34;&gt;使用说明
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在提升的PowerShell会话中运行脚本&lt;/strong&gt;(以管理员身份运行 - 已授权的恶意用户)：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;.\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vdh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;ps1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;脚本将：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建、挂载并格式化新的VHDX文件&lt;/li&gt;
+&lt;li&gt;在字节级别损坏文件&lt;/li&gt;
+&lt;li&gt;重新挂载并尝试读取卷&lt;/li&gt;
+&lt;li&gt;在挂载驱动器中创建your-salaries.bat批处理文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要触发立即重启，导航到挂载驱动器(如D:)并运行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;your-salaries.bat
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;脚本结束时，按0清理(卸载并删除损坏的VHDX)，或按其他键退出并保留文件供进一步分析。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;重要警告与注意事项&#34;&gt;重要警告与注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;仅在测试或隔离环境中运行&lt;/li&gt;
+&lt;li&gt;立即重启批处理文件会无警告强制重启系统&lt;/li&gt;
+&lt;li&gt;损坏是模拟且微妙的(8KB偏移处)&lt;/li&gt;
+&lt;li&gt;影响因操作系统版本和环境而异&lt;/li&gt;
+&lt;li&gt;需要管理员权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;损坏偏移：VHDX文件中8192字节(8KB)处&lt;/li&gt;
+&lt;li&gt;损坏模式：[0x00, 0xFF, 0x00, 0xFF, 0xDE, 0xAD, 0xBE, 0xEF]字节序列&lt;/li&gt;
+&lt;li&gt;磁盘初始化：MBR分区样式，单个NTFS分区&lt;/li&gt;
+&lt;li&gt;重启命令：&lt;code&gt;shutdown /r /t 0 /f&lt;/code&gt;强制立即重启&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例输出&#34;&gt;示例输出
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vbnet&#34; data-lang=&#34;vbnet&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;正在检查现有VHDX文件以避免冲突&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;创建新的VHDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;虚拟硬盘&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;文件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;大小&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;路径&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MicrosoftLoosers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Desktop&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CVE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2025&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;49683&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;corrupted_test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vhdx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;正在挂载新的VHDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;磁盘已初始化为NTFS格式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;驱动器挂载为E&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;正在卸载VHDX以应用损坏&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;通过在8KB偏移处修改字节模拟损坏&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[+]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;损坏应用成功&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;重新挂载损坏的VHDX观察效果&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[*]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;创建立即重启批处理脚本&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;your&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;salaries&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;许可证与免责声明&#34;&gt;许可证与免责声明
+&lt;/h3&gt;&lt;p&gt;本脚本仅用于教育和研究目的。作者和分发者对任何滥用造成的损害不承担责任。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;参考&#34;&gt;参考
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49683&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2025-49683&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/nu11secur1ty/CVE-mitre/tree/main/2025/CVE-2025-49683&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;源代码&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>微软安全更新指南(Security Update Guide)新手指南</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Mon, 04 Aug 2025 04:41:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;p&gt;2020年11月起，微软安全更新指南门户全面改版。本文将为初次接触或尚未熟悉新界面的用户提供详细操作指引。&lt;/p&gt;
+&lt;h3 id=&#34;安全更新指南是什么&#34;&gt;安全更新指南是什么？
+&lt;/h3&gt;&lt;p&gt;该门户提供微软产品/服务的漏洞和更新信息，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;漏洞详情(CVE)&lt;/li&gt;
+&lt;li&gt;受影响产品清单&lt;/li&gt;
+&lt;li&gt;已知问题列表&lt;/li&gt;
+&lt;li&gt;支持按产品/发布日期筛选&lt;/li&gt;
+&lt;li&gt;支持CVE编号等关键词搜索&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞详情页功能解析&#34;&gt;漏洞详情页功能解析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;CVSS评分&lt;/strong&gt;&lt;br&gt;
+采用通用漏洞评分系统，悬停评分项可查看具体定义&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可利用性&lt;/strong&gt;&lt;br&gt;
+显示漏洞披露状态及微软独家&amp;quot;可利用性评估&amp;quot;指标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢名单&lt;/strong&gt;&lt;br&gt;
+列出来自漏洞赏金计划的贡献者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;常见问题&lt;/strong&gt;&lt;br&gt;
+包含特殊配置要求、非标准更新方式等补充说明&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全更新列表&lt;/strong&gt;&lt;br&gt;
+提供修复该漏洞的所有更新程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;api数据获取方案&#34;&gt;API数据获取方案
+&lt;/h3&gt;&lt;p&gt;门户数据可通过CVRF格式API获取，具体资源包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[视频] GitHub上的API使用教程&lt;/li&gt;
+&lt;li&gt;[视频] 安全更新API调用演示&lt;/li&gt;
+&lt;li&gt;[视频] 月度更新摘要HTML生成&lt;/li&gt;
+&lt;li&gt;[视频] 数据导出至Excel的方法&lt;/li&gt;
+&lt;li&gt;[视频] CVE/KB列表获取技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：门户将持续迭代改进，功能界面可能调整&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;相关资源&#34;&gt;相关资源
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;新版漏洞详情说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc-blog.microsoft.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南改进公告&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Kubernetes镜像构建器漏洞分析：CVE-2024-9486与CVE-2024-9594技术详解</title>
+        <link>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 18:35:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;近期披露的两个漏洞（CVE-2024-9486 CVSS 9.8和CVE-2024-9594 CVSS 6.3）影响Kubernetes镜像构建器，攻击者在特定条件下可利用这些漏洞获取Kubernetes节点的root权限。部分镜像构建提供商未在构建完成后禁用默认管理凭证，导致节点部署后可能被入侵。该问题已在Image Builder v0.1.38版本修复，建议用户重建并重新部署受影响镜像。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及组件&#34;&gt;受影响系统及组件
+&lt;/h3&gt;&lt;p&gt;所有v0.1.37及更早版本的Image Builder均受影响，涉及以下提供商：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;最严重场景&lt;/strong&gt;：Proxmox&lt;/li&gt;
+&lt;li&gt;其他受影响提供商：Nutanix、OVA、QEMU和raw格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;h4 id=&#34;cve-2024-9486&#34;&gt;CVE-2024-9486
+&lt;/h4&gt;&lt;p&gt;该漏洞存在于使用Proxmox提供商的旧版Image Builder中。构建过程中启用的默认凭证未在完成后正确禁用，导致攻击者可通过残留凭证获取节点root权限。v0.1.38版本通过以下方式修复：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;构建期间仅生成随机临时密码&lt;/li&gt;
+&lt;li&gt;镜像构建完成后强制禁用builder账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;cve-2024-9594&#34;&gt;CVE-2024-9594
+&lt;/h4&gt;&lt;p&gt;此漏洞与CVE-2024-9486类似，但影响Nutanix/OVA/QEMU/raw提供商。关键区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅能在镜像部署周期内被利用&lt;/li&gt;
+&lt;li&gt;无法在构建完成后维持访问
+因此其CVSS评分较低（6.3）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;临时缓解&lt;/strong&gt;：在受影响虚拟机上禁用builder账户&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;彻底修复&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用已修复的Image Builder v0.1.38重建镜像&lt;/li&gt;
+&lt;li&gt;重新部署所有受影响虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;威胁现状&#34;&gt;威胁现状
+&lt;/h3&gt;&lt;p&gt;Kudelski安全团队尚未监测到这些漏洞的主动利用行为，将持续跟踪相关动态。&lt;/p&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thehackernews.com/2024/10/critical-kubernetes-image-builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hacker News相关报道&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

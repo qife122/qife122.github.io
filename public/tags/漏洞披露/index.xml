@@ -7,7 +7,48 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 11:45:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 11:34:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>阈值签名方案中的共享密钥破解漏洞分析</title>
+        <link>http://localhost:1313/p/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 11:34:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;打破阈值签名方案中的共享密钥---trail-of-bits博客&#34;&gt;打破阈值签名方案中的共享密钥 - Trail of Bits博客
+&lt;/h1&gt;&lt;p&gt;今天我们将披露一个拒绝服务漏洞，该漏洞影响基于Frost、DMZ21、GG20和GG18协议的多个阈值签名方案实现中的Pedersen分布式密钥生成(DKG)阶段。该漏洞允许单个恶意参与者秘密提高重构共享密钥所需的阈值，可能导致使用共享密钥生成的签名无效。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现过程&#34;&gt;漏洞发现过程
+&lt;/h2&gt;&lt;p&gt;我们去年在与Chainflip的合作中首次注意到这个漏洞。在审查Chainflip的Frost阈值签名方案实现时，我们发现其采用了不寻常的做法——这是我们从未见过的。通常这类异常现象表明代码库存在弱点或漏洞，但这次Chainflip的防御性编码实践反而保护了其实现免遭漏洞影响。通过格外谨慎，Chainflip还避免了在代码库中引入可能被单方利用来破坏协议密钥生成阶段创建的共享密钥的漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;pedersen-dkg协议解析&#34;&gt;Pedersen DKG协议解析
+&lt;/h2&gt;&lt;p&gt;该漏洞实际上很容易理解，但需要先了解Pedersen DKG协议背后的数学细节。Pedersen DKG协议基于Feldman的可验证秘密共享(VSS)方案，这是Shamir秘密共享方案的扩展。&lt;/p&gt;
+&lt;p&gt;设G是一个离散对数问题困难的交换群，g是G的生成元。在(t,n)-Feldman VSS方案中：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;经销商生成随机t次多项式p(x) = a0 + a1x + &amp;hellip; + atx^t&lt;/li&gt;
+&lt;li&gt;计算秘密份额si = p(i)&lt;/li&gt;
+&lt;li&gt;发布系数承诺Ai = g^ai&lt;/li&gt;
+&lt;li&gt;参与者可通过指数运算验证其份额&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Pedersen DKG协议本质上是并行运行n个Feldman VSS方案实例，最终生成一个所有参与者都不知道的(t,n)-Shamir秘密共享值。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞原理分析&#34;&gt;漏洞原理分析
+&lt;/h2&gt;&lt;p&gt;我们发现，如果参与者在Pedersen DKG协议中使用次数T大于t的多项式pi(x)，将导致最终多项式p(x)的次数变为T而非t。这意味着签名协议将需要T+1而非t+1参与者才能成功完成。如果其他参与者未检测到这一变化，攻击者可以秘密将阈值提高到超过参与者总数，从而使共享密钥无法使用。&lt;/p&gt;
+&lt;h2 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h2&gt;&lt;p&gt;我们共发现10个实现存在此漏洞，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Frost参考实现&lt;/li&gt;
+&lt;li&gt;ZCash Foundation的Frost实现&lt;/li&gt;
+&lt;li&gt;Penumbra基于decaf377的Frost实现&lt;/li&gt;
+&lt;li&gt;Frost-Dalek&lt;/li&gt;
+&lt;li&gt;Toposware的ICE-FROST实现&lt;/li&gt;
+&lt;li&gt;Trust Machines基于Frost的WSTS实现&lt;/li&gt;
+&lt;li&gt;FROST-BIP340&lt;/li&gt;
+&lt;li&gt;ZenGo-X的GG18和GG20实现&lt;/li&gt;
+&lt;li&gt;Safeheron的GG20实现&lt;/li&gt;
+&lt;li&gt;LatticeX的Open TSS GG20实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;披露过程&#34;&gt;披露过程
+&lt;/h2&gt;&lt;p&gt;我们于2024年1月3日联系了相关维护者，其中7个团队确认收到披露，4个团队表示已修复或计划修复该问题。对于未回应的3个团队，我们于2024年2月7日进行了二次联系，随后Toposware也确认收到披露。&lt;/p&gt;
+&lt;p&gt;（全文完）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Azure容器实例服务漏洞协同披露</title>
         <link>http://localhost:1313/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</link>
         <pubDate>Sun, 03 Aug 2025 11:45:52 +0800</pubDate>

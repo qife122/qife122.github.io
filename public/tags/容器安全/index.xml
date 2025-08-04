@@ -7,7 +7,146 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 11:45:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 20:24:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深入解析Kubernetes安全配置：allowPrivilegeEscalation的真相与误区</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</link>
+        <pubDate>Mon, 04 Aug 2025 20:24:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</guid>
+        <description>&lt;h1 id=&#34;停止对allowprivilegeescalation的过度担忧&#34;&gt;停止对&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;的过度担忧
+&lt;/h1&gt;&lt;p&gt;Kubernetes安全上下文允许您在pod或容器级别配置安全选项。虽然某些参数已被充分理解，但其他参数可能更加晦涩难懂。本文将揭穿关于allowPrivilegeEscalation选项的迷思。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt; - allowPrivilegeEscalation是一个安全加固选项，仅此而已。如果您能将其关闭作为快速安全措施，请务必这样做！否则，它本身不会导致系统被入侵。如果您没有显式禁用它，可能也没问题。&lt;/p&gt;
+&lt;h2 id=&#34;什么是allowprivilegeescalation&#34;&gt;什么是&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;？
+&lt;/h2&gt;&lt;p&gt;询问任何安全工程师是否应允许您的应用程序&amp;quot;提升权限&amp;quot;，您可能会得到茫然的眼神、困惑的表情，甚至可能被质疑您的理智。&lt;/p&gt;
+&lt;p&gt;好消息是：这里存在误解。当您问：
+&amp;ldquo;如果我没有显式将&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;标志设为false有关系吗？&amp;rdquo;
+&amp;hellip;您的安全工程师听到的是：
+&amp;ldquo;如果我不安全的Java应用能逃逸容器并在集群中肆意妄为，这没问题吗？&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;关于allowprivilegeescalation的常见误解&#34;&gt;关于&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;的常见误解
+&lt;/h2&gt;&lt;p&gt;开门见山：虽然关闭allowPrivilegeEscalation很有价值，但它只是一个您可以利用来增强容器化环境安全的安全加固设置。&lt;/p&gt;
+&lt;p&gt;具体来说，如果您将allowPrivilegeEscalation保留为true(其默认值)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它不会神奇地允许容器中的非特权进程将其权限提升至root&lt;/li&gt;
+&lt;li&gt;它不会允许容器内运行的进程逃逸容器&lt;/li&gt;
+&lt;li&gt;它不会允许pod在集群内执行任何类型的权限提升&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;allowprivilegeescalation实战&#34;&gt;&amp;lsquo;allowPrivilegeEscalation&amp;rsquo;实战
+&lt;/h2&gt;&lt;p&gt;让我们重现一个场景：漏洞允许非特权进程在容器内将其权限提升至root。这可能发生在DirtyCow、DirtyPipe或OverlayFS中的CVE-2023-0386等内核级漏洞中。&lt;/p&gt;
+&lt;p&gt;我们使用以下程序，它使用setreuid和setregid有效地将权限提升至root：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;setreuid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;setregid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;environ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;execve&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;environ&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当我们在Kubernetes集群中运行此容器并显式打开allowPrivilegeEscalation(尽管这是默认值)时，我们能够利用漏洞将权限提升至root。但如果我们将allowPrivilegeEscalation设为false，setreuid和setregid调用将失败。&lt;/p&gt;
+&lt;h2 id=&#34;allowprivilegeescalation工作原理&#34;&gt;&amp;lsquo;allowPrivilegeEscalation&amp;rsquo;工作原理
+&lt;/h2&gt;&lt;p&gt;根据Kubernetes文档：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;AllowPrivilegeEscalation控制进程是否可以获得比其父进程更多的权限。此布尔值直接控制是否会在容器进程上设置no_new_privs标志。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;no_new_privs标志是2012年发布的Linux 3.5内核中引入的功能。启用后，它确保没有子进程可以获得比其父进程更多的权限。&lt;/p&gt;
+&lt;p&gt;容器运行时(如runc)在创建新容器化进程时会执行此操作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;NoNewPrivileges&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;unix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Prctl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;unix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;PR_SET_NO_NEW_PRIVS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;SyscallError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Syscall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;prctl(SET_NO_NEW_PRIVS)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;安全就像大多数试图处理系统性故障的学科一样，是关于构建不同层次以确保单个缺陷不会变成数据泄露。&lt;/p&gt;
+&lt;p&gt;在此背景下：是的，显式关闭allowPrivilegeEscalation是一种合理的安全加固实践。关闭它可以大大提高攻击者入侵非特权应用程序后无法将其权限提升至容器内root的信心，从而降低利用需要root权限的进一步漏洞的风险。&lt;/p&gt;
+&lt;p&gt;如果您没有在工作负载上关闭它，这很糟糕吗？可能不会。将其视为您尚未启用的(又一个)加固机制。除非您是一个成熟的安全团队，否则您最好首先专注于容器安全路线图中更有价值的项目。&lt;/p&gt;
+&lt;h2 id=&#34;常见问题解答&#34;&gt;常见问题解答
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&amp;lsquo;allowPrivilegeEscalation&amp;rsquo;的默认值是什么？&lt;/strong&gt;
+默认为true。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果我的工作负载在容器内以root身份运行，关闭&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;有意义吗？&lt;/strong&gt;
+没有意义。如果工作负载以root身份运行，它们在容器内无法实现进一步的权限提升。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关闭&amp;rsquo;allowPrivilegeEscalation&amp;rsquo;是否能防止容器内的所有权限提升？&lt;/strong&gt;
+不能。例如，如果攻击者利用允许他们提升权限的内核漏洞，它将无济于事。也就是说，它应该阻止所有通过利用setuid/setgid工作的权限提升。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Kubernetes镜像构建器漏洞分析：CVE-2024-9486与CVE-2024-9594技术详解</title>
+        <link>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 03 Aug 2025 18:35:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/kubernetes%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2024-9486%E4%B8%8Ecve-2024-9594%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;近期披露的两个漏洞（CVE-2024-9486 CVSS 9.8和CVE-2024-9594 CVSS 6.3）影响Kubernetes镜像构建器，攻击者在特定条件下可利用这些漏洞获取Kubernetes节点的root权限。部分镜像构建提供商未在构建完成后禁用默认管理凭证，导致节点部署后可能被入侵。该问题已在Image Builder v0.1.38版本修复，建议用户重建并重新部署受影响镜像。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及组件&#34;&gt;受影响系统及组件
+&lt;/h3&gt;&lt;p&gt;所有v0.1.37及更早版本的Image Builder均受影响，涉及以下提供商：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;最严重场景&lt;/strong&gt;：Proxmox&lt;/li&gt;
+&lt;li&gt;其他受影响提供商：Nutanix、OVA、QEMU和raw格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;h4 id=&#34;cve-2024-9486&#34;&gt;CVE-2024-9486
+&lt;/h4&gt;&lt;p&gt;该漏洞存在于使用Proxmox提供商的旧版Image Builder中。构建过程中启用的默认凭证未在完成后正确禁用，导致攻击者可通过残留凭证获取节点root权限。v0.1.38版本通过以下方式修复：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;构建期间仅生成随机临时密码&lt;/li&gt;
+&lt;li&gt;镜像构建完成后强制禁用builder账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;cve-2024-9594&#34;&gt;CVE-2024-9594
+&lt;/h4&gt;&lt;p&gt;此漏洞与CVE-2024-9486类似，但影响Nutanix/OVA/QEMU/raw提供商。关键区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅能在镜像部署周期内被利用&lt;/li&gt;
+&lt;li&gt;无法在构建完成后维持访问
+因此其CVSS评分较低（6.3）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;临时缓解&lt;/strong&gt;：在受影响虚拟机上禁用builder账户&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;彻底修复&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用已修复的Image Builder v0.1.38重建镜像&lt;/li&gt;
+&lt;li&gt;重新部署所有受影响虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;威胁现状&#34;&gt;威胁现状
+&lt;/h3&gt;&lt;p&gt;Kudelski安全团队尚未监测到这些漏洞的主动利用行为，将持续跟踪相关动态。&lt;/p&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thehackernews.com/2024/10/critical-kubernetes-image-builder.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hacker News相关报道&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Azure容器实例服务漏洞协同披露</title>
         <link>http://localhost:1313/p/azure%E5%AE%B9%E5%99%A8%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E%E5%8D%8F%E5%90%8C%E6%8A%AB%E9%9C%B2/</link>
         <pubDate>Sun, 03 Aug 2025 11:45:52 +0800</pubDate>

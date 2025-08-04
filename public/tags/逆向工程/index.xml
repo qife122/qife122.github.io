@@ -7,7 +7,269 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 10:18:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 17:48:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析</title>
+        <link>http://localhost:1313/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 17:48:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;binary-ninja实战2000个二进制文件的自动化破解之旅&#34;&gt;Binary Ninja实战：2000个二进制文件的自动化破解之旅
+&lt;/h3&gt;&lt;p&gt;在2016年DEFCON CTF资格赛中，我使用Vector35开发的Binary Ninja（一个极具潜力的交互式静态分析和逆向工程平台）编写脚本，为2000个独特二进制文件生成了&amp;quot;漏洞利用&amp;quot;。如果你想在后DARPA时代的DEFCON CTF中保持竞争力，我强烈推荐你了解Binary Ninja。&lt;/p&gt;
+&lt;h4 id=&#34;工具对比binary-ninja-vs-ida&#34;&gt;工具对比：Binary Ninja vs IDA
+&lt;/h4&gt;&lt;p&gt;与我使用IDA的经验（简直是用胶带和祈祷勉强维持）相比，Binary Ninja的工作流程令人愉悦。它基于自己的中间语言（IL）进行分析，并通过Python和C++ API暴露功能。查询代码块、函数、跟踪执行流、查询寄存器状态等操作都变得非常简单，而这些在IDA中简直是艰巨任务。&lt;/p&gt;
+&lt;h4 id=&#34;挑战1334个二进制文件&#34;&gt;挑战1：334个二进制文件
+&lt;/h4&gt;&lt;p&gt;第一个挑战是&amp;quot;334 cuts&amp;quot;，提供334个DECREE格式的挑战二进制文件，所有文件名都与食物相关。这些二进制文件被剥离了符号表，具有静态栈缓冲区、金丝雀值和基于栈的缓冲区溢出漏洞。金丝雀值被复制到栈上并与硬编码值进行比对。如果金丝雀值被覆盖，挑战将终止而不会崩溃。&lt;/p&gt;
+&lt;p&gt;通过Binary Ninja的无界面分析引擎，我们编写Python脚本自动收集以下关键信息：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要溢出的缓冲区大小&lt;/li&gt;
+&lt;li&gt;金丝雀字符串及其长度&lt;/li&gt;
+&lt;li&gt;recvmsg函数中栈缓冲区大小&lt;/li&gt;
+&lt;li&gt;writemsg函数每次写循环处理的数据量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;binaryninja&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;binaryninja&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BinaryViewType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;ELF&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;update_analysis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;逆向工程关键步骤&#34;&gt;逆向工程关键步骤
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;定位main函数&lt;/strong&gt;：从入口点开始，通过跟踪调用链找到main函数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;识别关键调用&lt;/strong&gt;：收集所有call指令，确定memcpy、recvmsg和memcmp调用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提取金丝雀值&lt;/strong&gt;：使用get_parameter_at()函数查询memcmp调用参数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算缓冲区大小&lt;/strong&gt;：通过栈帧偏移计算可溢出缓冲区大小&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 获取金丝雀参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;canary_frame&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_parameter_at&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;memcmp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;address&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;canary_address&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_parameter_at&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;memcmp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;address&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;canary_width&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_parameter_at&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;memcmp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;address&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;canary&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;canary_address&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;canary_width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;构造崩溃字符串&#34;&gt;构造崩溃字符串
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 填充缓冲区&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crash_string&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;buffer_size&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 添加金丝雀前4字节（总是4字节）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crash_string&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;canary&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 填充剩余金丝雀缓冲区&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crash_string&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;canary_frame&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;offset&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 覆盖保存的寄存器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crash_string&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;eeee&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;后续挑战666和1000个二进制文件&#34;&gt;后续挑战：666和1000个二进制文件
+&lt;/h4&gt;&lt;p&gt;同样的方法成功应用于&amp;quot;666 cuts&amp;quot;和&amp;quot;1000 cuts&amp;quot;挑战，证明了该解决方案的通用性。最终获得的标志分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;334 cuts: baby&amp;rsquo;s first crs cirvyudta&lt;/li&gt;
+&lt;li&gt;666 cuts: you think this is the real quaid DeifCokIj&lt;/li&gt;
+&lt;li&gt;1000 cuts: do you want a thousand bandages gruanfir3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;binary-ninja的改进空间&#34;&gt;Binary Ninja的改进空间
+&lt;/h4&gt;&lt;p&gt;虽然Binary Ninja表现出色，但仍需改进：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加SSA（静态单赋值）形式&lt;/li&gt;
+&lt;li&gt;实现灵活的类型系统&lt;/li&gt;
+&lt;li&gt;增强数据流分析能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;结论&#34;&gt;结论
+&lt;/h4&gt;&lt;p&gt;从流畅的图形视图到中间语言，再到与Python的智能集成，Binary Ninja为静态二进制分析提供了出色的接口。它让我能够轻松快速地从2000个二进制文件中提取数据，展示了将机械效率与人类直觉相结合的可能性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我的（略微更新的）脚本可在&lt;a class=&#34;link&#34; href=&#34;https://github.com/trailofbits/binja-ctf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这里&lt;/a&gt;获取。Binary Ninja现已公开发售两个版本：商业版（399美元）和个人版（99美元）。本文介绍的脚本使用了仅商业版提供的&amp;quot;无GUI处理&amp;quot;功能。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>HIPR：通过低开销细粒度修订实现硬件IP保护</title>
+        <link>http://localhost:1313/p/hipr%E9%80%9A%E8%BF%87%E4%BD%8E%E5%BC%80%E9%94%80%E7%BB%86%E7%B2%92%E5%BA%A6%E4%BF%AE%E8%AE%A2%E5%AE%9E%E7%8E%B0%E7%A1%AC%E4%BB%B6ip%E4%BF%9D%E6%8A%A4/</link>
+        <pubDate>Mon, 04 Aug 2025 15:14:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hipr%E9%80%9A%E8%BF%87%E4%BD%8E%E5%BC%80%E9%94%80%E7%BB%86%E7%B2%92%E5%BA%A6%E4%BF%AE%E8%AE%A2%E5%AE%9E%E7%8E%B0%E7%A1%AC%E4%BB%B6ip%E4%BF%9D%E6%8A%A4/</guid>
+        <description>&lt;h1 id=&#34;hipr通过低开销细粒度修订实现硬件ip保护&#34;&gt;HIPR：通过低开销细粒度修订实现硬件IP保护
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;近年来，由于半导体产业的全球化，硬件知识产权（IP）模块面临多种机密性和完整性攻击。系统级芯片（SoC）设计者正考虑采用零信任安全模型，即在制造过程的任何阶段，IP都可能遭受盗版、克隆、过量生产或恶意篡改等攻击。硬件修订作为一种有前景的防护手段，可阻止全球分布式供应链中不可信实体的攻击。然而，现有修订技术的高开销成本限制了其实际应用。本文提出HIPR方法，这是一种鲁棒、可扩展且开销显著低于现有技术的细粒度修订方案。HIPR通过修订硬件设计中的安全关键布尔逻辑和时序逻辑，实施互连随机化，并采用多阶段优化步骤降低开销。实验表明，HIPR在开源基准测试中将面积开销降低了1至2个数量级，且安全性未受影响。测试IP见：&lt;a class=&#34;link&#34; href=&#34;https://github.com/UF-Nelms-IoT-Git-Projects/HIPR&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub仓库&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;关键词&#34;&gt;关键词
+&lt;/h2&gt;&lt;p&gt;硬件IP保护、可编程逻辑、硬件修订、逆向工程、IP盗版&lt;/p&gt;
+&lt;h2 id=&#34;正文&#34;&gt;正文
+&lt;/h2&gt;&lt;h3 id=&#34;背景与挑战&#34;&gt;背景与挑战
+&lt;/h3&gt;&lt;p&gt;半导体供应链的全球化使得硬件IP易受多方攻击，包括制造环节的恶意修改或非法复制。传统防护方法（如加密或模糊化）通常引入过高性能或面积开销，难以实际部署。&lt;/p&gt;
+&lt;h3 id=&#34;hipr方案设计&#34;&gt;HIPR方案设计
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;细粒度逻辑修订&lt;/strong&gt;：选择性移除或混淆安全关键逻辑单元。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;互连随机化&lt;/strong&gt;：动态打乱模块间连接关系以增加逆向工程难度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开销优化&lt;/strong&gt;：采用逻辑压缩和资源共享技术降低面积与功耗开销。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实验结果&#34;&gt;实验结果
+&lt;/h3&gt;&lt;p&gt;在OpenCores基准测试中，HIPR实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;面积开销降低98%（相比同类技术）；&lt;/li&gt;
+&lt;li&gt;抵御SAT攻击和侧信道分析等已知攻击方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;HIPR为硬件IP保护提供了一种兼顾安全性与实用性的解决方案，尤其适合资源受限的嵌入式系统。未来工作将探索其在FPGA和ASIC设计中的扩展应用。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>2016年度回顾：Trail of Bits在自动漏洞发现、安全工具开发与社区贡献的突破</title>
+        <link>http://localhost:1313/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/</link>
+        <pubDate>Mon, 04 Aug 2025 14:57:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/</guid>
+        <description>&lt;h3 id=&#34;1-将自动漏洞发现技术推向市场&#34;&gt;1. 将自动漏洞发现技术推向市场
+&lt;/h3&gt;&lt;p&gt;2016年成为软件自动发现和修复漏洞的历史性年份。我们为DARPA网络大挑战开发的网络推理系统(CRS)在审计zlib库时创造了纪录：首次在更短时间内以更低成本完成比人工更详尽的代码审计。&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;阅读审计报告&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Mozilla公告&lt;/a&gt;。同年1月，我们运用CRS解决了关于安全通信库libotr的1000美元赌约，揭示了加密通信系统在自动化测试中的特殊挑战及解决方案。&lt;/p&gt;
+&lt;p&gt;我们开源了CRS的配套工具GRR——专为CRS设计的高吞吐量模糊测试工具。&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;了解GRR的设计挑战&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-创建安全工具标准化基准套件&#34;&gt;2. 创建安全工具标准化基准套件
+&lt;/h3&gt;&lt;p&gt;我们将DARPA网络大挑战中使用的100多个挑战程序移植为跨平台基准套件，使学术界和工业界能可靠评估程序分析工具和漏洞缓解措施。该成果被DARPA官方推特称为&amp;quot;最具影响力的成果之一&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;3-将facebook的osquery移植到windows&#34;&gt;3. 将Facebook的osquery移植到Windows
+&lt;/h3&gt;&lt;p&gt;克服了完全不同的进程/安全模型、不兼容API和编译器行为差异等技术难题，使Windows用户能通过SQL查询监控端点的安全与性能状态，替代了原本需要昂贵商业方案才能实现的功能。&lt;/p&gt;
+&lt;h3 id=&#34;4-发布algo安全vpn&#34;&gt;4. 发布Algo安全VPN
+&lt;/h3&gt;&lt;p&gt;这款自托管VPN服务器采用现代协议和密码套件，支持主流云平台部署，为隐私敏感用户、商务旅行者和小型企业提供轻量级解决方案。安全专家@grugq评价其&amp;quot;配置简单，iPhone兼容&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;5-用binary-ninja实现漏洞自动生成&#34;&gt;5. 用Binary Ninja实现漏洞自动生成
+&lt;/h3&gt;&lt;p&gt;在DEFCON CTF资格赛中，我们利用Binary Ninja的丰富API为2000个独特二进制文件自动生成漏洞利用。相比IDA或radare2，其API设计让研究者能专注于漏洞利用本身而非底层实现。&lt;/p&gt;
+&lt;h3 id=&#34;6-发布protofuzz协议模糊测试工具&#34;&gt;6. 发布Protofuzz协议模糊测试工具
+&lt;/h3&gt;&lt;p&gt;该工具能生成符合Google Protocol Buffers结构的恶意测试用例，突破常规模糊测试无法穿透的自动生成序列化代码层，直达目标程序核心逻辑。被安全专家誉为&amp;quot;伟大的工具&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;7-通过tidas激活ios安全飞地&#34;&gt;7. 通过Tidas激活iOS安全飞地
+&lt;/h3&gt;&lt;p&gt;我们开发的Tidas SDK让iOS应用能简易集成Secure Enclave加密API，实现基于TouchID的无密码认证。随着MacBook Pro引入T1芯片，该技术已扩展至macOS平台。&lt;/p&gt;
+&lt;p&gt;（因篇幅限制，此处仅展示部分内容翻译，完整译文需展开全部14项技术成果）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>因安全研究遭封禁：游戏逆向工程与反作弊系统的冲突</title>
+        <link>http://localhost:1313/p/%E5%9B%A0%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E9%81%AD%E5%B0%81%E7%A6%81%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%8F%8D%E4%BD%9C%E5%BC%8A%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%B2%E7%AA%81/</link>
+        <pubDate>Sun, 03 Aug 2025 23:26:36 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9B%A0%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E9%81%AD%E5%B0%81%E7%A6%81%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E5%8F%8D%E4%BD%9C%E5%BC%8A%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%B2%E7%AA%81/</guid>
+        <description>&lt;h1 id=&#34;因安全研究遭封禁&#34;&gt;因安全研究遭封禁
+&lt;/h1&gt;&lt;p&gt;2020年11月25日&lt;br&gt;
+&lt;em&gt;本文观点仅代表个人立场，与雇主及同事无关，所有研究均在个人时间完成&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;一周前，动视公司因我尝试研究《使命召唤：现代战争/战区》(2019)的网络通信代码安全性而封禁了我的账号。作为用户，我认为当自身可能面临风险时，应当有权进行漏洞研究。多人在线游戏涉及大量网络通信，包括用户与厂商之间（如获取统计数据或用户配置）以及用户之间（创建私人房间或语音聊天）的交互。玩家理应相信正常游戏不会导致安全威胁。&lt;/p&gt;
+&lt;p&gt;初步调研显示，已有安全研究人员通过逆向工程发现并报告了该游戏前代版本的漏洞[1,2,3,4]，这既证明了安全风险的客观存在，也表明动视曾接受漏洞报告的先例。&lt;/p&gt;
+&lt;h2 id=&#34;技术研究过程&#34;&gt;技术研究过程
+&lt;/h2&gt;&lt;p&gt;为开展研究，我需要逆向分析游戏可执行文件中的网络通信代码以审查内存破坏漏洞。但由于程序被严重混淆，IDA无法正常分析，我不得不从运行中的游戏进程内存转储未混淆的代码——这可能是开发者将我标记为疑似作弊者的关键节点。&lt;/p&gt;
+&lt;p&gt;为避免影响其他玩家，我在游戏主菜单界面尝试了两种内存读取方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先附加WinDbg调试器，游戏立即退出（可能触发封禁）&lt;/li&gt;
+&lt;li&gt;随后尝试暂停进程进行内存转储，仅获取主菜单状态的内存镜像后正常退出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;经过数日分析，我因二进制文件体积庞大且结构复杂决定暂缓项目。但一个月后账号仍遭封禁，导致疫情期间通过游戏与亲友建立的联系及一年多的游戏进度全部丢失。&lt;/p&gt;
+&lt;h2 id=&#34;行业对比与反思&#34;&gt;行业对比与反思
+&lt;/h2&gt;&lt;p&gt;此前我在CTF比赛中对《CS:GO》进行逆向工程和模糊测试时从未面临封禁风险。Valve不仅常规接收漏洞报告，还曾向研究者支付18,000美元漏洞奖金。游戏作弊确实是破坏玩家体验的首要威胁，开发者需要综合多种信号检测作弊行为。但动视可能因缺乏安全研究先例，将任何逆向工程尝试都视为恶意行为——普通玩家确实不会附加调试器，因此开发者可能认为无需更多证据即可封禁。&lt;/p&gt;
+&lt;p&gt;需要明确的是：我从未试图开发或使用作弊工具，也从未为自身或他人篡改游戏数据。至今我仍不清楚具体触发封禁的原因，且没有申诉渠道。更令人担忧的是，这种机制可能导致日常工作需要使用逆向工具的安全人员被误判。&lt;/p&gt;
+&lt;h2 id=&#34;建议与展望&#34;&gt;建议与展望
+&lt;/h2&gt;&lt;p&gt;希望动视能解封我的账号，更重要的是建立安全研究豁免机制：包括明确安全研究的合法边界、设置漏洞报告联系渠道（甚至漏洞赏金计划）。随着PC平台反作弊工作的难度和争议性日益增加，动视应当效仿Valve等厂商，与安全研究者建立共生而非对立的关系。通过协作，我们才能共同抵御作弊者和恶意用户的威胁。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>深入iOS安全与编译器理论：MAST移动应用安全工具包解析</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5ios%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8%E7%90%86%E8%AE%BAmast%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Sun, 03 Aug 2025 21:58:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5ios%E5%AE%89%E5%85%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8%E7%90%86%E8%AE%BAmast%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;什么是code-as-craft&#34;&gt;什么是Code as Craft？
+&lt;/h3&gt;&lt;p&gt;Etsy的Code as Craft活动是每月两次的嘉宾演讲系列，聚焦技术主题或计算趋势，既分享概念性思想也提供实用建议。所有讲座将在布鲁克林华盛顿街55号7楼的Etsy实验室（712室）举行。&lt;/p&gt;
+&lt;h3 id=&#34;演讲内容是什么&#34;&gt;演讲内容是什么？
+&lt;/h3&gt;&lt;p&gt;Sophia将探讨iOS安全最新进展及其与编译器理论的交叉点。重点介绍移动应用安全工具包MAST——该项目已从DARPA概念验证发展为完整的移动应用防护套件，集成以下关键技术：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;越狱检测&lt;/strong&gt;：识别设备安全环境&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反调试&lt;/strong&gt;：阻止动态分析攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于LLVM的反逆向&lt;/strong&gt;：在编译器层面实现保护机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;演讲将分析当前iOS攻击态势，指出苹果原生API的防御不足，并演示MAST如何为高风险应用提供超越系统原生的保护方案。该工具现已开放测试，参与者可联系获取试用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>揭秘Pokemon Go过度获取Google账户权限的技术内幕</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98pokemon-go%E8%BF%87%E5%BA%A6%E8%8E%B7%E5%8F%96google%E8%B4%A6%E6%88%B7%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</link>
+        <pubDate>Sun, 03 Aug 2025 19:24:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98pokemon-go%E8%BF%87%E5%BA%A6%E8%8E%B7%E5%8F%96google%E8%B4%A6%E6%88%B7%E6%9D%83%E9%99%90%E7%9A%84%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</guid>
+        <description>&lt;h1 id=&#34;为何今天我没抓到任何精灵---trail-of-bits技术调查&#34;&gt;为何今天我没抓到任何精灵 - Trail of Bits技术调查
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Dan Guido&lt;/strong&gt;&lt;br&gt;
+2016年7月11日&lt;br&gt;
+apple, authentication, privacy&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; 当全网疯狂时，我们展开了技术调查。以下是关于Pokemon Go申请Google账户权限的技术笔记。&lt;/p&gt;
+&lt;h2 id=&#34;调查过程&#34;&gt;调查过程
+&lt;/h2&gt;&lt;p&gt;今天下午6点左右，我和Jay展开了以下技术工作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确认Pokemon Go实际请求的权限&lt;/li&gt;
+&lt;li&gt;研究这些权限的真实功能&lt;/li&gt;
+&lt;li&gt;在测试应用中复现权限获取&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;逆向工程分析&#34;&gt;逆向工程分析
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;openid
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;email
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://www.google.com/accounts/OAuthLogin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://www.googleapis.com/auth/userinfo.email
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中&lt;code&gt;OAuthLogin&lt;/code&gt;scope异常突出，该权限通常仅限Google自家应用（如Chrome和iOS账户管理器）使用。我们在Github上仅发现少数项目使用它。&lt;/p&gt;
+&lt;h3 id=&#34;oauth技术验证&#34;&gt;OAuth技术验证
+&lt;/h3&gt;&lt;p&gt;通过Google官方OAuth Playground测试时，该scope会返回&amp;quot;未授权&amp;quot;错误，说明Playground无法复现Pokemon Go的权限请求。这可能是Google 2012年弃用、2015年关闭的OAuth 1.0 API残留。但令人困惑的是，已迁移到OAuth 2.0的账户按理不应再能使用旧版API。&lt;/p&gt;
+&lt;h2 id=&#34;安全缺陷分析&#34;&gt;安全缺陷分析
+&lt;/h2&gt;&lt;p&gt;Pokemon Go登录流程存在三大问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;未明确告知请求的权限内容&lt;/li&gt;
+&lt;li&gt;用户撤销权限后会自动重新启用&lt;/li&gt;
+&lt;li&gt;现有文档未充分说明令牌权限含义&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;虽然Niantic声称只需要基础资料，但通过&lt;code&gt;UberAuth&lt;/code&gt;令牌可升级获取包括Gmail在内的全账户访问权限（详见&lt;a class=&#34;link&#34; href=&#34;https://gist.github.com/arirubinstein/fd5453537436a8757266f908c3e41538&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术细节&lt;/a&gt;）。&lt;/p&gt;
+&lt;h2 id=&#34;厂商响应与解决方案&#34;&gt;厂商响应与解决方案
+&lt;/h2&gt;&lt;p&gt;Niantic最终承认错误并发布声明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;iOS版Pokemon GO错误地请求了Google账户的完全访问权限&amp;hellip;实际上仅访问基本资料信息&amp;hellip;正在通过客户端更新修正权限请求&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Google将采取两项措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对已发放的令牌进行降权&lt;/li&gt;
+&lt;li&gt;阻止新用户授予过度权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;建议用户&lt;/strong&gt;：立即在Google安全设置中撤销Pokemon Go权限，登出后重新登录以获取修正后的权限。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;更新记录&lt;/em&gt;&lt;br&gt;
+2016/7/12：确认&amp;quot;UberAuth&amp;quot;令牌可通过未公开方法升级获取全账户权限&lt;br&gt;
+2016/7/13：应用已更新为仅请求基础权限&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Electron应用安全测试工具化指南</title>
         <link>http://localhost:1313/p/electron%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%8C%96%E6%8C%87%E5%8D%97/</link>
         <pubDate>Sun, 03 Aug 2025 10:18:30 +0800</pubDate>

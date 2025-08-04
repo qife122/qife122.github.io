@@ -7,7 +7,41 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 13:55:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 04 Aug 2025 02:03:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>超越传统威胁：AI驱动的API漏洞崛起</title>
+        <link>http://localhost:1313/p/%E8%B6%85%E8%B6%8A%E4%BC%A0%E7%BB%9F%E5%A8%81%E8%83%81ai%E9%A9%B1%E5%8A%A8%E7%9A%84api%E6%BC%8F%E6%B4%9E%E5%B4%9B%E8%B5%B7/</link>
+        <pubDate>Mon, 04 Aug 2025 02:03:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%B6%85%E8%B6%8A%E4%BC%A0%E7%BB%9F%E5%A8%81%E8%83%81ai%E9%A9%B1%E5%8A%A8%E7%9A%84api%E6%BC%8F%E6%B4%9E%E5%B4%9B%E8%B5%B7/</guid>
+        <description>&lt;h3 id=&#34;ai对api安全格局的颠覆性影响&#34;&gt;AI对API安全格局的颠覆性影响
+&lt;/h3&gt;&lt;p&gt;人工智能已深刻改变各行业，API安全领域亦不例外。传统防御手段主要针对已知威胁，但随着AI技术普及，自动化攻击工具、AI生成的漏洞利用代码以及业务逻辑滥用等问题使安全形势复杂化。根据Wallarm《2025年API威胁统计报告》，2024年AI相关CVE漏洞数量激增，其中98.9%直接关联API系统。&lt;/p&gt;
+&lt;h3 id=&#34;ai加剧的api风险特征&#34;&gt;AI加剧的API风险特征
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;弱认证机制&lt;/strong&gt;：89%的AI驱动API仍使用静态密钥&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;暴露端点问题&lt;/strong&gt;：57%的AI相关API存在未受控的公开访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新型漏洞类别&lt;/strong&gt;：二进制API和硬件级处理导致内存损坏漏洞激增&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ai驱动的自适应攻击技术解析&#34;&gt;AI驱动的自适应攻击技术解析
+&lt;/h3&gt;&lt;p&gt;攻击者利用AI实现四阶段攻击链：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;API行为自动化分析&lt;/strong&gt;：通过监控响应模式识别业务逻辑弱点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;业务逻辑逆向工程&lt;/strong&gt;：定位授权漏洞如BOLA（对象级授权缺陷）和BFLA（功能级授权缺陷）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实时规避检测&lt;/strong&gt;：攻击机器人可动态修改请求参数，绕过传统签名检测机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;行为伪装&lt;/strong&gt;：模拟正常用户流量，需上下文感知技术才能识别&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;构建ai弹性防御体系&#34;&gt;构建AI弹性防御体系
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时异常检测&lt;/strong&gt;：采用Wallarm等具备行为分析能力的平台，通过持续学习应对新型威胁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强化认证体系&lt;/strong&gt;：识别未受保护的API端点，发现权限控制漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全量API资产治理&lt;/strong&gt;：通过自动化发现工具管理影子API和僵尸API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SOC即服务&lt;/strong&gt;：结合专利AI/ML技术提供实时阻断和威胁狩猎能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;案例显示，采用AI增强防御方案的企业可将API攻击响应时间缩短83%。建议通过&lt;a class=&#34;link&#34; href=&#34;https://www.wallarm.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Wallarm演示&lt;/a&gt;了解具体实施方案。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金</title>
         <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
         <pubDate>Sun, 03 Aug 2025 13:55:41 +0800</pubDate>
