@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 12:12:29 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 17:47:00 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node.js V8引擎HashDoS漏洞技术分析报告</title>
+      <link>https://qife122.github.io/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Tue, 05 Aug 2025 17:47:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</guid>
+      <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本变更了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞 - 攻击者通过控制待哈希字符串可生成大量哈希碰撞，且无需知晓哈希种子(hash-seed)。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tvOS 18.6 安全更新：漏洞修复与技术细节</title>
+      <link>https://qife122.github.io/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</link>
+      <pubDate>Tue, 05 Aug 2025 04:26:52 +0800</pubDate>
+      <guid>https://qife122.github.io/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</guid>
+      <description>&lt;h1 id=&#34;apple-sa-07-29-2025-7-tvos-186&#34;&gt;APPLE-SA-07-29-2025-7 tvOS 18.6&lt;/h1&gt;&#xA;&lt;p&gt;tvOS 18.6 解决了以下问题。安全内容的信息也可在 &lt;a href=&#34;https://support.apple.com/124153&#34;&gt;https://support.apple.com/124153&lt;/a&gt; 查看。&lt;/p&gt;&#xA;&lt;p&gt;Apple 在 &lt;a href=&#34;https://support.apple.com/100100&#34;&gt;https://support.apple.com/100100&lt;/a&gt; 维护了一个安全发布页面，列出了最近带有安全公告的软件更新。&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞修复详情&#34;&gt;漏洞修复详情&lt;/h2&gt;&#xA;&lt;h3 id=&#34;afclip&#34;&gt;afclip&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;&#xA;&lt;strong&gt;影响&lt;/strong&gt;：解析文件可能导致应用意外终止&lt;br&gt;&#xA;&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;&#xA;&lt;strong&gt;CVE-2025-43186&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>攻击Active Directory组托管服务账户(GMSA)的技术解析</title>
       <link>https://qife122.github.io/p/%E6%94%BB%E5%87%BBactive-directory%E7%BB%84%E6%89%98%E7%AE%A1%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7gmsa%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>

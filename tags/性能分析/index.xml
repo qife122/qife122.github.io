@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>性能分析 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</link>
+    <description>Recent content in 性能分析 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Tue, 05 Aug 2025 13:41:11 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TSC频率全局共享：提升性能分析与基准测试精度</title>
+      <link>https://qife122.github.io/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</link>
+      <pubDate>Tue, 05 Aug 2025 13:41:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</guid>
+      <description>&lt;h2 id=&#34;tsc频率全局共享提升性能分析与基准测试精度&#34;&gt;TSC频率全局共享：提升性能分析与基准测试精度&lt;/h2&gt;&#xA;&lt;p&gt;你是否曾尝试使用LLVM的X-Ray分析工具生成火焰图，却遇到诸如以下的错误提示：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency for TSC accounting.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;或者更糟的情况：当你分析完应用的所有函数运行时间后，发现累计时间只有15分钟，而实际运行耗时20分钟——那消失的5分钟去哪了？&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="苹果发布Safari 18.6安全更新，修复libxml2/libxslt内存损坏、WebKit跨站脚本(XSS)、地址栏欺骗等15个高危漏洞，涉及Google Project Zero等多个安全团队披露的问题。">
+<title>Safari 18.6安全更新：修复多个内存损坏与XSS漏洞</title>
+
+<link rel='canonical' href='http://localhost:1313/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="Safari 18.6安全更新：修复多个内存损坏与XSS漏洞">
+<meta property='og:description' content="苹果发布Safari 18.6安全更新，修复libxml2/libxslt内存损坏、WebKit跨站脚本(XSS)、地址栏欺骗等15个高危漏洞，涉及Google Project Zero等多个安全团队披露的问题。">
+<meta property='og:url' content='http://localhost:1313/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='漏洞修复' /><meta property='article:tag' content='浏览器安全' /><meta property='article:published_time' content='2025-08-05T04:37:54&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T04:37:54&#43;08:00'/>
+<meta name="twitter:title" content="Safari 18.6安全更新：修复多个内存损坏与XSS漏洞">
+<meta name="twitter:description" content="苹果发布Safari 18.6安全更新，修复libxml2/libxslt内存损坏、WebKit跨站脚本(XSS)、地址栏欺骗等15个高危漏洞，涉及Google Project Zero等多个安全团队披露的问题。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#安全更新概述">安全更新概述</a></li>
+        <li><a href="#核心漏洞修复">核心漏洞修复</a>
+          <ol>
+            <li><a href="#libxml2">libxml2</a></li>
+            <li><a href="#libxslt">libxslt</a></li>
+            <li><a href="#safari浏览器">Safari浏览器</a></li>
+          </ol>
+        </li>
+        <li><a href="#webkit引擎关键修复">WebKit引擎关键修复</a></li>
+        <li><a href="#致谢名单">致谢名单</a></li>
+        <li><a href="#更新获取">更新获取</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/">Safari 18.6安全更新：修复多个内存损坏与XSS漏洞</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            苹果发布Safari 18.6安全更新，修复libxml2/libxslt内存损坏、WebKit跨站脚本(XSS)、地址栏欺骗等15个高危漏洞，涉及Google Project Zero等多个安全团队披露的问题。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="安全更新概述">安全更新概述
+</h3><p>Safari 18.6针对以下漏洞进行了修复，安全详情可参考<a class="link" href="https://support.apple.com/124152"  target="_blank" rel="noopener"
+    >Apple支持页面</a>。</p>
+<hr>
+<h3 id="核心漏洞修复">核心漏洞修复
+</h3><h4 id="libxml2">libxml2
+</h4><ul>
+<li><strong>影响系统</strong>：macOS Ventura及Sonoma</li>
+<li><strong>漏洞影响</strong>：文件处理可能导致内存损坏</li>
+<li><strong>CVE编号</strong>：CVE-2025-7425</li>
+<li><strong>发现者</strong>：Google Project Zero团队Sergei Glazunov</li>
+</ul>
+<h4 id="libxslt">libxslt
+</h4><ul>
+<li><strong>影响系统</strong>：macOS Ventura及Sonoma</li>
+<li><strong>漏洞影响</strong>：恶意网页内容处理可能导致内存损坏</li>
+<li><strong>CVE编号</strong>：CVE-2025-7424</li>
+<li><strong>发现者</strong>：Google Project Zero团队Ivan Fratric</li>
+</ul>
+<h4 id="safari浏览器">Safari浏览器
+</h4><ul>
+<li><strong>漏洞影响</strong>：恶意网页内容可导致浏览器意外崩溃</li>
+<li><strong>修复方式</strong>：改进逻辑检查机制</li>
+<li><strong>CVE编号</strong>：CVE-2025-24188</li>
+<li><strong>发现者</strong>：Nosebeard Labs团队</li>
+</ul>
+<hr>
+<h3 id="webkit引擎关键修复">WebKit引擎关键修复
+</h3><ol>
+<li>
+<p><strong>跨站脚本(XSS)</strong></p>
+<ul>
+<li><strong>CVE编号</strong>：CVE-2025-43229</li>
+<li><strong>发现者</strong>：Fingerprint团队Martin Bajanik</li>
+<li><strong>修复方式</strong>：增强状态管理机制</li>
+</ul>
+</li>
+<li>
+<p><strong>地址栏欺骗</strong></p>
+<ul>
+<li><strong>CVE编号</strong>：CVE-2025-43228</li>
+<li><strong>发现者</strong>：Jaydev Ahire</li>
+<li><strong>修复方式</strong>：改进用户界面验证</li>
+</ul>
+</li>
+<li>
+<p><strong>内存处理漏洞集群</strong></p>
+<ul>
+<li><strong>关联CVE</strong>：
+<ul>
+<li>CVE-2025-31278（内存损坏）</li>
+<li>CVE-2025-43214（释放后重用）</li>
+<li>CVE-2025-43265（越界读取）</li>
+</ul>
+</li>
+<li><strong>共同修复方式</strong>：强化内存处理与输入验证</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="致谢名单">致谢名单
+</h3><ul>
+<li>Google Project Zero团队</li>
+<li>Trend Micro零日计划</li>
+<li>DEVCORE研究团队</li>
+<li>Google V8安全团队</li>
+</ul>
+<hr>
+<h3 id="更新获取">更新获取
+</h3><p>用户可通过Mac App Store下载Safari 18.6更新，完整安全公告见<a class="link" href="https://support.apple.com/100100"  target="_blank" rel="noopener"
+    >Apple安全发布页</a>。</p>
+<p><em>本文档签名验证可通过<a class="link" href="https://www.apple.com/support/security/pgp/"  target="_blank" rel="noopener"
+    >Apple PGP公钥</a>进行校验。</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/">漏洞修复</a>
+        
+            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/">浏览器安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">关于Service Fabric Explorer (SFX) v1 Web客户端潜在风险的警示与指导</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2025%E5%B9%B46%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D67%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%8C%85%E5%90%AB1%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025年6月补丁星期二：微软修复67个漏洞，包含1个零日漏洞</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9app-installer%E6%BB%A5%E7%94%A8%E9%97%AE%E9%A2%98-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">微软应对App Installer滥用问题 | 安全技术深度解析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%8D%8F%E5%90%8C%E5%BA%94%E5%AF%B9encapsulated-postscript-eps%E6%94%BB%E5%87%BB-msrc%E5%8D%9A%E5%AE%A2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">协同应对Encapsulated PostScript (EPS)攻击 | MSRC博客</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%BE%AE%E8%BD%AF2025%E5%B9%B47%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E4%BF%AE%E5%A4%8D137%E4%B8%AA%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%90%AB14%E4%B8%AA%E5%85%B3%E9%94%AE%E7%BA%A7%E6%BC%8F%E6%B4%9E/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">微软2025年7月补丁星期二：修复137个安全漏洞，含14个关键级漏洞</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

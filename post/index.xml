@@ -7,8 +7,568 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 21:40:49 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 18:42:20 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>你被监控了吗？检测SSL中间人攻击</title>
+      <link>https://qife122.github.io/p/%E4%BD%A0%E8%A2%AB%E7%9B%91%E6%8E%A7%E4%BA%86%E5%90%97%E6%A3%80%E6%B5%8Bssl%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</link>
+      <pubDate>Tue, 05 Aug 2025 18:42:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%A0%E8%A2%AB%E7%9B%91%E6%8E%A7%E4%BA%86%E5%90%97%E6%A3%80%E6%B5%8Bssl%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</guid>
+      <description>&lt;h1 id=&#34;你被监控了吗检测ssl中间人攻击&#34;&gt;你被监控了吗？检测SSL中间人攻击&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者：Carrie Roberts&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;你的雇主是否在监控你工作电脑上的所有敏感网络浏览信息？很可能。但如何确认？&lt;/p&gt;&#xA;&lt;p&gt;企业通常会部署SSL解密代理以更好地保护资产安全——这是你入职时就同意的条款（至少在使用公司网络和管理设备时）。不过你可能想知道：哪些HTTPS流量会被解密？哪些不会？例如，企业可能为避免法律风险，不会解密银行网站（含密码信息）或政府网站（.gov）的流量。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>绕过PowerShell限制的简化方案</title>
+      <link>https://qife122.github.io/p/%E7%BB%95%E8%BF%87powershell%E9%99%90%E5%88%B6%E7%9A%84%E7%AE%80%E5%8C%96%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Tue, 05 Aug 2025 18:36:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BB%95%E8%BF%87powershell%E9%99%90%E5%88%B6%E7%9A%84%E7%AE%80%E5%8C%96%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;h1 id=&#34;powershell-wo-powershell-简化版&#34;&gt;PowerShell w/o PowerShell 简化版&lt;/h1&gt;&#xA;&lt;p&gt;作者：Brian Fehrman&lt;/p&gt;&#xA;&lt;p&gt;在之前的文章《PowerShell without PowerShell》中，我们展示了如何绕过应用白名单软件（AWS）、PowerShell限制/监控以及命令提示符限制。某些情况下，您可能只需要绕过PowerShell限制和/或监控。本文为这种场景提供了一个简单的解决方案。该方法并非首创，但本文尝试以简明直接的方式呈现。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2025年7月Patch Tuesday更新汇总：系统管理员必读</title>
+      <link>https://qife122.github.io/p/2025%E5%B9%B47%E6%9C%88patch-tuesday%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%BF%85%E8%AF%BB/</link>
+      <pubDate>Tue, 05 Aug 2025 18:30:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2025%E5%B9%B47%E6%9C%88patch-tuesday%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%BF%85%E8%AF%BB/</guid>
+      <description>&lt;h1 id=&#34;patch-tuesday-更新讨论专帖-2025-07-08&#34;&gt;Patch Tuesday 更新讨论专帖 (2025-07-08)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;一般讨论&#34;&gt;一般讨论&lt;/h2&gt;&#xA;&lt;p&gt;大家好，我是u/AutoModerator，欢迎来到本月的补丁更新讨论专帖！&lt;/p&gt;&#xA;&lt;p&gt;这里是讨论最新补丁、更新和发布的（相对）安全区域。我们设立这个帖子的目的是为了汇总本月所有更新相关信息：修复了哪些问题、出现了什么故障、哪些本该在QA环节被发现的问题还是发布了等等。这既是为了保持版面的整洁，也为亲爱的读者们提供一个集中的信息源。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>apt/apt-get远程代码执行漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 18:09:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;aptapt-get中的远程代码执行漏洞&#34;&gt;apt/apt-get中的远程代码执行漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者：Max Justicz&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;日期：2019年1月22日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;在apt中发现一个漏洞，允许网络中间人攻击者（或恶意软件包镜像站）在安装任何软件包时以root权限执行任意代码。该漏洞已在最新版apt中修复。若担心更新过程中被攻击，可通过禁用HTTP重定向进行防护：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Node.js V8引擎HashDoS漏洞技术分析报告</title>
+      <link>https://qife122.github.io/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Tue, 05 Aug 2025 17:47:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</guid>
+      <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本变更了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞 - 攻击者通过控制待哈希字符串可生成大量哈希碰撞，且无需知晓哈希种子(hash-seed)。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2018年BHIS最常用工具盘点：超越Nessus与Metasploit的实战利器</title>
+      <link>https://qife122.github.io/p/2018%E5%B9%B4bhis%E6%9C%80%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9%E8%B6%85%E8%B6%8Anessus%E4%B8%8Emetasploit%E7%9A%84%E5%AE%9E%E6%88%98%E5%88%A9%E5%99%A8/</link>
+      <pubDate>Tue, 05 Aug 2025 17:30:28 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2018%E5%B9%B4bhis%E6%9C%80%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9%E8%B6%85%E8%B6%8Anessus%E4%B8%8Emetasploit%E7%9A%84%E5%AE%9E%E6%88%98%E5%88%A9%E5%99%A8/</guid>
+      <description>&lt;h3 id=&#34;webcast-bhis-2018年度高频工具精选&#34;&gt;WEBCAST: BHIS 2018年度高频工具精选&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;John Strand//&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;在本期网络研讨会中，我们将介绍Black Hills信息安全团队日常使用的核心工具集。但有个特别之处：我们不会讨论Nessus、Nmap或Metasploit。为什么？因为除了那些安全书籍/博客中千篇一律的标准工具外，我们实际使用的众多（包括新晋和经典）工具更值得关注。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>可持续网页设计：降低碳排放的技术实践</title>
+      <link>https://qife122.github.io/p/%E5%8F%AF%E6%8C%81%E7%BB%AD%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%E9%99%8D%E4%BD%8E%E7%A2%B3%E6%8E%92%E6%94%BE%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Tue, 05 Aug 2025 17:19:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%8F%AF%E6%8C%81%E7%BB%AD%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%E9%99%8D%E4%BD%8E%E7%A2%B3%E6%8E%92%E6%94%BE%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;h3 id=&#34;建立可持续网页标准&#34;&gt;建立可持续网页标准&lt;/h3&gt;&#xA;&lt;p&gt;在大多数主要行业中，环境性能的关键指标已较为完善，例如汽车的每加仑英里数或房屋的每平方米能耗。然而在网站和应用领域，我们缺乏统一的环境标准，直到最近才获得进行环境评估所需的工具和方法。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>社会工程学攻击实战：有时就是这么简单</title>
+      <link>https://qife122.github.io/p/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E6%9C%89%E6%97%B6%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95/</link>
+      <pubDate>Tue, 05 Aug 2025 17:03:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E6%9C%89%E6%97%B6%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95/</guid>
+      <description>&lt;h1 id=&#34;社会工程学有时就是这么简单&#34;&gt;社会工程学——有时就是这么简单&lt;/h1&gt;&#xA;&lt;p&gt;这是一个不久前发生的有趣的社会工程学攻击故事。我想分享一些学到的经验，以及未来如何更好地做好准备。&lt;/p&gt;&#xA;&lt;h2 id=&#34;攻击目标&#34;&gt;攻击目标&lt;/h2&gt;&#xA;&lt;p&gt;致电客户的IT帮助台，尝试重置五个用户的密码。&lt;br&gt;&#xA;我既没有提供IT帮助台的电话号码，也没有提供员工姓名。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows日志、Sysmon与ELK技术实战解析</title>
+      <link>https://qife122.github.io/p/windows%E6%97%A5%E5%BF%97sysmon%E4%B8%8Eelk%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 16:46:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows%E6%97%A5%E5%BF%97sysmon%E4%B8%8Eelk%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;视频章节跳转youtube时间码&#34;&gt;视频章节跳转（YouTube时间码）&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.blackhillsinfosec.com/wp-content/uploads/2020/09/SLIDES_WindowsLogginSysmonELK.pdf&#34;&gt;幻灯片下载&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;4:36&lt;/strong&gt; 问题陈述与管理层视角&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;9:00&lt;/strong&gt; Sysmon快速回顾/ELK组件解析/数据类型对Elasticsearch的影响/观众答疑&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;20:51&lt;/strong&gt; 日志类型分类/Logstash日志处理流程/Kibana功能详解/工具使用技巧&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;27:12&lt;/strong&gt; HELK实战演示&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;48:34&lt;/strong&gt; Sigma规则探讨/ELK未来规划/Q&amp;amp;A环节&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;内容概要&#34;&gt;内容概要&lt;/h3&gt;&#xA;&lt;p&gt;本讲座由John Strand于2019年8月26日录制，重点解决&lt;strong&gt;Windows事件日志的采集与分析难题&lt;/strong&gt;。内容包含：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>破解含变音符号密码的技术指南</title>
+      <link>https://qife122.github.io/p/%E7%A0%B4%E8%A7%A3%E5%90%AB%E5%8F%98%E9%9F%B3%E7%AC%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 05 Aug 2025 16:33:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%A0%B4%E8%A7%A3%E5%90%AB%E5%8F%98%E9%9F%B3%E7%AC%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;破解含变音符号密码的技术指南&#34;&gt;破解含变音符号密码的技术指南&lt;/h1&gt;&#xA;&lt;h2 id=&#34;问题场景&#34;&gt;问题场景&lt;/h2&gt;&#xA;&lt;p&gt;我们获得了一个包含变音符号的Windows密码哈希值（示例密码：&amp;ldquo;Möm Rülez!&amp;quot;），该哈希通过域密码审计工具(DPAT)从Active Directory域控制器提取。哈希格式如下：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>移动安全专家Nicholas DePetrillo加盟Trail of Bits团队</title>
+      <link>https://qife122.github.io/p/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6nicholas-depetrillo%E5%8A%A0%E7%9B%9Ftrail-of-bits%E5%9B%A2%E9%98%9F/</link>
+      <pubDate>Tue, 05 Aug 2025 16:16:46 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6nicholas-depetrillo%E5%8A%A0%E7%9B%9Ftrail-of-bits%E5%9B%A2%E9%98%9F/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;纽约，2014年7月15日&lt;/strong&gt;——资深计算机安全研究员Nicholas DePetrillo已加入总部位于纽约的安全公司Trail of Bits，担任首席安全研究员。Trail of Bits联合创始人兼首席执行官Dan Guido今日宣布了这一任命。随着DePetrillo的加入，这家2012年由三人团队创立的公司员工总数达到13人。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Tue, 05 Aug 2025 16:00:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;堆喷射与dep绕过todayswf&#34;&gt;堆喷射与DEP绕过（today.swf）&lt;/h1&gt;&#xA;&lt;p&gt;数据执行保护（DEP）阻止内存被隐式执行。漏洞利用通常会在内存中创建数据形式的载荷并尝试执行。启用DEP后，攻击者必须明确标记其载荷为可执行状态。为绕过该防护，漏洞可利用内存中已标记为可执行的代码。许多攻击通过链式调用函数来标记载荷可执行，这种技术常被称为面向返回编程（ROP）。Windows XP及更高版本上的IE8采用DEP防护，必须绕过该机制才能成功执行代码。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Java开发者大会与AI应用构建技术全览</title>
+      <link>https://qife122.github.io/p/java%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%A7%E4%BC%9A%E4%B8%8Eai%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%88/</link>
+      <pubDate>Tue, 05 Aug 2025 15:43:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/java%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%A7%E4%BC%9A%E4%B8%8Eai%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%88/</guid>
+      <description>&lt;h3 id=&#34;2025年技术会议&#34;&gt;2025年技术会议&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;会议名称&lt;/th&gt;&#xA;          &lt;th&gt;演讲主题&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;London Java Community&lt;/td&gt;&#xA;          &lt;td&gt;应用现代化导航 - 利用生成式AI&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;WeAreDevelopers&lt;/td&gt;&#xA;          &lt;td&gt;应用现代化导航 - 利用生成式AI&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Tech Journey&lt;/td&gt;&#xA;          &lt;td&gt;通过Quarkus在Red Hat OpenShift上解锁云原生Java性能与效率&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Red Hat Summit&lt;/td&gt;&#xA;          &lt;td&gt;大规模评估和优先处理应用程序以实现Red Hat OpenShift现代化&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Geecon&lt;/td&gt;&#xA;          &lt;td&gt;Java + LLMs：构建Java版LLM应用的实践指南&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Krakow Elastic Meetup&lt;/td&gt;&#xA;          &lt;td&gt;使用Podman和OpenShift AI构建部署ElasticsearchAI融合应用&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Houston Java Users Group&lt;/td&gt;&#xA;          &lt;td&gt;用LangChain4j和Jakarta EE构建Java版LLM应用&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Copenhagen Elastic Meetup&lt;/td&gt;&#xA;          &lt;td&gt;使用Podman和OpenShift AI构建部署ElasticsearchAI融合应用&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;2024年技术会议&#34;&gt;2024年技术会议&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;会议名称&lt;/th&gt;&#xA;          &lt;th&gt;演讲主题&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Jug BD&lt;/td&gt;&#xA;          &lt;td&gt;Java开发者理解大语言模型&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;DevNation&lt;/td&gt;&#xA;          &lt;td&gt;利用Keycloak实现跨平台全面应用安全&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;WeAreDevelopers&lt;/td&gt;&#xA;          &lt;td&gt;利用生成式AI实现自动化代码转换的应用现代化&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;OpenShift Commons&lt;/td&gt;&#xA;          &lt;td&gt;Konveyor AI功能概览与演示&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;2023年技术会议&#34;&gt;2023年技术会议&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;会议名称&lt;/th&gt;&#xA;          &lt;th&gt;演讲主题&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;KubeCon&lt;/td&gt;&#xA;          &lt;td&gt;塑造未来技术：云原生、无服务器和多语言编程导航&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;YavaConf&lt;/td&gt;&#xA;          &lt;td&gt;用Java导航云原生和无服务器技术&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Devnation day&lt;/td&gt;&#xA;          &lt;td&gt;使用Red Hat Data Grid和Quarkus构建可扩展的现代微服务&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
+    </item>
+    <item>
+      <title>在Linux系统上运行原版Intercepter-NG网络嗅探工具</title>
+      <link>https://qife122.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Tue, 05 Aug 2025 15:27:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</guid>
+      <description>&lt;h1 id=&#34;在linux上运行原版intercepter&#34;&gt;在Linux上运行原版Intercepter&lt;/h1&gt;&#xA;&lt;h2 id=&#34;更新后的安装指南&#34;&gt;更新后的安装指南&lt;/h2&gt;&#xA;&lt;p&gt;[1] 下载Wine用的WinPcap封装库并安装libpcap-dev&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget http://sniff.su/wine_pcap_dlls.tar.gz&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install libpcap-dev&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;如果是i386版本的Kali系统，直接跳到步骤[3]。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;[2] 在Kali x64系统执行以下命令：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>警惕公共Wi-Fi安全隐患（第一部分）：周边环境安全评估</title>
+      <link>https://qife122.github.io/p/%E8%AD%A6%E6%83%95%E5%85%AC%E5%85%B1wi-fi%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E5%91%A8%E8%BE%B9%E7%8E%AF%E5%A2%83%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0/</link>
+      <pubDate>Tue, 05 Aug 2025 15:05:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%AD%A6%E6%83%95%E5%85%AC%E5%85%B1wi-fi%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E5%91%A8%E8%BE%B9%E7%8E%AF%E5%A2%83%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;作者：Jordan Drysdale&lt;/strong&gt;&lt;br&gt;&#xA;&lt;em&gt;免责声明：本文提及的技术工具可能已过时，但仍具学习价值，可帮助理解现代技术的演变基础。&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;我们的市中心区域约五乘四个街区，遍布艺术品店、玩具店、糖果铺、餐厅、酒吧和酒店。几乎所有商户都提供某种形式的公共无线网络——要么完全开放，要么仅用预共享密钥&amp;quot;保护&amp;quot;。作为长期为这些商户维护网络的承包商，我目睹了灾难性的安全现状。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>内核池初探：MS10-058漏洞分析与利用</title>
+      <link>https://qife122.github.io/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Tue, 05 Aug 2025 14:48:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;内核池初探ms10-058漏洞分析与利用&#34;&gt;内核池初探：MS10-058漏洞分析与利用&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;我正在研究基于池(pool)的内存破坏漏洞。因此我想为Tarjei Mandt在其首次演讲&amp;quot;Windows 7内核池利用&amp;quot;[3]中提到的漏洞编写一个PoC利用程序。我认为这是开始学习池溢出漏洞的好练习。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>虚假验证码背后的黑暗广告技术帝国</title>
+      <link>https://qife122.github.io/p/%E8%99%9A%E5%81%87%E9%AA%8C%E8%AF%81%E7%A0%81%E8%83%8C%E5%90%8E%E7%9A%84%E9%BB%91%E6%9A%97%E5%B9%BF%E5%91%8A%E6%8A%80%E6%9C%AF%E5%B8%9D%E5%9B%BD/</link>
+      <pubDate>Tue, 05 Aug 2025 14:26:31 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%99%9A%E5%81%87%E9%AA%8C%E8%AF%81%E7%A0%81%E8%83%8C%E5%90%8E%E7%9A%84%E9%BB%91%E6%9A%97%E5%B9%BF%E5%91%8A%E6%8A%80%E6%9C%AF%E5%B8%9D%E5%9B%BD/</guid>
+      <description>&lt;h3 id=&#34;虚假验证码喂养的黑暗广告技术帝国&#34;&gt;虚假验证码喂养的黑暗广告技术帝国&lt;/h3&gt;&#xA;&lt;p&gt;2024年末，安全研究人员发现克里姆林宫支持的虚假宣传活动通过恶意广告技术绕过社交媒体平台审核。最新调查显示，这个黑暗广告技术生态比已知的更加顽固且盘根错节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTTPS上的DNS（DoH）乱局：加密与隐私的博弈</title>
+      <link>https://qife122.github.io/p/https%E4%B8%8A%E7%9A%84dnsdoh%E4%B9%B1%E5%B1%80%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9A%90%E7%A7%81%E7%9A%84%E5%8D%9A%E5%BC%88/</link>
+      <pubDate>Tue, 05 Aug 2025 14:09:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/https%E4%B8%8A%E7%9A%84dnsdoh%E4%B9%B1%E5%B1%80%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9A%90%E7%A7%81%E7%9A%84%E5%8D%9A%E5%BC%88/</guid>
+      <description>&lt;h3 id=&#34;https上的dnsdoh乱局&#34;&gt;HTTPS上的DNS（DoH）乱局&lt;/h3&gt;&#xA;&lt;p&gt;作者：Joff Thyer //&lt;/p&gt;&#xA;&lt;p&gt;这个周一早晨醒来时，我认为是时候重新审视我的家庭网络中的域名服务（DNS）配置了。（这个想法也源于2021年在内华达州雷诺市Wild West Hackin&amp;rsquo; Fest活动中与Paul Vixie的多次讨论。）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>快速部署Active Directory实验室的完整指南</title>
+      <link>https://qife122.github.io/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 05 Aug 2025 14:02:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;在几分钟内部署active-directory实验室&#34;&gt;在几分钟内部署Active Directory实验室&lt;/h1&gt;&#xA;&lt;p&gt;创建自己的实验室听起来像是一项艰巨的任务。通过本文，您将能够在几分钟内部署自己的Active Directory（AD）环境！您只需要一个浏览器即可访问实验室环境，随时随地开展AD研发工作。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TSC频率全局共享：提升性能分析与基准测试精度</title>
+      <link>https://qife122.github.io/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</link>
+      <pubDate>Tue, 05 Aug 2025 13:41:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</guid>
+      <description>&lt;h2 id=&#34;tsc频率全局共享提升性能分析与基准测试精度&#34;&gt;TSC频率全局共享：提升性能分析与基准测试精度&lt;/h2&gt;&#xA;&lt;p&gt;你是否曾尝试使用LLVM的X-Ray分析工具生成火焰图，却遇到诸如以下的错误提示：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency for TSC accounting.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;或者更糟的情况：当你分析完应用的所有函数运行时间后，发现累计时间只有15分钟，而实际运行耗时20分钟——那消失的5分钟去哪了？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2017年10月安全更新发布 | 微软安全响应中心公告</title>
+      <link>https://qife122.github.io/p/2017%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
+      <pubDate>Tue, 05 Aug 2025 13:24:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2017%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</guid>
+      <description>&lt;p&gt;今天，我们发布了安全更新，以提供针对恶意攻击者的额外防护措施。默认情况下，Windows 10会自动接收这些更新，对于运行旧版本的用户，我们建议他们启用自动更新作为最佳实践。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>滥用Active Directory证书服务(第三部分) - 中继攻击与证书伪造实战</title>
+      <link>https://qife122.github.io/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 05 Aug 2025 13:08:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;滥用active-directory证书服务第三部分&#34;&gt;滥用Active Directory证书服务(第三部分)&lt;/h1&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;https://example.com/part1&#34;&gt;第一部分&lt;/a&gt;和&lt;a href=&#34;https://example.com/part2&#34;&gt;第二部分&lt;/a&gt;中，我们探讨了Active Directory证书模板的常见错误配置。本文将重点分析Web Enrollment功能的攻击利用。&lt;/p&gt;&#xA;&lt;h2 id=&#34;adcs-http端点中继攻击&#34;&gt;ADCS HTTP端点中继攻击&lt;/h2&gt;&#xA;&lt;p&gt;Active Directory证书服务(ADCS)支持基于HTTP的证书注册方法。当启用时，这些HTTP接口可能遭受NTLM中继攻击。攻击者诱导受害者账户向受控主机认证后，可将凭据中继到证书颁发机构(CA)来代表受害者申请证书。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/</link>
+      <pubDate>Tue, 05 Aug 2025 12:52:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/</guid>
+      <description>&lt;p&gt;在&amp;quot;驾驭M365 UAL&amp;quot;系列的第一部分中，我们讨论了使用PowerShell和SOF-ELK获取、解析和查询UAL数据。第二部分则探讨了利用AWS EC2实现SOF-ELK部署的更大灵活性和可访问性。在此过程中，我们学习了如何专门格式化导出的UAL数据以便SOF-ELK自动摄取，但如果获取的数据格式不正确怎么办？幸运的是，如果我们有从Purview或PowerShell导出的CSV中包含的&amp;quot;AuditData&amp;quot;字段，我们可以提取、重新格式化并馈送给SOF-ELK进行自动解析。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>选择TOTP解决多因素认证应用泛滥问题</title>
+      <link>https://qife122.github.io/p/%E9%80%89%E6%8B%A9totp%E8%A7%A3%E5%86%B3%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%BA%94%E7%94%A8%E6%B3%9B%E6%BB%A5%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 05 Aug 2025 12:46:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%89%E6%8B%A9totp%E8%A7%A3%E5%86%B3%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%BA%94%E7%94%A8%E6%B3%9B%E6%BB%A5%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h1 id=&#34;选择totp解决多因素认证应用泛滥问题&#34;&gt;选择TOTP解决多因素认证应用泛滥问题&lt;/h1&gt;&#xA;&lt;p&gt;你的手机上是否装满了各种MFA应用，让你感觉像穿上了臃肿的冬装无法活动？或者这些应用就像一群英国斗牛犬幼崽，时刻跟着你要关注和安全拥抱？&lt;/p&gt;&#xA;&lt;p&gt;无论如何，维护这么多应用确实令人头疼。面对众多MFA应用，请考虑以下问题：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>新风险指数助力企业应对云安全混沌局面</title>
+      <link>https://qife122.github.io/p/%E6%96%B0%E9%A3%8E%E9%99%A9%E6%8C%87%E6%95%B0%E5%8A%A9%E5%8A%9B%E4%BC%81%E4%B8%9A%E5%BA%94%E5%AF%B9%E4%BA%91%E5%AE%89%E5%85%A8%E6%B7%B7%E6%B2%8C%E5%B1%80%E9%9D%A2/</link>
+      <pubDate>Tue, 05 Aug 2025 12:35:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%96%B0%E9%A3%8E%E9%99%A9%E6%8C%87%E6%95%B0%E5%8A%A9%E5%8A%9B%E4%BC%81%E4%B8%9A%E5%BA%94%E5%AF%B9%E4%BA%91%E5%AE%89%E5%85%A8%E6%B7%B7%E6%B2%8C%E5%B1%80%E9%9D%A2/</guid>
+      <description>&lt;h3 id=&#34;新风险指数助力企业应对云安全混沌局面&#34;&gt;新风险指数助力企业应对云安全混沌局面&lt;/h3&gt;&#xA;&lt;p&gt;企业可利用IaC风险指数识别基础设施即代码环境中未受管理或治理的脆弱云资源。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;来源：Andriy Popov via Alamy Stock Photo&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;企业在维护整体安全态势时需要应对大量安全准则。新推出的IaC风险指数旨在帮助企业管理基础设施即代码环境相关的安全风险。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>监控高风险Azure登录事件 - 企业安全防护实战指南</title>
+      <link>https://qife122.github.io/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 05 Aug 2025 12:18:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h2 id=&#34;高风险azure登录监控实践&#34;&gt;高风险Azure登录监控实践&lt;/h2&gt;&#xA;&lt;p&gt;近期在安全运营中心(SOC)工作中，我们通过合作伙伴通报发现一起潜在的企业邮箱入侵(BEC)事件。这类威胁通常通过以下方式被发现：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;可疑邮件转发规则检测&lt;/li&gt;&#xA;&lt;li&gt;异常行为分析服务&lt;/li&gt;&#xA;&lt;li&gt;合作伙伴安全通报（如本次案例）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;在攻击链中越早发现此类事件，防御效果越好。这促使我们开始调查Azure AD身份保护（现称Entra身份保护）标记的高风险登录行为。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>FinOps X 2025：IT成本管理向AI与云计算的演进</title>
+      <link>https://qife122.github.io/p/finops-x-2025it%E6%88%90%E6%9C%AC%E7%AE%A1%E7%90%86%E5%90%91ai%E4%B8%8E%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%BC%94%E8%BF%9B/</link>
+      <pubDate>Tue, 05 Aug 2025 12:02:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/finops-x-2025it%E6%88%90%E6%9C%AC%E7%AE%A1%E7%90%86%E5%90%91ai%E4%B8%8E%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%BC%94%E8%BF%9B/</guid>
+      <description>&lt;h3 id=&#34;finops-x-2025it成本管理的进化&#34;&gt;FinOps X 2025：IT成本管理的进化&lt;/h3&gt;&#xA;&lt;p&gt;FinOps X 2025大会向IT领导者传递了明确信息：FinOps已从可选项转变为现代技术运营管理的核心能力。随着技术支出占比持续攀升，擅长管理成本并评估其业务价值的企业将获得竞争优势。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>vuLnDAP挑战全程解析：LDAP注入与SSH密钥提取实战</title>
+      <link>https://qife122.github.io/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 05 Aug 2025 11:45:53 +0800</pubDate>
+      <guid>https://qife122.github.io/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;vulndap-walkthrough&#34;&gt;vuLnDAP Walkthrough&lt;/h1&gt;&#xA;&lt;p&gt;这是关于vuLnDAP挑战的完整演练过程。当然可能存在其他解决方法，本文仅展示个人实现路径。如果您有更优方案，欢迎交流。&lt;/p&gt;&#xA;&lt;h2 id=&#34;初始探测&#34;&gt;初始探测&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;访问库存控制系统，选择水果分类时观察到URL结构：&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=fruits&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;/li&gt;&#xA;&lt;li&gt;此处存在首个注入点，可通过通配符&lt;code&gt;*&lt;/code&gt;获取系统所有对象（含用户和组）：&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=*&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;用户信息提取&#34;&gt;用户信息提取&lt;/h2&gt;&#xA;&lt;p&gt;选定CEO用户Fred后，发现URL包含显示控制参数：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>宏键盘在渗透测试中的高效应用</title>
+      <link>https://qife122.github.io/p/%E5%AE%8F%E9%94%AE%E7%9B%98%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%AB%98%E6%95%88%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Tue, 05 Aug 2025 11:24:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%AE%8F%E9%94%AE%E7%9B%98%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%AB%98%E6%95%88%E5%BA%94%E7%94%A8/</guid>
+      <description>&lt;h2 id=&#34;为什么使用宏键盘&#34;&gt;为什么使用宏键盘？&lt;/h2&gt;&#xA;&lt;p&gt;压缩技术无处不在——文件、视频、存储和网络中都存在，因此将其应用于工作流程中也合情合理。通过Elgato Stream Deck或完全可软件定制的机械键盘等宏键盘设备，您可以将需要多个步骤和配置的繁琐重复任务&amp;quot;压缩&amp;quot;为单键操作。&lt;br&gt;&#xA;&lt;strong&gt;请注意&lt;/strong&gt;：本文无需物理Stream Deck硬件，Elgato移动端Stream Deck应用同样具备宏键盘功能。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>跨交易所加密货币套利机器人：自动化交易的技术实现</title>
+      <link>https://qife122.github.io/p/%E8%B7%A8%E4%BA%A4%E6%98%93%E6%89%80%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%A5%97%E5%88%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Tue, 05 Aug 2025 11:07:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%B7%A8%E4%BA%A4%E6%98%93%E6%89%80%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%A5%97%E5%88%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0/</guid>
+      <description>&lt;h1 id=&#34;跨交易所加密货币套利机器人自动化交易的技术实现&#34;&gt;跨交易所加密货币套利机器人：自动化交易的技术实现&lt;/h1&gt;&#xA;&lt;h2 id=&#34;加密货币套利的概念与价值&#34;&gt;加密货币套利的概念与价值&lt;/h2&gt;&#xA;&lt;p&gt;加密货币套利是通过利用不同交易所间同一资产的价格差异获利的交易技术。与长期投资不同，套利交易依赖精确数学计算，通过快速买卖实现低风险盈利。例如当以太坊在Exchange A报价1800美元，在Exchange B报价1850美元时，套利者通过跨平台瞬时交易可锁定50美元价差收益。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>为什么托管式安全信息与事件管理(SIEM)是现代网络防御的基石</title>
+      <link>https://qife122.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%89%98%E7%AE%A1%E5%BC%8F%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%AE%A1%E7%90%86siem%E6%98%AF%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E9%98%B2%E5%BE%A1%E7%9A%84%E5%9F%BA%E7%9F%B3/</link>
+      <pubDate>Tue, 05 Aug 2025 10:50:50 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%89%98%E7%AE%A1%E5%BC%8F%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%AE%A1%E7%90%86siem%E6%98%AF%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E9%98%B2%E5%BE%A1%E7%9A%84%E5%9F%BA%E7%9F%B3/</guid>
+      <description>&lt;h1 id=&#34;为什么托管式安全信息与事件管理siem是现代网络防御的基石&#34;&gt;为什么托管式安全信息与事件管理(SIEM)是现代网络防御的基石&lt;/h1&gt;&#xA;&lt;p&gt;可视性是有效网络安全的基石。缺乏可视性，检测和响应恶意活动就会变成猜谜游戏，使攻击者能够悄无声息地利用漏洞。防火墙和终端代理等安全工具虽然能提供网络和主机层面的关键洞察，但这些工具通常只关注特定领域，提供的全局视角有限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>多维度网络攻击需要统一防御策略</title>
+      <link>https://qife122.github.io/p/%E5%A4%9A%E7%BB%B4%E5%BA%A6%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E9%9C%80%E8%A6%81%E7%BB%9F%E4%B8%80%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Tue, 05 Aug 2025 10:39:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A4%9A%E7%BB%B4%E5%BA%A6%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E9%9C%80%E8%A6%81%E7%BB%9F%E4%B8%80%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5/</guid>
+      <description>&lt;h2 id=&#34;多维度网络攻击需要统一防御策略&#34;&gt;多维度网络攻击需要统一防御策略&lt;/h2&gt;&#xA;&lt;p&gt;攻击不再局限于单一产品或漏洞的时代已经过去。如今，我们看到多向量攻击和多阶段攻击手段的日益增多。例如，印度尼西亚的一次DDoS攻击在单次攻击中使用了&lt;strong&gt;20种不同向量&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>美国网安机构警告：Interlock勒索软件以隐蔽攻击瞄准医疗行业</title>
+      <link>https://qife122.github.io/p/%E7%BE%8E%E5%9B%BD%E7%BD%91%E5%AE%89%E6%9C%BA%E6%9E%84%E8%AD%A6%E5%91%8Ainterlock%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E4%BB%A5%E9%9A%90%E8%94%BD%E6%94%BB%E5%87%BB%E7%9E%84%E5%87%86%E5%8C%BB%E7%96%97%E8%A1%8C%E4%B8%9A/</link>
+      <pubDate>Tue, 05 Aug 2025 10:32:30 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BE%8E%E5%9B%BD%E7%BD%91%E5%AE%89%E6%9C%BA%E6%9E%84%E8%AD%A6%E5%91%8Ainterlock%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E4%BB%A5%E9%9A%90%E8%94%BD%E6%94%BB%E5%87%BB%E7%9E%84%E5%87%86%E5%8C%BB%E7%96%97%E8%A1%8C%E4%B8%9A/</guid>
+      <description>&lt;h1 id=&#34;interlock勒索软件以隐蔽攻击瞄准医疗行业美国网安机构发出警告&#34;&gt;Interlock勒索软件以隐蔽攻击瞄准医疗行业，美国网安机构发出警告&lt;/h1&gt;&#xA;&lt;p&gt;美国四大网络安全机构近日联合发布安全警报，警告由Interlock勒索软件组织构成的日益严重的威胁。该组织正将攻击目标锁定为北美和欧洲的企业、医疗机构和关键基础设施实体。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>用NIST SP 800-228解决API安全问题的技术解析</title>
+      <link>https://qife122.github.io/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 10:15:50 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;p&gt;根据Wallarm 2025年Q1威胁统计报告，70%的应用攻击针对API。行业不能再将API安全视为次要问题，而应将其作为核心议题。NIST似乎也认同这一观点，发布了NIST SP 800-228的初稿，这是一套关于API安全的建议规范。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Codecademy Python课程评测：值得投入时间与金钱吗？(2023)</title>
+      <link>https://qife122.github.io/p/codecademy-python%E8%AF%BE%E7%A8%8B%E8%AF%84%E6%B5%8B%E5%80%BC%E5%BE%97%E6%8A%95%E5%85%A5%E6%97%B6%E9%97%B4%E4%B8%8E%E9%87%91%E9%92%B1%E5%90%972023/</link>
+      <pubDate>Tue, 05 Aug 2025 09:48:50 +0800</pubDate>
+      <guid>https://qife122.github.io/p/codecademy-python%E8%AF%BE%E7%A8%8B%E8%AF%84%E6%B5%8B%E5%80%BC%E5%BE%97%E6%8A%95%E5%85%A5%E6%97%B6%E9%97%B4%E4%B8%8E%E9%87%91%E9%92%B1%E5%90%972023/</guid>
+      <description>&lt;h1 id=&#34;codecademy-python评测它真的好吗2023&#34;&gt;Codecademy Python评测——它真的好吗？(2023)&lt;/h1&gt;&#xA;&lt;p&gt;Python学习资源众多，Codecademy的《Learn Python 3》是全网最受欢迎的课程之一。但值得投入时间和金钱吗？本评测将深入分析：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>近2000台MCP服务器存在严重安全漏洞：身份验证完全缺失</title>
+      <link>https://qife122.github.io/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</link>
+      <pubDate>Tue, 05 Aug 2025 09:32:28 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</guid>
+      <description>&lt;h1 id=&#34;近2000台mcp服务器存在完全安全缺失&#34;&gt;近2000台MCP服务器存在完全安全缺失&lt;/h1&gt;&#xA;&lt;p&gt;作为智能体AI核心组件的MCP（Model Context Protocol）服务器，其身份验证机制竟被设置为可选功能——而现实情况是根本无人启用它。这意味着攻击者可以轻松获得这些服务器的完全控制权。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>意外重置他人密码？一个逻辑漏洞的发现与思考</title>
+      <link>https://qife122.github.io/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</link>
+      <pubDate>Tue, 05 Aug 2025 09:11:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</guid>
+      <description>&lt;h1 id=&#34;一个让我怀疑现实的漏洞&#34;&gt;一个让我怀疑现实的漏洞&lt;/h1&gt;&#xA;&lt;p&gt;故事开始。我像往常一样在HackerOne上闲逛（其实就是找漏洞），突然发现了一个让我惊呼：&#xA;&amp;ldquo;等等，这不应该发生吧？&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Earth Koshchei利用红队工具发起复杂RDP攻击</title>
+      <link>https://qife122.github.io/p/earth-koshchei%E5%88%A9%E7%94%A8%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7%E5%8F%91%E8%B5%B7%E5%A4%8D%E6%9D%82rdp%E6%94%BB%E5%87%BB/</link>
+      <pubDate>Tue, 05 Aug 2025 08:54:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/earth-koshchei%E5%88%A9%E7%94%A8%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7%E5%8F%91%E8%B5%B7%E5%A4%8D%E6%9D%82rdp%E6%94%BB%E5%87%BB/</guid>
+      <description>&lt;h2 id=&#34;攻击概述&#34;&gt;攻击概述&lt;/h2&gt;&#xA;&lt;p&gt;Earth Koshchei（又称APT29）在2024年10月发起了一场利用恶意远程桌面协议（RDP）配置文件的攻击活动。该技术借鉴了Black Hills信息安全公司2022年公开的红队方法，包含三个核心组件：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用SOF-ELK进行对手追踪：网络安全分析与威胁狩猎实战</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8sof-elk%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%89%8B%E8%BF%BD%E8%B8%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 05 Aug 2025 08:48:53 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8sof-elk%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%89%8B%E8%BF%BD%E8%B8%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;工具匠人第126期使用sof-elk进行对手狩猎&#34;&gt;工具匠人第126期：使用SOF-ELK进行对手狩猎&lt;/h1&gt;&#xA;&lt;p&gt;当我们庆祝独立日时，我不禁想起我们纪念的当然是一场武装冲突。如今当我们思考冲突时，现实已经与士兵们在战场上排兵布阵、装填滑膛枪、向混战中投掷铅弹的时代大不相同。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>过度宽松的SAS令牌对PC Manager供应链的潜在影响分析</title>
+      <link>https://qife122.github.io/p/%E8%BF%87%E5%BA%A6%E5%AE%BD%E6%9D%BE%E7%9A%84sas%E4%BB%A4%E7%89%8C%E5%AF%B9pc-manager%E4%BE%9B%E5%BA%94%E9%93%BE%E7%9A%84%E6%BD%9C%E5%9C%A8%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 08:27:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%BF%87%E5%BA%A6%E5%AE%BD%E6%9D%BE%E7%9A%84sas%E4%BB%A4%E7%89%8C%E5%AF%B9pc-manager%E4%BE%9B%E5%BA%94%E9%93%BE%E7%9A%84%E6%BD%9C%E5%9C%A8%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;本研究报告揭示了两个通过WinGet仓库和微软官方子域名劫持PC Manager发布的潜在攻击场景，根源在于过度宽松的共享访问签名(SAS)令牌配置&lt;/li&gt;&#xA;&lt;li&gt;成功利用可导致攻击者：1) 通过软件供应链分发恶意软件 2) 替换官方软件版本 3) 篡改分发的可执行文件&lt;/li&gt;&#xA;&lt;li&gt;涉及的技术要素包括：Azure存储账户服务SAS令牌、WinGet清单架构、aka.ms短链接服务及数字签名验证机制&lt;/li&gt;&#xA;&lt;li&gt;所有问题已报告微软并修复，文末提供云凭证安全配置建议与威胁狩猎策略&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;技术分析&#34;&gt;技术分析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;zdi-23-1527-通过winget包劫持pc-manager&#34;&gt;ZDI-23-1527: 通过WinGet包劫持PC Manager&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;攻击链分析&lt;/strong&gt;：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NVIDIA容器工具包漏洞CVE-2024-0132补丁不完整，AI基础设施面临严重风险</title>
+      <link>https://qife122.github.io/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Tue, 05 Aug 2025 08:05:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h3&gt;&#xA;&lt;p&gt;趋势科技研究发现，NVIDIA在2024年9月针对容器工具包关键漏洞（CVE-2024-0132）发布的安全更新存在缺陷，可能导致容器逃逸攻击。同时发现影响Linux系统Docker的拒绝服务（DoS）漏洞，攻击者可利用这些漏洞访问主机敏感数据或耗尽系统资源。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ruby Psych库中的ReDoS漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 07:43:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;ruby-psych库中的redos漏洞报告&#34;&gt;Ruby Psych库中的ReDoS漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在Ruby Psych库中发现了一个正则表达式拒绝服务(ReDoS)漏洞，该漏洞存在于&lt;code&gt;Psych.load&lt;/code&gt;方法处理DateTime反序列化时。攻击者可通过构造特定格式的YAML字符串导致正则表达式匹配时间呈指数级增长。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用合法互联网渠道实现C2通信：Sneaky-Creeper开源工具解析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%90%88%E6%B3%95%E4%BA%92%E8%81%94%E7%BD%91%E6%B8%A0%E9%81%93%E5%AE%9E%E7%8E%B0c2%E9%80%9A%E4%BF%A1sneaky-creeper%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 07:27:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E5%90%88%E6%B3%95%E4%BA%92%E8%81%94%E7%BD%91%E6%B8%A0%E9%81%93%E5%AE%9E%E7%8E%B0c2%E9%80%9A%E4%BF%A1sneaky-creeper%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;我们能实现c2通信吗当然可以&#34;&gt;我们能实现C2通信吗？当然可以！&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dakota Nelson&lt;/strong&gt; //&lt;/p&gt;&#xA;&lt;p&gt;近来，高级攻击者利用合法互联网渠道进行网络数据渗透的情况日益普遍。从Twitter、Tumblr等社交平台，到Dropbox、Soundcloud等实用工具，甚至Salesforce和Google Docs等商业软件，都可能成为命令控制的传输通道。虽然类似FireEye的威胁情报报告能揭示对手的战术技巧，但网络防御者仍需实战经验来应对这类现实威胁。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Critical Langflow漏洞(CVE-2025-3248)被利用传播Flodrix僵尸网络的技术分析</title>
+      <link>https://qife122.github.io/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 07:11:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;趋势科技研究发现CVE-2025-3248漏洞正被活跃利用来传播Flodrix僵尸网络。攻击者利用该漏洞在受感染的Langflow服务器上执行下载脚本，进而安装恶意软件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lumma窃密软件卷土重来：采用更隐蔽的传播技术与规避手段</title>
+      <link>https://qife122.github.io/p/lumma%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E5%8D%B7%E5%9C%9F%E9%87%8D%E6%9D%A5%E9%87%87%E7%94%A8%E6%9B%B4%E9%9A%90%E8%94%BD%E7%9A%84%E4%BC%A0%E6%92%AD%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%A7%84%E9%81%BF%E6%89%8B%E6%AE%B5/</link>
+      <pubDate>Tue, 05 Aug 2025 07:05:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/lumma%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E5%8D%B7%E5%9C%9F%E9%87%8D%E6%9D%A5%E9%87%87%E7%94%A8%E6%9B%B4%E9%9A%90%E8%94%BD%E7%9A%84%E4%BC%A0%E6%92%AD%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%A7%84%E9%81%BF%E6%89%8B%E6%AE%B5/</guid>
+      <description>&lt;h3 id=&#34;核心发现&#34;&gt;核心发现&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;死灰复燃&lt;/strong&gt;：2025年5月执法行动后，Lumma窃密软件6月起攻击量已恢复至原有水平，通过GitHub仓库、社交媒体欺诈链接等隐蔽渠道传播&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;技术规避&lt;/strong&gt;：弃用Cloudflare转向俄罗斯Selectel等数据中心，利用PowerShell内存加载（无文件攻击）逃避检测&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;攻击链创新&lt;/strong&gt;：通过&amp;quot;ClickFix&amp;quot;虚假验证码诱导用户执行恶意命令，在YouTube/Facebook伪造破解软件推广页面&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;MaaS模式威胁&lt;/strong&gt;：作为恶意软件即服务，降低攻击门槛，非技术罪犯也可实施数据窃取&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;攻击技术深度分析&#34;&gt;攻击技术深度分析&lt;/h3&gt;&#xA;&lt;h4 id=&#34;基础设施演变&#34;&gt;基础设施演变&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;历史依赖&lt;/strong&gt;：2025年前70%的C&amp;amp;C域名使用Cloudflare隐蔽真实IP&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;当前策略&lt;/strong&gt;：执法行动后主要转向俄罗斯Selectel数据中心（占比提升至58%），同时保留部分Cloudflare节点作混淆&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;新型传播载体&#34;&gt;新型传播载体&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;虚假破解软件&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gunra勒索软件集团推出高效Linux变种</title>
+      <link>https://qife122.github.io/p/gunra%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%9B%86%E5%9B%A2%E6%8E%A8%E5%87%BA%E9%AB%98%E6%95%88linux%E5%8F%98%E7%A7%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 06:48:59 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gunra%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%9B%86%E5%9B%A2%E6%8E%A8%E5%87%BA%E9%AB%98%E6%95%88linux%E5%8F%98%E7%A7%8D/</guid>
+      <description>&lt;h1 id=&#34;gunra勒索软件集团推出高效linux变种&#34;&gt;Gunra勒索软件集团推出高效Linux变种&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Gunra勒索软件的Linux变种显著扩大了攻击面，表明该组织意图突破原有攻击范围&lt;/li&gt;&#xA;&lt;li&gt;Linux变种具备并行100线程加密能力，支持部分文件加密，并允许将RSA加密密钥存储在独立文件中&lt;/li&gt;&#xA;&lt;li&gt;自2025年4月首次活动以来，已攻击巴西、日本、加拿大等多国企业，涉及制造、医疗、IT等多个行业&lt;/li&gt;&#xA;&lt;li&gt;Trend Vision One™可检测相关攻击指标(IOC)，并提供狩猎查询、威胁情报报告等防护手段&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;技术分析&#34;&gt;技术分析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;执行特性&#34;&gt;执行特性&lt;/h3&gt;&#xA;&lt;p&gt;Linux变种需要多个运行时参数，缺少参数时会显示使用说明。执行时会在控制台输出活动日志。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软2022年10月安全更新公告：修复多个高危漏洞</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF2022%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%AC%E5%91%8A%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Tue, 05 Aug 2025 06:32:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF2022%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%AC%E5%91%8A%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;p&gt;2022年10月11日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新重点关注以下技术要点：&lt;/p&gt;&#xA;&lt;h3 id=&#34;关键漏洞修复&#34;&gt;关键漏洞修复&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;CVE-2022-41033&lt;/strong&gt;&lt;br&gt;&#xA;Windows COM+事件系统服务特权提升漏洞已被检测到在野利用，需优先修补。该漏洞细节尚未公开披露。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nvidia GPU存在Rowhammer攻击漏洞，专家建议启用ECC防护</title>
+      <link>https://qife122.github.io/p/nvidia-gpu%E5%AD%98%E5%9C%A8rowhammer%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%E4%B8%93%E5%AE%B6%E5%BB%BA%E8%AE%AE%E5%90%AF%E7%94%A8ecc%E9%98%B2%E6%8A%A4/</link>
+      <pubDate>Tue, 05 Aug 2025 06:16:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/nvidia-gpu%E5%AD%98%E5%9C%A8rowhammer%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%E4%B8%93%E5%AE%B6%E5%BB%BA%E8%AE%AE%E5%90%AF%E7%94%A8ecc%E9%98%B2%E6%8A%A4/</guid>
+      <description>&lt;h1 id=&#34;nvidia-gpu存在rowhammer攻击漏洞&#34;&gt;Nvidia GPU存在Rowhammer攻击漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;新闻&lt;/strong&gt;&lt;br&gt;&#xA;2024年7月16日 · 4分钟阅读 · GPU安全&lt;/p&gt;&#xA;&lt;p&gt;IT管理人员应确保启用Nvidia GPU中的错误校正代码(ECC)功能，以防止Rowhammer攻击。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>英国拟立法禁止公共部门支付勒索软件赎金</title>
+      <link>https://qife122.github.io/p/%E8%8B%B1%E5%9B%BD%E6%8B%9F%E7%AB%8B%E6%B3%95%E7%A6%81%E6%AD%A2%E5%85%AC%E5%85%B1%E9%83%A8%E9%97%A8%E6%94%AF%E4%BB%98%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E8%B5%8E%E9%87%91/</link>
+      <pubDate>Tue, 05 Aug 2025 05:54:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%8B%B1%E5%9B%BD%E6%8B%9F%E7%AB%8B%E6%B3%95%E7%A6%81%E6%AD%A2%E5%85%AC%E5%85%B1%E9%83%A8%E9%97%A8%E6%94%AF%E4%BB%98%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E8%B5%8E%E9%87%91/</guid>
+      <description>&lt;h1 id=&#34;英国拟立法禁止公共部门支付勒索软件赎金&#34;&gt;英国拟立法禁止公共部门支付勒索软件赎金&lt;/h1&gt;&#xA;&lt;p&gt;英国当局将勒索软件视为该国面临的最大网络犯罪威胁，其造成的经济损失高达数十亿英镑，并可能导致关键服务瘫痪。内政部已确认，正寻求通过立法禁止公共机构向网络犯罪分子支付赎金。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>关于Service Fabric Explorer (SFX) v1 Web客户端潜在风险的警示与指导</title>
+      <link>https://qife122.github.io/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</link>
+      <pubDate>Tue, 05 Aug 2025 05:43:40 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;微软近期发现旧版Service Fabric Explorer（SFXv1）在特定条件下存在跨站脚本（XSS）漏洞（CVE-2022-35829）。当前默认的SFX Web客户端（SFXv2）不受此漏洞影响，但用户仍可手动切换至存在漏洞的旧版客户端（SFXv1）。攻击者需已具备Service Fabric集群的代码部署与执行权限，且目标需使用存在漏洞的SFXv1客户端。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>漏洞利用实验室：2015年CanSecWest与SyScan漏洞实验公告</title>
+      <link>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</link>
+      <pubDate>Tue, 05 Aug 2025 05:27:30 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;漏洞利用实验室2015年会议公告&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;我们荣幸地宣布，漏洞利用实验室(Exploit Lab)将作为实践课程亮相2015年两大国际安全会议：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;CanSecWest&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;日期：2015年3月&lt;/li&gt;&#xA;&lt;li&gt;地点：加拿大温哥华&lt;/li&gt;&#xA;&lt;li&gt;内容：高级堆溢出利用技术实战，包括现代缓解机制（ASLR/DEP）绕过方法&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;SyScan360&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Coinbase数据泄露事件揭示内部威胁风险</title>
+      <link>https://qife122.github.io/p/coinbase%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E6%8F%AD%E7%A4%BA%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Tue, 05 Aug 2025 05:06:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/coinbase%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E6%8F%AD%E7%A4%BA%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;h1 id=&#34;coinbase数据泄露事件揭示内部威胁风险&#34;&gt;Coinbase数据泄露事件揭示内部威胁风险&lt;/h1&gt;&#xA;&lt;p&gt;当你的数字金库被攻破时，后果不仅仅是财务损失——它动摇了信任的根基。这正是全球最大加密货币交易所之一Coinbase面临的现实。据报道，该数据泄露事件导致高达4亿美元的损失，并暴露了近7万名客户的个人信息。这一事件引发了关于企业如何管理数据治理、内部安全控制和内部风险的严峻问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>将人为漏洞转化为组织优势：构建以人为核心的网络安全防线</title>
+      <link>https://qife122.github.io/p/%E5%B0%86%E4%BA%BA%E4%B8%BA%E6%BC%8F%E6%B4%9E%E8%BD%AC%E5%8C%96%E4%B8%BA%E7%BB%84%E7%BB%87%E4%BC%98%E5%8A%BF%E6%9E%84%E5%BB%BA%E4%BB%A5%E4%BA%BA%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E7%BA%BF/</link>
+      <pubDate>Tue, 05 Aug 2025 04:54:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%B0%86%E4%BA%BA%E4%B8%BA%E6%BC%8F%E6%B4%9E%E8%BD%AC%E5%8C%96%E4%B8%BA%E7%BB%84%E7%BB%87%E4%BC%98%E5%8A%BF%E6%9E%84%E5%BB%BA%E4%BB%A5%E4%BA%BA%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%98%B2%E7%BA%BF/</guid>
+      <description>&lt;h1 id=&#34;将人为漏洞转化为组织优势&#34;&gt;将人为漏洞转化为组织优势&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;来源&lt;/strong&gt;：Stephen Frost via Alamy Stock Photo&lt;br&gt;&#xA;&lt;strong&gt;评论文章&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;在动态变化的威胁环境中，有一种攻击手段始终顽固存在并持续有效：钓鱼攻击。尽管技术防御不断进步，但威胁行为体正加倍利用人性弱点，使钓鱼攻击不仅构成威胁，更演变成需要紧急应对的全面流行病。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>42%使用AI的开发者表示其代码库主要由AI生成</title>
+      <link>https://qife122.github.io/p/42%E4%BD%BF%E7%94%A8ai%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E8%A1%A8%E7%A4%BA%E5%85%B6%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%BB%E8%A6%81%E7%94%B1ai%E7%94%9F%E6%88%90/</link>
+      <pubDate>Tue, 05 Aug 2025 04:43:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/42%E4%BD%BF%E7%94%A8ai%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E8%A1%A8%E7%A4%BA%E5%85%B6%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%BB%E8%A6%81%E7%94%B1ai%E7%94%9F%E6%88%90/</guid>
+      <description>&lt;h3 id=&#34;ai生成代码占比显著但审查不足&#34;&gt;AI生成代码占比显著但审查不足&lt;/h3&gt;&#xA;&lt;p&gt;根据云原生软件制品管理平台Cloudsmith发布的《2025年制品管理报告》，42%采用AI辅助工作流的开发者表示，当前代码库中至少50%内容由AI生成。然而其中仅67%会在每次部署前审查这些代码——尽管针对AI的&amp;quot;垃圾包劫持&amp;quot;（slopsquatting）等新型攻击正在涌现（黑客利用编码助手生成的虚构包名进行攻击）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Safari 18.6安全更新：修复多个内存损坏与XSS漏洞</title>
+      <link>https://qife122.github.io/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Tue, 05 Aug 2025 04:37:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;h3 id=&#34;安全更新概述&#34;&gt;安全更新概述&lt;/h3&gt;&#xA;&lt;p&gt;Safari 18.6针对以下漏洞进行了修复，安全详情可参考&lt;a href=&#34;https://support.apple.com/124152&#34;&gt;Apple支持页面&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;核心漏洞修复&#34;&gt;核心漏洞修复&lt;/h3&gt;&#xA;&lt;h4 id=&#34;libxml2&#34;&gt;libxml2&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;影响系统&lt;/strong&gt;：macOS Ventura及Sonoma&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：文件处理可能导致内存损坏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-7425&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Google Project Zero团队Sergei Glazunov&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;libxslt&#34;&gt;libxslt&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;影响系统&lt;/strong&gt;：macOS Ventura及Sonoma&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：恶意网页内容处理可能导致内存损坏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-7424&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Google Project Zero团队Ivan Fratric&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;safari浏览器&#34;&gt;Safari浏览器&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：恶意网页内容可导致浏览器意外崩溃&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;修复方式&lt;/strong&gt;：改进逻辑检查机制&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-24188&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Nosebeard Labs团队&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;webkit引擎关键修复&#34;&gt;WebKit引擎关键修复&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;跨站脚本(XSS)&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tvOS 18.6 安全更新：漏洞修复与技术细节</title>
+      <link>https://qife122.github.io/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</link>
+      <pubDate>Tue, 05 Aug 2025 04:26:52 +0800</pubDate>
+      <guid>https://qife122.github.io/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</guid>
+      <description>&lt;h1 id=&#34;apple-sa-07-29-2025-7-tvos-186&#34;&gt;APPLE-SA-07-29-2025-7 tvOS 18.6&lt;/h1&gt;&#xA;&lt;p&gt;tvOS 18.6 解决了以下问题。安全内容的信息也可在 &lt;a href=&#34;https://support.apple.com/124153&#34;&gt;https://support.apple.com/124153&lt;/a&gt; 查看。&lt;/p&gt;&#xA;&lt;p&gt;Apple 在 &lt;a href=&#34;https://support.apple.com/100100&#34;&gt;https://support.apple.com/100100&lt;/a&gt; 维护了一个安全发布页面，列出了最近带有安全公告的软件更新。&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞修复详情&#34;&gt;漏洞修复详情&lt;/h2&gt;&#xA;&lt;h3 id=&#34;afclip&#34;&gt;afclip&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;&#xA;&lt;strong&gt;影响&lt;/strong&gt;：解析文件可能导致应用意外终止&lt;br&gt;&#xA;&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;&#xA;&lt;strong&gt;CVE-2025-43186&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>基于修正流的生成式图像隐写术精准潜在反转技术</title>
+      <link>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BF%AE%E6%AD%A3%E6%B5%81%E7%9A%84%E7%94%9F%E6%88%90%E5%BC%8F%E5%9B%BE%E5%83%8F%E9%9A%90%E5%86%99%E6%9C%AF%E7%B2%BE%E5%87%86%E6%BD%9C%E5%9C%A8%E5%8F%8D%E8%BD%AC%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Tue, 05 Aug 2025 04:20:05 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8E%E4%BF%AE%E6%AD%A3%E6%B5%81%E7%9A%84%E7%94%9F%E6%88%90%E5%BC%8F%E5%9B%BE%E5%83%8F%E9%9A%90%E5%86%99%E6%9C%AF%E7%B2%BE%E5%87%86%E6%BD%9C%E5%9C%A8%E5%8F%8D%E8%BD%AC%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;基于修正流的生成式图像隐写术精准潜在反转技术&#34;&gt;基于修正流的生成式图像隐写术精准潜在反转技术&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;&lt;br&gt;&#xA;基于扩散模型的隐写术因其生成高质量图像和强鲁棒性而备受关注。该方法首先将秘密信息嵌入初始潜在变量，再通过前向过程生成载密图像。为提取信息，需通过反转过程从接收图像重建潜在变量。然而，不精确的潜在反转会导致重建变量与原始变量显著差异，致使信息提取失败。针对该问题，我们提出&lt;strong&gt;RF-Stego&lt;/strong&gt;方法：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>基于LLM的窃密软件感染途径识别：从截图中挖掘Aurora窃密木马的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Ellm%E7%9A%84%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E6%84%9F%E6%9F%93%E9%80%94%E5%BE%84%E8%AF%86%E5%88%AB%E4%BB%8E%E6%88%AA%E5%9B%BE%E4%B8%AD%E6%8C%96%E6%8E%98aurora%E7%AA%83%E5%AF%86%E6%9C%A8%E9%A9%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 04:03:39 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Ellm%E7%9A%84%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E6%84%9F%E6%9F%93%E9%80%94%E5%BE%84%E8%AF%86%E5%88%AB%E4%BB%8E%E6%88%AA%E5%9B%BE%E4%B8%AD%E6%8C%96%E6%8E%98aurora%E7%AA%83%E5%AF%86%E6%9C%A8%E9%A9%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;窃密软件（Infostealer）会从受感染系统中窃取凭证、会话Cookie等敏感数据。2024年报告的窃密日志超过2900万条，人工分析难以应对。现有研究多聚焦主动检测，而针对感染后截图的反应式分析存在空白。本文创新性地采用大型语言模型（特别是gpt-4o-mini）分析感染截图，提取威胁指标（IoCs）、绘制感染路径并追踪攻击活动。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Twitter前安全主管举报：平台存在严重安全漏洞与隐私问题</title>
+      <link>https://qife122.github.io/p/twitter%E5%89%8D%E5%AE%89%E5%85%A8%E4%B8%BB%E7%AE%A1%E4%B8%BE%E6%8A%A5%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 05 Aug 2025 03:57:55 +0800</pubDate>
+      <guid>https://qife122.github.io/p/twitter%E5%89%8D%E5%AE%89%E5%85%A8%E4%B8%BB%E7%AE%A1%E4%B8%BE%E6%8A%A5%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;Twitter因其前安全主管Peiter &amp;ldquo;Mudge&amp;rdquo; Zatko提交的一份举报文件而陷入争议。Zatko在2020年至2022年期间担任Twitter安全主管约15个月，他向美国政府提交了一份84页的举报报告，指控Twitter存在严重的安全和隐私问题，甚至可能构成国家安全风险。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAN-OS CVE-2024-3400高危漏洞：立即修补Palo Alto防火墙</title>
+      <link>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+      <pubDate>Tue, 05 Aug 2025 03:52:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，该漏洞目前仍存在野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前已开发出内部利用代码并通知客户。值得注意的是，Palo Alto Networks提供的临时缓解措施（启用威胁防护和禁用设备遥测）均被Bishop Fox成功绕过。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用Konveyor和Kantra进行静态代码分析教程（第一部分）</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8konveyor%E5%92%8Ckantra%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</link>
+      <pubDate>Tue, 05 Aug 2025 03:35:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8konveyor%E5%92%8Ckantra%E8%BF%9B%E8%A1%8C%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/</guid>
+      <description>&lt;h1 id=&#34;static-code-analysis-tutorial-with-konveyor-and-kantra-part---1&#34;&gt;Static Code analysis tutorial with Konveyor and Kantra part - 1&lt;/h1&gt;&#xA;&lt;p&gt;Konveyor Kantra CLI 是一个命令行工具，用于分析和转换应用程序源代码以支持现代化和迁移。它通过静态代码分析检测问题，还能提取元数据、生成部署资产（如Kubernetes清单），并通过容器或原生方式运行。该工具支持Java、Go、.NET和Node.js等多语言，并能与CI/CD管道集成。Kantra是Konveyor AI（Kai）等基于LLM的自动化应用现代化工作流的基础。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用CodeReason进行原生程序语义分析 - 揭秘二进制逆向工程利器</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</link>
+      <pubDate>Tue, 05 Aug 2025 03:08:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;原生程序的语义分析codereason技术解析&#34;&gt;原生程序的语义分析：CodeReason技术解析&lt;/h1&gt;&#xA;&lt;p&gt;你是否曾想对原生模式程序发起查询，询问哪些代码位置会向特定寄存器写入特定值？是否希望自动化解混淆字符串的操作？&lt;/p&gt;&#xA;&lt;h2 id=&#34;逆向工程的语义挑战&#34;&gt;逆向工程的语义挑战&lt;/h2&gt;&#xA;&lt;p&gt;逆向工程原生程序需要在低层次理解其语义，直到浮现出高层次功能图景。系统化理解原生程序的一个关键挑战在于：这种理解必须覆盖程序使用的每一条指令。分析工具需要明确知道哪些指令会对内存调用和寄存器产生何种影响。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软应对国家级黑客组织Midnight Blizzard攻击的最新进展</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9%E5%9B%BD%E5%AE%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E7%BB%84%E7%BB%87midnight-blizzard%E6%94%BB%E5%87%BB%E7%9A%84%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%95/</link>
+      <pubDate>Tue, 05 Aug 2025 02:46:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9%E5%9B%BD%E5%AE%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E7%BB%84%E7%BB%87midnight-blizzard%E6%94%BB%E5%87%BB%E7%9A%84%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%95/</guid>
+      <description>&lt;h1 id=&#34;微软应对国家级黑客组织midnight-blizzard攻击的最新进展&#34;&gt;微软应对国家级黑客组织Midnight Blizzard攻击的最新进展&lt;/h1&gt;&#xA;&lt;p&gt;本文更新了微软安全团队于2024年1月12日检测到的国家级攻击事件进展。1月19日，安全团队发现该攻击已渗透至公司邮件系统，随即启动应急响应流程。经微软威胁情报调查，攻击者被确认为俄罗斯国家支持的黑客组织Midnight Blizzard（又名NOBELIUM）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux下可疑脚本与可执行文件的Sinkholing隔离技术</title>
+      <link>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Tue, 05 Aug 2025 02:29:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;sinkholing-suspicious-scripts-or-executables-on-linux&#34;&gt;Sinkholing Suspicious Scripts or Executables on Linux&lt;/h1&gt;&#xA;&lt;p&gt;当需要分析可疑代码时，沙箱环境是理想的执行场所。若缺乏完整沙箱或希望避免网络噪声，可通过sinkhole或NULL-route重定向流量（即数据包不会通过常规网络和默认网关发送）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>浏览器右键菜单重新启用的技术方案</title>
+      <link>https://qife122.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E9%87%8D%E6%96%B0%E5%90%AF%E7%94%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Tue, 05 Aug 2025 02:07:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E9%87%8D%E6%96%B0%E5%90%AF%E7%94%A8%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;h1 id=&#34;重新启用浏览器右键菜单&#34;&gt;重新启用浏览器右键菜单&lt;/h1&gt;&#xA;&lt;p&gt;我在测试一个禁用了右键上下文菜单的应用程序时遇到了困难。为了便于测试，我找到了以下一行代码，可以将其粘贴到浏览器控制台中以重新启用右键菜单：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>从黑客行动主义到网络犯罪：动机融合的深度剖析</title>
+      <link>https://qife122.github.io/p/%E4%BB%8E%E9%BB%91%E5%AE%A2%E8%A1%8C%E5%8A%A8%E4%B8%BB%E4%B9%89%E5%88%B0%E7%BD%91%E7%BB%9C%E7%8A%AF%E7%BD%AA%E5%8A%A8%E6%9C%BA%E8%9E%8D%E5%90%88%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 01:46:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BB%8E%E9%BB%91%E5%AE%A2%E8%A1%8C%E5%8A%A8%E4%B8%BB%E4%B9%89%E5%88%B0%E7%BD%91%E7%BB%9C%E7%8A%AF%E7%BD%AA%E5%8A%A8%E6%9C%BA%E8%9E%8D%E5%90%88%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;从意识形态到经济利益探索黑客行动主义与网络犯罪的融合&#34;&gt;从意识形态到经济利益：探索黑客行动主义与网络犯罪的融合&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在网络威胁行为者不断演变的格局中，意识形态驱动的黑客行动主义与经济动机的网络犯罪之间的界限日益模糊。最初由政治、社会或伦理原因驱动的黑客行动主义团体，历史上通过网站篡改、数据泄露和分布式拒绝服务(DDoS)攻击进行数字抗议。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS迁移安全指南：实现清晰度与信心的全面策略</title>
+      <link>https://qife122.github.io/p/aws%E8%BF%81%E7%A7%BB%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97%E5%AE%9E%E7%8E%B0%E6%B8%85%E6%99%B0%E5%BA%A6%E4%B8%8E%E4%BF%A1%E5%BF%83%E7%9A%84%E5%85%A8%E9%9D%A2%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Tue, 05 Aug 2025 01:38:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aws%E8%BF%81%E7%A7%BB%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97%E5%AE%9E%E7%8E%B0%E6%B8%85%E6%99%B0%E5%BA%A6%E4%B8%8E%E4%BF%A1%E5%BF%83%E7%9A%84%E5%85%A8%E9%9D%A2%E7%AD%96%E7%95%A5/</guid>
+      <description>&lt;h1 id=&#34;导航aws迁移实现清晰度与信心&#34;&gt;导航AWS迁移：实现清晰度与信心&lt;/h1&gt;&#xA;&lt;p&gt;将工作负载迁移到亚马逊云服务（AWS）代表着重要的战略机遇，能够提升敏捷性、可扩展性和创新潜力。但若缺乏全面的可见性与安全策略，此过程可能引入不可预见的风险、操作延迟以及管理新云环境的挑战。其中常被忽视的关键环节是敏感数据在迁移至云端及存储期间的发现与保护。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>新年新气象：安全领域的挑战与协作</title>
+      <link>https://qife122.github.io/p/%E6%96%B0%E5%B9%B4%E6%96%B0%E6%B0%94%E8%B1%A1%E5%AE%89%E5%85%A8%E9%A2%86%E5%9F%9F%E7%9A%84%E6%8C%91%E6%88%98%E4%B8%8E%E5%8D%8F%E4%BD%9C/</link>
+      <pubDate>Tue, 05 Aug 2025 01:32:38 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%96%B0%E5%B9%B4%E6%96%B0%E6%B0%94%E8%B1%A1%E5%AE%89%E5%85%A8%E9%A2%86%E5%9F%9F%E7%9A%84%E6%8C%91%E6%88%98%E4%B8%8E%E5%8D%8F%E4%BD%9C/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Handle:&lt;/strong&gt;&lt;br&gt;&#xA;Security Blanki&lt;br&gt;&#xA;&lt;strong&gt;IRL:&lt;/strong&gt;&lt;br&gt;&#xA;Sarah Blankinship&lt;br&gt;&#xA;&lt;strong&gt;Rank:&lt;/strong&gt;&lt;br&gt;&#xA;高级安全战略主管&lt;br&gt;&#xA;&lt;strong&gt;喜好:&lt;/strong&gt;&lt;br&gt;&#xA;漏洞管理、竞争团队合作、全球气候变化（越热越好）&lt;br&gt;&#xA;&lt;strong&gt;厌恶:&lt;/strong&gt;&lt;br&gt;&#xA;无礼的旁观者（女性也可以是极客！）、处于风险中的客户、自负心态&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux内核v4.17安全特性解析：从内存保护到系统调用加固</title>
+      <link>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</link>
+      <pubDate>Tue, 05 Aug 2025 01:15:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</guid>
+      <description>&lt;h3 id=&#34;linux内核v417的安全特性&#34;&gt;Linux内核v4.17的安全特性&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;先前版本&lt;/strong&gt;：v4.16&lt;br&gt;&#xA;Linux内核v4.17于上周发布，以下是我认为值得关注的安全改进：&lt;/p&gt;&#xA;&lt;h4 id=&#34;jailhouse管理程序&#34;&gt;Jailhouse管理程序&lt;/h4&gt;&#xA;&lt;p&gt;Jan Kiszka引入了Jailhouse管理程序支持，采用静态分区技术（即不进行资源超分配）。根&amp;quot;单元&amp;quot;通过缩减自身的CPU/内存等资源来创建新隔离区，并将资源移交给新隔离区。LWN在2014年对该管理程序有详细报道。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Azure Front Door WAF IP限制绕过漏洞分析</title>
+      <link>https://qife122.github.io/p/azure-front-door-waf-ip%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 00:59:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/azure-front-door-waf-ip%E9%99%90%E5%88%B6%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;azures-front-door-waf-wtf-ip限制绕过&#34;&gt;Azure&amp;rsquo;s Front Door WAF WTF: IP限制绕过&lt;/h1&gt;&#xA;&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;Azure提供两种WAF服务：全局部署的Front Door WAF和区域部署的Application Gateway WAF。本文披露的漏洞存在于Front Door WAF的IP限制功能中。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cURL HTTP请求走私漏洞深度分析</title>
+      <link>https://qife122.github.io/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 00:37:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;http请求走私漏洞分析---curl安全报告&#34;&gt;HTTP请求走私漏洞分析 - cURL安全报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;cURL未明确拒绝同时包含Transfer-Encoding和Content-Length头的HTTP请求，当这些请求通过解释头方式与目标服务器不同的中间系统(代理、负载均衡器、防火墙)时，可能导致HTTP请求走私漏洞(CWE-444)。这种不一致的解释使攻击者可能绕过安全控制走私恶意请求或导致缓存投毒攻击。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2017年5月安全更新发布 | 微软安全响应中心公告</title>
+      <link>https://qife122.github.io/p/2017%E5%B9%B45%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
+      <pubDate>Tue, 05 Aug 2025 00:15:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2017%E5%B9%B45%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</guid>
+      <description>&lt;p&gt;今天，我们发布了安全更新，以提供针对恶意攻击者的额外防护措施。默认情况下，Windows 10会自动接收这些更新。对于运行旧版本系统的客户，我们建议启用自动更新作为最佳实践。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编写Windows文件系统驱动之难：NTFS安全描述符继承漏洞分析</title>
+      <link>https://qife122.github.io/p/%E7%BC%96%E5%86%99windows%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A9%B1%E5%8A%A8%E4%B9%8B%E9%9A%BEntfs%E5%AE%89%E5%85%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%BB%A7%E6%89%BF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 23:59:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BC%96%E5%86%99windows%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A9%B1%E5%8A%A8%E4%B9%8B%E9%9A%BEntfs%E5%AE%89%E5%85%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%BB%A7%E6%89%BF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;p&gt;@jonasLyk的一条推文让我想起几个月前在NTFS中发现的一个漏洞，经核实该漏洞在Windows 10 2004版本中依然存在。虽然无法直接用于突破安全限制，但在攻击链中可能具有利用价值。NTFS的复杂性充分证明了编写Windows文件系统驱动的难度，因此出现各种边缘案例也就不足为奇了。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>黑帽大会现场攻防：微软悬赏10万美元征集Windows 8.1漏洞利用技术</title>
+      <link>https://qife122.github.io/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Mon, 04 Aug 2025 23:42:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h2 id=&#34;现场悬赏规则&#34;&gt;现场悬赏规则&lt;/h2&gt;&#xA;&lt;p&gt;距离拉斯维加斯黑帽大会开幕仅剩一周，微软公布了&amp;quot;实时防护绕过悬赏&amp;quot;的具体执行细则：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;演示时间&lt;/strong&gt;：每日中午12:45开始，建议参赛者提前至12:30抵达微软展台（#301）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CSS特异性控制：层叠层 vs BEM vs 工具类</title>
+      <link>https://qife122.github.io/p/css%E7%89%B9%E5%BC%82%E6%80%A7%E6%8E%A7%E5%88%B6%E5%B1%82%E5%8F%A0%E5%B1%82-vs-bem-vs-%E5%B7%A5%E5%85%B7%E7%B1%BB/</link>
+      <pubDate>Mon, 04 Aug 2025 23:25:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/css%E7%89%B9%E5%BC%82%E6%80%A7%E6%8E%A7%E5%88%B6%E5%B1%82%E5%8F%A0%E5%B1%82-vs-bem-vs-%E5%B7%A5%E5%85%B7%E7%B1%BB/</guid>
+      <description>&lt;h1 id=&#34;css层叠层-vs-bem-vs-工具类特异性控制&#34;&gt;CSS层叠层 vs BEM vs 工具类：特异性控制&lt;/h1&gt;&#xA;&lt;p&gt;CSS的不可预测性往往源于特异性问题。Victor Ayomipo剖析了样式不按预期生效的原因，指出理解特异性机制比依赖!important标记更为重要。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Codex与GPT-4在智能合约审计上仍无法超越人类——Trail of Bits实验报告</title>
+      <link>https://qife122.github.io/p/codex%E4%B8%8Egpt-4%E5%9C%A8%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%A1%E8%AE%A1%E4%B8%8A%E4%BB%8D%E6%97%A0%E6%B3%95%E8%B6%85%E8%B6%8A%E4%BA%BA%E7%B1%BBtrail-of-bits%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</link>
+      <pubDate>Mon, 04 Aug 2025 23:09:09 +0800</pubDate>
+      <guid>https://qife122.github.io/p/codex%E4%B8%8Egpt-4%E5%9C%A8%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%AE%A1%E8%AE%A1%E4%B8%8A%E4%BB%8D%E6%97%A0%E6%B3%95%E8%B6%85%E8%B6%8A%E4%BA%BA%E7%B1%BBtrail-of-bits%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/</guid>
+      <description>&lt;h3 id=&#34;核心发现&#34;&gt;核心发现&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;概念理解缺陷&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;模型无法有效推理合约所有权、重入攻击、费用分配等高级概念&lt;/li&gt;&#xA;&lt;li&gt;即使能自然语言描述重入攻击，Codex仍无法将其转化为实际分析能力&lt;/li&gt;&#xA;&lt;li&gt;GPT-4对Solidity的分析能力虽有提升，但仍存在跨函数重入检测等关键缺陷&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;工具链缺失&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows 10 Wow64环境下的Egghunter技术解析</title>
+      <link>https://qife122.github.io/p/windows-10-wow64%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84egghunter%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 22:52:34 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows-10-wow64%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84egghunter%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;windows-10-egghunterwow64技术解析&#34;&gt;Windows 10 Egghunter（Wow64）技术解析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;作者坦言对Egghunter技术一直怀有浓厚兴趣，但强调在实际漏洞利用中应尽量避免使用，因其会降低执行效率。本文是Corelan团队沉寂三年后的首篇技术文章，重点解决Windows 7时代Lincoln开发的Wow64 Egghunter在Windows 10失效的问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>从零到道德黑客：7天实战挑战</title>
+      <link>https://qife122.github.io/p/%E4%BB%8E%E9%9B%B6%E5%88%B0%E9%81%93%E5%BE%B7%E9%BB%91%E5%AE%A27%E5%A4%A9%E5%AE%9E%E6%88%98%E6%8C%91%E6%88%98/</link>
+      <pubDate>Mon, 04 Aug 2025 22:35:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BB%8E%E9%9B%B6%E5%88%B0%E9%81%93%E5%BE%B7%E9%BB%91%E5%AE%A27%E5%A4%A9%E5%AE%9E%E6%88%98%E6%8C%91%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;从零到道德黑客7天实战挑战&#34;&gt;从零到道德黑客：7天实战挑战&lt;/h1&gt;&#xA;&lt;p&gt;想象一下：你正在参加一个网络安全职位的面试。面试官问你：“你能真正发现漏洞，还是只懂理论？”你的心沉了下去，因为尽管你阅读了无数文章和YouTube教程，但从未真正发现过一个真实的漏洞。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过SSH实现流量转发与VPN搭建的技术指南</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ssh%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91%E4%B8%8Evpn%E6%90%AD%E5%BB%BA%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 04 Aug 2025 22:19:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ssh%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91%E4%B8%8Evpn%E6%90%AD%E5%BB%BA%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h3 id=&#34;ssh端口转发技术详解&#34;&gt;SSH端口转发技术详解&lt;/h3&gt;&#xA;&lt;h4 id=&#34;本地端口转发&#34;&gt;本地端口转发&lt;/h4&gt;&#xA;&lt;p&gt;通过&lt;code&gt;-L&lt;/code&gt;参数可将远程服务映射到本地端口。例如发现目标机(192.168.136.120)的8080端口运行着Python HTTP服务时，执行：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>LLAMA：基于LLM引导种子生成的多反馈智能合约模糊测试框架</title>
+      <link>https://qife122.github.io/p/llama%E5%9F%BA%E4%BA%8Ellm%E5%BC%95%E5%AF%BC%E7%A7%8D%E5%AD%90%E7%94%9F%E6%88%90%E7%9A%84%E5%A4%9A%E5%8F%8D%E9%A6%88%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Mon, 04 Aug 2025 22:02:22 +0800</pubDate>
+      <guid>https://qife122.github.io/p/llama%E5%9F%BA%E4%BA%8Ellm%E5%BC%95%E5%AF%BC%E7%A7%8D%E5%AD%90%E7%94%9F%E6%88%90%E7%9A%84%E5%A4%9A%E5%8F%8D%E9%A6%88%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</guid>
+      <description>&lt;h1 id=&#34;llama基于llm引导种子生成的多反馈智能合约模糊测试框架&#34;&gt;LLAMA：基于LLM引导种子生成的多反馈智能合约模糊测试框架&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;&lt;br&gt;&#xA;智能合约在区块链生态系统中发挥着关键作用，而模糊测试仍是保障其安全的重要手段。尽管变异调度是影响模糊测试效果的关键因素，现有模糊测试工具主要关注种子调度和生成，而变异调度却鲜有研究。本文提出基于大语言模型（LLMs）的多反馈智能合约模糊测试框架LLAMA，整合了LLMs、进化变异策略和混合测试技术。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>使用CodeQL捕捉OpenSSL误用漏洞 - 关键加密API安全实践</title>
       <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codeql%E6%8D%95%E6%8D%89openssl%E8%AF%AF%E7%94%A8%E6%BC%8F%E6%B4%9E-%E5%85%B3%E9%94%AE%E5%8A%A0%E5%AF%86api%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/</link>

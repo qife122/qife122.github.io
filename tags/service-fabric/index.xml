@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Service Fabric on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/service-fabric/</link>
+    <description>Recent content in Service Fabric on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Tue, 05 Aug 2025 05:43:40 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/service-fabric/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于Service Fabric Explorer (SFX) v1 Web客户端潜在风险的警示与指导</title>
+      <link>https://qife122.github.io/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</link>
+      <pubDate>Tue, 05 Aug 2025 05:43:40 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;微软近期发现旧版Service Fabric Explorer（SFXv1）在特定条件下存在跨站脚本（XSS）漏洞（CVE-2022-35829）。当前默认的SFX Web客户端（SFXv2）不受此漏洞影响，但用户仍可手动切换至存在漏洞的旧版客户端（SFXv1）。攻击者需已具备Service Fabric集群的代码部署与执行权限，且目标需使用存在漏洞的SFXv1客户端。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 09:21:28 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 04:03:39 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于LLM的窃密软件感染途径识别：从截图中挖掘Aurora窃密木马的技术分析</title>
+      <link>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Ellm%E7%9A%84%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E6%84%9F%E6%9F%93%E9%80%94%E5%BE%84%E8%AF%86%E5%88%AB%E4%BB%8E%E6%88%AA%E5%9B%BE%E4%B8%AD%E6%8C%96%E6%8E%98aurora%E7%AA%83%E5%AF%86%E6%9C%A8%E9%A9%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 04:03:39 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%9F%BA%E4%BA%8Ellm%E7%9A%84%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E6%84%9F%E6%9F%93%E9%80%94%E5%BE%84%E8%AF%86%E5%88%AB%E4%BB%8E%E6%88%AA%E5%9B%BE%E4%B8%AD%E6%8C%96%E6%8E%98aurora%E7%AA%83%E5%AF%86%E6%9C%A8%E9%A9%AC%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;窃密软件（Infostealer）会从受感染系统中窃取凭证、会话Cookie等敏感数据。2024年报告的窃密日志超过2900万条，人工分析难以应对。现有研究多聚焦主动检测，而针对感染后截图的反应式分析存在空白。本文创新性地采用大型语言模型（特别是gpt-4o-mini）分析感染截图，提取威胁指标（IoCs）、绘制感染路径并追踪攻击活动。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux下可疑脚本与可执行文件的Sinkholing隔离技术</title>
+      <link>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Tue, 05 Aug 2025 02:29:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;sinkholing-suspicious-scripts-or-executables-on-linux&#34;&gt;Sinkholing Suspicious Scripts or Executables on Linux&lt;/h1&gt;&#xA;&lt;p&gt;当需要分析可疑代码时，沙箱环境是理想的执行场所。若缺乏完整沙箱或希望避免网络噪声，可通过sinkhole或NULL-route重定向流量（即数据包不会通过常规网络和默认网关发送）。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>构建与维护恶意软件动物园：C2/植入测试平台实战解析</title>
       <link>https://qife122.github.io/p/%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BB%B4%E6%8A%A4%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8A%A8%E7%89%A9%E5%9B%ADc2/%E6%A4%8D%E5%85%A5%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</link>

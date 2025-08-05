@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NTLM中继攻击 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/ntlm%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB/</link>
+    <description>Recent content in NTLM中继攻击 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Tue, 05 Aug 2025 13:08:37 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/ntlm%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>滥用Active Directory证书服务(第三部分) - 中继攻击与证书伪造实战</title>
+      <link>https://qife122.github.io/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</link>
+      <pubDate>Tue, 05 Aug 2025 13:08:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</guid>
+      <description>&lt;h1 id=&#34;滥用active-directory证书服务第三部分&#34;&gt;滥用Active Directory证书服务(第三部分)&lt;/h1&gt;&#xA;&lt;p&gt;在&lt;a href=&#34;https://example.com/part1&#34;&gt;第一部分&lt;/a&gt;和&lt;a href=&#34;https://example.com/part2&#34;&gt;第二部分&lt;/a&gt;中，我们探讨了Active Directory证书模板的常见错误配置。本文将重点分析Web Enrollment功能的攻击利用。&lt;/p&gt;&#xA;&lt;h2 id=&#34;adcs-http端点中继攻击&#34;&gt;ADCS HTTP端点中继攻击&lt;/h2&gt;&#xA;&lt;p&gt;Active Directory证书服务(ADCS)支持基于HTTP的证书注册方法。当启用时，这些HTTP接口可能遭受NTLM中继攻击。攻击者诱导受害者账户向受控主机认证后，可将凭据中继到证书颁发机构(CA)来代表受害者申请证书。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

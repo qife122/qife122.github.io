@@ -7,8 +7,43 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 21:19:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 18:09:13 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>apt/apt-get远程代码执行漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 18:09:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;aptapt-get中的远程代码执行漏洞&#34;&gt;apt/apt-get中的远程代码执行漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者：Max Justicz&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;日期：2019年1月22日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;在apt中发现一个漏洞，允许网络中间人攻击者（或恶意软件包镜像站）在安装任何软件包时以root权限执行任意代码。该漏洞已在最新版apt中修复。若担心更新过程中被攻击，可通过禁用HTTP重定向进行防护：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ruby Psych库中的ReDoS漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 07:43:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;ruby-psych库中的redos漏洞报告&#34;&gt;Ruby Psych库中的ReDoS漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在Ruby Psych库中发现了一个正则表达式拒绝服务(ReDoS)漏洞，该漏洞存在于&lt;code&gt;Psych.load&lt;/code&gt;方法处理DateTime反序列化时。攻击者可通过构造特定格式的YAML字符串导致正则表达式匹配时间呈指数级增长。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Critical Langflow漏洞(CVE-2025-3248)被利用传播Flodrix僵尸网络的技术分析</title>
+      <link>https://qife122.github.io/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 07:11:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;趋势科技研究发现CVE-2025-3248漏洞正被活跃利用来传播Flodrix僵尸网络。攻击者利用该漏洞在受感染的Langflow服务器上执行下载脚本，进而安装恶意软件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>cURL HTTP请求走私漏洞深度分析</title>
+      <link>https://qife122.github.io/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 00:37:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;http请求走私漏洞分析---curl安全报告&#34;&gt;HTTP请求走私漏洞分析 - cURL安全报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;p&gt;cURL未明确拒绝同时包含Transfer-Encoding和Content-Length头的HTTP请求，当这些请求通过解释头方式与目标服务器不同的中间系统(代理、负载均衡器、防火墙)时，可能导致HTTP请求走私漏洞(CWE-444)。这种不一致的解释使攻击者可能绕过安全控制走私恶意请求或导致缓存投毒攻击。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>编写Windows文件系统驱动之难：NTFS安全描述符继承漏洞分析</title>
+      <link>https://qife122.github.io/p/%E7%BC%96%E5%86%99windows%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A9%B1%E5%8A%A8%E4%B9%8B%E9%9A%BEntfs%E5%AE%89%E5%85%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%BB%A7%E6%89%BF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 04 Aug 2025 23:59:00 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%BC%96%E5%86%99windows%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A9%B1%E5%8A%A8%E4%B9%8B%E9%9A%BEntfs%E5%AE%89%E5%85%A8%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%BB%A7%E6%89%BF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;p&gt;@jonasLyk的一条推文让我想起几个月前在NTFS中发现的一个漏洞，经核实该漏洞在Windows 10 2004版本中依然存在。虽然无法直接用于突破安全限制，但在攻击链中可能具有利用价值。NTFS的复杂性充分证明了编写Windows文件系统驱动的难度，因此出现各种边缘案例也就不足为奇了。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>关于允许程序性剔除随机值的安全隐患分析</title>
       <link>https://qife122.github.io/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/</link>

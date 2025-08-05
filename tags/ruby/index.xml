@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 01:20:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 07:43:47 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ruby Psych库中的ReDoS漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 07:43:47 +0800</pubDate>
+      <guid>https://qife122.github.io/p/ruby-psych%E5%BA%93%E4%B8%AD%E7%9A%84redos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;ruby-psych库中的redos漏洞报告&#34;&gt;Ruby Psych库中的ReDoS漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在Ruby Psych库中发现了一个正则表达式拒绝服务(ReDoS)漏洞，该漏洞存在于&lt;code&gt;Psych.load&lt;/code&gt;方法处理DateTime反序列化时。攻击者可通过构造特定格式的YAML字符串导致正则表达式匹配时间呈指数级增长。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>sitemap2proxy：将网站地图转换为代理请求的Ruby工具</title>
       <link>https://qife122.github.io/p/sitemap2proxy%E5%B0%86%E7%BD%91%E7%AB%99%E5%9C%B0%E5%9B%BE%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BB%A3%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84ruby%E5%B7%A5%E5%85%B7/</link>

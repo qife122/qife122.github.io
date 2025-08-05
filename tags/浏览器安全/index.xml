@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 10:59:22 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 16:00:21 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Tue, 05 Aug 2025 16:00:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;堆喷射与dep绕过todayswf&#34;&gt;堆喷射与DEP绕过（today.swf）&lt;/h1&gt;&#xA;&lt;p&gt;数据执行保护（DEP）阻止内存被隐式执行。漏洞利用通常会在内存中创建数据形式的载荷并尝试执行。启用DEP后，攻击者必须明确标记其载荷为可执行状态。为绕过该防护，漏洞可利用内存中已标记为可执行的代码。许多攻击通过链式调用函数来标记载荷可执行，这种技术常被称为面向返回编程（ROP）。Windows XP及更高版本上的IE8采用DEP防护，必须绕过该机制才能成功执行代码。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Safari 18.6安全更新：修复多个内存损坏与XSS漏洞</title>
+      <link>https://qife122.github.io/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Tue, 05 Aug 2025 04:37:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/safari-18.6%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E5%86%85%E5%AD%98%E6%8D%9F%E5%9D%8F%E4%B8%8Exss%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;h3 id=&#34;安全更新概述&#34;&gt;安全更新概述&lt;/h3&gt;&#xA;&lt;p&gt;Safari 18.6针对以下漏洞进行了修复，安全详情可参考&lt;a href=&#34;https://support.apple.com/124152&#34;&gt;Apple支持页面&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;核心漏洞修复&#34;&gt;核心漏洞修复&lt;/h3&gt;&#xA;&lt;h4 id=&#34;libxml2&#34;&gt;libxml2&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;影响系统&lt;/strong&gt;：macOS Ventura及Sonoma&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：文件处理可能导致内存损坏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-7425&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Google Project Zero团队Sergei Glazunov&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;libxslt&#34;&gt;libxslt&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;影响系统&lt;/strong&gt;：macOS Ventura及Sonoma&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：恶意网页内容处理可能导致内存损坏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-7424&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Google Project Zero团队Ivan Fratric&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;safari浏览器&#34;&gt;Safari浏览器&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞影响&lt;/strong&gt;：恶意网页内容可导致浏览器意外崩溃&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;修复方式&lt;/strong&gt;：改进逻辑检查机制&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;：CVE-2025-24188&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;发现者&lt;/strong&gt;：Nosebeard Labs团队&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;webkit引擎关键修复&#34;&gt;WebKit引擎关键修复&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;跨站脚本(XSS)&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>IE/Edge崩溃可利用性分析与微软安全防护技术解析</title>
       <link>https://qife122.github.io/p/ie/edge%E5%B4%A9%E6%BA%83%E5%8F%AF%E5%88%A9%E7%94%A8%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>

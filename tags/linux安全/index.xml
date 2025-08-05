@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 20:24:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 18:09:13 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/linux%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>apt/apt-get远程代码执行漏洞分析与修复</title>
+      <link>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 18:09:13 +0800</pubDate>
+      <guid>https://qife122.github.io/p/apt/apt-get%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BF%AE%E5%A4%8D/</guid>
+      <description>&lt;h1 id=&#34;aptapt-get中的远程代码执行漏洞&#34;&gt;apt/apt-get中的远程代码执行漏洞&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者：Max Justicz&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;日期：2019年1月22日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;在apt中发现一个漏洞，允许网络中间人攻击者（或恶意软件包镜像站）在安装任何软件包时以root权限执行任意代码。该漏洞已在最新版apt中修复。若担心更新过程中被攻击，可通过禁用HTTP重定向进行防护：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Gunra勒索软件集团推出高效Linux变种</title>
+      <link>https://qife122.github.io/p/gunra%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%9B%86%E5%9B%A2%E6%8E%A8%E5%87%BA%E9%AB%98%E6%95%88linux%E5%8F%98%E7%A7%8D/</link>
+      <pubDate>Tue, 05 Aug 2025 06:48:59 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gunra%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%9B%86%E5%9B%A2%E6%8E%A8%E5%87%BA%E9%AB%98%E6%95%88linux%E5%8F%98%E7%A7%8D/</guid>
+      <description>&lt;h1 id=&#34;gunra勒索软件集团推出高效linux变种&#34;&gt;Gunra勒索软件集团推出高效Linux变种&lt;/h1&gt;&#xA;&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Gunra勒索软件的Linux变种显著扩大了攻击面，表明该组织意图突破原有攻击范围&lt;/li&gt;&#xA;&lt;li&gt;Linux变种具备并行100线程加密能力，支持部分文件加密，并允许将RSA加密密钥存储在独立文件中&lt;/li&gt;&#xA;&lt;li&gt;自2025年4月首次活动以来，已攻击巴西、日本、加拿大等多国企业，涉及制造、医疗、IT等多个行业&lt;/li&gt;&#xA;&lt;li&gt;Trend Vision One™可检测相关攻击指标(IOC)，并提供狩猎查询、威胁情报报告等防护手段&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;技术分析&#34;&gt;技术分析&lt;/h2&gt;&#xA;&lt;h3 id=&#34;执行特性&#34;&gt;执行特性&lt;/h3&gt;&#xA;&lt;p&gt;Linux变种需要多个运行时参数，缺少参数时会显示使用说明。执行时会在控制台输出活动日志。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux下可疑脚本与可执行文件的Sinkholing隔离技术</title>
+      <link>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Tue, 05 Aug 2025 02:29:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;sinkholing-suspicious-scripts-or-executables-on-linux&#34;&gt;Sinkholing Suspicious Scripts or Executables on Linux&lt;/h1&gt;&#xA;&lt;p&gt;当需要分析可疑代码时，沙箱环境是理想的执行场所。若缺乏完整沙箱或希望避免网络噪声，可通过sinkhole或NULL-route重定向流量（即数据包不会通过常规网络和默认网关发送）。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>深入解析Kubernetes安全配置：allowPrivilegeEscalation的真相与误区</title>
       <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</link>

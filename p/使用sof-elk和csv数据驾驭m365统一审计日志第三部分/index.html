@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文是系列文章的第三部分，详细介绍了如何从M365 Purview导出的CSV数据中提取\"AuditData\"字段，并通过SOF-ELK进行高效解析和查询，同时分享了SOF-ELK的地理定位数据更新和系统升级技巧。">
+<title>使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）">
+<meta property='og:description' content="本文是系列文章的第三部分，详细介绍了如何从M365 Purview导出的CSV数据中提取\"AuditData\"字段，并通过SOF-ELK进行高效解析和查询，同时分享了SOF-ELK的地理定位数据更新和系统升级技巧。">
+<meta property='og:url' content='http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='csv数据' /><meta property='article:tag' content='M365' /><meta property='article:tag' content='Microsoft 365' /><meta property='article:tag' content='SOF-ELK' /><meta property='article:tag' content='UAL' /><meta property='article:tag' content='统一审计日志' /><meta property='article:published_time' content='2025-08-05T12:52:11&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T12:52:11&#43;08:00'/>
+<meta name="twitter:title" content="使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）">
+<meta name="twitter:description" content="本文是系列文章的第三部分，详细介绍了如何从M365 Purview导出的CSV数据中提取\"AuditData\"字段，并通过SOF-ELK进行高效解析和查询，同时分享了SOF-ELK的地理定位数据更新和系统升级技巧。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/">使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文是系列文章的第三部分，详细介绍了如何从M365 Purview导出的CSV数据中提取&#34;AuditData&#34;字段，并通过SOF-ELK进行高效解析和查询，同时分享了SOF-ELK的地理定位数据更新和系统升级技巧。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在&quot;驾驭M365 UAL&quot;系列的第一部分中，我们讨论了使用PowerShell和SOF-ELK获取、解析和查询UAL数据。第二部分则探讨了利用AWS EC2实现SOF-ELK部署的更大灵活性和可访问性。在此过程中，我们学习了如何专门格式化导出的UAL数据以便SOF-ELK自动摄取，但如果获取的数据格式不正确怎么办？幸运的是，如果我们有从Purview或PowerShell导出的CSV中包含的&quot;AuditData&quot;字段，我们可以提取、重新格式化并馈送给SOF-ELK进行自动解析。</p>
+<p>我们经常被叫去调查几天、几周甚至几个月前发生的事件，在许多情况下，客户或第三方已经从M365 Purview（又称合规）门户提取了UAL数据并提供给我们分析。不幸的是，Purview唯一的导出选项是CSV，通过Excel或命令行解析工具来处理CSV中的数据元素可能非常繁琐。借助&quot;驾驭&hellip;&ldquo;第一部分中关于SOF-ELK期望的数据格式的信息，我们可以获取提供的CSV，提取&quot;AuditData&quot;字段，更改编码，然后通过SOF-ELK回到高效的解析和查询。</p>
+<p>我们需要做的第一件事是从CSV中提取&quot;AuditData&quot;列。如果有Excel，可以打开CSV，将&quot;AuditData&quot;列（不包括列标题）复制/粘贴到文本编辑器中并保存为文本文件。有时CSV可能很大且难以处理，或者可能没有Excel，这时我们可以使用&quot;csvtool&quot;在Linux命令行上提取&quot;AuditData&quot;列。</p>
+<p>注意：虽然我们的CSV是&quot;逗号分隔&quot;的，但&quot;AuditData&quot;列包含逗号，这使得以逗号为分隔符进行&quot;切割&quot;具有挑战性。&ldquo;Csvtool&quot;可以很好地处理这个问题。</p>
+<p>我在WSL（Debian）中使用&quot;sudo apt-get install csvtool&quot;安装&quot;csvtool&rdquo;：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$sudo</span> apt-get install csvtool
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>让我们测试csvtool命令以验证CSV列是否正确，因为有时根据UAL数据的导出方式，&ldquo;AuditData&quot;列号可能会有所不同。我们希望看到完整的&quot;AuditData&quot;字段：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$csvtool</span> col <span class="m">6</span> your-csv-ual-data.csv <span class="p">|</span> head -n <span class="m">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>检查csvtool的&quot;AuditData&quot;输出</p>
+<p>第6列看起来是正确的，因此我们将继续将所有第6列提取到文本文件中，这次省略&quot;AuditData&quot;列标题。在上面的测试中，你可能已经注意到标准的CSV双引号包围了包含空格的值。我们需要删除这些以创建SOF-ELK可摄取的JSON文件，并删除&quot;AuditData&quot;列标题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$csvtool</span> col <span class="m">6</span> pc-purview-export.csv -o pc-purview-audit-data.csv
+</span></span><span class="line"><span class="cl"><span class="nv">$csvtool</span> readable pc-purview-audit-data.csv <span class="p">|</span> sed <span class="s1">&#39;1d&#39;</span> pc-purview-audit-data.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在，我们只需要将文件复制到SOF-ELK的摄取目录（将IP更改为你的SOF-ELK系统）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$scp</span> pc-purview-audit-data.json elk_user@192.168.1.100:/logstash/microsoft365/pc-purview-audit-data.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果一切按计划进行，你应该能够在SOF-ELK中检查Elasticsearch是否显示你的M365索引。你可以通过SSH和命令行或检查Web UI来完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$sof</span>-elk_clear.py -i list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>检查SOF-ELK索引
+检查SOF-ELK Web UI</p>
+<p>现在做什么？你猜对了：驾驭UAL时间！回到第一部分获取一些提示，或者留下来了解一些额外的SOF-ELK小技巧！</p>
+<p>趁我吸引你的注意力，我只想指出两个与SOF-ELK相关的注意事项：地理定位和更新。两者都不复杂，但都很有用。</p>
+<p>当前版本的SOF-ELK中预填充了MaxMind地理定位数据，但它必然是过时的，不是无用的，但不是最新的。要解决这个问题，请访问MaxMind并注册一个GeoLite2账户（或他们的其他商业解决方案）：https://www.maxmind.com/en/geolite2/signup。完成此操作后，你将收到一个账户ID，然后可以生成许可证密钥：https://www.maxmind.com/en/accounts/current/license-key。要轻松将其应用到你的SOF-ELK部署并更新地理定位数据，只需运行内置的&quot;geoip_bootstrap.sh&quot;脚本并在提示时输入你的账户信息。你需要以root身份运行此脚本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">$sudo</span> su
+</span></span><span class="line"><span class="cl"><span class="c1">#/usr/local/sbin/geoip_bootstrap.sh</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>设置MaxMind SOF-ELK配置</p>
+<p>最后，为了保持你的SOF-ELK安装最新，你可以运行内置的&quot;sof-elk_update.sh&quot;脚本，该脚本也必须以&quot;root&quot;身份运行。</p>
+<p>如前所述，我们只是浅尝辄止地介绍了SOF-ELK的实用性！当你有时机时，从你的SOF-ELK系统执行&quot;ls /logstash&quot;并思考日志处理的可能性（aws、azure、gcp等）！</p>
+<p>查看SOF-ELK的摄取可能性</p>
+<p>下次见，非常感谢你的阅读！</p>
+<p>阅读：
+第一部分
+第二部分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/csv%E6%95%B0%E6%8D%AE/">Csv数据</a>
+        
+            <a href="/tags/m365/">M365</a>
+        
+            <a href="/tags/microsoft-365/">Microsoft 365</a>
+        
+            <a href="/tags/sof-elk/">SOF-ELK</a>
+        
+            <a href="/tags/ual/">UAL</a>
+        
+            <a href="/tags/%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97/">统一审计日志</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
