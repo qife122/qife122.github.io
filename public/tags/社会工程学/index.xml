@@ -7,7 +7,63 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 22:33:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 17:03:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>社会工程学攻击实战：有时就是这么简单</title>
+        <link>http://localhost:1313/p/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E6%9C%89%E6%97%B6%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95/</link>
+        <pubDate>Tue, 05 Aug 2025 17:03:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E6%9C%89%E6%97%B6%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95/</guid>
+        <description>&lt;h1 id=&#34;社会工程学有时就是这么简单&#34;&gt;社会工程学——有时就是这么简单
+&lt;/h1&gt;&lt;p&gt;这是一个不久前发生的有趣的社会工程学攻击故事。我想分享一些学到的经验，以及未来如何更好地做好准备。&lt;/p&gt;
+&lt;h2 id=&#34;攻击目标&#34;&gt;攻击目标
+&lt;/h2&gt;&lt;p&gt;致电客户的IT帮助台，尝试重置五个用户的密码。&lt;br&gt;
+我既没有提供IT帮助台的电话号码，也没有提供员工姓名。&lt;/p&gt;
+&lt;h2 id=&#34;信息收集&#34;&gt;信息收集
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;通过公司官网&amp;quot;联系我们&amp;quot;页面获取总机号码，直接询问IT帮助台号码——轻松搞定。&lt;/li&gt;
+&lt;li&gt;在社交媒体搜索员工姓名——同样易如反掌。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;攻击剧本&#34;&gt;攻击剧本
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;伪装身份&lt;/strong&gt;：谎称自己正在休产假，无法通过OWA(Outlook Web Access)访问邮箱。&lt;/p&gt;
+&lt;h3 id=&#34;第一次通话&#34;&gt;第一次通话
+&lt;/h3&gt;&lt;p&gt;帮助台索要员工编号→&amp;ldquo;呃&amp;hellip;我现在手边没有，能用姓氏查询吗？&amp;rdquo;&lt;br&gt;
+→ 对方照做并提供了编号。&lt;br&gt;
+引导我使用内置的密码重置功能（可通过预留邮箱或手机接收验证码）。由于未做准备，我假装完成重置后结束通话。&lt;/p&gt;
+&lt;h3 id=&#34;第二次通话&#34;&gt;第二次通话
+&lt;/h3&gt;&lt;p&gt;使用相同说辞，但这次声称预留联系方式已失效。&lt;br&gt;
+帮助台人员要求我访问远程协助网站，从而获得了测试虚拟机(VM)的控制权（万幸这是专为该客户准备的VM）。&lt;br&gt;
+意外情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;后台运行着Burp Suite工具（希望她不懂这个）&lt;/li&gt;
+&lt;li&gt;打开OWA登录页时，自动填充显示出我已通过密码喷洒攻破的其他账号&lt;/li&gt;
+&lt;li&gt;Outlook中已登录着其他员工的账户（借口说是同事的电脑）&lt;/li&gt;
+&lt;li&gt;命令提示符显示&amp;quot;Users/Carrie Roberts&amp;quot;（与伪装身份不符但未被察觉）&lt;br&gt;
+最终获得新密码&amp;quot;Password@123&amp;quot;成功登录。&lt;br&gt;
+后续帮助台回拨六次未接，决定启用&amp;quot;来电显示伪装&amp;quot;应用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三次通话&#34;&gt;第三次通话
+&lt;/h3&gt;&lt;p&gt;使用伪装号码时通话意外中断。&lt;br&gt;
+重新联系后被告知&amp;quot;密码重置需经理批准&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;第四次通话&#34;&gt;第四次通话
+&lt;/h3&gt;&lt;p&gt;直接被告知&amp;quot;重置密码违反安全政策&amp;quot;，不过客服安慰说&amp;quot;我为您感到揪心&amp;quot;。&lt;/p&gt;
+&lt;h3 id=&#34;第五次通话两天后&#34;&gt;第五次通话（两天后）
+&lt;/h3&gt;&lt;p&gt;新建匹配伪装身份的Windows用户账户，避免多账号登录痕迹。&lt;br&gt;
+远程控制时播放婴儿哭声配合产假剧本→客服改用文字聊天（可能被哭声干扰？）。&lt;br&gt;
+在已打开OWA的情况下，她莫名卸载了Office又重装365，最终协助完成密码重置和Outlook配置。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;技术要点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用专用VM隔离攻击环境&lt;/li&gt;
+&lt;li&gt;Burp Suite用于网络流量分析&lt;/li&gt;
+&lt;li&gt;呼叫ID伪装技术应用&lt;/li&gt;
+&lt;li&gt;密码喷洒(Password Spraying)痕迹暴露&lt;/li&gt;
+&lt;li&gt;远程桌面协议(RDP)的安全风险&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通过该案例可见，即使是最基础的社会工程学手段，也能暴露出企业安全防护体系中的重大缺陷。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>AI生成虚假GitHub仓库传播SmartLoader和LummaStealer恶意软件</title>
         <link>http://localhost:1313/p/ai%E7%94%9F%E6%88%90%E8%99%9A%E5%81%87github%E4%BB%93%E5%BA%93%E4%BC%A0%E6%92%ADsmartloader%E5%92%8Clummastealer%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/</link>
         <pubDate>Sat, 02 Aug 2025 22:33:52 +0800</pubDate>

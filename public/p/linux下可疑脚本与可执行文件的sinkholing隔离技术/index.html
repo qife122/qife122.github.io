@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何利用Linux命名空间技术隔离可疑脚本的网络流量，通过虚拟网络接口和路由表重定向实现恶意代码的安全分析，包含具体操作步骤和Python解码示例。">
+<title>Linux下可疑脚本与可执行文件的Sinkholing隔离技术</title>
+
+<link rel='canonical' href='http://localhost:1313/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="Linux下可疑脚本与可执行文件的Sinkholing隔离技术">
+<meta property='og:description' content="本文详细介绍了如何利用Linux命名空间技术隔离可疑脚本的网络流量，通过虚拟网络接口和路由表重定向实现恶意代码的安全分析，包含具体操作步骤和Python解码示例。">
+<meta property='og:url' content='http://localhost:1313/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux安全' /><meta property='article:tag' content='网络隔离' /><meta property='article:tag' content='恶意软件分析' /><meta property='article:tag' content='命名空间' /><meta property='article:published_time' content='2025-08-05T02:29:56&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T02:29:56&#43;08:00'/><meta property='og:image' content='https://i.imgs.ovh/2025/08/05/YDBDh.jpeg' />
+<meta name="twitter:title" content="Linux下可疑脚本与可执行文件的Sinkholing隔离技术">
+<meta name="twitter:description" content="本文详细介绍了如何利用Linux命名空间技术隔离可疑脚本的网络流量，通过虚拟网络接口和路由表重定向实现恶意代码的安全分析，包含具体操作步骤和Python解码示例。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://i.imgs.ovh/2025/08/05/YDBDh.jpeg' />
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#实践演示">实践演示</a>
+      <ol>
+        <li><a href="#示例1完全网络隔离">示例1：完全网络隔离</a></li>
+        <li><a href="#示例2构建专用ip栈">示例2：构建专用IP栈</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/">
+                
+                    <img src="https://i.imgs.ovh/2025/08/05/YDBDh.jpeg" loading="lazy" alt="Featured image of post Linux下可疑脚本与可执行文件的Sinkholing隔离技术" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/">Linux下可疑脚本与可执行文件的Sinkholing隔离技术</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了如何利用Linux命名空间技术隔离可疑脚本的网络流量，通过虚拟网络接口和路由表重定向实现恶意代码的安全分析，包含具体操作步骤和Python解码示例。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="sinkholing-suspicious-scripts-or-executables-on-linux">Sinkholing Suspicious Scripts or Executables on Linux
+</h1><p>当需要分析可疑代码时，沙箱环境是理想的执行场所。若缺乏完整沙箱或希望避免网络噪声，可通过sinkhole或NULL-route重定向流量（即数据包不会通过常规网络和默认网关发送）。</p>
+<p>通过<code>/proc</code>[1]虚拟文件系统检查进程时，存在&quot;route&quot;文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">remnux@remnux:~$ cat /proc/1180/net/route
+</span></span><span class="line"><span class="cl">Iface    Destination    Gateway     Flags    RefCnt    Use    Metric    Mask        MTU    Window    IRTT                                                       
+</span></span><span class="line"><span class="cl">ens19    <span class="m">00000000</span>    01FEA8C0    <span class="m">0003</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">100</span>    <span class="m">00000000</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>                                                                            
+</span></span><span class="line"><span class="cl">ens18    004A10AC    <span class="m">00000000</span>    <span class="m">0001</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>    00FFFFFF    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>                                                                              
+</span></span><span class="line"><span class="cl">ens19    00FEA8C0    <span class="m">00000000</span>    <span class="m">0001</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>    00FFFFFF    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>                                                                              
+</span></span><span class="line"><span class="cl">ens19    01FEA8C0    <span class="m">00000000</span>    <span class="m">0005</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">100</span>    FFFFFFFF    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该文件显示进程分配的IP路由表。IP地址通常以小端十六进制编码，可通过Python解码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">gw</span> <span class="o">=</span> <span class="s2">&#34;01FEA8C0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">octets</span> <span class="o">=</span> <span class="p">[</span><span class="n">gw</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gw</span><span class="p">),</span> <span class="mi">2</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">octets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>  <span class="c1"># 输出: 1.254.168.192</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然<code>/proc</code>中的&quot;route&quot;文件是只读的，但Linux的命名空间(namespaces)[2]技术可实现进程级网络隔离。这是2016年左右引入的内核特性，能为进程提供独立的网络栈（类似容器）。</p>
+<h2 id="实践演示">实践演示
+</h2><h3 id="示例1完全网络隔离">示例1：完全网络隔离
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">remnux@remnux:~$ sudo unshare --net bash
+</span></span><span class="line"><span class="cl">root@remnux:/home/remnux# ./sample.sh 
+</span></span><span class="line"><span class="cl">Am I bad?
+</span></span><span class="line"><span class="cl">curl: <span class="o">(</span>6<span class="o">)</span> Could not resolve host: isc.sans.edu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="示例2构建专用ip栈">示例2：构建专用IP栈
+</h3><p>创建虚拟以太网接口对（10.0.0.1为新命名空间，10.0.0.2为主命名空间）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">namespace&gt; ip link add veth0 <span class="nb">type</span> veth peer name veth1
+</span></span><span class="line"><span class="cl">namespace&gt; ip addr add 10.0.0.1/24 dev veth0
+</span></span><span class="line"><span class="cl">namespace&gt; ip link <span class="nb">set</span> veth1 netns <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在主命名空间配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@remnux:/home/remnux# ip addr add 10.0.0.2/24 dev veth1
+</span></span><span class="line"><span class="cl">root@remnux:/home/remnux# ip link <span class="nb">set</span> veth1 up
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加默认路由后可通过tcpdump捕获流量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@remnux:/home/remnux# tcpdump -i veth1 -n
+</span></span><span class="line"><span class="cl">11:02:32.122380 ARP, Request who-has 10.0.0.2 tell 10.0.0.1, length <span class="m">28</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终路由表验证：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@remnux:/home/remnux# cat /proc/149522/net/route 
+</span></span><span class="line"><span class="cl">Iface    Destination    Gateway     Flags    RefCnt    Use    Metric    Mask        MTU    Window    IRTT                                                       
+</span></span><span class="line"><span class="cl">veth0    <span class="m">00000000</span>    0200000A    <span class="m">0003</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">00000000</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>                                                                              
+</span></span><span class="line"><span class="cl">veth0    0000000A    <span class="m">00000000</span>    <span class="m">0001</span>    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>    00FFFFFF    <span class="m">0</span>    <span class="m">0</span>    <span class="m">0</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>警告：此方案仅实现网络隔离，并非恶意软件分析的完美解决方案</p></blockquote>
+<p>[1] <a class="link" href="https://docs.kernel.org/filesystems/proc.html"  target="_blank" rel="noopener"
+    >https://docs.kernel.org/filesystems/proc.html</a><br>
+[2] <a class="link" href="https://en.wikipedia.org/wiki/Linux_namespaces"  target="_blank" rel="noopener"
+    >https://en.wikipedia.org/wiki/Linux_namespaces</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux%E5%AE%89%E5%85%A8/">Linux安全</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E9%9A%94%E7%A6%BB/">网络隔离</a>
+        
+            <a href="/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90/">恶意软件分析</a>
+        
+            <a href="/tags/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/">命名空间</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

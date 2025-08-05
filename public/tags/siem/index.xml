@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SIEM on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/siem/</link>
+        <description>Recent content in SIEM on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 12:18:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/siem/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>监控高风险Azure登录事件 - 企业安全防护实战指南</title>
+        <link>http://localhost:1313/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Tue, 05 Aug 2025 12:18:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h2 id=&#34;高风险azure登录监控实践&#34;&gt;高风险Azure登录监控实践
+&lt;/h2&gt;&lt;p&gt;近期在安全运营中心(SOC)工作中，我们通过合作伙伴通报发现一起潜在的企业邮箱入侵(BEC)事件。这类威胁通常通过以下方式被发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可疑邮件转发规则检测&lt;/li&gt;
+&lt;li&gt;异常行为分析服务&lt;/li&gt;
+&lt;li&gt;合作伙伴安全通报（如本次案例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在攻击链中越早发现此类事件，防御效果越好。这促使我们开始调查Azure AD身份保护（现称Entra身份保护）标记的高风险登录行为。&lt;/p&gt;
+&lt;h3 id=&#34;风险等级分类机制&#34;&gt;风险等级分类机制
+&lt;/h3&gt;&lt;p&gt;Entra ID保护将风险划分为三个等级：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;低风险&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中风险&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高风险&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当潜在攻击者可能已获取账户权限时，系统会附加&lt;code&gt;atRisk&lt;/code&gt;标签。风险判定基于Entra ID对信号的可信度评估，采用以下检测技术：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实时检测&lt;/li&gt;
+&lt;li&gt;离线分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：未购买Azure AD P2许可证的组织将受限于此服务的检测能力&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;调查方法论&#34;&gt;调查方法论
+&lt;/h3&gt;&lt;p&gt;理解Entra ID的检测依据后，调查流程将变得清晰。关键调查属性包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IP地址&lt;/li&gt;
+&lt;li&gt;操作系统&lt;/li&gt;
+&lt;li&gt;自治系统号(ASN)&lt;/li&gt;
+&lt;li&gt;来源国家&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;发现&lt;code&gt;atRisk&lt;/code&gt;登录后，建议调查步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查询相关用户账户&lt;/li&gt;
+&lt;li&gt;对比该账户周边登录日志&lt;/li&gt;
+&lt;li&gt;建立用户正常行为基线&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;多因素认证mfa关联检测&#34;&gt;多因素认证(MFA)关联检测
+&lt;/h3&gt;&lt;p&gt;与MFA事件强关联的检测最为有效。逻辑在于：当MFA请求发送至设备时，用户密码很可能已泄露。本文末尾提供的Sigma规则已包含此检测逻辑。&lt;/p&gt;
+&lt;h3 id=&#34;误报分析&#34;&gt;误报分析
+&lt;/h3&gt;&lt;p&gt;常见误报场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;移动设备登录（占比较高）&lt;/li&gt;
+&lt;li&gt;差旅导致的IP地址变更&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;真实攻击特征往往非常明显，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户通常使用Windows设备登录&lt;/li&gt;
+&lt;li&gt;突然出现Mac设备跨国登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;azure-atrisk登录事件处理&#34;&gt;Azure atRisk登录事件处理
+&lt;/h2&gt;&lt;p&gt;通过密切监控这些警报，我们得以在攻击链早期拦截更多威胁事件。&lt;/p&gt;
+&lt;h2 id=&#34;sigma检测规则&#34;&gt;Sigma检测规则
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;需要MFA的高风险Azure登录&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;已测试&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;利用Azure AD身份保护服务检测需要MFA批准的高风险云账户登录，此类事件表明用户密码可能已泄露。&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;references&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;author&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;David Perez&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2024&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/07/16&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;attack.t1528&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;attack.credential_access&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;logsource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;azure&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;signinlogs&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;detection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;selection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_state&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;atRisk&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;authentication_requirement&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;multiFactorAuthentication&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_level_aggregated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;High&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_level_during_signin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;High&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;condition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;selection and 1 of risk*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;falsepositives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;已知出差用户（最常见）&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;使用新设备认证（如移动设备）&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;entra风险检测时效&#34;&gt;Entra风险检测时效
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;检测类型&lt;/th&gt;
+          &lt;th&gt;延迟时间&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;实时检测&lt;/td&gt;
+          &lt;td&gt;5-10分钟&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;离线检测&lt;/td&gt;
+          &lt;td&gt;最长48小时&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;风险检测类型对照表&#34;&gt;风险检测类型对照表
+&lt;/h2&gt;&lt;p&gt;（完整表格参见原文技术参数部分）&lt;/p&gt;
+&lt;h2 id=&#34;技术资源&#34;&gt;技术资源
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-investigate-risk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Entra ID保护调查指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-risks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;风险概念解析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/overview-identity-protection#license-requirements&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;许可证要求说明&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>为什么托管式安全信息与事件管理(SIEM)是现代网络防御的基石</title>
+        <link>http://localhost:1313/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%89%98%E7%AE%A1%E5%BC%8F%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%AE%A1%E7%90%86siem%E6%98%AF%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E9%98%B2%E5%BE%A1%E7%9A%84%E5%9F%BA%E7%9F%B3/</link>
+        <pubDate>Tue, 05 Aug 2025 10:50:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%89%98%E7%AE%A1%E5%BC%8F%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%AE%A1%E7%90%86siem%E6%98%AF%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E9%98%B2%E5%BE%A1%E7%9A%84%E5%9F%BA%E7%9F%B3/</guid>
+        <description>&lt;h1 id=&#34;为什么托管式安全信息与事件管理siem是现代网络防御的基石&#34;&gt;为什么托管式安全信息与事件管理(SIEM)是现代网络防御的基石
+&lt;/h1&gt;&lt;p&gt;可视性是有效网络安全的基石。缺乏可视性，检测和响应恶意活动就会变成猜谜游戏，使攻击者能够悄无声息地利用漏洞。防火墙和终端代理等安全工具虽然能提供网络和主机层面的关键洞察，但这些工具通常只关注特定领域，提供的全局视角有限。&lt;/p&gt;
+&lt;p&gt;安全信息与事件管理(SIEM)解决方案通过整合分析整个组织基础设施的数据来突破这些限制。这提供了更完整的威胁视图和攻击模式，将原本分散的线索串联起来。然而许多传统SIEM难以兑现这一承诺，常常用未经筛选的日志和无关警报淹没安全团队，反而将关键洞察埋没在噪音中。&lt;/p&gt;
+&lt;p&gt;对于资源有限的中小企业，这些挑战更为严峻。传统SIEM需要持续调优和高技能管理才能有效运作，使其成为只有大型企业才能承担的奢侈品。不可预测的数据摄入费用更迫使企业在成本与完整可视性间做出取舍。&lt;/p&gt;
+&lt;p&gt;这正是托管式SIEM的价值所在。专业的托管SIEM方案通过压缩、过滤、聚合和关联遥测数据来消除噪音、降低成本，并为安全团队提供清晰可操作的洞察。这不仅能加速检测、实现精准响应，更能让团队在威胁升级前主动狩猎。&lt;/p&gt;
+&lt;h2 id=&#34;威胁狩猎的数据湖规模化集中与标准化&#34;&gt;威胁狩猎的数据湖：规模化集中与标准化
+&lt;/h2&gt;&lt;p&gt;SIEM最强大的功能之一是集中化和标准化海量日志数据的能力。从服务器、终端到防火墙和云服务，大多数设备都会生成记录关键安全活动的日志。但如果没有集中管理，这些数据将保持碎片化、不一致且难以有效解读。&lt;/p&gt;
+&lt;p&gt;SIEM将所有信息汇集一处，并将数据转换为统一格式。这使得应用检测规则、建立关联和分析跨系统模式成为可能。这种集中化实质上创建了威胁狩猎数据湖——调查人员可以查询、分析和交叉参考指标的统一环境。与主要关注主机行为的终端检测与响应(EDR)工具不同，SIEM提供了跨越整个基础设施的更广阔视角，能检测云日志、网络设备等非代理监控区域的异常活动。&lt;/p&gt;
+&lt;p&gt;但SIEM的全部潜力需要专业管理才能释放。通过精心设计的检测规则和专家提供的上下文，托管SIEM能突出异常、用威胁情报丰富事件，并发现高风险行为。这既减轻了内部团队的操作负担，又能主动识别入侵早期指标，使组织能在威胁升级前采取行动。&lt;/p&gt;
+&lt;h2 id=&#34;增强非代理设备可视性日志转发的价值&#34;&gt;增强非代理设备可视性：日志转发的价值
+&lt;/h2&gt;&lt;p&gt;SIEM另一个常被低估的优势是能接收难以或无法部署代理的系统数据，包括VPN、防火墙、路由器等网络设备以及不支持代理安装的遗留服务器。这些设备往往是攻击者的首要目标。&lt;/p&gt;
+&lt;p&gt;虽然这些设备可能不支持丰富的遥测功能，但几乎都支持syslog协议——计算机系统用于将事件日志发送到中央存储位置的协议。通过将这些日志转发到SIEM，组织可以实时监控认证尝试、配置变更和网络异常。&lt;/p&gt;
+&lt;p&gt;经过适当解析和告警配置，托管SIEM能将基础syslog数据转化为高价值安全洞察。例如：针对多账户的单一IP重复失败登录可能预示暴力破解；来自无业务地区VPN会话激增可能表明凭证泄露。没有SIEM，这些信号很容易被忽略；有了SIEM，它们就成为明确警告。在许多情况下，此类设备的日志转发能显著改善组织可视性，监控原有盲区并为事件调查提供关键上下文。&lt;/p&gt;
+&lt;h2 id=&#34;在攻击生命周期早期检测与阻断威胁&#34;&gt;在攻击生命周期早期检测与阻断威胁
+&lt;/h2&gt;&lt;p&gt;威胁发现得越早，遏制所需的成本和精力就越低。这一原则是网络杀伤链的核心，该模型描述了典型入侵的各个阶段。在早期阶段捕捉攻击者可以防止事件升级为重大泄露。&lt;/p&gt;
+&lt;p&gt;托管SIEM在这方面具有独特优势。通过近乎实时地收集分析遥测数据，它能在攻击者达成目标前发现恶意活动。以暴力破解攻击为例：这类通过自动尝试数千密码来攻陷RDP或VPN服务的攻击虽然噪声明显，但只有主动监控相关日志才能发现。&lt;/p&gt;
+&lt;p&gt;托管SIEM实现了这种监控能力。它能对异常登录行为、过多失败认证尝试或可疑位置访问生成告警。当与其他安全工具集成时，它还能自动执行响应动作，如封锁IP、禁用账户或终止VPN会话。&lt;/p&gt;
+&lt;h2 id=&#34;为什么需要专家管理&#34;&gt;为什么需要专家管理
+&lt;/h2&gt;&lt;p&gt;尽管有诸多优势，传统SIEM在实践中常常表现不佳。虽然它们擅长整合标准化海量遥测数据，但需要持续调优和专业知才能保持有效。缺乏专人管理配置、调整告警和解读洞察，传统SIEM很快就会变得难以驾驭。&lt;/p&gt;
+&lt;p&gt;这正是托管SIEM的价值所在。不同于将部署、配置、调优和威胁检测的负担完全压在内部团队身上，托管SIEM将技术与经验丰富的调查人员相结合，确保其产生真正的安全效益。&lt;/p&gt;
+&lt;p&gt;对于没有内部安全运营中心(SOC)的组织，这种模式提供了专家监控、定制检测和主动指导。这意味着组织不仅能获得更多数据，更能获得经过正确解读、丰富和优先处理的&amp;quot;对的数据&amp;quot;，而无需建立或维护昂贵的内部门槛。&lt;/p&gt;
+&lt;h2 id=&#34;黑客狩猎的强大工具&#34;&gt;黑客狩猎的强大工具
+&lt;/h2&gt;&lt;p&gt;在网络威胁频率和复杂性持续攀升的当下，对全面可视性和快速检测的需求比以往任何时候都迫切。托管SIEM同时提供这两者。它能集中数据、扩展监控范围，并帮助防御者在黑客造成实际危害前采取行动。&lt;/p&gt;
+&lt;p&gt;我们不应将SIEM视为过时工具或合规检查项，而应认识到它是现代网络防御的关键支柱。通过专业管理和上下文丰富，它远不止是日志聚合器——而是检测和阻断攻击的主动智能引擎，通常能在攻击开始前就将其扼杀。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于作者&lt;/strong&gt;&lt;br&gt;
+Anton Ovrutsky是Huntress首席威胁狩猎与响应分析师，持有CISSP、OSCP等多项认证，专攻需要深入审查的安全事件调查。Dray Agha是Huntress安全运营中心高级经理，持有OSCP认证，专长数字取证和事件响应。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

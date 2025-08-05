@@ -7,7 +7,151 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 10:23:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/soc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 12:18:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/soc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>监控高风险Azure登录事件 - 企业安全防护实战指南</title>
+        <link>http://localhost:1313/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Tue, 05 Aug 2025 12:18:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%9B%91%E6%8E%A7%E9%AB%98%E9%A3%8E%E9%99%A9azure%E7%99%BB%E5%BD%95%E4%BA%8B%E4%BB%B6-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h2 id=&#34;高风险azure登录监控实践&#34;&gt;高风险Azure登录监控实践
+&lt;/h2&gt;&lt;p&gt;近期在安全运营中心(SOC)工作中，我们通过合作伙伴通报发现一起潜在的企业邮箱入侵(BEC)事件。这类威胁通常通过以下方式被发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可疑邮件转发规则检测&lt;/li&gt;
+&lt;li&gt;异常行为分析服务&lt;/li&gt;
+&lt;li&gt;合作伙伴安全通报（如本次案例）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在攻击链中越早发现此类事件，防御效果越好。这促使我们开始调查Azure AD身份保护（现称Entra身份保护）标记的高风险登录行为。&lt;/p&gt;
+&lt;h3 id=&#34;风险等级分类机制&#34;&gt;风险等级分类机制
+&lt;/h3&gt;&lt;p&gt;Entra ID保护将风险划分为三个等级：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;低风险&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中风险&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高风险&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当潜在攻击者可能已获取账户权限时，系统会附加&lt;code&gt;atRisk&lt;/code&gt;标签。风险判定基于Entra ID对信号的可信度评估，采用以下检测技术：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实时检测&lt;/li&gt;
+&lt;li&gt;离线分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：未购买Azure AD P2许可证的组织将受限于此服务的检测能力&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;调查方法论&#34;&gt;调查方法论
+&lt;/h3&gt;&lt;p&gt;理解Entra ID的检测依据后，调查流程将变得清晰。关键调查属性包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IP地址&lt;/li&gt;
+&lt;li&gt;操作系统&lt;/li&gt;
+&lt;li&gt;自治系统号(ASN)&lt;/li&gt;
+&lt;li&gt;来源国家&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;发现&lt;code&gt;atRisk&lt;/code&gt;登录后，建议调查步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查询相关用户账户&lt;/li&gt;
+&lt;li&gt;对比该账户周边登录日志&lt;/li&gt;
+&lt;li&gt;建立用户正常行为基线&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;多因素认证mfa关联检测&#34;&gt;多因素认证(MFA)关联检测
+&lt;/h3&gt;&lt;p&gt;与MFA事件强关联的检测最为有效。逻辑在于：当MFA请求发送至设备时，用户密码很可能已泄露。本文末尾提供的Sigma规则已包含此检测逻辑。&lt;/p&gt;
+&lt;h3 id=&#34;误报分析&#34;&gt;误报分析
+&lt;/h3&gt;&lt;p&gt;常见误报场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;移动设备登录（占比较高）&lt;/li&gt;
+&lt;li&gt;差旅导致的IP地址变更&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;真实攻击特征往往非常明显，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户通常使用Windows设备登录&lt;/li&gt;
+&lt;li&gt;突然出现Mac设备跨国登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;azure-atrisk登录事件处理&#34;&gt;Azure atRisk登录事件处理
+&lt;/h2&gt;&lt;p&gt;通过密切监控这些警报，我们得以在攻击链早期拦截更多威胁事件。&lt;/p&gt;
+&lt;h2 id=&#34;sigma检测规则&#34;&gt;Sigma检测规则
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;需要MFA的高风险Azure登录&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;已测试&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;利用Azure AD身份保护服务检测需要MFA批准的高风险云账户登录，此类事件表明用户密码可能已泄露。&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;references&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;author&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;David Perez&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2024&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/07/16&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;attack.t1528&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;attack.credential_access&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;logsource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;product&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;azure&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;signinlogs&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;detection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;selection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_state&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;atRisk&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;authentication_requirement&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;multiFactorAuthentication&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_level_aggregated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;High&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;risk_level_during_signin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;High&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;condition&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;selection and 1 of risk*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;falsepositives&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;已知出差用户（最常见）&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;使用新设备认证（如移动设备）&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;entra风险检测时效&#34;&gt;Entra风险检测时效
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;检测类型&lt;/th&gt;
+          &lt;th&gt;延迟时间&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;实时检测&lt;/td&gt;
+          &lt;td&gt;5-10分钟&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;离线检测&lt;/td&gt;
+          &lt;td&gt;最长48小时&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;风险检测类型对照表&#34;&gt;风险检测类型对照表
+&lt;/h2&gt;&lt;p&gt;（完整表格参见原文技术参数部分）&lt;/p&gt;
+&lt;h2 id=&#34;技术资源&#34;&gt;技术资源
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/howto-identity-protection-investigate-risk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Entra ID保护调查指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-risks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;风险概念解析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learn.microsoft.com/en-us/entra/id-protection/overview-identity-protection#license-requirements&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;许可证要求说明&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>构建AI驱动的统一SOC：微软新电子书指南</title>
         <link>http://localhost:1313/p/%E6%9E%84%E5%BB%BAai%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%9F%E4%B8%80soc%E5%BE%AE%E8%BD%AF%E6%96%B0%E7%94%B5%E5%AD%90%E4%B9%A6%E6%8C%87%E5%8D%97/</link>
         <pubDate>Sat, 02 Aug 2025 10:23:13 +0800</pubDate>

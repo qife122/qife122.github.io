@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入探讨DNS over HTTPS（DoH）技术引发的隐私与协议架构争议，对比分析DNS over TLS（DoT）方案，并提供基于Stubby和Bind9的加密DNS部署实践，揭示中心化数据监控风险与分布式互联网原则的冲突。">
+<title>HTTPS上的DNS（DoH）乱局：加密与隐私的博弈</title>
+
+<link rel='canonical' href='http://localhost:1313/p/https%E4%B8%8A%E7%9A%84dnsdoh%E4%B9%B1%E5%B1%80%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9A%90%E7%A7%81%E7%9A%84%E5%8D%9A%E5%BC%88/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="HTTPS上的DNS（DoH）乱局：加密与隐私的博弈">
+<meta property='og:description' content="本文深入探讨DNS over HTTPS（DoH）技术引发的隐私与协议架构争议，对比分析DNS over TLS（DoT）方案，并提供基于Stubby和Bind9的加密DNS部署实践，揭示中心化数据监控风险与分布式互联网原则的冲突。">
+<meta property='og:url' content='http://localhost:1313/p/https%E4%B8%8A%E7%9A%84dnsdoh%E4%B9%B1%E5%B1%80%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9A%90%E7%A7%81%E7%9A%84%E5%8D%9A%E5%BC%88/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DNS' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='加密协议' /><meta property='article:tag' content='隐私保护' /><meta property='article:published_time' content='2025-08-05T14:09:57&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T14:09:57&#43;08:00'/>
+<meta name="twitter:title" content="HTTPS上的DNS（DoH）乱局：加密与隐私的博弈">
+<meta name="twitter:description" content="本文深入探讨DNS over HTTPS（DoH）技术引发的隐私与协议架构争议，对比分析DNS over TLS（DoT）方案，并提供基于Stubby和Bind9的加密DNS部署实践，揭示中心化数据监控风险与分布式互联网原则的冲突。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#https上的dnsdoh乱局">HTTPS上的DNS（DoH）乱局</a></li>
+        <li><a href="#stubby部署">Stubby部署</a></li>
+        <li><a href="#bind9配置">Bind9配置</a></li>
+        <li><a href="#防火墙配置">防火墙配置</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/https%E4%B8%8A%E7%9A%84dnsdoh%E4%B9%B1%E5%B1%80%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9A%90%E7%A7%81%E7%9A%84%E5%8D%9A%E5%BC%88/">HTTPS上的DNS（DoH）乱局：加密与隐私的博弈</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入探讨DNS over HTTPS（DoH）技术引发的隐私与协议架构争议，对比分析DNS over TLS（DoT）方案，并提供基于Stubby和Bind9的加密DNS部署实践，揭示中心化数据监控风险与分布式互联网原则的冲突。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="https上的dnsdoh乱局">HTTPS上的DNS（DoH）乱局
+</h3><p>作者：Joff Thyer //</p>
+<p>这个周一早晨醒来时，我认为是时候重新审视我的家庭网络中的域名服务（DNS）配置了。（这个想法也源于2021年在内华达州雷诺市Wild West Hackin&rsquo; Fest活动中与Paul Vixie的多次讨论。）</p>
+<p>背景而言，我从不认为应该依赖本地互联网服务提供商（ISP）的DNS基础设施。无意冒犯，但我始终认为ISP基础设施如同用胶带和铁丝勉强维系，而我向来是个喜欢&quot;自己动手&quot;的人。</p>
+<p>换句话说：&ldquo;伙计们，只需给我光纤到以太网的接口，路由我的静态地址，传递我的数据包，剩下的交给我。&ldquo;我很幸运找到一家恰好如此操作的ISP，他们甚至表示如果我拥有地址块，可以传递边界网关协议（BGP）表给我。这简直是天籁之音！</p>
+<p>毫不奇怪，我曾管理过拥有数千个端点的大型网络，而我的家庭网络也运行得井井有条。我自行部署路由、网络地址转换（NAT）、动态主机配置协议（DHCP）和DNS服务。只要上游正常传递数据包，我的网络就坚如磐石。</p>
+<p>现在进入令人不安的讨论。我们处于监控资本主义时代，全球互联网社区纵容众多公司通过挖掘我们持续产生的数据副产品牟利。</p>
+<p>DNS是互联网的基础设施，其设计本质就是高度分布式的！完全可以在自己的网络中运行DNS服务器，并通过DHCP告知网络端点：你的DNS才是域名到IP地址转换的正统之地。遗憾的是，家庭网络用户大多缺乏相关技能，只能依赖漏洞百出的家用路由器产品。</p>
+<p>当DNS遭遇监控资本主义，糟糕的事情就会发生。任何明文协议被网络嗅探并用于牟利时，你的隐私正在被侵犯，你正在成为巨额收入的来源。</p>
+<p>运行自己的DNS服务器有个微小优势：缓存机制。本地DNS服务器代表客户端存根解析器（端点）发出的请求都会带有生存时间（TTL）缓存值。你的DNS服务器会在TTL秒数内&quot;记住&quot;查询答案。</p>
+<p>如果不将所有请求转发给其他DNS提供商（如8.8.8.8），你的DNS服务器必须请求根域名服务器协助解析。下图展示了查询www.whitehouse.gov时本地DNS服务器的行为流程。</p>
+<p>问题何在？作为安全专业人士，我们热爱强加密，而DNS显然不够理想——它没有加密。DNSSEC？抱歉，它只确保应答准确性/防止欺骗，解决缓存中毒问题，但不保护传输中数据。</p>
+<p>各大浏览器厂商提出了有史以来最糟糕的解决方案：通过HTTPS传输DNS请求（RFC 8484）。HTTPS确实加密了，但请回想监控资本主义的问题——当DNS流量被发送到浏览器厂商的基础设施，你的数据反而更易被监控。这实际上导致了数据控制权的集中垄断！高度分布式架构的稳定性突然被少数巨头掌控，开放标准和自由互联网的原则正被数据挖掘者颠覆。</p>
+<p>从协议角度看，我们正在混淆流——HTTP是&quot;超文本传输协议&rdquo;，而DNS绝非超文本！结果形成了垂直协议栈的单一浏览器厂商锁定。这是我们想要的吗？这是正确的解决方案吗？</p>
+<p>我陷入深刻矛盾：强加密本是好事，安全专业人士理应支持经过验证的强加密，但当隐私被如此彻底侵犯时，我无法支持这种做法。更矛盾的是，我也无法确保本地ISP没有挖掘我的加密数据。</p>
+<p>另一种DNS加密形式DNS over TLS（DoT，RFC 7858）已存在多年。简言之，DoT至少在TCP 853端口建立适当的TLS服务，以标准合规方式实现加密。但DoT作为新协议面临实施挑战——如何让客户端存根解析器正确使用它？虽然可以通过DHCP选项配置，但仍需操作系统厂商在存根解析器代码中正确实现TLS支持。</p>
+<p>不出所料，&ldquo;正确方案&quot;往往不敌&quot;便捷方案&rdquo;。DoT需要大量改变，而人们厌恶改变——尤其是对DNS这种如电力般普及的基础服务。</p>
+<p>（数据监控话题需要公允看待）以下是主流DoH提供商列表，许多声称通过运营弹性和过滤恶意软件/广告域名提供增值服务：</p>
+<ul>
+<li>cloudflare-dns.com（隐私政策见其博客）</li>
+<li>dns.adguard.com（服务概述见其知识库）</li>
+<li>dns.google（将数据挖掘作为收入来源）</li>
+<li>dns.nextdns.io（见其隐私政策）</li>
+<li>dns.opendns.com（思科商业服务，见使用条款）</li>
+<li>dns.quad9.net（见隐私声明）</li>
+</ul>
+<p>平心而论，除个别例外，多数提供商都有较强的隐私声明。我最强烈的反对在于协议栈的破坏，以及浏览器无视本地网络配置擅自接管客户端存根解析器功能。这对需要严格管控网络协议的大型企业完全不可接受。</p>
+<p>这些DoH提供商大多也支持DoT。回到周一早晨的目标，我最终形成以下结论：</p>
+<ol>
+<li>强烈建议有能力者运行自己的内部DNS服务器</li>
+<li>需要保持诊断和监控内部DNS流量的能力</li>
+<li>自建DNS服务器可配置域名过滤服务（推荐Pi-Hole项目）</li>
+<li>警惕ISP将监控资本主义作为收入来源</li>
+<li>虽不愿破坏DNS原始的分布式美感，但强加密始终有益</li>
+</ol>
+<p>我决定继续运行自己的DNS服务器，但使用DoT加密到Quad9的流量。Quad9似乎最具公益属性。同时通过iptables动态IP集阻止所有公共DoH提供商（需定期更新域名列表）。这意味着直接阻止到特定IP的TCP 443流量——就因为有人觉得协议混用是个好主意（叹气）。</p>
+<h3 id="stubby部署">Stubby部署
+</h3><p>我的边界防火墙基于Ubuntu，需要找到能监听DNS请求并通过DoT转发到Quad9的软件。选择使用名为&quot;Stubby&quot;的DNS隐私守护进程（https://dnsprivacy.org）。安装命令：<code>sudo apt install stubby</code>。</p>
+<p>Stubby作为本地DNS隐私存根解析器，通过TLS连接发送加密查询。其配置文件为/etc/stubby/stubby.yml，Quad9提供了现成配置（参考其支持文档）。关键配置包括：</p>
+<ul>
+<li><code>tls_authentication: GETDNS_AUTHENTICATION_REQUIRED</code>：强制使用TLS且无回退</li>
+<li><code>tls_query_padding_blocksize: 128</code>：使用EDNS0填充隐藏查询尺寸</li>
+<li><code>edns_client_subnet_private: 1</code>：阻止发送客户端子网信息</li>
+<li><code>round_robin_upstreams: 1</code>：轮询上游服务器</li>
+<li><code>idle_timeout: 10000</code>：保持TCP连接降低开销</li>
+<li><code>listen_addresses: 127.0.0.1@8053</code>：绑定本地端口供Bind9使用</li>
+</ul>
+<h3 id="bind9配置">Bind9配置
+</h3><p>修改Bind配置使其将请求&quot;转发&quot;到本地Stubby实例。有两种选择：<code>forward only</code>（仅转发）或<code>forward first</code>（转发失败时回退标准DNS）。我的配置采用后者，在/etc/bind/named.conf的options部分添加转发地址。</p>
+<p>确保Stubby运行并启用开机自启：<code>systemctl enable stubby</code>。最后用<code>rndc reload</code>重载Bind，现在发往互联网的DNS流量已加密至Quad9。</p>
+<h3 id="防火墙配置">防火墙配置
+</h3><p>使用iptables实施以下规则：</p>
+<ol>
+<li>允许出站TCP 853到Quad9地址</li>
+<li>创建包含常见DoH提供商的IP集并阻止其流量</li>
+<li>阻止任何端点绕过内部DNS服务器</li>
+</ol>
+<p>维护DoH提供商IP集的脚本可通过定期DNS查询更新anycast地址。在crontab设置定时任务即可持续更新。</p>
+<p>假设防火墙是边界设备且执行NAT转发，需要添加规则阻止转发到DoH列表的流量。同时确保Stubby能出站与Quad9通信。最后关键规则是阻止内部网络（如10.0.0.0/8）端点直接访问外部DNS（如Google硬编码的8.8.8.8）。</p>
+<p>至此，我通过加密发往Quad9的DNS流量获得了暂时的安心，同时保留监控内部DNS流量的能力。这实现了加密、隐私、安全与运营可用性的平衡。祝你在应对DoH乱局的征途中一帆风顺！</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/dns/">DNS</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E5%8A%A0%E5%AF%86%E5%8D%8F%E8%AE%AE/">加密协议</a>
+        
+            <a href="/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/">隐私保护</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/twitter%E5%89%8D%E5%AE%89%E5%85%A8%E4%B8%BB%E7%AE%A1%E4%B8%BE%E6%8A%A5%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Twitter前安全主管举报：平台存在严重安全漏洞与隐私问题</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%AE%89%E5%85%A8%E6%B5%8F%E8%A7%88%E5%8D%8F%E8%AE%AE%E5%A6%82%E4%BD%95%E6%9C%AA%E8%83%BD%E4%BF%9D%E6%8A%A4%E7%94%A8%E6%88%B7%E9%9A%90%E7%A7%81-k%E5%8C%BF%E5%90%8D%E6%80%A7%E7%9A%84%E7%BC%BA%E9%99%B7%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">安全浏览协议如何未能保护用户隐私 - k匿名性的缺陷分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E4%BD%BF%E7%94%A8burp%E5%88%86%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%A9%E5%B1%95%E6%8B%A6%E6%88%AA%E6%95%88%E6%9E%9C%E5%AF%B9%E6%AF%94%E6%B5%8B%E8%AF%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用Burp分析浏览器扩展拦截效果对比测试</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

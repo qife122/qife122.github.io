@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>防火墙安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 防火墙安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 03:52:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PAN-OS CVE-2024-3400高危漏洞：立即修补Palo Alto防火墙</title>
+        <link>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+        <pubDate>Tue, 05 Aug 2025 03:52:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+        <description>&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，该漏洞目前仍存在野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前已开发出内部利用代码并通知客户。值得注意的是，Palo Alto Networks提供的临时缓解措施（启用威胁防护和禁用设备遥测）均被Bishop Fox成功绕过。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;该漏洞允许通过HTTP Cookie注入载荷，将任意名称文件写入底层文件系统。通过目录遍历技术，攻击者可控制文件写入位置。后续由定时任务执行的遥测脚本存在命令注入漏洞，最终实现root权限的带外远程代码执行。需特别说明的是，Bash命令被包含在文件名而非文件内容中。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施绕过&#34;&gt;缓解措施绕过
+&lt;/h2&gt;&lt;p&gt;Palo Alto Networks最初建议两种临时缓解方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;启用威胁防护（阻断包含目录遍历序列的恶意请求）&lt;/li&gt;
+&lt;li&gt;禁用设备遥测（阻止公开的命令注入载荷利用）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Bishop Fox成功开发了两种绕过技术：可规避威胁防护签名检测，并发现新的命令注入漏洞（在遥测功能禁用时仍可触发）。Palo Alto Networks随后更新公告，确认禁用遥测并非有效修复方案，并发布了新的威胁防护规则(TIDs 95187/95189/95191)。测试表明最新规则在补丁应用前是有效缓解措施，但需注意多重配置错误可能导致规则失效。&lt;/p&gt;
+&lt;p&gt;测试威胁防护规则是否生效的方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -k https://&amp;lt;HOST&amp;gt;/ -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Cookie: test=../../&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;规则生效时返回&amp;quot;connection reset&amp;quot;&lt;/li&gt;
+&lt;li&gt;配置错误时返回HTML响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;按有效性降序推荐修复方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;立即应用补丁（新增会话Cookie严格验证机制）&lt;/li&gt;
+&lt;li&gt;启用威胁防护签名ID 95187/95189/95191&lt;/li&gt;
+&lt;li&gt;在补丁应用前下线GlobalProtect接口&lt;/li&gt;
+&lt;li&gt;部署额外IPS规则阻断HTTP Cookie头部包含&amp;quot;../&amp;ldquo;序列的请求&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

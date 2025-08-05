@@ -7,7 +7,108 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 04:41:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 13:24:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2017年10月安全更新发布 | 微软安全响应中心公告</title>
+        <link>http://localhost:1313/p/2017%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 13:24:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2017%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</guid>
+        <description>&lt;p&gt;今天，我们发布了安全更新，以提供针对恶意攻击者的额外防护措施。默认情况下，Windows 10会自动接收这些更新，对于运行旧版本的用户，我们建议他们启用自动更新作为最佳实践。&lt;/p&gt;
+&lt;p&gt;有关本月安全更新的更多信息，请参阅《安全更新指南》。&lt;/p&gt;
+&lt;h3 id=&#34;相关链接&#34;&gt;相关链接
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;[安全公告]&lt;/li&gt;
+&lt;li&gt;[更新星期二]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>微软2022年10月安全更新公告：修复多个高危漏洞</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2022%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%AC%E5%91%8A%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Tue, 05 Aug 2025 06:32:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2022%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%AC%E5%91%8A%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;p&gt;2022年10月11日（美国时间），微软发布了针对其产品安全漏洞的月度更新。本次更新重点关注以下技术要点：&lt;/p&gt;
+&lt;h3 id=&#34;关键漏洞修复&#34;&gt;关键漏洞修复
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2022-41033&lt;/strong&gt;&lt;br&gt;
+Windows COM+事件系统服务特权提升漏洞已被检测到在野利用，需优先修补。该漏洞细节尚未公开披露。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2022-41043&lt;/strong&gt;&lt;br&gt;
+Microsoft Office漏洞在补丁发布前已公开披露，但未观测到实际攻击。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Active Directory强化&lt;/strong&gt;&lt;br&gt;
+本次更新强制要求域控制器验证PAC请求来源，作为对2021年CVE-2021-42287漏洞的最终修复措施（相关事件ID：35/37）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;更新范围&#34;&gt;更新范围
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;产品系列&lt;/th&gt;
+          &lt;th&gt;最高严重等级&lt;/th&gt;
+          &lt;th&gt;主要影响&lt;/th&gt;
+          &lt;th&gt;知识库编号&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows 11 v22H2&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;远程代码执行&lt;/td&gt;
+          &lt;td&gt;KB5018418/5018427&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows Server 2022&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;远程代码执行&lt;/td&gt;
+          &lt;td&gt;KB5018421&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Microsoft SharePoint&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;远程代码执行&lt;/td&gt;
+          &lt;td&gt;参见发布说明&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.NET Framework&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;特权提升&lt;/td&gt;
+          &lt;td&gt;需查阅专项指南&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;技术注意事项&#34;&gt;技术注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Exchange Server零日漏洞（CVE-2022-41040/41082）补丁暂未包含在本月更新中，需采用临时缓解措施。&lt;/li&gt;
+&lt;li&gt;服务堆栈更新(SSU)需通过ADV990001公告单独获取。&lt;/li&gt;
+&lt;li&gt;新增Exchange扩展保护功能的审计修复（涉及CVE-2022-21979等5个漏洞）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;后续计划&#34;&gt;后续计划
+&lt;/h3&gt;&lt;p&gt;下次安全更新定于2022年11月8日发布。建议通过&lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/security-updates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南API&lt;/a&gt;建立自定义监控流程。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2017年5月安全更新发布 | 微软安全响应中心公告</title>
+        <link>http://localhost:1313/p/2017%E5%B9%B45%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 00:15:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2017%E5%B9%B45%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</guid>
+        <description>&lt;p&gt;今天，我们发布了安全更新，以提供针对恶意攻击者的额外防护措施。默认情况下，Windows 10会自动接收这些更新。对于运行旧版本系统的客户，我们建议启用自动更新作为最佳实践。&lt;/p&gt;
+&lt;p&gt;有关本月安全更新的更多信息，请参阅&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/security-updates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;MSRC团队&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;相关标签&lt;/strong&gt;&lt;br&gt;
+安全公告 | 安全更新 | 补丁星期二&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>微软安全更新指南(Security Update Guide)新手指南</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97security-update-guide%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97/</link>
         <pubDate>Mon, 04 Aug 2025 04:41:25 +0800</pubDate>

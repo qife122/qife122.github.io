@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>医疗安全 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8C%BB%E7%96%97%E5%AE%89%E5%85%A8/</link>
+        <description>Recent content in 医疗安全 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 10:32:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BB%E7%96%97%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>美国网安机构警告：Interlock勒索软件以隐蔽攻击瞄准医疗行业</title>
+        <link>http://localhost:1313/p/%E7%BE%8E%E5%9B%BD%E7%BD%91%E5%AE%89%E6%9C%BA%E6%9E%84%E8%AD%A6%E5%91%8Ainterlock%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E4%BB%A5%E9%9A%90%E8%94%BD%E6%94%BB%E5%87%BB%E7%9E%84%E5%87%86%E5%8C%BB%E7%96%97%E8%A1%8C%E4%B8%9A/</link>
+        <pubDate>Tue, 05 Aug 2025 10:32:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BE%8E%E5%9B%BD%E7%BD%91%E5%AE%89%E6%9C%BA%E6%9E%84%E8%AD%A6%E5%91%8Ainterlock%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E4%BB%A5%E9%9A%90%E8%94%BD%E6%94%BB%E5%87%BB%E7%9E%84%E5%87%86%E5%8C%BB%E7%96%97%E8%A1%8C%E4%B8%9A/</guid>
+        <description>&lt;h1 id=&#34;interlock勒索软件以隐蔽攻击瞄准医疗行业美国网安机构发出警告&#34;&gt;Interlock勒索软件以隐蔽攻击瞄准医疗行业，美国网安机构发出警告
+&lt;/h1&gt;&lt;p&gt;美国四大网络安全机构近日联合发布安全警报，警告由Interlock勒索软件组织构成的日益严重的威胁。该组织正将攻击目标锁定为北美和欧洲的企业、医疗机构和关键基础设施实体。&lt;/p&gt;
+&lt;p&gt;联邦调查局（FBI）、网络安全和基础设施安全局（CISA）、卫生与公众服务部（HHS）以及多州信息共享与分析中心（MS-ISAC）于周二发布了这份警报，作为#StopRansomware倡议的一部分。这些机构强调Interlock的快速演变及其对高影响行业（尤其是医疗保健）的关注。&lt;/p&gt;
+&lt;h2 id=&#34;攻击手法分析&#34;&gt;攻击手法分析
+&lt;/h2&gt;&lt;p&gt;根据公告，Interlock于2024年9月出现，此后发起了以财务动机为主的勒索软件活动。该组织采用双重勒索模式，既加密受害者的系统又窃取数据，威胁如果不支付赎金就公布被盗文件。&lt;/p&gt;
+&lt;p&gt;该团伙不会在最初的勒索通知中包含赎金要求。相反，受害者会获得一个唯一代码，并被引导至Tor网络上的.onion网址进行赎金谈判。&lt;/p&gt;
+&lt;p&gt;联邦调查人员表示，Interlock的攻击者更多是机会主义者而非针对特定行业。尽管如此，医疗机构仍是常见受害者。其中最引人注目的受害者包括俄亥俄州大型医疗系统Kettering Health和财富500强肾脏护理公司DaVita。&lt;/p&gt;
+&lt;h3 id=&#34;入侵途径&#34;&gt;入侵途径
+&lt;/h3&gt;&lt;p&gt;FBI将Interlock的初始策略描述为勒索软件组织中&amp;quot;不常见&amp;quot;的，指出其通过受损但看似合法的网站进行路过式下载（drive-by downloads）。在这些案例中，攻击者将恶意负载伪装成Google Chrome或Microsoft Edge的虚假更新。&lt;/p&gt;
+&lt;p&gt;Interlock还使用社会工程学方法。一种名为&amp;quot;ClickFix&amp;quot;的策略欺骗用户执行恶意代码，借口是修复系统错误。另一种名为&amp;quot;FileFix&amp;quot;的变体利用Windows原生元素部署恶意软件，包括远程访问木马（RAT），同时规避安全检测。&lt;/p&gt;
+&lt;p&gt;一旦进入系统，Interlock会部署Interlock RAT和NodeSnake RAT等工具来维持控制、与命令控制（C2）服务器通信并执行进一步攻击。他们还使用PowerShell脚本下载窃取凭证的恶意软件，如cht.exe和klg.dll，这些软件会捕获用户名、密码和击键记录。这些凭证随后被用于在网络中进行横向移动，并可通过Kerberoasting等技术提升权限。&lt;/p&gt;
+&lt;p&gt;为了从云环境中提取数据，该组织利用了包括Azure Storage Explorer和AzCopy在内的合法工具。在Linux系统上，Interlock被观察到部署了一种罕见的基于FreeBSD的ELF加密器，这与更常见的针对VMware ESXi的勒索软件负载不同。&lt;/p&gt;
+&lt;h2 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h2&gt;&lt;p&gt;为降低Interlock勒索软件攻击的风险和影响，联邦公告敦促组织采取以下措施：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施DNS过滤以阻止访问恶意网站&lt;/li&gt;
+&lt;li&gt;使用Web应用防火墙过滤有害流量&lt;/li&gt;
+&lt;li&gt;保持系统和软件更新并打补丁&lt;/li&gt;
+&lt;li&gt;对所有账户强制执行多因素认证（MFA）&lt;/li&gt;
+&lt;li&gt;分段网络以遏制威胁并防止横向移动&lt;/li&gt;
+&lt;li&gt;培训员工识别钓鱼和社会工程攻击&lt;/li&gt;
+&lt;li&gt;维护关键数据的安全、离线且不可变的备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如需完整缓解措施列表和免费网络安全资源，建议组织访问stopransomware.gov。如果您的组织受到勒索软件影响或怀疑存在恶意活动，请联系当地FBI外勤办公室或通过CISA的事件报告系统进行报告。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

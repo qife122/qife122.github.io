@@ -7,7 +7,107 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 16:31:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 09:32:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>近2000台MCP服务器存在严重安全漏洞：身份验证完全缺失</title>
+        <link>http://localhost:1313/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</link>
+        <pubDate>Tue, 05 Aug 2025 09:32:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</guid>
+        <description>&lt;h1 id=&#34;近2000台mcp服务器存在完全安全缺失&#34;&gt;近2000台MCP服务器存在完全安全缺失
+&lt;/h1&gt;&lt;p&gt;作为智能体AI核心组件的MCP（Model Context Protocol）服务器，其身份验证机制竟被设置为可选功能——而现实情况是根本无人启用它。这意味着攻击者可以轻松获得这些服务器的完全控制权。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞现状&#34;&gt;漏洞现状
+&lt;/h2&gt;&lt;p&gt;网络安全研究人员通过扫描发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前暴露在互联网的&lt;strong&gt;1,862台MCP服务器&lt;/strong&gt;全部未配置任何访问控制&lt;/li&gt;
+&lt;li&gt;测试样本中119台服务器均会无条件响应&lt;code&gt;tools/list&lt;/code&gt;请求，暴露所有可执行功能&lt;/li&gt;
+&lt;li&gt;实际案例包括：汽车维修成本数据库、企业项目管理面板、法律案例库等敏感系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击面分析&#34;&gt;攻击面分析
+&lt;/h2&gt;&lt;p&gt;Knostic研究工程师Heather Linn指出：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我们发现有人通过MCP暴露数据库连接器、云服务管理工具。有个汽车维修服务商用它管理维修进度和成本估算——这些数据都能被公开查询&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;潜在攻击方式包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;任意命令执行&lt;/strong&gt;：可能导致完整系统沦陷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据泄露&lt;/strong&gt;：窃取API密钥、凭证等敏感信息&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;钱包耗尽&amp;quot;攻击(DoW)：恶意消耗受害者计算资源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术根源&#34;&gt;技术根源
+&lt;/h2&gt;&lt;p&gt;MCP协议存在双重问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;协议规范&lt;strong&gt;未强制要求认证机制&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;用户群体普遍缺乏安全意识：
+&lt;ul&gt;
+&lt;li&gt;相比传统云计算，AI技术&amp;quot;开箱即用&amp;quot;特性吸引了大量非专业用户&lt;/li&gt;
+&lt;li&gt;开发者未将安全作为默认配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;行业响应&#34;&gt;行业响应
+&lt;/h2&gt;&lt;p&gt;尽管Anthropic公司已更新规范：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新版MCP仍&lt;strong&gt;未强制认证&lt;/strong&gt;，但提供了相关指南&lt;/li&gt;
+&lt;li&gt;安全社区与厂商保持良好协作关系&lt;/li&gt;
+&lt;li&gt;研究人员强调这是新技术发展必经的&amp;quot;成长阵痛&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该事件暴露出AI基础设施在快速普及过程中面临严峻的安全挑战，亟需建立更严格的安全基线标准。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;图：Panther Media Global via Alamy Stock Photo&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>NVIDIA容器工具包漏洞CVE-2024-0132补丁不完整，AI基础设施面临严重风险</title>
+        <link>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</link>
+        <pubDate>Tue, 05 Aug 2025 08:05:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</guid>
+        <description>&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;趋势科技研究发现，NVIDIA在2024年9月针对容器工具包关键漏洞（CVE-2024-0132）发布的安全更新存在缺陷，可能导致容器逃逸攻击。同时发现影响Linux系统Docker的拒绝服务（DoS）漏洞，攻击者可利用这些漏洞访问主机敏感数据或耗尽系统资源。&lt;/p&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2024-0132补丁缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;时间竞争条件（TOCTOU）漏洞仍存在于NVIDIA容器工具包中，允许特制容器访问主机文件系统&lt;/li&gt;
+&lt;li&gt;默认配置下1.17.3及更早版本均受影响，1.17.4版本需显式启用&lt;code&gt;allow-cuda-compat-libs-from-container&lt;/code&gt;功能才存在风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Docker拒绝服务漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当容器配置多挂载点（bind-propagation=shared）时，Linux挂载表会无限增长&lt;/li&gt;
+&lt;li&gt;最终导致文件描述符耗尽，主机SSH连接中断等严重性能问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击场景&#34;&gt;攻击场景
+&lt;/h3&gt;&lt;p&gt;攻击者可通过以下步骤实现容器逃逸：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建包含恶意卷符号链接的容器镜像&lt;/li&gt;
+&lt;li&gt;通过供应链攻击或社会工程在受害者平台运行镜像&lt;/li&gt;
+&lt;li&gt;利用竞争条件获取主机文件系统访问权限&lt;/li&gt;
+&lt;li&gt;通过容器运行时Unix套接字执行任意root命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;严格限制Docker API访问权限&lt;/li&gt;
+&lt;li&gt;禁用NVIDIA容器工具包非必要功能&lt;/li&gt;
+&lt;li&gt;实施容器镜像准入控制策略&lt;/li&gt;
+&lt;li&gt;监控Linux挂载表异常增长&lt;/li&gt;
+&lt;li&gt;部署运行时异常检测工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;趋势科技解决方案&#34;&gt;趋势科技解决方案
+&lt;/h3&gt;&lt;p&gt;趋势Vision One™平台提供以下检测能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;观测攻击技术（OAT）：XSAE.F8306等规则&lt;/li&gt;
+&lt;li&gt;工作负载行为（WB）检测：可疑容器创建等行为&lt;/li&gt;
+&lt;li&gt;容器安全模块可阻断含漏洞镜像部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;图1-6展示了趋势Vision One的漏洞检测界面和告警示例（原文包含具体截图说明，此处从略）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整补丁仍是首选解决方案，但在复杂生产环境中，趋势科技提供的运行时检测和预防措施可有效降低风险。平台已集成对CVE-2024-0132及新发现漏洞的检测能力，覆盖从构建到运行的全生命周期防护。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>开源AI威胁建模工具——快速、情境感知且开发者友好</title>
         <link>http://localhost:1313/p/%E5%BC%80%E6%BA%90ai%E5%A8%81%E8%83%81%E5%BB%BA%E6%A8%A1%E5%B7%A5%E5%85%B7%E5%BF%AB%E9%80%9F%E6%83%85%E5%A2%83%E6%84%9F%E7%9F%A5%E4%B8%94%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%8B%E5%A5%BD/</link>
         <pubDate>Mon, 04 Aug 2025 16:31:58 +0800</pubDate>

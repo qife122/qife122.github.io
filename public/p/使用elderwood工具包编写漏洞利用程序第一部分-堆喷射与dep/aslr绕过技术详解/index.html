@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入解析Elderwood漏洞工具包如何通过Flash组件实现堆喷射、利用未启用ASLR的Office/Java6模块绕过内存防护，并构建ROP链对抗DEP保护，揭示高级攻击工具包的技术实现细节。">
+<title>使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解">
+<meta property='og:description' content="本文深入解析Elderwood漏洞工具包如何通过Flash组件实现堆喷射、利用未启用ASLR的Office/Java6模块绕过内存防护，并构建ROP链对抗DEP保护，揭示高级攻击工具包的技术实现细节。">
+<meta property='og:url' content='http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='漏洞利用' /><meta property='article:tag' content='浏览器安全' /><meta property='article:tag' content='内存防护绕过' /><meta property='article:tag' content='攻击工具包' /><meta property='article:published_time' content='2025-08-05T16:00:21&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T16:00:21&#43;08:00'/>
+<meta name="twitter:title" content="使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解">
+<meta name="twitter:description" content="本文深入解析Elderwood漏洞工具包如何通过Flash组件实现堆喷射、利用未启用ASLR的Office/Java6模块绕过内存防护，并构建ROP链对抗DEP保护，揭示高级攻击工具包的技术实现细节。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/">使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入解析Elderwood漏洞工具包如何通过Flash组件实现堆喷射、利用未启用ASLR的Office/Java6模块绕过内存防护，并构建ROP链对抗DEP保护，揭示高级攻击工具包的技术实现细节。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="堆喷射与dep绕过todayswf">堆喷射与DEP绕过（today.swf）
+</h1><p>数据执行保护（DEP）阻止内存被隐式执行。漏洞利用通常会在内存中创建数据形式的载荷并尝试执行。启用DEP后，攻击者必须明确标记其载荷为可执行状态。为绕过该防护，漏洞可利用内存中已标记为可执行的代码。许多攻击通过链式调用函数来标记载荷可执行，这种技术常被称为面向返回编程（ROP）。Windows XP及更高版本上的IE8采用DEP防护，必须绕过该机制才能成功执行代码。</p>
+<p>today.swf为用户执行DEP绕过。该Flash文档在内存中建立多个ROP链，确保其中一个位于已知地址（堆喷射）。当IE被攻击时，ROP链会将堆栈转移到伪造堆栈而非合法堆栈。堆栈转移后，ROP链执行指令序列，生成可执行的解密代码副本（将xsainfo.jpg转为DLL并执行）。由于Flash插件与浏览器渲染进程共享内存空间（与Chrome/Safari/Firefox不同），此操作可在插件内完成。</p>
+<p>SWF在JavaScript漏洞代码加载前被引入。加载swf时，堆喷射代码自动运行。用户无需了解其技术细节，最终结果是堆中充满堆栈帧，工具包用户可假定特定地址0x10ab0d0c处存在有效值。这意味着用户只需知道跳转目标地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="nx">unescape</span><span class="p">(</span><span class="s2">&#34;%u0d0c%u10abhttps://www.google.com/settings/account&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分析过程中发现，用于混淆Flash组件的软件可在Google搜索&quot;SWF Encryption&quot;首页找到。DoSWF是首个无需邮箱即可下载安装包的结果，且由北京某中国公司开发。</p>
+<h1 id="aslr绕过microsoft-office与java-6">ASLR绕过（Microsoft Office与Java 6）
+</h1><p>地址空间布局随机化（ASLR）是Windows Vista及更新系统的防护机制，会随机化内存中代码位置。ASLR通过使ROP指令位置未知来干扰攻击者对程序流的控制。最简单的绕过方法是定位未编译Dynamic Base标志的模块（表示不支持ASLR）。此类模块以固定虚拟地址加载后，攻击者可复用其中的已知指令序列，如同ASLR不存在。</p>
+<p>该工具包提供代码来加载多个未编译Dynamic Base标志的模块，包括Microsoft Office 2007/2010和未支持ASLR的Java 6插件。这些模块中的内存地址用于构建Flash文档中的ROP链。利用此特性绕过ASLR非常简单，工具包可能提供脚本来调用必要的插件加载例程。作者直接使用现成研究技术开发脚本：采用Oracle示例代码加载Java 6实现ASLR绕过（Google搜索&quot;force java 6&quot;可发现此代码）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;deployJava.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">try {
+</span></span><span class="line"><span class="cl">    location.href = &#39;ms-help://&#39;
+</span></span><span class="line"><span class="cl">} catch (e) {}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">try {
+</span></span><span class="line"><span class="cl">    var ma = new ActiveXObject(&#34;SharePoint.OpenDocuments.4&#34;);
+</span></span><span class="line"><span class="cl">} catch(e) {}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>加载这些插件后，config.html根据成功情况设置值，将&quot;test&quot; div标签的innerHTML设为true/false/default/cat。today.swf读取该值决定加载哪个内置ROP链，表明两者可能同步开发并提供给工具包用户。</p>
+<h1 id="结论">结论
+</h1><p>Elderwood工具包提供可复用组件来开发use-after-free漏洞利用程序，包含通过Adobe Flash实现堆喷射、加载未支持ASLR模块的技术，以及多个Windows版本的DEP绕过ROP链。工具用户几乎不需要理解这些技术的实现原理。例如用户无需了解内存布局和堆分配，直接使用工具包提供的固定地址即可。</p>
+<p>虽然这些工具满足多数漏洞开发需求，但某些任务仍需针对具体漏洞实现。例如要使用SWF置于内存的ROP指令，工具用户必须控制程序流——这正是各漏洞利用的特殊之处。我们将在下一章节讨论工具用户解决该问题的具体方案。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">漏洞利用</a>
+        
+            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/">浏览器安全</a>
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E9%98%B2%E6%8A%A4%E7%BB%95%E8%BF%87/">内存防护绕过</a>
+        
+            <a href="/tags/%E6%94%BB%E5%87%BB%E5%B7%A5%E5%85%B7%E5%8C%85/">攻击工具包</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2spidermonkey%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E7%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://i.imgs.ovh/2025/08/02/HiwQc.png" loading="lazy" data-key="" data-hash="https://i.imgs.ovh/2025/08/02/HiwQc.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">深入探索SpiderMonkey漏洞利用：从基础到高级浏览器攻击技术</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

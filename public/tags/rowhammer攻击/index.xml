@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Rowhammer攻击 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/rowhammer%E6%94%BB%E5%87%BB/</link>
+        <description>Recent content in Rowhammer攻击 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 06:16:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/rowhammer%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Nvidia GPU存在Rowhammer攻击漏洞，专家建议启用ECC防护</title>
+        <link>http://localhost:1313/p/nvidia-gpu%E5%AD%98%E5%9C%A8rowhammer%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%E4%B8%93%E5%AE%B6%E5%BB%BA%E8%AE%AE%E5%90%AF%E7%94%A8ecc%E9%98%B2%E6%8A%A4/</link>
+        <pubDate>Tue, 05 Aug 2025 06:16:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nvidia-gpu%E5%AD%98%E5%9C%A8rowhammer%E6%94%BB%E5%87%BB%E6%BC%8F%E6%B4%9E%E4%B8%93%E5%AE%B6%E5%BB%BA%E8%AE%AE%E5%90%AF%E7%94%A8ecc%E9%98%B2%E6%8A%A4/</guid>
+        <description>&lt;h1 id=&#34;nvidia-gpu存在rowhammer攻击漏洞&#34;&gt;Nvidia GPU存在Rowhammer攻击漏洞
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;新闻&lt;/strong&gt;&lt;br&gt;
+2024年7月16日 · 4分钟阅读 · GPU安全&lt;/p&gt;
+&lt;p&gt;IT管理人员应确保启用Nvidia GPU中的错误校正代码(ECC)功能，以防止Rowhammer攻击。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;网络犯罪分子可能通过Rowhammer攻击入侵Nvidia GPU&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Nvidia近期向应用开发者、计算机制造商和IT管理人员发出安全警告，指出现代显卡内存芯片可能易受Rowhammer漏洞攻击。此前加拿大大学研究人员已证实，可通过类似攻击成功入侵Nvidia A6000 GPU。&lt;/p&gt;
+&lt;p&gt;Rowhammer攻击是一种基于软件的故障注入攻击。该方法允许攻击者窃取受害者存储的信息并修改内存值。根据芯片制造商的警告，易受攻击的内存未在系统层面启用ECC(错误校正代码)。&lt;/p&gt;
+&lt;p&gt;针对企业环境，Nvidia建议使用专业数据中心产品而非消费级显卡硬件，并启用ECC错误校正功能以防止此类攻击。ECC在该制造商的Hopper和Blackwell系列数据中心级GPU上默认启用。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;风险评估还应区分单租户和多租户GPU使用场景，&amp;ldquo;Nvidia补充道，指出执行Rowhammer攻击需要在租户间同时访问GPU。&lt;/p&gt;
+&lt;p&gt;SANS研究所研究主任Johannes Ullrich解释：&amp;ldquo;这并非易利用的漏洞，很可能仅用于高度针对性的攻击。您有时间应对，应重点关注运行不可信代码的共享系统。&amp;ldquo;这主要涉及云系统，由云服务提供商负责。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Rowhammer是DDR(双倍数据速率)内存架构中的漏洞，&amp;ldquo;SANS研究所专家表示。任何使用现代DDR内存的系统都可能易受Rowhammer攻击。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;利用GPUhammer的攻击者会快速翻转其有权访问的比特位，以影响其无权访问的其他内存位，&amp;ldquo;Ullrich说。该攻击还需要执行特定代码。&amp;ldquo;这更多是对多用户共享系统的威胁。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;研究主任指出，某些显卡会稍微限制触发Rowhammer漏洞所需的内存访问。与连接普通CPU总线的DDR内存不同，GPU对内存的访问控制更严格。&amp;ldquo;但最终Rowhammer只需快速切换特定比特位，这对GPU也是可能的。只是确定需要切换哪些位更复杂，&amp;ldquo;Ullrich总结道。&lt;/p&gt;
+&lt;p&gt;IT专家自2015年就已知CPU可能遭受Rowhammer攻击。2018年这些漏洞被命名为Spectre和Meltdown。对采用DDR和LPDDR内存的Intel和AMD CPU的Rowhammer攻击，可使攻击者通过快速访问相邻内存行诱发存储单元中的位翻转。&lt;/p&gt;
+&lt;p&gt;早在2020年，IT管理人员就被告知预计一年内会出现重大Rowhammer漏洞利用。当时的研究表明GPU也存在风险。&lt;/p&gt;
+&lt;p&gt;理论上GPU应更难被利用，因为它们具有物理内存到GDDR库和行的专有映射，以及高内存延迟、更快的刷新率和可防止有效&amp;quot;锤击&amp;quot;的DDR内存。&lt;/p&gt;
+&lt;p&gt;然而，多伦多大学计算机科学系教员、研究报告合著者Gururaj Saileshwar警告此类攻击的影响。不仅数据可能被污染，对GPU的攻击还可能干扰AI数据模型。虽然攻击在配备GDDR6 DRAM的Nvidia GPU上演示，但Saileshwar表示它可能适用于任何GPU。&lt;/p&gt;
+&lt;p&gt;Nvidia发言人在回应询问时表示：&amp;ldquo;我们建议用户遵循已验证的安全实践并实施现有DRAM防护措施，以防止或降低Rowhammer攻击的可能性。&amp;rdquo;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

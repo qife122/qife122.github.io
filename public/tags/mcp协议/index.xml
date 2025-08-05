@@ -7,7 +7,54 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 00:53:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/mcp%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 09:32:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/mcp%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>近2000台MCP服务器存在严重安全漏洞：身份验证完全缺失</title>
+        <link>http://localhost:1313/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</link>
+        <pubDate>Tue, 05 Aug 2025 09:32:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BF%912000%E5%8F%B0mcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%9C%A8%E4%B8%A5%E9%87%8D%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E5%AE%8C%E5%85%A8%E7%BC%BA%E5%A4%B1/</guid>
+        <description>&lt;h1 id=&#34;近2000台mcp服务器存在完全安全缺失&#34;&gt;近2000台MCP服务器存在完全安全缺失
+&lt;/h1&gt;&lt;p&gt;作为智能体AI核心组件的MCP（Model Context Protocol）服务器，其身份验证机制竟被设置为可选功能——而现实情况是根本无人启用它。这意味着攻击者可以轻松获得这些服务器的完全控制权。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞现状&#34;&gt;漏洞现状
+&lt;/h2&gt;&lt;p&gt;网络安全研究人员通过扫描发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前暴露在互联网的&lt;strong&gt;1,862台MCP服务器&lt;/strong&gt;全部未配置任何访问控制&lt;/li&gt;
+&lt;li&gt;测试样本中119台服务器均会无条件响应&lt;code&gt;tools/list&lt;/code&gt;请求，暴露所有可执行功能&lt;/li&gt;
+&lt;li&gt;实际案例包括：汽车维修成本数据库、企业项目管理面板、法律案例库等敏感系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击面分析&#34;&gt;攻击面分析
+&lt;/h2&gt;&lt;p&gt;Knostic研究工程师Heather Linn指出：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我们发现有人通过MCP暴露数据库连接器、云服务管理工具。有个汽车维修服务商用它管理维修进度和成本估算——这些数据都能被公开查询&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;潜在攻击方式包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;任意命令执行&lt;/strong&gt;：可能导致完整系统沦陷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据泄露&lt;/strong&gt;：窃取API密钥、凭证等敏感信息&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;钱包耗尽&amp;quot;攻击(DoW)：恶意消耗受害者计算资源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术根源&#34;&gt;技术根源
+&lt;/h2&gt;&lt;p&gt;MCP协议存在双重问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;协议规范&lt;strong&gt;未强制要求认证机制&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;用户群体普遍缺乏安全意识：
+&lt;ul&gt;
+&lt;li&gt;相比传统云计算，AI技术&amp;quot;开箱即用&amp;quot;特性吸引了大量非专业用户&lt;/li&gt;
+&lt;li&gt;开发者未将安全作为默认配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;行业响应&#34;&gt;行业响应
+&lt;/h2&gt;&lt;p&gt;尽管Anthropic公司已更新规范：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新版MCP仍&lt;strong&gt;未强制认证&lt;/strong&gt;，但提供了相关指南&lt;/li&gt;
+&lt;li&gt;安全社区与厂商保持良好协作关系&lt;/li&gt;
+&lt;li&gt;研究人员强调这是新技术发展必经的&amp;quot;成长阵痛&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该事件暴露出AI基础设施在快速普及过程中面临严峻的安全挑战，亟需建立更严格的安全基线标准。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;图：Panther Media Global via Alamy Stock Photo&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用C#构建MCP服务器并在VS Code中运行AI代理</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8c%23%E6%9E%84%E5%BB%BAmcp%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E5%9C%A8vs-code%E4%B8%AD%E8%BF%90%E8%A1%8Cai%E4%BB%A3%E7%90%86/</link>
         <pubDate>Mon, 04 Aug 2025 00:53:25 +0800</pubDate>

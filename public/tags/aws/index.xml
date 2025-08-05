@@ -7,7 +7,134 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 04:19:59 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 14:02:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>快速部署Active Directory实验室的完整指南</title>
+        <link>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Tue, 05 Aug 2025 14:02:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;在几分钟内部署active-directory实验室&#34;&gt;在几分钟内部署Active Directory实验室
+&lt;/h1&gt;&lt;p&gt;创建自己的实验室听起来像是一项艰巨的任务。通过本文，您将能够在几分钟内部署自己的Active Directory（AD）环境！您只需要一个浏览器即可访问实验室环境，随时随地开展AD研发工作。&lt;/p&gt;
+&lt;h2 id=&#34;snap-labs平台介绍&#34;&gt;Snap Labs平台介绍
+&lt;/h2&gt;&lt;p&gt;Snap Labs是一个简化实验室环境构建和管理的平台，可用于创建网络安全训练场或研发环境。该平台由Immersive Labs所有，被Zero Point Security等安全培训机构采用。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;互联网连接&lt;/li&gt;
+&lt;li&gt;网页浏览器&lt;/li&gt;
+&lt;li&gt;AWS账户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注册流程&#34;&gt;注册流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问https://dashboard.snaplabs.io/signup注册&lt;/li&gt;
+&lt;li&gt;提供AWS账户凭证&lt;/li&gt;
+&lt;li&gt;Snap Labs将通过CloudFormation在AWS部署基础设施&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实验室模板&#34;&gt;实验室模板
+&lt;/h2&gt;&lt;p&gt;Snap Labs提供多种预设模板：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看模板详情（含网络拓扑图和预计成本）&lt;/li&gt;
+&lt;li&gt;选择&amp;quot;AD Quick Start - 2019&amp;quot;模板启动&lt;/li&gt;
+&lt;li&gt;包含域控制器、Windows服务器和管理机（跳板机）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;连接方式&#34;&gt;连接方式
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;VPN接入&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;配置不同访问角色的VPN文件&lt;/li&gt;
+&lt;li&gt;支持RDP/SSH连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;浏览器访问&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过Guacamole实现浏览器远程桌面&lt;/li&gt;
+&lt;li&gt;支持复制粘贴长命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自定义功能&#34;&gt;自定义功能
+&lt;/h2&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;自动更新的网络拓扑图&lt;/li&gt;
+&lt;li&gt;添加新系统（支持Windows/Kali等镜像）&lt;/li&gt;
+&lt;li&gt;配置网络规则（类似AWS安全组）&lt;/li&gt;
+&lt;li&gt;DHCP设置自定义DNS&lt;/li&gt;
+&lt;li&gt;系统/全环境快照功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;重要设置&#34;&gt;重要设置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自动关闭&lt;/strong&gt;：防止AWS资源持续计费&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板化&lt;/strong&gt;：保存配置供未来重用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享功能&lt;/strong&gt;：支持生成公开/私有分享链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术架构&#34;&gt;技术架构
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于AWS CloudFormation部署&lt;/li&gt;
+&lt;li&gt;使用AMI自定义系统镜像&lt;/li&gt;
+&lt;li&gt;通过Guacamole实现Web终端&lt;/li&gt;
+&lt;li&gt;支持网络规则自定义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;警告：创建公开模板链接后将无法撤销访问权限，请谨慎操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整文档参考：&lt;a class=&#34;link&#34; href=&#34;https://docs.snaplabs.io/docs/getting-started&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Snap Labs官方文档&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>AWS迁移安全指南：实现清晰度与信心的全面策略</title>
+        <link>http://localhost:1313/p/aws%E8%BF%81%E7%A7%BB%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97%E5%AE%9E%E7%8E%B0%E6%B8%85%E6%99%B0%E5%BA%A6%E4%B8%8E%E4%BF%A1%E5%BF%83%E7%9A%84%E5%85%A8%E9%9D%A2%E7%AD%96%E7%95%A5/</link>
+        <pubDate>Tue, 05 Aug 2025 01:38:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aws%E8%BF%81%E7%A7%BB%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97%E5%AE%9E%E7%8E%B0%E6%B8%85%E6%99%B0%E5%BA%A6%E4%B8%8E%E4%BF%A1%E5%BF%83%E7%9A%84%E5%85%A8%E9%9D%A2%E7%AD%96%E7%95%A5/</guid>
+        <description>&lt;h1 id=&#34;导航aws迁移实现清晰度与信心&#34;&gt;导航AWS迁移：实现清晰度与信心
+&lt;/h1&gt;&lt;p&gt;将工作负载迁移到亚马逊云服务（AWS）代表着重要的战略机遇，能够提升敏捷性、可扩展性和创新潜力。但若缺乏全面的可见性与安全策略，此过程可能引入不可预见的风险、操作延迟以及管理新云环境的挑战。其中常被忽视的关键环节是敏感数据在迁移至云端及存储期间的发现与保护。&lt;/p&gt;
+&lt;h2 id=&#34;迁移生命周期中的安全集成&#34;&gt;迁移生命周期中的安全集成
+&lt;/h2&gt;&lt;p&gt;成功的迁移绝非将安全视为事后考虑。安全必须贯穿整个迁移生命周期：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;评估阶段&lt;/strong&gt;：盘点现有资产并识别风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;准备阶段&lt;/strong&gt;：建立安全的AWS着陆区&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;迁移与现代化阶段&lt;/strong&gt;：转移工作负载并优化云配置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Rapid7安全平台通过统一关键能力提供支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Surface Command&lt;/strong&gt;：实现全面的攻击面管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exposure Command&lt;/strong&gt;：集成CNAPP能力，持续监控云配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;InsightConnect&lt;/strong&gt;：通过SOAR自动化修复流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险管理的三个阶段策略&#34;&gt;风险管理的三个阶段策略
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;迁移前&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发现未知资产避免迁移隐患系统&lt;/li&gt;
+&lt;li&gt;基于威胁情报的风险评分优先修复漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;迁移中&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施最小权限访问模型&lt;/li&gt;
+&lt;li&gt;集成Amazon Macie实现敏感数据定位&lt;/li&gt;
+&lt;li&gt;通过攻击路径分析评估业务影响&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;迁移后&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在CI/CD管道中实施&amp;quot;左移&amp;quot;安全&lt;/li&gt;
+&lt;li&gt;扫描容器镜像和IaC模板&lt;/li&gt;
+&lt;li&gt;持续监控生产环境配置漂移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;通过自动化建立信心&#34;&gt;通过自动化建立信心
+&lt;/h2&gt;&lt;p&gt;关键优势包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用Executive Risk View仪表板转化技术风险为商业洞察&lt;/li&gt;
+&lt;li&gt;自动响应新AWS环境中的威胁&lt;/li&gt;
+&lt;li&gt;通过基础设施即代码验证确保架构安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;通过将安全深度集成到迁移流程的每个阶段，组织能够以运营就绪状态替代不确定性。&amp;rdquo; —— Rapid7云安全专家&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.rapid7.com/products/surface-command/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;立即开始您的Surface Command免费试用&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Stratus Red Team：专为云环境设计的对抗模拟工具</title>
         <link>http://localhost:1313/p/stratus-red-team%E4%B8%93%E4%B8%BA%E4%BA%91%E7%8E%AF%E5%A2%83%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%AF%B9%E6%8A%97%E6%A8%A1%E6%8B%9F%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Mon, 04 Aug 2025 04:19:59 +0800</pubDate>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>大语言模型 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/</link>
+        <description>Recent content in 大语言模型 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Mon, 04 Aug 2025 22:02:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>LLAMA：基于LLM引导种子生成的多反馈智能合约模糊测试框架</title>
+        <link>http://localhost:1313/p/llama%E5%9F%BA%E4%BA%8Ellm%E5%BC%95%E5%AF%BC%E7%A7%8D%E5%AD%90%E7%94%9F%E6%88%90%E7%9A%84%E5%A4%9A%E5%8F%8D%E9%A6%88%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Mon, 04 Aug 2025 22:02:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/llama%E5%9F%BA%E4%BA%8Ellm%E5%BC%95%E5%AF%BC%E7%A7%8D%E5%AD%90%E7%94%9F%E6%88%90%E7%9A%84%E5%A4%9A%E5%8F%8D%E9%A6%88%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;h1 id=&#34;llama基于llm引导种子生成的多反馈智能合约模糊测试框架&#34;&gt;LLAMA：基于LLM引导种子生成的多反馈智能合约模糊测试框架
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;&lt;br&gt;
+智能合约在区块链生态系统中发挥着关键作用，而模糊测试仍是保障其安全的重要手段。尽管变异调度是影响模糊测试效果的关键因素，现有模糊测试工具主要关注种子调度和生成，而变异调度却鲜有研究。本文提出基于大语言模型（LLMs）的多反馈智能合约模糊测试框架LLAMA，整合了LLMs、进化变异策略和混合测试技术。&lt;/p&gt;
+&lt;p&gt;LLAMA的核心组件包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;分层提示策略&lt;/strong&gt;：指导LLMs生成语义有效的初始种子，结合轻量级预模糊测试阶段筛选高潜力输入；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多反馈优化机制&lt;/strong&gt;：利用运行时覆盖率和依赖反馈，同步改进种子生成、种子选择和变异调度；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进化模糊测试引擎&lt;/strong&gt;：根据有效性动态调整变异算子概率，并引入符号执行以突破停滞状态和发现深层漏洞。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实验结果表明，LLAMA在覆盖率和漏洞检测方面均优于最先进的模糊测试工具。具体而言，其指令覆盖率达到91%，分支覆盖率达90%，并能检测出跨多个类别的148个已知漏洞中的132个。这些结果证明了LLAMA在实际智能合约安全测试场景中的有效性、适应性和实用性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主题分类&lt;/strong&gt;&lt;br&gt;
+软件工程（cs.SE）；密码学与安全（cs.CR）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

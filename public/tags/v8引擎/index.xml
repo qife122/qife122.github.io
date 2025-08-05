@@ -7,7 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 09:45:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/v8%E5%BC%95%E6%93%8E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 17:47:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/v8%E5%BC%95%E6%93%8E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Node.js V8引擎HashDoS漏洞技术分析报告</title>
+        <link>http://localhost:1313/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 17:47:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</guid>
+        <description>&lt;h1 id=&#34;nodejs--报告-3131758---v8引擎中的hashdos漏洞--hackerone&#34;&gt;Node.js | 报告 #3131758 - V8引擎中的HashDoS漏洞 | HackerOne
+&lt;/h1&gt;&lt;p&gt;Node.js v24.0.0使用的V8引擎版本变更了通过rapidhash计算字符串哈希的方式。该实现重新引入了HashDoS漏洞 - 攻击者通过控制待哈希字符串可生成大量哈希碰撞，且无需知晓哈希种子(hash-seed)。&lt;/p&gt;
+&lt;p&gt;该漏洞影响所有Node.js v24.x版本用户。&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;sharp_edged 向Node.js提交报告&lt;br&gt;
+2025年5月6日 23:59 UTC&lt;/li&gt;
+&lt;li&gt;mcollina Node.js工作人员发表评论&lt;br&gt;
+2025年5月7日 05:05 UTC&lt;/li&gt;
+&lt;li&gt;mcollina Node.js工作人员将状态改为&amp;quot;Triaged&amp;quot;&lt;br&gt;
+2025年5月9日 16:46 UTC&lt;/li&gt;
+&lt;li&gt;mcollina Node.js工作人员发表评论&lt;br&gt;
+2025年5月10日 07:50 UTC&lt;/li&gt;
+&lt;li&gt;snek 以默认权限加入报告&lt;br&gt;
+2025年6月12日 19:00 UTC&lt;/li&gt;
+&lt;li&gt;snek 发表评论&lt;br&gt;
+2025年6月12日 21:33 UTC&lt;/li&gt;
+&lt;li&gt;mhdawson Node.js工作人员发表评论&lt;br&gt;
+2025年6月13日 13:26 UTC&lt;/li&gt;
+&lt;li&gt;mcollina Node.js工作人员发表评论&lt;br&gt;
+2025年6月13日 15:10 UTC&lt;/li&gt;
+&lt;li&gt;rafaelgss Node.js工作人员发表评论&lt;br&gt;
+9天前&lt;/li&gt;
+&lt;li&gt;snek 发表评论&lt;br&gt;
+9天前&lt;/li&gt;
+&lt;li&gt;Bot: security-release-stewards 更新CVE引用为CVE-2025-27209&lt;br&gt;
+9天前&lt;/li&gt;
+&lt;li&gt;Bot: security-release-stewards 关闭报告并将状态改为&amp;quot;Resolved&amp;quot;&lt;br&gt;
+9天前&lt;/li&gt;
+&lt;li&gt;Bot: security-release-stewards 请求公开该报告&lt;br&gt;
+2天前&lt;/li&gt;
+&lt;li&gt;sharp_edged 同意公开该报告&lt;br&gt;
+2天前&lt;/li&gt;
+&lt;li&gt;该报告已被公开&lt;br&gt;
+2天前&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;报告信息&#34;&gt;报告信息
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;报告时间：2025年5月6日 23:59 UTC&lt;/li&gt;
+&lt;li&gt;报告人：sharp_edged&lt;/li&gt;
+&lt;li&gt;报告对象：Node.js&lt;/li&gt;
+&lt;li&gt;参与者：见时间线&lt;/li&gt;
+&lt;li&gt;报告ID：#3131758&lt;/li&gt;
+&lt;li&gt;状态：已解决&lt;/li&gt;
+&lt;li&gt;严重程度：高危(7.5)&lt;/li&gt;
+&lt;li&gt;公开时间：2025年7月15日 22:49 UTC&lt;/li&gt;
+&lt;li&gt;弱点类型：加密问题 - 通用型&lt;/li&gt;
+&lt;li&gt;CVE ID：CVE-2025-27209&lt;/li&gt;
+&lt;li&gt;奖金：无&lt;/li&gt;
+&lt;li&gt;账户详情：无&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>V8引擎中的HashDoS漏洞分析 - Node.js v24.0.0安全风险警示</title>
         <link>http://localhost:1313/p/v8%E5%BC%95%E6%93%8E%E4%B8%AD%E7%9A%84hashdos%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-node.js-v24.0.0%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AD%A6%E7%A4%BA/</link>
         <pubDate>Sun, 03 Aug 2025 09:45:12 +0800</pubDate>

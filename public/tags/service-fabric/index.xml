@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Service Fabric on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/service-fabric/</link>
+        <description>Recent content in Service Fabric on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 05:43:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/service-fabric/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于Service Fabric Explorer (SFX) v1 Web客户端潜在风险的警示与指导</title>
+        <link>http://localhost:1313/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</link>
+        <pubDate>Tue, 05 Aug 2025 05:43:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%B3%E4%BA%8Eservice-fabric-explorer-sfx-v1-web%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BD%9C%E5%9C%A8%E9%A3%8E%E9%99%A9%E7%9A%84%E8%AD%A6%E7%A4%BA%E4%B8%8E%E6%8C%87%E5%AF%BC/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;微软近期发现旧版Service Fabric Explorer（SFXv1）在特定条件下存在跨站脚本（XSS）漏洞（CVE-2022-35829）。当前默认的SFX Web客户端（SFXv2）不受此漏洞影响，但用户仍可手动切换至存在漏洞的旧版客户端（SFXv1）。攻击者需已具备Service Fabric集群的代码部署与执行权限，且目标需使用存在漏洞的SFXv1客户端。&lt;/p&gt;
+&lt;p&gt;目前微软未发现该漏洞被利用的情况。为确保安全，建议所有Service Fabric用户升级至最新SFX版本，并避免手动切换至旧版SFXv1客户端。即将发布的SF版本将彻底移除SFXv1及其切换选项。&lt;/p&gt;
+&lt;p&gt;感谢Orca Security通过协调漏洞披露机制报告此漏洞，并与我们合作保护客户安全。&lt;/p&gt;
+&lt;h3 id=&#34;附加参考&#34;&gt;附加参考
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全更新指南&lt;/a&gt;获取CVE-2022-35829详细信息&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Azure Service Fabric产品博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-upgrade&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Azure Service Fabric集群升级指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;如有疑问，请通过&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/azsupt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Azure门户&lt;/a&gt;提交支持案例&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

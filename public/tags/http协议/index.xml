@@ -7,7 +7,223 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 11:24:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/http%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 00:37:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/http%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>cURL HTTP请求走私漏洞深度分析</title>
+        <link>http://localhost:1313/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 05 Aug 2025 00:37:20 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;http请求走私漏洞分析---curl安全报告&#34;&gt;HTTP请求走私漏洞分析 - cURL安全报告
+&lt;/h1&gt;&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;cURL未明确拒绝同时包含Transfer-Encoding和Content-Length头的HTTP请求，当这些请求通过解释头方式与目标服务器不同的中间系统(代理、负载均衡器、防火墙)时，可能导致HTTP请求走私漏洞(CWE-444)。这种不一致的解释使攻击者可能绕过安全控制走私恶意请求或导致缓存投毒攻击。&lt;/p&gt;
+&lt;p&gt;该漏洞源于http.c中的http_req_set_reader()函数，该函数处理Transfer-Encoding头时未验证是否存在冲突的Content-Length头。虽然cURL内部优先处理Transfer-Encoding而非Content-Length，但不会移除或拒绝冲突的Content-Length头，导致两个头同时被发送。&lt;/p&gt;
+&lt;p&gt;注意：本漏洞分析通过手动代码审查cURL源代码完成，使用AI辅助构建和格式化本漏洞报告。&lt;/p&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;p&gt;该漏洞影响包含当前HTTP请求处理实现的cURL版本。测试环境包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cURL版本：8.4.0(curl-master分支)&lt;/li&gt;
+&lt;li&gt;平台：Windows 10, Linux Ubuntu 20.04&lt;/li&gt;
+&lt;li&gt;libcurl版本：8.4.0&lt;/li&gt;
+&lt;li&gt;协议：HTTP/1.1, HTTP/2&lt;/li&gt;
+&lt;li&gt;特性：SSL, 分块传输编码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;检查版本命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -V
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;创建包含冲突头的测试HTTP请求：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -v -X POST &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Transfer-Encoding: chunked&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Content-Length: 100&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -d &lt;span class=&#34;s2&#34;&gt;&amp;#34;0\r\n\r\nSMUGGLED_PAYLOAD&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  http://example.com/test
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;观察cURL发送两个头而不拒绝：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;使用-v标志监控实际HTTP请求&lt;/li&gt;
+&lt;li&gt;确认Transfer-Encoding: chunked和Content-Length: 100头同时存在&lt;/li&gt;
+&lt;li&gt;注意cURL使用分块编码处理请求同时保留Content-Length头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用代理设置演示走私可能性：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设置优先解释Content-Length的测试代理&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 然后通过代理发送冲突头&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -v --proxy http://test-proxy:8080 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Transfer-Encoding: chunked&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Content-Length: 50&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -X POST &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -d &lt;span class=&#34;s2&#34;&gt;&amp;#34;0\r\n\r\nPOST /admin HTTP/1.1\r\nHost: target.com\r\n\r\n&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  http://target.com/public
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;使用Python脚本自动化测试：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;subprocess&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test_smuggling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;curl&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;-v&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;--include&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;-H&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Transfer-Encoding: chunked&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;-H&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Content-Length: 200&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;-X&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;-d&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;GET /smuggled HTTP/1.1&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;Host: example.com&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://example.com/endpoint&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subprocess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;capture_output&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;STDOUT:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stdout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;STDERR:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stderr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;test_smuggling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;通过检查HTTP流量验证漏洞：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;使用Wireshark等工具捕获实际HTTP请求&lt;/li&gt;
+&lt;li&gt;确认冲突头同时存在于网络协议中&lt;/li&gt;
+&lt;li&gt;对不同服务器/代理测试相同请求以观察不同解释&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;支持材料参考文献&#34;&gt;支持材料/参考文献
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;源代码分析：http.c - http_req_set_reader()函数和http_req_complete()函数审查&lt;/li&gt;
+&lt;li&gt;CWE分类：CWE-444 - HTTP请求不一致解释(&amp;lsquo;HTTP请求/响应走私&amp;rsquo;)&lt;/li&gt;
+&lt;li&gt;CVSS评分：6.5(中危) - CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L&lt;/li&gt;
+&lt;li&gt;概念验证脚本：演示漏洞的Python脚本(包含在上述步骤中)&lt;/li&gt;
+&lt;li&gt;网络流量捕获：Wireshark/tcpdump捕获显示同一请求中的两个头&lt;/li&gt;
+&lt;li&gt;RFC参考：
+&lt;ul&gt;
+&lt;li&gt;RFC 7230 Section 3.3.3 (消息体长度)&lt;/li&gt;
+&lt;li&gt;RFC 7230 Section 3.3.1 (传输编码)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;类似CVE：
+&lt;ul&gt;
+&lt;li&gt;CVE-2019-16276 (Node.js HTTP请求走私)&lt;/li&gt;
+&lt;li&gt;CVE-2020-11946 (多种web服务器中的HTTP请求走私)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;安全研究：James Kettle的&amp;quot;HTTP异步攻击：请求走私重生&amp;quot;白皮书&lt;/li&gt;
+&lt;li&gt;测试环境：具有不同代理配置的Docker容器用于测试头解释差异&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;影响&#34;&gt;影响
+&lt;/h2&gt;&lt;p&gt;攻击者利用此HTTP请求走私漏洞可实现以下重大安全影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;认证绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过绕过认证机制走私请求到受保护端点&lt;/li&gt;
+&lt;li&gt;无需凭证访问管理接口或敏感API&lt;/li&gt;
+&lt;li&gt;通过不同认证上下文路由请求提升权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;缓存投毒&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过将恶意内容与合法URL关联毒害web缓存和CDN&lt;/li&gt;
+&lt;li&gt;为后续请求缓存资源的用户提供恶意内容&lt;/li&gt;
+&lt;li&gt;操纵缓存响应注入恶意脚本或重定向用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;请求劫持&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;在共享代理环境中拦截和修改其他用户请求&lt;/li&gt;
+&lt;li&gt;从共享同一连接的其他用户请求中窃取敏感数据&lt;/li&gt;
+&lt;li&gt;操纵会话令牌和认证凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;防火墙和安全控制绕过&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过在走私请求中隐藏恶意负载规避Web应用防火墙(WAF)&lt;/li&gt;
+&lt;li&gt;绕过中间设备实现的速率限制和访问控制&lt;/li&gt;
+&lt;li&gt;逃避安全监控和日志系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;会话劫持&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过走私看似来自合法用户的请求操纵会话管理&lt;/li&gt;
+&lt;li&gt;通过拦截认证令牌劫持用户会话&lt;/li&gt;
+&lt;li&gt;以合法用户身份执行未授权操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;数据泄露&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过走私请求到内部API或数据库访问敏感数据&lt;/li&gt;
+&lt;li&gt;绕过数据丢失防护(DLP)系统&lt;/li&gt;
+&lt;li&gt;通过精心构造的走私请求提取机密信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;跨站脚本(XSS)和注入攻击&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;通过缓存投毒向响应中注入恶意脚本&lt;/li&gt;
+&lt;li&gt;通过走私数据库查询执行SQL注入攻击&lt;/li&gt;
+&lt;li&gt;通过毒害缓存内容执行存储型XSS攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;影响严重性：中到高，取决于网络架构和安全控制措施。该漏洞在具有多层代理、CDN或共享托管基础设施的环境中尤其危险。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>curl漏洞报告：带空格前缀的-H参数与--proxy联用导致HTTP头注入</title>
         <link>http://localhost:1313/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/</link>
         <pubDate>Sun, 03 Aug 2025 11:24:04 +0800</pubDate>

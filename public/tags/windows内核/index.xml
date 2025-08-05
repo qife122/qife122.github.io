@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Windows内核 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/windows%E5%86%85%E6%A0%B8/</link>
+        <description>Recent content in Windows内核 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 14:48:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows%E5%86%85%E6%A0%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>内核池初探：MS10-058漏洞分析与利用</title>
+        <link>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 14:48:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;内核池初探ms10-058漏洞分析与利用&#34;&gt;内核池初探：MS10-058漏洞分析与利用
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;我正在研究基于池(pool)的内存破坏漏洞。因此我想为Tarjei Mandt在其首次演讲&amp;quot;Windows 7内核池利用&amp;quot;[3]中提到的漏洞编写一个PoC利用程序。我认为这是开始学习池溢出漏洞的好练习。&lt;/p&gt;
+&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引言&lt;/li&gt;
+&lt;li&gt;前言&lt;/li&gt;
+&lt;li&gt;触发漏洞&lt;/li&gt;
+&lt;li&gt;池喷射技术
+&lt;ul&gt;
+&lt;li&gt;非分页对象&lt;/li&gt;
+&lt;li&gt;nt!PoolHitTag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;利用技术
+&lt;ul&gt;
+&lt;li&gt;基本结构&lt;/li&gt;
+&lt;li&gt;覆盖PoolIndex&lt;/li&gt;
+&lt;li&gt;非分页池类型&lt;/li&gt;
+&lt;li&gt;伪造池描述符&lt;/li&gt;
+&lt;li&gt;注意事项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;载荷与清理&lt;/li&gt;
+&lt;li&gt;致谢&lt;/li&gt;
+&lt;li&gt;结论&lt;/li&gt;
+&lt;li&gt;参考文献&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;如果你想实验这个漏洞，应该阅读[1]并确保拥有易受攻击的系统。我在Windows 7 32位虚拟机(tcpip.sys 6.1.7600.16385)上测试了这个漏洞。微软关于此漏洞的公告是MS10-058，由Matthieu Suiche[2]发现，并被用作Tarjei Mandt论文[3]中的示例。&lt;/p&gt;
+&lt;h2 id=&#34;触发漏洞&#34;&gt;触发漏洞
+&lt;/h2&gt;&lt;p&gt;tcpip!IppSortDestinationAddresses中的整数溢出导致分配了错误大小的非分页池内存块。漏洞版本与修补版本的差异如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+29   imul    eax, 1Ch
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2C   push    esi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2D   mov     esi, ds:__imp__ExAllocatePoolWithTag@12 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+33   push    edi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+34   mov     edi, 73617049h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+39   push    edi   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3A   push    eax  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3B   push    ebx           
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3C   call    esi ; ExAllocatePoolWithTag(x,x,x)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以通过WSAIoctl调用(SIO_ADDRESS_LIST_SORT)触发此代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;WSAIoctl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SIO_ADDRESS_LIST_SORT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;池喷射技术&#34;&gt;池喷射技术
+&lt;/h2&gt;&lt;h3 id=&#34;非分页对象&#34;&gt;非分页对象
+&lt;/h3&gt;&lt;p&gt;我们可以使用多种对象来操作非分页池，例如信号量对象或保留对象。由于驱动请求的是0x54字节(实际获得0x60字节块)，这与I/O完成保留对象(IoCo)的大小完全匹配。&lt;/p&gt;
+&lt;h3 id=&#34;ntpoolhittag&#34;&gt;nt!PoolHitTag
+&lt;/h3&gt;&lt;p&gt;要调试特定的ExFreePoolWithTag调用，可以使用池命中标签(pool hit tags)。nt!PoolHitTag会与当前释放块的池标签进行比较，如果匹配则触发调试断点。&lt;/p&gt;
+&lt;h2 id=&#34;利用技术&#34;&gt;利用技术
+&lt;/h2&gt;&lt;h3 id=&#34;基本结构&#34;&gt;基本结构
+&lt;/h3&gt;&lt;p&gt;池内存分为多种类型，其中两种是分页池和非分页池。池由_POOL_DESCRIPTOR结构描述，包含PoolType、ListHeads等字段。每个内存块在数据前都有一个_POOL_HEADER头，包含块大小、所属池等信息。&lt;/p&gt;
+&lt;h3 id=&#34;覆盖poolindex&#34;&gt;覆盖PoolIndex
+&lt;/h3&gt;&lt;p&gt;这种攻击的基本思路是破坏池头中的PoolIndex字段。该字段用于在释放分页池块时确定它属于哪个池描述符。攻击者可以通过破坏此字段使池管理器认为特定块属于另一个池描述符。&lt;/p&gt;
+&lt;h3 id=&#34;伪造池描述符&#34;&gt;伪造池描述符
+&lt;/h3&gt;&lt;p&gt;我们需要在空地址处伪造一个池描述符。只需分配该页面并放置伪造的延迟空闲列表和ListHeads即可。当释放一个块时，如果延迟空闲列表包含至少0x20个条目，ExFreePoolWithTag将实际释放这些块并将它们放在ListHeads的适当条目上。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;值得注意的是，这种攻击在现代缓解措施下无法工作，主要原因包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PoolIndex字段的验证&lt;/li&gt;
+&lt;li&gt;防止空页分配&lt;/li&gt;
+&lt;li&gt;Windows 8引入了NonPagedPoolNX类型&lt;/li&gt;
+&lt;li&gt;SMAP防止访问用户态数据&lt;/li&gt;
+&lt;li&gt;SMEP防止执行用户态代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;载荷与清理&#34;&gt;载荷与清理
+&lt;/h2&gt;&lt;p&gt;经典的&amp;quot;写任意位置&amp;quot;场景目标是HalDispatchTable。我们只需用指向我们载荷(setupPayload())的指针覆盖HalDispatchTable+4。完成后，我们需要将指针恢复为hal!HaliQuerySystemInformation。&lt;/p&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;特别感谢我的朋友@0vercl0k的审查和帮助！&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;希望你喜欢这篇文章。如果你想了解更多关于这个主题的内容，可以查看Tarjei Mandt、Zhenhua Liu和Nikita Tarakanov的最新论文。你可以在我的新github[5]上找到我的代码。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h2&gt;&lt;p&gt;[1] itsecdb上的漏洞详情
+[2] 微软公告
+[3] Windows 7内核池利用 - Tarjei Mandt的论文(必读)
+[4] Windows 7中的保留对象 - j00ru的优秀文章
+[5] 我的MS10-058漏洞利用代码&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

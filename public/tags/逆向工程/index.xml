@@ -7,7 +7,372 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 17:48:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 14:48:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>内核池初探：MS10-058漏洞分析与利用</title>
+        <link>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 14:48:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;内核池初探ms10-058漏洞分析与利用&#34;&gt;内核池初探：MS10-058漏洞分析与利用
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;我正在研究基于池(pool)的内存破坏漏洞。因此我想为Tarjei Mandt在其首次演讲&amp;quot;Windows 7内核池利用&amp;quot;[3]中提到的漏洞编写一个PoC利用程序。我认为这是开始学习池溢出漏洞的好练习。&lt;/p&gt;
+&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引言&lt;/li&gt;
+&lt;li&gt;前言&lt;/li&gt;
+&lt;li&gt;触发漏洞&lt;/li&gt;
+&lt;li&gt;池喷射技术
+&lt;ul&gt;
+&lt;li&gt;非分页对象&lt;/li&gt;
+&lt;li&gt;nt!PoolHitTag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;利用技术
+&lt;ul&gt;
+&lt;li&gt;基本结构&lt;/li&gt;
+&lt;li&gt;覆盖PoolIndex&lt;/li&gt;
+&lt;li&gt;非分页池类型&lt;/li&gt;
+&lt;li&gt;伪造池描述符&lt;/li&gt;
+&lt;li&gt;注意事项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;载荷与清理&lt;/li&gt;
+&lt;li&gt;致谢&lt;/li&gt;
+&lt;li&gt;结论&lt;/li&gt;
+&lt;li&gt;参考文献&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;p&gt;如果你想实验这个漏洞，应该阅读[1]并确保拥有易受攻击的系统。我在Windows 7 32位虚拟机(tcpip.sys 6.1.7600.16385)上测试了这个漏洞。微软关于此漏洞的公告是MS10-058，由Matthieu Suiche[2]发现，并被用作Tarjei Mandt论文[3]中的示例。&lt;/p&gt;
+&lt;h2 id=&#34;触发漏洞&#34;&gt;触发漏洞
+&lt;/h2&gt;&lt;p&gt;tcpip!IppSortDestinationAddresses中的整数溢出导致分配了错误大小的非分页池内存块。漏洞版本与修补版本的差异如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+29   imul    eax, 1Ch
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2C   push    esi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+2D   mov     esi, ds:__imp__ExAllocatePoolWithTag@12 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+33   push    edi
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+34   mov     edi, 73617049h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+39   push    edi   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3A   push    eax  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3B   push    ebx           
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;IppSortDestinationAddresses(x,x,x)+3C   call    esi ; ExAllocatePoolWithTag(x,x,x)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可以通过WSAIoctl调用(SIO_ADDRESS_LIST_SORT)触发此代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;WSAIoctl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SIO_ADDRESS_LIST_SORT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;池喷射技术&#34;&gt;池喷射技术
+&lt;/h2&gt;&lt;h3 id=&#34;非分页对象&#34;&gt;非分页对象
+&lt;/h3&gt;&lt;p&gt;我们可以使用多种对象来操作非分页池，例如信号量对象或保留对象。由于驱动请求的是0x54字节(实际获得0x60字节块)，这与I/O完成保留对象(IoCo)的大小完全匹配。&lt;/p&gt;
+&lt;h3 id=&#34;ntpoolhittag&#34;&gt;nt!PoolHitTag
+&lt;/h3&gt;&lt;p&gt;要调试特定的ExFreePoolWithTag调用，可以使用池命中标签(pool hit tags)。nt!PoolHitTag会与当前释放块的池标签进行比较，如果匹配则触发调试断点。&lt;/p&gt;
+&lt;h2 id=&#34;利用技术&#34;&gt;利用技术
+&lt;/h2&gt;&lt;h3 id=&#34;基本结构&#34;&gt;基本结构
+&lt;/h3&gt;&lt;p&gt;池内存分为多种类型，其中两种是分页池和非分页池。池由_POOL_DESCRIPTOR结构描述，包含PoolType、ListHeads等字段。每个内存块在数据前都有一个_POOL_HEADER头，包含块大小、所属池等信息。&lt;/p&gt;
+&lt;h3 id=&#34;覆盖poolindex&#34;&gt;覆盖PoolIndex
+&lt;/h3&gt;&lt;p&gt;这种攻击的基本思路是破坏池头中的PoolIndex字段。该字段用于在释放分页池块时确定它属于哪个池描述符。攻击者可以通过破坏此字段使池管理器认为特定块属于另一个池描述符。&lt;/p&gt;
+&lt;h3 id=&#34;伪造池描述符&#34;&gt;伪造池描述符
+&lt;/h3&gt;&lt;p&gt;我们需要在空地址处伪造一个池描述符。只需分配该页面并放置伪造的延迟空闲列表和ListHeads即可。当释放一个块时，如果延迟空闲列表包含至少0x20个条目，ExFreePoolWithTag将实际释放这些块并将它们放在ListHeads的适当条目上。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;p&gt;值得注意的是，这种攻击在现代缓解措施下无法工作，主要原因包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PoolIndex字段的验证&lt;/li&gt;
+&lt;li&gt;防止空页分配&lt;/li&gt;
+&lt;li&gt;Windows 8引入了NonPagedPoolNX类型&lt;/li&gt;
+&lt;li&gt;SMAP防止访问用户态数据&lt;/li&gt;
+&lt;li&gt;SMEP防止执行用户态代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;载荷与清理&#34;&gt;载荷与清理
+&lt;/h2&gt;&lt;p&gt;经典的&amp;quot;写任意位置&amp;quot;场景目标是HalDispatchTable。我们只需用指向我们载荷(setupPayload())的指针覆盖HalDispatchTable+4。完成后，我们需要将指针恢复为hal!HaliQuerySystemInformation。&lt;/p&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;特别感谢我的朋友@0vercl0k的审查和帮助！&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;希望你喜欢这篇文章。如果你想了解更多关于这个主题的内容，可以查看Tarjei Mandt、Zhenhua Liu和Nikita Tarakanov的最新论文。你可以在我的新github[5]上找到我的代码。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h2&gt;&lt;p&gt;[1] itsecdb上的漏洞详情
+[2] 微软公告
+[3] Windows 7内核池利用 - Tarjei Mandt的论文(必读)
+[4] Windows 7中的保留对象 - j00ru的优秀文章
+[5] 我的MS10-058漏洞利用代码&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>漏洞利用实验室：2015年CanSecWest与SyScan漏洞实验公告</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 05:27:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;漏洞利用实验室2015年会议公告&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我们荣幸地宣布，漏洞利用实验室(Exploit Lab)将作为实践课程亮相2015年两大国际安全会议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CanSecWest&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;日期：2015年3月&lt;/li&gt;
+&lt;li&gt;地点：加拿大温哥华&lt;/li&gt;
+&lt;li&gt;内容：高级堆溢出利用技术实战，包括现代缓解机制（ASLR/DEP）绕过方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SyScan360&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;日期：2015年7月&lt;/li&gt;
+&lt;li&gt;地点：中国北京&lt;/li&gt;
+&lt;li&gt;内容：内核级漏洞利用开发，重点分析Windows和Linux内核漏洞利用链构建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;课程技术亮点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于真实漏洞案例的利用代码开发（C/ASM）&lt;/li&gt;
+&lt;li&gt;ROP链构造与堆布局操控技术&lt;/li&gt;
+&lt;li&gt;针对不同操作系统架构的Shellcode编写规范&lt;/li&gt;
+&lt;li&gt;漏洞利用可靠性提升技巧（环境适配与稳定性优化）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实验环境要求&lt;/strong&gt;&lt;br&gt;
+参与者需自带安装以下工具的笔记本电脑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VMware Workstation 12+&lt;/li&gt;
+&lt;li&gt;IDA Pro 6.8+&lt;/li&gt;
+&lt;li&gt;Python 2.7环境及pwntools框架&lt;/li&gt;
+&lt;li&gt;预装Windows 7/8和Kali Linux虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>使用CodeReason进行原生程序语义分析 - 揭秘二进制逆向工程利器</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 03:08:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</guid>
+        <description>&lt;h1 id=&#34;原生程序的语义分析codereason技术解析&#34;&gt;原生程序的语义分析：CodeReason技术解析
+&lt;/h1&gt;&lt;p&gt;你是否曾想对原生模式程序发起查询，询问哪些代码位置会向特定寄存器写入特定值？是否希望自动化解混淆字符串的操作？&lt;/p&gt;
+&lt;h2 id=&#34;逆向工程的语义挑战&#34;&gt;逆向工程的语义挑战
+&lt;/h2&gt;&lt;p&gt;逆向工程原生程序需要在低层次理解其语义，直到浮现出高层次功能图景。系统化理解原生程序的一个关键挑战在于：这种理解必须覆盖程序使用的每一条指令。分析工具需要明确知道哪些指令会对内存调用和寄存器产生何种影响。&lt;/p&gt;
+&lt;p&gt;我们向您介绍CodeReason——这个为DARPA网络快速追踪项目开发的机器码分析框架。CodeReason提供了分析x86和ARM原生代码语义的框架，其价值在于能让我们平台化地查询原生代码对整体程序状态的影响，这得益于它对原生指令的深度语义理解。&lt;/p&gt;
+&lt;h2 id=&#34;构建语义理解的挑战&#34;&gt;构建语义理解的挑战
+&lt;/h2&gt;&lt;p&gt;构建这种语义理解既耗时又昂贵。现有系统要么门槛过高，要么无法精确满足需求，或者没有对其语义进行简化和优化。而我们正需要这些简化——它们能将复杂的优化转化为易于理解的简单表达式。为说明这点，我们将展示一个CodeReason的实际应用案例。&lt;/p&gt;
+&lt;h2 id=&#34;flame恶意软件分析实战&#34;&gt;Flame恶意软件分析实战
+&lt;/h2&gt;&lt;p&gt;当Flame恶意软件曝光时，其部分二进制文件被上传到malware.lu。这些样本采用全局数据结构存储混淆字符串，结构如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ObfuscatedString&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;padding&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hasDeobfuscated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;short&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stringLen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;每个结构体末尾包含可变长度数据，其中7字节似乎未被使用。&lt;/p&gt;
+&lt;h3 id=&#34;技术亮点一字符串反混淆&#34;&gt;技术亮点一：字符串反混淆
+&lt;/h3&gt;&lt;p&gt;我们使用CodeReason编写了C语言字符串解混淆器。原始程序逻辑分三步进行字符串解混淆：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;首函数&lt;/strong&gt;检查hasDeobfuscated字段：若为零，返回字符串首元素指针；若非零则调用第二函数，并将hasDeobfuscated置零&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;次函数&lt;/strong&gt;遍历&amp;rsquo;string&amp;rsquo;数组每个字符，调用第三函数获取值后从字符中减去该值，结果写回数组：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;inplace_buffer_decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;counted&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;counted&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;counted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newChar&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get_decrypt_modifier_f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;counted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newChar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;counted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;关键函数&lt;/strong&gt;&lt;code&gt;get_decrypt_modifier&lt;/code&gt;仅包含一个基本块：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;lea ecx, [eax+11h]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;add eax, 0Bh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;imul ecx, eax
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov edx, ecx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;shr edx, 8
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mov eax, edx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xor eax, ecx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;shr eax, 10h
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xor eax, edx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xor eax, ecx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;retn
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;CodeReason的优势在于：我们可以捕获该代码块并获取&amp;rsquo;eax&amp;rsquo;的方程式，从而理解该块的&amp;quot;返回&amp;quot;行为，在解混淆器中复现&lt;code&gt;get_decrypt_modifier&lt;/code&gt;的语义。&lt;/p&gt;
+&lt;h3 id=&#34;语义分析-vs-反编译&#34;&gt;语义分析 vs 反编译
+&lt;/h3&gt;&lt;p&gt;虽然可以反编译此代码片段为C，但我们更关注代码对&amp;rsquo;eax&amp;rsquo;的影响，而非高级的C代码表现形式。CodeReason让我们能跳过最后一步，直接分析语义，这种方式往往更强大。&lt;/p&gt;
+&lt;h2 id=&#34;codereason实战演示&#34;&gt;CodeReason实战演示
+&lt;/h2&gt;&lt;p&gt;通过CodeReason获取语义表达如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ ./bin/VEEShell -a X86 -f ../tests/testSkyWipe.bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;EAX = Xor32[ Xor32[ Shr32[ Xor32[ Shr32[ Mul32[ Add32[ REGREAD(EAX), I:U32(0xb) ], Add32[ REGREAD(EAX), I:U32(0x11) ] ], I:U8(0x8) ], Mul32[ Add32[ REGREAD(EAX), I:U32(0xb) ], Add32[ REGREAD(EAX), I:U32(0x11) ] ] ], I:U8(0x10) ], Shr32[ Mul32[ Add32[ REGREAD(EAX), I:U32(0xb) ], Add32[ REGREAD(EAX), I:U32(0x11) ] ], I:U8(0x8) ] ], Mul32[ Add32[ REGREAD(EAX), I:U32(0xb) ], Add32[ REGREAD(EAX), I:U32(0x11) ] ] ]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;基于此，我们实现了等效的C函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get_decrypt_modifier_f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Xor32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;Xor32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nf&#34;&gt;Shr32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;Xor32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nf&#34;&gt;Shr32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;Mul32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;mh&#34;&gt;0x8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nf&#34;&gt;Mul32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x11&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;mh&#34;&gt;0x10&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nf&#34;&gt;Shr32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;Mul32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x11&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;mh&#34;&gt;0x8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;Mul32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nf&#34;&gt;Add32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x11&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;实际运行效果验证了其正确性：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\code\tmp&amp;gt;skywiper_string_decrypt.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CreateToolhelp32Snapshot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们正在将CodeReason扩展为IDA插件，届时可直接在IDA中进行这些查询！&lt;/p&gt;
+&lt;h2 id=&#34;技术亮点二竞态条件发现&#34;&gt;技术亮点二：竞态条件发现
+&lt;/h2&gt;&lt;p&gt;这个字符串解混淆器存在竞态条件：若两个线程同时解混淆同一字符串，将导致字符串永久损坏。当处理关键混淆字符串时，这可能导致向系统服务传递错误数据，造成严重后果。&lt;/p&gt;
+&lt;h2 id=&#34;高级混淆破解案例&#34;&gt;高级混淆破解案例
+&lt;/h2&gt;&lt;p&gt;我们还用CodeReason破解了如下形式的字符串混淆：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;xor eax eax
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;push eax
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sub eax, 0x21ece84
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;push eax
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过巧妙利用二进制补码运算语义，这些指令序列将非字符串立即数转化为字符串值，并按正确顺序压栈，实现动态构建字符串。CodeReason配合简单窥孔优化器，能将其转换为字符串立即数的内存写入形式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MEMWRITE[esp] = &amp;#39;.dll&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MEMWRITE[esp-4] = &amp;#39;nlan&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;将机器码转化为可优化和理解的形式具有强大潜力！特别是当这种能力以编程库形式提供时。通过CodeReason，我们能够：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;提取字符串混淆函数的语义&lt;/li&gt;
+&lt;li&gt;自动实现字符串解混淆器&lt;/li&gt;
+&lt;li&gt;将混淆代码简化为直接表达解混淆字符串的形式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们将在后续博文中介绍CodeReason的更多应用场景和能力。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>用Binary Ninja破解2000个二进制文件 - 逆向工程实战解析</title>
         <link>http://localhost:1313/p/%E7%94%A8binary-ninja%E7%A0%B4%E8%A7%A32000%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%AE%9E%E6%88%98%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Mon, 04 Aug 2025 17:48:54 +0800</pubDate>

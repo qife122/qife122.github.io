@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>TvOS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/tvos/</link>
+        <description>Recent content in TvOS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 04:26:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/tvos/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>tvOS 18.6 安全更新：漏洞修复与技术细节</title>
+        <link>http://localhost:1313/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</link>
+        <pubDate>Tue, 05 Aug 2025 04:26:52 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</guid>
+        <description>&lt;h1 id=&#34;apple-sa-07-29-2025-7-tvos-186&#34;&gt;APPLE-SA-07-29-2025-7 tvOS 18.6
+&lt;/h1&gt;&lt;p&gt;tvOS 18.6 解决了以下问题。安全内容的信息也可在 &lt;a class=&#34;link&#34; href=&#34;https://support.apple.com/124153&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://support.apple.com/124153&lt;/a&gt; 查看。&lt;/p&gt;
+&lt;p&gt;Apple 在 &lt;a class=&#34;link&#34; href=&#34;https://support.apple.com/100100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://support.apple.com/100100&lt;/a&gt; 维护了一个安全发布页面，列出了最近带有安全公告的软件更新。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞修复详情&#34;&gt;漏洞修复详情
+&lt;/h2&gt;&lt;h3 id=&#34;afclip&#34;&gt;afclip
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：解析文件可能导致应用意外终止&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43186&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)&lt;/p&gt;
+&lt;h3 id=&#34;cfnetwork&#34;&gt;CFNetwork
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：非特权用户可能能够修改受限网络设置&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进输入验证解决了拒绝服务问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43223&lt;/strong&gt;：Nosebeard Labs 的 Andreas Jaegersberger 和 Ro Achterberg&lt;/p&gt;
+&lt;h3 id=&#34;coreaudio&#34;&gt;CoreAudio
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的音频文件可能导致内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43277&lt;/strong&gt;：Google 的威胁分析团队&lt;/p&gt;
+&lt;h3 id=&#34;coremedia&#34;&gt;CoreMedia
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的媒体文件可能导致应用意外终止或进程内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进边界检查解决了越界访问问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43210&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)&lt;/p&gt;
+&lt;h3 id=&#34;coremedia-playback&#34;&gt;CoreMedia Playback
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：应用可能能够访问用户敏感数据&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过额外的权限检查解决了该问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43230&lt;/strong&gt;：ZUSO ART 的 Chi Yuan Chang 和 taikosoup&lt;/p&gt;
+&lt;h3 id=&#34;icu&#34;&gt;ICU
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致 Safari 意外崩溃&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进边界检查解决了越界访问问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43209&lt;/strong&gt;：与 Trend Micro Zero Day Initiative 合作的 Gary Kwong&lt;/p&gt;
+&lt;h3 id=&#34;imageio&#34;&gt;ImageIO
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的图像可能导致进程内存泄露&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进输入验证解决了越界读取问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43226&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;libxml2&#34;&gt;libxml2
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理文件可能导致内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。&lt;br&gt;
+&lt;strong&gt;CVE-2025-7425&lt;/strong&gt;：Google Project Zero 的 Sergei Glazunov&lt;/p&gt;
+&lt;h3 id=&#34;libxslt&#34;&gt;libxslt
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。&lt;br&gt;
+&lt;strong&gt;CVE-2025-7424&lt;/strong&gt;：Google Project Zero 的 Ivan Fratric&lt;/p&gt;
+&lt;h3 id=&#34;metal&#34;&gt;Metal
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的纹理可能导致应用意外终止&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进输入验证解决了多个内存损坏问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43234&lt;/strong&gt;：Google 威胁分析团队的 Vlad Stolyarov&lt;/p&gt;
+&lt;h3 id=&#34;model-io&#34;&gt;Model I/O
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的媒体文件可能导致应用意外终止或进程内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进边界检查解决了越界访问问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-43224&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)&lt;br&gt;
+&lt;strong&gt;CVE-2025-43221&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)&lt;/p&gt;
+&lt;h3 id=&#34;model-io-1&#34;&gt;Model I/O
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的文件可能导致应用意外终止&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了输入验证问题。&lt;br&gt;
+&lt;strong&gt;CVE-2025-31281&lt;/strong&gt;：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)&lt;/p&gt;
+&lt;h3 id=&#34;webkit&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能泄露敏感用户信息&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进状态管理解决了该问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 292888&lt;br&gt;
+&lt;strong&gt;CVE-2025-43227&lt;/strong&gt;: Gilad Moav&lt;/p&gt;
+&lt;h3 id=&#34;webkit-1&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致内存损坏&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 291742&lt;br&gt;
+&lt;strong&gt;CVE-2025-31278&lt;/strong&gt;: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 291745&lt;br&gt;
+&lt;strong&gt;CVE-2025-31277&lt;/strong&gt;: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 293579&lt;br&gt;
+&lt;strong&gt;CVE-2025-31273&lt;/strong&gt;: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei&lt;/p&gt;
+&lt;h3 id=&#34;webkit-2&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致 Safari 意外崩溃&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 292599&lt;br&gt;
+&lt;strong&gt;CVE-2025-43214&lt;/strong&gt;: 与 Trend Micro Zero Day Initiative 和 Google V8 安全团队合作的 shandikri&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 292621&lt;br&gt;
+&lt;strong&gt;CVE-2025-43213&lt;/strong&gt;: Google V8 安全团队&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 293197&lt;br&gt;
+&lt;strong&gt;CVE-2025-43212&lt;/strong&gt;: Nan Wang (@eternalsakura13) 和 Ziling Chen&lt;/p&gt;
+&lt;h3 id=&#34;webkit-3&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理网页内容可能导致拒绝服务&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存处理解决了该问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 293730&lt;br&gt;
+&lt;strong&gt;CVE-2025-43211&lt;/strong&gt;: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei&lt;/p&gt;
+&lt;h3 id=&#34;webkit-4&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能泄露应用的内部状态&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进输入验证解决了越界读取问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 294182&lt;br&gt;
+&lt;strong&gt;CVE-2025-43265&lt;/strong&gt;: DEVCORE 研究团队的 HexRabbit (@h3xr4bb1t)&lt;/p&gt;
+&lt;h3 id=&#34;webkit-5&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致 Safari 意外崩溃&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：通过改进内存管理解决了释放后使用问题。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 295382&lt;br&gt;
+&lt;strong&gt;CVE-2025-43216&lt;/strong&gt;: Ignacio Sanmillan (@ulexec)&lt;/p&gt;
+&lt;h3 id=&#34;webkit-6&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;适用设备&lt;/strong&gt;：Apple TV HD 和 Apple TV 4K（所有型号）&lt;br&gt;
+&lt;strong&gt;影响&lt;/strong&gt;：处理恶意制作的网页内容可能导致 Safari 意外崩溃&lt;br&gt;
+&lt;strong&gt;描述&lt;/strong&gt;：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。&lt;br&gt;
+&lt;strong&gt;WebKit Bugzilla&lt;/strong&gt;: 296459&lt;br&gt;
+&lt;strong&gt;CVE-2025-6558&lt;/strong&gt;: Google 威胁分析团队的 Clément Lecigne 和 Vlad Stolyarov&lt;/p&gt;
+&lt;h2 id=&#34;额外致谢&#34;&gt;额外致谢
+&lt;/h2&gt;&lt;h3 id=&#34;bluetooth&#34;&gt;Bluetooth
+&lt;/h3&gt;&lt;p&gt;我们感谢 Source Guard 的 LIdong LI、Xiao Wang、Shao Dong Chen 和 Chao Tan 的帮助。&lt;/p&gt;
+&lt;h3 id=&#34;coreaudio-1&#34;&gt;CoreAudio
+&lt;/h3&gt;&lt;p&gt;我们感谢 Noah Weinberg 的帮助。&lt;/p&gt;
+&lt;h3 id=&#34;libxml2-1&#34;&gt;libxml2
+&lt;/h3&gt;&lt;p&gt;我们感谢 Google Project Zero 的 Sergei Glazunov 的帮助。&lt;/p&gt;
+&lt;h3 id=&#34;libxslt-1&#34;&gt;libxslt
+&lt;/h3&gt;&lt;p&gt;我们感谢 Google Project Zero 的 Ivan Fratric 的帮助。&lt;/p&gt;
+&lt;h3 id=&#34;webkit-7&#34;&gt;WebKit
+&lt;/h3&gt;&lt;p&gt;我们感谢 Google V8 安全团队、Yuhao Hu、Yan Kang、Chenggang Wu、Xiaojie Wei 和 rheza (@ginggilBesel) 的帮助。&lt;/p&gt;
+&lt;h2 id=&#34;更新说明&#34;&gt;更新说明
+&lt;/h2&gt;&lt;p&gt;Apple TV 会定期检查软件更新。您也可以手动检查软件更新，方法是选择“设置 -&amp;gt; 系统 -&amp;gt; 软件更新 -&amp;gt; 更新软件”。&lt;/p&gt;
+&lt;p&gt;要检查当前的软件版本，请选择“设置 -&amp;gt; 通用 -&amp;gt; 关于”。&lt;/p&gt;
+&lt;p&gt;所有信息也发布在 Apple 安全发布网站：&lt;a class=&#34;link&#34; href=&#34;https://support.apple.com/100100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://support.apple.com/100100&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;此消息使用 Apple 的产品安全 PGP 密钥签名，详细信息请访问：&lt;a class=&#34;link&#34; href=&#34;https://www.apple.com/support/security/pgp/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.apple.com/support/security/pgp/&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

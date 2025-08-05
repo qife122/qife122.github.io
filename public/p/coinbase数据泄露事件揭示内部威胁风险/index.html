@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入分析了Coinbase数据泄露事件，探讨了内部威胁的风险与管理，提出了以数据为中心的安全策略，包括数据分类、实时监控和合规性管理，为企业构建全面的安全框架提供了实用建议。">
+<title>Coinbase数据泄露事件揭示内部威胁风险</title>
+
+<link rel='canonical' href='http://localhost:1313/p/coinbase%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E6%8F%AD%E7%A4%BA%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81%E9%A3%8E%E9%99%A9/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="Coinbase数据泄露事件揭示内部威胁风险">
+<meta property='og:description' content="本文深入分析了Coinbase数据泄露事件，探讨了内部威胁的风险与管理，提出了以数据为中心的安全策略，包括数据分类、实时监控和合规性管理，为企业构建全面的安全框架提供了实用建议。">
+<meta property='og:url' content='http://localhost:1313/p/coinbase%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E6%8F%AD%E7%A4%BA%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81%E9%A3%8E%E9%99%A9/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='数据泄露' /><meta property='article:tag' content='内部威胁' /><meta property='article:published_time' content='2025-08-05T05:06:03&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T05:06:03&#43;08:00'/>
+<meta name="twitter:title" content="Coinbase数据泄露事件揭示内部威胁风险">
+<meta name="twitter:description" content="本文深入分析了Coinbase数据泄露事件，探讨了内部威胁的风险与管理，提出了以数据为中心的安全策略，包括数据分类、实时监控和合规性管理，为企业构建全面的安全框架提供了实用建议。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#控制失效">控制失效</a></li>
+    <li><a href="#内部威胁的兴起">内部威胁的兴起</a></li>
+    <li><a href="#以数据为中心的安全方法">以数据为中心的安全方法</a></li>
+    <li><a href="#超越检测构建韧性">超越检测：构建韧性</a></li>
+    <li><a href="#前进之路">前进之路</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/coinbase%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E6%8F%AD%E7%A4%BA%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81%E9%A3%8E%E9%99%A9/">Coinbase数据泄露事件揭示内部威胁风险</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入分析了Coinbase数据泄露事件，探讨了内部威胁的风险与管理，提出了以数据为中心的安全策略，包括数据分类、实时监控和合规性管理，为企业构建全面的安全框架提供了实用建议。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="coinbase数据泄露事件揭示内部威胁风险">Coinbase数据泄露事件揭示内部威胁风险
+</h1><p>当你的数字金库被攻破时，后果不仅仅是财务损失——它动摇了信任的根基。这正是全球最大加密货币交易所之一Coinbase面临的现实。据报道，该数据泄露事件导致高达4亿美元的损失，并暴露了近7万名客户的个人信息。这一事件引发了关于企业如何管理数据治理、内部安全控制和内部风险的严峻问题。</p>
+<p>不幸的是，这类网络安全事件已不再罕见。越来越多的企业发现自己处于相同境地：在可预防的事件发生后匆忙重建信任。但Coinbase事件的不同之处在于其执行方式，以及它对数据安全需要采取主动全面方法的广泛需求所发出的信号。</p>
+<h2 id="控制失效">控制失效
+</h2><p>根据法庭文件和公开披露，攻击者通过贿赂&quot;为Coinbase服务的少数个人&quot;利用了内部漏洞。这使得网络犯罪分子能够未经授权访问内部系统，最终窃取客户账户数据。泄露的数据包括客户姓名、地址、电话号码、电子邮件地址、社会安全号码后四位、银行详细信息、政府签发的身份证件和账户快照。</p>
+<p>Coinbase现在面临监管审查和多起诉讼，指控其未能保护个人数据以及对泄露事件的应对不当。许多报告估计，此次泄露可能给Coinbase造成1.8亿至4亿美元的损失。</p>
+<h2 id="内部威胁的兴起">内部威胁的兴起
+</h2><p>内部威胁并不新鲜，但它们已经呈现出不同的形态，而且比以往任何时候都更难被发现。这不再只是一个偏离脚本的流氓员工。现在，外部攻击者知道如何利用系统，使用社会工程学操纵内部人员获取他们想要的数据。</p>
+<p>问题在于，大多数安全工具仍然专注于外围防御。它们擅长阻止来自外部的已知威胁，但常常忽视内部发生的事情。如果公司不清楚谁在访问敏感信息、这些数据位于何处或如何移动，就很容易错过警告信号。</p>
+<p>这就是Coinbase泄露事件成为警钟的原因。它表明了对访问权限(尤其是具有提升权限的员工)实施严格控制的重要性。但锁定访问权限并不是全部。真正重要的是采取数据优先的方法，了解你拥有的敏感数据、存储位置、分类方式以及任何给定时间谁在与它交互。</p>
+<h2 id="以数据为中心的安全方法">以数据为中心的安全方法
+</h2><p>有效的风险缓解始于数据。组织需要能够自动发现和分类跨云、本地和混合环境的敏感数据。如果你不知道拥有什么数据或数据位于何处，几乎不可能实施正确的政策和保护措施。一旦识别出敏感数据，下一步就是了解其上下文，包括谁有权访问、存储位置以及是否违反任何政策。没有实时洞察，这些问题很难回答，更难采取行动。</p>
+<p>此外，组织应投资于监控和响应访问或使用模式异常的工具。例如，如果客户服务代理突然下载大量敏感信息，该行为应触发警报并立即执行政策。</p>
+<p>组织需要确保其数据治理战略符合法规要求。现代隐私法规，如欧洲的《通用数据保护条例》(GDPR)、《加州消费者隐私法案》(CCPA)等，要求组织展示他们如何管理数据权利、确保适当同意并响应数据主体请求。当这些流程实现自动化并映射到实时数据分类时，保持合规和响应事件就会变得容易得多。</p>
+<h2 id="超越检测构建韧性">超越检测：构建韧性
+</h2><p>Coinbase泄露事件的教训不仅在于出了什么问题，还在于如果准备充分可能会有什么不同。那些超越被动安全并构建治理、风险和合规综合框架的组织将在建立客户信任方面领先，并将在长期内表现更好。</p>
+<p>这包括创建基于敏感性、目的和监管要求定义数据处理方式的政策。这意味着当敏感数据出现在错误的位置或暴露给错误的人时，能够启用主动补救工作流程自动采取行动。这也意味着建立正确的流程，快速透明地报告事件。</p>
+<p>投资员工培训和安全意识也很关键。贿赂、钓鱼和冒充等社会工程策略仍然是最有效的防御突破方式之一。一支知识渊博的员工队伍是关键的防线。</p>
+<h2 id="前进之路">前进之路
+</h2><p>Coinbase泄露事件有力地提醒我们，网络安全是一项涉及组织各个部分的业务风险，从法律和合规到客户服务和高管领导。随着越来越多的公司处理日益增长的敏感信息，必须以与外部威胁相同的严谨态度应对内部风险。</p>
+<p>优势在于那些将可见性和控制合二为一的团队：发现敏感数据、了解其上下文并执行正确的控制——跨云、软件即服务(SaaS)和传统系统。这不仅仅是预防威胁。这是关于在系统中构建智能，以便你能在风险降临之前看到它。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/">数据泄露</a>
+        
+            <a href="/tags/%E5%86%85%E9%83%A8%E5%A8%81%E8%83%81/">内部威胁</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E9%BA%A6%E5%BD%93%E5%8A%B3ai%E6%8B%9B%E8%81%98%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%A0%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81123456%E8%87%B4%E6%95%B0%E7%99%BE%E4%B8%87%E6%B1%82%E8%81%8C%E8%80%85%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">麦当劳AI招聘机器人因使用密码&#34;123456&#34;致数百万求职者数据泄露</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%88%B4%E5%B0%94%E9%81%AD%E5%8B%92%E7%B4%A2%E7%BB%84%E7%BB%87%E5%85%A5%E4%BE%B5-%E5%9D%9A%E7%A7%B0%E6%B3%84%E9%9C%B2%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BC%AA%E9%80%A0%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">戴尔遭勒索组织入侵 坚称泄露数据为&#34;伪造&#34;测试数据</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%9F%BA%E4%BA%8Et-mobile%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AF%B9%E7%AD%96/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于T-Mobile数据泄露事件的企业安全事件分析与防御对策</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

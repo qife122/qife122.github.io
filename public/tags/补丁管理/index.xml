@@ -7,7 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 05:08:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 18:30:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025年7月Patch Tuesday更新汇总：系统管理员必读</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B47%E6%9C%88patch-tuesday%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%BF%85%E8%AF%BB/</link>
+        <pubDate>Tue, 05 Aug 2025 18:30:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B47%E6%9C%88patch-tuesday%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%BF%85%E8%AF%BB/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/05/oCsPt.png" alt="Featured image of post 2025年7月Patch Tuesday更新汇总：系统管理员必读" /&gt;&lt;h1 id=&#34;patch-tuesday-更新讨论专帖-2025-07-08&#34;&gt;Patch Tuesday 更新讨论专帖 (2025-07-08)
+&lt;/h1&gt;&lt;h2 id=&#34;一般讨论&#34;&gt;一般讨论
+&lt;/h2&gt;&lt;p&gt;大家好，我是u/AutoModerator，欢迎来到本月的补丁更新讨论专帖！&lt;/p&gt;
+&lt;p&gt;这里是讨论最新补丁、更新和发布的（相对）安全区域。我们设立这个帖子的目的是为了汇总本月所有更新相关信息：修复了哪些问题、出现了什么故障、哪些本该在QA环节被发现的问题还是发布了等等。这既是为了保持版面的整洁，也为亲爱的读者们提供一个集中的信息源。&lt;/p&gt;
+&lt;p&gt;想要查看往期讨论专帖的用户可以&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;点击这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;虽然本帖子时间安排与微软的Patch Tuesday同步，但欢迎讨论任何公司或产品的补丁、更新和发布。注意：本帖子通常在微软更新发布前就发布，微软更新计划于UTC时间下午5点发布。&lt;/p&gt;
+&lt;h2 id=&#34;安全补丁部署准则&#34;&gt;安全补丁部署准则
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;先部署到测试/开发环境&lt;/strong&gt;，再部署到生产环境&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;先部署到试点/测试组&lt;/strong&gt;，再部署到整个组织&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;制定回滚计划&lt;/strong&gt;以备出现问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反复测试&lt;/strong&gt;，测试，再测试！&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>2025年6月补丁星期二：微软修复67个漏洞，包含1个零日漏洞</title>
         <link>http://localhost:1313/p/2025%E5%B9%B46%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D67%E4%B8%AA%E6%BC%8F%E6%B4%9E%E5%8C%85%E5%90%AB1%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</link>
         <pubDate>Mon, 04 Aug 2025 05:08:49 +0800</pubDate>

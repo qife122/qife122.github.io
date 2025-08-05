@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了Apple tvOS 18.6版本中修复的多个安全漏洞，包括内存处理、输入验证、权限检查等技术问题，涉及afclip、CFNetwork、CoreAudio、CoreMedia等多个组件。">
+<title>tvOS 18.6 安全更新：漏洞修复与技术细节</title>
+
+<link rel='canonical' href='http://localhost:1313/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="tvOS 18.6 安全更新：漏洞修复与技术细节">
+<meta property='og:description' content="本文详细介绍了Apple tvOS 18.6版本中修复的多个安全漏洞，包括内存处理、输入验证、权限检查等技术问题，涉及afclip、CFNetwork、CoreAudio、CoreMedia等多个组件。">
+<meta property='og:url' content='http://localhost:1313/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='tvOS' /><meta property='article:tag' content='安全漏洞' /><meta property='article:tag' content='内存处理' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-05T04:26:52&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T04:26:52&#43;08:00'/>
+<meta name="twitter:title" content="tvOS 18.6 安全更新：漏洞修复与技术细节">
+<meta name="twitter:description" content="本文详细介绍了Apple tvOS 18.6版本中修复的多个安全漏洞，包括内存处理、输入验证、权限检查等技术问题，涉及afclip、CFNetwork、CoreAudio、CoreMedia等多个组件。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#漏洞修复详情">漏洞修复详情</a>
+      <ol>
+        <li><a href="#afclip">afclip</a></li>
+        <li><a href="#cfnetwork">CFNetwork</a></li>
+        <li><a href="#coreaudio">CoreAudio</a></li>
+        <li><a href="#coremedia">CoreMedia</a></li>
+        <li><a href="#coremedia-playback">CoreMedia Playback</a></li>
+        <li><a href="#icu">ICU</a></li>
+        <li><a href="#imageio">ImageIO</a></li>
+        <li><a href="#libxml2">libxml2</a></li>
+        <li><a href="#libxslt">libxslt</a></li>
+        <li><a href="#metal">Metal</a></li>
+        <li><a href="#model-io">Model I/O</a></li>
+        <li><a href="#model-io-1">Model I/O</a></li>
+        <li><a href="#webkit">WebKit</a></li>
+        <li><a href="#webkit-1">WebKit</a></li>
+        <li><a href="#webkit-2">WebKit</a></li>
+        <li><a href="#webkit-3">WebKit</a></li>
+        <li><a href="#webkit-4">WebKit</a></li>
+        <li><a href="#webkit-5">WebKit</a></li>
+        <li><a href="#webkit-6">WebKit</a></li>
+      </ol>
+    </li>
+    <li><a href="#额外致谢">额外致谢</a>
+      <ol>
+        <li><a href="#bluetooth">Bluetooth</a></li>
+        <li><a href="#coreaudio-1">CoreAudio</a></li>
+        <li><a href="#libxml2-1">libxml2</a></li>
+        <li><a href="#libxslt-1">libxslt</a></li>
+        <li><a href="#webkit-7">WebKit</a></li>
+      </ol>
+    </li>
+    <li><a href="#更新说明">更新说明</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/tvos-18.6-%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E4%B8%8E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/">tvOS 18.6 安全更新：漏洞修复与技术细节</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了Apple tvOS 18.6版本中修复的多个安全漏洞，包括内存处理、输入验证、权限检查等技术问题，涉及afclip、CFNetwork、CoreAudio、CoreMedia等多个组件。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="apple-sa-07-29-2025-7-tvos-186">APPLE-SA-07-29-2025-7 tvOS 18.6
+</h1><p>tvOS 18.6 解决了以下问题。安全内容的信息也可在 <a class="link" href="https://support.apple.com/124153"  target="_blank" rel="noopener"
+    >https://support.apple.com/124153</a> 查看。</p>
+<p>Apple 在 <a class="link" href="https://support.apple.com/100100"  target="_blank" rel="noopener"
+    >https://support.apple.com/100100</a> 维护了一个安全发布页面，列出了最近带有安全公告的软件更新。</p>
+<h2 id="漏洞修复详情">漏洞修复详情
+</h2><h3 id="afclip">afclip
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：解析文件可能导致应用意外终止<br>
+<strong>描述</strong>：通过改进内存处理解决了该问题。<br>
+<strong>CVE-2025-43186</strong>：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)</p>
+<h3 id="cfnetwork">CFNetwork
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：非特权用户可能能够修改受限网络设置<br>
+<strong>描述</strong>：通过改进输入验证解决了拒绝服务问题。<br>
+<strong>CVE-2025-43223</strong>：Nosebeard Labs 的 Andreas Jaegersberger 和 Ro Achterberg</p>
+<h3 id="coreaudio">CoreAudio
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的音频文件可能导致内存损坏<br>
+<strong>描述</strong>：通过改进内存处理解决了该问题。<br>
+<strong>CVE-2025-43277</strong>：Google 的威胁分析团队</p>
+<h3 id="coremedia">CoreMedia
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的媒体文件可能导致应用意外终止或进程内存损坏<br>
+<strong>描述</strong>：通过改进边界检查解决了越界访问问题。<br>
+<strong>CVE-2025-43210</strong>：Trend Micro Zero Day Initiative 的 Hossein Lotfi (@hosselot)</p>
+<h3 id="coremedia-playback">CoreMedia Playback
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：应用可能能够访问用户敏感数据<br>
+<strong>描述</strong>：通过额外的权限检查解决了该问题。<br>
+<strong>CVE-2025-43230</strong>：ZUSO ART 的 Chi Yuan Chang 和 taikosoup</p>
+<h3 id="icu">ICU
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致 Safari 意外崩溃<br>
+<strong>描述</strong>：通过改进边界检查解决了越界访问问题。<br>
+<strong>CVE-2025-43209</strong>：与 Trend Micro Zero Day Initiative 合作的 Gary Kwong</p>
+<h3 id="imageio">ImageIO
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的图像可能导致进程内存泄露<br>
+<strong>描述</strong>：通过改进输入验证解决了越界读取问题。<br>
+<strong>CVE-2025-43226</strong></p>
+<h3 id="libxml2">libxml2
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理文件可能导致内存损坏<br>
+<strong>描述</strong>：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。<br>
+<strong>CVE-2025-7425</strong>：Google Project Zero 的 Sergei Glazunov</p>
+<h3 id="libxslt">libxslt
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致内存损坏<br>
+<strong>描述</strong>：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。<br>
+<strong>CVE-2025-7424</strong>：Google Project Zero 的 Ivan Fratric</p>
+<h3 id="metal">Metal
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的纹理可能导致应用意外终止<br>
+<strong>描述</strong>：通过改进输入验证解决了多个内存损坏问题。<br>
+<strong>CVE-2025-43234</strong>：Google 威胁分析团队的 Vlad Stolyarov</p>
+<h3 id="model-io">Model I/O
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的媒体文件可能导致应用意外终止或进程内存损坏<br>
+<strong>描述</strong>：通过改进边界检查解决了越界访问问题。<br>
+<strong>CVE-2025-43224</strong>：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)<br>
+<strong>CVE-2025-43221</strong>：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)</p>
+<h3 id="model-io-1">Model I/O
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的文件可能导致应用意外终止<br>
+<strong>描述</strong>：通过改进内存处理解决了输入验证问题。<br>
+<strong>CVE-2025-31281</strong>：Trend Micro Zero Day Initiative 的 Michael DePlante (@izobashi)</p>
+<h3 id="webkit">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能泄露敏感用户信息<br>
+<strong>描述</strong>：通过改进状态管理解决了该问题。<br>
+<strong>WebKit Bugzilla</strong>: 292888<br>
+<strong>CVE-2025-43227</strong>: Gilad Moav</p>
+<h3 id="webkit-1">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致内存损坏<br>
+<strong>描述</strong>：通过改进内存处理解决了该问题。<br>
+<strong>WebKit Bugzilla</strong>: 291742<br>
+<strong>CVE-2025-31278</strong>: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei<br>
+<strong>WebKit Bugzilla</strong>: 291745<br>
+<strong>CVE-2025-31277</strong>: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei<br>
+<strong>WebKit Bugzilla</strong>: 293579<br>
+<strong>CVE-2025-31273</strong>: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei</p>
+<h3 id="webkit-2">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致 Safari 意外崩溃<br>
+<strong>描述</strong>：通过改进内存处理解决了该问题。<br>
+<strong>WebKit Bugzilla</strong>: 292599<br>
+<strong>CVE-2025-43214</strong>: 与 Trend Micro Zero Day Initiative 和 Google V8 安全团队合作的 shandikri<br>
+<strong>WebKit Bugzilla</strong>: 292621<br>
+<strong>CVE-2025-43213</strong>: Google V8 安全团队<br>
+<strong>WebKit Bugzilla</strong>: 293197<br>
+<strong>CVE-2025-43212</strong>: Nan Wang (@eternalsakura13) 和 Ziling Chen</p>
+<h3 id="webkit-3">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理网页内容可能导致拒绝服务<br>
+<strong>描述</strong>：通过改进内存处理解决了该问题。<br>
+<strong>WebKit Bugzilla</strong>: 293730<br>
+<strong>CVE-2025-43211</strong>: Yuhao Hu, Yan Kang, Chenggang Wu, 和 Xiaojie Wei</p>
+<h3 id="webkit-4">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能泄露应用的内部状态<br>
+<strong>描述</strong>：通过改进输入验证解决了越界读取问题。<br>
+<strong>WebKit Bugzilla</strong>: 294182<br>
+<strong>CVE-2025-43265</strong>: DEVCORE 研究团队的 HexRabbit (@h3xr4bb1t)</p>
+<h3 id="webkit-5">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致 Safari 意外崩溃<br>
+<strong>描述</strong>：通过改进内存管理解决了释放后使用问题。<br>
+<strong>WebKit Bugzilla</strong>: 295382<br>
+<strong>CVE-2025-43216</strong>: Ignacio Sanmillan (@ulexec)</p>
+<h3 id="webkit-6">WebKit
+</h3><p><strong>适用设备</strong>：Apple TV HD 和 Apple TV 4K（所有型号）<br>
+<strong>影响</strong>：处理恶意制作的网页内容可能导致 Safari 意外崩溃<br>
+<strong>描述</strong>：这是一个开源代码中的漏洞，Apple 软件是受影响的项目之一。CVE-ID 由第三方分配。<br>
+<strong>WebKit Bugzilla</strong>: 296459<br>
+<strong>CVE-2025-6558</strong>: Google 威胁分析团队的 Clément Lecigne 和 Vlad Stolyarov</p>
+<h2 id="额外致谢">额外致谢
+</h2><h3 id="bluetooth">Bluetooth
+</h3><p>我们感谢 Source Guard 的 LIdong LI、Xiao Wang、Shao Dong Chen 和 Chao Tan 的帮助。</p>
+<h3 id="coreaudio-1">CoreAudio
+</h3><p>我们感谢 Noah Weinberg 的帮助。</p>
+<h3 id="libxml2-1">libxml2
+</h3><p>我们感谢 Google Project Zero 的 Sergei Glazunov 的帮助。</p>
+<h3 id="libxslt-1">libxslt
+</h3><p>我们感谢 Google Project Zero 的 Ivan Fratric 的帮助。</p>
+<h3 id="webkit-7">WebKit
+</h3><p>我们感谢 Google V8 安全团队、Yuhao Hu、Yan Kang、Chenggang Wu、Xiaojie Wei 和 rheza (@ginggilBesel) 的帮助。</p>
+<h2 id="更新说明">更新说明
+</h2><p>Apple TV 会定期检查软件更新。您也可以手动检查软件更新，方法是选择“设置 -&gt; 系统 -&gt; 软件更新 -&gt; 更新软件”。</p>
+<p>要检查当前的软件版本，请选择“设置 -&gt; 通用 -&gt; 关于”。</p>
+<p>所有信息也发布在 Apple 安全发布网站：<a class="link" href="https://support.apple.com/100100"  target="_blank" rel="noopener"
+    >https://support.apple.com/100100</a>。</p>
+<p>此消息使用 Apple 的产品安全 PGP 密钥签名，详细信息请访问：<a class="link" href="https://www.apple.com/support/security/pgp/"  target="_blank" rel="noopener"
+    >https://www.apple.com/support/security/pgp/</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tvos/">TvOS</a>
+        
+            <a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">安全漏洞</a>
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%A4%84%E7%90%86/">内存处理</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

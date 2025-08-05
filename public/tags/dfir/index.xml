@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>DFIR on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/dfir/</link>
+        <description>Recent content in DFIR on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 08:48:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dfir/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用SOF-ELK进行对手追踪：网络安全分析与威胁狩猎实战</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%89%8B%E8%BF%BD%E8%B8%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Tue, 05 Aug 2025 08:48:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%89%8B%E8%BF%BD%E8%B8%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;工具匠人第126期使用sof-elk进行对手狩猎&#34;&gt;工具匠人第126期：使用SOF-ELK进行对手狩猎
+&lt;/h1&gt;&lt;p&gt;当我们庆祝独立日时，我不禁想起我们纪念的当然是一场武装冲突。如今当我们思考冲突时，现实已经与士兵们在战场上排兵布阵、装填滑膛枪、向混战中投掷铅弹的时代大不相同。&lt;/p&gt;
+&lt;p&gt;我们生活在一个非对称战争的世界中，这些冲突的目的和意图往往并不明显，而且很可能在多条战线上展开。关于这个话题最好的读物之一是TJ O&amp;rsquo;Connor的《The Jester Dynamic: A Lesson in Asymmetric Unmanaged Cyber Warfare》。如果你正在阅读这篇文章，那么你的战线很可能是由1和0组成的数字世界，无论你是蓝队防御者还是红队攻击者。&lt;/p&gt;
+&lt;h2 id=&#34;数据海洋中的挑战&#34;&gt;数据海洋中的挑战
+&lt;/h2&gt;&lt;p&gt;作为微软的蓝队成员和联合部队网络操作员，我每天都生活在这个世界中。我们每天都面临着数量庞大、质量参差不齐的数据，问题的答案可能隐藏其中，只有那些能够深入挖掘的人才能找到。&lt;/p&gt;
+&lt;p&gt;新的平台不断涌现来帮助我们完成这项任务。在微软，我们拥有各种平台使数据处理过程变得更容易（尽管同样艰巨），商业领域也在不断扩大其产品范围。对于那些预算和资源有限但有着强烈发现欲望的人来说，也有出色的选择。&lt;/p&gt;
+&lt;h2 id=&#34;sof-elk平台介绍&#34;&gt;SOF-ELK平台介绍
+&lt;/h2&gt;&lt;p&gt;本文将讨论的新兴平台是SOF-ELK，它是SANS Forensics社区的一部分，由SANS FOR572《高级网络取证与分析》的作者兼讲师Phil Hagen创建。SOF-ELK绝对是NFAT（网络取证分析工具）家族中的一员，是该类别的强大参与者。&lt;/p&gt;
+&lt;h2 id=&#34;实战日志分析&#34;&gt;实战日志分析
+&lt;/h2&gt;&lt;p&gt;SOF-ELK提供了一些很好的测试数据让你可以立即开始工作，包括来自防火墙、路由器的系统日志、转换后的Windows事件、Squid代理和名为muse的服务器的日志。你可以将这些数据放在SOF-ELK服务器的相应接收点。&lt;/p&gt;
+&lt;p&gt;我混合了一些自己的数据，将五月份的Apache日志添加到了/logstash/httpd/中。muse日志集中还包括一个DNS日志(named_log)，为了好玩，我也把它放入了/logstash/syslog/中，看看会有什么结果。&lt;/p&gt;
+&lt;h2 id=&#34;http日志分析实战&#34;&gt;HTTP日志分析实战
+&lt;/h2&gt;&lt;p&gt;SOF-ELK虚拟机预装了三个仪表板：系统日志、NetFlow和HTTPD。我的实例运行在http://192.168.50.110:5601/app/kibana。每个仪表板详情底部都有三个面板或区块。我深入研究了HTTPD日志仪表板进行这次实验，并立即重置了分析时间段（点击UI右上角的时间标记）。&lt;/p&gt;
+&lt;h2 id=&#34;发现安全威胁&#34;&gt;发现安全威胁
+&lt;/h2&gt;&lt;p&gt;在分析过程中，我发现了四个PUT请求——这通常是&amp;quot;坏事&amp;quot;的信号，表明有人试图在我的服务器上放置某些内容。通过点击包含四个PUT请求的图形线，我很快了解到两个请求来自密苏里州堪萨斯城的WholeSale Internet(AS32097)，另外两个来自中国杭州的阿里巴巴广告(AS37963)。&lt;/p&gt;
+&lt;p&gt;进一步研究发现，119.23.233.9出现在&amp;quot;InterServer入侵系统检测到的实时可疑恶意软件列表&amp;quot;中，而204.12.194.234在AbuseIPDB中被标记为检测到&amp;quot;Cknife Webshell&amp;quot;。这显然是试图进行远程文件包含攻击或使用web shell的PUT请求。&lt;/p&gt;
+&lt;h2 id=&#34;系统日志分析&#34;&gt;系统日志分析
+&lt;/h2&gt;&lt;p&gt;在系统日志分析中，我通过关键词&amp;quot;malware&amp;quot;搜索发现了两个指向bleepingcomputer.com的GET请求，涉及&amp;quot;Chrome中随机打开网站&amp;quot;的基本教程。更重要的是，我们获得了一个可以深入分析的IP地址：10.3.59.53。&lt;/p&gt;
+&lt;p&gt;通过分析这个IP地址的DNS查询记录，我发现了一些明显随机生成的域名，特别是那些包含.cc顶级域的域名。回到代理日志中搜索该IP地址和.exe请求，我发现了taxdocs.exe——这几乎可以肯定是恶意软件。&lt;/p&gt;
+&lt;h2 id=&#34;总结与启示&#34;&gt;总结与启示
+&lt;/h2&gt;&lt;p&gt;当我们思考Petya的IOC模式时，这样的狩猎非常有启发性。Petya的&amp;quot;初始感染似乎涉及乌克兰公司M.E.Doc（开发税务会计软件MEDoc）的软件供应链威胁&amp;quot;。虽然这不是Petya（据我所知），但我们确实看到了模式相似性，人们可以从中了解到很多关于羊和狼的信息。要做牧羊犬！&lt;/p&gt;
+&lt;p&gt;在免费和开源工具库中，很少有比SOF-ELK更好的工具来帮助你训练和增强内在的数字牧羊犬能力了。&amp;ldquo;我是一只牧羊犬。我活着就是为了保护羊群并与狼对抗。&amp;quot;——LTC Dave Grossman，《On Combat》作者。&lt;/p&gt;
+&lt;p&gt;SOF-ELK还能做更多事情，本文只是一个入门和激励。这是我在过去十多年讨论的126个独特工具中最喜欢的之一。下载虚拟机，开始你的狩猎工作吧！&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>命名空间 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/</link>
+        <description>Recent content in 命名空间 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 02:29:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux下可疑脚本与可执行文件的Sinkholing隔离技术</title>
+        <link>http://localhost:1313/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Tue, 05 Aug 2025 02:29:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E4%B8%8B%E5%8F%AF%E7%96%91%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84sinkholing%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/05/YDBDh.jpeg" alt="Featured image of post Linux下可疑脚本与可执行文件的Sinkholing隔离技术" /&gt;&lt;h1 id=&#34;sinkholing-suspicious-scripts-or-executables-on-linux&#34;&gt;Sinkholing Suspicious Scripts or Executables on Linux
+&lt;/h1&gt;&lt;p&gt;当需要分析可疑代码时，沙箱环境是理想的执行场所。若缺乏完整沙箱或希望避免网络噪声，可通过sinkhole或NULL-route重定向流量（即数据包不会通过常规网络和默认网关发送）。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;/proc&lt;/code&gt;[1]虚拟文件系统检查进程时，存在&amp;quot;route&amp;quot;文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remnux@remnux:~$ cat /proc/1180/net/route
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Iface    Destination    Gateway     Flags    RefCnt    Use    Metric    Mask        MTU    Window    IRTT                                                       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ens19    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    01FEA8C0    &lt;span class=&#34;m&#34;&gt;0003&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;                                                                            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ens18    004A10AC    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    00FFFFFF    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;                                                                              
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ens19    00FEA8C0    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    00FFFFFF    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;                                                                              
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ens19    01FEA8C0    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0005&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;    FFFFFFFF    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该文件显示进程分配的IP路由表。IP地址通常以小端十六进制编码，可通过Python解码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;gw&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;01FEA8C0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;octets&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gw&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;octets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 输出: 1.254.168.192&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;虽然&lt;code&gt;/proc&lt;/code&gt;中的&amp;quot;route&amp;quot;文件是只读的，但Linux的命名空间(namespaces)[2]技术可实现进程级网络隔离。这是2016年左右引入的内核特性，能为进程提供独立的网络栈（类似容器）。&lt;/p&gt;
+&lt;h2 id=&#34;实践演示&#34;&gt;实践演示
+&lt;/h2&gt;&lt;h3 id=&#34;示例1完全网络隔离&#34;&gt;示例1：完全网络隔离
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remnux@remnux:~$ sudo unshare --net bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@remnux:/home/remnux# ./sample.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Am I bad?
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;6&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Could not resolve host: isc.sans.edu
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;示例2构建专用ip栈&#34;&gt;示例2：构建专用IP栈
+&lt;/h3&gt;&lt;p&gt;创建虚拟以太网接口对（10.0.0.1为新命名空间，10.0.0.2为主命名空间）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;namespace&amp;gt; ip link add veth0 &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; veth peer name veth1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;namespace&amp;gt; ip addr add 10.0.0.1/24 dev veth0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;namespace&amp;gt; ip link &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; veth1 netns &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在主命名空间配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@remnux:/home/remnux# ip addr add 10.0.0.2/24 dev veth1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@remnux:/home/remnux# ip link &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; veth1 up
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;添加默认路由后可通过tcpdump捕获流量：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@remnux:/home/remnux# tcpdump -i veth1 -n
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;11:02:32.122380 ARP, Request who-has 10.0.0.2 tell 10.0.0.1, length &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最终路由表验证：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root@remnux:/home/remnux# cat /proc/149522/net/route 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Iface    Destination    Gateway     Flags    RefCnt    Use    Metric    Mask        MTU    Window    IRTT                                                       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;veth0    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    0200000A    &lt;span class=&#34;m&#34;&gt;0003&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;                                                                              
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;veth0    0000000A    &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    00FFFFFF    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;警告：此方案仅实现网络隔离，并非恶意软件分析的完美解决方案&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;[1] &lt;a class=&#34;link&#34; href=&#34;https://docs.kernel.org/filesystems/proc.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://docs.kernel.org/filesystems/proc.html&lt;/a&gt;&lt;br&gt;
+[2] &lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Linux_namespaces&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://en.wikipedia.org/wiki/Linux_namespaces&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,330 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 19:39:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 11:45:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>vuLnDAP挑战全程解析：LDAP注入与SSH密钥提取实战</title>
+        <link>http://localhost:1313/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Tue, 05 Aug 2025 11:45:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;vulndap-walkthrough&#34;&gt;vuLnDAP Walkthrough
+&lt;/h1&gt;&lt;p&gt;这是关于vuLnDAP挑战的完整演练过程。当然可能存在其他解决方法，本文仅展示个人实现路径。如果您有更优方案，欢迎交流。&lt;/p&gt;
+&lt;h2 id=&#34;初始探测&#34;&gt;初始探测
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问库存控制系统，选择水果分类时观察到URL结构：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=fruits
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;此处存在首个注入点，可通过通配符&lt;code&gt;*&lt;/code&gt;获取系统所有对象（含用户和组）：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;用户信息提取&#34;&gt;用户信息提取
+&lt;/h2&gt;&lt;p&gt;选定CEO用户Fred后，发现URL包含显示控制参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=stock,description,cn
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;disp&lt;/code&gt;参数控制LDAP查询返回字段&lt;/li&gt;
+&lt;li&gt;通过研究&lt;code&gt;posixAccount&lt;/code&gt;标准架构，补充关键字段：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=description,cn,uidNumber,gidNumber,homedirectory,userpassword
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ssh密钥泄露&#34;&gt;SSH密钥泄露
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;添加&lt;code&gt;sshPublicKey&lt;/code&gt;字段成功获取Fred的公钥：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=...,sshPublicKey
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;检查其他用户时发现意外泄露的私钥：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术要点&#34;&gt;技术要点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;userpassword&lt;/code&gt;字段仅用于认证不可读取&lt;/li&gt;
+&lt;li&gt;通过标准LDAP架构研究确定关键字段名&lt;/li&gt;
+&lt;li&gt;实际渗透中需验证密钥有效性（演示密钥已做无效化处理）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>意外重置他人密码？一个逻辑漏洞的发现与思考</title>
+        <link>http://localhost:1313/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</link>
+        <pubDate>Tue, 05 Aug 2025 09:11:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%84%8F%E5%A4%96%E9%87%8D%E7%BD%AE%E4%BB%96%E4%BA%BA%E5%AF%86%E7%A0%81%E4%B8%80%E4%B8%AA%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%80%9D%E8%80%83/</guid>
+        <description>&lt;h1 id=&#34;一个让我怀疑现实的漏洞&#34;&gt;一个让我怀疑现实的漏洞
+&lt;/h1&gt;&lt;p&gt;故事开始。我像往常一样在HackerOne上闲逛（其实就是找漏洞），突然发现了一个让我惊呼：
+&amp;ldquo;等等，这不应该发生吧？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;剧透：它确实发生了。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞重现&#34;&gt;漏洞重现
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问HackerOne密码重置页面：&lt;code&gt;https://hackerone.com/users/password/new&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;输入我的邮箱，点击提交&lt;/li&gt;
+&lt;li&gt;拦截请求时突发奇想：&amp;ldquo;如果我把请求中的邮箱改成别人的会怎样？&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;修改后转发请求&lt;/li&gt;
+&lt;li&gt;结果：目标邮箱收到了重置邮件，而我这个发起者却没收到&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;问题严重性&#34;&gt;问题严重性
+&lt;/h2&gt;&lt;p&gt;这不是简单的UI显示问题，而是核心功能缺陷：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你以为在重置自己的密码&lt;/li&gt;
+&lt;li&gt;实际重置邮件发给了任意指定的人&lt;/li&gt;
+&lt;li&gt;对方能在不知情的情况下重置密码&lt;/li&gt;
+&lt;li&gt;而你还在困惑为什么没收到邮件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;想象普通用户遇到这种情况：恐慌、困惑、反复提交客服工单&amp;hellip;如果大规模发生呢？&lt;/p&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;攻击步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问&amp;quot;忘记密码&amp;quot;表单&lt;/li&gt;
+&lt;li&gt;输入真实邮箱&lt;/li&gt;
+&lt;li&gt;拦截请求&lt;/li&gt;
+&lt;li&gt;替换为他人邮箱&lt;/li&gt;
+&lt;li&gt;转发请求&lt;/li&gt;
+&lt;li&gt;目标收到重置链接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;无需复杂攻击手段，仅需修改一个参数就导致严重的逻辑漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h2&gt;&lt;p&gt;正确的实现应该：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务端严格绑定初始用户输入&lt;/li&gt;
+&lt;li&gt;无论请求如何修改，只发送邮件到最初输入的地址&lt;/li&gt;
+&lt;li&gt;遵循&amp;quot;不信任客户端&amp;quot;的安全原则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但HackerOne的实现却是：&amp;ldquo;好的，你说发哪就发哪&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年6月3日：提交漏洞报告&lt;/li&gt;
+&lt;li&gt;2025年6月4日：确认为2013年报告的重复漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;p&gt;这个漏洞的特别之处在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不需要高技术手段&lt;/li&gt;
+&lt;li&gt;没有复杂攻击载荷&lt;/li&gt;
+&lt;li&gt;纯粹的逻辑缺陷&lt;/li&gt;
+&lt;li&gt;靠的是好奇心而非技术碾压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这正是漏洞猎手的乐趣所在——发现那些从指缝中溜走的简单错误。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>NVIDIA容器工具包漏洞CVE-2024-0132补丁不完整，AI基础设施面临严重风险</title>
+        <link>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</link>
+        <pubDate>Tue, 05 Aug 2025 08:05:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</guid>
+        <description>&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;趋势科技研究发现，NVIDIA在2024年9月针对容器工具包关键漏洞（CVE-2024-0132）发布的安全更新存在缺陷，可能导致容器逃逸攻击。同时发现影响Linux系统Docker的拒绝服务（DoS）漏洞，攻击者可利用这些漏洞访问主机敏感数据或耗尽系统资源。&lt;/p&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2024-0132补丁缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;时间竞争条件（TOCTOU）漏洞仍存在于NVIDIA容器工具包中，允许特制容器访问主机文件系统&lt;/li&gt;
+&lt;li&gt;默认配置下1.17.3及更早版本均受影响，1.17.4版本需显式启用&lt;code&gt;allow-cuda-compat-libs-from-container&lt;/code&gt;功能才存在风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Docker拒绝服务漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当容器配置多挂载点（bind-propagation=shared）时，Linux挂载表会无限增长&lt;/li&gt;
+&lt;li&gt;最终导致文件描述符耗尽，主机SSH连接中断等严重性能问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击场景&#34;&gt;攻击场景
+&lt;/h3&gt;&lt;p&gt;攻击者可通过以下步骤实现容器逃逸：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建包含恶意卷符号链接的容器镜像&lt;/li&gt;
+&lt;li&gt;通过供应链攻击或社会工程在受害者平台运行镜像&lt;/li&gt;
+&lt;li&gt;利用竞争条件获取主机文件系统访问权限&lt;/li&gt;
+&lt;li&gt;通过容器运行时Unix套接字执行任意root命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;严格限制Docker API访问权限&lt;/li&gt;
+&lt;li&gt;禁用NVIDIA容器工具包非必要功能&lt;/li&gt;
+&lt;li&gt;实施容器镜像准入控制策略&lt;/li&gt;
+&lt;li&gt;监控Linux挂载表异常增长&lt;/li&gt;
+&lt;li&gt;部署运行时异常检测工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;趋势科技解决方案&#34;&gt;趋势科技解决方案
+&lt;/h3&gt;&lt;p&gt;趋势Vision One™平台提供以下检测能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;观测攻击技术（OAT）：XSAE.F8306等规则&lt;/li&gt;
+&lt;li&gt;工作负载行为（WB）检测：可疑容器创建等行为&lt;/li&gt;
+&lt;li&gt;容器安全模块可阻断含漏洞镜像部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;图1-6展示了趋势Vision One的漏洞检测界面和告警示例（原文包含具体截图说明，此处从略）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整补丁仍是首选解决方案，但在复杂生产环境中，趋势科技提供的运行时检测和预防措施可有效降低风险。平台已集成对CVE-2024-0132及新发现漏洞的检测能力，覆盖从构建到运行的全生命周期防护。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>漏洞利用实验室：2015年CanSecWest与SyScan漏洞实验公告</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 05:27:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;漏洞利用实验室2015年会议公告&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我们荣幸地宣布，漏洞利用实验室(Exploit Lab)将作为实践课程亮相2015年两大国际安全会议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CanSecWest&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;日期：2015年3月&lt;/li&gt;
+&lt;li&gt;地点：加拿大温哥华&lt;/li&gt;
+&lt;li&gt;内容：高级堆溢出利用技术实战，包括现代缓解机制（ASLR/DEP）绕过方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SyScan360&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;日期：2015年7月&lt;/li&gt;
+&lt;li&gt;地点：中国北京&lt;/li&gt;
+&lt;li&gt;内容：内核级漏洞利用开发，重点分析Windows和Linux内核漏洞利用链构建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;课程技术亮点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于真实漏洞案例的利用代码开发（C/ASM）&lt;/li&gt;
+&lt;li&gt;ROP链构造与堆布局操控技术&lt;/li&gt;
+&lt;li&gt;针对不同操作系统架构的Shellcode编写规范&lt;/li&gt;
+&lt;li&gt;漏洞利用可靠性提升技巧（环境适配与稳定性优化）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;实验环境要求&lt;/strong&gt;&lt;br&gt;
+参与者需自带安装以下工具的笔记本电脑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VMware Workstation 12+&lt;/li&gt;
+&lt;li&gt;IDA Pro 6.8+&lt;/li&gt;
+&lt;li&gt;Python 2.7环境及pwntools框架&lt;/li&gt;
+&lt;li&gt;预装Windows 7/8和Kali Linux虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>PAN-OS CVE-2024-3400高危漏洞：立即修补Palo Alto防火墙</title>
+        <link>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+        <pubDate>Tue, 05 Aug 2025 03:52:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+        <description>&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，该漏洞目前仍存在野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前已开发出内部利用代码并通知客户。值得注意的是，Palo Alto Networks提供的临时缓解措施（启用威胁防护和禁用设备遥测）均被Bishop Fox成功绕过。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;该漏洞允许通过HTTP Cookie注入载荷，将任意名称文件写入底层文件系统。通过目录遍历技术，攻击者可控制文件写入位置。后续由定时任务执行的遥测脚本存在命令注入漏洞，最终实现root权限的带外远程代码执行。需特别说明的是，Bash命令被包含在文件名而非文件内容中。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施绕过&#34;&gt;缓解措施绕过
+&lt;/h2&gt;&lt;p&gt;Palo Alto Networks最初建议两种临时缓解方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;启用威胁防护（阻断包含目录遍历序列的恶意请求）&lt;/li&gt;
+&lt;li&gt;禁用设备遥测（阻止公开的命令注入载荷利用）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Bishop Fox成功开发了两种绕过技术：可规避威胁防护签名检测，并发现新的命令注入漏洞（在遥测功能禁用时仍可触发）。Palo Alto Networks随后更新公告，确认禁用遥测并非有效修复方案，并发布了新的威胁防护规则(TIDs 95187/95189/95191)。测试表明最新规则在补丁应用前是有效缓解措施，但需注意多重配置错误可能导致规则失效。&lt;/p&gt;
+&lt;p&gt;测试威胁防护规则是否生效的方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -k https://&amp;lt;HOST&amp;gt;/ -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Cookie: test=../../&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;规则生效时返回&amp;quot;connection reset&amp;quot;&lt;/li&gt;
+&lt;li&gt;配置错误时返回HTML响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;按有效性降序推荐修复方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;立即应用补丁（新增会话Cookie严格验证机制）&lt;/li&gt;
+&lt;li&gt;启用威胁防护签名ID 95187/95189/95191&lt;/li&gt;
+&lt;li&gt;在补丁应用前下线GlobalProtect接口&lt;/li&gt;
+&lt;li&gt;部署额外IPS规则阻断HTTP Cookie头部包含&amp;quot;../&amp;ldquo;序列的请求&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>黑帽大会现场攻防：微软悬赏10万美元征集Windows 8.1漏洞利用技术</title>
+        <link>http://localhost:1313/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Mon, 04 Aug 2025 23:42:13 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h2 id=&#34;现场悬赏规则&#34;&gt;现场悬赏规则
+&lt;/h2&gt;&lt;p&gt;距离拉斯维加斯黑帽大会开幕仅剩一周，微软公布了&amp;quot;实时防护绕过悬赏&amp;quot;的具体执行细则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;演示时间&lt;/strong&gt;：每日中午12:45开始，建议参赛者提前至12:30抵达微软展台（#301）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;目标系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设备型号：联想ThinkPad X1 Carbon触控版&lt;/li&gt;
+&lt;li&gt;主机系统：Windows 8（64位）&lt;/li&gt;
+&lt;li&gt;虚拟机系统：Windows 8.1预览版（64位）&lt;/li&gt;
+&lt;li&gt;配置：4GB内存/4核CPU/专用网卡&lt;/li&gt;
+&lt;li&gt;账户类型：本地账户（默认设置）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;参赛要求&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需携带漏洞利用代码（含源代码）&lt;/li&gt;
+&lt;li&gt;提交详细说明新技术原理的白皮书（电子/纸质版）&lt;/li&gt;
+&lt;li&gt;年龄需满14周岁（未成年人需监护人陪同签署文件）&lt;/li&gt;
+&lt;li&gt;排除微软员工及其直系亲属&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;评审流程&#34;&gt;评审流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;现场演示&lt;/strong&gt;：两位评委现场见证绕过技术演示&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深度评审&lt;/strong&gt;：成功演示者将进入私密评审室，与评委进行技术答辩&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果公布&lt;/strong&gt;：通过@k8em0和@msftsecresponse官方推特确认最终获奖者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;额外奖励&lt;/strong&gt;：提交有效防御方案者可竞争最高5万美元的&amp;quot;蓝帽防御奖金&amp;quot;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术价值&#34;&gt;技术价值
+&lt;/h2&gt;&lt;p&gt;该悬赏旨在发现Windows 8.1的全新攻击面，获奖技术将帮助微软强化超过10亿台设备的安全防护。参赛者需展示真正的技术突破——现有防护机制的创新绕过方法。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我们期待见证安全界最优秀的人才用前所未有的方式攻破系统。&amp;rdquo;&lt;br&gt;
+——Katie Moussouris（微软安全响应中心高级战略师）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/k8em0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;原始推文&lt;/a&gt;（作者推特账号末位是数字0）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Pwn2Own Automotive 2025 第二天战报：38.5万美元奖金与16个零日漏洞</title>
         <link>http://localhost:1313/p/pwn2own-automotive-2025-%E7%AC%AC%E4%BA%8C%E5%A4%A9%E6%88%98%E6%8A%A538.5%E4%B8%87%E7%BE%8E%E5%85%83%E5%A5%96%E9%87%91%E4%B8%8E16%E4%B8%AA%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E/</link>
         <pubDate>Mon, 04 Aug 2025 19:39:17 +0800</pubDate>

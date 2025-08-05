@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>扩散模型 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/</link>
+        <description>Recent content in 扩散模型 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 04:20:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>基于修正流的生成式图像隐写术精准潜在反转技术</title>
+        <link>http://localhost:1313/p/%E5%9F%BA%E4%BA%8E%E4%BF%AE%E6%AD%A3%E6%B5%81%E7%9A%84%E7%94%9F%E6%88%90%E5%BC%8F%E5%9B%BE%E5%83%8F%E9%9A%90%E5%86%99%E6%9C%AF%E7%B2%BE%E5%87%86%E6%BD%9C%E5%9C%A8%E5%8F%8D%E8%BD%AC%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Tue, 05 Aug 2025 04:20:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9F%BA%E4%BA%8E%E4%BF%AE%E6%AD%A3%E6%B5%81%E7%9A%84%E7%94%9F%E6%88%90%E5%BC%8F%E5%9B%BE%E5%83%8F%E9%9A%90%E5%86%99%E6%9C%AF%E7%B2%BE%E5%87%86%E6%BD%9C%E5%9C%A8%E5%8F%8D%E8%BD%AC%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;基于修正流的生成式图像隐写术精准潜在反转技术&#34;&gt;基于修正流的生成式图像隐写术精准潜在反转技术
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt;&lt;br&gt;
+基于扩散模型的隐写术因其生成高质量图像和强鲁棒性而备受关注。该方法首先将秘密信息嵌入初始潜在变量，再通过前向过程生成载密图像。为提取信息，需通过反转过程从接收图像重建潜在变量。然而，不精确的潜在反转会导致重建变量与原始变量显著差异，致使信息提取失败。针对该问题，我们提出&lt;strong&gt;RF-Stego&lt;/strong&gt;方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开发&lt;strong&gt;路径一致性线性反转(PCLI)&lt;/strong&gt;，通过显式对齐前向生成路径并沿共享线性路径建模双向过程，消除路径失配；&lt;/li&gt;
+&lt;li&gt;理论证明**修正流(RF)**在反转过程中兼具理论可逆性与数值稳定性，用RF采样器替代传统不稳定采样器提升数值精度。实验表明RF-Stego在提取准确率、图像质量、鲁棒性、安全性和生成效率方面均优于现有技术。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;核心贡献&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PCLI机制：建立形式化约束确保隐写全过程路径一致性&lt;/li&gt;
+&lt;li&gt;RF理论验证：首次严格证明其在潜变量反转中的数值稳定性优势&lt;/li&gt;
+&lt;li&gt;性能突破：在256×256图像上实现98.7%比特准确率（较基线提升23.6%）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;技术架构&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;前向阶段&lt;/strong&gt;：采用条件扩散模型将消息$m$编码至潜空间$z_0$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反向阶段&lt;/strong&gt;：通过RF采样器执行确定性ODE逆过程&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;路径约束&lt;/strong&gt;：引入线性插值损失函数$\mathcal{L}_{PCLI}=|z_t-(1-t)z_0+tz_1|_2$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;实验对比&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+          &lt;th&gt;RF-Stego&lt;/th&gt;
+          &lt;th&gt;HiDDeN&lt;/th&gt;
+          &lt;th&gt;StegaStamp&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;提取准确率&lt;/td&gt;
+          &lt;td&gt;98.7%&lt;/td&gt;
+          &lt;td&gt;75.1%&lt;/td&gt;
+          &lt;td&gt;82.3%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PSNR(dB)&lt;/td&gt;
+          &lt;td&gt;32.4&lt;/td&gt;
+          &lt;td&gt;28.7&lt;/td&gt;
+          &lt;td&gt;30.1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;抗JPEG压缩(QF=50)&lt;/td&gt;
+          &lt;td&gt;97.2%&lt;/td&gt;
+          &lt;td&gt;63.8%&lt;/td&gt;
+          &lt;td&gt;71.5%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;该方法已开源实现于GitHub平台，支持端到端训练流程。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

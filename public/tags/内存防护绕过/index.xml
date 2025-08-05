@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>内存防护绕过 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%86%85%E5%AD%98%E9%98%B2%E6%8A%A4%E7%BB%95%E8%BF%87/</link>
+        <description>Recent content in 内存防护绕过 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 16:00:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%86%85%E5%AD%98%E9%98%B2%E6%8A%A4%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Elderwood工具包编写漏洞利用程序（第一部分） - 堆喷射与DEP/ASLR绕过技术详解</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Tue, 05 Aug 2025 16:00:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8elderwood%E5%B7%A5%E5%85%B7%E5%8C%85%E7%BC%96%E5%86%99%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-%E5%A0%86%E5%96%B7%E5%B0%84%E4%B8%8Edep/aslr%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;堆喷射与dep绕过todayswf&#34;&gt;堆喷射与DEP绕过（today.swf）
+&lt;/h1&gt;&lt;p&gt;数据执行保护（DEP）阻止内存被隐式执行。漏洞利用通常会在内存中创建数据形式的载荷并尝试执行。启用DEP后，攻击者必须明确标记其载荷为可执行状态。为绕过该防护，漏洞可利用内存中已标记为可执行的代码。许多攻击通过链式调用函数来标记载荷可执行，这种技术常被称为面向返回编程（ROP）。Windows XP及更高版本上的IE8采用DEP防护，必须绕过该机制才能成功执行代码。&lt;/p&gt;
+&lt;p&gt;today.swf为用户执行DEP绕过。该Flash文档在内存中建立多个ROP链，确保其中一个位于已知地址（堆喷射）。当IE被攻击时，ROP链会将堆栈转移到伪造堆栈而非合法堆栈。堆栈转移后，ROP链执行指令序列，生成可执行的解密代码副本（将xsainfo.jpg转为DLL并执行）。由于Flash插件与浏览器渲染进程共享内存空间（与Chrome/Safari/Firefox不同），此操作可在插件内完成。&lt;/p&gt;
+&lt;p&gt;SWF在JavaScript漏洞代码加载前被引入。加载swf时，堆喷射代码自动运行。用户无需了解其技术细节，最终结果是堆中充满堆栈帧，工具包用户可假定特定地址0x10ab0d0c处存在有效值。这意味着用户只需知道跳转目标地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;unescape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;%u0d0c%u10abhttps://www.google.com/settings/account&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;分析过程中发现，用于混淆Flash组件的软件可在Google搜索&amp;quot;SWF Encryption&amp;quot;首页找到。DoSWF是首个无需邮箱即可下载安装包的结果，且由北京某中国公司开发。&lt;/p&gt;
+&lt;h1 id=&#34;aslr绕过microsoft-office与java-6&#34;&gt;ASLR绕过（Microsoft Office与Java 6）
+&lt;/h1&gt;&lt;p&gt;地址空间布局随机化（ASLR）是Windows Vista及更新系统的防护机制，会随机化内存中代码位置。ASLR通过使ROP指令位置未知来干扰攻击者对程序流的控制。最简单的绕过方法是定位未编译Dynamic Base标志的模块（表示不支持ASLR）。此类模块以固定虚拟地址加载后，攻击者可复用其中的已知指令序列，如同ASLR不存在。&lt;/p&gt;
+&lt;p&gt;该工具包提供代码来加载多个未编译Dynamic Base标志的模块，包括Microsoft Office 2007/2010和未支持ASLR的Java 6插件。这些模块中的内存地址用于构建Flash文档中的ROP链。利用此特性绕过ASLR非常简单，工具包可能提供脚本来调用必要的插件加载例程。作者直接使用现成研究技术开发脚本：采用Oracle示例代码加载Java 6实现ASLR绕过（Google搜索&amp;quot;force java 6&amp;quot;可发现此代码）。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;text/javascript&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;deployJava.js&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;try {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    location.href = &amp;#39;ms-help://&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;} catch (e) {}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;try {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    var ma = new ActiveXObject(&amp;#34;SharePoint.OpenDocuments.4&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;} catch(e) {}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;加载这些插件后，config.html根据成功情况设置值，将&amp;quot;test&amp;quot; div标签的innerHTML设为true/false/default/cat。today.swf读取该值决定加载哪个内置ROP链，表明两者可能同步开发并提供给工具包用户。&lt;/p&gt;
+&lt;h1 id=&#34;结论&#34;&gt;结论
+&lt;/h1&gt;&lt;p&gt;Elderwood工具包提供可复用组件来开发use-after-free漏洞利用程序，包含通过Adobe Flash实现堆喷射、加载未支持ASLR模块的技术，以及多个Windows版本的DEP绕过ROP链。工具用户几乎不需要理解这些技术的实现原理。例如用户无需了解内存布局和堆分配，直接使用工具包提供的固定地址即可。&lt;/p&gt;
+&lt;p&gt;虽然这些工具满足多数漏洞开发需求，但某些任务仍需针对具体漏洞实现。例如要使用SWF置于内存的ROP指令，工具用户必须控制程序流——这正是各漏洞利用的特殊之处。我们将在下一章节讨论工具用户解决该问题的具体方案。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

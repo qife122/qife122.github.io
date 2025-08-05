@@ -7,7 +7,105 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 03:36:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 17:30:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2018年BHIS最常用工具盘点：超越Nessus与Metasploit的实战利器</title>
+        <link>http://localhost:1313/p/2018%E5%B9%B4bhis%E6%9C%80%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9%E8%B6%85%E8%B6%8Anessus%E4%B8%8Emetasploit%E7%9A%84%E5%AE%9E%E6%88%98%E5%88%A9%E5%99%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 17:30:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2018%E5%B9%B4bhis%E6%9C%80%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9%E8%B6%85%E8%B6%8Anessus%E4%B8%8Emetasploit%E7%9A%84%E5%AE%9E%E6%88%98%E5%88%A9%E5%99%A8/</guid>
+        <description>&lt;h3 id=&#34;webcast-bhis-2018年度高频工具精选&#34;&gt;WEBCAST: BHIS 2018年度高频工具精选
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;John Strand//&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在本期网络研讨会中，我们将介绍Black Hills信息安全团队日常使用的核心工具集。但有个特别之处：我们不会讨论Nessus、Nmap或Metasploit。为什么？因为除了那些安全书籍/博客中千篇一律的标准工具外，我们实际使用的众多（包括新晋和经典）工具更值得关注。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blackhillsinformationsecurity.shootproof.com/gallery/8393821/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;演示幻灯片下载&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;想向John本人深入学习？&lt;/strong&gt;&lt;br&gt;
+可报名以下课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;BHIS与MITRE ATT&amp;amp;CK安全入门&lt;/li&gt;
+&lt;li&gt;渗透测试基础&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（支持线下/虚拟及点播形式）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Earth Koshchei利用红队工具发起复杂RDP攻击</title>
+        <link>http://localhost:1313/p/earth-koshchei%E5%88%A9%E7%94%A8%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7%E5%8F%91%E8%B5%B7%E5%A4%8D%E6%9D%82rdp%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Tue, 05 Aug 2025 08:54:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/earth-koshchei%E5%88%A9%E7%94%A8%E7%BA%A2%E9%98%9F%E5%B7%A5%E5%85%B7%E5%8F%91%E8%B5%B7%E5%A4%8D%E6%9D%82rdp%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;img src="https://www.trendmicro.com/content/dam/trendmicro/global/en/images/icons/icon-news.jpg" alt="Featured image of post Earth Koshchei利用红队工具发起复杂RDP攻击" /&gt;&lt;h2 id=&#34;攻击概述&#34;&gt;攻击概述
+&lt;/h2&gt;&lt;p&gt;Earth Koshchei（又称APT29）在2024年10月发起了一场利用恶意远程桌面协议（RDP）配置文件的攻击活动。该技术借鉴了Black Hills信息安全公司2022年公开的红队方法，包含三个核心组件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RDP中继服务器（193个域名）&lt;/li&gt;
+&lt;li&gt;恶意RDP服务器（34个后端节点）&lt;/li&gt;
+&lt;li&gt;诱导受害者连接的.rdp配置文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;攻击链分析&#34;&gt;攻击链分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始访问&lt;/strong&gt;：通过鱼叉邮件发送恶意.rdp文件，文件名伪装成&amp;quot;AWS安全存储连接稳定性测试&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接重定向&lt;/strong&gt;：配置文件将受害者导向攻击者控制的服务器，参数包含：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;full address: eu-north-1.regeringskansliet-se.cloud
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drivestoredirect: s:*  //重定向所有驱动器
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remoteapplicationprogram: &amp;#34;AWS Secure Storage...&amp;#34; //伪装的应用程序名
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据窃取&lt;/strong&gt;：利用PyRDP工具实现：
+&lt;ul&gt;
+&lt;li&gt;自动爬取重定向的驱动器文件&lt;/li&gt;
+&lt;li&gt;窃取剪贴板内容&lt;/li&gt;
+&lt;li&gt;无文件驻留（Living-off-the-land）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;匿名化架构&#34;&gt;匿名化架构
+&lt;/h3&gt;&lt;p&gt;攻击者采用三层隐匿措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;网络层&lt;/strong&gt;：TOR出口节点+商业VPN+住宅代理（使用90+个IP轮换）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制通道&lt;/strong&gt;：通过SSH over Tor管理基础设施&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮件发送&lt;/strong&gt;：入侵5个合法邮件服务器作为发件平台&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;准备阶段&lt;/strong&gt;（2024年8-10月）：
+&lt;ul&gt;
+&lt;li&gt;注册200+域名（平均每天4-5个）&lt;/li&gt;
+&lt;li&gt;目标涉及政府（38%）、军事（22%）、云服务商（15%）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击高峰&lt;/strong&gt;：10月22日集中发送钓鱼邮件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据外泄&lt;/strong&gt;：10月18-21日观察到军事目标的异常传输&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;阻止对外RDP连接到非信任服务器&lt;/li&gt;
+&lt;li&gt;过滤邮件中的.rdp附件（Trend Micro检测为Trojan.Win32.HUSTLECON.A）&lt;/li&gt;
+&lt;li&gt;监控异常RDP连接行为&lt;/li&gt;
+&lt;li&gt;实施网络分段策略&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;ioc指标&#34;&gt;IOC指标
+&lt;/h2&gt;&lt;p&gt;完整威胁指标包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;193个中继域名（如eu-south-2-aws[.]zero-trust[.]solutions）&lt;/li&gt;
+&lt;li&gt;34个后端服务器IP&lt;/li&gt;
+&lt;li&gt;恶意文件哈希值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该攻击展示了APT组织如何武器化红队工具，将原本用于防御测试的技术转化为攻击武器。企业应定期审查对外连接策略，特别是远程访问协议的安全配置。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>利用Active Directory进行攻击防御的技术解析</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8active-directory%E8%BF%9B%E8%A1%8C%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Mon, 04 Aug 2025 03:36:17 +0800</pubDate>

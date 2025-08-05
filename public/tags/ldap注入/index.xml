@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>LDAP注入 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/ldap%E6%B3%A8%E5%85%A5/</link>
+        <description>Recent content in LDAP注入 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 11:45:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ldap%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>vuLnDAP挑战全程解析：LDAP注入与SSH密钥提取实战</title>
+        <link>http://localhost:1313/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Tue, 05 Aug 2025 11:45:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/vulndap%E6%8C%91%E6%88%98%E5%85%A8%E7%A8%8B%E8%A7%A3%E6%9E%90ldap%E6%B3%A8%E5%85%A5%E4%B8%8Essh%E5%AF%86%E9%92%A5%E6%8F%90%E5%8F%96%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;vulndap-walkthrough&#34;&gt;vuLnDAP Walkthrough
+&lt;/h1&gt;&lt;p&gt;这是关于vuLnDAP挑战的完整演练过程。当然可能存在其他解决方法，本文仅展示个人实现路径。如果您有更优方案，欢迎交流。&lt;/p&gt;
+&lt;h2 id=&#34;初始探测&#34;&gt;初始探测
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问库存控制系统，选择水果分类时观察到URL结构：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=fruits
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;此处存在首个注入点，可通过通配符&lt;code&gt;*&lt;/code&gt;获取系统所有对象（含用户和组）：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/fruit_or_veg?objectClass=*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;用户信息提取&#34;&gt;用户信息提取
+&lt;/h2&gt;&lt;p&gt;选定CEO用户Fred后，发现URL包含显示控制参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=stock,description,cn
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;disp&lt;/code&gt;参数控制LDAP查询返回字段&lt;/li&gt;
+&lt;li&gt;通过研究&lt;code&gt;posixAccount&lt;/code&gt;标准架构，补充关键字段：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=description,cn,uidNumber,gidNumber,homedirectory,userpassword
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ssh密钥泄露&#34;&gt;SSH密钥泄露
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;添加&lt;code&gt;sshPublicKey&lt;/code&gt;字段成功获取Fred的公钥：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/item?cn=fred&amp;amp;disp=...,sshPublicKey
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;检查其他用户时发现意外泄露的私钥：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术要点&#34;&gt;技术要点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;userpassword&lt;/code&gt;字段仅用于认证不可读取&lt;/li&gt;
+&lt;li&gt;通过标准LDAP架构研究确定关键字段名&lt;/li&gt;
+&lt;li&gt;实际渗透中需验证密钥有效性（演示密钥已做无效化处理）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,60 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 20:24:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 08:05:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>NVIDIA容器工具包漏洞CVE-2024-0132补丁不完整，AI基础设施面临严重风险</title>
+        <link>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</link>
+        <pubDate>Tue, 05 Aug 2025 08:05:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nvidia%E5%AE%B9%E5%99%A8%E5%B7%A5%E5%85%B7%E5%8C%85%E6%BC%8F%E6%B4%9Ecve-2024-0132%E8%A1%A5%E4%B8%81%E4%B8%8D%E5%AE%8C%E6%95%B4ai%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E9%9D%A2%E4%B8%B4%E4%B8%A5%E9%87%8D%E9%A3%8E%E9%99%A9/</guid>
+        <description>&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;趋势科技研究发现，NVIDIA在2024年9月针对容器工具包关键漏洞（CVE-2024-0132）发布的安全更新存在缺陷，可能导致容器逃逸攻击。同时发现影响Linux系统Docker的拒绝服务（DoS）漏洞，攻击者可利用这些漏洞访问主机敏感数据或耗尽系统资源。&lt;/p&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2024-0132补丁缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;时间竞争条件（TOCTOU）漏洞仍存在于NVIDIA容器工具包中，允许特制容器访问主机文件系统&lt;/li&gt;
+&lt;li&gt;默认配置下1.17.3及更早版本均受影响，1.17.4版本需显式启用&lt;code&gt;allow-cuda-compat-libs-from-container&lt;/code&gt;功能才存在风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Docker拒绝服务漏洞&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当容器配置多挂载点（bind-propagation=shared）时，Linux挂载表会无限增长&lt;/li&gt;
+&lt;li&gt;最终导致文件描述符耗尽，主机SSH连接中断等严重性能问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击场景&#34;&gt;攻击场景
+&lt;/h3&gt;&lt;p&gt;攻击者可通过以下步骤实现容器逃逸：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建包含恶意卷符号链接的容器镜像&lt;/li&gt;
+&lt;li&gt;通过供应链攻击或社会工程在受害者平台运行镜像&lt;/li&gt;
+&lt;li&gt;利用竞争条件获取主机文件系统访问权限&lt;/li&gt;
+&lt;li&gt;通过容器运行时Unix套接字执行任意root命令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;严格限制Docker API访问权限&lt;/li&gt;
+&lt;li&gt;禁用NVIDIA容器工具包非必要功能&lt;/li&gt;
+&lt;li&gt;实施容器镜像准入控制策略&lt;/li&gt;
+&lt;li&gt;监控Linux挂载表异常增长&lt;/li&gt;
+&lt;li&gt;部署运行时异常检测工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;趋势科技解决方案&#34;&gt;趋势科技解决方案
+&lt;/h3&gt;&lt;p&gt;趋势Vision One™平台提供以下检测能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;观测攻击技术（OAT）：XSAE.F8306等规则&lt;/li&gt;
+&lt;li&gt;工作负载行为（WB）检测：可疑容器创建等行为&lt;/li&gt;
+&lt;li&gt;容器安全模块可阻断含漏洞镜像部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;图1-6展示了趋势Vision One的漏洞检测界面和告警示例（原文包含具体截图说明，此处从略）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整补丁仍是首选解决方案，但在复杂生产环境中，趋势科技提供的运行时检测和预防措施可有效降低风险。平台已集成对CVE-2024-0132及新发现漏洞的检测能力，覆盖从构建到运行的全生命周期防护。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>深入解析Kubernetes安全配置：allowPrivilegeEscalation的真相与误区</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90kubernetes%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEallowprivilegeescalation%E7%9A%84%E7%9C%9F%E7%9B%B8%E4%B8%8E%E8%AF%AF%E5%8C%BA/</link>
         <pubDate>Mon, 04 Aug 2025 20:24:21 +0800</pubDate>

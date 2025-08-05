@@ -7,7 +7,84 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 10:07:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 01:15:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux内核v4.17安全特性解析：从内存保护到系统调用加固</title>
+        <link>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</link>
+        <pubDate>Tue, 05 Aug 2025 01:15:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</guid>
+        <description>&lt;h3 id=&#34;linux内核v417的安全特性&#34;&gt;Linux内核v4.17的安全特性
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;先前版本&lt;/strong&gt;：v4.16&lt;br&gt;
+Linux内核v4.17于上周发布，以下是我认为值得关注的安全改进：&lt;/p&gt;
+&lt;h4 id=&#34;jailhouse管理程序&#34;&gt;Jailhouse管理程序
+&lt;/h4&gt;&lt;p&gt;Jan Kiszka引入了Jailhouse管理程序支持，采用静态分区技术（即不进行资源超分配）。根&amp;quot;单元&amp;quot;通过缩减自身的CPU/内存等资源来创建新隔离区，并将资源移交给新隔离区。LWN在2014年对该管理程序有详细报道。&lt;/p&gt;
+&lt;h4 id=&#34;sparc-adi支持&#34;&gt;SPARC ADI支持
+&lt;/h4&gt;&lt;p&gt;Khalid Aziz实现了SPARC应用数据完整性（ADI或称SSM：硅安全内存）的用户空间支持，这是SPARC M7处理器的硬件内存着色（标记）功能。该技术能有效防御线性溢出攻击，因为基指针被标记为仅属于特定内存分配区域（大小与缓存行对齐）。任何尝试越界访问不同标记内存的操作都会触发异常。Enrico Perla撰写了关于ADI在分配器中的应用及其与Intel MPX的对比分析。&lt;/p&gt;
+&lt;h4 id=&#34;fork时清零新内核栈&#34;&gt;fork时清零新内核栈
+&lt;/h4&gt;&lt;p&gt;此前新进程的内核栈可能残留旧内存内容。虽然通常不可见，但&amp;quot;未初始化&amp;quot;内存读取缺陷或读取溢出可能暴露这些内容（尤其是栈深处可能永远不被覆盖的数据）。为此我确保新栈始终被清零。有趣的是，这种缓存&amp;quot;预热&amp;quot;反而提升了性能，尽管差异微小。&lt;/p&gt;
+&lt;h4 id=&#34;map_fixed_noreplace&#34;&gt;MAP_FIXED_NOREPLACE
+&lt;/h4&gt;&lt;p&gt;为防御Stack Clash等攻击，Michal Hocko创建了MAP_FIXED_NOREPLACE。常规MAP_FIXED存在一个易被忽视的危险行为：它会替换任何重叠的现有映射。这意味着内核可能悄无声息地将栈重叠到mmap或代码区域。而MAP_FIXED_NOREPLACE在保留MAP_FIXED功能的同时移除了替换行为：当新请求的映射与现有映射重叠时会失败。ELF加载器已改用此新标志，用户空间也可用于类似场景。&lt;/p&gt;
+&lt;h4 id=&#34;exec期间固定栈限制&#34;&gt;exec期间固定栈限制
+&lt;/h4&gt;&lt;p&gt;我通过锁定exec期间的RLIMIT_STACK值来彻底解决问题。由于存在多种修改限制的方法（至少包括setrlimit()和prlimit()），以及多个决策点会使用该限制值，最稳妥的方案是在exec生命周期内固定这些值。这应该是exec期间栈限制与内存布局不良交互的最后修复（均为防御Stack Clash类漏洞的举措）。&lt;/p&gt;
+&lt;h4 id=&#34;开始移除可变长数组vla&#34;&gt;开始移除可变长数组(VLA)
+&lt;/h4&gt;&lt;p&gt;经过对Alexander Popov移植stackleak GCC插件的讨论，Linus Torvalds决定彻底消除内核中的可变长数组。此举能防御多种栈耗尽攻击，包括通过巨型栈分配跨越保护页的奇特攻击。但内核中有数百处VLA使用实例，清理工作艰巨。幸有多位开发者参与贡献，v4.17已解决约1/3的VLA实例，预计v4.19前完全清除。&lt;/p&gt;
+&lt;h4 id=&#34;x86系统调用寄存器清零补充说明&#34;&gt;x86系统调用寄存器清零（补充说明）
+&lt;/h4&gt;&lt;p&gt;为防范推测执行漏洞，攻击者可能通过&amp;quot;未使用&amp;quot;的寄存器内容向内核泄露信息。由于多数系统调用只需少量参数，Dominik Brodowski将Linus的概念验证扩展为完整的x86系统调用寄存器清零封装。事实证明寄存器清零操作速度极快。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;结语&lt;/strong&gt;&lt;br&gt;
+以上为v4.17主要安全更新。如有遗漏欢迎指正。敬请期待v4.18，合并窗口现已开启！&lt;br&gt;
+© 2018, Kees Cook. 本文采用CC BY-SA 4.0许可。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>黑帽大会现场攻防：微软悬赏10万美元征集Windows 8.1漏洞利用技术</title>
+        <link>http://localhost:1313/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Mon, 04 Aug 2025 23:42:13 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%BB%91%E5%B8%BD%E5%A4%A7%E4%BC%9A%E7%8E%B0%E5%9C%BA%E6%94%BB%E9%98%B2%E5%BE%AE%E8%BD%AF%E6%82%AC%E8%B5%8F10%E4%B8%87%E7%BE%8E%E5%85%83%E5%BE%81%E9%9B%86windows-8.1%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h2 id=&#34;现场悬赏规则&#34;&gt;现场悬赏规则
+&lt;/h2&gt;&lt;p&gt;距离拉斯维加斯黑帽大会开幕仅剩一周，微软公布了&amp;quot;实时防护绕过悬赏&amp;quot;的具体执行细则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;演示时间&lt;/strong&gt;：每日中午12:45开始，建议参赛者提前至12:30抵达微软展台（#301）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;目标系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设备型号：联想ThinkPad X1 Carbon触控版&lt;/li&gt;
+&lt;li&gt;主机系统：Windows 8（64位）&lt;/li&gt;
+&lt;li&gt;虚拟机系统：Windows 8.1预览版（64位）&lt;/li&gt;
+&lt;li&gt;配置：4GB内存/4核CPU/专用网卡&lt;/li&gt;
+&lt;li&gt;账户类型：本地账户（默认设置）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;参赛要求&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需携带漏洞利用代码（含源代码）&lt;/li&gt;
+&lt;li&gt;提交详细说明新技术原理的白皮书（电子/纸质版）&lt;/li&gt;
+&lt;li&gt;年龄需满14周岁（未成年人需监护人陪同签署文件）&lt;/li&gt;
+&lt;li&gt;排除微软员工及其直系亲属&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;评审流程&#34;&gt;评审流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;现场演示&lt;/strong&gt;：两位评委现场见证绕过技术演示&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深度评审&lt;/strong&gt;：成功演示者将进入私密评审室，与评委进行技术答辩&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果公布&lt;/strong&gt;：通过@k8em0和@msftsecresponse官方推特确认最终获奖者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;额外奖励&lt;/strong&gt;：提交有效防御方案者可竞争最高5万美元的&amp;quot;蓝帽防御奖金&amp;quot;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术价值&#34;&gt;技术价值
+&lt;/h2&gt;&lt;p&gt;该悬赏旨在发现Windows 8.1的全新攻击面，获奖技术将帮助微软强化超过10亿台设备的安全防护。参赛者需展示真正的技术突破——现有防护机制的创新绕过方法。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;我们期待见证安全界最优秀的人才用前所未有的方式攻破系统。&amp;rdquo;&lt;br&gt;
+——Katie Moussouris（微软安全响应中心高级战略师）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/k8em0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;原始推文&lt;/a&gt;（作者推特账号末位是数字0）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Linux内核v4.15安全技术深度解析</title>
         <link>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.15%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sun, 03 Aug 2025 10:07:35 +0800</pubDate>

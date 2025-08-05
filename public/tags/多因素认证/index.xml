@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>多因素认证 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81/</link>
+        <description>Recent content in 多因素认证 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 12:46:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>选择TOTP解决多因素认证应用泛滥问题</title>
+        <link>http://localhost:1313/p/%E9%80%89%E6%8B%A9totp%E8%A7%A3%E5%86%B3%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%BA%94%E7%94%A8%E6%B3%9B%E6%BB%A5%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Tue, 05 Aug 2025 12:46:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%89%E6%8B%A9totp%E8%A7%A3%E5%86%B3%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E5%BA%94%E7%94%A8%E6%B3%9B%E6%BB%A5%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h1 id=&#34;选择totp解决多因素认证应用泛滥问题&#34;&gt;选择TOTP解决多因素认证应用泛滥问题
+&lt;/h1&gt;&lt;p&gt;你的手机上是否装满了各种MFA应用，让你感觉像穿上了臃肿的冬装无法活动？或者这些应用就像一群英国斗牛犬幼崽，时刻跟着你要关注和安全拥抱？&lt;/p&gt;
+&lt;p&gt;无论如何，维护这么多应用确实令人头疼。面对众多MFA应用，请考虑以下问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手机丢失或损坏时你会失去哪些访问权限？&lt;/li&gt;
+&lt;li&gt;所有MFA应用都支持备份/导出吗？&lt;/li&gt;
+&lt;li&gt;已知支持备份的应用，你最近一个月做过备份吗？&lt;/li&gt;
+&lt;li&gt;在新手机上恢复这些MFA应用的流程是怎样的？&lt;/li&gt;
+&lt;li&gt;你是否测试过这个流程以确保没有意外？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;totp标准化解决方案&#34;&gt;TOTP：标准化解决方案
+&lt;/h2&gt;&lt;p&gt;大多数MFA应用都支持一种基于标准的方法：时间型一次性密码(TOTP)，也就是常见的30秒有效期的6位数验证码。TOTP的工作流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户和服务提供商共享密钥&lt;/li&gt;
+&lt;li&gt;用户的TOTP应用计算自Unix纪元以来的时间步数，结合共享密钥通过HMAC-SHA-1生成6位数代码&lt;/li&gt;
+&lt;li&gt;用户在认证时提交该代码，服务商使用其密钥副本进行相同计算&lt;/li&gt;
+&lt;li&gt;代码匹配则认证成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;TOTP如此简单，甚至可以用20行Python代码实现，或者几乎完全用bash脚本实现。&lt;/p&gt;
+&lt;h2 id=&#34;totp的优势&#34;&gt;TOTP的优势
+&lt;/h2&gt;&lt;p&gt;采用TOTP标准可以带来更多灵活性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可选择商业闭源应用或可审计的开源应用&lt;/li&gt;
+&lt;li&gt;可进行本地离线备份或使用可信的在线备份方案&lt;/li&gt;
+&lt;li&gt;可找到支持多设备注册的TOTP应用&lt;/li&gt;
+&lt;li&gt;甚至可以将老式Commodore 64改造成独立TOTP生成器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;如何识别服务商是否支持totp&#34;&gt;如何识别服务商是否支持TOTP
+&lt;/h2&gt;&lt;p&gt;服务商通常不会明确声明支持TOTP，但以下迹象可能表明支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提示&amp;quot;从你的MFA应用输入代码&amp;quot;&lt;/li&gt;
+&lt;li&gt;显示&amp;quot;Google Authenticator&amp;quot;选项（实际上指代TOTP标准）&lt;/li&gt;
+&lt;li&gt;可能需要选择&amp;quot;尝试其他方法&amp;quot;才能找到TOTP选项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;选择totp应用的注意事项&#34;&gt;选择TOTP应用的注意事项
+&lt;/h2&gt;&lt;p&gt;验证应用是否支持TOTP后，还需考虑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;备份方式：云备份还是本地备份？是否需要端到端加密？&lt;/li&gt;
+&lt;li&gt;设备注册数量：是否需要多设备支持？&lt;/li&gt;
+&lt;li&gt;去谷歌化：非谷歌Android设备能否使用？&lt;/li&gt;
+&lt;li&gt;安全审计：是否有独立安全审计报告？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过采用TOTP标准，你可以大幅减少需要管理的MFA应用数量，同时保持认证安全性。&lt;/p&gt;
+&lt;p&gt;[1] TOTP RFC标准：https://datatracker.ietf.org/doc/html/rfc6238
+[2] TOTP应用分析论文：https://www.usenix.org/system/files/sec23summer_198-gilsenan-prepub.pdf&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

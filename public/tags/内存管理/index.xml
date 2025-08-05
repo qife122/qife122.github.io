@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>内存管理 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+        <description>Recent content in 内存管理 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 01:15:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux内核v4.17安全特性解析：从内存保护到系统调用加固</title>
+        <link>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</link>
+        <pubDate>Tue, 05 Aug 2025 01:15:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E5%86%85%E6%A0%B8v4.17%E5%AE%89%E5%85%A8%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90%E4%BB%8E%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4%E5%88%B0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%8A%A0%E5%9B%BA/</guid>
+        <description>&lt;h3 id=&#34;linux内核v417的安全特性&#34;&gt;Linux内核v4.17的安全特性
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;先前版本&lt;/strong&gt;：v4.16&lt;br&gt;
+Linux内核v4.17于上周发布，以下是我认为值得关注的安全改进：&lt;/p&gt;
+&lt;h4 id=&#34;jailhouse管理程序&#34;&gt;Jailhouse管理程序
+&lt;/h4&gt;&lt;p&gt;Jan Kiszka引入了Jailhouse管理程序支持，采用静态分区技术（即不进行资源超分配）。根&amp;quot;单元&amp;quot;通过缩减自身的CPU/内存等资源来创建新隔离区，并将资源移交给新隔离区。LWN在2014年对该管理程序有详细报道。&lt;/p&gt;
+&lt;h4 id=&#34;sparc-adi支持&#34;&gt;SPARC ADI支持
+&lt;/h4&gt;&lt;p&gt;Khalid Aziz实现了SPARC应用数据完整性（ADI或称SSM：硅安全内存）的用户空间支持，这是SPARC M7处理器的硬件内存着色（标记）功能。该技术能有效防御线性溢出攻击，因为基指针被标记为仅属于特定内存分配区域（大小与缓存行对齐）。任何尝试越界访问不同标记内存的操作都会触发异常。Enrico Perla撰写了关于ADI在分配器中的应用及其与Intel MPX的对比分析。&lt;/p&gt;
+&lt;h4 id=&#34;fork时清零新内核栈&#34;&gt;fork时清零新内核栈
+&lt;/h4&gt;&lt;p&gt;此前新进程的内核栈可能残留旧内存内容。虽然通常不可见，但&amp;quot;未初始化&amp;quot;内存读取缺陷或读取溢出可能暴露这些内容（尤其是栈深处可能永远不被覆盖的数据）。为此我确保新栈始终被清零。有趣的是，这种缓存&amp;quot;预热&amp;quot;反而提升了性能，尽管差异微小。&lt;/p&gt;
+&lt;h4 id=&#34;map_fixed_noreplace&#34;&gt;MAP_FIXED_NOREPLACE
+&lt;/h4&gt;&lt;p&gt;为防御Stack Clash等攻击，Michal Hocko创建了MAP_FIXED_NOREPLACE。常规MAP_FIXED存在一个易被忽视的危险行为：它会替换任何重叠的现有映射。这意味着内核可能悄无声息地将栈重叠到mmap或代码区域。而MAP_FIXED_NOREPLACE在保留MAP_FIXED功能的同时移除了替换行为：当新请求的映射与现有映射重叠时会失败。ELF加载器已改用此新标志，用户空间也可用于类似场景。&lt;/p&gt;
+&lt;h4 id=&#34;exec期间固定栈限制&#34;&gt;exec期间固定栈限制
+&lt;/h4&gt;&lt;p&gt;我通过锁定exec期间的RLIMIT_STACK值来彻底解决问题。由于存在多种修改限制的方法（至少包括setrlimit()和prlimit()），以及多个决策点会使用该限制值，最稳妥的方案是在exec生命周期内固定这些值。这应该是exec期间栈限制与内存布局不良交互的最后修复（均为防御Stack Clash类漏洞的举措）。&lt;/p&gt;
+&lt;h4 id=&#34;开始移除可变长数组vla&#34;&gt;开始移除可变长数组(VLA)
+&lt;/h4&gt;&lt;p&gt;经过对Alexander Popov移植stackleak GCC插件的讨论，Linus Torvalds决定彻底消除内核中的可变长数组。此举能防御多种栈耗尽攻击，包括通过巨型栈分配跨越保护页的奇特攻击。但内核中有数百处VLA使用实例，清理工作艰巨。幸有多位开发者参与贡献，v4.17已解决约1/3的VLA实例，预计v4.19前完全清除。&lt;/p&gt;
+&lt;h4 id=&#34;x86系统调用寄存器清零补充说明&#34;&gt;x86系统调用寄存器清零（补充说明）
+&lt;/h4&gt;&lt;p&gt;为防范推测执行漏洞，攻击者可能通过&amp;quot;未使用&amp;quot;的寄存器内容向内核泄露信息。由于多数系统调用只需少量参数，Dominik Brodowski将Linus的概念验证扩展为完整的x86系统调用寄存器清零封装。事实证明寄存器清零操作速度极快。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;结语&lt;/strong&gt;&lt;br&gt;
+以上为v4.17主要安全更新。如有遗漏欢迎指正。敬请期待v4.18，合并窗口现已开启！&lt;br&gt;
+© 2018, Kees Cook. 本文采用CC BY-SA 4.0许可。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

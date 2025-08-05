@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>M365 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/m365/</link>
+        <description>Recent content in M365 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 12:52:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/m365/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用SOF-ELK和CSV数据驾驭M365统一审计日志（第三部分）</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/</link>
+        <pubDate>Tue, 05 Aug 2025 12:52:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8sof-elk%E5%92%8Ccsv%E6%95%B0%E6%8D%AE%E9%A9%BE%E9%A9%ADm365%E7%BB%9F%E4%B8%80%E5%AE%A1%E8%AE%A1%E6%97%A5%E5%BF%97%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86/</guid>
+        <description>&lt;p&gt;在&amp;quot;驾驭M365 UAL&amp;quot;系列的第一部分中，我们讨论了使用PowerShell和SOF-ELK获取、解析和查询UAL数据。第二部分则探讨了利用AWS EC2实现SOF-ELK部署的更大灵活性和可访问性。在此过程中，我们学习了如何专门格式化导出的UAL数据以便SOF-ELK自动摄取，但如果获取的数据格式不正确怎么办？幸运的是，如果我们有从Purview或PowerShell导出的CSV中包含的&amp;quot;AuditData&amp;quot;字段，我们可以提取、重新格式化并馈送给SOF-ELK进行自动解析。&lt;/p&gt;
+&lt;p&gt;我们经常被叫去调查几天、几周甚至几个月前发生的事件，在许多情况下，客户或第三方已经从M365 Purview（又称合规）门户提取了UAL数据并提供给我们分析。不幸的是，Purview唯一的导出选项是CSV，通过Excel或命令行解析工具来处理CSV中的数据元素可能非常繁琐。借助&amp;quot;驾驭&amp;hellip;&amp;ldquo;第一部分中关于SOF-ELK期望的数据格式的信息，我们可以获取提供的CSV，提取&amp;quot;AuditData&amp;quot;字段，更改编码，然后通过SOF-ELK回到高效的解析和查询。&lt;/p&gt;
+&lt;p&gt;我们需要做的第一件事是从CSV中提取&amp;quot;AuditData&amp;quot;列。如果有Excel，可以打开CSV，将&amp;quot;AuditData&amp;quot;列（不包括列标题）复制/粘贴到文本编辑器中并保存为文本文件。有时CSV可能很大且难以处理，或者可能没有Excel，这时我们可以使用&amp;quot;csvtool&amp;quot;在Linux命令行上提取&amp;quot;AuditData&amp;quot;列。&lt;/p&gt;
+&lt;p&gt;注意：虽然我们的CSV是&amp;quot;逗号分隔&amp;quot;的，但&amp;quot;AuditData&amp;quot;列包含逗号，这使得以逗号为分隔符进行&amp;quot;切割&amp;quot;具有挑战性。&amp;ldquo;Csvtool&amp;quot;可以很好地处理这个问题。&lt;/p&gt;
+&lt;p&gt;我在WSL（Debian）中使用&amp;quot;sudo apt-get install csvtool&amp;quot;安装&amp;quot;csvtool&amp;rdquo;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$sudo&lt;/span&gt; apt-get install csvtool
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;让我们测试csvtool命令以验证CSV列是否正确，因为有时根据UAL数据的导出方式，&amp;ldquo;AuditData&amp;quot;列号可能会有所不同。我们希望看到完整的&amp;quot;AuditData&amp;quot;字段：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$csvtool&lt;/span&gt; col &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; your-csv-ual-data.csv &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; head -n &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;检查csvtool的&amp;quot;AuditData&amp;quot;输出&lt;/p&gt;
+&lt;p&gt;第6列看起来是正确的，因此我们将继续将所有第6列提取到文本文件中，这次省略&amp;quot;AuditData&amp;quot;列标题。在上面的测试中，你可能已经注意到标准的CSV双引号包围了包含空格的值。我们需要删除这些以创建SOF-ELK可摄取的JSON文件，并删除&amp;quot;AuditData&amp;quot;列标题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$csvtool&lt;/span&gt; col &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; pc-purview-export.csv -o pc-purview-audit-data.csv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$csvtool&lt;/span&gt; readable pc-purview-audit-data.csv &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sed &lt;span class=&#34;s1&#34;&gt;&amp;#39;1d&amp;#39;&lt;/span&gt; pc-purview-audit-data.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;现在，我们只需要将文件复制到SOF-ELK的摄取目录（将IP更改为你的SOF-ELK系统）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$scp&lt;/span&gt; pc-purview-audit-data.json elk_user@192.168.1.100:/logstash/microsoft365/pc-purview-audit-data.json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果一切按计划进行，你应该能够在SOF-ELK中检查Elasticsearch是否显示你的M365索引。你可以通过SSH和命令行或检查Web UI来完成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$sof&lt;/span&gt;-elk_clear.py -i list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;检查SOF-ELK索引
+检查SOF-ELK Web UI&lt;/p&gt;
+&lt;p&gt;现在做什么？你猜对了：驾驭UAL时间！回到第一部分获取一些提示，或者留下来了解一些额外的SOF-ELK小技巧！&lt;/p&gt;
+&lt;p&gt;趁我吸引你的注意力，我只想指出两个与SOF-ELK相关的注意事项：地理定位和更新。两者都不复杂，但都很有用。&lt;/p&gt;
+&lt;p&gt;当前版本的SOF-ELK中预填充了MaxMind地理定位数据，但它必然是过时的，不是无用的，但不是最新的。要解决这个问题，请访问MaxMind并注册一个GeoLite2账户（或他们的其他商业解决方案）：https://www.maxmind.com/en/geolite2/signup。完成此操作后，你将收到一个账户ID，然后可以生成许可证密钥：https://www.maxmind.com/en/accounts/current/license-key。要轻松将其应用到你的SOF-ELK部署并更新地理定位数据，只需运行内置的&amp;quot;geoip_bootstrap.sh&amp;quot;脚本并在提示时输入你的账户信息。你需要以root身份运行此脚本。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$sudo&lt;/span&gt; su
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#/usr/local/sbin/geoip_bootstrap.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;设置MaxMind SOF-ELK配置&lt;/p&gt;
+&lt;p&gt;最后，为了保持你的SOF-ELK安装最新，你可以运行内置的&amp;quot;sof-elk_update.sh&amp;quot;脚本，该脚本也必须以&amp;quot;root&amp;quot;身份运行。&lt;/p&gt;
+&lt;p&gt;如前所述，我们只是浅尝辄止地介绍了SOF-ELK的实用性！当你有时机时，从你的SOF-ELK系统执行&amp;quot;ls /logstash&amp;quot;并思考日志处理的可能性（aws、azure、gcp等）！&lt;/p&gt;
+&lt;p&gt;查看SOF-ELK的摄取可能性&lt;/p&gt;
+&lt;p&gt;下次见，非常感谢你的阅读！&lt;/p&gt;
+&lt;p&gt;阅读：
+第一部分
+第二部分&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

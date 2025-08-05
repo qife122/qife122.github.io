@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>实验室搭建 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BA/</link>
+        <description>Recent content in 实验室搭建 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 14:02:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>快速部署Active Directory实验室的完整指南</title>
+        <link>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Tue, 05 Aug 2025 14:02:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2active-directory%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;在几分钟内部署active-directory实验室&#34;&gt;在几分钟内部署Active Directory实验室
+&lt;/h1&gt;&lt;p&gt;创建自己的实验室听起来像是一项艰巨的任务。通过本文，您将能够在几分钟内部署自己的Active Directory（AD）环境！您只需要一个浏览器即可访问实验室环境，随时随地开展AD研发工作。&lt;/p&gt;
+&lt;h2 id=&#34;snap-labs平台介绍&#34;&gt;Snap Labs平台介绍
+&lt;/h2&gt;&lt;p&gt;Snap Labs是一个简化实验室环境构建和管理的平台，可用于创建网络安全训练场或研发环境。该平台由Immersive Labs所有，被Zero Point Security等安全培训机构采用。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;互联网连接&lt;/li&gt;
+&lt;li&gt;网页浏览器&lt;/li&gt;
+&lt;li&gt;AWS账户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注册流程&#34;&gt;注册流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;访问https://dashboard.snaplabs.io/signup注册&lt;/li&gt;
+&lt;li&gt;提供AWS账户凭证&lt;/li&gt;
+&lt;li&gt;Snap Labs将通过CloudFormation在AWS部署基础设施&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实验室模板&#34;&gt;实验室模板
+&lt;/h2&gt;&lt;p&gt;Snap Labs提供多种预设模板：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看模板详情（含网络拓扑图和预计成本）&lt;/li&gt;
+&lt;li&gt;选择&amp;quot;AD Quick Start - 2019&amp;quot;模板启动&lt;/li&gt;
+&lt;li&gt;包含域控制器、Windows服务器和管理机（跳板机）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;连接方式&#34;&gt;连接方式
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;VPN接入&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;配置不同访问角色的VPN文件&lt;/li&gt;
+&lt;li&gt;支持RDP/SSH连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;浏览器访问&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过Guacamole实现浏览器远程桌面&lt;/li&gt;
+&lt;li&gt;支持复制粘贴长命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自定义功能&#34;&gt;自定义功能
+&lt;/h2&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;自动更新的网络拓扑图&lt;/li&gt;
+&lt;li&gt;添加新系统（支持Windows/Kali等镜像）&lt;/li&gt;
+&lt;li&gt;配置网络规则（类似AWS安全组）&lt;/li&gt;
+&lt;li&gt;DHCP设置自定义DNS&lt;/li&gt;
+&lt;li&gt;系统/全环境快照功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;重要设置&#34;&gt;重要设置
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自动关闭&lt;/strong&gt;：防止AWS资源持续计费&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板化&lt;/strong&gt;：保存配置供未来重用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享功能&lt;/strong&gt;：支持生成公开/私有分享链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术架构&#34;&gt;技术架构
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基于AWS CloudFormation部署&lt;/li&gt;
+&lt;li&gt;使用AMI自定义系统镜像&lt;/li&gt;
+&lt;li&gt;通过Guacamole实现Web终端&lt;/li&gt;
+&lt;li&gt;支持网络规则自定义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;警告：创建公开模板链接后将无法撤销访问权限，请谨慎操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完整文档参考：&lt;a class=&#34;link&#34; href=&#34;https://docs.snaplabs.io/docs/getting-started&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Snap Labs官方文档&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

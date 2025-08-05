@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SAS令牌 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/sas%E4%BB%A4%E7%89%8C/</link>
+        <description>Recent content in SAS令牌 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 08:27:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/sas%E4%BB%A4%E7%89%8C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>过度宽松的SAS令牌对PC Manager供应链的潜在影响分析</title>
+        <link>http://localhost:1313/p/%E8%BF%87%E5%BA%A6%E5%AE%BD%E6%9D%BE%E7%9A%84sas%E4%BB%A4%E7%89%8C%E5%AF%B9pc-manager%E4%BE%9B%E5%BA%94%E9%93%BE%E7%9A%84%E6%BD%9C%E5%9C%A8%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 05 Aug 2025 08:27:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BF%87%E5%BA%A6%E5%AE%BD%E6%9D%BE%E7%9A%84sas%E4%BB%A4%E7%89%8C%E5%AF%B9pc-manager%E4%BE%9B%E5%BA%94%E9%93%BE%E7%9A%84%E6%BD%9C%E5%9C%A8%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本研究报告揭示了两个通过WinGet仓库和微软官方子域名劫持PC Manager发布的潜在攻击场景，根源在于过度宽松的共享访问签名(SAS)令牌配置&lt;/li&gt;
+&lt;li&gt;成功利用可导致攻击者：1) 通过软件供应链分发恶意软件 2) 替换官方软件版本 3) 篡改分发的可执行文件&lt;/li&gt;
+&lt;li&gt;涉及的技术要素包括：Azure存储账户服务SAS令牌、WinGet清单架构、aka.ms短链接服务及数字签名验证机制&lt;/li&gt;
+&lt;li&gt;所有问题已报告微软并修复，文末提供云凭证安全配置建议与威胁狩猎策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;h3 id=&#34;zdi-23-1527-通过winget包劫持pc-manager&#34;&gt;ZDI-23-1527: 通过WinGet包劫持PC Manager
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击链分析&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WinGet清单中的&lt;code&gt;InstallerUrl&lt;/code&gt;包含服务SAS令牌（有效期至2024年3月）&lt;/li&gt;
+&lt;li&gt;令牌权限：&lt;code&gt;rwdl&lt;/code&gt;（读/写/删除/列表）&lt;/li&gt;
+&lt;li&gt;通过Azure Storage Explorer验证可访问中国区存储账户&lt;code&gt;distributestorage.blob.core.chinacloudapi.cn&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;358GiB容器包含PC Manager多个版本（含20GiB内部版本）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;技术影响&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 攻击时间窗：2022年11月至2023年9月
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 虽SHA256校验可触发告警，但用户可能因信任微软品牌而忽略
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;zdi-23-1528-通过pcmanagermicrosoftcom劫持&#34;&gt;ZDI-23-1528: 通过pcmanager.microsoft.com劫持
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击链差异&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;下载流程：官网→aka.ms短链→全球区存储账户&lt;code&gt;pcmdistributestorage.blob.core.windows.net&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新SAS令牌同样具有&lt;code&gt;rwdl&lt;/code&gt;权限（有效期至2024年3月）&lt;/li&gt;
+&lt;li&gt;118GiB容器包含通过官网分发的所有版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;升级风险&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 默认启用自动更新机制可扩大攻击面
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; 虽无数字证书，攻击者可滥用ZIP包或泄露证书进行签名伪造
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防护方案&#34;&gt;防护方案
+&lt;/h2&gt;&lt;h3 id=&#34;检测策略&#34;&gt;检测策略
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;检测场景&lt;/th&gt;
+          &lt;th&gt;关键日志字段&lt;/th&gt;
+          &lt;th&gt;实施要点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据外泄&lt;/td&gt;
+          &lt;td&gt;response-packet-size&lt;/td&gt;
+          &lt;td&gt;监控异常大流量至可疑IP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;过度宽松SAS令牌&lt;/td&gt;
+          &lt;td&gt;request-url包含sp参数&lt;/td&gt;
+          &lt;td&gt;重点识别rw权限组合&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;匿名访问&lt;/td&gt;
+          &lt;td&gt;authentication-type&lt;/td&gt;
+          &lt;td&gt;过滤成功匿名请求&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;敏感文件访问&lt;/td&gt;
+          &lt;td&gt;requested-object-key&lt;/td&gt;
+          &lt;td&gt;匹配.env/password等关键词&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;trend解决方案&#34;&gt;Trend解决方案
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;1.&lt;/span&gt; 强制SAS令牌仅限HTTPS传输
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;2.&lt;/span&gt; 实施1小时超短有效期策略
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;3.&lt;/span&gt; 启用Blob不可变存储保护
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;4.&lt;/span&gt; 配置存储账户IP白名单
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;核心建议&#34;&gt;核心建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;最小权限原则&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将SAS范围限定到单一资源&lt;/li&gt;
+&lt;li&gt;禁用容器级匿名访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;生命周期管理&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;采用存储访问策略(Stored Access Policy)&lt;/li&gt;
+&lt;li&gt;准备密钥轮换应急方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;监控体系&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启用Azure存储分析日志&lt;/li&gt;
+&lt;li&gt;部署SAS过期策略监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

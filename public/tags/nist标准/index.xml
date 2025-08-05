@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>NIST标准 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/nist%E6%A0%87%E5%87%86/</link>
+        <description>Recent content in NIST标准 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 10:15:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/nist%E6%A0%87%E5%87%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>用NIST SP 800-228解决API安全问题的技术解析</title>
+        <link>http://localhost:1313/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Tue, 05 Aug 2025 10:15:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;根据Wallarm 2025年Q1威胁统计报告，70%的应用攻击针对API。行业不能再将API安全视为次要问题，而应将其作为核心议题。NIST似乎也认同这一观点，发布了NIST SP 800-228的初稿，这是一套关于API安全的建议规范。&lt;/p&gt;
+&lt;h3 id=&#34;背景api自动化与攻击速度&#34;&gt;背景：API、自动化与攻击速度
+&lt;/h3&gt;&lt;p&gt;API不仅是应用架构的演进，更是服务构建、消费和安全方式的根本转变。与Web应用不同，API专为程序化访问设计。正是这种特性——状态保持、结构化、机器可读性——使其成为攻击者的理想目标。&lt;/p&gt;
+&lt;p&gt;AJ Debole（甲骨文现场CISO）指出：API降低了攻击的技术门槛。无需操纵浏览器流量或掌握代理工具，简单的curl命令或Python脚本就足以对API进行模糊测试。随着API与AI系统（特别是GenAI代理）的集成加深，API流量、复杂性和暴露风险呈指数级增长。&lt;/p&gt;
+&lt;h3 id=&#34;nist-sp-800-228的技术要点&#34;&gt;NIST SP 800-228的技术要点
+&lt;/h3&gt;&lt;p&gt;NIST提出了22项推荐控制措施，可归纳为7个技术主题组：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;API规范与资产管理&lt;/strong&gt;&lt;br&gt;
+基础原则：无法保护未知资产。必须建立实时API清单和规范定义，防止影子API成为易攻击目标。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;模式验证与输入处理&lt;/strong&gt;&lt;br&gt;
+需在运行时强制实施请求/响应模式验证。典型案例：某加密交易所因未验证令牌类型而被攻破。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;认证与授权&lt;/strong&gt;&lt;br&gt;
+虽然OAuth等改进了认证(authN)，但授权(authZ)仍是重灾区。许多API仍存在&amp;quot;自称管理员即可提权&amp;quot;的漏洞，NIST要求实现字段和方法级的精细访问控制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;敏感数据识别与保护&lt;/strong&gt;&lt;br&gt;
+敏感数据不仅限于PII。某公司意外暴露网络安全保险单（含勒索软件赔付上限）的案例表明，需要超越简单关键词的数据分类策略。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;访问控制与请求流管理&lt;/strong&gt;&lt;br&gt;
+重点强化令牌泄露等异常场景下的API行为。需建立实时响应能力，例如按需阻断特定密钥或用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;速率限制与滥用防护&lt;/strong&gt;&lt;br&gt;
+NIST建议实施方法/用户/字段级的细粒度限速，防止云计算资源或LLM API被恶意消耗造成经济损失。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;日志与可观测性&lt;/strong&gt;&lt;br&gt;
+关键不在于日志收集，而在于响应能力。需建立日志分析与安全操作的联动机制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;wallarm的技术实现&#34;&gt;Wallarm的技术实现
+&lt;/h3&gt;&lt;p&gt;Wallarm平台与NIST标准深度契合，提供以下技术能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动发现API并生成OpenAPI规范&lt;/li&gt;
+&lt;li&gt;实时模式验证和异常请求检测&lt;/li&gt;
+&lt;li&gt;识别身份验证漏洞、敏感数据暴露和BOLA等风险&lt;/li&gt;
+&lt;li&gt;细粒度速率限制&lt;/li&gt;
+&lt;li&gt;完整流量上下文分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;平台通过机器学习分析API流量模式，可识别90%以上的影子API，并将安全事件响应时间缩短至分钟级。对于金融科技客户，Wallarm特别强化了支付API的序列化攻击防护，成功拦截了83%的业务逻辑滥用尝试。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;案例：某零售企业部署Wallarm后，API攻击面减少62%，误报率降低至0.2%，安全团队效率提升4倍。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

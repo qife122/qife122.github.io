@@ -7,7 +7,179 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 09:37:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 15:27:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>在Linux系统上运行原版Intercepter-NG网络嗅探工具</title>
+        <link>http://localhost:1313/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Tue, 05 Aug 2025 15:27:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%9C%A8linux%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%89%88intercepter-ng%E7%BD%91%E7%BB%9C%E5%97%85%E6%8E%A2%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h1 id=&#34;在linux上运行原版intercepter&#34;&gt;在Linux上运行原版Intercepter
+&lt;/h1&gt;&lt;h2 id=&#34;更新后的安装指南&#34;&gt;更新后的安装指南
+&lt;/h2&gt;&lt;p&gt;[1] 下载Wine用的WinPcap封装库并安装libpcap-dev&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget http://sniff.su/wine_pcap_dlls.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install libpcap-dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果是i386版本的Kali系统，直接跳到步骤[3]。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;[2] 在Kali x64系统执行以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dpkg --add-architecture i386
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get update 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install wine-bin:i386
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install tcpdump:i386
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;[3] 将dll文件复制到wine库目录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp wpcap.dll.so /usr/lib/i386-linux-gnu/wine
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp packet.dll.so /usr/lib/i386-linux-gnu/wine
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[4] 安装winetricks并配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install winetricks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winetricks cc580
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ethtool --offload eth0 rx off tx off
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[5] 下载Intercepter-NG 0.9.9并移除冲突的dll：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm wpcap.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm packet.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wine Intercepter-NG.exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;常见问题解答&#34;&gt;常见问题解答
+&lt;/h2&gt;&lt;p&gt;多位用户在评论区反馈了安装过程中遇到的问题，主要包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;64位系统兼容性问题&lt;/li&gt;
+&lt;li&gt;DLL文件缺失错误&lt;/li&gt;
+&lt;li&gt;配置文件读取异常&lt;/li&gt;
+&lt;li&gt;Wine版本兼容性问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;作者建议确保：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用root账户直接运行（非sudo）&lt;/li&gt;
+&lt;li&gt;所有文件解压到同一目录&lt;/li&gt;
+&lt;li&gt;严格按照步骤操作&lt;/li&gt;
+&lt;li&gt;对于Kali 2.0等新系统可能需要额外调试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：本文档适用于Kali Linux等渗透测试系统，实际网络嗅探操作需遵守当地法律法规。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>TSC频率全局共享：提升性能分析与基准测试精度</title>
+        <link>http://localhost:1313/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</link>
+        <pubDate>Tue, 05 Aug 2025 13:41:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/tsc%E9%A2%91%E7%8E%87%E5%85%A8%E5%B1%80%E5%85%B1%E4%BA%AB%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%B2%BE%E5%BA%A6/</guid>
+        <description>&lt;h2 id=&#34;tsc频率全局共享提升性能分析与基准测试精度&#34;&gt;TSC频率全局共享：提升性能分析与基准测试精度
+&lt;/h2&gt;&lt;p&gt;你是否曾尝试使用LLVM的X-Ray分析工具生成火焰图，却遇到诸如以下的错误提示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency for TSC accounting.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;==65892==Unable to determine CPU frequency.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者更糟的情况：当你分析完应用的所有函数运行时间后，发现累计时间只有15分钟，而实际运行耗时20分钟——那消失的5分钟去哪了？&lt;/p&gt;
+&lt;p&gt;我们遇到了上述问题，因此开发了名为&lt;code&gt;tsc_freq_khz&lt;/code&gt;的Linux内核模块解决方案。该模块能显著提升X-Ray等性能分析工具在虚拟化环境中的表现，彻底消除&amp;quot;无法确定CPU频率&amp;quot;的错误提示。&lt;/p&gt;
+&lt;h3 id=&#34;时间戳的困境&#34;&gt;时间戳的困境
+&lt;/h3&gt;&lt;p&gt;x86架构至少有六种计时方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实时时钟(RTC)&lt;/li&gt;
+&lt;li&gt;可编程间隔定时器(PIT)&lt;/li&gt;
+&lt;li&gt;高性能事件定时器(HPET)&lt;/li&gt;
+&lt;li&gt;ACPI电源管理定时器(ACPI PM)&lt;/li&gt;
+&lt;li&gt;高级可编程中断控制器(APIC)定时器&lt;/li&gt;
+&lt;li&gt;时间戳计数器(TSC)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;尽管存在缺陷，TSC因其极低延迟（电路直接集成在CPU上）和用户态直接访问的特性，成为基准测试和性能分析的理想选择。X-Ray等工具正是依赖TSC进行精确测量。&lt;/p&gt;
+&lt;h3 id=&#34;从时钟周期到纳秒&#34;&gt;从时钟周期到纳秒
+&lt;/h3&gt;&lt;p&gt;将TSC计数值转换为纳秒的基本公式很简单：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;time_in_nanoseconds = (tsc_count_end - tsc_count_start) * tsc_frequency
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;但确定TSC频率非常困难，在虚拟化环境中甚至不可能。Linux内核本身不提供获取TSC频率的接口，而新Intel CPU的最大时钟速度已不能准确反映TSC频率，这正是性能分析中&amp;quot;时间消失&amp;quot;问题的根源。&lt;/p&gt;
+&lt;h3 id=&#34;google的启示&#34;&gt;Google的启示
+&lt;/h3&gt;&lt;p&gt;X-Ray源代码中引用了一个神秘的sysfs条目&lt;code&gt;/sys/devices/system/cpu/cpu0/tsc_freq_khz&lt;/code&gt;，但Linux内核源码中并无相关实现。调查发现这是Google内部内核的补丁，用于通过sysfs导出TSC频率。&lt;/p&gt;
+&lt;h3 id=&#34;全民共享tsc频率&#34;&gt;全民共享TSC频率
+&lt;/h3&gt;&lt;p&gt;我们开发的内核模块&lt;code&gt;tsc_freq_khz&lt;/code&gt;实现了相同功能。该模块会：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读取内核启动时计算的&lt;code&gt;tsc_khz&lt;/code&gt;变量值&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;/sys/devices/system/cpu/cpu0/tsc_freq_khz&lt;/code&gt;导出到用户空间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;安装测试方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ sudo insmod ./tsc_freq_khz.ko
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ dmesg &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep tsc_freq_khz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;14045.345025&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; tsc_freq_khz: starting driver
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;14045.345026&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; tsc_freq_khz: registering with sysfs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;14045.345028&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; tsc_freq_khz: successfully registered
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ cat /sys/devices/system/cpu/cpu0/tsc_freq_khz
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;2712020&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;警告：本模块暂不适合生产环境使用，它假设CPU0存在且未对TSC值进行可靠性检查。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;结语&#34;&gt;结语
+&lt;/h3&gt;&lt;p&gt;这类看似简单的问题往往隐藏着有趣的技术深度。在Google内部补丁被纳入主流内核前，&lt;code&gt;tsc_freq_khz&lt;/code&gt;模块可作为获取精确性能分析数据的临时解决方案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>通过OSTIF强化开源基础设施安全 - Trail of Bits技术实践</title>
         <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87ostif%E5%BC%BA%E5%8C%96%E5%BC%80%E6%BA%90%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E5%AE%89%E5%85%A8-trail-of-bits%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
         <pubDate>Mon, 04 Aug 2025 09:37:51 +0800</pubDate>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>宏键盘 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%AE%8F%E9%94%AE%E7%9B%98/</link>
+        <description>Recent content in 宏键盘 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 11:24:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%8F%E9%94%AE%E7%9B%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>宏键盘在渗透测试中的高效应用</title>
+        <link>http://localhost:1313/p/%E5%AE%8F%E9%94%AE%E7%9B%98%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%AB%98%E6%95%88%E5%BA%94%E7%94%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 11:24:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%8F%E9%94%AE%E7%9B%98%E5%9C%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E9%AB%98%E6%95%88%E5%BA%94%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;为什么使用宏键盘&#34;&gt;为什么使用宏键盘？
+&lt;/h2&gt;&lt;p&gt;压缩技术无处不在——文件、视频、存储和网络中都存在，因此将其应用于工作流程中也合情合理。通过Elgato Stream Deck或完全可软件定制的机械键盘等宏键盘设备，您可以将需要多个步骤和配置的繁琐重复任务&amp;quot;压缩&amp;quot;为单键操作。&lt;br&gt;
+&lt;strong&gt;请注意&lt;/strong&gt;：本文无需物理Stream Deck硬件，Elgato移动端Stream Deck应用同样具备宏键盘功能。&lt;/p&gt;
+&lt;h2 id=&#34;宏键盘的核心价值&#34;&gt;宏键盘的核心价值
+&lt;/h2&gt;&lt;p&gt;渗透测试工作中，复制粘贴笔记内容或重复输入常用命令往往占据大量时间。无论是执行Nmap扫描、运行常用Nuclei模板，还是在Word中格式化漏洞发现，针对独特环境的渗透测试（尤其在测试初期）存在大量重复性工作。&lt;/p&gt;
+&lt;h2 id=&#34;基础功能解析&#34;&gt;基础功能解析
+&lt;/h2&gt;&lt;p&gt;在深入创建宏之前，需先了解Stream Deck的基础功能。以下是日常使用的核心功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多动作(Multi-Action)&lt;/strong&gt;：&lt;br&gt;
+可顺序执行多个命令。例如单键实现VPN连接、启动终端和切换工作区布局。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;热键(Hotkey)&lt;/strong&gt;：&lt;br&gt;
+绑定组合键如&amp;quot;ctrl+c&amp;quot;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件夹(Folders)&lt;/strong&gt;：&lt;br&gt;
+分类管理宏指令。例如集中存放所有报告模板避免主界面混乱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;插件(Add-ons)&lt;/strong&gt;：&lt;br&gt;
+支持Microsoft Teams/Discord等第三方应用，快速调用通讯功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;配置文件(Profiles)&lt;/strong&gt;：&lt;br&gt;
+为不同应用（Word/终端/浏览器）设置独立布局。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;渗透测试自动化实例&#34;&gt;渗透测试自动化实例
+&lt;/h2&gt;&lt;p&gt;构建宏需要时间积累。建议从高频操作入手，例如：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;环境初始化&lt;/strong&gt;：&lt;br&gt;
+将标准apt命令序列（更新/升级/安装）集成到单个多动作宏：&lt;br&gt;
+&lt;code&gt;apt update; apt upgrade -y; apt dist-upgrade -y; apt install nuclei&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;脚本快速部署&lt;/strong&gt;：&lt;br&gt;
+使用MacOS的&lt;code&gt;pbcopy&lt;/code&gt;命令，通过多动作宏实现数百行配置脚本的即时复制，效率远超手动操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;扫描命令模板&lt;/strong&gt;：&lt;br&gt;
+预设Nmap/Nuclei/FFuF等工具的命令模板，保留文件输入参数：&lt;br&gt;
+&lt;code&gt;Nmap -sC -sV -p 443,80,8443,8080 -iL&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;报告自动化&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;插入常用文本片段&lt;/li&gt;
+&lt;li&gt;一键应用&amp;quot;Code&amp;quot;或&amp;quot;Heading 2&amp;quot;样式&lt;/li&gt;
+&lt;li&gt;自动添加Nmap/Burp Suite工具脚注&lt;/li&gt;
+&lt;li&gt;截图即时格式化（通过Word的键盘自定义功能实现）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;专业技巧&#34;&gt;专业技巧
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;文本动作(Text Action)适合短指令，长文本建议使用复制粘贴（因字符输入存在1-10ms延迟）&lt;/li&gt;
+&lt;li&gt;善用插件商店（https://marketplace.elgato.com/stream-deck/plugins）获取生产力工具：
+&lt;ul&gt;
+&lt;li&gt;Microsoft Teams控制&lt;/li&gt;
+&lt;li&gt;番茄钟计时器&lt;/li&gt;
+&lt;li&gt;家庭智能控制&lt;/li&gt;
+&lt;li&gt;IP地址实时显示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通过Visual Basic宏还可实现Markdown代码块到Word样式的自动转换，进一步强化文档处理能力。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
