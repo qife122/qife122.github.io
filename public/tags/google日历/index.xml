@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Google日历 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/google%E6%97%A5%E5%8E%86/</link>
+        <description>Recent content in Google日历 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Tue, 05 Aug 2025 19:26:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/google%E6%97%A5%E5%8E%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用MailSniper实现Google日历事件注入攻击</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8mailsniper%E5%AE%9E%E7%8E%B0google%E6%97%A5%E5%8E%86%E4%BA%8B%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Tue, 05 Aug 2025 19:26:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8mailsniper%E5%AE%9E%E7%8E%B0google%E6%97%A5%E5%8E%86%E4%BA%8B%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;h1 id=&#34;google日历事件注入与mailsniper&#34;&gt;Google日历事件注入与MailSniper
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Beau Bullock &amp;amp; Michael Felch&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;Google日历是企业员工仅次于电子邮件的第二大生产力工具。其自动添加事件的功能存在安全隐患：攻击者无需发送邮件即可直接向目标日历注入事件，且能绕过Google的多项安全控制。本文将通过MailSniper工具演示该漏洞的利用方法。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;攻击方法&#34;&gt;攻击方法
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;基础凭证注入（Invoke-InjectGEvent）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Invoke-InjectGEvent&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-EmailAddress&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;attacker@gmail.com&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Password&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;pwd&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-EventTitle&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;紧急会议&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Targets&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;victim@gmail.com&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;要求：有效的Google账号凭证&lt;/li&gt;
+&lt;li&gt;限制：目标需开启&amp;quot;自动添加事件&amp;quot;功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;API高级注入（Invoke-InjectGEventAPI）&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Invoke-InjectGEventAPI&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-AccessToken&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;API_TOKEN&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Targets&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;victim@gmail.com&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-EventTitle&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;全员会议&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;关键突破：通过API强制设置&lt;code&gt;attendees[].responseStatus = &#39;accepted&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;完全绕过&amp;quot;仅显示已接受邀请&amp;quot;的安全设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安全设置绕过&#34;&gt;安全设置绕过
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;安全设置&lt;/th&gt;
+          &lt;th&gt;默认状态&lt;/th&gt;
+          &lt;th&gt;绕过方法&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;来自Gmail的事件&lt;/td&gt;
+          &lt;td&gt;启用&lt;/td&gt;
+          &lt;td&gt;直接创建事件不发送邮件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;自动添加邀请&lt;/td&gt;
+          &lt;td&gt;严格模式&lt;/td&gt;
+          &lt;td&gt;通过API标记为&amp;quot;已接受&amp;quot;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;实战案例&#34;&gt;实战案例
+&lt;/h2&gt;&lt;p&gt;在某次红队评估中，攻击者注入标题为&amp;quot;10分钟后召开全员会议&amp;quot;的事件，并在事件描述中嵌入伪造的Google认证页面链接。当用户点击查看&amp;quot;会议议程&amp;quot;时，其凭证即被窃取。&lt;/p&gt;
+&lt;h2 id=&#34;时间线披露&#34;&gt;时间线披露
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2017年10月9日：向Google提交漏洞&lt;/li&gt;
+&lt;li&gt;10月17日：Google静默更新日历设置&lt;/li&gt;
+&lt;li&gt;10月31日：Google最终回应称此为&amp;quot;设计特性&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;禁用所有自动添加事件功能&lt;/li&gt;
+&lt;li&gt;对日历API调用实施严格监控&lt;/li&gt;
+&lt;li&gt;培训员工识别异常日历事件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下篇预告：将介绍CredSniper框架如何窃取双重认证令牌&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,20 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 14:01:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 19:59:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
+        <link>http://localhost:1313/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>
+        <pubDate>Tue, 05 Aug 2025 19:59:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</guid>
+        <description>&lt;p&gt;微软今日发布安全通告983438，针对SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。该漏洞可能导致攻击者在SharePoint站点内实现权限提升(EoP)。使用Internet Explorer 8客户端的服务器风险较低，因为IE8的XSS过滤器能在互联网区域缓解此问题。目前尚未发现活跃攻击。&lt;/p&gt;
+&lt;p&gt;运行SharePoint Server 2007或SharePoint Services 3.0的客户应审阅并实施安全通告中讨论的缓解措施和临时解决方案，包括限制对SharePoint help.aspx XML文件的访问，以及在内部网区域启用IE8 XSS过滤器。&lt;/p&gt;
+&lt;p&gt;微软正通过Microsoft Active Protections Program(MAPP)与合作伙伴积极协作，提供可扩展客户保护的解决方案信息。微软始终致力于与安全研究人员合作解决软件漏洞，确保用户在漏洞被恶意利用前获得全面高质量的安全更新。&lt;/p&gt;
+&lt;p&gt;受影响用户可访问http://support.microsoft.com获取支持，并建议联系所在国家的执法机构。我们将通过博客和Twitter(@msftsecresponse)持续更新进展。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本文档按&amp;quot;原样&amp;quot;提供，不附任何担保，亦不授予任何权利。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Bludit v3.16.2存储型XSS漏洞分析：通过&#34;添加新内容&#34;功能实现攻击</title>
         <link>http://localhost:1313/p/bludit-v3.16.2%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E9%80%9A%E8%BF%87%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%86%85%E5%AE%B9%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%94%BB%E5%87%BB/</link>
         <pubDate>Mon, 04 Aug 2025 14:01:23 +0800</pubDate>

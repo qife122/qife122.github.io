@@ -7,7 +7,43 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 16:02:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 21:44:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bitwarden回应加密设计缺陷批评：提升PBKDF2迭代次数强化安全</title>
+        <link>http://localhost:1313/p/bitwarden%E5%9B%9E%E5%BA%94%E5%8A%A0%E5%AF%86%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E6%89%B9%E8%AF%84%E6%8F%90%E5%8D%87pbkdf2%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%BC%BA%E5%8C%96%E5%AE%89%E5%85%A8/</link>
+        <pubDate>Tue, 05 Aug 2025 21:44:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bitwarden%E5%9B%9E%E5%BA%94%E5%8A%A0%E5%AF%86%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E6%89%B9%E8%AF%84%E6%8F%90%E5%8D%87pbkdf2%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%BC%BA%E5%8C%96%E5%AE%89%E5%85%A8/</guid>
+        <description>&lt;h3 id=&#34;加密方案争议核心&#34;&gt;加密方案争议核心
+&lt;/h3&gt;&lt;p&gt;密码管理服务商Bitwarden近期回应了关于其加密密钥保护机制的批评，重点调整了PBKDF2哈希迭代次数的默认配置。该机制用于生成用户密码库的解密密钥，安全研究人员指出其原有配置存在安全隐患。&lt;/p&gt;
+&lt;h4 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OWASP标准&lt;/strong&gt;：推荐使用PBKDF2算法配合随机盐值、SHA-256及60万次迭代（原标准为31万次）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bitwarden原配置&lt;/strong&gt;：采用200,001次迭代（客户端100,001次 + 服务器端100,000次）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键缺陷&lt;/strong&gt;：安全专家Wladimir Palant指出服务器端迭代实际无效，且旧账户默认仅5,000次迭代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;事件背景&#34;&gt;事件背景
+&lt;/h3&gt;&lt;p&gt;此次争议源于LastPass数据泄露事件后，研究人员对其他密码管理工具的审查。LastPass曾因仅采用10万次迭代（旧账户5,000次）而受到批评。Bitwarden在2018年就收到过类似问题报告，但未彻底解决。&lt;/p&gt;
+&lt;h3 id=&#34;解决方案与争议&#34;&gt;解决方案与争议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;配置升级&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;新账户默认迭代次数从200,001次提升至350,000次&lt;/li&gt;
+&lt;li&gt;后根据OWASP新指南调整为600,000次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;遗留问题&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;现有账户是否自动升级尚不明确&lt;/li&gt;
+&lt;li&gt;Mastodon声明引发社区对升级计划的质疑&lt;/li&gt;
+&lt;li&gt;Bitwarden官方将此视为&amp;quot;功能请求&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;安全影响&#34;&gt;安全影响
+&lt;/h3&gt;&lt;p&gt;当密码库服务器遭入侵时，不足的哈希迭代次数会大幅降低暴力破解难度。用户可通过手动设置提高迭代次数，但普通用户往往缺乏相关意识。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软发布本地管理员密码解决方案(LAPS)工具</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%8F%91%E5%B8%83%E6%9C%AC%E5%9C%B0%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88laps%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sat, 02 Aug 2025 16:02:32 +0800</pubDate>

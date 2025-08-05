@@ -7,7 +7,116 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 18:49:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 20:54:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>开源排名算法工具raink：利用LLM实现高效文档排序</title>
+        <link>http://localhost:1313/p/%E5%BC%80%E6%BA%90%E6%8E%92%E5%90%8D%E7%AE%97%E6%B3%95%E5%B7%A5%E5%85%B7raink%E5%88%A9%E7%94%A8llm%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%96%87%E6%A1%A3%E6%8E%92%E5%BA%8F/</link>
+        <pubDate>Tue, 05 Aug 2025 20:54:55 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BC%80%E6%BA%90%E6%8E%92%E5%90%8D%E7%AE%97%E6%B3%95%E5%B7%A5%E5%85%B7raink%E5%88%A9%E7%94%A8llm%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%96%87%E6%A1%A3%E6%8E%92%E5%BA%8F/</guid>
+        <description>&lt;h1 id=&#34;raink使用llms进行文档排序&#34;&gt;raink：使用LLMs进行文档排序
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;：Bishop Fox发布了raink命令行工具，采用新型基于LLM的列表排序算法。该工具最初在RVASec 2024展示，可解决复杂排序问题，包括将代码差异与安全公告关联。&lt;/p&gt;
+&lt;h2 id=&#34;算法背景&#34;&gt;算法背景
+&lt;/h2&gt;&lt;p&gt;传统排序方法面临三大挑战：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;点对点评分&lt;/strong&gt;：LLM难以生成一致的客观分数&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;列表完整性&lt;/strong&gt;：模型常丢失部分输入项或拒绝执行任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果一致性&lt;/strong&gt;：相同输入在不同上下文可能产生不同排序&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;核心算法&#34;&gt;核心算法
+&lt;/h2&gt;&lt;p&gt;raink采用三级优化架构：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始批处理&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将输入列表随机分块（默认每组10项）&lt;/li&gt;
+&lt;li&gt;对每个分块进行独立排序&lt;/li&gt;
+&lt;li&gt;记录每项在分块中的相对位置作为初始分数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多轮验证&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重复10次分块排序过程&lt;/li&gt;
+&lt;li&gt;计算各项位置的平均值形成初步排名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;递归优化&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;聚焦排名靠前的子集（如前50%）&lt;/li&gt;
+&lt;li&gt;逐层细化直到确定最终排序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术对比&#34;&gt;技术对比
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方法类型&lt;/th&gt;
+          &lt;th&gt;时间复杂度&lt;/th&gt;
+          &lt;th&gt;特点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;点对点&lt;/td&gt;
+          &lt;td&gt;O(N)&lt;/td&gt;
+          &lt;td&gt;评分不一致&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;成对排序&lt;/td&gt;
+          &lt;td&gt;O(N²)&lt;/td&gt;
+          &lt;td&gt;精度高但耗时&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;raink&lt;/td&gt;
+          &lt;td&gt;O(N log N)&lt;/td&gt;
+          &lt;td&gt;平衡效率与准确性&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;实际应用&#34;&gt;实际应用
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;案例1：TLD数学相关性排序&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;raink -f tlds-iana.lst -r &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -s &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -p &lt;span class=&#34;s1&#34;&gt;&amp;#39;按&amp;#34;数学&amp;#34;相关性降序排列这些顶级域名&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出结果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;edu&lt;/li&gt;
+&lt;li&gt;university&lt;/li&gt;
+&lt;li&gt;academy&lt;/li&gt;
+&lt;li&gt;education&lt;/li&gt;
+&lt;li&gt;school&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;案例2：漏洞识别&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;raink -f code-diffs.jsonl -r &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; -s &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; -p &lt;span class=&#34;s2&#34;&gt;&amp;#34;根据安全公告分析代码变更相关性&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;测试表明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;60%概率准确定位关键函数&lt;/li&gt;
+&lt;li&gt;平均识别准确率达top 7%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;性能表现&#34;&gt;性能表现
+&lt;/h2&gt;&lt;p&gt;使用GPT-4o mini处理1445个TLD：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;耗时&amp;lt;2分钟&lt;/li&gt;
+&lt;li&gt;API调用次数减少83% vs 传统成对排序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;项目已开源：https://github.com/bishopfox/raink&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>无需物理硬件的Wi-Fi黑客实战：Wi-Fi Forge虚拟化无线攻防实验室</title>
         <link>http://localhost:1313/p/%E6%97%A0%E9%9C%80%E7%89%A9%E7%90%86%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E5%AE%9E%E6%88%98wi-fi-forge%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4/</link>
         <pubDate>Mon, 04 Aug 2025 18:49:04 +0800</pubDate>

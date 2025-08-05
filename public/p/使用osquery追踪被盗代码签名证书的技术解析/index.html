@@ -408,7 +408,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">osquery</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">authenticode</span><span class="p">.</span><span class="k">result</span><span class="w">  
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">processes</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">process</span><span class="w">  
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">authenticode</span><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="n">JOIN</span><span class="w"> </span><span class="n">authenticode</span><span class="w">  
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">process</span><span class="p">.</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authenticode</span><span class="p">.</span><span class="n">path</span><span class="w">  
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;missing&#39;</span><span class="p">;</span><span class="w">  
 </span></span></span></code></pre></td></tr></table>
@@ -551,6 +551,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用osquery追踪被盗代码签名证书的技术分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

@@ -7,7 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 07:05:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Aug 2025 21:11:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>免费文件共享服务再遭滥用：恶意软件传播分析</title>
+        <link>http://localhost:1313/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 05 Aug 2025 21:11:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;更多免费文件共享服务遭滥用&#34;&gt;更多免费文件共享服务遭滥用
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;发布时间&lt;/strong&gt;：2025-07-16&lt;br&gt;
+&lt;strong&gt;最后更新&lt;/strong&gt;：2025-07-16 13:00:28 UTC&lt;br&gt;
+&lt;strong&gt;作者&lt;/strong&gt;：Xavier Mertens（版本：1）&lt;/p&gt;
+&lt;p&gt;数月前，我曾撰文讨论过被用于数据外泄的在线服务[1]。其中提到catbox.moe[2]等知名平台。最近发现某样本正试图从该网站下载载荷，经快速调查后收集到更多样本！&lt;/p&gt;
+&lt;h2 id=&#34;数据分析&#34;&gt;数据分析
+&lt;/h2&gt;&lt;p&gt;我共收集了612个直连下载URL（示例：hxxps://files[.]catbox[.]moe/xxxxxx），部分高频出现的URL被多个样本重复使用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;remnux@remnux:~/malwarezoo/catmoe-research$ cat urls.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; uniq -c &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sort -rn&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; head -10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;23&lt;/span&gt; hxxps://files&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;catbox&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;moe/a1z5ds.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; hxxps://files&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;catbox&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;moe/63g8p0.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; hxxps://files&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;catbox&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;moe/h7b4e4.dll
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; hxxps://files&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;catbox&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;moe/mqhwlv.sys
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; hxxps://files&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;catbox&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;moe/j5s1uy.bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;文件类型统计&#34;&gt;文件类型统计
+&lt;/h2&gt;&lt;p&gt;通过&lt;code&gt;file&lt;/code&gt;命令分析样本类型分布，前五位均为Windows可执行文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;55&lt;/span&gt; PE32+ executable &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DLL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GUI&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; x86-64, &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; MS Windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;29&lt;/span&gt; PE32+ executable &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;native&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; x86-64, &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; MS Windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; ASCII text, with no line terminators
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; PE32+ executable &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DLL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;console&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; x86-64, &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; MS Windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; PE32+ executable &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;console&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; x86-64, &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; MS Windows
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;安全警示&#34;&gt;安全警示
+&lt;/h2&gt;&lt;p&gt;值得注意的是，catbox.moe本应禁止PE文件上传。若企业未使用此类服务，任何相关流量都应视为可疑行为。&lt;/p&gt;
+&lt;p&gt;[1] &lt;a class=&#34;link&#34; href=&#34;https://isc.sans.edu/diary/Online&amp;#43;Services&amp;#43;Again&amp;#43;Abused&amp;#43;to&amp;#43;Exfiltrate&amp;#43;Data/31862&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://isc.sans.edu/diary/Online+Services+Again+Abused+to+Exfiltrate+Data/31862&lt;/a&gt;&lt;br&gt;
+[2] &lt;a class=&#34;link&#34; href=&#34;https://catbox.moe/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://catbox.moe/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键词&lt;/strong&gt;：在线文件共享&lt;br&gt;
+&lt;strong&gt;威胁指标&lt;/strong&gt;：DLL文件、PE可执行文件、恶意载荷下载URL&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Lumma窃密软件卷土重来：采用更隐蔽的传播技术与规避手段</title>
         <link>http://localhost:1313/p/lumma%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E5%8D%B7%E5%9C%9F%E9%87%8D%E6%9D%A5%E9%87%87%E7%94%A8%E6%9B%B4%E9%9A%90%E8%94%BD%E7%9A%84%E4%BC%A0%E6%92%AD%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%A7%84%E9%81%BF%E6%89%8B%E6%AE%B5/</link>
         <pubDate>Tue, 05 Aug 2025 07:05:32 +0800</pubDate>
