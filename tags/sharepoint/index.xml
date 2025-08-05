@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 15:40:04 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 19:59:42 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/sharepoint/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
+      <link>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>
+      <pubDate>Tue, 05 Aug 2025 19:59:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</guid>
+      <description>&lt;p&gt;微软今日发布安全通告983438，针对SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。该漏洞可能导致攻击者在SharePoint站点内实现权限提升(EoP)。使用Internet Explorer 8客户端的服务器风险较低，因为IE8的XSS过滤器能在互联网区域缓解此问题。目前尚未发现活跃攻击。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>SharePoint XSS漏洞技术分析与缓解措施</title>
       <link>https://qife122.github.io/p/sharepoint-xss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%8E%AA%E6%96%BD/</link>

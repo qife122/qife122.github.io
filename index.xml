@@ -7,8 +7,92 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 18:42:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 21:55:36 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何利用薄弱的NTFS权限进行渗透测试</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E8%96%84%E5%BC%B1%E7%9A%84ntfs%E6%9D%83%E9%99%90%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Tue, 05 Aug 2025 21:55:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E8%96%84%E5%BC%B1%E7%9A%84ntfs%E6%9D%83%E9%99%90%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</guid>
+      <description>&lt;h1 id=&#34;如何利用薄弱的ntfs权限&#34;&gt;如何利用薄弱的NTFS权限&lt;/h1&gt;&#xA;&lt;p&gt;薄弱的NTFS权限可能导致目标环境中多种攻击，包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;访问敏感信息&lt;/li&gt;&#xA;&lt;li&gt;修改系统二进制文件和配置文件&lt;/li&gt;&#xA;&lt;li&gt;DLL劫持等&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这些是渗透测试人员通常会考虑的攻击方式。然而，当我们只有有限权限时，还有其他机会可以寻找，尤其是在权限提升或横向移动受到限制的环境中。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Bitwarden回应加密设计缺陷批评：提升PBKDF2迭代次数强化安全</title>
+      <link>https://qife122.github.io/p/bitwarden%E5%9B%9E%E5%BA%94%E5%8A%A0%E5%AF%86%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E6%89%B9%E8%AF%84%E6%8F%90%E5%8D%87pbkdf2%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%BC%BA%E5%8C%96%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Tue, 05 Aug 2025 21:44:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/bitwarden%E5%9B%9E%E5%BA%94%E5%8A%A0%E5%AF%86%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E6%89%B9%E8%AF%84%E6%8F%90%E5%8D%87pbkdf2%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%BC%BA%E5%8C%96%E5%AE%89%E5%85%A8/</guid>
+      <description>&lt;h3 id=&#34;加密方案争议核心&#34;&gt;加密方案争议核心&lt;/h3&gt;&#xA;&lt;p&gt;密码管理服务商Bitwarden近期回应了关于其加密密钥保护机制的批评，重点调整了PBKDF2哈希迭代次数的默认配置。该机制用于生成用户密码库的解密密钥，安全研究人员指出其原有配置存在安全隐患。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTTP注入攻击实战视频教程</title>
+      <link>https://qife122.github.io/p/http%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Tue, 05 Aug 2025 21:27:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/http%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%E5%AE%9E%E6%88%98%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/</guid>
+      <description>&lt;h1 id=&#34;拦截全球http注入视频教程&#34;&gt;拦截全球！HTTP注入视频教程&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;2014年5月14日，星期三&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;又一个优质教程，展示如何使用Intercepter工具中的HTTP注入技术来获取对受害目标的完全控制权限。&lt;/p&gt;&#xA;&lt;p&gt;视频作者已在实际环境中成功应用该技术方案。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>免费文件共享服务再遭滥用：恶意软件传播分析</title>
+      <link>https://qife122.github.io/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 21:11:27 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;更多免费文件共享服务遭滥用&#34;&gt;更多免费文件共享服务遭滥用&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;发布时间&lt;/strong&gt;：2025-07-16&lt;br&gt;&#xA;&lt;strong&gt;最后更新&lt;/strong&gt;：2025-07-16 13:00:28 UTC&lt;br&gt;&#xA;&lt;strong&gt;作者&lt;/strong&gt;：Xavier Mertens（版本：1）&lt;/p&gt;&#xA;&lt;p&gt;数月前，我曾撰文讨论过被用于数据外泄的在线服务[1]。其中提到catbox.moe[2]等知名平台。最近发现某样本正试图从该网站下载载荷，经快速调查后收集到更多样本！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>开源排名算法工具raink：利用LLM实现高效文档排序</title>
+      <link>https://qife122.github.io/p/%E5%BC%80%E6%BA%90%E6%8E%92%E5%90%8D%E7%AE%97%E6%B3%95%E5%B7%A5%E5%85%B7raink%E5%88%A9%E7%94%A8llm%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%96%87%E6%A1%A3%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 05 Aug 2025 20:54:55 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BC%80%E6%BA%90%E6%8E%92%E5%90%8D%E7%AE%97%E6%B3%95%E5%B7%A5%E5%85%B7raink%E5%88%A9%E7%94%A8llm%E5%AE%9E%E7%8E%B0%E9%AB%98%E6%95%88%E6%96%87%E6%A1%A3%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;h1 id=&#34;raink使用llms进行文档排序&#34;&gt;raink：使用LLMs进行文档排序&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;：Bishop Fox发布了raink命令行工具，采用新型基于LLM的列表排序算法。该工具最初在RVASec 2024展示，可解决复杂排序问题，包括将代码差异与安全公告关联。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Linux内核Cgroup BPF Use-After-Free漏洞分析：CVE-2020-14356与CVE-2020-25220</title>
+      <link>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8cgroup-bpf-use-after-free%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2020-14356%E4%B8%8Ecve-2020-25220/</link>
+      <pubDate>Tue, 05 Aug 2025 20:38:24 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8cgroup-bpf-use-after-free%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2020-14356%E4%B8%8Ecve-2020-25220/</guid>
+      <description>&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景&lt;/h2&gt;&#xA;&lt;p&gt;2019年Tejun Heo发现cgroup_bpf生命周期存在的竞态条件问题（可能导致双重释放）。该漏洞在5.3内核中被修复。随后Roman Gushchin发现修复代码存在新的Use-After-Free问题。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>如何绕过邮件过滤器投递恶意宏代码 - 高级渗透测试技巧</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87%E9%82%AE%E4%BB%B6%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8A%95%E9%80%92%E6%81%B6%E6%84%8F%E5%AE%8F%E4%BB%A3%E7%A0%81-%E9%AB%98%E7%BA%A7%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Tue, 05 Aug 2025 20:16:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87%E9%82%AE%E4%BB%B6%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8A%95%E9%80%92%E6%81%B6%E6%84%8F%E5%AE%8F%E4%BB%A3%E7%A0%81-%E9%AB%98%E7%BA%A7%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;h1 id=&#34;如何绕过邮件过滤器投递恶意宏代码&#34;&gt;如何绕过邮件过滤器投递恶意宏代码&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;警告&lt;/strong&gt;：本文所述技术可能已过时，不适用于当前环境。但仍可作为学习资料，或用于更新现代工具技术。&lt;/p&gt;&#xA;&lt;p&gt;恶意宏代码是有效的攻击技术手段。为防范此类攻击，邮件安全过滤器通常会拦截恶意宏文档。以下是我总结的有效绕过技术：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
+      <link>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>
+      <pubDate>Tue, 05 Aug 2025 19:59:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</guid>
+      <description>&lt;p&gt;微软今日发布安全通告983438，针对SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。该漏洞可能导致攻击者在SharePoint站点内实现权限提升(EoP)。使用Internet Explorer 8客户端的服务器风险较低，因为IE8的XSS过滤器能在互联网区域缓解此问题。目前尚未发现活跃攻击。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pandas与Snowpark Pandas API数据处理框架深度解析</title>
+      <link>https://qife122.github.io/p/pandas%E4%B8%8Esnowpark-pandas-api%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 19:43:27 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pandas%E4%B8%8Esnowpark-pandas-api%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%A1%86%E6%9E%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;pandas与snowpark-pandas-api数据处理框架分析&#34;&gt;Pandas与Snowpark Pandas API数据处理框架分析&lt;/h1&gt;&#xA;&lt;p&gt;本文阐述了如何将现有Pandas工作流迁移至Snowpark Pandas API的过程，采用近乎&amp;quot;直接迁移&amp;quot;的方式满足不断增长的数据需求。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用MailSniper实现Google日历事件注入攻击</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8mailsniper%E5%AE%9E%E7%8E%B0google%E6%97%A5%E5%8E%86%E4%BA%8B%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/</link>
+      <pubDate>Tue, 05 Aug 2025 19:26:44 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8mailsniper%E5%AE%9E%E7%8E%B0google%E6%97%A5%E5%8E%86%E4%BA%8B%E4%BB%B6%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/</guid>
+      <description>&lt;h1 id=&#34;google日历事件注入与mailsniper&#34;&gt;Google日历事件注入与MailSniper&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Beau Bullock &amp;amp; Michael Felch&lt;/p&gt;&#xA;&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;Google日历是企业员工仅次于电子邮件的第二大生产力工具。其自动添加事件的功能存在安全隐患：攻击者无需发送邮件即可直接向目标日历注入事件，且能绕过Google的多项安全控制。本文将通过MailSniper工具演示该漏洞的利用方法。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用osquery追踪被盗代码签名证书的技术分析</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 19:15:34 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;使用osquery追踪被盗代码签名证书&#34;&gt;使用osquery追踪被盗代码签名证书&lt;/h1&gt;&#xA;&lt;p&gt;Mike Myers | 2017年10月10日&lt;/p&gt;&#xA;&lt;p&gt;近期，270万台Windows电脑感染了通过CCleaner软件更新机制传播的恶意软件，该恶意软件使用了从CCleaner开发商处窃取的证书进行签名。得益于同事Alessandro Gario提交的PR（新增了Windows可执行文件代码签名验证功能），现在通过osquery可以轻松检测此类签名恶意软件。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SANS SEC504课程VSAgent快速部署指南</title>
+      <link>https://qife122.github.io/p/sans-sec504%E8%AF%BE%E7%A8%8Bvsagent%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Tue, 05 Aug 2025 18:58:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sans-sec504%E8%AF%BE%E7%A8%8Bvsagent%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h1 id=&#34;504-vsagent使用说明&#34;&gt;504 VSAgent使用说明&lt;/h1&gt;&#xA;&lt;h2 id=&#34;部署步骤&#34;&gt;部署步骤&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;创建服务器节点&lt;/strong&gt;&lt;br&gt;&#xA;首先在Digital Ocean上新建Ubuntu节点并记录IP地址。建议配置DNS记录，若未将GoDaddy DNS与Digital Ocean集成，现在即可操作。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>你被监控了吗？检测SSL中间人攻击</title>
       <link>https://qife122.github.io/p/%E4%BD%A0%E8%A2%AB%E7%9B%91%E6%8E%A7%E4%BA%86%E5%90%97%E6%A3%80%E6%B5%8Bssl%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</link>

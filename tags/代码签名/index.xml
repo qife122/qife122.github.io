@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 06:54:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 19:15:34 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用osquery追踪被盗代码签名证书的技术分析</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 05 Aug 2025 19:15:34 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;使用osquery追踪被盗代码签名证书&#34;&gt;使用osquery追踪被盗代码签名证书&lt;/h1&gt;&#xA;&lt;p&gt;Mike Myers | 2017年10月10日&lt;/p&gt;&#xA;&lt;p&gt;近期，270万台Windows电脑感染了通过CCleaner软件更新机制传播的恶意软件，该恶意软件使用了从CCleaner开发商处窃取的证书进行签名。得益于同事Alessandro Gario提交的PR（新增了Windows可执行文件代码签名验证功能），现在通过osquery可以轻松检测此类签名恶意软件。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>使用osquery追踪被盗代码签名证书的技术解析</title>
       <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8osquery%E8%BF%BD%E8%B8%AA%E8%A2%AB%E7%9B%97%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>

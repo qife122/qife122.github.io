@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文分析了攻击者滥用catbox.moe等免费文件共享服务传播恶意软件的技术细节，包括高频使用的DLL文件类型、PE文件违规上传以及相关威胁指标统计。">
+<title>免费文件共享服务再遭滥用：恶意软件传播分析</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="免费文件共享服务再遭滥用：恶意软件传播分析">
+<meta property='og:description' content="本文分析了攻击者滥用catbox.moe等免费文件共享服务传播恶意软件的技术细节，包括高频使用的DLL文件类型、PE文件违规上传以及相关威胁指标统计。">
+<meta property='og:url' content='http://localhost:1313/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='恶意软件' /><meta property='article:tag' content='数据外泄' /><meta property='article:published_time' content='2025-08-05T21:11:27&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T21:11:27&#43;08:00'/>
+<meta name="twitter:title" content="免费文件共享服务再遭滥用：恶意软件传播分析">
+<meta name="twitter:description" content="本文分析了攻击者滥用catbox.moe等免费文件共享服务传播恶意软件的技术细节，包括高频使用的DLL文件类型、PE文件违规上传以及相关威胁指标统计。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#数据分析">数据分析</a></li>
+    <li><a href="#文件类型统计">文件类型统计</a></li>
+    <li><a href="#安全警示">安全警示</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/">免费文件共享服务再遭滥用：恶意软件传播分析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文分析了攻击者滥用catbox.moe等免费文件共享服务传播恶意软件的技术细节，包括高频使用的DLL文件类型、PE文件违规上传以及相关威胁指标统计。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 05, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="更多免费文件共享服务遭滥用">更多免费文件共享服务遭滥用
+</h1><p><strong>发布时间</strong>：2025-07-16<br>
+<strong>最后更新</strong>：2025-07-16 13:00:28 UTC<br>
+<strong>作者</strong>：Xavier Mertens（版本：1）</p>
+<p>数月前，我曾撰文讨论过被用于数据外泄的在线服务[1]。其中提到catbox.moe[2]等知名平台。最近发现某样本正试图从该网站下载载荷，经快速调查后收集到更多样本！</p>
+<h2 id="数据分析">数据分析
+</h2><p>我共收集了612个直连下载URL（示例：hxxps://files[.]catbox[.]moe/xxxxxx），部分高频出现的URL被多个样本重复使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">remnux@remnux:~/malwarezoo/catmoe-research$ cat urls.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -rn<span class="p">|</span> head -10
+</span></span><span class="line"><span class="cl"> <span class="m">23</span> hxxps://files<span class="o">[</span>.<span class="o">]</span>catbox<span class="o">[</span>.<span class="o">]</span>moe/a1z5ds.dll
+</span></span><span class="line"><span class="cl"> <span class="m">20</span> hxxps://files<span class="o">[</span>.<span class="o">]</span>catbox<span class="o">[</span>.<span class="o">]</span>moe/63g8p0.dll
+</span></span><span class="line"><span class="cl"> <span class="m">16</span> hxxps://files<span class="o">[</span>.<span class="o">]</span>catbox<span class="o">[</span>.<span class="o">]</span>moe/h7b4e4.dll
+</span></span><span class="line"><span class="cl"> <span class="m">13</span> hxxps://files<span class="o">[</span>.<span class="o">]</span>catbox<span class="o">[</span>.<span class="o">]</span>moe/mqhwlv.sys
+</span></span><span class="line"><span class="cl"> <span class="m">13</span> hxxps://files<span class="o">[</span>.<span class="o">]</span>catbox<span class="o">[</span>.<span class="o">]</span>moe/j5s1uy.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="文件类型统计">文件类型统计
+</h2><p>通过<code>file</code>命令分析样本类型分布，前五位均为Windows可执行文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">55</span> PE32+ executable <span class="o">(</span>DLL<span class="o">)</span> <span class="o">(</span>GUI<span class="o">)</span> x86-64, <span class="k">for</span> MS Windows
+</span></span><span class="line"><span class="cl"><span class="m">29</span> PE32+ executable <span class="o">(</span>native<span class="o">)</span> x86-64, <span class="k">for</span> MS Windows
+</span></span><span class="line"><span class="cl"><span class="m">21</span> ASCII text, with no line terminators
+</span></span><span class="line"><span class="cl"><span class="m">20</span> PE32+ executable <span class="o">(</span>DLL<span class="o">)</span> <span class="o">(</span>console<span class="o">)</span> x86-64, <span class="k">for</span> MS Windows
+</span></span><span class="line"><span class="cl"><span class="m">20</span> PE32+ executable <span class="o">(</span>console<span class="o">)</span> x86-64, <span class="k">for</span> MS Windows
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安全警示">安全警示
+</h2><p>值得注意的是，catbox.moe本应禁止PE文件上传。若企业未使用此类服务，任何相关流量都应视为可疑行为。</p>
+<p>[1] <a class="link" href="https://isc.sans.edu/diary/Online&#43;Services&#43;Again&#43;Abused&#43;to&#43;Exfiltrate&#43;Data/31862"  target="_blank" rel="noopener"
+    >https://isc.sans.edu/diary/Online+Services+Again+Abused+to+Exfiltrate+Data/31862</a><br>
+[2] <a class="link" href="https://catbox.moe/"  target="_blank" rel="noopener"
+    >https://catbox.moe/</a></p>
+<p><strong>关键词</strong>：在线文件共享<br>
+<strong>威胁指标</strong>：DLL文件、PE可执行文件、恶意载荷下载URL</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/">恶意软件</a>
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%96%E6%B3%84/">数据外泄</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/lumma%E7%AA%83%E5%AF%86%E8%BD%AF%E4%BB%B6%E5%8D%B7%E5%9C%9F%E9%87%8D%E6%9D%A5%E9%87%87%E7%94%A8%E6%9B%B4%E9%9A%90%E8%94%BD%E7%9A%84%E4%BC%A0%E6%92%AD%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%A7%84%E9%81%BF%E6%89%8B%E6%AE%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Lumma窃密软件卷土重来：采用更隐蔽的传播技术与规避手段</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90sucuri2018%E8%A2%AB%E9%BB%91%E7%BD%91%E7%AB%99%E8%B6%8B%E5%8A%BF%E6%8A%A5%E5%91%8Acms%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%94%BB%E9%98%B2%E5%AE%9E%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">深度解析SUCURI《2018被黑网站趋势报告》：CMS漏洞与恶意软件攻防实录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/shadowpad%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%87%E7%BA%A7%E5%AF%BC%E8%87%B4%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.trendmicro.com/content/dam/trendmicro/global/en/images/photography/technology/abstract-security-background.jpg" loading="lazy" data-key="" data-hash="https://www.trendmicro.com/content/dam/trendmicro/global/en/images/photography/technology/abstract-security-background.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Shadowpad恶意软件升级导致勒索软件部署：新型攻击手法深度分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ai%E7%94%9F%E6%88%90%E8%99%9A%E5%81%87github%E4%BB%93%E5%BA%93%E4%BC%A0%E6%92%ADsmartloader%E5%92%8Clummastealer%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AI生成虚假GitHub仓库传播SmartLoader和LummaStealer恶意软件</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/rust%E5%9C%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%AE%9E%E8%B7%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rust在恶意软件开发中的优势与实践</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

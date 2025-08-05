@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 01:56:38 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2025 21:55:36 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何利用薄弱的NTFS权限进行渗透测试</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E8%96%84%E5%BC%B1%E7%9A%84ntfs%E6%9D%83%E9%99%90%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Tue, 05 Aug 2025 21:55:36 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E8%96%84%E5%BC%B1%E7%9A%84ntfs%E6%9D%83%E9%99%90%E8%BF%9B%E8%A1%8C%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</guid>
+      <description>&lt;h1 id=&#34;如何利用薄弱的ntfs权限&#34;&gt;如何利用薄弱的NTFS权限&lt;/h1&gt;&#xA;&lt;p&gt;薄弱的NTFS权限可能导致目标环境中多种攻击，包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;访问敏感信息&lt;/li&gt;&#xA;&lt;li&gt;修改系统二进制文件和配置文件&lt;/li&gt;&#xA;&lt;li&gt;DLL劫持等&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这些是渗透测试人员通常会考虑的攻击方式。然而，当我们只有有限权限时，还有其他机会可以寻找，尤其是在权限提升或横向移动受到限制的环境中。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
+      <link>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>
+      <pubDate>Tue, 05 Aug 2025 19:59:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</guid>
+      <description>&lt;p&gt;微软今日发布安全通告983438，针对SharePoint Server 2007和SharePoint Services 3.0中存在的跨站脚本(XSS)漏洞。该漏洞可能导致攻击者在SharePoint站点内实现权限提升(EoP)。使用Internet Explorer 8客户端的服务器风险较低，因为IE8的XSS过滤器能在互联网区域缓解此问题。目前尚未发现活跃攻击。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>探索AWS Batch权限提升漏洞的技术分析</title>
       <link>https://qife122.github.io/p/%E6%8E%A2%E7%B4%A2aws-batch%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
