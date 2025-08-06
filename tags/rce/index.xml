@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 03:25:44 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 15:37:54 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/rce/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jenkins安全漏洞与攻击技术全解析</title>
+      <link>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 15:37:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;jenkins攻击技术合集&#34;&gt;Jenkins攻击技术合集&lt;/h3&gt;&#xA;&lt;h4 id=&#34;远程代码执行rce相关&#34;&gt;远程代码执行(RCE)相关&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;构建步骤操纵&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;http://www.labofapenetrationtester.com/2014/08/script-execution-and-privilege-esc-jenkins.html&#34;&gt;LabofPentester文章&lt;/a&gt;演示如何通过操纵构建步骤实现RCE&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;终端插件利用&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://medium.com/@uranium238/shodan-jenkins-to-get-rces-on-servers-6b6ec7c960e2&#34;&gt;Medium文章&lt;/a&gt;展示通过终端插件获取RCE&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;关键插件漏洞&lt;/strong&gt;&lt;br&gt;&#xA;Orange Tsai发现的漏洞影响：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pipeline: Declarative Plugin ≤1.3.4&lt;/li&gt;&#xA;&lt;li&gt;Pipeline: Groovy Plugin ≤2.61&lt;/li&gt;&#xA;&lt;li&gt;Script Security Plugin ≤1.49&lt;br&gt;&#xA;（Jenkins 2.121.1 LTS/2.132 weekly已修复）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h4 id=&#34;反序列化漏洞&#34;&gt;反序列化漏洞&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;CVE-2015-8103 &amp;amp; CVE-2016-0792&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://github.com/Coalfire-Research/java-deserialization-exploits/tree/master/Jenkins&#34;&gt;GitHub PoC&lt;/a&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://www.contrastsecurity.com/security-influencers/serialization-must-die-act-2-xstream&#34;&gt;技术分析&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>旧瓶装新酒 - Microsoft SharePoint 认证后反序列化远程代码执行漏洞分析(CVE-2022-29108)</title>
+      <link>https://qife122.github.io/p/%E6%97%A7%E7%93%B6%E8%A3%85%E6%96%B0%E9%85%92-microsoft-sharepoint-%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2022-29108/</link>
+      <pubDate>Wed, 06 Aug 2025 12:03:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%97%A7%E7%93%B6%E8%A3%85%E6%96%B0%E9%85%92-microsoft-sharepoint-%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2022-29108/</guid>
+      <description>&lt;h1 id=&#34;旧瓶装新酒---microsoft-sharepoint认证后反序列化rce-cve-2022-29108&#34;&gt;旧瓶装新酒 - Microsoft SharePoint认证后反序列化RCE (CVE-2022-29108)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;最近我在研究SharePoint相关工作时，开始学习如何搭建环境并调试其历史漏洞。今年2月出现的反序列化漏洞CVE-2022-22005（当然是认证后漏洞）已有越南研究员撰写了详细分析文章。该博客内容详实，我也参考该文进行环境搭建和调试。由于本文所述漏洞与之密切相关，建议先阅读前文以便更好理解！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Visual Studio Code Jupyter Notebook远程代码执行漏洞分析</title>
+      <link>https://qife122.github.io/p/visual-studio-code-jupyter-notebook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 03:01:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/visual-studio-code-jupyter-notebook%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;visual-studio-code-jupyter-notebook-rce&#34;&gt;Visual Studio Code Jupyter Notebook RCE&lt;/h2&gt;&#xA;&lt;p&gt;2022年10月27日 - Luca Carettoni&lt;/p&gt;&#xA;&lt;p&gt;我利用上周末的几个小时研究了Justin Steven于2021年8月发现的Visual Studio Code .ipynb Jupyter Notebook漏洞利用方法。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Discord桌面应用远程代码执行漏洞分析</title>
       <link>https://qife122.github.io/p/discord%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

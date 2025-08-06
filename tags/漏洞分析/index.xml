@@ -7,8 +7,29 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 20:38:24 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 12:03:02 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>旧瓶装新酒 - Microsoft SharePoint 认证后反序列化远程代码执行漏洞分析(CVE-2022-29108)</title>
+      <link>https://qife122.github.io/p/%E6%97%A7%E7%93%B6%E8%A3%85%E6%96%B0%E9%85%92-microsoft-sharepoint-%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2022-29108/</link>
+      <pubDate>Wed, 06 Aug 2025 12:03:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%97%A7%E7%93%B6%E8%A3%85%E6%96%B0%E9%85%92-microsoft-sharepoint-%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2022-29108/</guid>
+      <description>&lt;h1 id=&#34;旧瓶装新酒---microsoft-sharepoint认证后反序列化rce-cve-2022-29108&#34;&gt;旧瓶装新酒 - Microsoft SharePoint认证后反序列化RCE (CVE-2022-29108)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;最近我在研究SharePoint相关工作时，开始学习如何搭建环境并调试其历史漏洞。今年2月出现的反序列化漏洞CVE-2022-22005（当然是认证后漏洞）已有越南研究员撰写了详细分析文章。该博客内容详实，我也参考该文进行环境搭建和调试。由于本文所述漏洞与之密切相关，建议先阅读前文以便更好理解！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAN-OS CVE-2024-3400高危漏洞：请立即修补您的Palo Alto防火墙</title>
+      <link>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+      <pubDate>Wed, 06 Aug 2025 03:40:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，但该漏洞目前已被野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前就开发了内部利用程序并通知了客户。值得注意的是，我们成功绕过了Palo Alto Networks提供的临时缓解措施。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>防御安全播客第291期：从Tenable插件故障到AI钓鱼邮件的技术剖析</title>
+      <link>https://qife122.github.io/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC291%E6%9C%9F%E4%BB%8Etenable%E6%8F%92%E4%BB%B6%E6%95%85%E9%9A%9C%E5%88%B0ai%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 02:07:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC291%E6%9C%9F%E4%BB%8Etenable%E6%8F%92%E4%BB%B6%E6%95%85%E9%9A%9C%E5%88%B0ai%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;技术要点讨论&#34;&gt;技术要点讨论&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Tenable插件更新事故&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;全球Nessus代理因恶意插件更新大规模瘫痪&lt;/li&gt;&#xA;&lt;li&gt;事故根源分析与供应链安全启示&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Chrome扩展劫持事件&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;攻击者通过OAuth信任漏洞劫持35个官方扩展&lt;/li&gt;&#xA;&lt;li&gt;详细技术路径：从代码注入到权限提升&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;医疗HIPAA新规解读&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Linux内核Cgroup BPF Use-After-Free漏洞分析：CVE-2020-14356与CVE-2020-25220</title>
       <link>https://qife122.github.io/p/linux%E5%86%85%E6%A0%B8cgroup-bpf-use-after-free%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2020-14356%E4%B8%8Ecve-2020-25220/</link>

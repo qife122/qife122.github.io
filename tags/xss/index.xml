@@ -7,8 +7,43 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 21:08:59 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 13:58:10 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/xss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackMD上的可蠕虫化XSS漏洞分析与利用</title>
+      <link>https://qife122.github.io/p/hackmd%E4%B8%8A%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Wed, 06 Aug 2025 13:58:10 +0800</pubDate>
+      <guid>https://qife122.github.io/p/hackmd%E4%B8%8A%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;hackmd上的可蠕虫化xss漏洞&#34;&gt;HackMD上的可蠕虫化XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;在Web安全领域，我通常更偏爱服务器端漏洞而非客户端漏洞（当然能直接获取shell的客户端漏洞除外XD）。但这次发现的XSS漏洞确实有些特别，因此决定分享这个有趣的发现。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MainWP成本跟踪器笔记字段中的反射型XSS漏洞分析</title>
+      <link>https://qife122.github.io/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 13:25:20 +0800</pubDate>
+      <guid>https://qife122.github.io/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;反射型xss在成本跟踪器笔记字段中的漏洞报告&#34;&gt;反射型XSS在&amp;quot;成本跟踪器&amp;quot;笔记字段中的漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在MainWP客户端管理面板的&amp;quot;成本跟踪器&amp;quot;模块中，当用户添加或编辑成本时，可以在笔记字段输入任意内容。由于缺乏适当的输入净化和输出编码，如果该输入包含恶意JavaScript（例如XSS有效载荷），将在保存后立即被反射并执行。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MainWP成本跟踪器笔记字段反射型XSS漏洞分析</title>
+      <link>https://qife122.github.io/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 06:33:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;mainwp成本跟踪器笔记字段反射型xss漏洞报告&#34;&gt;MainWP成本跟踪器笔记字段反射型XSS漏洞报告&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;在MainWP客户端管理面板的&amp;quot;成本跟踪器&amp;quot;模块中（版本5.4.0.11），&amp;ldquo;笔记&amp;quot;输入字段存在反射型跨站脚本（XSS）漏洞。当用户添加或编辑成本时，可在笔记字段输入任意内容，若包含恶意JavaScript代码（如XSS有效载荷），由于缺乏适当的输入清理和输出编码，该代码会在保存后立即执行。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AVTOKYO2015演讲分享：漏洞猎手的烦恼与XSS漏洞技术细节</title>
+      <link>https://qife122.github.io/p/avtokyo2015%E6%BC%94%E8%AE%B2%E5%88%86%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%8C%8E%E6%89%8B%E7%9A%84%E7%83%A6%E6%81%BC%E4%B8%8Exss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</link>
+      <pubDate>Wed, 06 Aug 2025 05:39:41 +0800</pubDate>
+      <guid>https://qife122.github.io/p/avtokyo2015%E6%BC%94%E8%AE%B2%E5%88%86%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%8C%8E%E6%89%8B%E7%9A%84%E7%83%A6%E6%81%BC%E4%B8%8Exss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</guid>
+      <description>&lt;h1 id=&#34;我在avtokyo2015的演讲漏洞猎手的烦恼&#34;&gt;我在AVTOKYO2015的演讲：漏洞猎手的烦恼&lt;/h1&gt;&#xA;&lt;p&gt;本文分享我在AVTOKYO2015会议上的演讲幻灯片。AVTOKYO2015是一场于2015年11月14日在东京举办的计算机安全会议。&lt;/p&gt;&#xA;&lt;p&gt;2013年9月，我遭遇了一个意外事件：由于ISP将我的XSS研究请求误判为攻击行为，导致我的网络连接被阻断。在演讲中，我详细讲述了这个令人沮丧的故事。同时，您还可以看到我2014年的漏洞挖掘收入数据，以及一些有趣XSS漏洞的技术细节。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HackMD中的可蠕虫化XSS漏洞分析</title>
+      <link>https://qife122.github.io/p/hackmd%E4%B8%AD%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 04:18:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/hackmd%E4%B8%AD%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;可蠕虫化的hackmd-xss漏洞&#34;&gt;可蠕虫化的HackMD XSS漏洞&lt;/h1&gt;&#xA;&lt;p&gt;在Web安全领域，我通常更偏爱服务器端漏洞而非客户端漏洞（当然能直接获取shell的客户端漏洞除外XD）。控制他人服务器对我来说更有趣！正因如此，我以往较少关注XSS和CSRF等客户端漏洞（翻看记录只有2018年Google CTF那篇）。但这次发现的漏洞相当有趣，本着教育（和炫耀？）的心态决定撰文分享。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用文档模式继承漏洞：EasyXDM 2.4.19 DOMXSS分析</title>
       <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%96%87%E6%A1%A3%E6%A8%A1%E5%BC%8F%E7%BB%A7%E6%89%BF%E6%BC%8F%E6%B4%9Eeasyxdm-2.4.19-domxss%E5%88%86%E6%9E%90/</link>

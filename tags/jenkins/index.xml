@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jenkins on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/jenkins/</link>
+    <description>Recent content in Jenkins on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Wed, 06 Aug 2025 15:37:54 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jenkins安全漏洞与攻击技术全解析</title>
+      <link>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 15:37:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;jenkins攻击技术合集&#34;&gt;Jenkins攻击技术合集&lt;/h3&gt;&#xA;&lt;h4 id=&#34;远程代码执行rce相关&#34;&gt;远程代码执行(RCE)相关&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;构建步骤操纵&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;http://www.labofapenetrationtester.com/2014/08/script-execution-and-privilege-esc-jenkins.html&#34;&gt;LabofPentester文章&lt;/a&gt;演示如何通过操纵构建步骤实现RCE&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;终端插件利用&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://medium.com/@uranium238/shodan-jenkins-to-get-rces-on-servers-6b6ec7c960e2&#34;&gt;Medium文章&lt;/a&gt;展示通过终端插件获取RCE&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;关键插件漏洞&lt;/strong&gt;&lt;br&gt;&#xA;Orange Tsai发现的漏洞影响：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pipeline: Declarative Plugin ≤1.3.4&lt;/li&gt;&#xA;&lt;li&gt;Pipeline: Groovy Plugin ≤2.61&lt;/li&gt;&#xA;&lt;li&gt;Script Security Plugin ≤1.49&lt;br&gt;&#xA;（Jenkins 2.121.1 LTS/2.132 weekly已修复）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h4 id=&#34;反序列化漏洞&#34;&gt;反序列化漏洞&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;CVE-2015-8103 &amp;amp; CVE-2016-0792&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://github.com/Coalfire-Research/java-deserialization-exploits/tree/master/Jenkins&#34;&gt;GitHub PoC&lt;/a&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://www.contrastsecurity.com/security-influencers/serialization-must-die-act-2-xstream&#34;&gt;技术分析&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

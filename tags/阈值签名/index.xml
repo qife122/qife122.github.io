@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 11:34:05 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 15:21:08 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>阈值密码学实现中的多个CVE漏洞分析</title>
+      <link>https://qife122.github.io/p/%E9%98%88%E5%80%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%9E%E7%8E%B0%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AAcve%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 15:21:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%98%88%E5%80%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%9E%E7%8E%B0%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AAcve%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;io.finnet委托我们对基于Canetti等人论文《UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts》的Go语言实现tss-lib进行代码审计。审计发现的高危漏洞已分配CVE编号：CVE-2022-47930、CVE-2022-47931、CVE-2023-26556和CVE-2023-26557。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>阈值签名方案中的共享密钥破解漏洞分析</title>
       <link>https://qife122.github.io/p/%E9%98%88%E5%80%BC%E7%AD%BE%E5%90%8D%E6%96%B9%E6%A1%88%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 03:08:37 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 16:10:02 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用CodeQL检测C&#43;&#43;迭代器失效问题</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codeql%E6%A3%80%E6%B5%8Bc-%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Wed, 06 Aug 2025 16:10:02 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codeql%E6%A3%80%E6%B5%8Bc-%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h1 id=&#34;使用codeql检测迭代器失效&#34;&gt;使用CodeQL检测迭代器失效&lt;/h1&gt;&#xA;&lt;p&gt;迭代器失效是C++中常见且隐蔽的一类错误，经常导致可利用的漏洞。在Trail of Bits实习期间，我开发了Itergator——一组用于分析和发现迭代器失效的CodeQL类和查询。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>使用Binary Ninja API检测潜在释放后使用漏洞的技术解析</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8binary-ninja-api%E6%A3%80%E6%B5%8B%E6%BD%9C%E5%9C%A8%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 11:46:22 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8binary-ninja-api%E6%A3%80%E6%B5%8B%E6%BD%9C%E5%9C%A8%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;释放后使用漏洞的静态检测挑战&#34;&gt;释放后使用漏洞的静态检测挑战&lt;/h2&gt;&#xA;&lt;p&gt;释放后使用(Use-after-Free)是一种内存破坏条件，程序在内存被释放后仍继续引用。静态检测这类漏洞具有挑战性。本文探索了利用Binary Ninja的中级中间语言(MLIL)建立数据流图的方法，通过追踪特定内存分配与其他内存区域的交互关系，进行跨函数分析以识别潜在漏洞。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>使用CodeReason进行原生程序语义分析 - 揭秘二进制逆向工程利器</title>
       <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</link>

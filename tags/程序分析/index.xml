@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 17:43:34 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 10:56:03 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>检测不良OpenSSL使用模式 - Anselm工具深度解析</title>
+      <link>https://qife122.github.io/p/%E6%A3%80%E6%B5%8B%E4%B8%8D%E8%89%AFopenssl%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F-anselm%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 10:56:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%A3%80%E6%B5%8B%E4%B8%8D%E8%89%AFopenssl%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F-anselm%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;检测不良openssl使用模式&#34;&gt;检测不良OpenSSL使用模式&lt;/h1&gt;&#xA;&lt;p&gt;OpenSSL是最流行的密码学库之一，即便您不使用C/C++，您所用编程语言的核心库很可能也包含OpenSSL绑定。由于其底层API的设计特点，这个库极易被误用。幸运的是，许多错误都遵循可识别的模式，这为自动化检测提供了可能。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Siderophile：暴露Rust代码库中的不安全操作</title>
+      <link>https://qife122.github.io/p/siderophile%E6%9A%B4%E9%9C%B2rust%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%AE%89%E5%85%A8%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Wed, 06 Aug 2025 08:22:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/siderophile%E6%9A%B4%E9%9C%B2rust%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%AE%89%E5%85%A8%E6%93%8D%E4%BD%9C/</guid>
+      <description>&lt;p&gt;今天我们发布了一款名为siderophile的工具，它能帮助Rust开发者在代码库中寻找模糊测试目标。该工具会扫描crate的所有依赖项，定位每个不安全函数、表达式、特质方法等，然后沿调用图追溯至使用这些不安全元素的源头函数，并按危险程度（badness）进行排序——函数使用的不安全元素越多，其危险等级就越高。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Magnifier：交互式反编译的实验性工具</title>
       <link>https://qife122.github.io/p/magnifier%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%8F%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%80%A7%E5%B7%A5%E5%85%B7/</link>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSRF攻击 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/csrf%E6%94%BB%E5%87%BB/</link>
+    <description>Recent content in CSRF攻击 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Wed, 06 Aug 2025 05:07:27 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/csrf%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过CSRF暴力破解用户ID实现批量删除用户攻击</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87csrf%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7id%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E6%94%BB%E5%87%BB/</link>
+      <pubDate>Wed, 06 Aug 2025 05:07:27 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87csrf%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7id%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E6%94%BB%E5%87%BB/</guid>
+      <description>&lt;h1 id=&#34;通过csrf暴力破解用户id删除所有用户&#34;&gt;通过CSRF暴力破解用户ID删除所有用户&lt;/h1&gt;&#xA;&lt;p&gt;在测试某应用时发现&amp;quot;删除用户&amp;quot;模块未实施CSRF防护。攻击者只需构造恶意表单诱使管理员点击，即可任意删除用户账户。&lt;/p&gt;&#xA;&lt;h2 id=&#34;基础csrf攻击验证&#34;&gt;基础CSRF攻击验证&lt;/h2&gt;&#xA;&lt;p&gt;删除请求中未包含CSRF令牌，典型PoC如下：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

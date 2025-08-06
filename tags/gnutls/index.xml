@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GnuTLS on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/gnutls/</link>
+    <description>Recent content in GnuTLS on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Wed, 06 Aug 2025 06:54:28 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/gnutls/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GnuTLS与OpenSSL类型混淆漏洞分析</title>
+      <link>https://qife122.github.io/p/gnutls%E4%B8%8Eopenssl%E7%B1%BB%E5%9E%8B%E6%B7%B7%E6%B7%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 06:54:28 +0800</pubDate>
+      <guid>https://qife122.github.io/p/gnutls%E4%B8%8Eopenssl%E7%B1%BB%E5%9E%8B%E6%B7%B7%E6%B7%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;gnutls-curlinfo_tls_session--curlinfo_tls_ssl_ptr-类型混淆&#34;&gt;GnuTLS CURLINFO_TLS_SESSION / CURLINFO_TLS_SSL_PTR 类型混淆&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h2&gt;&#xA;&lt;p&gt;curl_easy_getinfo函数在处理CURLINFO_TLS_SESSION和CURLINFO_TLS_SSL_PTR时，错误地将GnuTLS后端标识为CURLSSLBACKEND_OPENSSL，导致类型混淆问题。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

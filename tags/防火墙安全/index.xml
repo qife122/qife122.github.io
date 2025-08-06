@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 03:52:04 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 03:40:23 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E9%98%B2%E7%81%AB%E5%A2%99%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAN-OS CVE-2024-3400高危漏洞：请立即修补您的Palo Alto防火墙</title>
+      <link>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+      <pubDate>Wed, 06 Aug 2025 03:40:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，但该漏洞目前已被野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前就开发了内部利用程序并通知了客户。值得注意的是，我们成功绕过了Palo Alto Networks提供的临时缓解措施。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>PAN-OS CVE-2024-3400高危漏洞：立即修补Palo Alto防火墙</title>
       <link>https://qife122.github.io/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
