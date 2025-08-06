@@ -7,7 +7,150 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 17:47:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 15:37:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jenkins安全漏洞与攻击技术全解析</title>
+        <link>http://localhost:1313/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 15:37:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;jenkins攻击技术合集&#34;&gt;Jenkins攻击技术合集
+&lt;/h3&gt;&lt;h4 id=&#34;远程代码执行rce相关&#34;&gt;远程代码执行(RCE)相关
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构建步骤操纵&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://www.labofapenetrationtester.com/2014/08/script-execution-and-privilege-esc-jenkins.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LabofPentester文章&lt;/a&gt;演示如何通过操纵构建步骤实现RCE&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;终端插件利用&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://medium.com/@uranium238/shodan-jenkins-to-get-rces-on-servers-6b6ec7c960e2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Medium文章&lt;/a&gt;展示通过终端插件获取RCE&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;关键插件漏洞&lt;/strong&gt;&lt;br&gt;
+Orange Tsai发现的漏洞影响：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pipeline: Declarative Plugin ≤1.3.4&lt;/li&gt;
+&lt;li&gt;Pipeline: Groovy Plugin ≤2.61&lt;/li&gt;
+&lt;li&gt;Script Security Plugin ≤1.49&lt;br&gt;
+（Jenkins 2.121.1 LTS/2.132 weekly已修复）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;反序列化漏洞&#34;&gt;反序列化漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2015-8103 &amp;amp; CVE-2016-0792&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/Coalfire-Research/java-deserialization-exploits/tree/master/Jenkins&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub PoC&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.contrastsecurity.com/security-influencers/serialization-must-die-act-2-xstream&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2017-1000353&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/vulhub/vulhub/tree/master/jenkins/CVE-2017-1000353&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;漏洞复现环境&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.twistlock.com/2017/06/18/jenkins-java-deserialization/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twistlock分析&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;文件读取漏洞&#34;&gt;文件读取漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2018-1999002&lt;/strong&gt;&lt;br&gt;
+Windows环境下可通过&lt;code&gt;../&lt;/code&gt;遍历不存在目录读取任意文件&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/1165414&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术细节&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/anntsmart/CVE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PoC代码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;凭证解密技术&#34;&gt;凭证解密技术
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;credentials.xml解密&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.n00py.io/2017/01/compromising-jenkins-and-extracting-credentials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;n00py.io指南&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/02/jenkins-decrypting-credentialsxml.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Carnal0wnage方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;权限绕过漏洞&#34;&gt;权限绕过漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2018-1999001&lt;/strong&gt;&lt;br&gt;
+畸形请求导致config.xml被移动，结合DoS漏洞(CVE-2018-1999043)强制重启实现未授权访问&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cyberark.com/threat-research-blog/tripping-the-jenkins-main-security-circuit-breaker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CyberArk分析&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;其他关键漏洞&#34;&gt;其他关键漏洞
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2015-5323&lt;/strong&gt;&lt;br&gt;
+管理员可获取其他用户的API令牌&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/02/jenkins-security-200-cve-2015-5323-poc.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PoC演示&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2018-1000600&lt;/strong&gt;&lt;br&gt;
+GitHub插件中的SSRF漏洞&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/03/jenkins-cve-2018-1000600-poc.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;漏洞验证&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;节点发现技术&#34;&gt;节点发现技术
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;识别节点IP地址&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/03/jenkins-identify-ip-addresses-of-nodes.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术方案&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>阈值密码学实现中的多个CVE漏洞分析</title>
+        <link>http://localhost:1313/p/%E9%98%88%E5%80%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%9E%E7%8E%B0%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AAcve%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 15:21:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%88%E5%80%BC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%9E%E7%8E%B0%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AAcve%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;io.finnet委托我们对基于Canetti等人论文《UC Non-Interactive, Proactive, Threshold ECDSA with Identifiable Aborts》的Go语言实现tss-lib进行代码审计。审计发现的高危漏洞已分配CVE编号：CVE-2022-47930、CVE-2022-47931、CVE-2023-26556和CVE-2023-26557。&lt;/p&gt;
+&lt;h2 id=&#34;安全问题描述&#34;&gt;安全问题描述
+&lt;/h2&gt;&lt;h3 id=&#34;cve-2022-47930涉及证明的重放攻击&#34;&gt;CVE-2022-47930：涉及证明的重放攻击
+&lt;/h3&gt;&lt;p&gt;多数MPC阈值方案使用零知识证明防止参与者作弊。但该实现中Fiat-Shamir变换的挑战值未包含会话ID、上下文字符串或随机数，导致可能重放攻击。具体表现为Schnorr知识证明的挑战计算未使用会话ID：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Fig 22.2 e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;big&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;eHash&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;common&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;SHA512_256i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;X&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;common&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;RejectionSample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;q&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;eHash&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该问题同样影响方案中的其他零知识证明（dec、affg、enc、logstar和mul）。&lt;/p&gt;
+&lt;h3 id=&#34;cve-2022-47931哈希值碰撞&#34;&gt;CVE-2022-47931：哈希值碰撞
+&lt;/h3&gt;&lt;p&gt;函数&lt;code&gt;SHA512_256&lt;/code&gt;和&lt;code&gt;SHA512_256i&lt;/code&gt;在哈希拼接时使用&amp;quot;$&amp;ldquo;作为分隔符，但该字符可能包含在输入值中导致碰撞。例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;a$&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;b&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;和&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;$b&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;会产生相同哈希值。这破坏了随机预言机假设，可能被用于构造恶意参数。&lt;/p&gt;
+&lt;h3 id=&#34;cve-2023-2655626557非恒定时间运算&#34;&gt;CVE-2023-26556/26557：非恒定时间运算
+&lt;/h3&gt;&lt;p&gt;这两个漏洞涉及敏感操作中使用Go的非常数时间算法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;big.Int&lt;/code&gt;的模幂运算可能泄露Paillier私钥的lambda值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;crypto/elliptic&lt;/code&gt;包的secp256k1曲线实现缺少恒定时间标量乘法，可能泄露秘密标量（如密钥份额x）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结论建议&#34;&gt;结论建议
+&lt;/h2&gt;&lt;p&gt;密码协议实现应严格遵循论文规范，避免安全假设的偏差。公开这些漏洞细节有助于提升方案的安全性。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Node.js V8引擎HashDoS漏洞技术分析报告</title>
         <link>http://localhost:1313/p/node.js-v8%E5%BC%95%E6%93%8Ehashdos%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/</link>
         <pubDate>Tue, 05 Aug 2025 17:47:00 +0800</pubDate>

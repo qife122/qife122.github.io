@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>代码搜索 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2/</link>
+        <description>Recent content in 代码搜索 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 13:09:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>快速准确的C/C&#43;&#43;语法搜索工具Syntex解析</title>
+        <link>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E5%87%86%E7%A1%AE%E7%9A%84c/c-%E8%AF%AD%E6%B3%95%E6%90%9C%E7%B4%A2%E5%B7%A5%E5%85%B7syntex%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 13:09:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BF%AB%E9%80%9F%E5%87%86%E7%A1%AE%E7%9A%84c/c-%E8%AF%AD%E6%B3%95%E6%90%9C%E7%B4%A2%E5%B7%A5%E5%85%B7syntex%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;基于上下文的智能搜索&#34;&gt;基于上下文的智能搜索
+&lt;/h2&gt;&lt;p&gt;Syntex解决了传统模式搜索工具的两大核心问题：&lt;/p&gt;
+&lt;p&gt;首先，现有工具容易产生假阴性结果。这些工具通常使用自建解析器处理不同语言代码库，对于C/C++代码往往不进行宏扩展处理。这意味着它们无法像Clang等真实编译器那样提供准确结果，用户无法确信&amp;quot;这是该模式的所有出现&amp;quot;或&amp;quot;该模式从未出现&amp;quot;。&lt;/p&gt;
+&lt;p&gt;其次，这些工具的内部解析器不使用真实编译器的代码表示方式，也不理解源代码语义。它们只能输出纯文本结果，无法提供结果出现的语义上下文，这严重限制了作为分析基础工具的实用性。&lt;/p&gt;
+&lt;h2 id=&#34;基于clang-ast的语法匹配&#34;&gt;基于Clang AST的语法匹配
+&lt;/h2&gt;&lt;p&gt;Syntex通过操作真实的Clang AST解决了这些问题。由于使用与编译器相同的AST表示，它消除了传统工具的准确性缺陷，并能提供包含AST节点引用的结果，支持后续语义分析。&lt;/p&gt;
+&lt;h2 id=&#34;语法合成技术&#34;&gt;语法合成技术
+&lt;/h2&gt;&lt;p&gt;在代码构建和索引阶段，Syntex通过递归遍历Clang AST生成上下文无关文法。子节点对应非终结符，每个节点出现都会添加形如parent -&amp;gt; child_0&amp;hellip;child_n的产生式规则。无子节点则成为文法中的终结符号。&lt;/p&gt;
+&lt;h2 id=&#34;查询解析机制&#34;&gt;查询解析机制
+&lt;/h2&gt;&lt;p&gt;Syntex使用记忆化图表解析器（memoizing chart parser）解析查询语句。记忆化技术防止了解析过程的指数级复杂度，结果记忆表作为查询解析森林的内存表示。匹配器利用该表确定哪些索引AST与查询匹配。&lt;/p&gt;
+&lt;h2 id=&#34;高级功能特性&#34;&gt;高级功能特性
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;元变量支持&lt;/strong&gt;：如&amp;quot;++$x&amp;quot;可匹配任何递增表达式，并可通过名称x获取匹配子表达式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通配运算符&lt;/strong&gt;：&amp;ldquo;printf($&amp;hellip;)&amp;ldquo;可匹配任意数量参数的printf调用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;类型约束&lt;/strong&gt;：&amp;quot;++$x:DECL_REF_EXPR&amp;quot;仅匹配对声明引用的递增操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;未来发展方向&#34;&gt;未来发展方向
+&lt;/h2&gt;&lt;p&gt;Syntex计划支持C++模板实例化的语法搜索，利用Clang将AST节点还原为源代码的能力。该项目已超越Semgrep等开源替代方案，展现了在语法搜索领域的独特优势。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

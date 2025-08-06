@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>账户接管 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1/</link>
+        <description>Recent content in 账户接管 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 08:39:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>星巴克新加坡站6000美元账户接管漏洞：IDOR攻击剖析</title>
+        <link>http://localhost:1313/p/%E6%98%9F%E5%B7%B4%E5%85%8B%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%AB%996000%E7%BE%8E%E5%85%83%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 08:39:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%98%9F%E5%B7%B4%E5%85%8B%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%AB%996000%E7%BE%8E%E5%85%83%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;侦察阶段&#34;&gt;侦察阶段
+&lt;/h3&gt;&lt;p&gt;在浏览星巴克新加坡站时，我发现某个页面加载了第三方站点（暂称example.com）的内容。经调查发现card.starbucks.com.sg的登录页面存在于example.com/starbucks目录下，存在两种可能性：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;该应用可能是card.starbucks.com.sg的开发和测试环境&lt;/li&gt;
+&lt;li&gt;或是已废弃的旧测试环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过在生产环境创建测试账户并成功登录example.com/starbucks，确认两个应用使用相同的认证机制。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h3&gt;&lt;p&gt;在测试环境发现一个生产环境不存在的端点，其POST参数为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;email=hacker@hacker.com 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当填入目标邮箱时，可在个人资料页看到该账户的部分信息。由于测试环境生成的CSRF令牌无效，无法直接修改密码。通过将测试环境的PHPSESSID cookie复制到生产环境后：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;成功查看受害者完整信息&lt;/li&gt;
+&lt;li&gt;利用生产环境有效的CSRF令牌修改密码&lt;/li&gt;
+&lt;li&gt;实现账户完全接管&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h3&gt;&lt;p&gt;攻击者可：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看用户所有个人信息&lt;/li&gt;
+&lt;li&gt;完全控制账户&lt;/li&gt;
+&lt;li&gt;通过移动应用消费账户内存储的星礼卡余额&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞链扩展&#34;&gt;漏洞链扩展
+&lt;/h3&gt;&lt;p&gt;在example.com发现另外两个测试环境：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;starbucks2：禁止新用户注册&lt;/li&gt;
+&lt;li&gt;starbucks3：可创建新账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过分析得出：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;starbucks2/starbucks3使用独立测试用户表&lt;/li&gt;
+&lt;li&gt;starbucks3创建的账户可登录starbucks2&lt;/li&gt;
+&lt;li&gt;starbucks2的PHPSESSID在生产环境有效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终构建攻击链：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在starbucks3用受害者邮箱创建傀儡账户（写入testusers表）&lt;/li&gt;
+&lt;li&gt;在starbucks2通过相同端点将该邮箱与自己账户关联（绑定PHPSESSID到测试用户表）&lt;/li&gt;
+&lt;li&gt;复制PHPSESSID到生产环境接管真实账户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;时间线&#34;&gt;时间线
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;5月17日：提交报告&lt;/li&gt;
+&lt;li&gt;5月18日：分类处理&lt;/li&gt;
+&lt;li&gt;5月20日：获4000美元赏金&lt;/li&gt;
+&lt;li&gt;6月17日：追加2000美元（1.5倍奖励）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://hackerone.com/reports/xxx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;原始漏洞报告&lt;/a&gt; | 关注作者Twitter获取更多安全研究内容&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

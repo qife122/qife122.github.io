@@ -7,7 +7,55 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 03:08:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 11:46:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Binary Ninja API检测潜在释放后使用漏洞的技术解析</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8binary-ninja-api%E6%A3%80%E6%B5%8B%E6%BD%9C%E5%9C%A8%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 11:46:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8binary-ninja-api%E6%A3%80%E6%B5%8B%E6%BD%9C%E5%9C%A8%E9%87%8A%E6%94%BE%E5%90%8E%E4%BD%BF%E7%94%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;释放后使用漏洞的静态检测挑战&#34;&gt;释放后使用漏洞的静态检测挑战
+&lt;/h2&gt;&lt;p&gt;释放后使用(Use-after-Free)是一种内存破坏条件，程序在内存被释放后仍继续引用。静态检测这类漏洞具有挑战性。本文探索了利用Binary Ninja的中级中间语言(MLIL)建立数据流图的方法，通过追踪特定内存分配与其他内存区域的交互关系，进行跨函数分析以识别潜在漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;内存分配数据流图构建&#34;&gt;内存分配数据流图构建
+&lt;/h2&gt;&lt;p&gt;数据流图由四种节点类型构成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;追踪分配节点(红色)&lt;/strong&gt;：表示待追踪的内存分配&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;函数栈帧节点(绿色)&lt;/strong&gt;：表示函数调用栈帧&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态内存节点(蓝色)&lt;/strong&gt;：表示无法确定来源的SSA变量&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全局内存节点(黑色)&lt;/strong&gt;：表示函数内的全局变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;边表示指针存储操作，包含两个关键属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;write&lt;/code&gt;：写入位置相对于分配基址的偏移&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;points&lt;/code&gt;：指针值指向的目标偏移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ssa变量与图节点的映射关系&#34;&gt;SSA变量与图节点的映射关系
+&lt;/h2&gt;&lt;p&gt;分析从分配函数(如malloc())返回值的SSA变量开始追踪。通过Binary Ninja的&lt;code&gt;get_ssa_var_definition()&lt;/code&gt;和&lt;code&gt;get_ssa_var_uses()&lt;/code&gt;API可以获取变量的定义位置和使用链。指针算术运算时会额外存储偏移信息。&lt;/p&gt;
+&lt;h2 id=&#34;内存加载操作转换为图边&#34;&gt;内存加载操作转换为图边
+&lt;/h2&gt;&lt;p&gt;当遇到函数外部内存加载操作时，会假设相关存储操作发生在函数外部，并据此创建图边。内存存储、赋值和加载操作共同构成了数据流图的基础构件。&lt;/p&gt;
+&lt;h2 id=&#34;数据流图信息传播&#34;&gt;数据流图信息传播
+&lt;/h2&gt;&lt;p&gt;变量赋值分为三种情况处理：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;直接变量赋值：简单传递源变量值&lt;/li&gt;
+&lt;li&gt;含指针算术的赋值：更新偏移信息&lt;/li&gt;
+&lt;li&gt;内存加载赋值：通过图边解析目标节点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;释放后使用漏洞检测&#34;&gt;释放后使用漏洞检测
+&lt;/h2&gt;&lt;p&gt;完成数据流图构建后，分析所有被标记为&amp;quot;Free&amp;quot;的基本块，检查是否存在路径通向&amp;quot;Use&amp;quot;块。同时也会检测从一个&amp;quot;Free&amp;quot;块到另一个&amp;quot;Free&amp;quot;块的路径，以发现潜在的双重释放问题。&lt;/p&gt;
+&lt;h2 id=&#34;分配器释放器函数的自动识别&#34;&gt;分配器/释放器函数的自动识别
+&lt;/h2&gt;&lt;p&gt;通过分析标准函数(如malloc/free)的使用链，可以识别程序特定的包装函数。对于释放器函数，检查函数参数是否直接传递给free()等标准释放函数。&lt;/p&gt;
+&lt;h2 id=&#34;实际漏洞案例分析&#34;&gt;实际漏洞案例分析
+&lt;/h2&gt;&lt;p&gt;工具在多个历史漏洞中成功检测出问题，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JasPer JPEG-2000中的双重释放(CVE-2015-5221)&lt;/li&gt;
+&lt;li&gt;Giflib中的双重释放(CVE-2016-3177)&lt;/li&gt;
+&lt;li&gt;GNOME-Nettool中的释放后使用&lt;/li&gt;
+&lt;li&gt;OpenSLP中的跨函数双重释放(CVE-2015-5177)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论与展望&#34;&gt;结论与展望
+&lt;/h2&gt;&lt;p&gt;本文介绍的方法虽然存在静态分析固有的分类误差，但为识别释放后使用漏洞提供了有效途径。未来可通过改进日志分组和增加全局内存跟踪来增强工具实用性。项目源代码已公开在uafninja仓库。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用CodeReason进行原生程序语义分析 - 揭秘二进制逆向工程利器</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8codereason%E8%BF%9B%E8%A1%8C%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90-%E6%8F%AD%E7%A7%98%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%A9%E5%99%A8/</link>
         <pubDate>Tue, 05 Aug 2025 03:08:37 +0800</pubDate>

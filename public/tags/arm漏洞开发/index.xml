@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>ARM漏洞开发 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/arm%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91/</link>
+        <description>Recent content in ARM漏洞开发 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 10:28:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/arm%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ARM漏洞开发实验室技术专题：从基础到实战</title>
+        <link>http://localhost:1313/p/arm%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%8A%80%E6%9C%AF%E4%B8%93%E9%A2%98%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Wed, 06 Aug 2025 10:28:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/arm%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%8A%80%E6%9C%AF%E4%B8%93%E9%A2%98%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;h1 id=&#34;arm漏洞开发实验室登陆44con伦敦2016&#34;&gt;ARM漏洞开发实验室登陆44CON伦敦2016
+&lt;/h1&gt;&lt;p&gt;随着互联网重心向ARM设备（移动和物联网）转移，ARM漏洞开发正成为攻防安全从业者必备的重要技能。&lt;/p&gt;
+&lt;p&gt;我们首次在CanSecWest 2016推出ARM漏洞实验室，随后在SyScan和HITB2016AMS进行巡讲。今年我们将为44CON带来为期3天的特别培训课程，内容涵盖：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ARM汇编语言基础&lt;/li&gt;
+&lt;li&gt;ARM架构下的函数工作原理&lt;/li&gt;
+&lt;li&gt;ARM栈溢出漏洞利用&lt;/li&gt;
+&lt;li&gt;ARM Shellcode编写技巧&lt;/li&gt;
+&lt;li&gt;绕过ARM的XN（不可执行内存）保护&lt;/li&gt;
+&lt;li&gt;ARM返回导向编程(ROP)&lt;/li&gt;
+&lt;li&gt;突破ARM的ASLR防护&lt;/li&gt;
+&lt;li&gt;实战案例：从固件分析到完全控制——某ARM路由器的完整漏洞利用过程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;44CON开幕在即，报名请访问大会培训注册页面。下月伦敦见！
+—— Saumil&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;arm-x框架与全新物联网ctf挑战赛&#34;&gt;ARM-X框架与全新物联网CTF挑战赛
+&lt;/h1&gt;&lt;p&gt;近日发布的ARM-X固件仿真框架可构建接近真实的物联网虚拟环境，主要应用于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;物联网设备仿真与渗透测试&lt;/li&gt;
+&lt;li&gt;ARM物联网漏洞开发教学&lt;/li&gt;
+&lt;li&gt;物联网目标模糊测试&lt;/li&gt;
+&lt;li&gt;物联网CTF竞赛平台&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;预览版VM包含两个仿真设备：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DVAR漏洞路由器（原TinysploitARM）&lt;/li&gt;
+&lt;li&gt;Trivision 227WF IP摄像头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CTF挑战赛要求参赛者分析IP摄像头的三个已知漏洞，首个提交有效利用方案及分析报告者将获赠&amp;quot;0-day漏洞礼盒&amp;quot;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;dvar路由器rop挑战赛升级版&#34;&gt;DVAR路由器ROP挑战赛升级版
+&lt;/h1&gt;&lt;p&gt;在完成基础栈溢出练习后解锁进阶挑战：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;分析&amp;quot;/usr/bin/lightsrv&amp;quot;交通信号服务的栈溢出漏洞&lt;/li&gt;
+&lt;li&gt;实现pc=0x41414140的崩溃控制&lt;/li&gt;
+&lt;li&gt;构建完整ROP链（启用XN保护）&lt;/li&gt;
+&lt;li&gt;最终获取shell&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;内存布局提示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;00010000-00012000 r-xp /usr/bin/lightsrv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;40000000-40064000 r-xp /lib/libc.so
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;befdf000-bf000000 rw-p [stack]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h1 id=&#34;dvar漏洞路由器发布&#34;&gt;DVAR漏洞路由器发布
+&lt;/h1&gt;&lt;p&gt;这款仿真ARM路由器运行存在漏洞的web服务，包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于QEMU的完整ARM架构仿真&lt;/li&gt;
+&lt;li&gt;预置tinysploitARM虚拟机镜像（47.4MB）&lt;/li&gt;
+&lt;li&gt;从固件分析到漏洞利用的完整训练环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下载SHA256校验：
+bc6eb66b7f5c0c71ca418c809213eb452e3fbf90654856ebb0591e164d634e2b&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;特别技术培训通告&#34;&gt;特别技术培训通告
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;维也纳DEEPSEC2017：首次举办3天ARM物联网漏洞实验室&lt;/li&gt;
+&lt;li&gt;44CON伦敦：新增ARM/Linux物联网设备实战内容&lt;/li&gt;
+&lt;li&gt;Blackhat USA 2017：
+&lt;ul&gt;
+&lt;li&gt;初级班：ARM汇编基础/远程漏洞利用&lt;/li&gt;
+&lt;li&gt;高级班：对抗XN/ASLR防护/固件分析/真实硬件攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;课程链接：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cansecwest.com/dojos/2019/exploitlab.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cansecwest.com/dojos/2019/exploitlab.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://conference.hitb.org/hitbsecconf2019ams/sessions/3-day-training-1-the-arm-exploit-laboratory/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://conference.hitb.org/hitbsecconf2019ams/sessions/3-day-training-1-the-arm-exploit-laboratory/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

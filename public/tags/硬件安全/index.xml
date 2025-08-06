@@ -7,7 +7,170 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 21:25:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 18:58:34 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Off-By-One 2024 大会徽章硬件CTF挑战全解析</title>
+        <link>http://localhost:1313/p/off-by-one-2024-%E5%A4%A7%E4%BC%9A%E5%BE%BD%E7%AB%A0%E7%A1%AC%E4%BB%B6ctf%E6%8C%91%E6%88%98%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 18:58:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/off-by-one-2024-%E5%A4%A7%E4%BC%9A%E5%BE%BD%E7%AB%A0%E7%A1%AC%E4%BB%B6ctf%E6%8C%91%E6%88%98%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;off-by-one-2024大会徽章硬件ctf挑战&#34;&gt;Off-By-One 2024大会徽章硬件CTF挑战
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;我们如期在活动结束一个月后发布徽章固件和本文，让感兴趣的参与者可以继续探索。章鱼徽章作为Off-By-One 2024大会的亮点，内置了以硬件为核心的CTF挑战。本文将深入解析徽章的设计过程和技术实现。&lt;/p&gt;
+&lt;h2 id=&#34;硬件设计&#34;&gt;硬件设计
+&lt;/h2&gt;&lt;p&gt;徽章采用ESP32-S3作为主处理器，驱动两个GC9A01 OLED显示屏作为章鱼眼睛。用户可通过物理按钮和方向摇杆交互，ATmega328P协处理器通过I2C协议通信。电路设计使用KiCad完成，提供三种配色版本区分参会者身份。&lt;/p&gt;
+&lt;h2 id=&#34;硬件ctf挑战&#34;&gt;硬件CTF挑战
+&lt;/h2&gt;&lt;h3 id=&#34;1-usb字符串描述符&#34;&gt;1. USB字符串描述符
+&lt;/h3&gt;&lt;p&gt;欢迎flag隐藏在USB描述符中，可通过Linux的dmesg或Windows设备管理器查看：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ dmesg -w
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3240249.488872&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; usb 3-3.2: Product: &lt;span class=&#34;c1&#34;&gt;#BadgeLife&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3240249.488892&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; usb 3-3.2: SerialNumber: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;Welcome_To_OffByOne_2024&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;2-c编译内部库&#34;&gt;2. C编译内部库
+&lt;/h3&gt;&lt;p&gt;flaglib模块通过MicroPython REPL暴露：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;flaglib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;flaglib&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getflag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{my_compiled_python_library}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由于未加密的固件存储，可通过esptool.py提取闪存内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ esptool.py read_flash 0x0 0x400000 fw-backup.bin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ strings fw-backup.bin &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;3-硬件随机数生成器&#34;&gt;3. 硬件随机数生成器
+&lt;/h3&gt;&lt;p&gt;通过分析roulette.mpy文件发现，RNG使用ADC噪声作为熵源。将指定引脚接地可控制随机数生成：&lt;/p&gt;
+&lt;h3 id=&#34;4-arduino协处理器&#34;&gt;4. Arduino协处理器
+&lt;/h3&gt;&lt;p&gt;I2C总线上的0x30地址直接返回flag：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readfrom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;starlabs&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{i2c_flag_1}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;5-时序攻击&#34;&gt;5. 时序攻击
+&lt;/h3&gt;&lt;p&gt;0x31地址需要精确控制读取时机：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;derp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;off&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;readfrom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x31&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过200-220ms的精细控制逐字符获取flag。&lt;/p&gt;
+&lt;h3 id=&#34;6-电压毛刺攻击&#34;&gt;6. 电压毛刺攻击
+&lt;/h3&gt;&lt;p&gt;Arduino的UART端口显示验证代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;123456&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;unlock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过精确控制电源通断制造指令跳过：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;off&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arduino&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;成功时显示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Unlocked. Here is your flag starlabs{voltage_glitching_is_cool}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;该徽章设计成功展示了嵌入式系统安全的关键技术，包括硬件接口分析、固件提取、物理层攻击等，为参会者提供了宝贵的硬件安全实践机会。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>为内部OTS硬件设备配置TLS证书的技术方案</title>
+        <link>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Wed, 06 Aug 2025 03:56:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;为内部ots硬件设备配置tls证书&#34;&gt;为内部OTS硬件设备配置TLS证书
+&lt;/h1&gt;&lt;p&gt;很久以前，一位客户请我测试一款接入家庭网络提供服务的硬件设备。该设备通常通过HTTP的Web界面进行管理。测试时正值Chrome即将更新，新版本会突出显示HTTP访问和提交内容的安全风险。我与客户讨论了这一变化，询问他们是否有应对计划。&lt;/p&gt;
+&lt;p&gt;他们考虑过使用自签名证书，但这同样会显示安全警告，迫使用户忽略警告接受证书。由于该硬件旨在增强网络安全，这种做法显然不妥。&lt;/p&gt;
+&lt;p&gt;为此，我与TLS专家Scott Helme讨论后，设计出以下工作流程，使内部设备能获得有效的TLS证书。&lt;/p&gt;
+&lt;h2 id=&#34;参与方&#34;&gt;参与方
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OTS&lt;/strong&gt;：需要证书的现成硬件设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HQ&lt;/strong&gt;：制造商&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LE&lt;/strong&gt;：Let&amp;rsquo;s Encrypt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;设置&#34;&gt;设置
+&lt;/h2&gt;&lt;p&gt;制造商需要拥有一个专门用于OTS设备的域名，例如主域为ots.space，可使用ots-cert.space作为设备域。&lt;/p&gt;
+&lt;h2 id=&#34;工作流程&#34;&gt;工作流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;OTS首次启动时生成随机令牌，并通过HTTPS将其与IP地址发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ为设备生成唯一名称（如nifty-babbage）。&lt;/li&gt;
+&lt;li&gt;HQ在设备域上为设备名称创建DNS记录（如nifty-babbage.ots-cert.space A 192.168.0.7）。&lt;/li&gt;
+&lt;li&gt;HQ将名称返回给OTS。&lt;/li&gt;
+&lt;li&gt;OTS生成私钥和CSR，发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ使用CSR和LE的DNS验证为子域名生成证书。&lt;/li&gt;
+&lt;li&gt;HQ创建包含证书和认证令牌的包。&lt;/li&gt;
+&lt;li&gt;OTS轮询HQ检查包是否就绪，使用初始令牌作为标识。下载包后安装证书，并设置HTTP到HTTPS的重定向（如http://192.168.0.7重定向到https://nifty-babbage.ots-cert.space）。&lt;/li&gt;
+&lt;li&gt;OTS每天检查证书有效期，到期前7天使用认证令牌请求新证书。设备重启时也执行此流程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LE证书会提交到证书透明度日志，可能暴露设备名称，但无法关联到具体用户。&lt;/li&gt;
+&lt;li&gt;设备名称可自定义，但可能增加信息泄露风险。&lt;/li&gt;
+&lt;li&gt;LE证书有效期为90天，设备长期离线后启动时会自动更新证书。&lt;/li&gt;
+&lt;li&gt;对于DHCP网络，IP变化时可更新DNS记录，短TTL可减少问题。&lt;/li&gt;
+&lt;li&gt;为防止DDoS，每日任务应随机时间执行。&lt;/li&gt;
+&lt;li&gt;生产时可预装客户端证书替代随机令牌，但需考虑长期有效性。&lt;/li&gt;
+&lt;li&gt;私钥仅在OTS生成，不会通过网络传输。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;概念验证&#34;&gt;概念验证
+&lt;/h2&gt;&lt;p&gt;本文提供了完整可运行的概念验证，设置简单，易于实施。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e6%bc%94%e7%a4%ba%e9%93%be%e6%8e%a5&#34; &gt;查看演示&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>我在BlackHat 2021和DefCon29的演讲：聚焦UEFI固件供应链与RISC-V芯片故障注入</title>
         <link>http://localhost:1313/p/%E6%88%91%E5%9C%A8blackhat-2021%E5%92%8Cdefcon29%E7%9A%84%E6%BC%94%E8%AE%B2%E8%81%9A%E7%84%A6uefi%E5%9B%BA%E4%BB%B6%E4%BE%9B%E5%BA%94%E9%93%BE%E4%B8%8Erisc-v%E8%8A%AF%E7%89%87%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/</link>
         <pubDate>Sun, 03 Aug 2025 21:25:14 +0800</pubDate>

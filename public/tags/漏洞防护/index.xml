@@ -7,7 +7,92 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 10:15:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 13:41:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MSHTML主机安全FAQ（第二部分）：深入解析IE渲染引擎安全配置</title>
+        <link>http://localhost:1313/p/mshtml%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8faq%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ie%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/</link>
+        <pubDate>Wed, 06 Aug 2025 13:41:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mshtml%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8faq%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ie%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/</guid>
+        <description>&lt;h3 id=&#34;mshtml主机安全faq第二部分&#34;&gt;MSHTML主机安全FAQ（第二部分）
+&lt;/h3&gt;&lt;p&gt;MSHTML（又称Trident）是Internet Explorer浏览器的渲染引擎。它不仅是网页浏览的核心组件，也被广泛用于应用程序中的富UI展示。例如，Windows XP的&amp;quot;添加/删除程序&amp;quot;控制面板就是基于MSHTML实现的。但托管MSHTML时需要特别注意安全配置，本FAQ将帮助您避免常见错误。&lt;/p&gt;
+&lt;h4 id=&#34;如何启用ie高级安全缓解措施&#34;&gt;如何启用IE高级安全缓解措施？
+&lt;/h4&gt;&lt;p&gt;IE6 SP2引入的功能控制键（FCK）机制允许按进程启用/禁用浏览器功能。部分FCK与安全直接相关，以下是建议启用的关键FCK：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FEATURE_LOCALMACHINE_LOCKDOWN
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FEATURE_MIME_HANDLING
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;FEATURE_MIME_SNIFFING
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[共列出22个安全相关FCK]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;安全托管mshtml的其他要点&#34;&gt;安全托管MSHTML的其他要点
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;信任决策与反欺骗&lt;/strong&gt;&lt;br&gt;
+若托管来自互联网的内容，必须实现类似IE7地址栏保护机制，确保用户能做出有效信任判断。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;新窗口管控&lt;/strong&gt;&lt;br&gt;
+恶意脚本可能通过&lt;code&gt;window.opener&lt;/code&gt;反向操作宿主环境，建议通过SHDOCVW的WebBrowser控件事件管理新窗口创建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;保护模式集成&lt;/strong&gt;&lt;br&gt;
+在Vista及以上系统，需注意MSHTML实例默认与宿主应用同权限级别（通常为中等完整性），避免成为脱离保护模式的跳板。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;通用托管建议&#34;&gt;通用托管建议
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;关键&lt;code&gt;DOCHOSTUIFLAG&lt;/code&gt;安全标志：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;下载控制标志（如&lt;code&gt;DLCTL_NO_SCRIPTS&lt;/code&gt;）可有效限制危险内容执行&lt;/li&gt;
+&lt;li&gt;邮件客户端等场景建议启用&lt;code&gt;DLCTL_FORCEOFFLINE&lt;/code&gt;阻止外部资源加载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;高权限沙箱特别警告&#34;&gt;&amp;ldquo;高权限沙箱&amp;quot;特别警告
+&lt;/h4&gt;&lt;p&gt;当MSHTML宿主赋予脚本特殊权限时（如HTML Help允许执行系统命令），攻击者会千方百计侵入宿主环境。常见危险实践包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用&lt;code&gt;innerHTML&lt;/code&gt;/&lt;code&gt;document.write&lt;/code&gt;写入不可信内容&lt;/li&gt;
+&lt;li&gt;对不可信输入执行&lt;code&gt;eval&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;未验证URL协议直接引用等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建议考虑使用Silverlight或WPF等更安全的替代方案，若必须使用MSHTML，开发者需严格遵循安全编码规范。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本文档按&amp;quot;原样&amp;quot;提供，不附带任何担保。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>EMET 2.0 安全缓解工具培训视频发布</title>
+        <link>http://localhost:1313/p/emet-2.0-%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E5%9F%B9%E8%AE%AD%E8%A7%86%E9%A2%91%E5%8F%91%E5%B8%83/</link>
+        <pubDate>Wed, 06 Aug 2025 06:11:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/emet-2.0-%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E5%9F%B9%E8%AE%AD%E8%A7%86%E9%A2%91%E5%8F%91%E5%B8%83/</guid>
+        <description>&lt;p&gt;嘿，大家好，
+我很高兴地宣布，BlueHat团队与微软安全响应中心（MSRC）的两位工程师Andrew Roths和Fermin J. Serna合作，制作了一期关于增强缓解体验工具包（EMET）2.0版本的培训视频。该视频已在BlueHat网站上发布，您可以随时观看。&lt;/p&gt;
+&lt;p&gt;相信大多数人都知道，EMET被设计为一款能够持续更新的工具，可以集成未来的缓解措施、防御威胁并改进安全流程。随着2.0版本的发布，新的缓解技术即将到来（该版本很快将在微软下载中心提供，请关注安全研究与防御博客的发布公告）。在这段视频中，您可以抢先了解EMET 2.0的功能，包括演示以及对当前和未来缓解技术的深入讨论。视频还展示了EMET更新的用户界面，可以显示正在运行的进程以及EMET是否正在保护它们。&lt;/p&gt;
+&lt;p&gt;对于参加Black Hat大会并希望了解更多工具信息的用户，Fermin Serna将在微软展台解答您的详细问题。您的反馈将有助于我们构建更强大的社区防御体系，保护客户和合作伙伴免受网络威胁。快来享受这20分钟的BlueHat培训视频吧！&lt;/p&gt;
+&lt;p&gt;拉斯维加斯见！
+Celene&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>用NIST SP 800-228解决API安全问题的技术解析</title>
         <link>http://localhost:1313/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Tue, 05 Aug 2025 10:15:50 +0800</pubDate>

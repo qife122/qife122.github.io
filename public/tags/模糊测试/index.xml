@@ -7,7 +7,52 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 22:02:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 08:22:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Siderophile：暴露Rust代码库中的不安全操作</title>
+        <link>http://localhost:1313/p/siderophile%E6%9A%B4%E9%9C%B2rust%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%AE%89%E5%85%A8%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Wed, 06 Aug 2025 08:22:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/siderophile%E6%9A%B4%E9%9C%B2rust%E4%BB%A3%E7%A0%81%E5%BA%93%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%AE%89%E5%85%A8%E6%93%8D%E4%BD%9C/</guid>
+        <description>&lt;p&gt;今天我们发布了一款名为siderophile的工具，它能帮助Rust开发者在代码库中寻找模糊测试目标。该工具会扫描crate的所有依赖项，定位每个不安全函数、表达式、特质方法等，然后沿调用图追溯至使用这些不安全元素的源头函数，并按危险程度（badness）进行排序——函数使用的不安全元素越多，其危险等级就越高。&lt;/p&gt;
+&lt;p&gt;Siderophile（[ˈsidərəˌfīl]）——对金属铁有亲和力&lt;/p&gt;
+&lt;p&gt;我们在一次紧急代码审计任务中开发了这个工具。当时需要短时间内审查一个庞大的Rust代码库，通过siderophile自动化定位高风险函数，显著加速了漏洞发现过程。现在我们将这个工具开源。&lt;/p&gt;
+&lt;h3 id=&#34;示例输出&#34;&gt;示例输出
+&lt;/h3&gt;&lt;p&gt;在MLS加密协议实现库molasses上运行的示例结果：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;危险度&lt;/th&gt;
+          &lt;th&gt;函数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;012&lt;/td&gt;
+          &lt;td&gt;molasses::crypto::hash::HashFunction::hash_serializable&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;005&lt;/td&gt;
+          &lt;td&gt;molasses::crypto::hash::HashContext::feed_serializable&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;003&lt;/td&gt;
+          &lt;td&gt;molasses::utils::derive_node_values&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;hellip;&lt;/td&gt;
+          &lt;td&gt;&amp;hellip;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;可见主要风险集中在序列化和加密相关例程中，这些将是1.0版本前的重点模糊测试对象。&lt;/p&gt;
+&lt;h3 id=&#34;局限性&#34;&gt;局限性
+&lt;/h3&gt;&lt;p&gt;当前版本无法检测宏和动态分发方法中的不安全操作，且在某些crate上存在误报。我们正在积极维护项目，欢迎贡献者参与改进。&lt;/p&gt;
+&lt;h3 id=&#34;立即试用&#34;&gt;立即试用
+&lt;/h3&gt;&lt;p&gt;Siderophile已发布在GitHub，包含详细使用说明。建议对您的Rust crate运行该工具，并针对发现的高风险函数设置模糊测试。&lt;/p&gt;
+&lt;p&gt;最后感谢cargo-geiger和rust-praezi项目的先驱工作。本工具很大程度上基于他们的成果。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>LLAMA：基于LLM引导种子生成的多反馈智能合约模糊测试框架</title>
         <link>http://localhost:1313/p/llama%E5%9F%BA%E4%BA%8Ellm%E5%BC%95%E5%AF%BC%E7%A7%8D%E5%AD%90%E7%94%9F%E6%88%90%E7%9A%84%E5%A4%9A%E5%8F%8D%E9%A6%88%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</link>
         <pubDate>Mon, 04 Aug 2025 22:02:22 +0800</pubDate>

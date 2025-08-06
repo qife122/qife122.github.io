@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>组策略 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%BB%84%E7%AD%96%E7%95%A5/</link>
+        <description>Recent content in 组策略 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 15:04:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BB%84%E7%AD%96%E7%95%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>网络安全实战：持续探索阻断攻击链的最佳实践</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%81%E7%BB%AD%E6%8E%A2%E7%B4%A2%E9%98%BB%E6%96%AD%E6%94%BB%E5%87%BB%E9%93%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Wed, 06 Aug 2025 15:04:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%81%E7%BB%AD%E6%8E%A2%E7%B4%A2%E9%98%BB%E6%96%AD%E6%94%BB%E5%87%BB%E9%93%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;核心内容更新&#34;&gt;核心内容更新
+&lt;/h3&gt;&lt;p&gt;Jordan和Kent基于此前广受好评的《阻断攻击链的组策略》和《让攻击者沮丧的Active Directory最佳实践》网络研讨会，整合了一年来的新发现。安全防御技术时而缓慢演进，时而快速迭代，本次将重点讨论：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须部署的基础防御配置&lt;/li&gt;
+&lt;li&gt;降低平均检测时间(MTTD)的实战方法&lt;/li&gt;
+&lt;li&gt;如何有效提升网络和域的安全性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术要点时间轴&#34;&gt;技术要点时间轴
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;00:00&lt;/strong&gt; 主题演讲开始&lt;br&gt;
+&lt;strong&gt;02:15&lt;/strong&gt; 年度技术变化分析&lt;br&gt;
+&lt;strong&gt;06:31&lt;/strong&gt; 攻击链深度解析&lt;br&gt;
+&lt;strong&gt;07:47&lt;/strong&gt; Active Directory防御实践&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;09:22&lt;/strong&gt; 实施前提条件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;13:31&lt;/strong&gt; AD核心配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;16:16&lt;/strong&gt; 组织单元与策略架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;17:47&lt;/strong&gt; 二层协议安全&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;20:53&lt;/strong&gt; LLMNR/NBNS/WPAD漏洞处置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;34:34&lt;/strong&gt; NBNS特定防护&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;35:17&lt;/strong&gt; WPAD攻击缓解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;37:05&lt;/strong&gt; 文件共享安全&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;39:48&lt;/strong&gt; SMB签名强制实施&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;41:26&lt;/strong&gt; IPv6风险管控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;42:17&lt;/strong&gt; 高级防护技术&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LDAP通道绑定&lt;/li&gt;
+&lt;li&gt;微软商店限制&lt;/li&gt;
+&lt;li&gt;本地管理员管控(45:07)&lt;/li&gt;
+&lt;li&gt;网络登录加固(45:51)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;48:59&lt;/strong&gt; 应用控制与勒索软件防护&lt;br&gt;
+&lt;strong&gt;50:48&lt;/strong&gt; 防火墙策略优化&lt;br&gt;
+&lt;strong&gt;52:29&lt;/strong&gt; 蜜罐账户部署&lt;br&gt;
+&lt;strong&gt;53:19&lt;/strong&gt; 网络流量分析技术&lt;br&gt;
+&lt;strong&gt;54:45&lt;/strong&gt; 凭证保护方案&lt;/p&gt;
+&lt;h3 id=&#34;资源获取&#34;&gt;资源获取
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://discord.gg/bhis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;加入BHIS Discord社区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;原始技术资料：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/webcast-group-policies-that-kill-kill-chains/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;攻击链阻断指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/webcast-group-policies-that-kill-kill-chains/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Active Directory防御手册&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

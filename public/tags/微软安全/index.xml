@@ -7,7 +7,63 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 02:46:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 18:25:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MSRC内部揭秘：以客户为中心的安全事件响应机制</title>
+        <link>http://localhost:1313/p/msrc%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98%E4%BB%A5%E5%AE%A2%E6%88%B7%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Wed, 06 Aug 2025 18:25:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/msrc%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98%E4%BB%A5%E5%AE%A2%E6%88%B7%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;h3 id=&#34;微软安全响应体系概述&#34;&gt;微软安全响应体系概述
+&lt;/h3&gt;&lt;p&gt;微软安全响应中心(MSRC)作为网络防御运营中心(CDOC)的核心组件，整合了公司内部安全专家资源，提供7×24小时实时威胁防护。CDOC可直接调动微软数千名安全专家、数据科学家和产品工程师，实现安全威胁的快速响应与处置。&lt;/p&gt;
+&lt;h3 id=&#34;ssirp响应计划演进&#34;&gt;SSIRP响应计划演进
+&lt;/h3&gt;&lt;p&gt;2004年在冲击波(Blaster)、震荡波(Sasser)等蠕虫病毒爆发后，微软正式建立软件与服务事件响应计划(SSIRP)，用于规范针对客户的高级威胁响应流程。该机制在近年应对Spectre/Meltdown漏洞和WannaCry勒索软件等重大事件中持续发挥核心作用。&lt;/p&gt;
+&lt;h3 id=&#34;主动防御技术体系&#34;&gt;主动防御技术体系
+&lt;/h3&gt;&lt;p&gt;MSRC团队开发的安全开发生命周期(SDL)已成为行业标准，通过12项最佳实践确保产品安全：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;漏洞消除&lt;/strong&gt;：采用消除攻击面的核心技术&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用阻断&lt;/strong&gt;：通过纵深防御技术限制任意代码执行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁遏制&lt;/strong&gt;：沙箱技术隔离攻击影响范围&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;响应协同&lt;/strong&gt;：Windows Defender与行业伙伴威胁情报联动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;漏洞经济对抗策略&#34;&gt;漏洞经济对抗策略
+&lt;/h3&gt;&lt;p&gt;通过协调漏洞披露(CVD)机制与漏洞赏金计划，微软推动形成更安全的生态系统：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MAPP计划确保行业伙伴同步获得漏洞防护方案&lt;/li&gt;
+&lt;li&gt;近年已实现漏洞修复率持续上升，实际利用数量显著下降&lt;/li&gt;
+&lt;li&gt;每年处理数十起涉及Azure/O365等云服务的重大安全事件&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>EMET 2.0 安全缓解工具培训视频发布</title>
+        <link>http://localhost:1313/p/emet-2.0-%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E5%9F%B9%E8%AE%AD%E8%A7%86%E9%A2%91%E5%8F%91%E5%B8%83/</link>
+        <pubDate>Wed, 06 Aug 2025 06:11:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/emet-2.0-%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E5%9F%B9%E8%AE%AD%E8%A7%86%E9%A2%91%E5%8F%91%E5%B8%83/</guid>
+        <description>&lt;p&gt;嘿，大家好，
+我很高兴地宣布，BlueHat团队与微软安全响应中心（MSRC）的两位工程师Andrew Roths和Fermin J. Serna合作，制作了一期关于增强缓解体验工具包（EMET）2.0版本的培训视频。该视频已在BlueHat网站上发布，您可以随时观看。&lt;/p&gt;
+&lt;p&gt;相信大多数人都知道，EMET被设计为一款能够持续更新的工具，可以集成未来的缓解措施、防御威胁并改进安全流程。随着2.0版本的发布，新的缓解技术即将到来（该版本很快将在微软下载中心提供，请关注安全研究与防御博客的发布公告）。在这段视频中，您可以抢先了解EMET 2.0的功能，包括演示以及对当前和未来缓解技术的深入讨论。视频还展示了EMET更新的用户界面，可以显示正在运行的进程以及EMET是否正在保护它们。&lt;/p&gt;
+&lt;p&gt;对于参加Black Hat大会并希望了解更多工具信息的用户，Fermin Serna将在微软展台解答您的详细问题。您的反馈将有助于我们构建更强大的社区防御体系，保护客户和合作伙伴免受网络威胁。快来享受这20分钟的BlueHat培训视频吧！&lt;/p&gt;
+&lt;p&gt;拉斯维加斯见！
+Celene&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MAPP 计划更新：降低信息泄露风险的行动措施</title>
+        <link>http://localhost:1313/p/mapp-%E8%AE%A1%E5%88%92%E6%9B%B4%E6%96%B0%E9%99%8D%E4%BD%8E%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9%E7%9A%84%E8%A1%8C%E5%8A%A8%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Wed, 06 Aug 2025 04:51:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mapp-%E8%AE%A1%E5%88%92%E6%9B%B4%E6%96%B0%E9%99%8D%E4%BD%8E%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9%E7%9A%84%E8%A1%8C%E5%8A%A8%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h3 id=&#34;mapp-计划更新降低信息泄露风险的行动措施&#34;&gt;MAPP 计划更新：降低信息泄露风险的行动措施
+&lt;/h3&gt;&lt;p&gt;在我们对微软主动保护计划（MAPP）合作伙伴共享机密数据泄露事件的调查中，确认杭州迪普科技有限公司违反了保密协议（NDA）。微软对违反NDA的行为采取零容忍态度，已将该合作伙伴从MAPP计划中除名。&lt;/p&gt;
+&lt;p&gt;此外，自5月版本起，我们强化了现有控制措施并采取新行动以加强信息保护。这些改进措施既能更好地保护微软的信息安全，又能通过协助合作伙伴开发主动防护机制来增强客户保护。如需了解MAPP如何为防御者提供关键先机并降低风险，请参阅MAPP团队的&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术博客&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Yunsun Wee&lt;/strong&gt;&lt;br&gt;
+总监&lt;br&gt;
+微软可信计算部门&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软应对国家级黑客组织Midnight Blizzard攻击的最新进展</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E5%BA%94%E5%AF%B9%E5%9B%BD%E5%AE%B6%E7%BA%A7%E9%BB%91%E5%AE%A2%E7%BB%84%E7%BB%87midnight-blizzard%E6%94%BB%E5%87%BB%E7%9A%84%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%95/</link>
         <pubDate>Tue, 05 Aug 2025 02:46:11 +0800</pubDate>

@@ -7,7 +7,79 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 21:11:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 07:43:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>揭秘&#39;瘟疫&#39;后门：如何无痕渗透Linux系统并绕过VirusTotal检测</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98%E7%98%9F%E7%96%AB%E5%90%8E%E9%97%A8%E5%A6%82%E4%BD%95%E6%97%A0%E7%97%95%E6%B8%97%E9%80%8Flinux%E7%B3%BB%E7%BB%9F%E5%B9%B6%E7%BB%95%E8%BF%87virustotal%E6%A3%80%E6%B5%8B/</link>
+        <pubDate>Wed, 06 Aug 2025 07:43:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98%E7%98%9F%E7%96%AB%E5%90%8E%E9%97%A8%E5%A6%82%E4%BD%95%E6%97%A0%E7%97%95%E6%B8%97%E9%80%8Flinux%E7%B3%BB%E7%BB%9F%E5%B9%B6%E7%BB%95%E8%BF%87virustotal%E6%A3%80%E6%B5%8B/</guid>
+        <description>&lt;h1 id=&#34;如何检测瘟疫后门针对linux认证层的隐形攻击&#34;&gt;如何检测&amp;quot;瘟疫&amp;quot;后门：针对Linux认证层的隐形攻击
+&lt;/h1&gt;&lt;p&gt;安全研究人员发现了一种异常隐蔽的Linux后门，甚至能逃过VirusTotal的检测。这个被Nextron团队命名为&amp;quot;瘟疫&amp;quot;的恶意软件通过伪装成可插拔认证模块(PAM)，使攻击者能够绕过认证并建立持久的SSH访问通道。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;瘟疫深度集成在认证栈中，可存活于系统更新过程，且几乎不留取证痕迹，&amp;ldquo;研究人员在博客中指出，&amp;ldquo;结合分层混淆和环境篡改技术，使得传统检测工具极难发现其存在。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;深度潜伏的认证劫持&#34;&gt;深度潜伏的认证劫持
+&lt;/h2&gt;&lt;p&gt;该恶意软件自2024年7月29日开始活跃，到2025年3月已出现多个变种。研究人员发现的样本包含针对Debian、Ubuntu等Linux发行版的编译痕迹，表明攻击者可能针对广泛的Linux环境。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;瘟疫&amp;quot;通过名为libselinus.so.8的共享库文件运作，劫持了pam_sm_authenticate()等PAM核心函数——这些函数正是系统验证用户登录凭证的关键机制。这种注入方式使得恶意代码成为登录流程的一部分，攻击者仅需使用硬编码密码即可获得隐蔽后门。&lt;/p&gt;
+&lt;h2 id=&#34;绕过传统检测的技术原理&#34;&gt;绕过传统检测的技术原理
+&lt;/h2&gt;&lt;p&gt;该后门之所以能长期潜伏，关键在于其设计理念：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无独立加载器&lt;/strong&gt;：直接操作认证层，无需额外持久化机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;升级抵抗性&lt;/strong&gt;：随PAM栈调用自动激活（如SSH或sudo时）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多层混淆&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;早期版本采用简单XOR编码&lt;/li&gt;
+&lt;li&gt;新变种使用KSA/PRGA算法和DRBG阶段的多层加密&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环境感知&lt;/strong&gt;：运行时检测分析环境并改变行为模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;VirusTotal数据显示，过去一年上传的数十个变种样本检测率均为0/66。研究人员在样本中甚至发现了对电影《黑客》的引用：&amp;ldquo;呃，瘟疫先生？我们好像遇到黑客了&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;p&gt;Nextron建议企业采取以下应对措施：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施基于行为的检测方案&lt;/li&gt;
+&lt;li&gt;加强内存取证能力&lt;/li&gt;
+&lt;li&gt;定期审计PAM配置&lt;/li&gt;
+&lt;li&gt;监控/lib/security/目录下的.so文件变更&lt;/li&gt;
+&lt;li&gt;追踪环境变量篡改行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该威胁的出现标志着Linux系统面临的新型高级持久性威胁，安全团队需要超越传统特征码检测，转向更深入的系统行为监控。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>揭秘&#39;瘟疫&#39;：无痕渗透Linux系统的隐形后门技术</title>
+        <link>http://localhost:1313/p/%E6%8F%AD%E7%A7%98%E7%98%9F%E7%96%AB%E6%97%A0%E7%97%95%E6%B8%97%E9%80%8Flinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%9A%90%E5%BD%A2%E5%90%8E%E9%97%A8%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Wed, 06 Aug 2025 07:16:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%AD%E7%A7%98%E7%98%9F%E7%96%AB%E6%97%A0%E7%97%95%E6%B8%97%E9%80%8Flinux%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%9A%90%E5%BD%A2%E5%90%8E%E9%97%A8%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;如何发现这个隐形威胁&#34;&gt;如何发现这个隐形威胁？
+&lt;/h1&gt;&lt;p&gt;Nextron安全研究人员发现，这个被命名为&amp;quot;Plague&amp;quot;的后门程序通过伪装成Linux可插拔认证模块(PAM)实现深度潜伏。恶意共享库文件(libselinus.so.8)会劫持pam_sm_authenticate()等关键认证函数，在用户登录验证环节植入后门。&lt;/p&gt;
+&lt;h1 id=&#34;技术架构解析&#34;&gt;技术架构解析
+&lt;/h1&gt;&lt;h2 id=&#34;认证栈深度集成&#34;&gt;认证栈深度集成
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;无需独立加载器或持久化机制&lt;/li&gt;
+&lt;li&gt;通过硬编码密码建立隐蔽通道&lt;/li&gt;
+&lt;li&gt;在SSH或sudo调用PAM栈时自动触发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;高级规避技术&#34;&gt;高级规避技术
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;早期版本使用XOR字符串编码&lt;/li&gt;
+&lt;li&gt;新变种采用KSA/PRGA和DRBG多层加密&lt;/li&gt;
+&lt;li&gt;编译时针对Debian/Ubuntu等发行版定制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;检测困境&#34;&gt;检测困境
+&lt;/h1&gt;&lt;p&gt;VirusTotal上数十个变种样本均显示0/66检出率。研究人员指出：&amp;ldquo;过去一年上传的多个变种，没有任何杀毒引擎将其标记为恶意。&amp;rdquo;&lt;/p&gt;
+&lt;h1 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;采用基于行为的检测策略&lt;/li&gt;
+&lt;li&gt;监控/lib/security/目录下的.so文件&lt;/li&gt;
+&lt;li&gt;审计PAM配置变更&lt;/li&gt;
+&lt;li&gt;追踪环境级篡改行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;就像电影《黑客》中的台词：&amp;lsquo;普拉格先生，我想我们被入侵了&amp;rsquo;——某个样本在pam-authenticate后显示了这条信息。&amp;ldquo;研究人员在分析反混淆例程时发现了这个流行文化彩蛋。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>免费文件共享服务再遭滥用：恶意软件传播分析</title>
         <link>http://localhost:1313/p/%E5%85%8D%E8%B4%B9%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%86%8D%E9%81%AD%E6%BB%A5%E7%94%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</link>
         <pubDate>Tue, 05 Aug 2025 21:11:27 +0800</pubDate>

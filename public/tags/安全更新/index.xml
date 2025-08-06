@@ -7,7 +7,69 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 13:24:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 08:55:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软Windows加密技术改进：增强证书处理与算法管理</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AFwindows%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%94%B9%E8%BF%9B%E5%A2%9E%E5%BC%BA%E8%AF%81%E4%B9%A6%E5%A4%84%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AE%A1%E7%90%86/</link>
+        <pubDate>Wed, 06 Aug 2025 08:55:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AFwindows%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E6%94%B9%E8%BF%9B%E5%A2%9E%E5%BC%BA%E8%AF%81%E4%B9%A6%E5%A4%84%E7%90%86%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AE%A1%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;加密技术改进背景&#34;&gt;加密技术改进背景
+&lt;/h3&gt;&lt;p&gt;2013年6月，微软发布安全公告2854544，为企业用户提供更多数字证书管理选项。该功能最初内置于Windows 8/Server 2012/RT系统，后向旧系统反向移植。此次更新并非针对特定事件，而是持续优化证书处理机制以提升安全性。&lt;/p&gt;
+&lt;h3 id=&#34;关键更新内容&#34;&gt;关键更新内容
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MD5哈希算法限制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安全公告2862973宣布限制微软根证书计划中MD5算法的使用。该更新于2014年2月通过Windows Update推送，企业可提前通过下载中心获取以评估影响。&lt;/li&gt;
+&lt;li&gt;适用范围：服务器认证、代码签名和时间戳（部分证书例外，详见KB 2862973）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;非对称加密增强&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增算法管理框架，支持管理员配置：
+&lt;ul&gt;
+&lt;li&gt;加密算法类型（RSA/DSA/ECDSA）&lt;/li&gt;
+&lt;li&gt;最小密钥长度&lt;/li&gt;
+&lt;li&gt;允许的哈希算法（如代码签名用途）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;技术细节详见Microsoft TechNet文档。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加密改进时间线&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安全公告2661254&lt;/strong&gt;：强制要求RSA密钥长度≥1024位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KB 2813430&lt;/strong&gt;：支持离线环境更新证书信任列表（CTL）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KB 2862966&lt;/strong&gt;：建立非对称加密管理框架。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;企业部署建议&#34;&gt;企业部署建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;立即测试MD5限制更新，尤其需清查加密依赖项。&lt;/li&gt;
+&lt;li&gt;通过安全公告2854544集中跟踪所有加密改进状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本次更新通过强化签名验证和底层算法，有效抵御内容伪造、中间人攻击和钓鱼行为。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;——William Peteroy, MSRC团队&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2016年7月安全更新发布 | 微软安全响应中心公告</title>
+        <link>http://localhost:1313/p/2016%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
+        <pubDate>Tue, 05 Aug 2025 23:40:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2016%E5%B9%B47%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</guid>
+        <description>&lt;p&gt;今天，我们发布了安全更新以提供针对恶意攻击者的额外防护措施。作为最佳实践，我们建议客户在安全更新发布后尽快安装。&lt;/p&gt;
+&lt;p&gt;有关本月安全更新和公告的更多信息，请参阅&lt;a class=&#34;link&#34; href=&#34;https://technet.microsoft.com/security/bulletin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安全技术库&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;MSRC团队&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>2017年10月安全更新发布 | 微软安全响应中心公告</title>
         <link>http://localhost:1313/p/2017%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E5%85%AC%E5%91%8A/</link>
         <pubDate>Tue, 05 Aug 2025 13:24:44 +0800</pubDate>

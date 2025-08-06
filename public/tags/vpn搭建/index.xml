@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>VPN搭建 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/vpn%E6%90%AD%E5%BB%BA/</link>
+        <description>Recent content in VPN搭建 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 01:39:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vpn%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>全设备广告屏蔽实战指南：DNS与VPN技术解析</title>
+        <link>http://localhost:1313/p/%E5%85%A8%E8%AE%BE%E5%A4%87%E5%B9%BF%E5%91%8A%E5%B1%8F%E8%94%BD%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97dns%E4%B8%8Evpn%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 01:39:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%A8%E8%AE%BE%E5%A4%87%E5%B9%BF%E5%91%8A%E5%B1%8F%E8%94%BD%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97dns%E4%B8%8Evpn%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;噩梦般的广告现状&#34;&gt;噩梦般的广告现状
+&lt;/h3&gt;&lt;p&gt;广告虽是网站主要收入来源，但其泛滥会导致带宽占用、恶意弹窗甚至安全威胁。尽管安全从业者能识别欺诈广告，但普通家庭成员仍面临风险。&lt;/p&gt;
+&lt;h3 id=&#34;家庭广告拦截方案dns服务器&#34;&gt;家庭广告拦截方案：DNS服务器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;OpenDNS简易方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注册免费账户&lt;/li&gt;
+&lt;li&gt;配置拦截类别&lt;/li&gt;
+&lt;li&gt;修改家庭网络DNS设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pi-Hole高级方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持RaspberryPi/Debian系统&lt;/li&gt;
+&lt;li&gt;预置10万+广告域名黑名单&lt;/li&gt;
+&lt;li&gt;安装方式：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Raspbian Lite推荐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -sSL https://install.pi-hole.net &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;路由器配置：
+&lt;ul&gt;
+&lt;li&gt;将DHCP DNS指向Pi-Hole IP&lt;/li&gt;
+&lt;li&gt;通过Web界面管理黑白名单（如&lt;code&gt;http://pi.hole/admin&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;远程广告拦截方案vpn搭建&#34;&gt;远程广告拦截方案：VPN搭建
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SoftEther服务端配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在RaspberryPi安装：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget https://www.softether-download.com/files/softether/v4.41-9787-rtm-2023.03.14-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.41-9787-rtm-2023.03.14-linux-x64-64bit.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;端口转发要求：
+&lt;ul&gt;
+&lt;li&gt;UDP 500/4500（L2TP/IPSec）&lt;/li&gt;
+&lt;li&gt;启用IPSec/L2TP穿透&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;客户端配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;各平台连接指南：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/3.VPN_for_Mobile&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Android/iOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/9.L2TPIPsec_Setup_Guide_for_SoftEther_VPN_Server/4.Windows_L2TP_Client_Setup&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/9.L2TPIPsec_Setup_Guide_for_SoftEther_VPN_Server/5.Mac_OS_X_L2TP_Client_Setup&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;macOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;双重防护效果&#34;&gt;双重防护效果
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;家庭网络：所有DHCP设备自动获得广告拦截&lt;/li&gt;
+&lt;li&gt;外部网络：VPN连接后同时实现流量加密+广告过滤&lt;/li&gt;
+&lt;li&gt;数据统计：日均减少10-15%广告流量消耗&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

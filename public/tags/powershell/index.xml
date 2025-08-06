@@ -7,7 +7,217 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 18:42:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/powershell/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 08:06:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/powershell/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深入解析Azure Active Directory：微软云身份认证的核心架构</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90azure-active-directory%E5%BE%AE%E8%BD%AF%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</link>
+        <pubDate>Wed, 06 Aug 2025 08:06:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90azure-active-directory%E5%BE%AE%E8%BD%AF%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</guid>
+        <description>&lt;h1 id=&#34;什么是azure-active-directory&#34;&gt;什么是Azure Active Directory？
+&lt;/h1&gt;&lt;p&gt;许多人都熟悉Windows Server中的本地目录和认证系统——Active Directory，但Azure Active Directory究竟是什么？Azure Active Directory（Azure AD或AAD）是一个多租户云目录和认证服务。它是Office 365（和Azure）用于账户、组和角色的目录服务，同时也是一个支持联合认证（SAML等）的身份提供者（IdP）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：鉴于云技术的快速变化，本文部分内容可能在发布后不久就会过时。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;azure-ad的高可用性架构&#34;&gt;Azure AD的高可用性架构
+&lt;/h2&gt;&lt;p&gt;Azure AD具有极高的可用性和全球部署能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在全球30多个数据中心部署，并利用Azure可用区&lt;/li&gt;
+&lt;li&gt;数据写入后至少会复制到4个（最多13个）数据中心&lt;/li&gt;
+&lt;li&gt;每个数据中心内数据至少复制9次以实现持久性和负载均衡&lt;/li&gt;
+&lt;li&gt;系统定期进行故障注入测试，甚至模拟整个数据中心宕机&lt;/li&gt;
+&lt;li&gt;目前运行在超过30万个CPU核心上，每周处理超过11PB的监控数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;azure-ad不是云版本的ad&#34;&gt;Azure AD不是云版本的AD
+&lt;/h2&gt;&lt;p&gt;Azure Active Directory并不是托管在云端的Active Directory。它不支持传统的AD认证方法（如NTLM或Kerberos）、没有LDAP协议，也不支持组策略（GPO），因此不适用于传统的本地应用程序。&lt;/p&gt;
+&lt;p&gt;微软Azure（Azure Active Directory Domain Services）、亚马逊AWS（Amazon Managed Microsoft AD）和谷歌云（Managed Service for Microsoft AD）都提供可以用于管理云工作负载的托管Active Directory环境。这些环境都有2个或更多域控制器，租户管理员不会获得域管理员权限，只能获得特定OU和GPO的委派管理权限。&lt;/p&gt;
+&lt;h2 id=&#34;主要管理工具&#34;&gt;主要管理工具
+&lt;/h2&gt;&lt;p&gt;大多数AD管理员熟悉的工具是Active Directory用户和计算机（ADUC，MMC工具）。Azure Active Directory管理员主要使用https://portal.azure.com网页控制台进行管理。&lt;/p&gt;
+&lt;p&gt;管理本地AD和Azure AD/Office 365的管理员将同时使用本地MMC工具和网页管理门户（及其各种相关URL）。虽然Azure AD也有PowerShell cmdlet（类似于本地AD），但云功能的发展速度通常快于PowerShell工具的发布速度，因此即使在使用PowerShell时，仍应使用云管理门户。&lt;/p&gt;
+&lt;h2 id=&#34;与azure-ad交互&#34;&gt;与Azure AD交互
+&lt;/h2&gt;&lt;p&gt;由于Azure AD没有LDAP，与之交互需要通过Graph API或PowerShell模块。有两个主要的PowerShell模块用于与Azure AD交互：MSOnline和AzureAD。可以通过以下命令安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MSOnline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AzureAD&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;AzureAD模块可能最终会取代MSOnline PowerShell模块，但MSOnline中有些功能尚未移植到AzureAD模块。&lt;/p&gt;
+&lt;h2 id=&#34;azure-ad-powershell模块和cmdlet对比&#34;&gt;Azure AD PowerShell模块和cmdlet对比
+&lt;/h2&gt;&lt;p&gt;（截至2020年1月的模块和cmdlet数据）&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类别&lt;/th&gt;
+          &lt;th&gt;MSOnline&lt;/th&gt;
+          &lt;th&gt;AzureAD&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;管理单元&lt;/td&gt;
+          &lt;td&gt;Get-MsolAdministrativeUnit&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;应用&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;Get-AzureADApplication&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;联系人&lt;/td&gt;
+          &lt;td&gt;Get-MsolContact&lt;/td&gt;
+          &lt;td&gt;Get-AzureADContact&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;设备&lt;/td&gt;
+          &lt;td&gt;Get-MsolDevice&lt;/td&gt;
+          &lt;td&gt;Get-AzureADDevice&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;域&lt;/td&gt;
+          &lt;td&gt;Get-MsolDomain&lt;/td&gt;
+          &lt;td&gt;Get-AzureADDomain&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;组&lt;/td&gt;
+          &lt;td&gt;Get-MsolGroup&lt;/td&gt;
+          &lt;td&gt;Get-AzureADGroup&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;用户&lt;/td&gt;
+          &lt;td&gt;Get-MsolUser&lt;/td&gt;
+          &lt;td&gt;Get-AzureADUser&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;（表格中详细列出了两个模块的cmdlet对比，此处仅展示部分）&lt;/p&gt;
+&lt;h2 id=&#34;使用adal实现单点登录&#34;&gt;使用ADAL实现单点登录
+&lt;/h2&gt;&lt;p&gt;微软云环境最初只支持用户名和密码认证。这种&amp;quot;传统认证&amp;quot;不包括多因素认证（MFA），出于安全考虑，应通过安全默认值、条件访问等禁用传统认证。&lt;/p&gt;
+&lt;p&gt;Azure Active Directory认证库（ADAL）提供&amp;quot;现代认证&amp;quot;，完全支持MFA（甚至无密码认证）。根据微软的定义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ADAL使开发人员能够通过以下功能更轻松地进行认证：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可配置的令牌缓存，存储访问令牌和刷新令牌&lt;/li&gt;
+&lt;li&gt;当访问令牌过期且存在刷新令牌时自动刷新令牌&lt;/li&gt;
+&lt;li&gt;支持异步方法调用&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;安装ADAL PowerShell模块（&lt;code&gt;Install-Module -Name adal.ps&lt;/code&gt;）后，可以运行以下命令加载ADAL令牌：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$clientId&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;1b730954-1685-4b74-9bfd-dac224a7b894&amp;#34;&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# Azure AD PowerShell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$redirectUri&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Uri&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;urn:ietf:wg:oauth:2.0:oob&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$authority&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://login.windows.net/common/oauth2/authorize&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$resourceUrl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://graph.windows.net&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$ADALresponse&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;get-adaltoken&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Resource&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$resourceUrl&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ClientId&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$clientId&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-RedirectUri&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$redirectUri&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Authority&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$authority&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-PromptBehavior:Always&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;azure-ad的访问权限&#34;&gt;Azure AD的访问权限
+&lt;/h2&gt;&lt;p&gt;在Active Directory中，几乎所有内容都可以作为普通用户查看。Azure AD用户可以查看有关用户和组的信息，但在可访问性方面存在一些限制。在Azure AD中，特权组被称为&amp;quot;角色&amp;quot;（实际上是组），用于标识特殊访问权限。Office 365中有几个这样的管理员角色，提供对整个Office 365或特定部分的管理级权限。&lt;/p&gt;
+&lt;p&gt;许多组织在全局管理员（又称租户管理员）角色中有一个报告账户，该角色实际上是集成了企业管理员、域管理员和架构管理员权限的单一组。全局管理员对Azure AD和所有Office 365服务拥有完全控制权。这就是为什么许多组织的全局管理员超过5个（微软推荐的最大数量）。只有云账户应被添加到角色中，以便他们可以利用Azure MFA（和无密码认证）以及由PIM控制的角色成员资格。&lt;/p&gt;
+&lt;p&gt;还强烈建议创建一个（或两个）&amp;ldquo;应急&amp;quot;管理员账户，以确保对租户的持续特权访问。微软发布了一份关于如何保护特权访问的文档。&lt;/p&gt;
+&lt;p&gt;特权身份管理（PIM）强烈推荐用于控制角色成员资格，需要为每个将使用PIM的账户购买Azure AD Premium 2（P2）许可证。PIM提供对具有所需权限的管理角色的即时访问。当管理员需要管理员权限时，他们可以通过PIM请求并获得访问权限（可以发送审批或自动批准）。微软建议所有角色中的账户都由PIM管理（并拥有AAD P2许可证）。&lt;/p&gt;
+&lt;p&gt;还有一个用于PIM的PowerShell模块可以安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Azure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;ActiveDirectory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PIM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PSModule&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;2019年秋季，微软添加了一个名为&amp;quot;全局读取者&amp;quot;的新角色，该角色对所有Azure AD/Office 365服务具有只读/查看权限，这些服务全局管理员可以看到（有一些例外，因为微软仍在向所有Office 365服务推出全局读取者只读功能）。全局读取者的成员资格应提供给需要Microsoft Cloud（Azure AD和Office 365）环境只读访问权限的安全团队或审计人员。&lt;/p&gt;
+&lt;h2 id=&#34;攻击azure-active-directory&#34;&gt;攻击Azure Active Directory
+&lt;/h2&gt;&lt;p&gt;Office 365服务默认可从互联网访问（使用条件访问限制访问），这使其对攻击者具有吸引力。攻击者利用几种攻击方法针对Azure AD和Office 365。&lt;/p&gt;
+&lt;h3 id=&#34;账户枚举&#34;&gt;账户枚举
+&lt;/h3&gt;&lt;p&gt;在传统的Active Directory中，任何Active Directory用户都可以枚举所有用户账户和管理组成员资格（只要有域控制器的网络访问权限）。&lt;/p&gt;
+&lt;p&gt;Azure Active Directory用户可以枚举所有用户账户和管理组成员资格（只要有Office 365服务的访问权限，默认是互联网）。使用O365creeper等工具，甚至可以在没有账户的情况下进行用户枚举，该工具尝试使用电子邮件地址列表向O365进行认证。根据响应代码，工具确定电子邮件地址是否是有效用户账户。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Azure AD枚举工具&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O365 Creeper - Office 365认证页面（Python）[账户发现]&lt;/li&gt;
+&lt;li&gt;OWA（Golang）&lt;/li&gt;
+&lt;li&gt;ActiveSync（Python）&lt;/li&gt;
+&lt;li&gt;MSOnline/AzureAD PowerShell模块（PowerShell）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;密码喷洒&#34;&gt;密码喷洒
+&lt;/h3&gt;&lt;p&gt;攻击者以及许多渗透测试人员和红队人员常用的方法称为&amp;quot;密码喷洒&amp;rdquo;。密码喷洒是有趣的，因为它是针对所有用户的自动化密码猜测。这种针对所有用户的自动化密码猜测通常可以避免账户锁定，因为使用特定密码的登录尝试是针对每个用户执行的，而不是针对一个特定用户，这正是账户锁定设计要防范的。&lt;/p&gt;
+&lt;p&gt;攻击者从一个他们将要尝试的密码列表开始，从最可能的密码（&amp;ldquo;Fall2017&amp;rdquo;、&amp;ldquo;Winter2018&amp;quot;等）开始。当密码喷洒开始时，我们从列表中的第一个密码开始。第一个密码用于尝试作为每个用户进行认证。这个密码针对每个用户尝试后，我们继续下一个密码。&lt;/p&gt;
+&lt;p&gt;密码喷洒相对容易执行且非常有效。我们与许多组织合作过，他们的云环境账户因密码喷洒而遭到入侵。许多联合客户没有意识到这是他们的工作，而不是云的工作。密码喷洒的风险不仅限于云。如果云账户和本地账户使用相同的密码且未配置MFA，攻击者可能通过密码喷洒云账户然后获得企业网络访问权限。这不是理论或假设的场景，强调了MFA的重要性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒工具&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruler（Exchange）[Golang]&lt;/li&gt;
+&lt;li&gt;SprayingToolkit（Lync/Skype for Business/OWA）[Python]&lt;/li&gt;
+&lt;li&gt;LyncSniper（Lync/Skype for Business）[PowerShell]&lt;/li&gt;
+&lt;li&gt;MailSniper（OWA/EWS）[PowerShell]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒缓解&lt;/strong&gt;
+通过启用&amp;quot;安全默认值&amp;quot;或配置自定义条件访问策略禁用传统认证。还强烈建议要求所有用户使用MFA。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒检测&lt;/strong&gt;
+假设密码喷洒针对Office 365服务且未配置联合（ADFS、Okta等），则可以通过参考Azure AD登录日志进行检测。&lt;/p&gt;
+&lt;p&gt;通过关联同一用户在时间范围内的多个事件，其中登录错误代码为&amp;quot;50126&amp;quot;且客户端应用为&amp;quot;其他客户端；旧版Office客户端&amp;rdquo;（这意味着执行了传统认证）来检测。&lt;/p&gt;
+&lt;h3 id=&#34;账户令牌窃取和重用&#34;&gt;账户令牌窃取和重用
+&lt;/h3&gt;&lt;p&gt;由于云认证通常会在认证的应用或网页浏览器中存储令牌，这是认证的证明，可能会被重用。网页浏览器通常将此认证令牌存储为cookie。如果这些数据被盗，攻击者可能利用这些数据伪造访问并配置持久性以保持持续访问。&lt;/p&gt;
+&lt;h2 id=&#34;azure-ad审查&#34;&gt;Azure AD审查
+&lt;/h2&gt;&lt;p&gt;微软的Azure AD GitHub包括用于审查Azure AD配置的PowerShell代码（https://github.com/AzureAD/AzureADAssessment）&lt;/p&gt;
+&lt;p&gt;Trimarc还提供了一项名为Microsoft Cloud Security Assessment（MCSA）的新服务，类似于本地Active Directory安全评估，但专注于Azure AD和Office 365。&lt;/p&gt;
+&lt;h2 id=&#34;其他office-365服务powershell模块&#34;&gt;其他Office 365服务PowerShell模块
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Exchange Online模块
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ExchangeOnlineManagement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft SharePoint
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Online&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;SharePoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PowerShell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft Teams
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MicrosoftTeams&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft Skype for Business Online&lt;/li&gt;
+&lt;li&gt;Microsoft InTune
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Graph&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Intune&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;（需要管理员提供管理员同意：&lt;code&gt;Connect-MSGraph -AdminConsent&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>你被监控了吗？检测SSL中间人攻击</title>
         <link>http://localhost:1313/p/%E4%BD%A0%E8%A2%AB%E7%9B%91%E6%8E%A7%E4%BA%86%E5%90%97%E6%A3%80%E6%B5%8Bssl%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/</link>
         <pubDate>Tue, 05 Aug 2025 18:42:20 +0800</pubDate>

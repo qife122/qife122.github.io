@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>保护性DNS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BF%9D%E6%8A%A4%E6%80%A7dns/</link>
+        <description>Recent content in 保护性DNS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 17:43:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BF%9D%E6%8A%A4%E6%80%A7dns/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>加密DNS与保护性DNS的完美结合：零信任安全新方案</title>
+        <link>http://localhost:1313/p/%E5%8A%A0%E5%AF%86dns%E4%B8%8E%E4%BF%9D%E6%8A%A4%E6%80%A7dns%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%AE%89%E5%85%A8%E6%96%B0%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Wed, 06 Aug 2025 17:43:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8A%A0%E5%AF%86dns%E4%B8%8E%E4%BF%9D%E6%8A%A4%E6%80%A7dns%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%AE%89%E5%85%A8%E6%96%B0%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h3 id=&#34;加密dns保护性dns&#34;&gt;加密DNS+保护性DNS=？
+&lt;/h3&gt;&lt;p&gt;如果你像我一样年长，可能还记得Reese&amp;rsquo;s花生酱杯那个经典广告。广告的核心创意是&amp;quot;两种美妙滋味相遇创造出更棒的美味&amp;quot;。快进40年，在DNS技术领域，&amp;ldquo;巧克力与花生酱&amp;quot;的当代版本变成了加密DNS与保护性DNS的组合——至少在我们这些DNS极客眼中如此。&lt;/p&gt;
+&lt;h4 id=&#34;技术基础解析&#34;&gt;技术基础解析
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;加密DNS&lt;/strong&gt;解决了DNS存在的&amp;quot;最后一英里&amp;quot;安全隐患：传统DNS查询在终端设备(stub resolver)与递归DNS服务器之间的通信容易被监听和篡改。通过DoT(DNS over TLS)或DoH(DNS over HTTPS)等加密协议，我们不仅能加密传输内容，还能实现终端与服务器间的双向认证。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;保护性DNS&lt;/strong&gt;在传统DNS解析基础上增加了策略控制层，可阻止对已知恶意域名的解析。由于互联网上几乎所有交易都依赖DNS，这种保护机制形成了普适性的安全层。&lt;/p&gt;
+&lt;p&gt;这两种技术革新已被纳入美国国家标准与技术研究院(NIST)最新修订的《SP 800-81安全DNS部署指南》草案。&lt;/p&gt;
+&lt;h4 id=&#34;技术融合实践&#34;&gt;技术融合实践
+&lt;/h4&gt;&lt;p&gt;微软的**零信任DNS(ZTDNS)**方案完美融合了这两种技术：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Windows DNS客户端配置为通过DoT/DoH协议查询指定的保护性DNS服务器&lt;/li&gt;
+&lt;li&gt;系统强制所有DNS查询只能发往授权服务器&lt;/li&gt;
+&lt;li&gt;TCP/IP协议栈确保通信仅允许访问通过保护性DNS解析的IP地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;配合响应策略区域(RPZ)等机制，该体系能够：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阻止用户访问钓鱼网站&lt;/li&gt;
+&lt;li&gt;防范域名仿冒攻击&lt;/li&gt;
+&lt;li&gt;切断恶意软件的C2通信&lt;/li&gt;
+&lt;li&gt;阻止内网扫描行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目前ZTDNS已开放公开预览，这可能是自&amp;hellip;（你知道的）以来最酷的安全创新。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;技术扩展阅读：微软技术文档详细介绍了ZTDNS的&lt;a class=&#34;link&#34; href=&#34;https://example.com/ztdns-tech&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;实现架构&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

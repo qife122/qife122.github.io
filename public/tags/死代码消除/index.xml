@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>死代码消除 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%AD%BB%E4%BB%A3%E7%A0%81%E6%B6%88%E9%99%A4/</link>
+        <description>Recent content in 死代码消除 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 03:18:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%AD%BB%E4%BB%A3%E7%A0%81%E6%B6%88%E9%99%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>McSema提升代码中的死存储消除优化技术详解</title>
+        <link>http://localhost:1313/p/mcsema%E6%8F%90%E5%8D%87%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E6%AD%BB%E5%AD%98%E5%82%A8%E6%B6%88%E9%99%A4%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Wed, 06 Aug 2025 03:18:13 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mcsema%E6%8F%90%E5%8D%87%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E6%AD%BB%E5%AD%98%E5%82%A8%E6%B6%88%E9%99%A4%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;提升代码中的死存储消除优化&#34;&gt;提升代码中的死存储消除优化
+&lt;/h1&gt;&lt;p&gt;作为Trail of Bits春季实习项目的一部分，我开发了一系列基于数据流的优化技术，用于消除McSema提升程序中模拟机器码寄存器写入的&amp;quot;死&amp;quot;存储。例如，在Apache httpd上应用死存储消除(DSE)优化后，成功移除了117,059次存储操作，相当于Remill寄存器状态结构中50%的存储操作。&lt;/p&gt;
+&lt;h2 id=&#34;提升时发生了什么&#34;&gt;提升时发生了什么
+&lt;/h2&gt;&lt;p&gt;Remill/McSema提升代码的核心是State结构体，它模拟机器的寄存器状态。Remill通过LLVM的load/store指令来模拟寄存器的读写操作。例如一个简化版x86架构的State结构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-llvm&#34; data-lang=&#34;llvm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;%struct.State&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;i32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;i32&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;考虑以下机器码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-asm&#34; data-lang=&#34;asm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;对应的LLVM IR简化表示中，我们可以发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从&lt;code&gt;%ebx_0&lt;/code&gt;到&lt;code&gt;%eax_ptr&lt;/code&gt;的存储后立即从同一位置加载&lt;code&gt;%eax_0&lt;/code&gt;是冗余的&lt;/li&gt;
+&lt;li&gt;后续的&lt;code&gt;%eax_1&lt;/code&gt;存储会使之前的存储变为死存储&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;构建消除器&#34;&gt;构建消除器
+&lt;/h2&gt;&lt;h3 id=&#34;槽位划分&#34;&gt;槽位划分
+&lt;/h3&gt;&lt;p&gt;DSE过程将State结构划分为&amp;quot;槽位&amp;quot;，每个槽位大致对应一个寄存器。通过计算指针偏移量，我们可以确定每条指令引用的具体槽位。&lt;/p&gt;
+&lt;h3 id=&#34;槽位别名分析&#34;&gt;槽位别名分析
+&lt;/h3&gt;&lt;p&gt;我们使用ForwardAliasVisitor(FAV)来识别指向相同槽位的指令别名。FAV维护两个映射：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问映射：记录访问状态偏移的指令&lt;/li&gt;
+&lt;li&gt;偏移映射：跟踪所有可能引用状态结构的指针&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;消除死指令&#34;&gt;消除死指令
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;LiveSetBlockVisitor(LSBV)&lt;/strong&gt;：通过反向遍历基本块进行活跃变量分析，确定哪些存储可以被安全消除&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ForwardingBlockVisitor&lt;/strong&gt;：通过替换存储-加载-使用序列为直接使用原值来优化指令&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;优化效果验证&#34;&gt;优化效果验证
+&lt;/h2&gt;&lt;p&gt;在amd64架构的Apache httpd上，我们获得了以下优化结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;候选存储：210,855&lt;/li&gt;
+&lt;li&gt;死存储消除：117,059&lt;/li&gt;
+&lt;li&gt;DSE移除指令：273,322&lt;/li&gt;
+&lt;li&gt;转发优化：3,348&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;未来优化方向&#34;&gt;未来优化方向
+&lt;/h2&gt;&lt;p&gt;虽然当前DSE已取得显著效果，但仍有改进空间：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;处理分支中槽位仅在一侧活跃的情况&lt;/li&gt;
+&lt;li&gt;更精确地处理函数调用&lt;/li&gt;
+&lt;li&gt;将活跃区域提升为allocas以利用LLVM的mem2reg优化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

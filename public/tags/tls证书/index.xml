@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>TLS证书 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/tls%E8%AF%81%E4%B9%A6/</link>
+        <description>Recent content in TLS证书 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 03:56:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/tls%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>为内部OTS硬件设备配置TLS证书的技术方案</title>
+        <link>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Wed, 06 Aug 2025 03:56:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;为内部ots硬件设备配置tls证书&#34;&gt;为内部OTS硬件设备配置TLS证书
+&lt;/h1&gt;&lt;p&gt;很久以前，一位客户请我测试一款接入家庭网络提供服务的硬件设备。该设备通常通过HTTP的Web界面进行管理。测试时正值Chrome即将更新，新版本会突出显示HTTP访问和提交内容的安全风险。我与客户讨论了这一变化，询问他们是否有应对计划。&lt;/p&gt;
+&lt;p&gt;他们考虑过使用自签名证书，但这同样会显示安全警告，迫使用户忽略警告接受证书。由于该硬件旨在增强网络安全，这种做法显然不妥。&lt;/p&gt;
+&lt;p&gt;为此，我与TLS专家Scott Helme讨论后，设计出以下工作流程，使内部设备能获得有效的TLS证书。&lt;/p&gt;
+&lt;h2 id=&#34;参与方&#34;&gt;参与方
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OTS&lt;/strong&gt;：需要证书的现成硬件设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HQ&lt;/strong&gt;：制造商&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LE&lt;/strong&gt;：Let&amp;rsquo;s Encrypt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;设置&#34;&gt;设置
+&lt;/h2&gt;&lt;p&gt;制造商需要拥有一个专门用于OTS设备的域名，例如主域为ots.space，可使用ots-cert.space作为设备域。&lt;/p&gt;
+&lt;h2 id=&#34;工作流程&#34;&gt;工作流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;OTS首次启动时生成随机令牌，并通过HTTPS将其与IP地址发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ为设备生成唯一名称（如nifty-babbage）。&lt;/li&gt;
+&lt;li&gt;HQ在设备域上为设备名称创建DNS记录（如nifty-babbage.ots-cert.space A 192.168.0.7）。&lt;/li&gt;
+&lt;li&gt;HQ将名称返回给OTS。&lt;/li&gt;
+&lt;li&gt;OTS生成私钥和CSR，发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ使用CSR和LE的DNS验证为子域名生成证书。&lt;/li&gt;
+&lt;li&gt;HQ创建包含证书和认证令牌的包。&lt;/li&gt;
+&lt;li&gt;OTS轮询HQ检查包是否就绪，使用初始令牌作为标识。下载包后安装证书，并设置HTTP到HTTPS的重定向（如http://192.168.0.7重定向到https://nifty-babbage.ots-cert.space）。&lt;/li&gt;
+&lt;li&gt;OTS每天检查证书有效期，到期前7天使用认证令牌请求新证书。设备重启时也执行此流程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LE证书会提交到证书透明度日志，可能暴露设备名称，但无法关联到具体用户。&lt;/li&gt;
+&lt;li&gt;设备名称可自定义，但可能增加信息泄露风险。&lt;/li&gt;
+&lt;li&gt;LE证书有效期为90天，设备长期离线后启动时会自动更新证书。&lt;/li&gt;
+&lt;li&gt;对于DHCP网络，IP变化时可更新DNS记录，短TTL可减少问题。&lt;/li&gt;
+&lt;li&gt;为防止DDoS，每日任务应随机时间执行。&lt;/li&gt;
+&lt;li&gt;生产时可预装客户端证书替代随机令牌，但需考虑长期有效性。&lt;/li&gt;
+&lt;li&gt;私钥仅在OTS生成，不会通过网络传输。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;概念验证&#34;&gt;概念验证
+&lt;/h2&gt;&lt;p&gt;本文提供了完整可运行的概念验证，设置简单，易于实施。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e6%bc%94%e7%a4%ba%e9%93%be%e6%8e%a5&#34; &gt;查看演示&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,107 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 22:00:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9B%B6%E4%BF%A1%E4%BB%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 17:43:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9B%B6%E4%BF%A1%E4%BB%BB/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>加密DNS与保护性DNS的完美结合：零信任安全新方案</title>
+        <link>http://localhost:1313/p/%E5%8A%A0%E5%AF%86dns%E4%B8%8E%E4%BF%9D%E6%8A%A4%E6%80%A7dns%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%AE%89%E5%85%A8%E6%96%B0%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Wed, 06 Aug 2025 17:43:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8A%A0%E5%AF%86dns%E4%B8%8E%E4%BF%9D%E6%8A%A4%E6%80%A7dns%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%AE%89%E5%85%A8%E6%96%B0%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h3 id=&#34;加密dns保护性dns&#34;&gt;加密DNS+保护性DNS=？
+&lt;/h3&gt;&lt;p&gt;如果你像我一样年长，可能还记得Reese&amp;rsquo;s花生酱杯那个经典广告。广告的核心创意是&amp;quot;两种美妙滋味相遇创造出更棒的美味&amp;quot;。快进40年，在DNS技术领域，&amp;ldquo;巧克力与花生酱&amp;quot;的当代版本变成了加密DNS与保护性DNS的组合——至少在我们这些DNS极客眼中如此。&lt;/p&gt;
+&lt;h4 id=&#34;技术基础解析&#34;&gt;技术基础解析
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;加密DNS&lt;/strong&gt;解决了DNS存在的&amp;quot;最后一英里&amp;quot;安全隐患：传统DNS查询在终端设备(stub resolver)与递归DNS服务器之间的通信容易被监听和篡改。通过DoT(DNS over TLS)或DoH(DNS over HTTPS)等加密协议，我们不仅能加密传输内容，还能实现终端与服务器间的双向认证。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;保护性DNS&lt;/strong&gt;在传统DNS解析基础上增加了策略控制层，可阻止对已知恶意域名的解析。由于互联网上几乎所有交易都依赖DNS，这种保护机制形成了普适性的安全层。&lt;/p&gt;
+&lt;p&gt;这两种技术革新已被纳入美国国家标准与技术研究院(NIST)最新修订的《SP 800-81安全DNS部署指南》草案。&lt;/p&gt;
+&lt;h4 id=&#34;技术融合实践&#34;&gt;技术融合实践
+&lt;/h4&gt;&lt;p&gt;微软的**零信任DNS(ZTDNS)**方案完美融合了这两种技术：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Windows DNS客户端配置为通过DoT/DoH协议查询指定的保护性DNS服务器&lt;/li&gt;
+&lt;li&gt;系统强制所有DNS查询只能发往授权服务器&lt;/li&gt;
+&lt;li&gt;TCP/IP协议栈确保通信仅允许访问通过保护性DNS解析的IP地址&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;配合响应策略区域(RPZ)等机制，该体系能够：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阻止用户访问钓鱼网站&lt;/li&gt;
+&lt;li&gt;防范域名仿冒攻击&lt;/li&gt;
+&lt;li&gt;切断恶意软件的C2通信&lt;/li&gt;
+&lt;li&gt;阻止内网扫描行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目前ZTDNS已开放公开预览，这可能是自&amp;hellip;（你知道的）以来最酷的安全创新。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;技术扩展阅读：微软技术文档详细介绍了ZTDNS的&lt;a class=&#34;link&#34; href=&#34;https://example.com/ztdns-tech&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;实现架构&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>企业安全中的隐形威胁：流氓访问及其治理策略</title>
+        <link>http://localhost:1313/p/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BD%A2%E5%A8%81%E8%83%81%E6%B5%81%E6%B0%93%E8%AE%BF%E9%97%AE%E5%8F%8A%E5%85%B6%E6%B2%BB%E7%90%86%E7%AD%96%E7%95%A5/</link>
+        <pubDate>Wed, 06 Aug 2025 11:12:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BD%A2%E5%A8%81%E8%83%81%E6%B5%81%E6%B0%93%E8%AE%BF%E9%97%AE%E5%8F%8A%E5%85%B6%E6%B2%BB%E7%90%86%E7%AD%96%E7%95%A5/</guid>
+        <description>&lt;h1 id=&#34;企业安全中的隐形威胁流氓访问&#34;&gt;企业安全中的隐形威胁：流氓访问
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;流氓访问&lt;/strong&gt;如同企业安全领域的暗物质：通常不可见且被忽视，但若放任不管则蕴含爆炸性风险。该术语指任何绕过正式审批渠道配置的访问权限，或在合法需求终止后仍保留的访问权限。与孤儿账户不同，流氓访问可能仍处于活跃状态甚至关联已知用户，但缺乏适当的所有权归属、合理性证明或追踪机制——这是脱离治理框架的访问行为。&lt;/p&gt;
+&lt;p&gt;随着组织完善其身份治理与管理（IGA）策略，解决流氓访问已成为优先事项，尤其在审计、合规审查和零信任架构实施过程中至关重要。&lt;/p&gt;
+&lt;h2 id=&#34;访问请求流程与流氓访问的产生节点&#34;&gt;访问请求流程与流氓访问的产生节点
+&lt;/h2&gt;&lt;p&gt;在治理完善的企业中，标准访问流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问请求（通过自助门户或工单）&lt;/li&gt;
+&lt;li&gt;审批流程（由管理者、应用/权限所有者或双方共同完成）&lt;/li&gt;
+&lt;li&gt;权限配置（自动或手动）&lt;/li&gt;
+&lt;li&gt;认证/重新验证（定期确认或权限移除）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;任何偏离该标准流程、缺乏审计追踪或违反策略的访问行为均被标记为流氓访问。其常见产生节点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;绕过审批流程（管理员手动添加或影子IT操作）&lt;/li&gt;
+&lt;li&gt;岗位变动后未及时撤销的遗留权限&lt;/li&gt;
+&lt;li&gt;应急访问或项目期间的过度授权&lt;/li&gt;
+&lt;li&gt;离职或工作交接时的权限回收失败&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;流氓访问的识别标准&#34;&gt;流氓访问的识别标准
+&lt;/h2&gt;&lt;p&gt;通过静态指标与行为特征的组合进行判定：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无关联的访问请求或审批记录&lt;/li&gt;
+&lt;li&gt;所有权不匹配（如权限所有者已不在系统内）&lt;/li&gt;
+&lt;li&gt;与同岗位/部门成员相比存在异常访问模式&lt;/li&gt;
+&lt;li&gt;高权限账户长期无活动（如休眠的root权限）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现代IGA工具（如SailPoint）内置变更工作流，可识别流氓访问并立即启动修复。这些工具还能利用身份图谱和行为分析进行风险评分，自动标记待审项目或执行修复。&lt;/p&gt;
+&lt;h2 id=&#34;流氓访问与孤儿账户的共生关系&#34;&gt;流氓访问与孤儿账户的共生关系
+&lt;/h2&gt;&lt;p&gt;这两类问题往往相互交织：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;孤儿账户&lt;/strong&gt;：无明确所有者的账户（如承包商遗留的服务账户）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流氓访问&lt;/strong&gt;：有效用户持有但脱离治理规范的权限（如未经审批手动授予的遗留数据库访问权限）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;二者均违反最小权限和零信任原则。主流IGA平台（SailPoint/Saviynt/Microsoft Entra ID）通过机器学习检测异常访问，实现自动化修复/认证循环。&lt;/p&gt;
+&lt;h2 id=&#34;基于风险的层级化治理方案&#34;&gt;基于风险的层级化治理方案
+&lt;/h2&gt;&lt;p&gt;识别后应按系统关键性分级处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;高危系统&lt;/strong&gt;（如AD、ERP、云平台）：24-48小时内撤销访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中危系统&lt;/strong&gt;（含敏感数据的内部应用）：7-10天处理周期&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;低危系统&lt;/strong&gt;（非关键内容的只读访问）：30天处理周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;权限优先级应综合考量特权等级、数据分类和角色关键性。已连接应用可通过SCIM/API触发即时修复，未连接系统则需ITSM工单配合升级机制。&lt;/p&gt;
+&lt;h2 id=&#34;合规审计的刚性要求&#34;&gt;合规审计的刚性要求
+&lt;/h2&gt;&lt;p&gt;所有主流审计框架均将流氓访问视为危险信号：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SOX&lt;/strong&gt;：要求金融系统具备明确的审批和基于角色的访问控制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PCI DSS 4.0&lt;/strong&gt;：强制实施支付环境的最小权限原则&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NIST 800-53&lt;/strong&gt;：强调访问审查、用户问责和权限限制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ISO 27001&lt;/strong&gt;：关注生命周期访问治理和异常检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;现实世界中的典型案例&#34;&gt;现实世界中的典型案例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Snowflake事件（2024）&lt;/strong&gt;：攻击者利用承包商未受监管的高权限凭证窃取客户数据，这些凭证在治理系统中无记录且长期闲置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Twitter事件（2020）&lt;/strong&gt;：社会工程攻击利用数十名员工角色变更后遗留的管理权限，暴露生命周期治理的失效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论看见不可见守护企业安全&#34;&gt;结论：看见不可见，守护企业安全
+&lt;/h2&gt;&lt;p&gt;流氓访问未必出于恶意，但必然带来风险。它滋生于配置错误、人为失误和流程漏洞的灰色地带，在延迟访问审查或依赖单点认证的环境中尤为猖獗。通过合适的IGA工具、治理策略和风险阈值，企业能在攻击者之前持续检测并处置流氓访问。当今安全领域，忽视不可见威胁绝非选项——那些你看不见的，恰恰可能造成致命伤害。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于作者&lt;/strong&gt;&lt;br&gt;
+Durgaprasad Balakrishnan&lt;br&gt;
+拥有16年IT治理、风险与合规经验的信息安全经理，曾领导跨国企业的身份与访问管理项目，擅长制定与业务目标协同的安全战略。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>AWS远程访问指南：混合办公环境的安全技术方案</title>
         <link>http://localhost:1313/p/aws%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%8C%87%E5%8D%97%E6%B7%B7%E5%90%88%E5%8A%9E%E5%85%AC%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
         <pubDate>Sat, 02 Aug 2025 22:00:53 +0800</pubDate>

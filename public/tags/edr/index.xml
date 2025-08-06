@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>EDR on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/edr/</link>
+        <description>Recent content in EDR on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 07:21:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/edr/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>EDR如何绕过EDR防护？安全研究人员发现新型攻击向量</title>
+        <link>http://localhost:1313/p/edr%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87edr%E9%98%B2%E6%8A%A4%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E4%BA%BA%E5%91%98%E5%8F%91%E7%8E%B0%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E5%90%91%E9%87%8F/</link>
+        <pubDate>Wed, 06 Aug 2025 07:21:55 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/edr%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87edr%E9%98%B2%E6%8A%A4%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E4%BA%BA%E5%91%98%E5%8F%91%E7%8E%B0%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E5%90%91%E9%87%8F/</guid>
+        <description>&lt;h1 id=&#34;edr如何绕过edr防护&#34;&gt;EDR如何绕过EDR防护？
+&lt;/h1&gt;&lt;h2 id=&#34;新型攻击向量被发现&#34;&gt;新型攻击向量被发现
+&lt;/h2&gt;&lt;p&gt;网络安全研究人员Ezra Woods和Mike Manrod发现了一种危险的攻击方式：攻击者可以滥用终端检测与响应(EDR)软件的免费试用版本来禁用现有的安全防护工具。他们将这种现象称为&amp;quot;EDR-on-EDR暴力&amp;quot;，并在Medium上发表了详细研究成果。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;总结来说，EDR/AV产品可被用来禁用或阻止现有安全工具、远程控制设备，甚至像我们在某个案例中发现的那样——加密整个硬盘，&amp;ldquo;研究人员指出。这种具有讽刺意味的新攻击向量利用了安全领域一个很少被质疑的基本假设：合法的安全工具总是可信的。&lt;/p&gt;
+&lt;h2 id=&#34;攻击原理分析&#34;&gt;攻击原理分析
+&lt;/h2&gt;&lt;p&gt;根据研究人员的发现，攻击者可以在已入侵的系统上以本地管理员权限安装EDR产品的免费试用版本，然后配置这些版本来阻止现有的安全工具。在他们的测试中，Woods和Manrod成功禁用了Cisco Secure Endpoint、CrowdStrike Falcon和Elastic Defend，而且不会触发任何警报或生成遥测数据——受攻击的终端只是显示为离线状态。&lt;/p&gt;
+&lt;p&gt;被滥用的软件具有有效的数字证书并被识别为合法程序，因此很难与真正授权的安装区分开来。在企业环境中，安全团队很可能无法识别防护措施已被故意破坏。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;实现方式是通过删除排除项，然后将现有AV/EDR产品的哈希值添加到阻止应用程序列表中，&amp;ldquo;研究人员在分析中解释道。具有远程监控和管理功能的EDR产品尤其容易被滥用，例如研究人员使用ESET的EDR产品实例成功加密了目标系统的整个硬盘。&lt;/p&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;p&gt;研究人员为企业提供了以下防护建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;部署应用程序控制解决方案，阻止未经授权的安全软件安装&lt;/li&gt;
+&lt;li&gt;实施自定义攻击指标，检测可疑的EDR安装&lt;/li&gt;
+&lt;li&gt;使用&amp;quot;应用感知&amp;quot;防火墙和安全Web网关，防止访问安全供应商的未授权门户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Woods和Manrod在其文章中分享了详细的操作指南，帮助安全团队复现、测试和深入理解这种攻击方式，并建议在隔离系统中进行受控测试。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

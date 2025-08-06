@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PCI-DSS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/pci-dss/</link>
+        <description>Recent content in PCI-DSS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 04:34:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pci-dss/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>安全设计为何必须前置：从非对称加密到多因素认证的技术演进</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E4%BD%95%E5%BF%85%E9%A1%BB%E5%89%8D%E7%BD%AE%E4%BB%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%88%B0%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
+        <pubDate>Wed, 06 Aug 2025 04:34:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E4%BD%95%E5%BF%85%E9%A1%BB%E5%89%8D%E7%BD%AE%E4%BB%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%88%B0%E5%A4%9A%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81%E7%9A%84%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
+        <description>&lt;p&gt;当WiKID初创时，我们深知必须达到或超越当时主流安全方案（如RSA和Vasco）的防护等级。我们认定在用户设备端生成非对称密钥是消除软件令牌质疑的最佳方案——毕竟RSA三人组发明公钥加密正是为了克服共享密钥的固有缺陷。&lt;/p&gt;
+&lt;p&gt;然而时至今日，主流消费者双因素认证仍采用基于共享密钥的&amp;quot;两步验证&amp;quot;（即便发生过重大供应商密钥泄露事件），甚至更脆弱的短信验证。这似乎印证了&amp;quot;营销胜过技术&amp;quot;的定律，市场对非对称加密的增强安全性始终兴趣寥寥。&lt;/p&gt;
+&lt;p&gt;但安全领域存在特殊规律：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击手段持续进化&lt;/li&gt;
+&lt;li&gt;合规要求可能强制市场变革&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;PCI-DSS委员会最新指南正推动这种变革，明确指出多步验证会导致账户信息泄露，应予以弃用。NIST也已将短信验证列为过时机制。&lt;/p&gt;
+&lt;p&gt;这对系统管理员反而是种简化。多数VPN和远程访问服务默认通过RADIUS支持基于OTP的双因素认证（同时支持AD/LDAP授权），且根本不兼容多步验证流程。例如在Cisco ASA设备上就无法配置两步验证。但双因素认证却能轻松集成到ASA管理员账户——这不仅是绝佳实践，也即将成为PCI非控制台管理访问的强制要求。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

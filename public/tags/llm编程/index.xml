@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>LLM编程 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/llm%E7%BC%96%E7%A8%8B/</link>
+        <description>Recent content in LLM编程 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 11:29:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/llm%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025年夏季：与LLM协同编程的最新实践</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B4%E5%A4%8F%E5%AD%A3%E4%B8%8Ellm%E5%8D%8F%E5%90%8C%E7%BC%96%E7%A8%8B%E7%9A%84%E6%9C%80%E6%96%B0%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Wed, 06 Aug 2025 11:29:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B4%E5%A4%8F%E5%AD%A3%E4%B8%8Ellm%E5%8D%8F%E5%90%8C%E7%BC%96%E7%A8%8B%E7%9A%84%E6%9C%80%E6%96%B0%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;antirez&gt; 
+2025年夏季：与LLM协同编程（更新篇）antirez 10小时前。53435次浏览。以Gemini 2.5 PRO为代表的前沿大语言模型凭借其广博的知识储备和秒级理解数千行代码的能力，正在成为程序员的能力倍增器。只要你能清晰描述问题，并适应与LLM的交互节奏，就能实现以下突破：
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在代码触达用户前消灭缺陷&lt;/strong&gt;：我在Redis向量集合实现中就验证了这点。虽然最终我都能自行修复所有bug，但Gemini/Claude的代码审查能立即消除大部分问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加速创意验证&lt;/strong&gt;：让LLM快速编写可抛弃的测试代码，立即验证解决方案的性能表现和可行性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开展结对设计&lt;/strong&gt;：将你的直觉、经验和设计品味，与LLM内化的博士级知识相结合。虽然LLM有时会提出愚蠢方案，但也会闪现惊人洞见——你的价值就在于规避局部最优陷阱。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规范化的代码生成&lt;/strong&gt;：在明确规范下让LLM完成部分代码编写。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨界技术探索&lt;/strong&gt;：比如用68000汇编编写Amiga演示程序时，可将LLM作为特定知识的外接模块。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一年半前我写过《2024年初的LLM与编程》，当时LLM已显实用价值，但这18个月的进步彻底改变了游戏规则。不过要充分发挥其效能，使用者需要具备特定素质并遵循最佳实践。&lt;/p&gt;
+&lt;h2 id=&#34;拒绝氛围编程&#34;&gt;拒绝&amp;quot;氛围编程&amp;quot;
+&lt;/h2&gt;&lt;p&gt;当前阶段，LLM是优秀的放大器，却是糟糕的独奏者。虽然它们能在严格监督下加速开发（我的做法是追求同等时间内产出更多/更好的代码），但面对复杂目标时，独立工作的LLM往往会产生冗余、脆弱且充满局部最优解的代码体系。日常实践让我坚信：人机协作才能实现最高质量。这需要两个关键前提：使用者必须具备出色的沟通能力，以及丰富的LLM交互经验。&lt;/p&gt;
+&lt;h2 id=&#34;提供完整上下文&#34;&gt;提供完整上下文
+&lt;/h2&gt;&lt;p&gt;当需要LLM协助实现或修复代码时，必须提供完整信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;相关论文&lt;/li&gt;
+&lt;li&gt;目标代码库的完整上下文（尽可能全部）&lt;/li&gt;
+&lt;li&gt;你对解决方案的全部认知，特别要包括：
+&lt;ul&gt;
+&lt;li&gt;看似优秀实则欠佳的方案及其缺陷&lt;/li&gt;
+&lt;li&gt;尚未完善的优质方案雏形&lt;/li&gt;
+&lt;li&gt;代码必须遵守的约束条件和风格规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;选对llm工具&#34;&gt;选对LLM工具
+&lt;/h2&gt;&lt;p&gt;编程任务应优先选用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Gemini 2.5 PRO&lt;/strong&gt;：语义理解更强，擅长发现复杂缺陷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Claude Opus 4&lt;/strong&gt;：有时在新代码生成方面更优&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;始终直接使用最先进的基座模型&lt;/li&gt;
+&lt;li&gt;避免任何会分割上下文的RAG方案&lt;/li&gt;
+&lt;li&gt;保持人工控制：手动在终端与LLM界面间传递代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;尽管自主编程代理备受关注，但目前保持&amp;quot;人在循环中&amp;quot;仍能最大化开发效能。未来当AI足够成熟时，人类将专注于决策&amp;quot;做什么&amp;quot;和&amp;quot;怎么做&amp;quot;。现阶段建议定期测试代理能力边界，但多数时候保持主导地位。另外也要警惕因意识形态拒绝使用LLM而导致的技术落后——与LLM协作所需的技能体系本身就需要时间积累。或许正如古谚所云：&amp;ldquo;中庸之道才是美德&amp;rdquo;。&lt;/p&gt;
+&lt;p&gt;请启用JavaScript查看Disqus评论。&lt;/p&gt;
+&lt;p&gt;rss订阅 | twitter | 谷歌群组 | 旧版站点：&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
