@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>分布式计算 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/</link>
+        <description>Recent content in 分布式计算 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 22:55:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>即刻保护，延时揭秘：可扩展的时间锁谜题解决方案</title>
+        <link>http://localhost:1313/p/%E5%8D%B3%E5%88%BB%E4%BF%9D%E6%8A%A4%E5%BB%B6%E6%97%B6%E6%8F%AD%E7%A7%98%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%97%B6%E9%97%B4%E9%94%81%E8%B0%9C%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Thu, 07 Aug 2025 22:55:53 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8D%B3%E5%88%BB%E4%BF%9D%E6%8A%A4%E5%BB%B6%E6%97%B6%E6%8F%AD%E7%A7%98%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%97%B6%E9%97%B4%E9%94%81%E8%B0%9C%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h3 id=&#34;时间锁谜题的核心价值&#34;&gt;时间锁谜题的核心价值
+&lt;/h3&gt;&lt;p&gt;时间锁谜题（TLP）允许今日加密的信息在指定时间后自动解密，其应用场景涵盖：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;延时加密货币支付&lt;/li&gt;
+&lt;li&gt;密封投标拍卖&lt;/li&gt;
+&lt;li&gt;基于时间的访问控制&lt;/li&gt;
+&lt;li&gt;零知识证明系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;现有方案的局限性&#34;&gt;现有方案的局限性
+&lt;/h3&gt;&lt;p&gt;传统TLP存在两大瓶颈：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;算力假设不现实&lt;/strong&gt;：要求服务器在固定时间窗口内完成所有并行谜题计算（例如同时处理24小时和40小时谜题需64小时算力）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;扩展性缺陷&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;链式TLP（C-TLP）仅支持单一客户端固定间隔的谜题链&lt;/li&gt;
+&lt;li&gt;可批处理TLP要求所有消息必须同时解密&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;突破性解决方案ed-tlp协议&#34;&gt;突破性解决方案：ED-TLP协议
+&lt;/h3&gt;&lt;p&gt;我们提出的高效委托时间锁谜题协议实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安全任务委托&lt;/strong&gt;：允许客户端/服务器将计算外包给第三方（即使不可信）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态时间间隔&lt;/strong&gt;：支持不同客户端的异构时间要求（如24小时+16小时=40小时总延迟）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实时验证&lt;/strong&gt;：轻量级解决方案验证机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;智能合约支付&lt;/strong&gt;：通过区块链确保计算者按时正确交付后获得报酬&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[&lt;img src=&#34;http://localhost:1313/&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;工作流程对比&#34;
+	
+	
+&gt;](Fig.1: 协议对比演示)&lt;/p&gt;
+&lt;h3 id=&#34;实际应用场景&#34;&gt;实际应用场景
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;高风险信息保护&lt;/strong&gt;：记者/举报人可预设信息在遭遇不测后自动公开&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;远程教育&lt;/strong&gt;：学生提前下载加密试卷，考试开始时自动解密&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定时金融交易&lt;/strong&gt;：避免金融机构提前获知交易细节&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;性能突破&#34;&gt;性能突破
+&lt;/h3&gt;&lt;p&gt;万级谜题测试显示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;客户端计算量减少99%&lt;/li&gt;
+&lt;li&gt;服务器计算负载降低100%&lt;/li&gt;
+&lt;li&gt;单谜题智能合约成本仅0.2美分&lt;/li&gt;
+&lt;li&gt;开源实现已发布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这项研究使时间依赖型密码学真正具备大规模应用可行性，为金融、教育、人权保护等领域提供新的安全范式。我们期待与密码学、区块链领域研究者展开深度合作。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

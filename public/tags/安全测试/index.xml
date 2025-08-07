@@ -7,7 +7,70 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 17:17:36 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 20:30:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>以太坊智能合约可复用属性库 - 提升安全测试效率的168个预置属性</title>
+        <link>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E5%BA%93-%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87%E7%9A%84168%E4%B8%AA%E9%A2%84%E7%BD%AE%E5%B1%9E%E6%80%A7/</link>
+        <pubDate>Thu, 07 Aug 2025 20:30:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E5%BA%93-%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87%E7%9A%84168%E4%B8%AA%E9%A2%84%E7%BD%AE%E5%B1%9E%E6%80%A7/</guid>
+        <description>&lt;h3 id=&#34;可复用的以太坊合约属性库&#34;&gt;可复用的以太坊合约属性库
+&lt;/h3&gt;&lt;p&gt;随着智能合约安全技术发展，基于属性的模糊测试（property-based fuzzing）已成为开发者和安全工程师的核心技术。该技术依赖代码属性（通常称为不变量）的创建，这些属性描述代码的预期行为。为帮助社区定义属性，我们发布了包含168个预置属性的集合，可直接用于我们的智能合约模糊测试工具Echidna或通过单元测试调用。这些属性涵盖：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见ERC代币接口的合规性检查&lt;/li&gt;
+&lt;li&gt;通用可测试安全属性&lt;/li&gt;
+&lt;li&gt;定点数学运算测试属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实战研讨会安排&#34;&gt;实战研讨会安排
+&lt;/h3&gt;&lt;p&gt;为帮助掌握这些工具，我们将举办两场直播：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;3月7日&lt;/strong&gt;：ERC20属性详解、Echidna作弊码使用（讲师：Guillermo Larregay）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3月14日&lt;/strong&gt;：ERC4626属性解析与高效模糊测试技巧（讲师：Benjamin Samuels）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么需要这些属性&#34;&gt;为什么需要这些属性？
+&lt;/h3&gt;&lt;p&gt;该资源库及配套研讨会将展示模糊测试如何提供远超常规单元测试的安全保障。这些属性可轻松集成到使用常见标准或流行库的项目中，当前版本包含对以下标准的测试：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ERC20&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标准接口函数属性&lt;/li&gt;
+&lt;li&gt;基础逻辑属性（如：用户余额不应大于代币总量）&lt;/li&gt;
+&lt;li&gt;可销毁/可铸造/可暂停等扩展功能属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ERC4626&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;合规性舍入方向验证&lt;/li&gt;
+&lt;li&gt;禁止异常回退的函数属性&lt;/li&gt;
+&lt;li&gt;差分测试属性（如deposit()需符合previewDeposit()预期）&lt;/li&gt;
+&lt;li&gt;非标准安全属性（如份额通胀攻击检查）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ABDKMath64x64数学库&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交换律/结合律/分配律等数学属性&lt;/li&gt;
+&lt;li&gt;差分测试（如2^(-x)应与1/2^x等价）&lt;/li&gt;
+&lt;li&gt;输入范围异常检测属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实战案例发现abdkmath64x64库漏洞&#34;&gt;实战案例：发现ABDKMath64x64库漏洞
+&lt;/h3&gt;&lt;h3 id=&#34;快速开始指南&#34;&gt;快速开始指南
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;安装Echidna测试工具&lt;/li&gt;
+&lt;li&gt;集成属性库：
+&lt;ul&gt;
+&lt;li&gt;Hardhat项目：&lt;code&gt;npm install https://github.com/crytic/properties.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Foundry项目：&lt;code&gt;forge install crytic/properties&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;创建测试合约（示例代码见原文）&lt;/li&gt;
+&lt;li&gt;配置Echidna参数文件&lt;/li&gt;
+&lt;li&gt;运行测试：&lt;code&gt;echidna-test . --contract CryticERC20ExternalHarness --config tests/echidna-external.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;扩展对PRBMath等数学库的测试支持&lt;/li&gt;
+&lt;li&gt;增加更多ERC标准测试&lt;/li&gt;
+&lt;li&gt;开发AMM/流动性池等非标合约的测试集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>Trail of Bits发布《测试手册》——聚焦Semgrep静态分析工具与CI/CD优化</title>
         <link>http://localhost:1313/p/trail-of-bits%E5%8F%91%E5%B8%83%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E8%81%9A%E7%84%A6semgrep%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E4%B8%8Eci/cd%E4%BC%98%E5%8C%96/</link>
         <pubDate>Sun, 03 Aug 2025 17:17:36 +0800</pubDate>

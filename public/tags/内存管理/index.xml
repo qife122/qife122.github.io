@@ -7,7 +7,34 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 22:20:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 23:12:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Intel EPT技术实现MMU虚拟化详解</title>
+        <link>http://localhost:1313/p/intel-ept%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0mmu%E8%99%9A%E6%8B%9F%E5%8C%96%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Thu, 07 Aug 2025 23:12:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/intel-ept%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0mmu%E8%99%9A%E6%8B%9F%E5%8C%96%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;mmu-virtualization-via-intel-ept---index&#34;&gt;MMU Virtualization via Intel EPT - Index
+&lt;/h1&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;在收到大量请求后，我决定完成这个关于使用Intel EPT实现MMU虚拟化的5部分系列文章。本系列既可用于自主hypervisor开发，也可与之前发布的CPU虚拟化系列配套使用。文章将频繁引用先前项目内容（因多数读者会同步跟进），但实现方案在所有Type-2型hypervisor项目中都较为相似。本系列仅适用于支持虚拟化技术特性的Intel处理器用户，目标是让读者掌握分页机制、扩展页表(EPT)、多种地址转换机制的技术细节，并学会在虚拟化项目中实际应用。&lt;/p&gt;
+&lt;p&gt;完成本系列后，读者将拥有可工作的EPT基础框架，并能在未来项目中自主设计实现EPT基础设施。每篇文章都会像往常一样提供相关概念解析、重要性说明、详细参考资料链接，并在文末设置&amp;quot;推荐阅读&amp;quot;章节。部分VMX地址转换机制还会标注&amp;quot;必读&amp;quot;要求。&lt;/p&gt;
+&lt;h2 id=&#34;章节规划&#34;&gt;章节规划
+&lt;/h2&gt;&lt;h3 id=&#34;part-0---技术基础&#34;&gt;Part 0 - 技术基础
+&lt;/h3&gt;&lt;p&gt;介绍扩展页表相关子课题，包括Intel EPT的设计动机、地址转换辅助机制、性能考量，以及分页结构中常见的缓存组件入门。&lt;/p&gt;
+&lt;h3 id=&#34;part-1---实现篇---结构体定义与初始化&#34;&gt;Part 1 - 实现篇 - 结构体定义与初始化
+&lt;/h3&gt;&lt;p&gt;提供预制结构体及其功能详解，这些结构将用于本系列主要EPT实现。同时详述VMX环境下EPT初始化与直通(passthrough)流程。完成本章后将具备可运行的EPT框架。&lt;/p&gt;
+&lt;h3 id=&#34;part-2---实现篇---ept辅助函数页遍历ept违规与销毁&#34;&gt;Part 2 - 实现篇 - EPT辅助函数/页遍历/EPT违规与销毁
+&lt;/h3&gt;&lt;p&gt;解析各类EPT引发的VM-exit及其处理方法，实现销毁函数集和Guest-Host地址转换辅助例程。读者将编写处理程序，学习EPT相关的配置错误、违规和异常类型。&lt;/p&gt;
+&lt;h3 id=&#34;part-3---集成测试&#34;&gt;Part 3 - 集成测试
+&lt;/h3&gt;&lt;p&gt;将EPT初始化函数集成到现有CPU虚拟化项目中，通过测试运行验证EPT正常工作，并主动触发违规来测试处理程序。&lt;/p&gt;
+&lt;h3 id=&#34;part-4---eptp切换与页钩子附加章节&#34;&gt;Part 4 - EPTP切换与页钩子（附加章节）
+&lt;/h3&gt;&lt;p&gt;作为安全研究特别内容，演示如何通过EPTP切换和页钩子来隐藏信息、挂钩受保护函数，或防止敏感信息被读取。案例包括：挂钩Windows内核函数以伪造代码完整性校验结果，以及防止应用程序读取受保护进程的内存空间。&lt;/p&gt;
+&lt;h2 id=&#34;特别说明&#34;&gt;特别说明
+&lt;/h2&gt;&lt;p&gt;在阅读本系列前，强烈建议通读所有推荐资料并实践——如果你想真正精通虚拟化技术和微架构的话。这个提醒会在每篇文章重复出现，因为细节决定成败。各章节还会根据内容补充推特、博客等第三方资料（均会标明出处）。&lt;/p&gt;
+&lt;p&gt;特别感谢Aidan Khoury在合作项目中提供的深刻见解，他传授的诸多技巧将在本系列与读者分享。欢迎在评论区留下反馈、问题或建议。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;版权声明：本文采用Read Only许可协议，禁止未经授权的复制或使用&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Arm64架构内存页大小配置指南：提升性能的关键技巧</title>
         <link>http://localhost:1313/p/arm64%E6%9E%B6%E6%9E%84%E5%86%85%E5%AD%98%E9%A1%B5%E5%A4%A7%E5%B0%8F%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD%E7%9A%84%E5%85%B3%E9%94%AE%E6%8A%80%E5%B7%A7/</link>
         <pubDate>Wed, 06 Aug 2025 22:20:09 +0800</pubDate>

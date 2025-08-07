@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了在Ubuntu 16.04系统上安装和配置Cacti 1.1.10网络监控工具的完整步骤，包括系统准备、软件依赖安装、数据库配置、Apache设置以及最终的系统部署和登录过程。">
+<title>在Ubuntu 16.04上安装Cacti 1.1.10的完整指南</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%9C%A8ubuntu-16.04%E4%B8%8A%E5%AE%89%E8%A3%85cacti-1.1.10%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="在Ubuntu 16.04上安装Cacti 1.1.10的完整指南">
+<meta property='og:description' content="本文详细介绍了在Ubuntu 16.04系统上安装和配置Cacti 1.1.10网络监控工具的完整步骤，包括系统准备、软件依赖安装、数据库配置、Apache设置以及最终的系统部署和登录过程。">
+<meta property='og:url' content='http://localhost:1313/p/%E5%9C%A8ubuntu-16.04%E4%B8%8A%E5%AE%89%E8%A3%85cacti-1.1.10%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Cacti' /><meta property='article:tag' content='Ubuntu' /><meta property='article:tag' content='网络监控' /><meta property='article:tag' content='系统管理' /><meta property='article:published_time' content='2025-08-07T19:52:30&#43;08:00'/><meta property='article:modified_time' content='2025-08-07T19:52:30&#43;08:00'/>
+<meta name="twitter:title" content="在Ubuntu 16.04上安装Cacti 1.1.10的完整指南">
+<meta name="twitter:description" content="本文详细介绍了在Ubuntu 16.04系统上安装和配置Cacti 1.1.10网络监控工具的完整步骤，包括系统准备、软件依赖安装、数据库配置、Apache设置以及最终的系统部署和登录过程。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#什么是cacti">什么是Cacti？</a>
+      <ol>
+        <li><a href="#网络管理员视角">网络管理员视角</a></li>
+        <li><a href="#安全管理员视角">安全管理员视角</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装ubuntu-1604">安装Ubuntu 16.04</a>
+      <ol>
+        <li><a href="#更新基础系统">更新基础系统</a></li>
+        <li><a href="#配置网络">配置网络</a></li>
+        <li><a href="#关于sudo和root的说明">关于sudo和root的说明</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装预装依赖">安装预装依赖</a>
+      <ol>
+        <li><a href="#下载cacti文件">下载Cacti文件</a></li>
+        <li><a href="#设置日志位置">设置日志位置</a></li>
+      </ol>
+    </li>
+    <li><a href="#配置sql数据库">配置SQL数据库</a></li>
+    <li><a href="#配置cacti文件">配置Cacti文件</a>
+      <ol>
+        <li><a href="#设置文件权限">设置文件权限</a></li>
+      </ol>
+    </li>
+    <li><a href="#配置apache">配置Apache</a>
+      <ol>
+        <li><a href="#输入以下内容并保存cacticonf">输入以下内容并保存cacti.conf</a></li>
+        <li><a href="#从apache中移除默认现有站点">从Apache中移除默认/现有站点</a></li>
+        <li><a href="#在apache中启用cacti站点">在Apache中启用Cacti站点</a></li>
+      </ol>
+    </li>
+    <li><a href="#配置mysql">配置MySQL</a>
+      <ol>
+        <li><a href="#在配置文件底部添加以下行">在配置文件底部添加以下行：</a></li>
+      </ol>
+    </li>
+    <li><a href="#配置poller-crontab">配置Poller Crontab</a>
+      <ol>
+        <li><a href="#在底部添加行">在底部添加行</a></li>
+      </ol>
+    </li>
+    <li><a href="#重启服务">重启服务</a></li>
+    <li><a href="#启动web-gui安装">启动Web-GUI安装</a></li>
+    <li><a href="#完成登录">完成！登录！</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%9C%A8ubuntu-16.04%E4%B8%8A%E5%AE%89%E8%A3%85cacti-1.1.10%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">在Ubuntu 16.04上安装Cacti 1.1.10的完整指南</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了在Ubuntu 16.04系统上安装和配置Cacti 1.1.10网络监控工具的完整步骤，包括系统准备、软件依赖安装、数据库配置、Apache设置以及最终的系统部署和登录过程。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="在ubuntu-1604上安装cacti-1110">在Ubuntu 16.04上安装Cacti 1.1.10
+</h1><p><strong>作者：Kent Ickler</strong><br>
+<strong>注意：</strong> 本文中提到的技术和工具可能已过时，不适用于当前情况。但本文仍可作为学习资源，并可能被整合或更新到现代工具和技术中。</p>
+<h2 id="什么是cacti">什么是Cacti？
+</h2><p>Cacti是一个网络系统，用于输入系统生成的量化数据并以精美的图表呈现这些数据。</p>
+<h3 id="网络管理员视角">网络管理员视角
+</h3><p>在网络管理领域，Cacti提供时间关键和时间历史数据，帮助您做出重要决策。典型的数据输入包括：交换机端口利用率、环境信息（温度、湿度等）、系统关键指标（存储空间、CPU时间等）。</p>
+<h3 id="安全管理员视角">安全管理员视角
+</h3><p>结合SIEM和其他系统数据源，Cacti可用于生成安全基线和规范化模式。它也是快速检查网络健康状况的工具。</p>
+<h2 id="安装ubuntu-1604">安装Ubuntu 16.04
+</h2><p>我们从ISO <code>ubuntu-16.04.2-server-amd64.iso</code> 进行安装。完成典型设置，但在操作系统安装包选择时确保安装了LAMP包。</p>
+<p>您将被提示创建MySQL root账户密码。创建密码（不要留空），妥善保存（稍后在处理mysql和mysqladmin时会需要），然后继续。</p>
+<p>安装完成后登录。注意我们需要进行的所有更新！</p>
+<h3 id="更新基础系统">更新基础系统
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -s
+</span></span><span class="line"><span class="cl">apt-get update
+</span></span><span class="line"><span class="cl">apt-get upgrade
+</span></span><span class="line"><span class="cl">reboot -h now
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置网络">配置网络
+</h3><p>更新完成后，设置您的网络堆栈。然后重启：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -s
+</span></span><span class="line"><span class="cl">nano /etc/network/interfaces
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>关于nano的说明：</strong> CTRL+O保存更改，CTRL+X关闭<br>
+更新您的网络设置并再次重启。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">reboot -h now
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="关于sudo和root的说明">关于sudo和root的说明
+</h3><p>从现在开始的大部分工作都是在root下完成的，因为这些工作主要在/opt/目录下进行和安装组件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装预装依赖">安装预装依赖
+</h2><p>重启后再次登录。我们需要为Cacti安装一些预装依赖：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get install php-xml php-ldap php-mbstring php-gd php-snmp php-gmp rrdtool snmp librrds-perl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="下载cacti文件">下载Cacti文件
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://www.cacti.net/downloads/cacti-1.1.10.tar.gz
+</span></span><span class="line"><span class="cl">tar xvzf cacti-1.1.10.tar.gz
+</span></span><span class="line"><span class="cl">mv cacti-1.1.10 /opt/cacti
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="设置日志位置">设置日志位置
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /opt/logs
+</span></span><span class="line"><span class="cl">touch /opt/logs/cacti.log
+</span></span><span class="line"><span class="cl">touch /opt/logs/httpd_access.log
+</span></span><span class="line"><span class="cl">touch /opt/logs/httpd_error.log
+</span></span><span class="line"><span class="cl">chown -R www-data /opt/logs/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置sql数据库">配置SQL数据库
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建cacti数据库</span>
+</span></span><span class="line"><span class="cl">mysqladmin --user<span class="o">=</span>root --password create cacti
+</span></span><span class="line"><span class="cl"><span class="c1">### 输入您的mysql root密码</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 填充Cacti数据库</span>
+</span></span><span class="line"><span class="cl">mysql --user root -p cacti &lt; /opt/cacti/cacti.sql
+</span></span><span class="line"><span class="cl"><span class="c1">### 输入您的mysql root密码</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 这个过程需要几分钟，耐心等待提示符返回</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在SQL中创建时区表</span>
+</span></span><span class="line"><span class="cl">mysql_tzinfo_to_sql /usr/share/zoneinfo <span class="p">|</span> mysql -u root -p mysql
+</span></span><span class="line"><span class="cl"><span class="c1">### 输入您的mysql root密码</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 为cacti用户提供对cacti数据库和时区数据库的访问权限</span>
+</span></span><span class="line"><span class="cl">mysql --user<span class="o">=</span>root --password mysql
+</span></span><span class="line"><span class="cl"><span class="c1">### 输入您的mysql root密码。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 这将使您进入mysql数据库的控制台。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 注意：这里引用的&#39;somepassword&#39;是cacti用户的密码，必须与下一节中cacti配置中使用的密码相同</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mysql&gt; GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY <span class="s1">&#39;somepassword&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">mysql&gt; GRANT SELECT ON mysql.time_zone_name TO cacti@localhost IDENTIFIED BY <span class="s1">&#39;somepassword&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置cacti文件">配置Cacti文件
+</h2><p>注意：这里引用的&rsquo;somepassword&rsquo;是上面指定的cacti数据库用户密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /opt/cacti/include/config.php
+</span></span><span class="line"><span class="cl"><span class="c1">### 找到这些变量并进行以下更改</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$database_type</span> <span class="o">=</span> <span class="s1">&#39;mysql&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_default</span> <span class="o">=</span> <span class="s1">&#39;cacti&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_hostname</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_username</span> <span class="o">=</span> <span class="s1">&#39;cactiuser&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_password</span> <span class="o">=</span> somepassword<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_port</span> <span class="o">=</span> <span class="s1">&#39;3306&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$database_ssl</span> <span class="o">=</span> false<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url_path</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="设置文件权限">设置文件权限
+</h3><p>注意：设置完成后，出于安全原因，&ldquo;Needed for setup&quot;部分应恢复为您的Linux用户。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装所需</span>
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/resource/snmp_queries
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/resource/script_server
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/resource/script_queries
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/scripts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 始终需要</span>
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/rra/ /opt/cacti/log/
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/cache/mibcache
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/cache/realtime
+</span></span><span class="line"><span class="cl">chown -R www-data:www-data /opt/cacti/cache/spikekill
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置apache">配置Apache
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">touch /etc/apache2/sites-available/cacti.conf
+</span></span><span class="line"><span class="cl">nano /etc/apache2/sites-available/cacti.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="输入以下内容并保存cacticonf">输入以下内容并保存cacti.conf
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-apache" data-lang="apache"><span class="line"><span class="cl"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Location</span> <span class="s">/</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">require</span> <span class="k">all</span> granted
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/Location&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">ServerAdmin</span> webmaster@localhost
+</span></span><span class="line"><span class="cl">    <span class="nb">DocumentRoot</span> <span class="sx">/opt/cacti</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">ErrorLog</span> <span class="sx">/opt/logs/httpd_error.log</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">CustomLog</span> <span class="sx">/opt/logs/httpd_access.log</span> combined
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/VirtualHost&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="从apache中移除默认现有站点">从Apache中移除默认/现有站点
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm /etc/apache2/sites-enabled/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="在apache中启用cacti站点">在Apache中启用Cacti站点
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">a2ensite cacti.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置mysql">配置MySQL
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/mysql/mysql.conf.d/mysqld.cnf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="在配置文件底部添加以下行">在配置文件底部添加以下行：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">Max_heap_table_size</span> <span class="o">=</span> <span class="s">380M</span>
+</span></span><span class="line"><span class="cl"><span class="na">Tmp_table_size</span> <span class="o">=</span> <span class="s">64M</span>
+</span></span><span class="line"><span class="cl"><span class="na">Join_buffer_size</span> <span class="o">=</span> <span class="s">64M</span>
+</span></span><span class="line"><span class="cl"><span class="na">Innodb_doublewrite</span> <span class="o">=</span> <span class="s">OFF</span>
+</span></span><span class="line"><span class="cl"><span class="na">Innodb_buffer_pool_size</span> <span class="o">=</span> <span class="s">1899M</span>
+</span></span><span class="line"><span class="cl"><span class="na">Innodb_flush_log_at_timeout</span> <span class="o">=</span> <span class="s">3</span>
+</span></span><span class="line"><span class="cl"><span class="na">Innodb_read_io_threads</span> <span class="o">=</span> <span class="s">32</span>
+</span></span><span class="line"><span class="cl"><span class="na">Innodb_write_io_threads</span> <span class="o">=</span> <span class="s">16</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置poller-crontab">配置Poller Crontab
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/crontab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="在底部添加行">在底部添加行
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">*/5 * * * * www-data php /opt/cacti/poller.php &gt; /dev/null 2&gt;&amp;1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="重启服务">重启服务
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service apache2 restart
+</span></span><span class="line"><span class="cl">service mysql restart
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="启动web-gui安装">启动Web-GUI安装
+</h2><p>完成所有预装依赖后，Web-GUI安装应该会很简单。每页的左下角有NEXT按钮。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">http://<span class="o">[</span>your-cacti-ip<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：确保将cacti日志路径更新为/opt/logs/cacti.conf</p>
+<p>确保检查所有可用的安装模板。</p>
+<h2 id="完成登录">完成！登录！
+</h2><p>首次登录的默认凭据是：<br>
+<strong>用户：</strong> admin<br>
+<strong>密码：</strong> admin<br>
+首次登录时，系统会提示您更改密码。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cacti/">Cacti</a>
+        
+            <a href="/tags/ubuntu/">Ubuntu</a>
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7/">网络监控</a>
+        
+            <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">系统管理</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

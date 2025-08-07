@@ -7,7 +7,238 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 18:34:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 21:57:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何防御Vidar恶意广告攻击？剖析双阶段勒索软件入侵</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1vidar%E6%81%B6%E6%84%8F%E5%B9%BF%E5%91%8A%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E5%8F%8C%E9%98%B6%E6%AE%B5%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E5%85%A5%E4%BE%B5/</link>
+        <pubDate>Thu, 07 Aug 2025 21:57:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1vidar%E6%81%B6%E6%84%8F%E5%B9%BF%E5%91%8A%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E5%8F%8C%E9%98%B6%E6%AE%B5%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E5%85%A5%E4%BE%B5/</guid>
+        <description>&lt;h1 id=&#34;vidar恶意广告攻击运作机制&#34;&gt;Vidar恶意广告攻击运作机制
+&lt;/h1&gt;&lt;p&gt;研究人员近期发现名为Vidar的信息窃取程序，其作为多阶段恶意广告攻击的组成部分，与GandCrab勒索软件形成双重攻击载荷。该攻击通过以下流程实施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;恶意广告感染终端设备&lt;/li&gt;
+&lt;li&gt;下载Vidar窃取敏感信息&lt;/li&gt;
+&lt;li&gt;同步部署GandCrab实施文件加密&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;攻击特征与目标定位&#34;&gt;攻击特征与目标定位
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地理排除策略&lt;/strong&gt;：攻击代码主动避开俄罗斯、白俄罗斯等前苏联国家终端&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;传播渠道&lt;/strong&gt;：主要分布在Torrent种子站与流媒体平台广告位&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模块化架构&lt;/strong&gt;：恶意功能组件可独立更新，保持攻击灵活性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;企业防护方案&#34;&gt;企业防护方案
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;终端安全基线&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署行为检测型杀毒软件&lt;/li&gt;
+&lt;li&gt;强制应用白名单策略&lt;/li&gt;
+&lt;li&gt;定期验证安全控制措施有效性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;应急响应要点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;完整取证分析感染终端&lt;/li&gt;
+&lt;li&gt;检查是否存在后门漏洞&lt;/li&gt;
+&lt;li&gt;参照Malwarebytes发布的威胁指标(IoC)进行排查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;持续监控&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立恶意广告流量识别机制&lt;/li&gt;
+&lt;li&gt;监控异常进程创建行为&lt;/li&gt;
+&lt;li&gt;实施网络层载荷检测&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;专业建议：低风险容忍企业应彻底禁止非授权代码执行，并对所有异常活动启动三级调查流程。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>防御ToolShell攻击：SharePoint最新高危漏洞分析与防护</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E5%BE%A1toolshell%E6%94%BB%E5%87%BBsharepoint%E6%9C%80%E6%96%B0%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4/</link>
+        <pubDate>Thu, 07 Aug 2025 21:03:45 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E5%BE%A1toolshell%E6%94%BB%E5%87%BBsharepoint%E6%9C%80%E6%96%B0%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4/</guid>
+        <description>&lt;h1 id=&#34;防御toolshell攻击sharepoint最新高危漏洞&#34;&gt;防御ToolShell攻击：SharePoint最新高危漏洞
+&lt;/h1&gt;&lt;p&gt;2025年7月22日&lt;/p&gt;
+&lt;p&gt;一种名为&amp;quot;ToolShell&amp;quot;(CVE-2025-53770)的新型零日漏洞正对本地部署的SharePoint服务器构成重大威胁。该漏洞允许未经认证的远程代码执行(RCE)，给全球组织带来重大风险。SentinelOne已检测到野外攻击活动，凸显了这一新攻击的活跃威胁。&lt;/p&gt;
+&lt;h2 id=&#34;toolshell漏洞概述&#34;&gt;ToolShell漏洞概述
+&lt;/h2&gt;&lt;p&gt;ToolShell是影响本地SharePoint服务器的关键零日远程代码执行漏洞。其严重性体现在以下关键特征：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;零日状态&lt;/strong&gt;：此前未知且无补丁，使组织在官方修复前暴露&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高CVSS评分(9.8)&lt;/strong&gt;：表明近乎最高严重性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无需认证&lt;/strong&gt;：攻击者无需有效凭证即可利用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;远程代码执行(RCE)&lt;/strong&gt;：成功利用可使攻击者在受影响的SharePoint服务器上执行任意代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;野外攻击&lt;/strong&gt;：威胁分子已在积极利用此漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sentinelone的防御措施&#34;&gt;SentinelOne的防御措施
+&lt;/h2&gt;&lt;p&gt;SentinelOne的集成防护方法确保客户从一开始就受到保护：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;漏洞识别与分析&lt;/strong&gt;：SentinelLABS威胁研究团队和MDR团队快速识别并深入分析漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开箱即用的检测逻辑&lt;/strong&gt;：工程团队迅速开发并实施强健的检测逻辑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无缝IOC集成&lt;/strong&gt;：自动将发现的IOC集成到平台中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁狩猎查询&lt;/strong&gt;：为Singularity平台用户提供专用查询&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主动漏洞检测&lt;/strong&gt;：通过Singularity漏洞管理检测环境中的ToolShell实例&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h2&gt;&lt;p&gt;建议组织实施多层防御策略：&lt;/p&gt;
+&lt;h3 id=&#34;紧急缓解措施&#34;&gt;紧急缓解措施
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;隔离SharePoint实例：限制从公共互联网访问&lt;/li&gt;
+&lt;li&gt;启用AMSI完整模式&lt;/li&gt;
+&lt;li&gt;立即应用可用补丁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;增强检测与监控&#34;&gt;增强检测与监控
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;集成IOC指标&lt;/li&gt;
+&lt;li&gt;监控可疑SharePoint行为&lt;/li&gt;
+&lt;li&gt;进行回溯性威胁狩猎&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;ToolShell是一个重大漏洞，使许多运行本地SharePoint服务器的组织面临巨大风险。SentinelOne客户可确信已受到保护，我们的威胁研究和MDR团队不懈努力，确保平台提供即时有效的防御。&lt;/p&gt;
+&lt;h2 id=&#34;威胁指标ioc&#34;&gt;威胁指标(IOC)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;SHA-1哈希&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;f5b60a8ead96703080e73a1f79c3e70ff44df271 - spinstall0.aspx webshell&lt;/li&gt;
+&lt;li&gt;fe3a3042890c1f11361368aeb2cc12647a6fdae1 - xxx.aspx webshell&lt;/li&gt;
+&lt;li&gt;76746b48a78a3828b64924f4aedca2e4c49b6735 - App_Web_spinstall0.aspx.9c9699a8.avz5nq6f.dll&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;IP地址&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;96.9.125[.]147&lt;/li&gt;
+&lt;li&gt;107.191.58[.]76&lt;/li&gt;
+&lt;li&gt;104.238.159[.]149&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;平台检测规则&#34;&gt;平台检测规则
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LAYOUTS目录中的Web Shell创建&lt;/li&gt;
+&lt;li&gt;检测到LAYOUTS目录中的Web Shell文件&lt;/li&gt;
+&lt;li&gt;SharePoint IIS工作进程产生的可疑子进程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;威胁狩猎查询&#34;&gt;威胁狩猎查询
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;可疑&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SharePoint活动&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dataSource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;SentinelOne&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;event&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Process Creation&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;svchost.exe&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;w3wp.exe&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tgt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cmd.exe&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cmdline&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;SharePoint&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spinstall0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;aspx执行痕迹&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dataSource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;SentinelOne&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;event&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Process Creation&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;csc.exe&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tgt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;contains&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;App_Web_spinstall0.aspx&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>3CX供应链攻击内幕：国家级APT组织的复杂攻击链分析</title>
+        <link>http://localhost:1313/p/3cx%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB%E5%86%85%E5%B9%95%E5%9B%BD%E5%AE%B6%E7%BA%A7apt%E7%BB%84%E7%BB%87%E7%9A%84%E5%A4%8D%E6%9D%82%E6%94%BB%E5%87%BB%E9%93%BE%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 20:47:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/3cx%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB%E5%86%85%E5%B9%95%E5%9B%BD%E5%AE%B6%E7%BA%A7apt%E7%BB%84%E7%BB%87%E7%9A%84%E5%A4%8D%E6%9D%82%E6%94%BB%E5%87%BB%E9%93%BE%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;统一通信供应商3cx上周确认遭受供应链攻击但攻击源头仍不明确&#34;&gt;统一通信供应商3CX上周确认遭受供应链攻击，但攻击源头仍不明确。
+&lt;/h3&gt;&lt;p&gt;3CX首席信息安全官Pierre Jourdan在3月30日的博客中表示，其Electron Windows应用的多个版本因恶意代码受到影响，这些代码源自&amp;quot;某高级持续性威胁（APT）组织（可能受国家支持）发起的针对性供应链攻击&amp;quot;。Jourdan提到，攻击可能通过&amp;quot;通过GIT打包到Windows Electron应用中的某个库&amp;quot;实现。CEO Nick Galea在同日的论坛发文中称，此次攻击因&amp;quot;使用的上游库被感染&amp;quot;引发。&lt;/p&gt;
+&lt;p&gt;安全厂商SentinelOne和CrowdStrike的初期报告指出，感染核心文件为&amp;quot;ffmpeg.dll&amp;quot;（引用多媒体框架FFmpeg）。对此，FFmpeg通过推特回应称其开源项目仅处理源代码而非编译文件。3CX随后似乎撤回了&amp;quot;上游库&amp;quot;相关声明。&lt;/p&gt;
+&lt;p&gt;CrowdStrike 3月29日的研究博客显示，此次攻击部分特征与朝鲜Lazarus组织3月初的另一起网络攻击一致。卡巴斯基实验室的博客则将该活动与针对加密货币公司的攻击相关联。&lt;/p&gt;
+&lt;p&gt;TechTarget编辑Rob Wright和Alex Culafi在本期《Risk &amp;amp; Repeat》播客中探讨了3CX事件及供应链攻击的整体威胁态势。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>效率与影响：Synack集成如何提升安全成果</title>
+        <link>http://localhost:1313/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</link>
+        <pubDate>Thu, 07 Aug 2025 20:08:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</guid>
+        <description>&lt;p&gt;“效率”很可能是2025年的年度关键词。在资源有限的情况下，安全领导者们面临着既要加快速度又要更智能修复漏洞的压力。这正是集成技术的价值所在。&lt;/p&gt;
+&lt;p&gt;通过将Synack的渗透测试即服务(PTaaS)平台与现有安全生态系统（从攻击面管理工具到漏洞管理和工单平台）连接，组织可以将测试资源集中在风险最高的领域，同时最大化预算效益。Synack的集成可以自动化关键交接流程，加速修复并提高补丁效率，而无需增加人手。&lt;/p&gt;
+&lt;p&gt;使用Synack技术集成的客户在第一年就将平均修复时间缩短了63%以上，补丁有效率提高了近20%（补丁有效率衡量正确修复漏洞所需的次数）。数据不会说谎：孤立的测试模式无法扩展。&lt;/p&gt;
+&lt;p&gt;当Synack与Palo Alto Networks Cortex Xpanse攻击面管理工具和Tenable漏洞管理等上游工具连接时，组织能够发现更多真实世界的攻击面，并优先处理最关键的问题。当测试结果无缝流入Jira、Splunk和ServiceNow等平台时，漏洞能够更快、更精确地得到解决，且大大减少手动操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实际案例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;某金融行业客户通过集成Synack与Jira，将修复时间缩短了265%，并借助Synack Red Team（1500多名经过审查的全球安全研究人员）的深入指导首次正确修复漏洞。&lt;/li&gt;
+&lt;li&gt;某企业客户将Synack测试结果集成到Splunk环境中，使安全运营中心能立即发现并处理可利用漏洞，修复速度提升3倍以上。&lt;/li&gt;
+&lt;li&gt;使用Palo Alto Networks Cortex Xpanse的客户通过集成发现了1700个先前未测试的资产，实现了基于风险的智能优先级划分。&lt;/li&gt;
+&lt;li&gt;使用ServiceNow漏洞管理的团队通过集成将平均修复时间缩短62%，补丁有效率提高26%。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;集成不仅是便利，更是催化剂。将Synack PTaaS嵌入安全技术栈，能让团队更高效、更自信地工作。随着安全计划的成熟和左移，自动化和集成已不再是可选项，而是必需品。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SonicWall漏洞CVE-2024-53704技术分析：SSL VPN会话劫持漏洞详解</title>
+        <link>http://localhost:1313/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Thu, 07 Aug 2025 18:51:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;漏洞概要&#34;&gt;漏洞概要
+&lt;/h1&gt;&lt;p&gt;Bishop Fox研究人员成功利用SonicWall防火墙未修补的认证绕过漏洞CVE-2024-53704，该漏洞允许远程攻击者劫持活跃SSL VPN会话并获取未授权网络访问权限。虽然漏洞挖掘需要大量逆向工程，但实际利用过程极为简单，凸显了企业立即应用SonicWall 2025年1月安全补丁的紧迫性。&lt;/p&gt;
+&lt;h1 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞影响&#34;&gt;漏洞影响
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;影响组件：SonicWall防火墙的SSL VPN模块&lt;/li&gt;
+&lt;li&gt;攻击条件：至少存在一个已连接的VPN用户&lt;/li&gt;
+&lt;li&gt;攻击效果：
+&lt;ul&gt;
+&lt;li&gt;劫持任意活跃VPN会话&lt;/li&gt;
+&lt;li&gt;获取NetExtender配置文件&lt;/li&gt;
+&lt;li&gt;查看受害者可访问的私有路由&lt;/li&gt;
+&lt;li&gt;无需密码即可建立VPN隧道连接&lt;/li&gt;
+&lt;li&gt;可强制注销合法用户会话&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击特征&#34;&gt;攻击特征
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;机会型攻击：无需特定目标，可接管任意会话&lt;/li&gt;
+&lt;li&gt;当前仍有数千台未修补设备暴露在互联网上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2025年1月7日：厂商发布安全公告&lt;/li&gt;
+&lt;li&gt;漏洞披露遵循负责任原则：
+&lt;ul&gt;
+&lt;li&gt;90天漏洞披露期限&lt;/li&gt;
+&lt;li&gt;补丁发布后30天缓冲期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;立即应用SonicWall官方补丁&lt;/li&gt;
+&lt;li&gt;使用Bishop Fox Cosmos平台的客户已收到：
+&lt;ul&gt;
+&lt;li&gt;漏洞设备清单（公告发布数日内）&lt;/li&gt;
+&lt;li&gt;漏洞利用演示（用于推动修复工作）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;作者说明&#34;&gt;作者说明
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;将本漏洞描述为会话劫持比认证绕过更能准确反映其危害性。攻击者可获得与受害者相同的内网访问权限，并能即时断开合法用户连接。&amp;rdquo; —— Jon Williams，Bishop Fox高级安全工程师&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>FBI成功瓦解Hive勒索软件网络的行动与技术内幕</title>
         <link>http://localhost:1313/p/fbi%E6%88%90%E5%8A%9F%E7%93%A6%E8%A7%A3hive%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E7%BD%91%E7%BB%9C%E7%9A%84%E8%A1%8C%E5%8A%A8%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</link>
         <pubDate>Thu, 07 Aug 2025 18:34:57 +0800</pubDate>

