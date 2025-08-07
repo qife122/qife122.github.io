@@ -7,8 +7,43 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 18:34:57 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 21:57:33 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何防御Vidar恶意广告攻击？剖析双阶段勒索软件入侵</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1vidar%E6%81%B6%E6%84%8F%E5%B9%BF%E5%91%8A%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E5%8F%8C%E9%98%B6%E6%AE%B5%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E5%85%A5%E4%BE%B5/</link>
+      <pubDate>Thu, 07 Aug 2025 21:57:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1vidar%E6%81%B6%E6%84%8F%E5%B9%BF%E5%91%8A%E6%94%BB%E5%87%BB%E5%89%96%E6%9E%90%E5%8F%8C%E9%98%B6%E6%AE%B5%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E5%85%A5%E4%BE%B5/</guid>
+      <description>&lt;h1 id=&#34;vidar恶意广告攻击运作机制&#34;&gt;Vidar恶意广告攻击运作机制&lt;/h1&gt;&#xA;&lt;p&gt;研究人员近期发现名为Vidar的信息窃取程序，其作为多阶段恶意广告攻击的组成部分，与GandCrab勒索软件形成双重攻击载荷。该攻击通过以下流程实施：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>防御ToolShell攻击：SharePoint最新高危漏洞分析与防护</title>
+      <link>https://qife122.github.io/p/%E9%98%B2%E5%BE%A1toolshell%E6%94%BB%E5%87%BBsharepoint%E6%9C%80%E6%96%B0%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4/</link>
+      <pubDate>Thu, 07 Aug 2025 21:03:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%98%B2%E5%BE%A1toolshell%E6%94%BB%E5%87%BBsharepoint%E6%9C%80%E6%96%B0%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4/</guid>
+      <description>&lt;h1 id=&#34;防御toolshell攻击sharepoint最新高危漏洞&#34;&gt;防御ToolShell攻击：SharePoint最新高危漏洞&lt;/h1&gt;&#xA;&lt;p&gt;2025年7月22日&lt;/p&gt;&#xA;&lt;p&gt;一种名为&amp;quot;ToolShell&amp;quot;(CVE-2025-53770)的新型零日漏洞正对本地部署的SharePoint服务器构成重大威胁。该漏洞允许未经认证的远程代码执行(RCE)，给全球组织带来重大风险。SentinelOne已检测到野外攻击活动，凸显了这一新攻击的活跃威胁。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>3CX供应链攻击内幕：国家级APT组织的复杂攻击链分析</title>
+      <link>https://qife122.github.io/p/3cx%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB%E5%86%85%E5%B9%95%E5%9B%BD%E5%AE%B6%E7%BA%A7apt%E7%BB%84%E7%BB%87%E7%9A%84%E5%A4%8D%E6%9D%82%E6%94%BB%E5%87%BB%E9%93%BE%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 20:47:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/3cx%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB%E5%86%85%E5%B9%95%E5%9B%BD%E5%AE%B6%E7%BA%A7apt%E7%BB%84%E7%BB%87%E7%9A%84%E5%A4%8D%E6%9D%82%E6%94%BB%E5%87%BB%E9%93%BE%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;统一通信供应商3cx上周确认遭受供应链攻击但攻击源头仍不明确&#34;&gt;统一通信供应商3CX上周确认遭受供应链攻击，但攻击源头仍不明确。&lt;/h3&gt;&#xA;&lt;p&gt;3CX首席信息安全官Pierre Jourdan在3月30日的博客中表示，其Electron Windows应用的多个版本因恶意代码受到影响，这些代码源自&amp;quot;某高级持续性威胁（APT）组织（可能受国家支持）发起的针对性供应链攻击&amp;quot;。Jourdan提到，攻击可能通过&amp;quot;通过GIT打包到Windows Electron应用中的某个库&amp;quot;实现。CEO Nick Galea在同日的论坛发文中称，此次攻击因&amp;quot;使用的上游库被感染&amp;quot;引发。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>效率与影响：Synack集成如何提升安全成果</title>
+      <link>https://qife122.github.io/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</link>
+      <pubDate>Thu, 07 Aug 2025 20:08:56 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%95%88%E7%8E%87%E4%B8%8E%E5%BD%B1%E5%93%8Dsynack%E9%9B%86%E6%88%90%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%88%90%E6%9E%9C/</guid>
+      <description>&lt;p&gt;“效率”很可能是2025年的年度关键词。在资源有限的情况下，安全领导者们面临着既要加快速度又要更智能修复漏洞的压力。这正是集成技术的价值所在。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SonicWall漏洞CVE-2024-53704技术分析：SSL VPN会话劫持漏洞详解</title>
+      <link>https://qife122.github.io/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 07 Aug 2025 18:51:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h1&gt;&#xA;&lt;p&gt;Bishop Fox研究人员成功利用SonicWall防火墙未修补的认证绕过漏洞CVE-2024-53704，该漏洞允许远程攻击者劫持活跃SSL VPN会话并获取未授权网络访问权限。虽然漏洞挖掘需要大量逆向工程，但实际利用过程极为简单，凸显了企业立即应用SonicWall 2025年1月安全补丁的紧迫性。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>FBI成功瓦解Hive勒索软件网络的行动与技术内幕</title>
       <link>https://qife122.github.io/p/fbi%E6%88%90%E5%8A%9F%E7%93%A6%E8%A7%A3hive%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E7%BD%91%E7%BB%9C%E7%9A%84%E8%A1%8C%E5%8A%A8%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</link>

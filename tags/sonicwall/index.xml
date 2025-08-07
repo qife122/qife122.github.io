@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 02:08:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 18:51:25 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/sonicwall/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SonicWall漏洞CVE-2024-53704技术分析：SSL VPN会话劫持漏洞详解</title>
+      <link>https://qife122.github.io/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 07 Aug 2025 18:51:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h1&gt;&#xA;&lt;p&gt;Bishop Fox研究人员成功利用SonicWall防火墙未修补的认证绕过漏洞CVE-2024-53704，该漏洞允许远程攻击者劫持活跃SSL VPN会话并获取未授权网络访问权限。虽然漏洞挖掘需要大量逆向工程，但实际利用过程极为简单，凸显了企业立即应用SonicWall 2025年1月安全补丁的紧迫性。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>SonicWall SMA 100系列管理界面远程代码执行漏洞分析</title>
       <link>https://qife122.github.io/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>虚拟化 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/</link>
+    <description>Recent content in 虚拟化 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Thu, 07 Aug 2025 23:12:26 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intel EPT技术实现MMU虚拟化详解</title>
+      <link>https://qife122.github.io/p/intel-ept%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0mmu%E8%99%9A%E6%8B%9F%E5%8C%96%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 07 Aug 2025 23:12:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/intel-ept%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0mmu%E8%99%9A%E6%8B%9F%E5%8C%96%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;mmu-virtualization-via-intel-ept---index&#34;&gt;MMU Virtualization via Intel EPT - Index&lt;/h1&gt;&#xA;&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;在收到大量请求后，我决定完成这个关于使用Intel EPT实现MMU虚拟化的5部分系列文章。本系列既可用于自主hypervisor开发，也可与之前发布的CPU虚拟化系列配套使用。文章将频繁引用先前项目内容（因多数读者会同步跟进），但实现方案在所有Type-2型hypervisor项目中都较为相似。本系列仅适用于支持虚拟化技术特性的Intel处理器用户，目标是让读者掌握分页机制、扩展页表(EPT)、多种地址转换机制的技术细节，并学会在虚拟化项目中实际应用。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
