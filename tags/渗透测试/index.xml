@@ -7,8 +7,64 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Wed, 06 Aug 2025 15:37:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 17:03:18 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Skyhook实现隐蔽文件传输 - 规避检测的技术解析</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8skyhook%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93-%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 17:03:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8skyhook%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93-%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;引言&#34;&gt;引言&lt;/h1&gt;&#xA;&lt;p&gt;本文提出&amp;quot;混淆博弈&amp;quot;概念，描述渗透测试中为绕过企业签名检测机制而对文件进行反复混淆的繁琐过程。开源工具Skyhook通过自动化网络过滤混淆和文件托管步骤，显著提升操作效率，同时提供隐蔽化文件渗出功能。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>渗透测试报告的艺术：提升价值与效率的实战指南</title>
+      <link>https://qife122.github.io/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E7%9A%84%E8%89%BA%E6%9C%AF%E6%8F%90%E5%8D%87%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%95%88%E7%8E%87%E7%9A%84%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 07 Aug 2025 13:04:08 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E7%9A%84%E8%89%BA%E6%9C%AF%E6%8F%90%E5%8D%87%E4%BB%B7%E5%80%BC%E4%B8%8E%E6%95%88%E7%8E%87%E7%9A%84%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;h3 id=&#34;渗透测试的本质价值&#34;&gt;渗透测试的本质价值&lt;/h3&gt;&#xA;&lt;p&gt;在Black Hills信息安全公司(BHIS)，我们以渗透测试为生，但从未因&amp;quot;测试行为&amp;quot;本身获得报酬。渗透测试师的真正价值体现在：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践</title>
+      <link>https://qife122.github.io/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Thu, 07 Aug 2025 11:54:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+      <description>&lt;h1 id=&#34;核心技术解析&#34;&gt;核心技术解析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;项目背景&#34;&gt;项目背景&lt;/h2&gt;&#xA;&lt;p&gt;Wild West Hackin&amp;rsquo; Fest活动中，团队发现传统无线攻防训练存在三大痛点：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;硬件兼容性问题（特定无线网卡/驱动要求）&lt;/li&gt;&#xA;&lt;li&gt;虚拟机USB穿透技术限制（VMware被Broadcom收购后的支持问题）&lt;/li&gt;&#xA;&lt;li&gt;设备运输与现场配置的可靠性问题&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;技术架构&#34;&gt;技术架构&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;内核层虚拟化&lt;/strong&gt;&lt;br&gt;&#xA;基于mac80211_hwsim内核模块创建虚拟无线接口，该模块通常用于协议开发测试&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>通过密码分析识别新型攻击路径</title>
+      <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E8%AF%86%E5%88%AB%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Thu, 07 Aug 2025 11:00:19 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%9A%E8%BF%87%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E8%AF%86%E5%88%AB%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84/</guid>
+      <description>&lt;h1 id=&#34;通过密码分析识别新型攻击路径&#34;&gt;通过密码分析识别新型攻击路径&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;2025年4月21日&lt;/strong&gt;&lt;br&gt;&#xA;n00py&lt;br&gt;&#xA;&lt;strong&gt;渗透测试&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;查看我在Wild West Hacking Fest – Mile High 2025的演讲内容：&lt;br&gt;&#xA;[演讲幻灯片链接]&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;相关技术主题&#34;&gt;相关技术主题&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;针对RapidIdentity登录门户的密码喷洒技术&lt;/li&gt;&#xA;&lt;li&gt;不依赖Mimikatz的用户密码操纵方法&lt;/li&gt;&#xA;&lt;li&gt;通过Cisco统一通信管理器(CUCM)未授权导出用户名&lt;/li&gt;&#xA;&lt;li&gt;纯Metasploit框架下的基于资源的约束委派(RBCD)攻击&lt;/li&gt;&#xA;&lt;li&gt;NTLMv1协议的实际攻击案例&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：原文为技术博客框架性内容，实际技术细节需参考作者在安全会议的演讲资料。文中提及的攻防技术均属于渗透测试研究范畴。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>是否应将渗透测试报告提交给MSRC？微软安全响应中心技术解析</title>
+      <link>https://qife122.github.io/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 00:29:49 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;p&gt;每天，微软安全响应中心（MSRC）都会收到来自安全研究人员、技术/行业合作伙伴和客户的漏洞报告。我们重视这些报告，因为它们能帮助我们提升产品和服务的安防水平。包含概念验证、攻击细节或漏洞演示的高质量报告极具行动价值。如果您提交过这类报告，我们深表感谢！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Jenkins安全漏洞与攻击技术全解析</title>
+      <link>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 00:12:57 +0800</pubDate>
+      <guid>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;jenkins攻击技术合集&#34;&gt;Jenkins攻击技术合集&lt;/h3&gt;&#xA;&lt;h4 id=&#34;远程代码执行rce技术&#34;&gt;远程代码执行(RCE)技术&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;构建步骤操纵&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;http://www.labofapenetrationtester.com/2014/08/script-execution-and-privilege-esc-jenkins.html&#34;&gt;Lab of a Pentester&lt;/a&gt;&lt;br&gt;&#xA;通过修改构建步骤实现RCE&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;终端插件利用&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://medium.com/@uranium238/shodan-jenkins-to-get-rces-on-servers-6b6ec7c960e2&#34;&gt;Medium文章&lt;/a&gt;&lt;br&gt;&#xA;利用Terminal插件获取RCE权限&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h4 id=&#34;关键漏洞利用&#34;&gt;关键漏洞利用&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;CVE-2019-1003000&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;http://blog.orange.tw/2019/02/abusing-meta-programming-for-unauthenticated-rce.html&#34;&gt;Orange Tsai漏洞分析&lt;/a&gt;&lt;br&gt;&#xA;影响组件：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Pipeline: Declarative Plugin ≤1.3.4&lt;/li&gt;&#xA;&lt;li&gt;Pipeline: Groovy Plugin ≤2.61&lt;/li&gt;&#xA;&lt;li&gt;Script Security Plugin ≤1.49&lt;br&gt;&#xA;&lt;em&gt;修复版本：Jenkins 2.121.1 LTS/2.132+&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;反序列化漏洞&lt;/strong&gt;&lt;br&gt;&#xA;&lt;a href=&#34;https://github.com/Coalfire-Research/java-deserialization-exploits/tree/master/Jenkins&#34;&gt;GitHub PoC&lt;/a&gt;&lt;br&gt;&#xA;涉及CVE：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>应用渗透测试：一次性评估与持续测试方案解析</title>
+      <link>https://qife122.github.io/p/%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AF%84%E4%BC%B0%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 06 Aug 2025 22:41:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AF%84%E4%BC%B0%E4%B8%8E%E6%8C%81%E7%BB%AD%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;p&gt;在快节奏的数字化环境中，现代应用常存储传输敏感数据，成为网络犯罪的主要目标。过去五年中，56%的重大安全事件与Web应用安全问题相关，企业平均部署464个定制应用，应用安全测试的必要性不言而喻。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>测试手册新增Burp Suite专业版章节 - 提升Web应用安全测试效率</title>
+      <link>https://qife122.github.io/p/%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E6%96%B0%E5%A2%9Eburp-suite%E4%B8%93%E4%B8%9A%E7%89%88%E7%AB%A0%E8%8A%82-%E6%8F%90%E5%8D%87web%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87/</link>
+      <pubDate>Wed, 06 Aug 2025 20:51:52 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E6%96%B0%E5%A2%9Eburp-suite%E4%B8%93%E4%B8%9A%E7%89%88%E7%AB%A0%E8%8A%82-%E6%8F%90%E5%8D%87web%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87/</guid>
+      <description>&lt;h3 id=&#34;burp-suite专业版动态分析的价值&#34;&gt;Burp Suite专业版动态分析的价值&lt;/h3&gt;&#xA;&lt;p&gt;基于我们的安全审计经验，Burp Suite Professional的动态分析能够发现目标组件迷宫中隐藏的漏洞。仅通过源代码审查时，竞态条件等不可预测的安全问题往往难以捕捉。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Jenkins安全漏洞与攻击技术全解析</title>
       <link>https://qife122.github.io/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>

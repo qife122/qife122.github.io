@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Discourse on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/discourse/</link>
+    <description>Recent content in Discourse on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Wed, 06 Aug 2025 21:46:50 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/discourse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Discourse 3.1.1未授权访问漏洞分析：聊天消息泄露风险</title>
+      <link>https://qife122.github.io/p/discourse-3.1.1%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Wed, 06 Aug 2025 21:46:50 +0800</pubDate>
+      <guid>https://qife122.github.io/p/discourse-3.1.1%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9/</guid>
+      <description>&lt;h1 id=&#34;discourse-311---未授权访问聊天消息漏洞分析&#34;&gt;Discourse 3.1.1 - 未授权访问聊天消息漏洞分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;: CVE-2023-45131&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVSS评分&lt;/strong&gt;: 7.5 (高危)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;影响版本&lt;/strong&gt;: Discourse &amp;lt; 3.1.1稳定版, &amp;lt; 3.2.0.beta2&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;漏洞类型&lt;/strong&gt;: 未授权访问&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;技术细节&#34;&gt;技术细节&lt;/h2&gt;&#xA;&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理&lt;/h3&gt;&#xA;&lt;p&gt;该漏洞存在于Discourse的消息总线(MessageBus)实现中，允许未认证用户：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Wed, 06 Aug 2025 16:53:44 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 01:29:54 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/http/3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>curl中HTTP/3/QUIC支持的TLS密码套件配置问题分析</title>
+      <link>https://qife122.github.io/p/curl%E4%B8%ADhttp/3/quic%E6%94%AF%E6%8C%81%E7%9A%84tls%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 01:29:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E4%B8%ADhttp/3/quic%E6%94%AF%E6%8C%81%E7%9A%84tls%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;tls-cipher-misconfiguration-in-http3quic-support&#34;&gt;TLS Cipher Misconfiguration in HTTP/3/QUIC Support&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要&lt;/h2&gt;&#xA;&lt;p&gt;当使用curl命令的&lt;code&gt;--ciphers&lt;/code&gt;选项手动指定TLS密码套件时，HTTP/3或QUIC协议将无法正常工作。这是因为QUIC协议不依赖于为TLS 1.2或更早版本定义的传统TLS密码套件，导致在尝试访问仅支持HTTP/3或QUIC的端点时出现连接失败。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>curl HTTP/3/QUIC 中的 TLS 密码套件配置问题</title>
       <link>https://qife122.github.io/p/curl-http/3/quic-%E4%B8%AD%E7%9A%84-tls-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</link>

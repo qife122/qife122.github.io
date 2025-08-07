@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Wed, 06 Aug 2025 13:58:10 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 15:01:24 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/xss/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASP.NET请求验证绕过漏洞解析</title>
+      <link>https://qife122.github.io/p/asp.net%E8%AF%B7%E6%B1%82%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 15:01:24 +0800</pubDate>
+      <guid>https://qife122.github.io/p/asp.net%E8%AF%B7%E6%B1%82%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;aspnet请求验证绕过&#34;&gt;ASP.NET请求验证绕过&lt;/h1&gt;&#xA;&lt;p&gt;2017年10月14日&lt;/p&gt;&#xA;&lt;p&gt;&amp;hellip;以及为什么你应该报告这个漏洞（也许）。&lt;/p&gt;&#xA;&lt;p&gt;本文讨论的是.NET请求验证漏洞，如&lt;a href=&#34;https://docs.microsoft.com/en-us/previous-versions/dotnet/articles/ms972969%28v=msdn.10%29&#34;&gt;微软文档&lt;/a&gt;所述。虽然这不是新问题，但我在2017年仍发现许多.NET网站存在此问题。&lt;/p&gt;&#xA;&lt;h2 id=&#34;请求验证机制剖析&#34;&gt;请求验证机制剖析&lt;/h2&gt;&#xA;&lt;p&gt;请求验证是ASP.NET的输入过滤器，旨在防范XSS攻击。但微软官方声明该机制并不安全：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>HackMD上的可蠕虫化XSS漏洞分析与利用</title>
       <link>https://qife122.github.io/p/hackmd%E4%B8%8A%E7%9A%84%E5%8F%AF%E8%A0%95%E8%99%AB%E5%8C%96xss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 02:19:58 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 23:15:17 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/python%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python依赖项沙箱化实践：用secimport保护你的代码安全</title>
+      <link>https://qife122.github.io/p/python%E4%BE%9D%E8%B5%96%E9%A1%B9%E6%B2%99%E7%AE%B1%E5%8C%96%E5%AE%9E%E8%B7%B5%E7%94%A8secimport%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Wed, 06 Aug 2025 23:15:17 +0800</pubDate>
+      <guid>https://qife122.github.io/p/python%E4%BE%9D%E8%B5%96%E9%A1%B9%E6%B2%99%E7%AE%B1%E5%8C%96%E5%AE%9E%E8%B7%B5%E7%94%A8secimport%E4%BF%9D%E6%8A%A4%E4%BD%A0%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8/</guid>
+      <description>&lt;h1 id=&#34;python代码中的依赖项沙箱化实践&#34;&gt;Python代码中的依赖项沙箱化实践&lt;/h1&gt;&#xA;&lt;p&gt;运行来自不可信源的代码仍是未解决的安全难题，尤其在Python这类动态语言中。本文作者通过两个尖锐问题引出核心议题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;当导入requests进行HTTP请求时，为何它需要获得打开终端切换sudo的权限？&lt;/li&gt;&#xA;&lt;li&gt;当仅需将日志写入特定目录时，logging模块为何能进行网络通信（如Log4Shell漏洞中的LDAP调用）？&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;技术方案概览&#34;&gt;技术方案概览&lt;/h2&gt;&#xA;&lt;p&gt;通过&lt;code&gt;secimport&lt;/code&gt;工具实现Python模块级沙箱控制，核心能力包括：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>利用海象运算符简化Python反序列化漏洞利用</title>
       <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6%E7%AE%80%E5%8C%96python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>

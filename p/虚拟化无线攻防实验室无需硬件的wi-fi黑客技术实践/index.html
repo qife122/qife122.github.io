@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文介绍Black Hills信息安全团队开发的Wi-Fi Forge开源项目，该项目通过内核级虚拟化技术实现无需物理硬件的无线攻防训练环境，支持WPA2/WPA3等多种攻击场景，有效降低无线安全学习门槛。">
+<title>虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践">
+<meta property='og:description' content="本文介绍Black Hills信息安全团队开发的Wi-Fi Forge开源项目，该项目通过内核级虚拟化技术实现无需物理硬件的无线攻防训练环境，支持WPA2/WPA3等多种攻击场景，有效降低无线安全学习门槛。">
+<meta property='og:url' content='http://localhost:1313/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='无线攻防' /><meta property='article:tag' content='虚拟化技术' /><meta property='article:tag' content='渗透测试' /><meta property='article:published_time' content='2025-08-07T11:54:45&#43;08:00'/><meta property='article:modified_time' content='2025-08-07T11:54:45&#43;08:00'/>
+<meta name="twitter:title" content="虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践">
+<meta name="twitter:description" content="本文介绍Black Hills信息安全团队开发的Wi-Fi Forge开源项目，该项目通过内核级虚拟化技术实现无需物理硬件的无线攻防训练环境，支持WPA2/WPA3等多种攻击场景，有效降低无线安全学习门槛。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#项目背景">项目背景</a></li>
+    <li><a href="#技术架构">技术架构</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-wpa2四步握手攻击">1. WPA2四步握手攻击</a></li>
+    <li><a href="#2-wep加密破解">2. WEP加密破解</a></li>
+    <li><a href="#3-钓鱼热点攻击">3. 钓鱼热点攻击</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/">虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文介绍Black Hills信息安全团队开发的Wi-Fi Forge开源项目，该项目通过内核级虚拟化技术实现无需物理硬件的无线攻防训练环境，支持WPA2/WPA3等多种攻击场景，有效降低无线安全学习门槛。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="核心技术解析">核心技术解析
+</h1><h2 id="项目背景">项目背景
+</h2><p>Wild West Hackin&rsquo; Fest活动中，团队发现传统无线攻防训练存在三大痛点：</p>
+<ol>
+<li>硬件兼容性问题（特定无线网卡/驱动要求）</li>
+<li>虚拟机USB穿透技术限制（VMware被Broadcom收购后的支持问题）</li>
+<li>设备运输与现场配置的可靠性问题</li>
+</ol>
+<h2 id="技术架构">技术架构
+</h2><ol>
+<li>
+<p><strong>内核层虚拟化</strong><br>
+基于mac80211_hwsim内核模块创建虚拟无线接口，该模块通常用于协议开发测试</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">modprobe mac80211_hwsim
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>用户空间控制</strong></p>
+<ul>
+<li>Mininet-WiFi增强版作为底层框架</li>
+<li>TMUX多窗口管理替代传统xterm终端</li>
+<li>Python编写的统一控制界面（支持箭头导航）</li>
+</ul>
+</li>
+<li>
+<p><strong>攻击场景仿真</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>攻击类型</th>
+          <th>仿真技术</th>
+          <th>对应工具链</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>四步握手捕获</td>
+          <td>虚拟客户端重连行为模拟</td>
+          <td>BetterCap/Aircrack</td>
+      </tr>
+      <tr>
+          <td>WEP密钥破解</td>
+          <td>流量生成与IV采集</td>
+          <td>iPerf+Aircrack-ng</td>
+      </tr>
+      <tr>
+          <td>钓鱼AP</td>
+          <td>动态门户页面生成</td>
+          <td>WiFi-Pisher</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+</ol>
+<h1 id="核心功能演示">核心功能演示
+</h1><h2 id="1-wpa2四步握手攻击">1. WPA2四步握手攻击
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 监控模式激活</span>
+</span></span><span class="line"><span class="cl">airmon-ng start wlan0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用BetterCap进行嗅探</span>
+</span></span><span class="line"><span class="cl">bettercap -iface wlan0mon -eval <span class="s2">&#34;wifi.recon on; wifi.clear; wifi.recon 6&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-wep加密破解">2. WEP加密破解
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 虚拟流量生成</span>
+</span></span><span class="line"><span class="cl"><span class="n">h1</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="s1">&#39;iperf -s -u &amp;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">h2</span><span class="o">.</span><span class="n">cmd</span><span class="p">(</span><span class="s1">&#39;iperf -c 10.0.0.1 -u -t 60&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-钓鱼热点攻击">3. 钓鱼热点攻击
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建虚假企业网络</span>
+</span></span><span class="line"><span class="cl">python wifi_forge.py --essid CorpNet --template enterprise
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="未来路线图">未来路线图
+</h1><ol>
+<li>
+<p><strong>容器化部署</strong><br>
+当前Docker镜像约5GB，计划采用Miniconda优化依赖管理</p>
+</li>
+<li>
+<p><strong>WPA3支持</strong><br>
+集成Dragon Blood等新型攻击技术</p>
+</li>
+<li>
+<p><strong>环境快照工具</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 网络环境配置文件示例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">access_points</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">bssid</span><span class="p">:</span><span class="w"> </span><span class="m">00</span><span class="p">:</span><span class="m">11</span><span class="p">:</span><span class="m">22</span><span class="p">:</span><span class="m">33</span><span class="p">:</span><span class="m">44</span><span class="p">:</span><span class="m">55</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="m">6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">encryption</span><span class="p">:</span><span class="w"> </span><span class="l">WPA2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">signal</span><span class="p">:</span><span class="w"> </span>-<span class="l">65dBm</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="项目意义">项目意义
+</h1><ol>
+<li><strong>教育普惠</strong>：使无专业硬件的学习者能实践高级无线攻击技术</li>
+<li><strong>红队准备</strong>：支持客户网络环境预仿真测试</li>
+<li><strong>研究平台</strong>：安全工具开发测试的标准化环境</li>
+</ol>
+<blockquote>
+<p>项目GitHub仓库：blackhillsinfosec/WiFi-Forge<br>
+特别提示：建议在Ubuntu虚拟机运行，Kali Linux存在已知兼容性问题</p></blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2/">无线攻防</a>
+        
+            <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF/">虚拟化技术</a>
+        
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%88%A9%E7%94%A8skyhook%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93-%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">利用Skyhook实现隐蔽文件传输 - 规避检测的技术解析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E9%80%9A%E8%BF%87%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E8%AF%86%E5%88%AB%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">通过密码分析识别新型攻击路径</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">是否应将渗透测试报告提交给MSRC？微软安全响应中心技术解析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%88%91%E4%BB%AC%E6%9E%84%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E9%9D%B6%E5%9C%BA-%E5%85%8D%E8%B4%B9%E5%9F%B9%E8%AE%AD%E9%85%8D%E5%A5%97%E7%9A%84%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%E5%B9%B3%E5%8F%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">我们构建了一个网络靶场！ - 免费培训配套的实战演练平台</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E7%BA%A2%E9%98%9F%E6%B5%8B%E8%AF%95%E8%AF%A6%E8%A7%A3%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">红队测试详解：网络安全攻防演练的核心技术</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

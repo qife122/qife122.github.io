@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括模板源码分析、缓冲区大小调整以及实际测试效果验证。">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括缓冲区大小调整和汇编代码修改等技术细节。">
 <title>修改Metasploit x64模板实现反病毒规避技术</title>
 
 <link rel='canonical' href='http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/'>
 
 <link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="修改Metasploit x64模板实现反病毒规避技术">
-<meta property='og:description' content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括模板源码分析、缓冲区大小调整以及实际测试效果验证。">
+<meta property='og:description' content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括缓冲区大小调整和汇编代码修改等技术细节。">
 <meta property='og:url' content='http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/'>
 <meta property='og:site_name' content='办公AI智能小助手'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Metasploit' /><meta property='article:tag' content='反病毒规避' /><meta property='article:tag' content='shellcode' /><meta property='article:tag' content='红队技术' /><meta property='article:published_time' content='2025-08-05T23:18:51&#43;08:00'/><meta property='article:modified_time' content='2025-08-05T23:18:51&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Metasploit' /><meta property='article:tag' content='反病毒规避' /><meta property='article:tag' content='shellcode' /><meta property='article:tag' content='红队技术' /><meta property='article:published_time' content='2025-08-07T18:08:23&#43;08:00'/><meta property='article:modified_time' content='2025-08-07T18:08:23&#43;08:00'/>
 <meta name="twitter:title" content="修改Metasploit x64模板实现反病毒规避技术">
-<meta name="twitter:description" content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括模板源码分析、缓冲区大小调整以及实际测试效果验证。">
+<meta name="twitter:description" content="本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括缓冲区大小调整和汇编代码修改等技术细节。">
 
 
 <script
@@ -243,11 +243,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#现状分析">现状分析</a></li>
-    <li><a href="#技术原理">技术原理</a></li>
-    <li><a href="#实验过程">实验过程</a></li>
-    <li><a href="#技术验证">技术验证</a></li>
-    <li><a href="#结论">结论</a></li>
+    <li><a href="#反病毒软件的检测机制">反病毒软件的检测机制</a></li>
+    <li><a href="#metasploit模板分析">Metasploit模板分析</a></li>
+    <li><a href="#64位模板修改实验">64位模板修改实验</a></li>
+    <li><a href="#技术验证截图">技术验证截图</a></li>
+    <li><a href="#结论与启示">结论与启示</a></li>
   </ol>
 </nav>
         </div>
@@ -272,7 +272,7 @@
     
         
         <h3 class="article-subtitle">
-            本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括模板源码分析、缓冲区大小调整以及实际测试效果验证。
+            本文详细介绍了如何通过修改Metasploit框架中的64位可执行模板来绕过Avast等反病毒软件的检测，包括缓冲区大小调整和汇编代码修改等技术细节。
         </h3>
         
     </div>
@@ -293,7 +293,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 05, 2025</time>
+                <time class="article-time--published">Aug 07, 2025</time>
             </div>
         
 
@@ -325,63 +325,42 @@
     
     <h1 id="修改metasploit-x64模板实现反病毒规避">修改Metasploit x64模板实现反病毒规避
 </h1><p><strong>Joff Thyer</strong><br>
-<em>注意：本文所述技术可能已过时，但仍可作为学习现代工具技术演进的参考案例。</em></p>
-<p>在针对Windows桌面的渗透测试中，测试人员常使用Veil&rsquo;s Powershell Empire等工具将shellcode直接注入内存。这种技术能有效规避磁盘写入和端点防护软件的检测。但有时我们需要使用实际恶意软件可执行文件进行更全面的测试，以评估防御技术的检测阈值。</p>
-<h2 id="现状分析">现状分析
-</h2><p>反病毒引擎对Metasploit框架生成的32位恶意软件检测效果显著，但对64位变种检测能力较弱。研究发现，AV引擎不仅检测shellcode，还会匹配msfvenom生成的可执行文件中存根加载器的汇编代码特征。</p>
-<h2 id="技术原理">技术原理
-</h2><p>Metasploit生成payload时使用预编译的模板可执行文件：</p>
-<ul>
-<li>32位模板：C语言源码（位于<code>/usr/share/metasploit-framework/data/templates/src/pe/exe</code>）</li>
-<li>64位模板：汇编语言源码</li>
-</ul>
-<p>模板功能均为：</p>
+<em>免责声明：本文所述技术可能已过时，但仍可作为学习参考，并可能整合到现代工具中。</em></p>
+<p>在针对Windows桌面的渗透测试中，测试人员常使用Veil&rsquo;s Powershell Empire等工具将shellcode直接注入内存。这种方法虽能避免磁盘写入和端点防护的检测，但有时我们需要使用实际恶意软件可执行文件进行更全面的测试。</p>
+<h2 id="反病毒软件的检测机制">反病毒软件的检测机制
+</h2><p>反病毒引擎对Metasploit生成的32位恶意软件检测效果显著，但对64位payload的检测能力较弱。研究发现，AV引擎不仅检测shellcode，还会匹配msfvenom生成的可执行文件中存根加载器的汇编代码模式。</p>
+<h2 id="metasploit模板分析">Metasploit模板分析
+</h2><p>Metasploit的payload生成使用预编译的32位（C语言）和64位（汇编语言）模板，位于KALI系统的<code>/usr/share/metasploit-framework/data/templates/src/pe/exe</code>目录。模板功能包括：</p>
 <ol>
 <li>分配4096字节内存缓冲区</li>
 <li>写入&quot;PAYLOAD:&ldquo;标记字符串</li>
-<li>msfvenom将选定payload（经编码处理后）注入该缓冲区</li>
+<li>保留缓冲区空间供msfvenom插入shellcode</li>
 </ol>
-<h2 id="实验过程">实验过程
-</h2><ol>
-<li><strong>原始模板测试</strong>：Avast立即触发警报（基于汇编指令特征匹配）</li>
-<li><strong>缓冲区扩容测试</strong>：将缓冲区改为8192字节后，Avast完全漏报</li>
-<li><strong>完整修改测试</strong>：
+<h2 id="64位模板修改实验">64位模板修改实验
+</h2><p>通过修改64位汇编模板进行三项测试：</p>
+<ol>
+<li><strong>直接重编译原代码</strong>：Avast立即报警</li>
+<li><strong>仅将缓冲区扩大至8192字节</strong>：成功绕过检测</li>
+<li><strong>全面修改汇编值+生成payload</strong>：
 <ul>
-<li>修改全部汇编代码数值为8192</li>
-<li>生成两种payload（含XOR编码/无编码）</li>
-<li>成功绕过Avast的&quot;深度扫描&quot;并获取shell</li>
+<li>使用XOR编码和无编码两种shellcode</li>
+<li>均成功通过Avast的深度扫描</li>
+<li>最终获得shell访问权限</li>
 </ul>
 </li>
 </ol>
-<h2 id="技术验证">技术验证
-</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">;</span> <span class="err">修改后的</span><span class="n">x64汇编代码片段</span><span class="err">（</span><span class="mi">8192</span><span class="err">字节缓冲区）</span>
-</span></span><span class="line"><span class="cl"><span class="n">section</span> <span class="o">.</span><span class="n">text</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mov</span> <span class="n">rcx</span><span class="p">,</span> <span class="mi">8192</span>
-</span></span><span class="line"><span class="cl">    <span class="n">call</span> <span class="n">VirtualAlloc</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mov</span> <span class="n">rsi</span><span class="p">,</span> <span class="n">payload_start</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mov</span> <span class="n">rdi</span><span class="p">,</span> <span class="n">rax</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mov</span> <span class="n">rcx</span><span class="p">,</span> <span class="mi">8192</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rep</span> <span class="n">movsb</span>
-</span></span><span class="line"><span class="cl">    <span class="n">call</span> <span class="n">rax</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="结论">结论
-</h2><p>实验证实AV厂商主要检测模板特征而非shellcode本身。仅通过简单修改汇编代码（如调整缓冲区大小）即可有效绕过64位payload检测。该方法对其他AV引擎的适用性有待进一步验证。</p>
+<h2 id="技术验证截图">技术验证截图
+</h2><ul>
+<li>修改后的汇编源代码（8192字节缓冲区）</li>
+<li>使用新模板生成的64位payload文件</li>
+<li>Avast扫描结果显示&quot;安全&rdquo;</li>
+<li>成功获取shell的终端界面</li>
+</ul>
+<h2 id="结论与启示">结论与启示
+</h2><p>反病毒厂商主要检测模板特征而非shellcode本身。本实验证明，仅通过简单的汇编代码修改（如调整缓冲区大小）即可有效绕过AV检测。该方法对其他AV引擎的适用性有待进一步验证。</p>
 <blockquote>
-<p>提示：完整技术细节和编译说明请参考原文中的汇编源码注释。</p></blockquote>
+<p><em>延伸学习：</em><br>
+作者相关课程：《正则表达式实战》《企业攻击模拟与C2植入开发》《Python入门》等</p></blockquote>
 
 </section>
 
@@ -422,6 +401,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">修改Metasploit x64模板实现反病毒规避技术</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

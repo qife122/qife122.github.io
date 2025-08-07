@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 23:18:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 18:08:23 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/shellcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>修改Metasploit x64模板实现反病毒规避技术</title>
+      <link>https://qife122.github.io/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Thu, 07 Aug 2025 18:08:23 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h1 id=&#34;修改metasploit-x64模板实现反病毒规避&#34;&gt;修改Metasploit x64模板实现反病毒规避&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;Joff Thyer&lt;/strong&gt;&lt;br&gt;&#xA;&lt;em&gt;免责声明：本文所述技术可能已过时，但仍可作为学习参考，并可能整合到现代工具中。&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;在针对Windows桌面的渗透测试中，测试人员常使用Veil&amp;rsquo;s Powershell Empire等工具将shellcode直接注入内存。这种方法虽能避免磁盘写入和端点防护的检测，但有时我们需要使用实际恶意软件可执行文件进行更全面的测试。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>修改Metasploit x64模板实现反病毒规避技术</title>
       <link>https://qife122.github.io/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>

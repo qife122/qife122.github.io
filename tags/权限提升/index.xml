@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Wed, 06 Aug 2025 12:52:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Aug 2025 15:56:31 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Avira VPN 2.15.2.28160本地权限提升漏洞分析</title>
+      <link>https://qife122.github.io/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 15:56:31 +0800</pubDate>
+      <guid>https://qife122.github.io/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;产品信息&#34;&gt;产品信息&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;: Avira Phantom VPN 2.15.2.28160&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;下载源&lt;/strong&gt;: &lt;a href=&#34;https://package.avira.com/package/oeavira/win/int/avira_en_vpn__ws.exe&#34;&gt;官方安装包链接&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;测试系统&lt;/strong&gt;: Windows 10 1803 (x64)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h3&gt;&#xA;&lt;p&gt;Avira VPN服务在修改VPN配置时，会调整&lt;code&gt;C:\ProgramData\Avira\VPN\&lt;/code&gt;目录下&lt;code&gt;VpnSharedSettings.backup&lt;/code&gt;和&lt;code&gt;VpnSharedSettings.config&lt;/code&gt;文件的DACL（自主访问控制列表）。通过创建硬链接指向目标文件（如&lt;code&gt;phantomvpn.exe&lt;/code&gt;），攻击者可利用此漏洞覆盖目标文件的DACL，最终实现从低权限用户到SYSTEM的权限提升。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>服务隔离技术解析：Windows服务安全与权限提升漏洞分析</title>
+      <link>https://qife122.github.io/p/%E6%9C%8D%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90windows%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E4%B8%8E%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 07 Aug 2025 04:30:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%9C%8D%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90windows%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E4%B8%8E%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h2 id=&#34;服务隔离技术说明&#34;&gt;服务隔离技术说明&lt;/h2&gt;&#xA;&lt;p&gt;过去几天，在Cesar Cerrudo发布概念验证代码后，服务隔离问题成为我们关注的重点。IIS团队的Nazim Lala已发布详细博客说明修复方案及耗时原因。该补丁的代码修改量预计接近XP SP2级别，我们需要将Vista服务加固的大量基础设施工作回溯移植到旧版本系统，这对安全更新而言是项浩大工程。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>深入探讨任务计划程序的服务账户使用技巧</title>
       <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
