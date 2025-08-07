@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>代码审查 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</link>
+        <description>Recent content in 代码审查 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 10:10:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查</title>
+        <link>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</link>
+        <pubDate>Thu, 07 Aug 2025 10:10:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</guid>
+        <description>&lt;h1 id=&#34;down-the-rabbit-hole-unusual-applications-of-openai-in-cybersecurity-tooling&#34;&gt;Down the Rabbit Hole: Unusual Applications of OpenAI in Cybersecurity Tooling
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;随着AI技术进入成熟应用期，网络安全领域的低垂果实已被采摘——杀毒引擎集成机器学习模型，攻击者滥用合成媒体实施诈骗。尽管存在炒作和恐吓，OpenAI的GPT-3语言模型仍因其在Black Hat和DEF CON大会上展示的钓鱼工具/反钓鱼工具引发广泛关注。&lt;/p&gt;
+&lt;h2 id=&#34;gpt-3的技术跨越&#34;&gt;GPT-3的技术跨越
+&lt;/h2&gt;&lt;p&gt;Lambda Labs数据显示，GPT-3 API相较前代实现百倍级参数增长：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+          &lt;th&gt;GPT-2&lt;/th&gt;
+          &lt;th&gt;GPT-3&lt;/th&gt;
+          &lt;th&gt;GPT-3 API&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;训练时间&lt;/td&gt;
+          &lt;td&gt;1+周&lt;/td&gt;
+          &lt;td&gt;355年&lt;/td&gt;
+          &lt;td&gt;&amp;lt;1分钟&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;成本&lt;/td&gt;
+          &lt;td&gt;$43k&lt;/td&gt;
+          &lt;td&gt;$4.6m&lt;/td&gt;
+          &lt;td&gt;$0.06/千token&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据量&lt;/td&gt;
+          &lt;td&gt;40GB&lt;/td&gt;
+          &lt;td&gt;45TB&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;算力需求&lt;/td&gt;
+          &lt;td&gt;32个TPUv3&lt;/td&gt;
+          &lt;td&gt;1个Tesla V100&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;代码解析新纪元&#34;&gt;代码解析新纪元
+&lt;/h2&gt;&lt;p&gt;OpenAI推出两大代码相关产品：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GitHub Copilot：基于GPT-3的代码自动补全工具&lt;/li&gt;
+&lt;li&gt;Codex：通过自然语言指令生成代码的进阶工具&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;早期测试显示GPT-3具备出色的代码解析能力。例如输入JavaScript代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bob&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Kevin&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Stuart&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型能准确解释为：&amp;ldquo;该代码初始化包含三个名字的数组，然后将数组打印到控制台&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id=&#34;逆向工程实验&#34;&gt;逆向工程实验
+&lt;/h2&gt;&lt;p&gt;作者尝试将GPT-3应用于汇编代码逆向工程。以Metasploit的RC4加密payload为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;原始模型表现&lt;/strong&gt;：将RC4密钥调度算法误判为&amp;quot;打印HELLO WORLD&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改进方法&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用fine-tuning功能在Curie模型上训练&lt;/li&gt;
+&lt;li&gt;构建包含100个Metasploit payload的训练集（50个RC4/50个未加密）&lt;/li&gt;
+&lt;li&gt;训练耗时仅5分钟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;测试结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RC4识别准确率：80%（4/5）&lt;/li&gt;
+&lt;li&gt;未加密代码识别准确率：60%（3/5）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;代码审查实践&#34;&gt;代码审查实践
+&lt;/h2&gt;&lt;p&gt;使用davinci-instruct模型进行漏洞检测：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/search&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;search&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;results.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型成功识别出XSS漏洞，并准确定位到危险参数&lt;code&gt;q&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;技术局限&#34;&gt;技术局限
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;语言模型本质限制：不适合密码分析或模糊测试&lt;/li&gt;
+&lt;li&gt;供应链攻击风险：训练数据可能被投毒&lt;/li&gt;
+&lt;li&gt;许可争议：使用GitHub代码作为训练数据的法律问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;随着GPT-3访问权限放宽，预计将涌现更多AI驱动的安全工具，如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集成机器学习的云端反编译器&lt;/li&gt;
+&lt;li&gt;自动化漏洞检测系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（全文完）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

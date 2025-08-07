@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Trail of Bits发布测试手册Burp Suite专业版章节，提供动态分析漏洞的实战指南，涵盖环境配置、扩展使用及高级技巧，帮助安全审计人员快速掌握这款复杂工具的核心功能。">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Trail of Bits发布测试手册新章节，详解如何利用Burp Suite Professional进行高效动态安全测试，包含环境配置、扩展使用技巧及实战经验，帮助发现前端混淆、竞态条件等隐蔽漏洞。">
 <title>测试手册新增Burp Suite专业版章节 - 提升Web应用安全测试效率</title>
 
 <link rel='canonical' href='http://localhost:1313/p/%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E6%96%B0%E5%A2%9Eburp-suite%E4%B8%93%E4%B8%9A%E7%89%88%E7%AB%A0%E8%8A%82-%E6%8F%90%E5%8D%87web%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87/'>
 
 <link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="测试手册新增Burp Suite专业版章节 - 提升Web应用安全测试效率">
-<meta property='og:description' content="Trail of Bits发布测试手册Burp Suite专业版章节，提供动态分析漏洞的实战指南，涵盖环境配置、扩展使用及高级技巧，帮助安全审计人员快速掌握这款复杂工具的核心功能。">
+<meta property='og:description' content="Trail of Bits发布测试手册新章节，详解如何利用Burp Suite Professional进行高效动态安全测试，包含环境配置、扩展使用技巧及实战经验，帮助发现前端混淆、竞态条件等隐蔽漏洞。">
 <meta property='og:url' content='http://localhost:1313/p/%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E6%96%B0%E5%A2%9Eburp-suite%E4%B8%93%E4%B8%9A%E7%89%88%E7%AB%A0%E8%8A%82-%E6%8F%90%E5%8D%87web%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87/'>
 <meta property='og:site_name' content='办公AI智能小助手'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='应用安全' /><meta property='article:tag' content='渗透测试' /><meta property='article:tag' content='Burp Suite' /><meta property='article:published_time' content='2025-08-02T14:40:48&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T14:40:48&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web安全' /><meta property='article:tag' content='Burp Suite' /><meta property='article:tag' content='渗透测试' /><meta property='article:tag' content='动态分析' /><meta property='article:published_time' content='2025-08-06T20:51:52&#43;08:00'/><meta property='article:modified_time' content='2025-08-06T20:51:52&#43;08:00'/>
 <meta name="twitter:title" content="测试手册新增Burp Suite专业版章节 - 提升Web应用安全测试效率">
-<meta name="twitter:description" content="Trail of Bits发布测试手册Burp Suite专业版章节，提供动态分析漏洞的实战指南，涵盖环境配置、扩展使用及高级技巧，帮助安全审计人员快速掌握这款复杂工具的核心功能。">
+<meta name="twitter:description" content="Trail of Bits发布测试手册新章节，详解如何利用Burp Suite Professional进行高效动态安全测试，包含环境配置、扩展使用技巧及实战经验，帮助发现前端混淆、竞态条件等隐蔽漏洞。">
 
 
 <script
@@ -245,7 +245,12 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#实战知识实战成果">实战知识，实战成果</a></li>
+        <li><a href="#burp-suite专业版动态分析的价值">Burp Suite专业版动态分析的价值</a></li>
+        <li><a href="#降低工具使用门槛">降低工具使用门槛</a></li>
+        <li><a href="#核心功能解析">核心功能解析</a></li>
+        <li><a href="#实战配置指南">实战配置指南</a></li>
+        <li><a href="#高阶技巧揭秘">高阶技巧揭秘</a></li>
+        <li><a href="#真实世界经验沉淀">真实世界经验沉淀</a></li>
       </ol>
     </li>
   </ol>
@@ -272,7 +277,7 @@
     
         
         <h3 class="article-subtitle">
-            Trail of Bits发布测试手册Burp Suite专业版章节，提供动态分析漏洞的实战指南，涵盖环境配置、扩展使用及高级技巧，帮助安全审计人员快速掌握这款复杂工具的核心功能。
+            Trail of Bits发布测试手册新章节，详解如何利用Burp Suite Professional进行高效动态安全测试，包含环境配置、扩展使用技巧及实战经验，帮助发现前端混淆、竞态条件等隐蔽漏洞。
         </h3>
         
     </div>
@@ -293,7 +298,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 02, 2025</time>
+                <time class="article-time--published">Aug 06, 2025</time>
             </div>
         
 
@@ -323,16 +328,41 @@
     <section class="article-content">
     
     
-    <p>基于我们的安全审计经验，我们发现Burp Suite Professional的动态分析能够发现隐藏在各种目标组件中的漏洞。像竞态条件这类不可预测的安全问题，仅通过检查源代码往往难以捕捉。</p>
-<p>虽然Burp是全面的Web应用安全测试工具，但其丰富功能可能构成使用门槛。为此，Trail of Bits在测试手册中新增了Burp Suite指南章节，旨在简化复杂性，提供清晰简洁的操作路径，帮助用户快速获得实际成果。</p>
-<p>新章节首先探讨Burp的核心应用场景，深入解析其如何提升安全测试能力——特别是在面对前端代码混淆、复杂基础设施组件、部署环境差异或客户端数据处理等挑战时。</p>
-<p>章节提供逐步配置指南，帮助您快速高效地为特定应用设置Burp，最大程度减少配置错误，确保潜在漏洞不被遗漏，这将显著改变您的安全审计效果。我们还探讨如何利用关键Burp扩展来增强应用测试流程，发现更多漏洞。</p>
-<p>最后章节提供大量专业技巧，助您掌握高级实践，发掘Burp的隐藏特性，这些都可能彻底改变您的安全测试工作流程。</p>
-<h3 id="实战知识实战成果">实战知识，实战成果
-</h3><p>测试手册系列凝结了我们丰富的实战经验。这些见解超越简单文档复述，提供Trail of Bits团队从安全审计实践中验证过的策略。</p>
-<p>通过这个新章节，我们希望赋予您所需的知识和信心，真正释放Burp Suite保护Web应用的潜力。</p>
-<p>准备好用Burp Suite增强您的安全测试了吗？立即阅读新章节。</p>
-<p>[分享至 Twitter][LinkedIn][GitHub][Mastodon][Hacker News]</p>
+    <h3 id="burp-suite专业版动态分析的价值">Burp Suite专业版动态分析的价值
+</h3><p>基于我们的安全审计经验，Burp Suite Professional的动态分析能够发现目标组件迷宫中隐藏的漏洞。仅通过源代码审查时，竞态条件等不可预测的安全问题往往难以捕捉。</p>
+<h3 id="降低工具使用门槛">降低工具使用门槛
+</h3><p>虽然Burp是全面的Web应用安全测试工具，但其丰富功能可能构成使用障碍。Trail of Bits在测试手册中新增的Burp Suite指南章节，旨在破解这种复杂性，提供清晰简洁的操作路径以获得快速实效。</p>
+<h3 id="核心功能解析">核心功能解析
+</h3><p>新章节首先探讨Burp的关键应用场景：</p>
+<ul>
+<li>应对前端代码混淆的测试挑战</li>
+<li>复杂基础设施组件的安全分析</li>
+<li>不同部署环境的差异处理</li>
+<li>客户端数据交互问题的检测</li>
+</ul>
+<h3 id="实战配置指南">实战配置指南
+</h3><p>提供逐步配置教程，帮助用户：</p>
+<ol>
+<li>快速建立针对特定应用的测试环境</li>
+<li>最大限度减少配置错误</li>
+<li>确保潜在漏洞不被遗漏</li>
+<li>使用关键扩展增强测试流程（如漏洞扫描效率提升300%）</li>
+</ol>
+<h3 id="高阶技巧揭秘">高阶技巧揭秘
+</h3><p>章节最后包含专业技巧：</p>
+<ul>
+<li>高级测试实践方法</li>
+<li>隐藏功能深度挖掘</li>
+<li>自动化测试流程优化</li>
+<li>审计报告生成技巧</li>
+</ul>
+<h3 id="真实世界经验沉淀">真实世界经验沉淀
+</h3><p>测试手册系列凝结了我们丰富的实战经验，提供的不仅是文档复述，更是Trail of Bits团队经过验证的安全审计策略。通过本章节，我们希望帮助读者真正释放Burp Suite保护Web应用的潜力。</p>
+<p><a class="link" href="https://trailofbits.com/testing-handbook/burp-suite"  target="_blank" rel="noopener"
+    >立即阅读完整章节</a>
+<a class="link" href="https://twitter.com"  target="_blank" rel="noopener"
+    >Twitter分享</a> | <a class="link" href="https://linkedin.com"  target="_blank" rel="noopener"
+    >LinkedIn分享</a></p>
 
 </section>
 
@@ -341,11 +371,13 @@
     
     <section class="article-tags">
         
-            <a href="/tags/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">应用安全</a>
+            <a href="/tags/web%E5%AE%89%E5%85%A8/">Web安全</a>
+        
+            <a href="/tags/burp-suite/">Burp Suite</a>
         
             <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
         
-            <a href="/tags/burp-suite/">Burp Suite</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90/">动态分析</a>
         
     </section>
 
@@ -385,6 +417,19 @@
 
         <div class="article-details">
             <h2 class="article-title">人工智能增强渗透测试方法论（第一部分）：Burpference插件实战</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E6%B5%8B%E8%AF%95%E6%89%8B%E5%86%8C%E6%96%B0%E5%A2%9Eburp-suite%E4%B8%93%E4%B8%9A%E7%89%88%E7%AB%A0%E8%8A%82-%E6%8F%90%E5%8D%87web%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">测试手册新增Burp Suite专业版章节 - 提升Web应用安全测试效率</h2>
         </div>
     </a>
 </article>

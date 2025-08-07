@@ -7,7 +7,82 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 15:04:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/active-directory/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 00:29:49 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/active-directory/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>是否应将渗透测试报告提交给MSRC？微软安全响应中心技术解析</title>
+        <link>http://localhost:1313/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 00:29:49 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;每天，微软安全响应中心（MSRC）都会收到来自安全研究人员、技术/行业合作伙伴和客户的漏洞报告。我们重视这些报告，因为它们能帮助我们提升产品和服务的安防水平。包含概念验证、攻击细节或漏洞演示的高质量报告极具行动价值。如果您提交过这类报告，我们深表感谢！&lt;/p&gt;
+&lt;p&gt;客户常委托渗透测试人员评估其部署环境并生成报告。这些报告能帮助客户发现并修正部署中的安全风险。但需要注意的是，渗透测试结果必须结合客户的组策略对象、现有缓解措施及检测工具来综合评估。我们收到的渗透测试报告通常仅声明产品存在漏洞，却未提供具体的攻击向量或漏洞利用演示。实际上，许多安全风险可通过现有缓解措施解决，无需修改产品代码。&lt;/p&gt;
+&lt;p&gt;以Lync Server 2013的渗透测试报告为例，该报告未提及现有缓解措施：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;案例：部署环境存在暴力破解风险？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;某客户部署了支持拨入功能的Lync Server 2013，包含多个允许用户加入/安排会议的Web端点。渗透测试报告指出&amp;quot;可通过Lync实例进行密码暴力破解&amp;quot;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;技术细节分析：&lt;/strong&gt;
+Lync Server 2013使用特定Web端点进行表单认证。若这些端点配置不当，攻击者可能通过以下SOAP服务与Active Directory交互：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/WebTicket/WebTicketService.svc/Auth
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该服务调用LogonUserW API进行AD认证。当认证端点暴露时，确实存在暴力破解风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;现有缓解方案：&lt;/strong&gt;
+在启用账户锁定策略的环境中，此类攻击仅会导致目标用户遭遇临时拒绝服务（DoS），而非账户沦陷。虽然影响用户体验，但相比账户失窃危害更小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;深度防御方案：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;强化密码策略&lt;/strong&gt;
+采用强密码策略可有效防御常见密码字典攻击。微软密码指南提供基于Azure云防护经验的研究成果：https://www.microsoft.com/en-us/research/publication/password-guidance/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实施账户锁定策略&lt;/strong&gt;
+账户锁定机制可增加攻击时间成本，同时提升异常登录的可观测性。技术细节参见：https://blogs.technet.microsoft.com/secguide/2014/08/13/configuring-account-lockout/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;记录访问尝试&lt;/strong&gt;
+通过防火墙层的Web应用过滤或速率限制，可降低单IP暴力破解成功率。丢弃异常登录数据包能有效阻断特定IP范围的攻击。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;审计账户登录事件&lt;/strong&gt;
+在认证服务器上启用组策略审计功能，可监控密码猜测行为。AD环境安全最佳实践指南：https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/monitoring-active-directory-for-signs-of-compromise&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web应用过滤规则&lt;/strong&gt;
+当上述方案不可行时，可通过IIS ARR反向代理实施缓解。测试环境中，我们使用IIS重写规则阻止了以下外部访问请求（返回403错误）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;rule&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;BlockDialin&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;patternSyntax=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Wildcard&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;stopProcessing=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;match&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;url=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;conditions&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;logicalGrouping=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;MatchAny&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;trackAllCaptures=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;input=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{HTTP_HOST}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;pattern=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;dialin.foo.bar.com&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;input=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{REQUEST_URI}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;pattern=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/dialin/*&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/conditions&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;CustomResponse&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusCode=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;403&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusReason=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Access denied.&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusDescription=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Access denied.&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/rule&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Lync Server的ARR配置参考：https://blogs.technet.microsoft.com/nexthop/2013/02/19/using-iis-arr-as-a-reverse-proxy-for-lync-server-2013/&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试报告的最佳使用方式：&lt;/strong&gt;
+建议先评估报告中的缓解措施再决定是否外传。若发现无补丁的零日漏洞，请将报告及POC提交至MSRC。更多信息请访问：www.microsoft.com/msrc&lt;/p&gt;
+&lt;p&gt;（本文由微软安全中心团队与IDC Skype Exchange研发部门共同撰写）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>网络安全实战：持续探索阻断攻击链的最佳实践</title>
         <link>http://localhost:1313/p/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%81%E7%BB%AD%E6%8E%A2%E7%B4%A2%E9%98%BB%E6%96%AD%E6%94%BB%E5%87%BB%E9%93%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</link>
         <pubDate>Wed, 06 Aug 2025 15:04:29 +0800</pubDate>

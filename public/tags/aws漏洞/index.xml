@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>AWS漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/aws%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in AWS漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 11:21:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/aws%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>亚马逊再次遭遇BGP劫持攻击，三小时失控IP池导致23.5万美元损失</title>
+        <link>http://localhost:1313/p/%E4%BA%9A%E9%A9%AC%E9%80%8A%E5%86%8D%E6%AC%A1%E9%81%AD%E9%81%87bgp%E5%8A%AB%E6%8C%81%E6%94%BB%E5%87%BB%E4%B8%89%E5%B0%8F%E6%97%B6%E5%A4%B1%E6%8E%A7ip%E6%B1%A0%E5%AF%BC%E8%87%B423.5%E4%B8%87%E7%BE%8E%E5%85%83%E6%8D%9F%E5%A4%B1/</link>
+        <pubDate>Thu, 07 Aug 2025 11:21:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BA%9A%E9%A9%AC%E9%80%8A%E5%86%8D%E6%AC%A1%E9%81%AD%E9%81%87bgp%E5%8A%AB%E6%8C%81%E6%94%BB%E5%87%BB%E4%B8%89%E5%B0%8F%E6%97%B6%E5%A4%B1%E6%8E%A7ip%E6%B1%A0%E5%AF%BC%E8%87%B423.5%E4%B8%87%E7%BE%8E%E5%85%83%E6%8D%9F%E5%A4%B1/</guid>
+        <description>&lt;h3 id=&#34;bgp协议与攻击背景&#34;&gt;BGP协议与攻击背景
+&lt;/h3&gt;&lt;p&gt;BGP（边界网关协议）是互联网自治系统（AS）间路由的核心协议。2022年8月，黑客通过操纵AS209243（英国运营商quickhost.uk）广播虚假路由，劫持了亚马逊AS16509管理的256个IP地址（44.235.216.0/24段），持续时间达3小时。&lt;/p&gt;
+&lt;h3 id=&#34;技术攻击链分析&#34;&gt;技术攻击链分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路由劫持阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击者伪造AS路径，使流量经恶意AS14618路由&lt;/li&gt;
+&lt;li&gt;通过BGP Updates撤回亚马逊合法路由（图10）&lt;/li&gt;
+&lt;li&gt;Hurricane Electric监控显示异常bogon路由广播（图6）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;证书窃取&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用劫持的44.235.216.69 IP（原属celer.network）&lt;/li&gt;
+&lt;li&gt;向拉脱维亚CA机构GoGetSSL成功申请TLS证书（图2）&lt;/li&gt;
+&lt;li&gt;推测通过DNS TXT记录验证或服务器漏洞实现域名控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;智能合约攻击&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署恶意合约替换cBridge跨链桥接口（图1）&lt;/li&gt;
+&lt;li&gt;3小时内窃取32笔交易共计234,866美元&lt;/li&gt;
+&lt;li&gt;最大单笔损失达156,000美元（图11）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;取证与溯源&#34;&gt;取证与溯源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;SlowMist团队通过日志定位攻击IP：54.84.236.100&lt;/li&gt;
+&lt;li&gt;Censys平台显示证书与IP关联异常（图3/4）&lt;/li&gt;
+&lt;li&gt;BGP Play记录确认AS16509路由被恶意撤回（图9）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术启示&#34;&gt;技术启示
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;BGP协议固有缺陷：缺乏路由验证机制&lt;/li&gt;
+&lt;li&gt;CA证书颁发流程漏洞：IP控制即视为所有权证明&lt;/li&gt;
+&lt;li&gt;区块链应用特殊风险：智能合约不可逆性放大损失&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;数据来源：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://arstechnica.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ars Technica事件报道&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://www.coinbase.com/blog/celer-bridge-incident-analysis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Coinbase技术分析&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

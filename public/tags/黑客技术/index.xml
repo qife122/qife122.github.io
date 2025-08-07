@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>黑客技术 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/</link>
+        <description>Recent content in 黑客技术 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 03:36:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2023年十大Web黑客技术盘点 | PortSwigger研究</title>
+        <link>http://localhost:1313/p/2023%E5%B9%B4%E5%8D%81%E5%A4%A7web%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E7%9B%98%E7%82%B9-portswigger%E7%A0%94%E7%A9%B6/</link>
+        <pubDate>Thu, 07 Aug 2025 03:36:08 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2023%E5%B9%B4%E5%8D%81%E5%A4%A7web%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E7%9B%98%E7%82%B9-portswigger%E7%A0%94%E7%A9%B6/</guid>
+        <description>&lt;h1 id=&#34;2023年十大web黑客技术盘点&#34;&gt;2023年十大Web黑客技术盘点
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;欢迎阅读《2023年十大Web黑客技术》第17版，这是我们年度社区驱动的研究成果展示，旨在识别过去一年中最具创新性的Web安全研究。&lt;/p&gt;
+&lt;p&gt;今年社区创纪录地提交了68项提名，经过投票选出15项决赛作品。由Nicolas Grégoire、Soroush Dalili、Filedescriptor和我组成的专家小组经过两周分析，最终评选出2023年十大Web黑客技术！&lt;/p&gt;
+&lt;h2 id=&#34;技术榜单&#34;&gt;技术榜单
+&lt;/h2&gt;&lt;h3 id=&#34;10-根epp服务器攻击接管域名控制权&#34;&gt;10. 根EPP服务器攻击：接管域名控制权
+&lt;/h3&gt;&lt;p&gt;Sam Curry团队揭示了关键互联网基础设施的脆弱性，展示了通过多层间接路径实现控制的经典案例。&lt;/p&gt;
+&lt;h3 id=&#34;9-cookie瓦解web会话完整性的攻防&#34;&gt;9. Cookie瓦解：Web会话完整性的攻防
+&lt;/h3&gt;&lt;p&gt;Marco Squarcina等人深入剖析Web Cookie安全现状，特别展示了CSRF令牌固定攻击对Symfony等PHP框架的影响。&lt;/p&gt;
+&lt;h3 id=&#34;8-从akamai到f5再到ntlm&#34;&gt;8. 从Akamai到F5再到NTLM&amp;hellip;
+&lt;/h3&gt;&lt;p&gt;D3d的deadvolvo通过HTTP异步攻击研究，揭示了该漏洞类在当今互联网的持续影响，同时探讨了漏洞赏金机制的矛盾。&lt;/p&gt;
+&lt;h3 id=&#34;7-我是如何黑掉microsoft-teams并获得15万美元赏金&#34;&gt;7. 我是如何黑掉Microsoft Teams并获得15万美元赏金
+&lt;/h3&gt;&lt;p&gt;Masato Kinugawa详细呈现了价值15万美元的漏洞利用链开发过程，为Electron应用安全研究提供了创新方法论。&lt;/p&gt;
+&lt;h3 id=&#34;6-http请求拆分漏洞利用&#34;&gt;6. HTTP请求拆分漏洞利用
+&lt;/h3&gt;&lt;p&gt;Sergey Bobrov通过nginx案例研究，展示了这种本不该存在的漏洞如何成为攻击者的高价值目标。&lt;/p&gt;
+&lt;h3 id=&#34;5-利用http解析器不一致性&#34;&gt;5. 利用HTTP解析器不一致性
+&lt;/h3&gt;&lt;p&gt;Rafael da Costa Santos重新应用解析器混淆技术，发现ACL绕过、SSRF、缓存污染等多类漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;4-php过滤器链基于错误预言机的文件读取&#34;&gt;4. PHP过滤器链：基于错误预言机的文件读取
+&lt;/h3&gt;&lt;p&gt;Rémi Matasse优化了hash_kitten提出的创新技术，通过PHP过滤器触发内存异常来实现文件内容泄露。&lt;/p&gt;
+&lt;h3 id=&#34;3-smtp走私全球邮件伪造&#34;&gt;3. SMTP走私：全球邮件伪造
+&lt;/h3&gt;&lt;p&gt;Timo Longin将HTTP请求走私技术移植到SMTP协议，展示了针对主流邮件软件的髙影响案例研究。&lt;/p&gt;
+&lt;h3 id=&#34;2-强化版net反序列化漏洞利用&#34;&gt;2. 强化版.NET反序列化漏洞利用
+&lt;/h3&gt;&lt;p&gt;Piotr Bazydło的100页研究报告彻底解构了反序列化防护机制，特别展示了CredentialInitializer等精巧gadget的利用。&lt;/p&gt;
+&lt;h3 id=&#34;1-粉碎状态机web竞态条件的真正潜力&#34;&gt;1. 粉碎状态机：Web竞态条件的真正潜力
+&lt;/h3&gt;&lt;p&gt;James Kettle重新定义了竞态条件攻击范式，通过多阶段攻击链和新型HTTP栈利用技术实现突破性进展。&lt;/p&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语
+&lt;/h2&gt;&lt;p&gt;2023年安全社区产出了大量优质研究。这些技术因其长期影响力入选，建议安全从业者同时查阅历年榜单。如需获取最新研究动态，可订阅我们的RSS或关注社交媒体。&lt;/p&gt;
+&lt;p&gt;特别感谢所有参与提名、投票和研究的社区成员！我们2024年再见。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>打印服务 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</link>
+        <description>Recent content in 打印服务 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 04:46:39 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows Point and Print默认行为变更以应对PrintNightmare漏洞</title>
+        <link>http://localhost:1313/p/windows-point-and-print%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA%E5%8F%98%E6%9B%B4%E4%BB%A5%E5%BA%94%E5%AF%B9printnightmare%E6%BC%8F%E6%B4%9E/</link>
+        <pubDate>Thu, 07 Aug 2025 04:46:39 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows-point-and-print%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA%E5%8F%98%E6%9B%B4%E4%BB%A5%E5%BA%94%E5%AF%B9printnightmare%E6%BC%8F%E6%B4%9E/</guid>
+        <description>&lt;p&gt;我们的调查发现，被称为&amp;quot;PrintNightmare&amp;quot;的一系列漏洞表明，Point and Print功能的默认行为无法提供足够的安全防护。为此，我们现更改Point and Print驱动安装和更新的默认行为，要求管理员权限。此变更将随2021年8月10日发布的安全更新生效（CVE-2021-34481），可缓解Windows打印后台处理服务中已公开的漏洞。&lt;/p&gt;
+&lt;p&gt;这一变更可能影响非特权用户此前能添加或更新打印机的场景。但我们认为安全风险证明这一变更是必要的。虽然不推荐，用户仍可通过注册表键值手动禁用此缓解措施（详见KB5005652）。禁用将使系统暴露于已知漏洞，建议管理员谨慎评估安全需求。&lt;/p&gt;
+&lt;p&gt;我们一如既往建议用户尽快安装所有安全更新。自动更新用户将自动获得保护。更多详情请参阅Microsoft安全更新指南。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

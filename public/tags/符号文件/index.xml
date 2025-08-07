@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>符号文件 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%96%87%E4%BB%B6/</link>
+        <description>Recent content in 符号文件 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 12:48:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%A6%E5%8F%B7%E6%96%87%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Microsoft Office将于2022年8月起公开符号文件以提升安全与性能</title>
+        <link>http://localhost:1313/p/microsoft-office%E5%B0%86%E4%BA%8E2022%E5%B9%B48%E6%9C%88%E8%B5%B7%E5%85%AC%E5%BC%80%E7%AC%A6%E5%8F%B7%E6%96%87%E4%BB%B6%E4%BB%A5%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E4%B8%8E%E6%80%A7%E8%83%BD/</link>
+        <pubDate>Thu, 07 Aug 2025 12:48:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/microsoft-office%E5%B0%86%E4%BA%8E2022%E5%B9%B48%E6%9C%88%E8%B5%B7%E5%85%AC%E5%BC%80%E7%AC%A6%E5%8F%B7%E6%96%87%E4%BB%B6%E4%BB%A5%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E4%B8%8E%E6%80%A7%E8%83%BD/</guid>
+        <description>&lt;h1 id=&#34;microsoft-office2022年8月からシンボルを公開&#34;&gt;Microsoft Office、2022年8月からシンボルを公開
+&lt;/h1&gt;&lt;p&gt;本博客是《Microsoft Office to publish symbols starting August 2022》的摘要版本。最新信息请参考原文。&lt;/p&gt;
+&lt;p&gt;我们很高兴地宣布，Microsoft Office将于2022年8月9日通过Microsoft Public Symbol Server开始公开Windows版Office的符号文件。这是微软为提升客户和合作伙伴的安全性与性能而进行的持续投资的一部分。&lt;/p&gt;
+&lt;h2 id=&#34;主要优势&#34;&gt;主要优势
+&lt;/h2&gt;&lt;h3 id=&#34;安全性助力安全社区保护客户&#34;&gt;安全性：助力安全社区保护客户
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;符号文件为安全研究人员提供额外信息，帮助他们检测和报告Office产品的安全问题&lt;/li&gt;
+&lt;li&gt;使用符号文件后，研究人员能通过Process Monitor、WinDbg、Visual Studio等工具生成更详细、可操作的堆栈跟踪报告，从而加速工程师的问题解决流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;性能加速诊断与测试&#34;&gt;性能：加速诊断与测试
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;符号文件帮助客户和合作伙伴更好地理解和诊断问题&lt;/li&gt;
+&lt;li&gt;为开发更高级的性能工具和洞察开启新可能&lt;/li&gt;
+&lt;li&gt;硬件供应商可将Office公共符号用于设备性能测试与调优&lt;/li&gt;
+&lt;li&gt;软件供应商可将其用于依赖Office的软件性能测试&lt;/li&gt;
+&lt;li&gt;性能测试套件可利用符号提供更定制化的性能报告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;什么是符号文件&#34;&gt;什么是符号文件？
+&lt;/h2&gt;&lt;p&gt;符号文件由编译器在项目构建时生成，包含调试器分析程序时使用的信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公共符号：包含函数名、全局变量等基础信息（Office将提供此类剥离符号文件）&lt;/li&gt;
+&lt;li&gt;私有符号：额外包含局部变量和行号等信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;microsoft-symbol-server&#34;&gt;Microsoft Symbol Server
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过Microsoft Public Symbol Server访问Office符号&lt;/li&gt;
+&lt;li&gt;微软仅允许将符号用于微软软件相关的调试和测试（详见《Microsoft License Terms – Microsoft Symbol Server》）&lt;/li&gt;
+&lt;li&gt;将持续公开以下版本及未来新版本的符号：
+&lt;ul&gt;
+&lt;li&gt;当前通道/Fork Build 16.0.15601.20037/版本2208&lt;/li&gt;
+&lt;li&gt;Beta通道/DevMain Build 16.0.15606.20000/版本2209&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作为微软整体安全防御策略的一部分，我们很高兴通过公开Office符号来改善诊断能力并增强安全研究。&lt;/p&gt;
+&lt;p&gt;Sparsh Saxena | Office产品经理&lt;br&gt;
+Shane Guthrie | Office高级产品经理&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

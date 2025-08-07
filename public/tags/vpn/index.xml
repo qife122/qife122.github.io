@@ -7,7 +7,82 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 22:19:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vpn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 06:19:15 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vpn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>构建你自己的隐私保护代理(BYOPPP) - 基于OpenVPN和Privoxy的技术方案</title>
+        <link>http://localhost:1313/p/%E6%9E%84%E5%BB%BA%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E4%BB%A3%E7%90%86byoppp-%E5%9F%BA%E4%BA%8Eopenvpn%E5%92%8Cprivoxy%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Thu, 07 Aug 2025 06:19:15 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%9E%84%E5%BB%BA%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E4%BB%A3%E7%90%86byoppp-%E5%9F%BA%E4%BA%8Eopenvpn%E5%92%8Cprivoxy%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;byoppp---构建你自己的隐私保护代理&#34;&gt;BYOPPP - 构建你自己的隐私保护代理
+&lt;/h1&gt;&lt;p&gt;我最近读到一篇关于在树莓派上搭建隐私代理服务器的博文，这让我开始思考如何将其应用于安卓手机，既能保护隐私又能屏蔽烦人的广告。&lt;/p&gt;
+&lt;p&gt;由于我使用的是三星Galaxy S3 LTE（搭载基于硬件的Knox计数器），现在root手机会破坏Knox并丧失保修。这意味着我必须在非root环境下解决这个问题。幸运的是，新版安卓系统支持免root使用VPN，但设置全局系统代理仍需要root权限。&lt;/p&gt;
+&lt;p&gt;不过借助iptables和Privoxy的组合方案，这个问题迎刃而解。&lt;/p&gt;
+&lt;h2 id=&#34;构建隐私保护代理的组件清单&#34;&gt;构建隐私保护代理的组件清单：
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一台（或多台）廉价VPS服务器&lt;/li&gt;
+&lt;li&gt;可靠的VPN程序&lt;/li&gt;
+&lt;li&gt;Privoxy&lt;/li&gt;
+&lt;li&gt;iptables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;vps服务器&#34;&gt;VPS服务器
+&lt;/h2&gt;&lt;p&gt;推荐使用Amazon EC2的微实例，价格低廉（甚至免费），资源完全够用。我目前使用Ubuntu免费套餐运行良好。选择距离最近的AWS区域（例如我选择欧盟-爱尔兰），10分钟内即可完成Ubuntu服务器搭建。&lt;/p&gt;
+&lt;h2 id=&#34;vpn配置&#34;&gt;VPN配置
+&lt;/h2&gt;&lt;p&gt;推荐使用OpenVPN AS免费版（注意服务器和客户端都需使用2.0.6或更高版本）。其提供图形化配置界面和安卓/iOS/Windows/Linux/OSX的一键安装客户端。&lt;/p&gt;
+&lt;p&gt;关键配置参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用TCP 443和UDP 53端口&lt;/li&gt;
+&lt;li&gt;优先选择UDP协议以获得更好性能&lt;/li&gt;
+&lt;li&gt;VPN模式选择&amp;quot;Layer 3 (routing/NAT)&amp;quot;&lt;/li&gt;
+&lt;li&gt;记得在AWS安全组中开放VPN端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其他重要设置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;允许VPN客户端访问服务器端私有子网：是&lt;/li&gt;
+&lt;li&gt;客户端网络流量通过VPN路由：是&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;privoxy安装&#34;&gt;Privoxy安装
+&lt;/h2&gt;&lt;p&gt;通过&lt;code&gt;apt-get install privoxy&lt;/code&gt;安装后，需修改&lt;code&gt;/etc/privoxy/config&lt;/code&gt;文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;listen-address your.ip.add.ress:8118
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;accept-intercepted-requests 1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意在AWS安全组中限制仅VPN用户可访问Privoxy服务器。&lt;/p&gt;
+&lt;p&gt;启动命令：&lt;code&gt;service privoxy start&lt;/code&gt;
+设置开机自启：&lt;code&gt;update-rc.d privoxy defaults&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;iptables配置&#34;&gt;iptables配置
+&lt;/h2&gt;&lt;p&gt;将所有VPN客户端的web流量重定向到Privoxy：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;iptables -t nat -A PREROUTING -s 5.5.0.0/16 -p tcp -m multiport --dports 80,8080,81 -j DNAT --to-destination your.ip.add.ress:8118
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;可选配置其他端口过滤规则，根据Linux发行版设置规则持久化。&lt;/p&gt;
+&lt;h2 id=&#34;效果测试&#34;&gt;效果测试
+&lt;/h2&gt;&lt;p&gt;连接VPN后可以看到广告拦截效果对比：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;愤怒的小鸟游戏：使用Privoxy前后对比&lt;/li&gt;
+&lt;li&gt;手电筒应用：广告拦截效果展示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本方案不提供IP层匿名性&lt;/li&gt;
+&lt;li&gt;网络连接中断时VPN会断开&lt;/li&gt;
+&lt;li&gt;SSL网站仍可能通过域名泄露隐私&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;额外推荐&#34;&gt;额外推荐
+&lt;/h2&gt;&lt;p&gt;OSX/Windows用户可使用Aviator浏览器作为默认浏览器。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>通过SSH实现流量转发与VPN搭建的技术指南</title>
         <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87ssh%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91%E4%B8%8Evpn%E6%90%AD%E5%BB%BA%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>
         <pubDate>Mon, 04 Aug 2025 22:19:00 +0800</pubDate>

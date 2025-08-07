@@ -7,7 +7,118 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 07:58:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 15:39:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>WSL2完全指南：在Windows 10/11上运行Linux的终极教程</title>
+        <link>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E5%9C%A8windows-10/11%E4%B8%8A%E8%BF%90%E8%A1%8Clinux%E7%9A%84%E7%BB%88%E6%9E%81%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Thu, 07 Aug 2025 15:39:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E5%9C%A8windows-10/11%E4%B8%8A%E8%BF%90%E8%A1%8Clinux%E7%9A%84%E7%BB%88%E6%9E%81%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h1 id=&#34;windows-subsystem-for-linux-2-wsl2windows-10--11完全教程&#34;&gt;Windows Subsystem for Linux 2 (WSL2)：Windows 10 &amp;amp; 11完全教程
+&lt;/h1&gt;&lt;h2 id=&#34;关键要点&#34;&gt;关键要点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WSL2实现Linux环境与Windows的无缝集成，可同时使用Linux应用和Windows资源&lt;/li&gt;
+&lt;li&gt;Windows 11的WSL2安装流程比Windows 10更简化&lt;/li&gt;
+&lt;li&gt;支持直接在Windows中运行Linux GUI应用&lt;/li&gt;
+&lt;li&gt;Docker在WSL2中运行效率更高，无需专用Hyper-V&lt;/li&gt;
+&lt;li&gt;通过挂载和符号链接实现跨系统文件共享&lt;/li&gt;
+&lt;li&gt;VS Code与WSL2集成提供强大的开发环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;为什么使用linux&#34;&gt;为什么使用Linux？
+&lt;/h2&gt;&lt;p&gt;Web服务器普遍使用Linux环境运行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器软件（Apache、NGINX等）&lt;/li&gt;
+&lt;li&gt;语言运行时（PHP、Python、Node.js等）&lt;/li&gt;
+&lt;li&gt;数据库（MySQL、MongoDB等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;什么是wsl&#34;&gt;什么是WSL？
+&lt;/h2&gt;&lt;p&gt;WSL2通过Hyper-V虚拟机技术运行完整Linux内核，文件访问速度比WSL1快20倍。&lt;/p&gt;
+&lt;h2 id=&#34;系统要求&#34;&gt;系统要求
+&lt;/h2&gt;&lt;h3 id=&#34;硬件要求&#34;&gt;硬件要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;需在BIOS中启用硬件虚拟化支持（VT-x/AMD-V）&lt;/li&gt;
+&lt;li&gt;C盘至少1GB可用空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;windows版本要求&#34;&gt;Windows版本要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;支持Windows 10/11家庭版/专业版&lt;/li&gt;
+&lt;li&gt;Windows 10需2004版本或更高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装配置&#34;&gt;安装配置
+&lt;/h2&gt;&lt;h3 id=&#34;基础配置&#34;&gt;基础配置
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;禁用快速启动（可选）&lt;/li&gt;
+&lt;li&gt;安装Windows Terminal（推荐）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;启用wsl2windows-10&#34;&gt;启用WSL2（Windows 10）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dism&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;online&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;featurename&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Microsoft-Windows&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-Subsystem-Linux&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;all&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dism&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;online&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;featurename&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VirtualMachinePlatform&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;all&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-set-default-version&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;安装linux发行版&#34;&gt;安装Linux发行版
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-install&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ubuntu&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;使用技巧&#34;&gt;使用技巧
+&lt;/h2&gt;&lt;h3 id=&#34;文件系统交互&#34;&gt;文件系统交互
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;从Windows访问Linux文件：&lt;code&gt;\\wsl$\Ubuntu\&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;从Linux访问Windows文件：&lt;code&gt;/mnt/c/Users/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;命令交互&#34;&gt;命令交互
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在Windows中运行Linux命令：&lt;code&gt;wsl &amp;lt;command&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在Linux中运行Windows程序：&lt;code&gt;notepad.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;高级功能&#34;&gt;高级功能
+&lt;/h2&gt;&lt;h3 id=&#34;图形化应用&#34;&gt;图形化应用
+&lt;/h3&gt;&lt;p&gt;安装GPU驱动后可直接运行Linux GUI应用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install gedit
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gedit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;docker集成&#34;&gt;Docker集成
+&lt;/h3&gt;&lt;p&gt;Docker Desktop支持WSL2后端，提供更好的性能体验。&lt;/p&gt;
+&lt;h3 id=&#34;vs-code集成&#34;&gt;VS Code集成
+&lt;/h3&gt;&lt;p&gt;安装&amp;quot;Remote - WSL&amp;quot;扩展后，可直接在WSL环境中开发：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;code .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;常见问题&#34;&gt;常见问题
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Q：WSL1和WSL2有什么区别？&lt;/strong&gt;
+A：WSL2使用完整Linux内核，兼容性和性能更好。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Q：如何升级到WSL2？&lt;/strong&gt;
+A：&lt;code&gt;wsl --set-version &amp;lt;distro&amp;gt; 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Q：能运行GUI应用吗？&lt;/strong&gt;
+A：可以，需Windows 10 2021年5月更新或更高版本。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;WSL2彻底改变了Windows上的Linux开发体验，无需虚拟机即可获得完整的Linux环境，实现跨系统无缝协作。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>WSL2完全指南：Windows 10和11上的Linux开发环境配置</title>
         <link>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97windows-10%E5%92%8C11%E4%B8%8A%E7%9A%84linux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
         <pubDate>Mon, 04 Aug 2025 07:58:04 +0800</pubDate>

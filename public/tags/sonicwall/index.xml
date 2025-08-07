@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SonicWall on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/sonicwall/</link>
+        <description>Recent content in SonicWall on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 02:08:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/sonicwall/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SonicWall SMA 100系列管理界面远程代码执行漏洞分析</title>
+        <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 02:08:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;sonicwall-secure-mobile-access-sma-100系列管理界面远程代码执行漏洞&#34;&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面远程代码执行漏洞
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;MS-ISAC咨询编号&lt;/strong&gt;: 2025-043&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;: 2025年4月22日&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;在SonicWall Secure Mobile Access (SMA) 100管理界面中发现了一个漏洞，可能导致远程代码执行。SonicWall SMA是企业用于提供远程应用访问的统一安全网关。成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h2&gt;&lt;p&gt;根据SonicWall 2025年4月15日的公告，该漏洞已被发现在野外被积极利用。作为预防措施，SonicWall PSIRT已将CVSS评分从中等提升至高危(7.2)。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SMA 200&lt;/li&gt;
+&lt;li&gt;SMA 210&lt;/li&gt;
+&lt;li&gt;SMA 400&lt;/li&gt;
+&lt;li&gt;SMA 410&lt;/li&gt;
+&lt;li&gt;SMA 500v (ESX, KVM, AWS, Azure)&lt;/li&gt;
+&lt;li&gt;版本10.2.1.0-17sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本10.2.0.7-34sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本9.0.0.10-28sv及更早版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;用户类型&lt;/th&gt;
+          &lt;th&gt;风险等级&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;家庭用户&lt;/td&gt;
+          &lt;td&gt;低&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面中存在漏洞，可能导致远程代码执行。漏洞详情如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;战术&lt;/strong&gt;: 初始访问(TA0001)&lt;br&gt;
+&lt;strong&gt;技术&lt;/strong&gt;: 利用面向公众的应用程序(T1190)&lt;/p&gt;
+&lt;p&gt;SMA100管理界面中对特殊元素的不当中和处理允许远程认证攻击者以&amp;rsquo;nobody&amp;rsquo;用户身份注入任意命令，可能导致代码执行(CVE-2021-20035)。&lt;/p&gt;
+&lt;p&gt;成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;建议采取以下措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;软件更新&lt;/strong&gt;: 在适当测试后立即应用SonicWall提供的更新(M1051: 更新软件)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;漏洞管理流程&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立并维护企业资产的漏洞管理流程(保障措施7.1)&lt;/li&gt;
+&lt;li&gt;建立基于风险的修复策略，每月至少审查一次(保障措施7.2)&lt;/li&gt;
+&lt;li&gt;每月至少执行一次自动化应用补丁管理(保障措施7.4)&lt;/li&gt;
+&lt;li&gt;每季度至少执行一次内部企业资产的自动化漏洞扫描(保障措施7.5)&lt;/li&gt;
+&lt;li&gt;每月至少修复一次检测到的漏洞(保障措施7.7)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络基础设施&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确保网络基础设施保持最新(保障措施12.1)&lt;/li&gt;
+&lt;li&gt;建立并维护安全的网络架构(保障措施12.2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立适合企业规模的渗透测试计划(保障措施18.1)&lt;/li&gt;
+&lt;li&gt;每年至少执行一次外部渗透测试(保障措施18.2)&lt;/li&gt;
+&lt;li&gt;根据企业政策修复渗透测试发现的问题(保障措施18.3)&lt;/li&gt;
+&lt;li&gt;对关键应用进行渗透测试(保障措施16.13)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限管理&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有系统和服务应用最小权限原则(M1026: 特权账户管理)&lt;/li&gt;
+&lt;li&gt;管理企业资产和软件的默认账户(保障措施4.7)&lt;/li&gt;
+&lt;li&gt;建立并维护服务账户清单(保障措施5.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;利用防护&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用功能检测和阻止可能导致软件利用的条件(M1050: 利用防护)&lt;/li&gt;
+&lt;li&gt;尽可能在企业资产和软件上启用反利用功能(保障措施10.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络分段&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过网络分段隔离关键系统(M1030: 网络分段)&lt;/li&gt;
+&lt;li&gt;使用DMZ隔离面向互联网的服务&lt;/li&gt;
+&lt;li&gt;配置单独的VPC实例隔离关键云系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVE: &lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SonicWall: &lt;a class=&#34;link&#34; href=&#34;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

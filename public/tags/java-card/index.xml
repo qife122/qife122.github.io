@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Java Card on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/java-card/</link>
+        <description>Recent content in Java Card on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 08:33:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/java-card/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>数亿手机存在eSIM漏洞，可导致监控与设备劫持</title>
+        <link>http://localhost:1313/p/%E6%95%B0%E4%BA%BF%E6%89%8B%E6%9C%BA%E5%AD%98%E5%9C%A8esim%E6%BC%8F%E6%B4%9E%E5%8F%AF%E5%AF%BC%E8%87%B4%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%AE%BE%E5%A4%87%E5%8A%AB%E6%8C%81/</link>
+        <pubDate>Thu, 07 Aug 2025 08:33:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%95%B0%E4%BA%BF%E6%89%8B%E6%9C%BA%E5%AD%98%E5%9C%A8esim%E6%BC%8F%E6%B4%9E%E5%8F%AF%E5%AF%BC%E8%87%B4%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%AE%BE%E5%A4%87%E5%8A%AB%E6%8C%81/</guid>
+        <description>&lt;h1 id=&#34;esim漏洞使数亿手机面临监控与劫持风险&#34;&gt;eSIM漏洞使数亿手机面临监控与劫持风险
+&lt;/h1&gt;&lt;p&gt;全球范围内的eSIM卡可能因Oracle技术中一个存在6年的漏洞而面临物理和网络攻击的根本性威胁，该技术支撑着数十亿张SIM卡。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞详情&#34;&gt;漏洞详情
+&lt;/h2&gt;&lt;p&gt;嵌入式用户身份模块(eSIM)的系统性漏洞已使数十亿设备面临监控、SIM卡交换等威胁。与传统SIM卡不同，eSIM允许单个设备存在多个运营商订阅，且无法物理移除替换。&lt;/p&gt;
+&lt;p&gt;安全公司Security Explorations创始人Adam Gowdiak发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用Kigen嵌入式通用集成电路卡(eUICC)中的漏洞&lt;/li&gt;
+&lt;li&gt;攻击者可窃取eSIM与移动网络运营商(MNO)认证的私密加密密钥&lt;/li&gt;
+&lt;li&gt;能以明文下载运营商eSIM配置文件&lt;/li&gt;
+&lt;li&gt;通过未经验证的Java Card字节码安装恶意小程序(OTA)&lt;/li&gt;
+&lt;li&gt;整个过程不会触发任何安全警报&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术根源&#34;&gt;技术根源
+&lt;/h2&gt;&lt;p&gt;漏洞源于Oracle &amp;ldquo;Java Card&amp;quot;虚拟机(VM)实现中缺乏字节码验证导致的&amp;quot;类型混淆&amp;quot;问题。Java Card是运行在资源受限设备芯片上的应用环境，每年约有60亿台启用Java Card的设备诞生。&lt;/p&gt;
+&lt;p&gt;尽管2019年就报告该漏洞，Oracle当时认为&amp;quot;不适用&amp;quot;而未修复。Gowdiak表示：&amp;ldquo;Kigen开发了自己的JavaCard VM，结果证明存在漏洞。考虑到所有eSIM都需要支持JavaCard（根据GSMA规范要求），我倾向于认为所有eSIM都受影响。&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVSS评分：6.7（中危）&lt;/li&gt;
+&lt;li&gt;受影响产品：Kigen eSIM OS ECu10.13（面向开发的特定变体）&lt;/li&gt;
+&lt;li&gt;补丁情况：Kigen已发布安全公告和OTA补丁，并强化操作系统对未验证字节码的防护&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;攻击场景&#34;&gt;攻击场景
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;国家级威胁&lt;/strong&gt;：可植入持久化恶意小程序，实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设备变砖&lt;/li&gt;
+&lt;li&gt;克隆eSIM接收受害者短信/电话&lt;/li&gt;
+&lt;li&gt;拦截双因素认证(2FA)代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;运营商数据窃取&lt;/strong&gt;：通过模拟eSIM与运营商服务器通信&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多配置文件攻击&lt;/strong&gt;：例如在中国安装次级eSIM配置文件时，可能泄露主运营商（如AT&amp;amp;T）密钥&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Gowdiak警告：&amp;ldquo;一个恶意eSIM配置文件可能破坏芯片安全，影响该芯片上属于其他运营商的所有配置文件。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本文更新于2025年7月11日上午9:30，补充了Kigen发言人评论&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

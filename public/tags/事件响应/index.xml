@@ -7,7 +7,68 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 18:57:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 16:29:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>事件响应中的开源情报技术（第二部分）——揭秘银行欺诈攻击链</title>
+        <link>http://localhost:1313/p/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E4%B8%AD%E7%9A%84%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%8A%80%E6%9C%AF%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%8F%AD%E7%A7%98%E9%93%B6%E8%A1%8C%E6%AC%BA%E8%AF%88%E6%94%BB%E5%87%BB%E9%93%BE/</link>
+        <pubDate>Thu, 07 Aug 2025 16:29:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E4%B8%AD%E7%9A%84%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%8A%80%E6%9C%AF%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%8F%AD%E7%A7%98%E9%93%B6%E8%A1%8C%E6%AC%BA%E8%AF%88%E6%94%BB%E5%87%BB%E9%93%BE/</guid>
+        <description>&lt;h3 id=&#34;元数据与新型银行劫案&#34;&gt;元数据与新型银行劫案
+&lt;/h3&gt;&lt;p&gt;在事件响应工作中，某些案件会因独特的挑战性而令人着迷。本文案例涉及一家采用深度防御架构的美国金融机构（代号FFSI Bank），尽管部署了终端防护、网络微隔离和交易审计等全套安全措施，仍持续遭遇特定交易欺诈。&lt;/p&gt;
+&lt;h3 id=&#34;osint侦查启动&#34;&gt;OSINT侦查启动
+&lt;/h3&gt;&lt;p&gt;我们首先执行标准5分钟OSINT流程（参见Part 1）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;DNS侦查&lt;/strong&gt;：通过&lt;code&gt;portal.ffsibank.com&lt;/code&gt;和&lt;code&gt;support.ffsibank.com&lt;/code&gt;的A记录推断出&lt;code&gt;50.x.x.101&lt;/code&gt;可能属于FFSI，进而发现关联域名&lt;code&gt;dev.ffsibanking.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LeakIX突破&lt;/strong&gt;：搜索&lt;code&gt;ffsibank&lt;/code&gt;关键词发现关键线索——柬埔寨赌博域名&lt;code&gt;mail.redacted-pid.com&lt;/code&gt;上存在仿冒登录门户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;虚拟化浏览器取证&#34;&gt;虚拟化浏览器取证
+&lt;/h3&gt;&lt;p&gt;通过Browserling安全访问可疑域名：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发现&lt;code&gt;/ffsibank/&lt;/code&gt;目录包含高仿真银行登录页面&lt;/li&gt;
+&lt;li&gt;提取&lt;code&gt;visit_log.txt&lt;/code&gt;获取受害者IP和User-Agent信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[示例取证数据]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;访问路径: Index of /ffsibank/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;文件列表:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; login.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; styles/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; visit_log.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;证书指纹追踪&#34;&gt;证书指纹追踪
+&lt;/h3&gt;&lt;p&gt;在Censys执行证书搜索：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通配符搜索&lt;code&gt;names:&amp;quot;ffsib*&amp;quot;&lt;/code&gt;获得425+结果&lt;/li&gt;
+&lt;li&gt;筛选Let&amp;rsquo;s Encrypt证书发现批量伪造站点特征：
+&lt;ul&gt;
+&lt;li&gt;常见名称(CN)包含&lt;code&gt;ffsibnak&lt;/code&gt;等拼写变异&lt;/li&gt;
+&lt;li&gt;相同证书签名策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击链重建&#34;&gt;攻击链重建
+&lt;/h3&gt;&lt;p&gt;最终确认攻击者通过：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注册相似域名（如ffsibanking.com）&lt;/li&gt;
+&lt;li&gt;部署Let&amp;rsquo;s Encrypt证书增强可信度&lt;/li&gt;
+&lt;li&gt;构建钓鱼门户收集凭证&lt;/li&gt;
+&lt;li&gt;通过访问日志监控受害者行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;下期预告&#34;&gt;下期预告
+&lt;/h3&gt;&lt;p&gt;第三部分将剖析Active Directory账户锁定拒绝服务攻击中的元数据侦查技术。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用osquery收集NTFS取证信息 - 深入解析NTFS取证扩展</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8osquery%E6%94%B6%E9%9B%86ntfs%E5%8F%96%E8%AF%81%E4%BF%A1%E6%81%AF-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ntfs%E5%8F%96%E8%AF%81%E6%89%A9%E5%B1%95/</link>
         <pubDate>Sun, 03 Aug 2025 18:57:24 +0800</pubDate>

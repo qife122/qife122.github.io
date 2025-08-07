@@ -7,7 +7,39 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 14:40:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 02:24:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>隐藏Bash历史记录的实用技巧</title>
+        <link>http://localhost:1313/p/%E9%9A%90%E8%97%8Fbash%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Thu, 07 Aug 2025 02:24:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%9A%90%E8%97%8Fbash%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E7%9A%84%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;h1 id=&#34;隐藏bash历史记录&#34;&gt;隐藏Bash历史记录
+&lt;/h1&gt;&lt;p&gt;你是否曾登录Linux服务器后，突然意识到Bash会记录所有执行过的命令？这种情况我偶尔会遇到，因此专门研究了隐藏这些&amp;quot;失误&amp;quot;的方法。以下是我的发现，如果你有其他建议欢迎联系我。&lt;/p&gt;
+&lt;h2 id=&#34;常用方法对比&#34;&gt;常用方法对比
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;正常退出&lt;/strong&gt; - 历史记录会正常写入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kill &amp;lt;bash进程ID&amp;gt;&lt;/strong&gt;（服务端执行）- 不会写入历史记录。经测试不需要使用-9参数，普通kill命令就足以中断进程阻止写入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kill &amp;lt;ssh进程ID&amp;gt;&lt;/strong&gt;（客户端执行）- 即使使用-9参数也会写入历史记录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;set +o history&lt;/strong&gt; - 不记录当前会话的任何命令。可在会话任意时刻执行，隐藏全部命令&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;set -o history&lt;/strong&gt; - 重新开启记录，但会记录set命令本身&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;unset HISTFILE&lt;/strong&gt; - 清除历史文件存储路径变量，阻止记录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;history -c&lt;/strong&gt; - 完全清除历史记录（非常明显）&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;em&gt;export HISTIGNORE=&amp;ldquo;ls&lt;/em&gt;:cat&lt;/em&gt;**&amp;rdquo; - 设置不记录的命令列表（支持shell通配符）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;export HISTFILESIZE=10&lt;/strong&gt; - 限制历史文件只记录10条命令&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;编辑.bash_history文件&lt;/strong&gt; - 会话期间编辑会使得修改出现在当前会话命令之前&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用多个会话&lt;/strong&gt; - Bash按会话终止顺序写入历史文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;命令前加空格&lt;/strong&gt; - 根据配置可能不记录该命令（不同发行版效果不同）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;history -r&lt;/strong&gt; - 重新读取历史文件，可配合编辑后使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;最佳实践&#34;&gt;最佳实践
+&lt;/h2&gt;&lt;p&gt;综合来看，&amp;ldquo;set +o history&amp;quot;可能是最佳通用方案，它能隐藏当前会话所有命令同时保留之前历史。但不同场景下其他方法可能更适用。&lt;/p&gt;
+&lt;p&gt;重要提示：依赖这些方法前请先测试。如果发现需要隐藏命令时不必惊慌，历史记录通常只在会话结束时写入（除非特殊配置为每条命令都记录）。&lt;/p&gt;
+&lt;p&gt;最后提醒：虽然其他shell可能不受这些方法影响，但生产环境服务器大多仍使用Bash。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://digi.ninja/support.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;支持本站&lt;/a&gt; - 本站所有内容均为Robin Wood原创制作&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Palo Alto Networks 关键安全更新：CVE-2024-5910 和 CVE-2024-3596 漏洞分析</title>
         <link>http://localhost:1313/p/palo-alto-networks-%E5%85%B3%E9%94%AE%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0cve-2024-5910-%E5%92%8C-cve-2024-3596-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Mon, 04 Aug 2025 14:40:46 +0800</pubDate>

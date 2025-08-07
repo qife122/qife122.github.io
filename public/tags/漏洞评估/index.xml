@@ -7,7 +7,50 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 11:35:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%AF%84%E4%BC%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 17:41:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%AF%84%E4%BC%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>neXCSer工具：将Nessus扫描结果转换为结构化CSV报告</title>
+        <link>http://localhost:1313/p/nexcser%E5%B7%A5%E5%85%B7%E5%B0%86nessus%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BB%93%E6%9E%84%E5%8C%96csv%E6%8A%A5%E5%91%8A/</link>
+        <pubDate>Thu, 07 Aug 2025 17:41:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nexcser%E5%B7%A5%E5%85%B7%E5%B0%86nessus%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BB%93%E6%9E%84%E5%8C%96csv%E6%8A%A5%E5%91%8A/</guid>
+        <description>&lt;h3 id=&#34;nexcser&#34;&gt;neXCSer
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;项目背景&lt;/strong&gt;&lt;br&gt;
+neXCSer最初设计用于合并多名审计人员的Nessus扫描结果，生成统一文件以便手工分析或电子表格处理。开发过程中发现其功能可进一步扩展——通过将扫描结果的不同部分拆分为独立数据集来提升分析效率。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;当前功能&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;版本1生成两个CSV文件：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;summary.csv&lt;/code&gt;：被扫描机器的概览&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;detail.csv&lt;/code&gt;：包含扫描全部细节的详细报告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;未来计划支持按插件类型提取特定数据（例如：
+&lt;ul&gt;
+&lt;li&gt;插件10395（SMB共享枚举）→ 独立CSV文件记录机器IP/名称及其共享列表&lt;/li&gt;
+&lt;li&gt;插件10860（通过SMB主机SID枚举本地用户）→ 生成所有机器的用户清单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;发布原因&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;测试基础XML解析器的准确性&lt;/li&gt;
+&lt;li&gt;收集用户反馈以确定需要优先拆分的插件类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;下载&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;%e4%b8%8b%e8%bd%bd%e9%93%be%e6%8e%a5&#34; &gt;下载neXCSer版本1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用方法&lt;/strong&gt;&lt;br&gt;
+⚠️ 仅支持Nessus v2格式报告（Nessus 4.2+版本生成）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基本命令：运行脚本并指定Nessus文件作为参数&lt;/li&gt;
+&lt;li&gt;输出文件默认为&lt;code&gt;summary.csv&lt;/code&gt;和&lt;code&gt;detail.csv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;支持参数自定义输出文件名和内容类型（使用&lt;code&gt;--help&lt;/code&gt;查看选项）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Nessus 1转Nessus 2报告&lt;/strong&gt;&lt;br&gt;
+推荐方法：通过Nessus 4.2打开旧版报告并重新保存。注意转换后的报告可能缺失部分数据（尤其是摘要报告通常仅保留IP地址列表）。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>基于T-Mobile数据泄露事件的企业安全事件分析与防御对策</title>
         <link>http://localhost:1313/p/%E5%9F%BA%E4%BA%8Et-mobile%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AF%B9%E7%AD%96/</link>
         <pubDate>Sun, 03 Aug 2025 11:35:04 +0800</pubDate>

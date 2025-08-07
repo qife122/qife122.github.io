@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>协议处理器 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8D%8F%E8%AE%AE%E5%A4%84%E7%90%86%E5%99%A8/</link>
+        <description>Recent content in 协议处理器 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 12:31:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8D%8F%E8%AE%AE%E5%A4%84%E7%90%86%E5%99%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows Help and Support中心漏洞全披露：技术分析与防护方案</title>
+        <link>http://localhost:1313/p/windows-help-and-support%E4%B8%AD%E5%BF%83%E6%BC%8F%E6%B4%9E%E5%85%A8%E6%8A%AB%E9%9C%B2%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Thu, 07 Aug 2025 12:31:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows-help-and-support%E4%B8%AD%E5%BF%83%E6%BC%8F%E6%B4%9E%E5%85%A8%E6%8A%AB%E9%9C%B2%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h3 id=&#34;漏洞技术分析&#34;&gt;漏洞技术分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;受影响平台&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅影响Windows XP/Server 2003系统&lt;/li&gt;
+&lt;li&gt;Windows 7/Vista/2000/Server 2008不受影响（无Help and Support Center组件）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击机制&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;hcp://协议处理器&lt;/strong&gt;：通过注册的URL协议调用helpctr.exe&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;白名单绕过&lt;/strong&gt;：攻击者发现存在XSS漏洞的帮助页面，并构造特殊查询字符串突破安全页面检查&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行链&lt;/strong&gt;：恶意hcp://链接→XSS漏洞利用→绕过安全控制→执行任意本地exe文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Server 2003特殊性&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虽然存在漏洞组件，但当前PoC无法实现代码执行&lt;/li&gt;
+&lt;li&gt;微软仍在评估潜在攻击可能性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;防护方案&#34;&gt;防护方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;临时解决方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-reg&#34; data-lang=&#34;reg&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Windows Registry Editor Version 5.00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;HKEY_CLASSES_ROOT&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;\HCP]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;通过注销hcp://协议处理器阻断攻击链&lt;/li&gt;
+&lt;li&gt;副作用：影响远程协助等依赖hcp://的功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全建议&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不推荐使用第三方热修复工具（存在绕过风险）&lt;/li&gt;
+&lt;li&gt;完整补丁正在开发中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术团队&#34;&gt;技术团队
+&lt;/h3&gt;&lt;p&gt;MSRC工程团队成员：David Ross、Chengyun Chu等负责漏洞分析。微软正在开发自动化修复工具FixIt。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

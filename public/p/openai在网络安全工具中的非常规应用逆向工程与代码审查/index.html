@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文探讨了如何利用OpenAI的GPT-3模型进行网络安全工具开发，包括逆向工程汇编代码识别和自动化代码审查，展示了AI在网络安全领域的创新应用潜力。">
+<title>OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查</title>
+
+<link rel='canonical' href='http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查">
+<meta property='og:description' content="本文探讨了如何利用OpenAI的GPT-3模型进行网络安全工具开发，包括逆向工程汇编代码识别和自动化代码审查，展示了AI在网络安全领域的创新应用潜力。">
+<meta property='og:url' content='http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='OpenAI' /><meta property='article:tag' content='逆向工程' /><meta property='article:tag' content='代码审查' /><meta property='article:published_time' content='2025-08-07T10:10:43&#43;08:00'/><meta property='article:modified_time' content='2025-08-07T10:10:43&#43;08:00'/>
+<meta name="twitter:title" content="OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查">
+<meta name="twitter:description" content="本文探讨了如何利用OpenAI的GPT-3模型进行网络安全工具开发，包括逆向工程汇编代码识别和自动化代码审查，展示了AI在网络安全领域的创新应用潜力。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#gpt-3的技术跨越">GPT-3的技术跨越</a></li>
+    <li><a href="#代码解析新纪元">代码解析新纪元</a></li>
+    <li><a href="#逆向工程实验">逆向工程实验</a></li>
+    <li><a href="#代码审查实践">代码审查实践</a></li>
+    <li><a href="#技术局限">技术局限</a></li>
+    <li><a href="#未来展望">未来展望</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/">OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文探讨了如何利用OpenAI的GPT-3模型进行网络安全工具开发，包括逆向工程汇编代码识别和自动化代码审查，展示了AI在网络安全领域的创新应用潜力。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="down-the-rabbit-hole-unusual-applications-of-openai-in-cybersecurity-tooling">Down the Rabbit Hole: Unusual Applications of OpenAI in Cybersecurity Tooling
+</h1><h2 id="引言">引言
+</h2><p>随着AI技术进入成熟应用期，网络安全领域的低垂果实已被采摘——杀毒引擎集成机器学习模型，攻击者滥用合成媒体实施诈骗。尽管存在炒作和恐吓，OpenAI的GPT-3语言模型仍因其在Black Hat和DEF CON大会上展示的钓鱼工具/反钓鱼工具引发广泛关注。</p>
+<h2 id="gpt-3的技术跨越">GPT-3的技术跨越
+</h2><p>Lambda Labs数据显示，GPT-3 API相较前代实现百倍级参数增长：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指标</th>
+          <th>GPT-2</th>
+          <th>GPT-3</th>
+          <th>GPT-3 API</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>训练时间</td>
+          <td>1+周</td>
+          <td>355年</td>
+          <td>&lt;1分钟</td>
+      </tr>
+      <tr>
+          <td>成本</td>
+          <td>$43k</td>
+          <td>$4.6m</td>
+          <td>$0.06/千token</td>
+      </tr>
+      <tr>
+          <td>数据量</td>
+          <td>40GB</td>
+          <td>45TB</td>
+          <td>可忽略</td>
+      </tr>
+      <tr>
+          <td>算力需求</td>
+          <td>32个TPUv3</td>
+          <td>1个Tesla V100</td>
+          <td>可忽略</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="代码解析新纪元">代码解析新纪元
+</h2><p>OpenAI推出两大代码相关产品：</p>
+<ol>
+<li>GitHub Copilot：基于GPT-3的代码自动补全工具</li>
+<li>Codex：通过自然语言指令生成代码的进阶工具</li>
+</ol>
+<p>早期测试显示GPT-3具备出色的代码解析能力。例如输入JavaScript代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">minions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Bob&#34;</span><span class="p">,</span> <span class="s2">&#34;Kevin&#34;</span><span class="p">,</span> <span class="s2">&#34;Stuart&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">minions</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>模型能准确解释为：&ldquo;该代码初始化包含三个名字的数组，然后将数组打印到控制台&rdquo;。</p>
+<h2 id="逆向工程实验">逆向工程实验
+</h2><p>作者尝试将GPT-3应用于汇编代码逆向工程。以Metasploit的RC4加密payload为例：</p>
+<ol>
+<li><strong>原始模型表现</strong>：将RC4密钥调度算法误判为&quot;打印HELLO WORLD&quot;</li>
+<li><strong>改进方法</strong>：
+<ul>
+<li>使用fine-tuning功能在Curie模型上训练</li>
+<li>构建包含100个Metasploit payload的训练集（50个RC4/50个未加密）</li>
+<li>训练耗时仅5分钟</li>
+</ul>
+</li>
+</ol>
+<p>测试结果：</p>
+<ul>
+<li>RC4识别准确率：80%（4/5）</li>
+<li>未加密代码识别准确率：60%（3/5）</li>
+</ul>
+<h2 id="代码审查实践">代码审查实践
+</h2><p>使用davinci-instruct模型进行漏洞检测：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;results.html&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>模型成功识别出XSS漏洞，并准确定位到危险参数<code>q</code>。</p>
+<h2 id="技术局限">技术局限
+</h2><ol>
+<li>语言模型本质限制：不适合密码分析或模糊测试</li>
+<li>供应链攻击风险：训练数据可能被投毒</li>
+<li>许可争议：使用GitHub代码作为训练数据的法律问题</li>
+</ol>
+<h2 id="未来展望">未来展望
+</h2><p>随着GPT-3访问权限放宽，预计将涌现更多AI驱动的安全工具，如：</p>
+<ul>
+<li>集成机器学习的云端反编译器</li>
+<li>自动化漏洞检测系统</li>
+</ul>
+<p>（全文完）</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/openai/">OpenAI</a>
+        
+            <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
+        
+            <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/">代码审查</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%AE%9E%E9%AA%8C%E5%AE%A42015%E5%B9%B4cansecwest%E4%B8%8Esyscan%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%85%AC%E5%91%8A/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">漏洞利用实验室：2015年CanSecWest与SyScan漏洞实验公告</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/2016%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BEtrail-of-bits%E5%9C%A8%E8%87%AA%E5%8A%A8%E6%BC%8F%E6%B4%9E%E5%8F%91%E7%8E%B0%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E4%B8%8E%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E7%AA%81%E7%A0%B4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2016年度回顾：Trail of Bits在自动漏洞发现、安全工具开发与社区贡献的突破</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/rust%E5%9C%A8%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%AE%9E%E8%B7%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rust在恶意软件开发中的优势与实践</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

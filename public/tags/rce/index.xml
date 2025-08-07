@@ -7,7 +7,87 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 15:37:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/rce/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 00:12:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/rce/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jenkins安全漏洞与攻击技术全解析</title>
+        <link>http://localhost:1313/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 00:12:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/07/oI3Zt.png" alt="Featured image of post Jenkins安全漏洞与攻击技术全解析" /&gt;&lt;h3 id=&#34;jenkins攻击技术合集&#34;&gt;Jenkins攻击技术合集
+&lt;/h3&gt;&lt;h4 id=&#34;远程代码执行rce技术&#34;&gt;远程代码执行(RCE)技术
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构建步骤操纵&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://www.labofapenetrationtester.com/2014/08/script-execution-and-privilege-esc-jenkins.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Lab of a Pentester&lt;/a&gt;&lt;br&gt;
+通过修改构建步骤实现RCE&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;终端插件利用&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://medium.com/@uranium238/shodan-jenkins-to-get-rces-on-servers-6b6ec7c960e2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Medium文章&lt;/a&gt;&lt;br&gt;
+利用Terminal插件获取RCE权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;关键漏洞利用&#34;&gt;关键漏洞利用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CVE-2019-1003000&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://blog.orange.tw/2019/02/abusing-meta-programming-for-unauthenticated-rce.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Orange Tsai漏洞分析&lt;/a&gt;&lt;br&gt;
+影响组件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pipeline: Declarative Plugin ≤1.3.4&lt;/li&gt;
+&lt;li&gt;Pipeline: Groovy Plugin ≤2.61&lt;/li&gt;
+&lt;li&gt;Script Security Plugin ≤1.49&lt;br&gt;
+&lt;em&gt;修复版本：Jenkins 2.121.1 LTS/2.132+&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;反序列化漏洞&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/Coalfire-Research/java-deserialization-exploits/tree/master/Jenkins&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub PoC&lt;/a&gt;&lt;br&gt;
+涉及CVE：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE-2015-8103&lt;/li&gt;
+&lt;li&gt;CVE-2016-0792&lt;/li&gt;
+&lt;li&gt;CVE-2017-1000353（&lt;a class=&#34;link&#34; href=&#34;https://www.twistlock.com/2017/06/18/jenkins-java-deserialization/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twistlock分析&lt;/a&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;windows环境特殊漏洞&#34;&gt;Windows环境特殊漏洞
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;CVE-2018-1999002&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;影响版本：≤2.132/≤2.121.1&lt;/li&gt;
+&lt;li&gt;Windows路径遍历可实现任意文件读取&lt;/li&gt;
+&lt;li&gt;Linux需存在带下划线的插件目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;凭证安全&#34;&gt;凭证安全
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;credentials.xml解密&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.n00py.io/2017/01/compromising-jenkins-and-extracting-credentials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;n00py.io教程&lt;/a&gt;&lt;br&gt;
+通过脚本控制台解密存储的凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;权限提升&#34;&gt;权限提升
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;CVE-2018-1999001&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;恶意请求可移动config.xml文件&lt;/li&gt;
+&lt;li&gt;配合DoS漏洞（CVE-2018-1999043）强制重启实现未授权访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;补充资源&#34;&gt;补充资源
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.crowdstrike.com/blog/your-jenkins-belongs-to-us-now-abusing-continuous-integration-systems/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CrowdStrike分析报告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/03/jenkins-identify-ip-addresses-of-nodes.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Jenkins节点IP探测技术&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://carnal0wnage.attackresearch.com/2019/03/jenkins-cve-2018-1000600-poc.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub插件SSRF漏洞（CVE-2018-1000600）&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Jenkins安全漏洞与攻击技术全解析</title>
         <link>http://localhost:1313/p/jenkins%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E4%B8%8E%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Wed, 06 Aug 2025 15:37:54 +0800</pubDate>

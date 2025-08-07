@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>API滥用 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/api%E6%BB%A5%E7%94%A8/</link>
+        <description>Recent content in API滥用 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 06:45:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E6%BB%A5%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>绕过青铜合作伙伴钱包限制：利用业务逻辑漏洞接受负余额行程</title>
+        <link>http://localhost:1313/p/%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E5%88%A9%E7%94%A8%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B/</link>
+        <pubDate>Thu, 07 Aug 2025 06:45:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BB%95%E8%BF%87%E9%9D%92%E9%93%9C%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4%E9%92%B1%E5%8C%85%E9%99%90%E5%88%B6%E5%88%A9%E7%94%A8%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E6%8E%A5%E5%8F%97%E8%B4%9F%E4%BD%99%E9%A2%9D%E8%A1%8C%E7%A8%8B/</guid>
+        <description>&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;安全研究员@bugbountywithmarco发现Bykea平台存在业务逻辑缺陷，允许钱包余额为负的青铜级合作伙伴绕过平台限制接受行程订单。通过串联调用三个后端API端点，负余额司机可重置其可用状态并成功提交报价。&lt;/p&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;p&gt;攻击链涉及以下端点调用序列：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先调用&lt;code&gt;GET /v2/:city_id/bookings&lt;/code&gt;获取行程列表&lt;/li&gt;
+&lt;li&gt;随后调用&lt;code&gt;PUT /api/v2/driver/update/location&lt;/code&gt;（携带任意trip_id参数）&lt;/li&gt;
+&lt;li&gt;最后通过&lt;code&gt;POST /api/v2/offer/bid&lt;/code&gt;提交报价&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这种调用方式会绕过平台对负余额账户的常规限制检查，使不符合条件的司机能够非法接受行程订单。&lt;/p&gt;
+&lt;h3 id=&#34;时间线&#34;&gt;时间线
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;2024年11月27日：漏洞初次报告&lt;/li&gt;
+&lt;li&gt;2024年11月28日：漏洞被分类为中等风险(6.5分)&lt;/li&gt;
+&lt;li&gt;2025年3月27日：问题修复&lt;/li&gt;
+&lt;li&gt;2025年6月13日：漏洞报告公开披露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞分类&#34;&gt;漏洞分类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;弱点类型：业务逻辑错误(Business Logic Errors)&lt;/li&gt;
+&lt;li&gt;CVE编号：无&lt;/li&gt;
+&lt;li&gt;风险等级：中等(6.5)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

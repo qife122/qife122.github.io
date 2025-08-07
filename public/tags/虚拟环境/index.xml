@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>虚拟环境 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</link>
+        <description>Recent content in 虚拟环境 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 23:55:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Python工具与库的正确安装方式 - 揭秘高效开发技巧</title>
+        <link>http://localhost:1313/p/python%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%BA%93%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F-%E6%8F%AD%E7%A7%98%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/</link>
+        <pubDate>Wed, 06 Aug 2025 23:55:55 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/python%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%BA%93%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F-%E6%8F%AD%E7%A7%98%E9%AB%98%E6%95%88%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/</guid>
+        <description>&lt;h3 id=&#34;核心痛点&#34;&gt;核心痛点
+&lt;/h3&gt;&lt;p&gt;您是否遇到过以下情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装新Python工具后，原有工具突然失效&lt;/li&gt;
+&lt;li&gt;在Kali系统中混用apt-get和pip导致环境崩溃&lt;/li&gt;
+&lt;li&gt;被Python依赖地狱折磨到放弃安装工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;专业解决方案&#34;&gt;专业解决方案
+&lt;/h3&gt;&lt;p&gt;本视频将揭示隐藏在Python文档中的高效方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Python版本管理&lt;/strong&gt;（25:22）
+&lt;ul&gt;
+&lt;li&gt;使用pyenv解决多版本共存问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖隔离技术&lt;/strong&gt;（31:01）
+&lt;ul&gt;
+&lt;li&gt;虚拟环境(venv)的深度应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;革命性工具pipx&lt;/strong&gt;（46:37）
+&lt;ul&gt;
+&lt;li&gt;安全安装全局Python应用的&amp;quot;傻瓜按钮&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高级部署方案&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;自包含ZipApps（53:17）&lt;/li&gt;
+&lt;li&gt;Shiv打包工具（1:03:41）&lt;/li&gt;
+&lt;li&gt;Docker终极方案（1:11:41）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术资源&#34;&gt;技术资源
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [&lt;span class=&#34;nt&#34;&gt;pyenv安装指南&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;https://github.com/pyenv/pyenv-installer&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [&lt;span class=&#34;nt&#34;&gt;官方venv文档&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;https://docs.python.org/3/library/venv.html&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [&lt;span class=&#34;nt&#34;&gt;pipx项目主页&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;https://github.com/pipxproject/pipx&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; [&lt;span class=&#34;nt&#34;&gt;ZipApp技术规范&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;https://docs.python.org/3/library/zipapp.html&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;特别提示：所有演示幻灯片已开源提供，包含完整代码示例和故障排查指南。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

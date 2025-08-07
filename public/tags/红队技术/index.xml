@@ -7,7 +7,83 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 23:18:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 18:08:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BA%A2%E9%98%9F%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>修改Metasploit x64模板实现反病毒规避技术</title>
+        <link>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Thu, 07 Aug 2025 18:08:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;修改metasploit-x64模板实现反病毒规避&#34;&gt;修改Metasploit x64模板实现反病毒规避
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Joff Thyer&lt;/strong&gt;&lt;br&gt;
+&lt;em&gt;免责声明：本文所述技术可能已过时，但仍可作为学习参考，并可能整合到现代工具中。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;在针对Windows桌面的渗透测试中，测试人员常使用Veil&amp;rsquo;s Powershell Empire等工具将shellcode直接注入内存。这种方法虽能避免磁盘写入和端点防护的检测，但有时我们需要使用实际恶意软件可执行文件进行更全面的测试。&lt;/p&gt;
+&lt;h2 id=&#34;反病毒软件的检测机制&#34;&gt;反病毒软件的检测机制
+&lt;/h2&gt;&lt;p&gt;反病毒引擎对Metasploit生成的32位恶意软件检测效果显著，但对64位payload的检测能力较弱。研究发现，AV引擎不仅检测shellcode，还会匹配msfvenom生成的可执行文件中存根加载器的汇编代码模式。&lt;/p&gt;
+&lt;h2 id=&#34;metasploit模板分析&#34;&gt;Metasploit模板分析
+&lt;/h2&gt;&lt;p&gt;Metasploit的payload生成使用预编译的32位（C语言）和64位（汇编语言）模板，位于KALI系统的&lt;code&gt;/usr/share/metasploit-framework/data/templates/src/pe/exe&lt;/code&gt;目录。模板功能包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;分配4096字节内存缓冲区&lt;/li&gt;
+&lt;li&gt;写入&amp;quot;PAYLOAD:&amp;ldquo;标记字符串&lt;/li&gt;
+&lt;li&gt;保留缓冲区空间供msfvenom插入shellcode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;64位模板修改实验&#34;&gt;64位模板修改实验
+&lt;/h2&gt;&lt;p&gt;通过修改64位汇编模板进行三项测试：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;直接重编译原代码&lt;/strong&gt;：Avast立即报警&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;仅将缓冲区扩大至8192字节&lt;/strong&gt;：成功绕过检测&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全面修改汇编值+生成payload&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用XOR编码和无编码两种shellcode&lt;/li&gt;
+&lt;li&gt;均成功通过Avast的深度扫描&lt;/li&gt;
+&lt;li&gt;最终获得shell访问权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术验证截图&#34;&gt;技术验证截图
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;修改后的汇编源代码（8192字节缓冲区）&lt;/li&gt;
+&lt;li&gt;使用新模板生成的64位payload文件&lt;/li&gt;
+&lt;li&gt;Avast扫描结果显示&amp;quot;安全&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;成功获取shell的终端界面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论与启示&#34;&gt;结论与启示
+&lt;/h2&gt;&lt;p&gt;反病毒厂商主要检测模板特征而非shellcode本身。本实验证明，仅通过简单的汇编代码修改（如调整缓冲区大小）即可有效绕过AV检测。该方法对其他AV引擎的适用性有待进一步验证。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;延伸学习：&lt;/em&gt;&lt;br&gt;
+作者相关课程：《正则表达式实战》《企业攻击模拟与C2植入开发》《Python入门》等&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>绕过Cylance防护：第二部分——使用DNSCat2建立DNS隐蔽信道</title>
+        <link>http://localhost:1313/p/%E7%BB%95%E8%BF%87cylance%E9%98%B2%E6%8A%A4%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E4%BD%BF%E7%94%A8dnscat2%E5%BB%BA%E7%AB%8Bdns%E9%9A%90%E8%94%BD%E4%BF%A1%E9%81%93/</link>
+        <pubDate>Wed, 06 Aug 2025 21:30:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BB%95%E8%BF%87cylance%E9%98%B2%E6%8A%A4%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E4%BD%BF%E7%94%A8dnscat2%E5%BB%BA%E7%AB%8Bdns%E9%9A%90%E8%94%BD%E4%BF%A1%E9%81%93/</guid>
+        <description>&lt;h1 id=&#34;绕过cylance防护第二部分使用dnscat2&#34;&gt;绕过Cylance防护：第二部分——使用DNSCat2
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;David Fletcher&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;以下技术展示了在特定Cylance防护环境中建立C2通信的方法。测试前未检查集中式基础设施和终端代理的配置。该环境可能存在配置错误，可能不符合Cylance部署的最佳实践。但根据我们的经验，配置错误并不罕见，且往往会对环境整体安全态势造成灾难性影响。这就是我们在接受其声称的保护级别前进行测试的原因。此外，这些案例也说明了深度防御的必要性——在每个成功建立C2的实例中，二级或三级控制措施本应（且应该）弥补初始控制的失效。分层防御是任何环境中的关键保护要素，组织必须认清信息安全没有&amp;quot;银弹&amp;quot;的事实。&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;第一部分使用VSAgent.exe的案例见此&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;dnscat2github工具链接&#34;&gt;DNSCat2（&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;GitHub工具链接&lt;/a&gt;）
+&lt;/h2&gt;&lt;p&gt;DNSCat2作为另一种非传统绕过手段，通过DNS查询/响应机制建立C2信道。测试发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用默认参数（启用加密）执行时，初始连接虽可建立但会立即终止&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键突破&lt;/strong&gt;：当服务器禁用加密时，会话成功建立（如下图所示）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Cylance工具仍未检测到该工具的执行和C2信道建立。与VSAgent案例相同，正确的应用程序白名单技术本可阻止此攻击。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;防御建议&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施严格的应用程序白名单&lt;/li&gt;
+&lt;li&gt;监控异常DNS流量模式&lt;/li&gt;
+&lt;li&gt;启用多层级防御控制措施&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;延伸学习&lt;/strong&gt;：&lt;br&gt;
+Antisyphon提供可负担的进阶培训课程（支持随需/直播形式）&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;← 第一部分：使用VSAgent.exe&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;第三部分：Netcat与Nishang的ICMP C2信道 →&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>修改Metasploit x64模板实现反病毒规避技术</title>
         <link>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>
         <pubDate>Tue, 05 Aug 2025 23:18:51 +0800</pubDate>

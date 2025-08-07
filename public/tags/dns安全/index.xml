@@ -7,7 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 17:43:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 09:54:10 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>零信任DNS在现代安全中的关键作用</title>
+        <link>http://localhost:1313/p/%E9%9B%B6%E4%BF%A1%E4%BB%BBdns%E5%9C%A8%E7%8E%B0%E4%BB%A3%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8/</link>
+        <pubDate>Thu, 07 Aug 2025 09:54:10 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%9B%B6%E4%BF%A1%E4%BB%BBdns%E5%9C%A8%E7%8E%B0%E4%BB%A3%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8/</guid>
+        <description>&lt;h3 id=&#34;零信任dns的诞生&#34;&gt;零信任DNS的诞生
+&lt;/h3&gt;&lt;p&gt;微软在Windows 11 Insider版本中公开预览了Zero Trust DNS（ZTDNS），该功能通过强制实施基于域名的网络访问控制提升安全性。ZTDNS将Windows DNS客户端与受信任的防护性DNS（PDNS）服务器集成，确保仅允许访问由这些服务器解析的IP地址，严格遵循零信任的&amp;quot;默认拒绝&amp;quot;原则。&lt;/p&gt;
+&lt;h3 id=&#34;威胁态势的演变&#34;&gt;威胁态势的演变
+&lt;/h3&gt;&lt;p&gt;攻击者正利用AI自动化网络攻击，使其更复杂且难以检测：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过恶意广告技术（如流量分发系统TDS）诱导用户访问恶意站点&lt;/li&gt;
+&lt;li&gt;传播信息窃取恶意软件（infostealer），成为企业数据泄露的核心载体&lt;br&gt;
+传统安全模型专注于事后检测（如识别首个感染者），但面对AI驱动的攻击已力不从心。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防护性dnspdns的价值&#34;&gt;防护性DNS（PDNS）的价值
+&lt;/h3&gt;&lt;p&gt;PDNS通过DNS威胁情报主动拦截威胁：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;预判机制&lt;/strong&gt;：监控域名注册和DNS查询，在攻击者利用高风险域名前即阻断&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NSA数据&lt;/strong&gt;：DNS可拦截92%的恶意软件攻击，在&amp;quot;通信意图&amp;quot;阶段即中止威胁链&lt;/li&gt;
+&lt;li&gt;核心优势：
+&lt;ul&gt;
+&lt;li&gt;阻止初始感染（拒绝解析恶意域名）&lt;/li&gt;
+&lt;li&gt;中断命令与控制（C2）通信&lt;/li&gt;
+&lt;li&gt;防范DNS数据外泄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;零信任原则与dns的融合&#34;&gt;零信任原则与DNS的融合
+&lt;/h3&gt;&lt;p&gt;真正的零信任必须包含DNS安全：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;永不信任，始终验证&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;确保DNS不解析高风险域名&lt;/li&gt;
+&lt;li&gt;采用加密和认证连接DNS服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;持续监控&lt;/strong&gt;：检测DNS流量中的异常（如数据外泄、DGA域名生成算法）&lt;br&gt;
+微软ZTDNS强制使用加密DNS，并限定查询仅发送至配置的PDNS服务器，有效防御：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS劫持&lt;/li&gt;
+&lt;li&gt;恶意通信&lt;/li&gt;
+&lt;li&gt;零日DNS威胁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;infoblox的实践案例&#34;&gt;Infoblox的实践案例
+&lt;/h3&gt;&lt;p&gt;Infoblox Threat Defense™作为领先的PDNS解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于预测性DNS威胁情报算法，平均早于行业63天阻断威胁&lt;/li&gt;
+&lt;li&gt;75.4%的威胁在首次DNS查询前即被拦截&lt;/li&gt;
+&lt;li&gt;误报率仅0.0002%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;免费安全研讨会：深入了解零信任及DNS滥用防御（&lt;a class=&#34;link&#34; href=&#34;https://www.infoblox.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;注册链接&lt;/a&gt;）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;技术注解：本文涉及DNS协议加密（DoT/DoH）、威胁情报集成、零信任网络架构（ZTNA）等具体技术实现。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>加密DNS与保护性DNS的完美结合：零信任安全新方案</title>
         <link>http://localhost:1313/p/%E5%8A%A0%E5%AF%86dns%E4%B8%8E%E4%BF%9D%E6%8A%A4%E6%80%A7dns%E7%9A%84%E5%AE%8C%E7%BE%8E%E7%BB%93%E5%90%88%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%AE%89%E5%85%A8%E6%96%B0%E6%96%B9%E6%A1%88/</link>
         <pubDate>Wed, 06 Aug 2025 17:43:01 +0800</pubDate>

@@ -7,7 +7,107 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 06:32:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E8%A1%A5%E4%B8%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 22:58:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E8%A1%A5%E4%B8%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软产品关键补丁发布：2025年4月8日安全更新详解</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E4%BA%A7%E5%93%81%E5%85%B3%E9%94%AE%E8%A1%A5%E4%B8%81%E5%8F%91%E5%B8%832025%E5%B9%B44%E6%9C%888%E6%97%A5%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Wed, 06 Aug 2025 22:58:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E4%BA%A7%E5%93%81%E5%85%B3%E9%94%AE%E8%A1%A5%E4%B8%81%E5%8F%91%E5%B8%832025%E5%B9%B44%E6%9C%888%E6%97%A5%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;安全公告编号&#34;&gt;安全公告编号
+&lt;/h3&gt;&lt;p&gt;MS-ISAC ADVISORY NUMBER: 2025-036&lt;br&gt;
+发布日期：2025/04/08&lt;/p&gt;
+&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;微软产品中发现多个安全漏洞，其中最严重的漏洞可允许攻击者以登录用户权限执行远程代码。根据用户权限级别，攻击者可能安装程序、增删改数据或创建具有完全权限的新账户。系统权限较低的用户受影响程度小于管理员账户。&lt;/p&gt;
+&lt;h3 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h3&gt;&lt;p&gt;目前尚未发现这些漏洞在野利用的实例。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Visual Studio Code&lt;/li&gt;
+&lt;li&gt;Windows标准存储管理服务&lt;/li&gt;
+&lt;li&gt;Windows本地安全认证(LSA)&lt;/li&gt;
+&lt;li&gt;Windows NTFS文件系统&lt;/li&gt;
+&lt;li&gt;Windows路由和远程访问服务(RRAS)&lt;/li&gt;
+&lt;li&gt;Windows更新堆栈&lt;/li&gt;
+&lt;li&gt;22个其他核心组件（完整列表见正文）&lt;/li&gt;
+&lt;li&gt;Microsoft Office全家桶（Word/Excel/SharePoint等）&lt;/li&gt;
+&lt;li&gt;Azure本地集群&lt;/li&gt;
+&lt;li&gt;Windows Defender应用控制(WDAC)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;用户类型&lt;/th&gt;
+          &lt;th&gt;风险级别&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;大中型政府机构&lt;/td&gt;
+          &lt;td&gt;高危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;小型政府机构&lt;/td&gt;
+          &lt;td&gt;中危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业用户&lt;/td&gt;
+          &lt;td&gt;高危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;家庭用户&lt;/td&gt;
+          &lt;td&gt;低危&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;p&gt;最严重漏洞存在于Windows内核权限验证模块，攻击者可通过特制网络包触发缓冲区溢出。其他漏洞涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;权限提升（3个）&lt;/li&gt;
+&lt;li&gt;信息泄露（2个）&lt;/li&gt;
+&lt;li&gt;安全功能绕过（1个）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整漏洞列表请参考微软官方公告链接。&lt;/p&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立即打补丁&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过WSUS或Microsoft Update部署官方补丁&lt;/li&gt;
+&lt;li&gt;关键系统建议72小时内完成更新（M1051补丁策略）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限控制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施最小权限原则（M1026）&lt;/li&gt;
+&lt;li&gt;禁用默认管理员账户（Safeguard 4.7）&lt;/li&gt;
+&lt;li&gt;日常操作使用非特权账户（Safeguard 5.4）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;终端防护&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署EDR解决方案（Safeguard 13.7）&lt;/li&gt;
+&lt;li&gt;启用行为检测（M1040）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全意识&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;年度社会工程培训（Safeguard 14.2）&lt;/li&gt;
+&lt;li&gt;钓鱼攻击模拟演练&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软安全更新指南&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cisecurity.org/controls&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CIS漏洞管理标准&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>微软2022年10月安全更新公告：修复多个高危漏洞</title>
         <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF2022%E5%B9%B410%E6%9C%88%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E5%85%AC%E5%91%8A%E4%BF%AE%E5%A4%8D%E5%A4%9A%E4%B8%AA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E/</link>
         <pubDate>Tue, 05 Aug 2025 06:32:37 +0800</pubDate>

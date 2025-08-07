@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>可复现构建 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%9E%84%E5%BB%BA/</link>
+        <description>Recent content in 可复现构建 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 00:51:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%9E%84%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>提升SGX飞地的可信度：利用Nix实现可复现构建</title>
+        <link>http://localhost:1313/p/%E6%8F%90%E5%8D%87sgx%E9%A3%9E%E5%9C%B0%E7%9A%84%E5%8F%AF%E4%BF%A1%E5%BA%A6%E5%88%A9%E7%94%A8nix%E5%AE%9E%E7%8E%B0%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%9E%84%E5%BB%BA/</link>
+        <pubDate>Thu, 07 Aug 2025 00:51:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%8F%90%E5%8D%87sgx%E9%A3%9E%E5%9C%B0%E7%9A%84%E5%8F%AF%E4%BF%A1%E5%BA%A6%E5%88%A9%E7%94%A8nix%E5%AE%9E%E7%8E%B0%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%9E%84%E5%BB%BA/</guid>
+        <description>&lt;h1 id=&#34;增强sgx飞地的可信度&#34;&gt;增强SGX飞地的可信度
+&lt;/h1&gt;&lt;p&gt;在隐私导向部署中为SGX飞地创建可复现构建是一项困难的任务，目前缺乏便捷而稳健的解决方案。我们描述了如何使用Nix实现可复现且透明的飞地构建，使任何人都能审计飞地是否运行其声称的源代码，从而增强SGX系统的安全性。&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景
+&lt;/h2&gt;&lt;p&gt;Intel SGX于2015年推出，是机密(或可信)计算的一种实现。更具体地说，它是一种可信执行环境(TEE)，允许用户在由不受信任方拥有和维护的远程计算机上运行机密计算。用户信任硬件(此处指Intel CPU)制造商能保护执行环境免受篡改，即使是最高权限级别的代码(如内核恶意软件)也无法干预。SGX代码和数据存在于称为飞地的特殊加密和认证内存区域中。&lt;/p&gt;
+&lt;h2 id=&#34;飞地如何证明其身份&#34;&gt;飞地如何证明其身份？
+&lt;/h2&gt;&lt;p&gt;除了上述TEE保护(无信息泄露且执行不可篡改)外，SGX可以远程证明飞地的身份，包括其代码哈希、签名和运行时配置。这一功能称为远程认证，对于不熟悉此类技术的人来说可能有些陌生。&lt;/p&gt;
+&lt;p&gt;当飞地加载时，其初始状态(包括代码)会被CPU哈希处理成测量哈希(称为MRENCLAVE)。只有飞地代码变更时此哈希才会改变。该哈希与其他数据(如签名者和环境详情)一起被放入仅SGX实现可访问的特殊内存区域。飞地可请求CPU生成包含所有这些数据的报告，然后将其传递给特殊的Intel签名引用飞地对报告进行签名(此后称为quote)，以便交付给远程方进行验证。&lt;/p&gt;
+&lt;h2 id=&#34;为什么可复现构建很困难&#34;&gt;为什么可复现构建很困难？
+&lt;/h2&gt;&lt;p&gt;我们关心的可复现性是比特级可复现。某些软件可能在语义上相同，但其产物存在微小差异。SGX飞地使用SGX SDK构建为.dll或.so文件，且必须用作者的RSA密钥签名。由于我们计算产物哈希，即使一位差异也会产生不同哈希。测量过程会忽略飞地可执行文件中的某些细节(如签名者)，但实现完整的文件可复现性仍是理想目标。&lt;/p&gt;
+&lt;h2 id=&#34;为什么nix能做得更好&#34;&gt;为什么Nix能做得更好？
+&lt;/h2&gt;&lt;p&gt;Nix是一个跨平台基于源的包管理器，具有描述包的Nix语言和称为Nixpkgs的大型社区维护包集合。NixOS是基于Nix和Nixpkgs构建的Linux发行版，从一开始就专注于可复现性。它与传统包管理器非常不同。例如，它不会将任何内容安装到常规系统路径如/bin或/usr/lib中，而是使用自己的/nix/store目录和符号链接。&lt;/p&gt;
+&lt;p&gt;Nix在减少杂质方面做得很好，这增加了构建可复现性的机会，进而增加了对源到产物对应关系的信任。然而，最终可复现性是无法被证明或保证的。理想情况下，应在持续基础上跟踪可复现性。&lt;/p&gt;
+&lt;h2 id=&#34;将sgx-sdk引入nixpkgs&#34;&gt;将SGX SDK引入Nixpkgs
+&lt;/h2&gt;&lt;p&gt;我得出结论，SGX SDK应属于Nixpkgs以实现真正可复现和透明的飞地构建。事实证明已经有一个正在进行中的努力，我加入并帮助完成了这项工作。此后社区一直在扩展和维护这项工作。现在，任何SGX飞地都可以使用sgx-sdk包轻松地用Nix构建。&lt;/p&gt;
+&lt;p&gt;我们准备了reproducible-sgx GitHub仓库来展示如何用Nix和移植的SDK构建Intel的示例飞地。虽然这展示了基础知识，但SGX飞地可以几乎任意复杂并使用不同的库和编程语言。&lt;/p&gt;
+&lt;h2 id=&#34;资源&#34;&gt;资源
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Intel SGX开发者指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://eprint.iacr.org/2016/086&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Intel SGX详解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://sgx101.gitbook.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SGX 101&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

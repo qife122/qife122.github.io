@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>生物技术 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%94%9F%E7%89%A9%E6%8A%80%E6%9C%AF/</link>
+        <description>Recent content in 生物技术 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 04:14:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%94%9F%E7%89%A9%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>英国数据保护监管机构因凭证填充攻击对23andMe处以310万美元罚款</title>
+        <link>http://localhost:1313/p/%E8%8B%B1%E5%9B%BD%E6%95%B0%E6%8D%AE%E4%BF%9D%E6%8A%A4%E7%9B%91%E7%AE%A1%E6%9C%BA%E6%9E%84%E5%9B%A0%E5%87%AD%E8%AF%81%E5%A1%AB%E5%85%85%E6%94%BB%E5%87%BB%E5%AF%B923andme%E5%A4%84%E4%BB%A5310%E4%B8%87%E7%BE%8E%E5%85%83%E7%BD%9A%E6%AC%BE/</link>
+        <pubDate>Thu, 07 Aug 2025 04:14:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%8B%B1%E5%9B%BD%E6%95%B0%E6%8D%AE%E4%BF%9D%E6%8A%A4%E7%9B%91%E7%AE%A1%E6%9C%BA%E6%9E%84%E5%9B%A0%E5%87%AD%E8%AF%81%E5%A1%AB%E5%85%85%E6%94%BB%E5%87%BB%E5%AF%B923andme%E5%A4%84%E4%BB%A5310%E4%B8%87%E7%BE%8E%E5%85%83%E7%BD%9A%E6%AC%BE/</guid>
+        <description>&lt;h3 id=&#34;事件概述&#34;&gt;事件概述
+&lt;/h3&gt;&lt;p&gt;2025年6月5日，英国信息专员办公室(ICO)对23andMe处以231万英镑（约310万美元）罚款。该处罚源于该公司未能保护超过15.5万英国用户的个人数据安全。此次调查由ICO与加拿大隐私专员办公室联合开展，体现了监管机构在数据保护执法中日益加强的协作。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ico.org.uk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ICO处罚通知原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关于23andme&#34;&gt;关于23andMe
+&lt;/h3&gt;&lt;p&gt;23andMe是一家美国个人基因组学和生物技术公司，提供直接面向消费者的基因检测服务。用户通过提交唾液样本获取 ancestry、健康风险和遗传特征分析，并可下载原始基因数据。该公司目前正处于破产重组阶段。&lt;/p&gt;
+&lt;h3 id=&#34;攻击事件详情&#34;&gt;攻击事件详情
+&lt;/h3&gt;&lt;p&gt;2023年4月至9月期间，攻击者通过凭证填充攻击（使用其他数据泄露事件中窃取的凭证）入侵了大量用户账户。23andMe在8月通过客户门户和暗网市场Hydra获知此事，但最初误认为是恶作剧而关闭了内部调查工单。&lt;/p&gt;
+&lt;p&gt;10月，约1400万用户的敏感数据在多个论坛出售，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;健康信息&lt;/li&gt;
+&lt;li&gt;原始基因数据&lt;/li&gt;
+&lt;li&gt;种族/民族背景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ico认定的安全缺陷&#34;&gt;ICO认定的安全缺陷
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;缺乏多因素认证(MFA)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;原始基因数据下载控制不足&lt;/li&gt;
+&lt;li&gt;事件监控与响应系统薄弱&lt;/li&gt;
+&lt;li&gt;强制使用邮箱作为用户名&lt;/li&gt;
+&lt;li&gt;弱密码策略（未过滤常见词和已知泄露凭证）&lt;/li&gt;
+&lt;li&gt;缺少设备指纹识别技术&lt;/li&gt;
+&lt;li&gt;下载原始数据前无额外验证步骤&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关键教训&#34;&gt;关键教训
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;监管机构明确要求在线服务必须部署防凭证填充攻击措施&lt;/li&gt;
+&lt;li&gt;数据泄露通知必须符合GDPR第34(2)条要求（需包含泄露时段、数据类型和潜在影响）&lt;/li&gt;
+&lt;li&gt;调查期间与监管机构的合作缺失可能导致处罚加重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;企业应对建议&#34;&gt;企业应对建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;聘请外部法律顾问和取证专家&lt;/li&gt;
+&lt;li&gt;建立结构化监管响应策略&lt;/li&gt;
+&lt;li&gt;对敏感数据实施分层保护机制&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Exchange on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/exchange/</link>
+        <description>Recent content in Exchange on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Wed, 06 Aug 2025 23:37:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/exchange/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Exchange本地缓解工具（一键式缓解工具）技术解析</title>
+        <link>http://localhost:1313/p/exchange%E6%9C%AC%E5%9C%B0%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%80%E9%94%AE%E5%BC%8F%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 23:37:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/exchange%E6%9C%AC%E5%9C%B0%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%80%E9%94%AE%E5%BC%8F%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;「One-Click Microsoft Exchange On-Premises Mitigation Tool – March 2021」日文技术摘要翻译：&lt;/p&gt;
+&lt;p&gt;针对近期针对本地Exchange Server的攻击威胁，微软发布了新型一键式缓解工具*。该工具专为缺乏专职安全团队或尚未打补丁的Exchange 2013/2016/2019环境设计，包含三大自动化功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;漏洞缓解&lt;/strong&gt;&lt;br&gt;
+通过配置URL Rewrite规则阻断CVE-2021-26855漏洞利用路径&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全扫描&lt;/strong&gt;&lt;br&gt;
+集成Microsoft Safety Scanner进行恶意软件检测&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;威胁修复&lt;/strong&gt;&lt;br&gt;
+自动回滚已识别攻击造成的配置变更&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/wp-content-uploads-2021-03-image-28.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Exchange本地缓解工具工作流程&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关键说明&#34;&gt;关键说明
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;该工具需从GitHub下载EOMT.ps1脚本执行&lt;/li&gt;
+&lt;li&gt;仅为临时解决方案，仍需尽快安装正式安全更新&lt;/li&gt;
+&lt;li&gt;相比旧版ExchangeMitigation.ps1整合了最新威胁情报&lt;/li&gt;
+&lt;li&gt;经测试不影响Exchange基础功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术限制&#34;&gt;技术限制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;仅针对当前已知攻击手法有效&lt;/li&gt;
+&lt;li&gt;需联网环境获取最新威胁数据&lt;/li&gt;
+&lt;li&gt;采用MIT开源协议（详见GitHub仓库）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整技术文档与执行示例请访问：&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/eomt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub仓库&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;免责声明：微软不对本工具提供任何明示或默示担保&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>供应链风险 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E9%A3%8E%E9%99%A9/</link>
+        <description>Recent content in 供应链风险 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 17:19:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E9%A3%8E%E9%99%A9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>保障指数级增长的AI供应链安全 - 思科技术解析</title>
+        <link>http://localhost:1313/p/%E4%BF%9D%E9%9A%9C%E6%8C%87%E6%95%B0%E7%BA%A7%E5%A2%9E%E9%95%BF%E7%9A%84ai%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8-%E6%80%9D%E7%A7%91%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 17:19:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%9D%E9%9A%9C%E6%8C%87%E6%95%B0%E7%BA%A7%E5%A2%9E%E9%95%BF%E7%9A%84ai%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8-%E6%80%9D%E7%A7%91%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;全球ai竞赛与供应链风险&#34;&gt;全球AI竞赛与供应链风险
+&lt;/h3&gt;&lt;p&gt;当前，AI模型平台HuggingFace以惊人的速度扩张——从100万模型增长至180万仅用9个月。各类供应商（包括未经验证的来源）通过该平台直接向开发者分发模型，导致网络安全等领域面临海量AI技术的同时，也引入了供应链风险，主要体现为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;软件层&lt;/strong&gt;：库与框架漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型层&lt;/strong&gt;：文件内嵌恶意代码、架构后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据层&lt;/strong&gt;：训练数据污染、许可证合规问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;思科cerberus防护系统&#34;&gt;思科Cerberus防护系统
+&lt;/h3&gt;&lt;p&gt;思科Foundation AI团队开发的Cerberus系统提供全天候自动化监测：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时扫描&lt;/strong&gt;：监控HuggingFace模型更新，分析潜在风险并生成标准化威胁报告。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;产品集成&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Secure Endpoint &amp;amp; Email&lt;/strong&gt;：阻断恶意文件读写及邮件附件传输。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Web Gateway&lt;/strong&gt;：禁止下载含漏洞的模型，检查许可证合规性（如GPL协议风险），拦截地缘敏感区域（如DeepSeek）的未授权模型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;风险检测技术&#34;&gt;风险检测技术
+&lt;/h3&gt;&lt;p&gt;Cerberus结合元数据分析、沙箱检测和pickle文件审查等技术，识别以下威胁：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代码执行&lt;/strong&gt;：利用&lt;code&gt;eval&lt;/code&gt;或&lt;code&gt;pwntools&lt;/code&gt;的反序列化攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;系统控制&lt;/strong&gt;：通过&lt;code&gt;posix&lt;/code&gt;获取父系统权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据外泄&lt;/strong&gt;：使用&lt;code&gt;fabric.connection&lt;/code&gt;建立远程通道&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合规性&lt;/strong&gt;：高风险开源许可证或供应商来源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;策略执行机制&#34;&gt;策略执行机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Secure Web Gateway&lt;/strong&gt;：直接拦截HuggingFace的恶意模型下载。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Email&lt;/strong&gt;：过滤含危险附件的邮件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Endpoint&lt;/strong&gt;：保护终端文件系统，阻止对可疑模型的读写。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;应对未来挑战&#34;&gt;应对未来挑战
+&lt;/h3&gt;&lt;p&gt;随着AI代理参与代码开发的全流程，思科将持续优化防御技术，帮助安全团队快速响应新型威胁。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;关注思科安全社交媒体（LinkedIn/Facebook/X）获取最新动态。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

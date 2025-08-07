@@ -7,7 +7,1852 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 18:41:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 18:34:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>FBI成功瓦解Hive勒索软件网络的行动与技术内幕</title>
+        <link>http://localhost:1313/p/fbi%E6%88%90%E5%8A%9F%E7%93%A6%E8%A7%A3hive%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E7%BD%91%E7%BB%9C%E7%9A%84%E8%A1%8C%E5%8A%A8%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</link>
+        <pubDate>Thu, 07 Aug 2025 18:34:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/fbi%E6%88%90%E5%8A%9F%E7%93%A6%E8%A7%A3hive%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6%E7%BD%91%E7%BB%9C%E7%9A%84%E8%A1%8C%E5%8A%A8%E4%B8%8E%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</guid>
+        <description>&lt;h3 id=&#34;美国司法部宣布打击勒索软件的重大胜利&#34;&gt;美国司法部宣布打击勒索软件的重大胜利
+&lt;/h3&gt;&lt;p&gt;美国司法部上周宣布在打击勒索软件方面取得重大胜利，成功取缔并没收了Hive勒索软件组织的基础设施。这项由FBI坦帕分局主导的国际执法行动，在上周四由美国司法部长梅里克·加兰、副司法部长丽莎·摩纳哥和FBI局长克里斯托弗·雷举行的新闻发布会上正式公布。&lt;/p&gt;
+&lt;h3 id=&#34;hive勒索组织的运作模式与危害&#34;&gt;Hive勒索组织的运作模式与危害
+&lt;/h3&gt;&lt;p&gt;Hive是2021年中首次被发现的&amp;quot;勒索软件即服务&amp;quot;(RaaS)组织。司法部表示，该组织已攻击超过1500名受害者。新闻发布会上透露，FBI于行动前一天（上周三）在洛杉矶查获了包含该团伙&amp;quot;关键信息&amp;quot;的服务器。&lt;/p&gt;
+&lt;h3 id=&#34;fbi的渗透技术与解密行动&#34;&gt;FBI的渗透技术与解密行动
+&lt;/h3&gt;&lt;p&gt;此次行动源于FBI自2022年7月起对Hive网络长达数月的渗透。在成功入侵后，FBI获取了勒索软件解密密钥，并向约1300名新旧受害者提供了这些密钥。加兰表示，这项工作为受害者节省了1.3亿美元的潜在赎金支付。&lt;/p&gt;
+&lt;h3 id=&#34;司法部的反勒索软件战略&#34;&gt;司法部的反勒索软件战略
+&lt;/h3&gt;&lt;p&gt;摩纳哥强调要将受害者置于司法部反勒索软件战略的核心位置，并呼吁受攻击影响的组织主动联系执法机构。本期Risk &amp;amp; Repeat播客中，TechTarget编辑讨论了此次行动对未来打击勒索软件的潜在影响。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>neXCSer工具：将Nessus扫描结果转换为结构化CSV报告</title>
+        <link>http://localhost:1313/p/nexcser%E5%B7%A5%E5%85%B7%E5%B0%86nessus%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BB%93%E6%9E%84%E5%8C%96csv%E6%8A%A5%E5%91%8A/</link>
+        <pubDate>Thu, 07 Aug 2025 17:41:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/nexcser%E5%B7%A5%E5%85%B7%E5%B0%86nessus%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BB%93%E6%9E%84%E5%8C%96csv%E6%8A%A5%E5%91%8A/</guid>
+        <description>&lt;h3 id=&#34;nexcser&#34;&gt;neXCSer
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;项目背景&lt;/strong&gt;&lt;br&gt;
+neXCSer最初设计用于合并多名审计人员的Nessus扫描结果，生成统一文件以便手工分析或电子表格处理。开发过程中发现其功能可进一步扩展——通过将扫描结果的不同部分拆分为独立数据集来提升分析效率。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;当前功能&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;版本1生成两个CSV文件：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;summary.csv&lt;/code&gt;：被扫描机器的概览&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;detail.csv&lt;/code&gt;：包含扫描全部细节的详细报告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;未来计划支持按插件类型提取特定数据（例如：
+&lt;ul&gt;
+&lt;li&gt;插件10395（SMB共享枚举）→ 独立CSV文件记录机器IP/名称及其共享列表&lt;/li&gt;
+&lt;li&gt;插件10860（通过SMB主机SID枚举本地用户）→ 生成所有机器的用户清单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;发布原因&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;测试基础XML解析器的准确性&lt;/li&gt;
+&lt;li&gt;收集用户反馈以确定需要优先拆分的插件类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;下载&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;%e4%b8%8b%e8%bd%bd%e9%93%be%e6%8e%a5&#34; &gt;下载neXCSer版本1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用方法&lt;/strong&gt;&lt;br&gt;
+⚠️ 仅支持Nessus v2格式报告（Nessus 4.2+版本生成）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基本命令：运行脚本并指定Nessus文件作为参数&lt;/li&gt;
+&lt;li&gt;输出文件默认为&lt;code&gt;summary.csv&lt;/code&gt;和&lt;code&gt;detail.csv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;支持参数自定义输出文件名和内容类型（使用&lt;code&gt;--help&lt;/code&gt;查看选项）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Nessus 1转Nessus 2报告&lt;/strong&gt;&lt;br&gt;
+推荐方法：通过Nessus 4.2打开旧版报告并重新保存。注意转换后的报告可能缺失部分数据（尤其是摘要报告通常仅保留IP地址列表）。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>保障指数级增长的AI供应链安全 - 思科技术解析</title>
+        <link>http://localhost:1313/p/%E4%BF%9D%E9%9A%9C%E6%8C%87%E6%95%B0%E7%BA%A7%E5%A2%9E%E9%95%BF%E7%9A%84ai%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8-%E6%80%9D%E7%A7%91%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 17:19:46 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%9D%E9%9A%9C%E6%8C%87%E6%95%B0%E7%BA%A7%E5%A2%9E%E9%95%BF%E7%9A%84ai%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8-%E6%80%9D%E7%A7%91%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;全球ai竞赛与供应链风险&#34;&gt;全球AI竞赛与供应链风险
+&lt;/h3&gt;&lt;p&gt;当前，AI模型平台HuggingFace以惊人的速度扩张——从100万模型增长至180万仅用9个月。各类供应商（包括未经验证的来源）通过该平台直接向开发者分发模型，导致网络安全等领域面临海量AI技术的同时，也引入了供应链风险，主要体现为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;软件层&lt;/strong&gt;：库与框架漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型层&lt;/strong&gt;：文件内嵌恶意代码、架构后门&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据层&lt;/strong&gt;：训练数据污染、许可证合规问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;思科cerberus防护系统&#34;&gt;思科Cerberus防护系统
+&lt;/h3&gt;&lt;p&gt;思科Foundation AI团队开发的Cerberus系统提供全天候自动化监测：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时扫描&lt;/strong&gt;：监控HuggingFace模型更新，分析潜在风险并生成标准化威胁报告。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;产品集成&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Secure Endpoint &amp;amp; Email&lt;/strong&gt;：阻断恶意文件读写及邮件附件传输。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Web Gateway&lt;/strong&gt;：禁止下载含漏洞的模型，检查许可证合规性（如GPL协议风险），拦截地缘敏感区域（如DeepSeek）的未授权模型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;风险检测技术&#34;&gt;风险检测技术
+&lt;/h3&gt;&lt;p&gt;Cerberus结合元数据分析、沙箱检测和pickle文件审查等技术，识别以下威胁：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代码执行&lt;/strong&gt;：利用&lt;code&gt;eval&lt;/code&gt;或&lt;code&gt;pwntools&lt;/code&gt;的反序列化攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;系统控制&lt;/strong&gt;：通过&lt;code&gt;posix&lt;/code&gt;获取父系统权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据外泄&lt;/strong&gt;：使用&lt;code&gt;fabric.connection&lt;/code&gt;建立远程通道&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;合规性&lt;/strong&gt;：高风险开源许可证或供应商来源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;策略执行机制&#34;&gt;策略执行机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Secure Web Gateway&lt;/strong&gt;：直接拦截HuggingFace的恶意模型下载。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Email&lt;/strong&gt;：过滤含危险附件的邮件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secure Endpoint&lt;/strong&gt;：保护终端文件系统，阻止对可疑模型的读写。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;应对未来挑战&#34;&gt;应对未来挑战
+&lt;/h3&gt;&lt;p&gt;随着AI代理参与代码开发的全流程，思科将持续优化防御技术，帮助安全团队快速响应新型威胁。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;关注思科安全社交媒体（LinkedIn/Facebook/X）获取最新动态。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>利用Skyhook实现隐蔽文件传输 - 规避检测的技术解析</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8skyhook%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93-%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 17:03:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8skyhook%E5%AE%9E%E7%8E%B0%E9%9A%90%E8%94%BD%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93-%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;引言&#34;&gt;引言
+&lt;/h1&gt;&lt;p&gt;本文提出&amp;quot;混淆博弈&amp;quot;概念，描述渗透测试中为绕过企业签名检测机制而对文件进行反复混淆的繁琐过程。开源工具Skyhook通过自动化网络过滤混淆和文件托管步骤，显著提升操作效率，同时提供隐蔽化文件渗出功能。&lt;/p&gt;
+&lt;h1 id=&#34;重要警示非隐私工具&#34;&gt;重要警示：非隐私工具
+&lt;/h1&gt;&lt;p&gt;尽管采用加密算法，但需注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;密钥明文暴露于Web界面及客户端IndexedDB&lt;/li&gt;
+&lt;li&gt;混淆流程≠端到端加密(E2EE)，最终仍以明文落盘&lt;/li&gt;
+&lt;li&gt;仅针对边界防御机制有效，不增强传输文件机密性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;技术架构解析&#34;&gt;技术架构解析
+&lt;/h1&gt;&lt;h2 id=&#34;双服务设计&#34;&gt;双服务设计
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;管理服务(Admin Service)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;独立HTTPS服务运行于React界面&lt;/li&gt;
+&lt;li&gt;账户管理/混淆器配置（YAML底层）&lt;/li&gt;
+&lt;li&gt;动态生成含随机路径的传输链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;传输服务(Transfer Service)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于WebAssembly实现浏览器端混淆算法：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 支持算法类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;AES&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Base64&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Blowfish&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Twofish&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;XOR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;文件分块处理（默认1MB/块）&lt;/li&gt;
+&lt;li&gt;IndexedDB存储下载块数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;核心功能演示&#34;&gt;核心功能演示
+&lt;/h1&gt;&lt;h2 id=&#34;混淆器配置&#34;&gt;混淆器配置
+&lt;/h2&gt;&lt;p&gt;通过管理界面可叠加多种算法（示例配置XOR密钥&amp;quot;secret&amp;quot;）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;obfuscators&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;algorithm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;XOR&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;c2VjcmV0&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;algorithm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;Base64&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;文件传输过程&#34;&gt;文件传输过程
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;下载流程&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;请求路径/REST参数实时混淆&lt;/li&gt;
+&lt;li&gt;Burp捕获示例：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST /aXBkY...== HTTP/2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Body: U2FsdGVkX1+71jO... 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;上传流程&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器切片处理+实时混淆&lt;/li&gt;
+&lt;li&gt;服务端顺序解混淆重组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;实战效果&#34;&gt;实战效果
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;在真实渗透测试中实现100%绕过IDPS检测&lt;/li&gt;
+&lt;li&gt;支持GB级文件传输（MD5校验保障完整性）&lt;/li&gt;
+&lt;li&gt;推荐部署模式：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -p 65535:65535 -p 8443:8443 skyhook-demo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;附录a演示环境搭建&#34;&gt;附录A：演示环境搭建
+&lt;/h1&gt;&lt;p&gt;使用Chrome浏览器访问：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管理端：&lt;code&gt;https://127.1:65535&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;传输端：&lt;code&gt;https://127.1:8443&lt;/code&gt;&lt;br&gt;
+启动时需从stdout获取管理员凭证。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>警惕责任扩散效应：如何有效分配网络安全任务</title>
+        <link>http://localhost:1313/p/%E8%AD%A6%E6%83%95%E8%B4%A3%E4%BB%BB%E6%89%A9%E6%95%A3%E6%95%88%E5%BA%94%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BB%BB%E5%8A%A1/</link>
+        <pubDate>Thu, 07 Aug 2025 16:46:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%AD%A6%E6%83%95%E8%B4%A3%E4%BB%BB%E6%89%A9%E6%95%A3%E6%95%88%E5%BA%94%E5%A6%82%E4%BD%95%E6%9C%89%E6%95%88%E5%88%86%E9%85%8D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BB%BB%E5%8A%A1/</guid>
+        <description>&lt;h1 id=&#34;分配网络安全任务时需警惕责任扩散效应&#34;&gt;分配网络安全任务时需警惕责任扩散效应
+&lt;/h1&gt;&lt;p&gt;&amp;ldquo;安全是每个人的责任&amp;quot;这一理念可追溯至20世纪80年代美国海军训练手册和众议院听证会。这句简洁口号背后的含义是：组织中的每个人都应为安全计划贡献力量。即便公司设有专职安全岗位，仅靠他们也无法独自保护信息资产——毕竟业务人员才是提供服务、打造产品、做出安全决策的主体。&lt;/p&gt;
+&lt;h2 id=&#34;人人有责可能变成无人负责&#34;&gt;人人有责可能变成无人负责？
+&lt;/h2&gt;&lt;p&gt;如何分配网络安全任务，将这种理想化的理念落到实处？责任扩散原理表明，当人们处于群体中时责任感会降低，因为他们认为他人会采取行动。宣称安全是&amp;quot;每个人的责任&amp;rdquo;，结果可能变成&amp;quot;无人负责&amp;quot;。&lt;/p&gt;
+&lt;p&gt;为有效分配安全责任，我们需要采取以下措施对抗责任扩散：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;明确期望&lt;/li&gt;
+&lt;li&gt;落实问责&lt;/li&gt;
+&lt;li&gt;在利益相关者与受影响事项间建立个人联系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;明确期望&#34;&gt;明确期望
+&lt;/h2&gt;&lt;p&gt;网络安全领导者通常负责设计和管理安全计划框架。在此框架下，安全团队的核心职责包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;识别和追踪漏洞修复&lt;/li&gt;
+&lt;li&gt;设计安全措施执行系统&lt;/li&gt;
+&lt;li&gt;监控和调查安全事件&lt;/li&gt;
+&lt;li&gt;制定安全配置指南&lt;/li&gt;
+&lt;li&gt;为业务方提供安全指导&lt;/li&gt;
+&lt;li&gt;监督安全期望落实情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而漏洞修复、安全原则应用等技术任务通常分散在各部门：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DevOps/IT团队按风险基准时间表打补丁&lt;/li&gt;
+&lt;li&gt;采购/法务团队按流程进行供应商安全审查&lt;/li&gt;
+&lt;li&gt;人事团队按标准执行入职背景调查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用RACI责任矩阵等工具可详细界定&amp;quot;执行、负责、咨询、知会&amp;quot;角色。除文档记录外，制定矩阵的过程本身就能暴露分歧和盲区。&lt;/p&gt;
+&lt;p&gt;更广泛的安全意识计划应明确全员责任，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按公司指南处理信息&lt;/li&gt;
+&lt;li&gt;报告可疑活动&lt;/li&gt;
+&lt;li&gt;使用含安全要求的标准化模板&lt;/li&gt;
+&lt;li&gt;在新项目启动时咨询安全团队&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;落实问责&#34;&gt;落实问责
+&lt;/h2&gt;&lt;p&gt;为确保分布式安全措施有效实施，可采用三重保障：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术强制&lt;/strong&gt;：如强制双因素认证、阻止含敏感信息的代码提交&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险护栏&lt;/strong&gt;：如Terraform预置安全模块、生产环境严格变更控制、DNS过滤危险网站&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺口监控&lt;/strong&gt;：通过日志聚合和持续合规监控，例如：
+&lt;ul&gt;
+&lt;li&gt;检查HR系统确保背景调查执行&lt;/li&gt;
+&lt;li&gt;关联多系统数据识别未安装安全代理的设备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;补丁管理尤其具有挑战性，可能涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DevOps/IT团队&lt;/li&gt;
+&lt;li&gt;开发人员&lt;/li&gt;
+&lt;li&gt;外部供应商&lt;/li&gt;
+&lt;li&gt;终端用户（如自主安装应用的更新责任）
+可通过自动化工具跟踪未更新应用并提醒用户（参见实际案例）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;建立个人联系&#34;&gt;建立个人联系
+&lt;/h2&gt;&lt;p&gt;除明确期望和问责外，还需建立人员与任务间的个人关联。例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提醒用户&amp;quot;你的笔记本&amp;quot;需要更新才能最佳工作状态&lt;/li&gt;
+&lt;li&gt;强调安全设计能保护&amp;quot;你的数据&amp;quot;和项目连续性&lt;/li&gt;
+&lt;li&gt;指出第三方数据泄露会影响&amp;quot;你的声誉&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;分配安全责任时，应关联组织共同目标。员工理解业务目标后，才能认识安全责任对目标实现的促进或阻碍作用。通过这种情境化表达，才能真正建立&amp;quot;安全人人有责&amp;quot;的可扩展计划。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;更新于2023年11月3日&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>事件响应中的开源情报技术（第二部分）——揭秘银行欺诈攻击链</title>
+        <link>http://localhost:1313/p/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E4%B8%AD%E7%9A%84%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%8A%80%E6%9C%AF%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%8F%AD%E7%A7%98%E9%93%B6%E8%A1%8C%E6%AC%BA%E8%AF%88%E6%94%BB%E5%87%BB%E9%93%BE/</link>
+        <pubDate>Thu, 07 Aug 2025 16:29:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E4%B8%AD%E7%9A%84%E5%BC%80%E6%BA%90%E6%83%85%E6%8A%A5%E6%8A%80%E6%9C%AF%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E6%8F%AD%E7%A7%98%E9%93%B6%E8%A1%8C%E6%AC%BA%E8%AF%88%E6%94%BB%E5%87%BB%E9%93%BE/</guid>
+        <description>&lt;h3 id=&#34;元数据与新型银行劫案&#34;&gt;元数据与新型银行劫案
+&lt;/h3&gt;&lt;p&gt;在事件响应工作中，某些案件会因独特的挑战性而令人着迷。本文案例涉及一家采用深度防御架构的美国金融机构（代号FFSI Bank），尽管部署了终端防护、网络微隔离和交易审计等全套安全措施，仍持续遭遇特定交易欺诈。&lt;/p&gt;
+&lt;h3 id=&#34;osint侦查启动&#34;&gt;OSINT侦查启动
+&lt;/h3&gt;&lt;p&gt;我们首先执行标准5分钟OSINT流程（参见Part 1）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;DNS侦查&lt;/strong&gt;：通过&lt;code&gt;portal.ffsibank.com&lt;/code&gt;和&lt;code&gt;support.ffsibank.com&lt;/code&gt;的A记录推断出&lt;code&gt;50.x.x.101&lt;/code&gt;可能属于FFSI，进而发现关联域名&lt;code&gt;dev.ffsibanking.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LeakIX突破&lt;/strong&gt;：搜索&lt;code&gt;ffsibank&lt;/code&gt;关键词发现关键线索——柬埔寨赌博域名&lt;code&gt;mail.redacted-pid.com&lt;/code&gt;上存在仿冒登录门户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;虚拟化浏览器取证&#34;&gt;虚拟化浏览器取证
+&lt;/h3&gt;&lt;p&gt;通过Browserling安全访问可疑域名：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发现&lt;code&gt;/ffsibank/&lt;/code&gt;目录包含高仿真银行登录页面&lt;/li&gt;
+&lt;li&gt;提取&lt;code&gt;visit_log.txt&lt;/code&gt;获取受害者IP和User-Agent信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[示例取证数据]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;访问路径: Index of /ffsibank/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;文件列表:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; login.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; styles/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; visit_log.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;证书指纹追踪&#34;&gt;证书指纹追踪
+&lt;/h3&gt;&lt;p&gt;在Censys执行证书搜索：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通配符搜索&lt;code&gt;names:&amp;quot;ffsib*&amp;quot;&lt;/code&gt;获得425+结果&lt;/li&gt;
+&lt;li&gt;筛选Let&amp;rsquo;s Encrypt证书发现批量伪造站点特征：
+&lt;ul&gt;
+&lt;li&gt;常见名称(CN)包含&lt;code&gt;ffsibnak&lt;/code&gt;等拼写变异&lt;/li&gt;
+&lt;li&gt;相同证书签名策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击链重建&#34;&gt;攻击链重建
+&lt;/h3&gt;&lt;p&gt;最终确认攻击者通过：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注册相似域名（如ffsibanking.com）&lt;/li&gt;
+&lt;li&gt;部署Let&amp;rsquo;s Encrypt证书增强可信度&lt;/li&gt;
+&lt;li&gt;构建钓鱼门户收集凭证&lt;/li&gt;
+&lt;li&gt;通过访问日志监控受害者行为&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;下期预告&#34;&gt;下期预告
+&lt;/h3&gt;&lt;p&gt;第三部分将剖析Active Directory账户锁定拒绝服务攻击中的元数据侦查技术。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Avira VPN 2.15.2.28160本地权限提升漏洞分析</title>
+        <link>http://localhost:1313/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 15:56:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;产品信息&#34;&gt;产品信息
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;: Avira Phantom VPN 2.15.2.28160&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下载源&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://package.avira.com/package/oeavira/win/int/avira_en_vpn__ws.exe&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方安装包链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试系统&lt;/strong&gt;: Windows 10 1803 (x64)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;Avira VPN服务在修改VPN配置时，会调整&lt;code&gt;C:\ProgramData\Avira\VPN\&lt;/code&gt;目录下&lt;code&gt;VpnSharedSettings.backup&lt;/code&gt;和&lt;code&gt;VpnSharedSettings.config&lt;/code&gt;文件的DACL（自主访问控制列表）。通过创建硬链接指向目标文件（如&lt;code&gt;phantomvpn.exe&lt;/code&gt;），攻击者可利用此漏洞覆盖目标文件的DACL，最终实现从低权限用户到SYSTEM的权限提升。&lt;/p&gt;
+&lt;h3 id=&#34;漏洞原理&#34;&gt;漏洞原理
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;触发条件&lt;/strong&gt;: 通过VPN GUI修改配置（如取消勾选“发送诊断数据”）时，服务端调用&lt;code&gt;Avira.VPN.Core.dll&lt;/code&gt;中的&lt;code&gt;AdjustSecurity()&lt;/code&gt;函数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限修改&lt;/strong&gt;: 对于共享配置文件（&lt;code&gt;StorageType&lt;/code&gt;为&lt;code&gt;AllUserAccess&lt;/code&gt;），服务会将文件DACL设置为允许所有认证用户完全控制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;利用链&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;攻击者创建硬链接，将&lt;code&gt;VpnSharedSettings.backup&lt;/code&gt;指向目标文件（如&lt;code&gt;phantomvpn.exe&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;触发配置更改后，目标文件的DACL被覆盖为低权限用户可写。&lt;/li&gt;
+&lt;li&gt;替换目标文件为恶意二进制，并通过VPN连接触发执行，获得SYSTEM权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;创建硬链接指向&lt;code&gt;phantomvpn.exe&lt;/code&gt;:
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;mklink&lt;/span&gt; /H C:\ProgramData\Avira\VPN\VpnSharedSettings.backup &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Program Files (x86)\Avira\VPN\OpenVPN\phantomvpn.exe&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;在VPN设置中取消勾选“发送诊断数据”，触发DACL修改。&lt;/li&gt;
+&lt;li&gt;替换&lt;code&gt;phantomvpn.exe&lt;/code&gt;为恶意程序，点击“Secure my Connection”执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;时间线&#34;&gt;时间线
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2018年9月28日&lt;/strong&gt;: 向Avira报告&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2018年10月4日&lt;/strong&gt;: Avira确认复现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2018年12月13日&lt;/strong&gt;: 漏洞修复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关联漏洞&#34;&gt;关联漏洞
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5&#34; &gt;Avira VPN通过不安全更新路径的本地提权（2020年1月）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5&#34; &gt;Avira Optimizer本地提权漏洞（2019年8月）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>安全成熟度、资产复杂性与漏洞赏金计划有效性深度解析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%B5%84%E4%BA%A7%E5%A4%8D%E6%9D%82%E6%80%A7%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%89%E6%95%88%E6%80%A7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 15:23:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%B5%84%E4%BA%A7%E5%A4%8D%E6%9D%82%E6%80%A7%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%89%E6%95%88%E6%80%A7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;目录&#34;&gt;目录
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;攻击面的定义及其对漏洞狩猎的影响&lt;/li&gt;
+&lt;li&gt;安全成熟度的核心内涵&lt;/li&gt;
+&lt;li&gt;资产复杂性与安全成熟度、攻击面的关联&lt;/li&gt;
+&lt;li&gt;对计划所有者和研究人员的双重影响&lt;/li&gt;
+&lt;li&gt;资产蔓延对IT团队和研究人员的冲击&lt;/li&gt;
+&lt;li&gt;如何通过侦察手段识别和减少资产蔓延&lt;/li&gt;
+&lt;li&gt;复杂度映射与奖励机制设计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键要素解析&#34;&gt;关键要素解析
+&lt;/h3&gt;&lt;p&gt;漏洞赏金计划的三大核心要素是&lt;strong&gt;攻击面&lt;/strong&gt;、&lt;strong&gt;安全成熟度&lt;/strong&gt;和&lt;strong&gt;资产复杂性&lt;/strong&gt;。攻击面指系统/网络中所有可能被利用的入口点集合，通常攻击面越大，漏洞猎人可挖掘的潜在漏洞越多。安全成熟度体现组织管理安全威胁的能力，成熟度越高意味着防御体系越完善，但同时也需要更高技能的研究人员参与。&lt;/p&gt;
+&lt;h3 id=&#34;资产复杂性评估&#34;&gt;资产复杂性评估
+&lt;/h3&gt;&lt;p&gt;资产复杂性涉及技术栈深度、认证流程、变更频率等维度。例如：一个需要深度技术理解的复杂消息平台，其安全审查所需的时间和技能远超普通Web应用。评估时需分析端点、子域名等表层信息，还需追踪历史漏洞和代码部署频率。&lt;/p&gt;
+&lt;h3 id=&#34;资产蔓延的挑战&#34;&gt;资产蔓延的挑战
+&lt;/h3&gt;&lt;p&gt;当组织失去对资产的可见性时，会出现&lt;strong&gt;资产蔓延&lt;/strong&gt;现象。未跟踪的资产往往缺乏维护，成为威胁攻击者的突破口。配置管理数据库（CMDB）维护困难、影子IT（如未经批准的开发环境）等问题会加剧资产蔓延，导致漏洞赏金计划范围模糊，研究人员可能重复提交低风险漏洞而忽略高危系统。&lt;/p&gt;
+&lt;h3 id=&#34;解决方案侦察与复杂度映射&#34;&gt;解决方案：侦察与复杂度映射
+&lt;/h3&gt;&lt;p&gt;通过**侦察（Recon）**流程可识别未知资产，结合自动化工具与人工分类减少蔓延。复杂度映射则需根据资产类型（如虚拟机管理程序vs标准Web应用）制定差异化奖励策略，确保复杂度高、业务关键性强的资产能吸引顶尖研究人员投入足够时间。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;跳过侦察环节的研究者往往会遗漏未登记资产，而这些被遗忘的资产往往能带来丰厚回报&amp;rdquo; —— blackbird-eu&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（正文完整保留了技术术语的英文对照和专家引述，技术细节包括CMDB维护、IOC监测、影子IT管理等关键概念均准确呈现）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>安全专家揭秘：汽车、家居和医疗设备的SMART服务为何如此易被入侵？</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%8F%AD%E7%A7%98%E6%B1%BD%E8%BD%A6%E5%AE%B6%E5%B1%85%E5%92%8C%E5%8C%BB%E7%96%97%E8%AE%BE%E5%A4%87%E7%9A%84smart%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E6%98%93%E8%A2%AB%E5%85%A5%E4%BE%B5/</link>
+        <pubDate>Thu, 07 Aug 2025 14:28:02 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E4%B8%93%E5%AE%B6%E6%8F%AD%E7%A7%98%E6%B1%BD%E8%BD%A6%E5%AE%B6%E5%B1%85%E5%92%8C%E5%8C%BB%E7%96%97%E8%AE%BE%E5%A4%87%E7%9A%84smart%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BD%95%E5%A6%82%E6%AD%A4%E6%98%93%E8%A2%AB%E5%85%A5%E4%BE%B5/</guid>
+        <description>&lt;h3 id=&#34;黑客如何轻松攻破汽车家居和医疗设备的smart服务&#34;&gt;黑客如何轻松攻破汽车、家居和医疗设备的SMART服务？
+&lt;/h3&gt;&lt;p&gt;企业正在通过将传统服务数字化改造来重塑自身。数字化服务利用智能产品提供更优质的服务体验、附加功能以及用于性能优化的数据采集。这些智能产品可通过Wi-Fi/蜂窝网络、传感器、云端基础设施和移动端进行远程控制，涵盖联网汽车、家用电器、监控系统、可穿戴设备、医疗仪器甚至智能步枪等领域。近期白帽黑客就利用软件漏洞成功劫持了行驶中的Jeep Cherokee，使其失控冲入沟渠——而驾驶员全程束手无策！&lt;/p&gt;
+&lt;h4 id=&#34;安全与物理伤害的界限正在模糊&#34;&gt;安全与物理伤害的界限正在模糊
+&lt;/h4&gt;&lt;p&gt;虽然这次汽车黑客事件导致140万辆汽车召回，但它更标志着网络攻击开始能对人身安全造成实质伤害。未来的网络攻击将不再局限于数据泄露、金融窃取或隐私窥探，而是可能通过定向或随机方式致人伤残甚至死亡——这一切可能就发生在受害者家中。&lt;/p&gt;
+&lt;h4 id=&#34;物理接触攻击的隐蔽威胁&#34;&gt;物理接触攻击的隐蔽威胁
+&lt;/h4&gt;&lt;p&gt;部分漏洞利用技术被低估的原因在于需要物理接触设备。但车辆维修或代泊期间，攻击者完全可能篡改电子系统乃至固件。所有智能设备都将支持无线更新，这为黑客提供了绝佳的攻击入口。因此数字产品必须建立双重防御体系：既要防范无线入侵，也要防范技术人员等内部人员的物理接触攻击。&lt;/p&gt;
+&lt;h4 id=&#34;初创企业的安全困境&#34;&gt;初创企业的安全困境
+&lt;/h4&gt;&lt;p&gt;资金有限的初创企业往往难以提供充分的安全防护，这为恶意攻击者提供了可乘之机。智能产品安全投资的驱动力将主要来自安全法规、合规要求及严厉的惩罚性条款。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>虚拟化无线攻防实验室：无需硬件的Wi-Fi黑客技术实践</title>
+        <link>http://localhost:1313/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Thu, 07 Aug 2025 11:54:45 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%97%A0%E7%BA%BF%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%97%A0%E9%9C%80%E7%A1%AC%E4%BB%B6%E7%9A%84wi-fi%E9%BB%91%E5%AE%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;核心技术解析&#34;&gt;核心技术解析
+&lt;/h1&gt;&lt;h2 id=&#34;项目背景&#34;&gt;项目背景
+&lt;/h2&gt;&lt;p&gt;Wild West Hackin&amp;rsquo; Fest活动中，团队发现传统无线攻防训练存在三大痛点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;硬件兼容性问题（特定无线网卡/驱动要求）&lt;/li&gt;
+&lt;li&gt;虚拟机USB穿透技术限制（VMware被Broadcom收购后的支持问题）&lt;/li&gt;
+&lt;li&gt;设备运输与现场配置的可靠性问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术架构&#34;&gt;技术架构
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内核层虚拟化&lt;/strong&gt;&lt;br&gt;
+基于mac80211_hwsim内核模块创建虚拟无线接口，该模块通常用于协议开发测试&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;modprobe mac80211_hwsim
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;用户空间控制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mininet-WiFi增强版作为底层框架&lt;/li&gt;
+&lt;li&gt;TMUX多窗口管理替代传统xterm终端&lt;/li&gt;
+&lt;li&gt;Python编写的统一控制界面（支持箭头导航）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击场景仿真&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;攻击类型&lt;/th&gt;
+          &lt;th&gt;仿真技术&lt;/th&gt;
+          &lt;th&gt;对应工具链&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;四步握手捕获&lt;/td&gt;
+          &lt;td&gt;虚拟客户端重连行为模拟&lt;/td&gt;
+          &lt;td&gt;BetterCap/Aircrack&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;WEP密钥破解&lt;/td&gt;
+          &lt;td&gt;流量生成与IV采集&lt;/td&gt;
+          &lt;td&gt;iPerf+Aircrack-ng&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;钓鱼AP&lt;/td&gt;
+          &lt;td&gt;动态门户页面生成&lt;/td&gt;
+          &lt;td&gt;WiFi-Pisher&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;核心功能演示&#34;&gt;核心功能演示
+&lt;/h1&gt;&lt;h2 id=&#34;1-wpa2四步握手攻击&#34;&gt;1. WPA2四步握手攻击
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 监控模式激活&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;airmon-ng start wlan0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 使用BetterCap进行嗅探&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;bettercap -iface wlan0mon -eval &lt;span class=&#34;s2&#34;&gt;&amp;#34;wifi.recon on; wifi.clear; wifi.recon 6&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;2-wep加密破解&#34;&gt;2. WEP加密破解
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 虚拟流量生成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;h1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iperf -s -u &amp;amp;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;h2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;iperf -c 10.0.0.1 -u -t 60&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;3-钓鱼热点攻击&#34;&gt;3. 钓鱼热点攻击
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 创建虚假企业网络&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python wifi_forge.py --essid CorpNet --template enterprise
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;未来路线图&#34;&gt;未来路线图
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;容器化部署&lt;/strong&gt;&lt;br&gt;
+当前Docker镜像约5GB，计划采用Miniconda优化依赖管理&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WPA3支持&lt;/strong&gt;&lt;br&gt;
+集成Dragon Blood等新型攻击技术&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;环境快照工具&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 网络环境配置文件示例&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;access_points&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;- &lt;span class=&#34;nt&#34;&gt;bssid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;44&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;55&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;channel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;encryption&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;WPA2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;signal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;-&lt;span class=&#34;l&#34;&gt;65dBm&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;项目意义&#34;&gt;项目意义
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;教育普惠&lt;/strong&gt;：使无专业硬件的学习者能实践高级无线攻击技术&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;红队准备&lt;/strong&gt;：支持客户网络环境预仿真测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;研究平台&lt;/strong&gt;：安全工具开发测试的标准化环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;项目GitHub仓库：blackhillsinfosec/WiFi-Forge&lt;br&gt;
+特别提示：建议在Ubuntu虚拟机运行，Kali Linux存在已知兼容性问题&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>亚马逊再次遭遇BGP劫持攻击，三小时失控IP池导致23.5万美元损失</title>
+        <link>http://localhost:1313/p/%E4%BA%9A%E9%A9%AC%E9%80%8A%E5%86%8D%E6%AC%A1%E9%81%AD%E9%81%87bgp%E5%8A%AB%E6%8C%81%E6%94%BB%E5%87%BB%E4%B8%89%E5%B0%8F%E6%97%B6%E5%A4%B1%E6%8E%A7ip%E6%B1%A0%E5%AF%BC%E8%87%B423.5%E4%B8%87%E7%BE%8E%E5%85%83%E6%8D%9F%E5%A4%B1/</link>
+        <pubDate>Thu, 07 Aug 2025 11:21:50 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BA%9A%E9%A9%AC%E9%80%8A%E5%86%8D%E6%AC%A1%E9%81%AD%E9%81%87bgp%E5%8A%AB%E6%8C%81%E6%94%BB%E5%87%BB%E4%B8%89%E5%B0%8F%E6%97%B6%E5%A4%B1%E6%8E%A7ip%E6%B1%A0%E5%AF%BC%E8%87%B423.5%E4%B8%87%E7%BE%8E%E5%85%83%E6%8D%9F%E5%A4%B1/</guid>
+        <description>&lt;h3 id=&#34;bgp协议与攻击背景&#34;&gt;BGP协议与攻击背景
+&lt;/h3&gt;&lt;p&gt;BGP（边界网关协议）是互联网自治系统（AS）间路由的核心协议。2022年8月，黑客通过操纵AS209243（英国运营商quickhost.uk）广播虚假路由，劫持了亚马逊AS16509管理的256个IP地址（44.235.216.0/24段），持续时间达3小时。&lt;/p&gt;
+&lt;h3 id=&#34;技术攻击链分析&#34;&gt;技术攻击链分析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路由劫持阶段&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;攻击者伪造AS路径，使流量经恶意AS14618路由&lt;/li&gt;
+&lt;li&gt;通过BGP Updates撤回亚马逊合法路由（图10）&lt;/li&gt;
+&lt;li&gt;Hurricane Electric监控显示异常bogon路由广播（图6）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;证书窃取&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用劫持的44.235.216.69 IP（原属celer.network）&lt;/li&gt;
+&lt;li&gt;向拉脱维亚CA机构GoGetSSL成功申请TLS证书（图2）&lt;/li&gt;
+&lt;li&gt;推测通过DNS TXT记录验证或服务器漏洞实现域名控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;智能合约攻击&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署恶意合约替换cBridge跨链桥接口（图1）&lt;/li&gt;
+&lt;li&gt;3小时内窃取32笔交易共计234,866美元&lt;/li&gt;
+&lt;li&gt;最大单笔损失达156,000美元（图11）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;取证与溯源&#34;&gt;取证与溯源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;SlowMist团队通过日志定位攻击IP：54.84.236.100&lt;/li&gt;
+&lt;li&gt;Censys平台显示证书与IP关联异常（图3/4）&lt;/li&gt;
+&lt;li&gt;BGP Play记录确认AS16509路由被恶意撤回（图9）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术启示&#34;&gt;技术启示
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;BGP协议固有缺陷：缺乏路由验证机制&lt;/li&gt;
+&lt;li&gt;CA证书颁发流程漏洞：IP控制即视为所有权证明&lt;/li&gt;
+&lt;li&gt;区块链应用特殊风险：智能合约不可逆性放大损失&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;数据来源：&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://arstechnica.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ars Technica事件报道&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://www.coinbase.com/blog/celer-bridge-incident-analysis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Coinbase技术分析&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>通过密码分析识别新型攻击路径</title>
+        <link>http://localhost:1313/p/%E9%80%9A%E8%BF%87%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E8%AF%86%E5%88%AB%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84/</link>
+        <pubDate>Thu, 07 Aug 2025 11:00:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%9A%E8%BF%87%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E8%AF%86%E5%88%AB%E6%96%B0%E5%9E%8B%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84/</guid>
+        <description>&lt;h1 id=&#34;通过密码分析识别新型攻击路径&#34;&gt;通过密码分析识别新型攻击路径
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2025年4月21日&lt;/strong&gt;&lt;br&gt;
+n00py&lt;br&gt;
+&lt;strong&gt;渗透测试&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;查看我在Wild West Hacking Fest – Mile High 2025的演讲内容：&lt;br&gt;
+[演讲幻灯片链接]&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;相关技术主题&#34;&gt;相关技术主题
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;针对RapidIdentity登录门户的密码喷洒技术&lt;/li&gt;
+&lt;li&gt;不依赖Mimikatz的用户密码操纵方法&lt;/li&gt;
+&lt;li&gt;通过Cisco统一通信管理器(CUCM)未授权导出用户名&lt;/li&gt;
+&lt;li&gt;纯Metasploit框架下的基于资源的约束委派(RBCD)攻击&lt;/li&gt;
+&lt;li&gt;NTLMv1协议的实际攻击案例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;注&lt;/strong&gt;：原文为技术博客框架性内容，实际技术细节需参考作者在安全会议的演讲资料。文中提及的攻防技术均属于渗透测试研究范畴。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>托管安全服务与内部SOC：如何选择最适合的方案？</title>
+        <link>http://localhost:1313/p/%E6%89%98%E7%AE%A1%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E4%B8%8E%E5%86%85%E9%83%A8soc%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%9C%80%E9%80%82%E5%90%88%E7%9A%84%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Thu, 07 Aug 2025 10:27:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%89%98%E7%AE%A1%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1%E4%B8%8E%E5%86%85%E9%83%A8soc%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%9C%80%E9%80%82%E5%90%88%E7%9A%84%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h1 id=&#34;托管安全服务与内部soc如何选择最适合的方案&#34;&gt;托管安全服务与内部SOC：如何选择最适合的方案？
+&lt;/h1&gt;&lt;h2 id=&#34;网络安全威胁的崛起&#34;&gt;网络安全威胁的崛起
+&lt;/h2&gt;&lt;p&gt;技术进步和AI的兴起改变了所有参与者的游戏规则。网络攻击者现在拥有更多资源来渗透并破坏信息安全管理系统(ISMS)，而几乎所有行业的公司都在通过各种不同手段争相加强其在线安全防御。&lt;/p&gt;
+&lt;p&gt;在这种情况下，企业建立安全运营中心(SOC)变得至关重要。一个优秀的SOC不仅能检测安全基础设施中的漏洞，还能帮助企业主动制定策略保护关键资产，确保始终领先于网络安全威胁一步。&lt;/p&gt;
+&lt;h2 id=&#34;什么是内部soc&#34;&gt;什么是内部SOC？
+&lt;/h2&gt;&lt;p&gt;内部安全运营中心(SOC)是一个专门保护组织信息管理系统的独立部门，提供全天候的外部网络威胁监控和安全防护。&lt;/p&gt;
+&lt;p&gt;拥有内部SOC的主要优势包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对整个安全流程的完全控制&lt;/li&gt;
+&lt;li&gt;利用内部安全和技术人员制定安全相关策略&lt;/li&gt;
+&lt;li&gt;根据公司需求定制解决方案&lt;/li&gt;
+&lt;li&gt;对组织系统的深入了解&lt;/li&gt;
+&lt;li&gt;保持数据主权，确保敏感数据不会离开组织&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;安全运营中心(SOC)是您网络安全战略的控制中心。在这里，威胁被实时检测、调查和响应，确保您的业务保持受保护状态。&amp;rdquo;&lt;br&gt;
+— John M.，微软认证服务采用专家&lt;/p&gt;
+&lt;p&gt;然而，内部SOC也面临诸多挑战：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要大量投资于安全工具、数据中心和专业人员&lt;/li&gt;
+&lt;li&gt;持续投入以保持团队对最新安全趋势的了解&lt;/li&gt;
+&lt;li&gt;扩展时面临可扩展性挑战和成本增加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;什么是托管安全服务&#34;&gt;什么是托管安全服务？
+&lt;/h2&gt;&lt;p&gt;托管安全服务是由第三方组织或托管安全服务提供商(MSSP)提供的一整套网络安全解决方案。通过利用公司的人员、流程和技术，MSSP能够提供一系列网络安全解决方案，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;威胁狩猎和事件响应&lt;/li&gt;
+&lt;li&gt;用户行为分析&lt;/li&gt;
+&lt;li&gt;24/7主动监控&lt;/li&gt;
+&lt;li&gt;端到端监控&lt;/li&gt;
+&lt;li&gt;漏洞评估&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;托管安全服务的主要优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取全球威胁情报&lt;/li&gt;
+&lt;li&gt;符合合规和监管要求&lt;/li&gt;
+&lt;li&gt;增强的事件响应能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;但托管安全服务也存在缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;沟通障碍&lt;/li&gt;
+&lt;li&gt;数据隐私问题&lt;/li&gt;
+&lt;li&gt;控制权缺失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;选择前的关键问题&#34;&gt;选择前的关键问题
+&lt;/h2&gt;&lt;p&gt;在决定选择内部SOC还是托管安全服务时，企业需要考虑以下关键问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;组织规模与成熟度&lt;/strong&gt;：组织规模和经验水平是重要决定因素&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;年度网络安全预算&lt;/strong&gt;：是否有资源承担建立和维护内部SOC的高昂前期成本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;能否吸引合格安全人员&lt;/strong&gt;：需要为高素质安全人员预留预算&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;24/7监控的关键性&lt;/strong&gt;：是否处于高风险环境需要全天候监控&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;是否受严格监管要求约束&lt;/strong&gt;：技术、医疗和金融行业需遵守严格标准&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;是否需要快速扩展安全运营&lt;/strong&gt;：托管服务提供更灵活的扩展能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;与catalyic-security探索有效的soc方案&#34;&gt;与Catalyic Security探索有效的SOC方案
+&lt;/h2&gt;&lt;p&gt;作为托管安全服务(MSS)的一部分，我们运营高可用性安全运营中心(SOC)，提供24/7不间断的安全防护。我们的SOC可以针对不同行业组织进行定制，并定期进行SOC成熟度评估。&lt;/p&gt;
+&lt;p&gt;无论企业选择哪种方案，重要的是保持对在线安全管理的主动态度。只有通过持续审查和监控，企业才能避免破坏性的网络安全威胁，并在不断变化的数字环境中稳健前行。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>OpenAI在网络安全工具中的非常规应用：逆向工程与代码审查</title>
+        <link>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</link>
+        <pubDate>Thu, 07 Aug 2025 10:10:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/openai%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%E4%B8%AD%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E5%BA%94%E7%94%A8%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</guid>
+        <description>&lt;h1 id=&#34;down-the-rabbit-hole-unusual-applications-of-openai-in-cybersecurity-tooling&#34;&gt;Down the Rabbit Hole: Unusual Applications of OpenAI in Cybersecurity Tooling
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;随着AI技术进入成熟应用期，网络安全领域的低垂果实已被采摘——杀毒引擎集成机器学习模型，攻击者滥用合成媒体实施诈骗。尽管存在炒作和恐吓，OpenAI的GPT-3语言模型仍因其在Black Hat和DEF CON大会上展示的钓鱼工具/反钓鱼工具引发广泛关注。&lt;/p&gt;
+&lt;h2 id=&#34;gpt-3的技术跨越&#34;&gt;GPT-3的技术跨越
+&lt;/h2&gt;&lt;p&gt;Lambda Labs数据显示，GPT-3 API相较前代实现百倍级参数增长：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指标&lt;/th&gt;
+          &lt;th&gt;GPT-2&lt;/th&gt;
+          &lt;th&gt;GPT-3&lt;/th&gt;
+          &lt;th&gt;GPT-3 API&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;训练时间&lt;/td&gt;
+          &lt;td&gt;1+周&lt;/td&gt;
+          &lt;td&gt;355年&lt;/td&gt;
+          &lt;td&gt;&amp;lt;1分钟&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;成本&lt;/td&gt;
+          &lt;td&gt;$43k&lt;/td&gt;
+          &lt;td&gt;$4.6m&lt;/td&gt;
+          &lt;td&gt;$0.06/千token&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据量&lt;/td&gt;
+          &lt;td&gt;40GB&lt;/td&gt;
+          &lt;td&gt;45TB&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;算力需求&lt;/td&gt;
+          &lt;td&gt;32个TPUv3&lt;/td&gt;
+          &lt;td&gt;1个Tesla V100&lt;/td&gt;
+          &lt;td&gt;可忽略&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;代码解析新纪元&#34;&gt;代码解析新纪元
+&lt;/h2&gt;&lt;p&gt;OpenAI推出两大代码相关产品：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GitHub Copilot：基于GPT-3的代码自动补全工具&lt;/li&gt;
+&lt;li&gt;Codex：通过自然语言指令生成代码的进阶工具&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;早期测试显示GPT-3具备出色的代码解析能力。例如输入JavaScript代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bob&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Kevin&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Stuart&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;minions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型能准确解释为：&amp;ldquo;该代码初始化包含三个名字的数组，然后将数组打印到控制台&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id=&#34;逆向工程实验&#34;&gt;逆向工程实验
+&lt;/h2&gt;&lt;p&gt;作者尝试将GPT-3应用于汇编代码逆向工程。以Metasploit的RC4加密payload为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;原始模型表现&lt;/strong&gt;：将RC4密钥调度算法误判为&amp;quot;打印HELLO WORLD&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改进方法&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用fine-tuning功能在Curie模型上训练&lt;/li&gt;
+&lt;li&gt;构建包含100个Metasploit payload的训练集（50个RC4/50个未加密）&lt;/li&gt;
+&lt;li&gt;训练耗时仅5分钟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;测试结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RC4识别准确率：80%（4/5）&lt;/li&gt;
+&lt;li&gt;未加密代码识别准确率：60%（3/5）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;代码审查实践&#34;&gt;代码审查实践
+&lt;/h2&gt;&lt;p&gt;使用davinci-instruct模型进行漏洞检测：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@app.route&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/search&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;search&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;render_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;results.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;模型成功识别出XSS漏洞，并准确定位到危险参数&lt;code&gt;q&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;技术局限&#34;&gt;技术局限
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;语言模型本质限制：不适合密码分析或模糊测试&lt;/li&gt;
+&lt;li&gt;供应链攻击风险：训练数据可能被投毒&lt;/li&gt;
+&lt;li&gt;许可争议：使用GitHub代码作为训练数据的法律问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来展望&#34;&gt;未来展望
+&lt;/h2&gt;&lt;p&gt;随着GPT-3访问权限放宽，预计将涌现更多AI驱动的安全工具，如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集成机器学习的云端反编译器&lt;/li&gt;
+&lt;li&gt;自动化漏洞检测系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（全文完）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>零信任DNS在现代安全中的关键作用</title>
+        <link>http://localhost:1313/p/%E9%9B%B6%E4%BF%A1%E4%BB%BBdns%E5%9C%A8%E7%8E%B0%E4%BB%A3%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8/</link>
+        <pubDate>Thu, 07 Aug 2025 09:54:10 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%9B%B6%E4%BF%A1%E4%BB%BBdns%E5%9C%A8%E7%8E%B0%E4%BB%A3%E5%AE%89%E5%85%A8%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E4%BD%9C%E7%94%A8/</guid>
+        <description>&lt;h3 id=&#34;零信任dns的诞生&#34;&gt;零信任DNS的诞生
+&lt;/h3&gt;&lt;p&gt;微软在Windows 11 Insider版本中公开预览了Zero Trust DNS（ZTDNS），该功能通过强制实施基于域名的网络访问控制提升安全性。ZTDNS将Windows DNS客户端与受信任的防护性DNS（PDNS）服务器集成，确保仅允许访问由这些服务器解析的IP地址，严格遵循零信任的&amp;quot;默认拒绝&amp;quot;原则。&lt;/p&gt;
+&lt;h3 id=&#34;威胁态势的演变&#34;&gt;威胁态势的演变
+&lt;/h3&gt;&lt;p&gt;攻击者正利用AI自动化网络攻击，使其更复杂且难以检测：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过恶意广告技术（如流量分发系统TDS）诱导用户访问恶意站点&lt;/li&gt;
+&lt;li&gt;传播信息窃取恶意软件（infostealer），成为企业数据泄露的核心载体&lt;br&gt;
+传统安全模型专注于事后检测（如识别首个感染者），但面对AI驱动的攻击已力不从心。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防护性dnspdns的价值&#34;&gt;防护性DNS（PDNS）的价值
+&lt;/h3&gt;&lt;p&gt;PDNS通过DNS威胁情报主动拦截威胁：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;预判机制&lt;/strong&gt;：监控域名注册和DNS查询，在攻击者利用高风险域名前即阻断&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NSA数据&lt;/strong&gt;：DNS可拦截92%的恶意软件攻击，在&amp;quot;通信意图&amp;quot;阶段即中止威胁链&lt;/li&gt;
+&lt;li&gt;核心优势：
+&lt;ul&gt;
+&lt;li&gt;阻止初始感染（拒绝解析恶意域名）&lt;/li&gt;
+&lt;li&gt;中断命令与控制（C2）通信&lt;/li&gt;
+&lt;li&gt;防范DNS数据外泄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;零信任原则与dns的融合&#34;&gt;零信任原则与DNS的融合
+&lt;/h3&gt;&lt;p&gt;真正的零信任必须包含DNS安全：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;永不信任，始终验证&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;确保DNS不解析高风险域名&lt;/li&gt;
+&lt;li&gt;采用加密和认证连接DNS服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;持续监控&lt;/strong&gt;：检测DNS流量中的异常（如数据外泄、DGA域名生成算法）&lt;br&gt;
+微软ZTDNS强制使用加密DNS，并限定查询仅发送至配置的PDNS服务器，有效防御：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS劫持&lt;/li&gt;
+&lt;li&gt;恶意通信&lt;/li&gt;
+&lt;li&gt;零日DNS威胁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;infoblox的实践案例&#34;&gt;Infoblox的实践案例
+&lt;/h3&gt;&lt;p&gt;Infoblox Threat Defense™作为领先的PDNS解决方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于预测性DNS威胁情报算法，平均早于行业63天阻断威胁&lt;/li&gt;
+&lt;li&gt;75.4%的威胁在首次DNS查询前即被拦截&lt;/li&gt;
+&lt;li&gt;误报率仅0.0002%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;免费安全研讨会：深入了解零信任及DNS滥用防御（&lt;a class=&#34;link&#34; href=&#34;https://www.infoblox.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;注册链接&lt;/a&gt;）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;技术注解：本文涉及DNS协议加密（DoT/DoH）、威胁情报集成、零信任网络架构（ZTNA）等具体技术实现。&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>使用HoneyBadger追踪黑客入门指南</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8honeybadger%E8%BF%BD%E8%B8%AA%E9%BB%91%E5%AE%A2%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Thu, 07 Aug 2025 09:37:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8honeybadger%E8%BF%BD%E8%B8%AA%E9%BB%91%E5%AE%A2%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;使用honeybadger追踪黑客入门指南&#34;&gt;使用HoneyBadger追踪黑客入门指南
+&lt;/h1&gt;&lt;p&gt;大家好，我是John Strand。在本视频中，我们将讨论HoneyBadger。在讨论归因或网络欺骗时，通常会关注创建能够回传信标的文档或元素，并收集发起信标的IP地址。虽然这可行，但IP地址的地理定位并不十分准确。我们可以做得更好，这就是HoneyBadger的用武之地。&lt;/p&gt;
+&lt;p&gt;HoneyBadger是由Black Hills Information Security的Bradley基于Tim Tomes（lanmaster53）的工作开发的工具。它可以通过收集攻击者周围的无线网络信息，利用Google API进行精确定位。&lt;/p&gt;
+&lt;h2 id=&#34;安装与配置&#34;&gt;安装与配置
+&lt;/h2&gt;&lt;p&gt;HoneyBadger可在ADHD（Active Defense Harbinger Distribution）上安装。ADHD是用于Wild West Hackin&amp;rsquo; Fest课程和Black Hat培训的发行版。安装完成后，桌面上的&amp;quot;ADHD Usage&amp;quot;文件提供了详细的使用说明。选择&amp;quot;Attribution&amp;quot;，然后选择&amp;quot;HoneyBadger&amp;quot;即可开始。&lt;/p&gt;
+&lt;p&gt;配置HoneyBadger时，需要注意必须获取Google API密钥以使地图功能正常工作。&lt;/p&gt;
+&lt;h2 id=&#34;工作原理&#34;&gt;工作原理
+&lt;/h2&gt;&lt;p&gt;HoneyBadger通过无线站点调查实现追踪。使用USB无线适配器（如Hak5商店出售的产品）可以扫描周围的无线网络。实际上，任何计算机系统都能检测到周围的无线网络接入点。&lt;/p&gt;
+&lt;p&gt;无线接入点每秒约发送10次信标，广播其BSSID（MAC地址）和ESSID（接入点名称）。HoneyBadger会促使攻击者的计算机执行无线站点调查，收集这些SSID、BSSID和ESSID信息，然后通过Google API查询地理位置数据。&lt;/p&gt;
+&lt;h2 id=&#34;使用界面&#34;&gt;使用界面
+&lt;/h2&gt;&lt;p&gt;在HoneyBadger界面中，可以设置不同的目标（targets）来区分不同活动。例如，可以创建&amp;quot;demo&amp;quot;、&amp;ldquo;class&amp;quot;或&amp;quot;Spearfish&amp;quot;等不同标识的GUID。这种区分很重要，因为可以在Excel表格、网站等多种媒介中部署HoneyBadger元素。&lt;/p&gt;
+&lt;p&gt;HoneyBadger提供以下功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;生成原始宏&lt;/strong&gt;：可插入Excel表格或Word文档（虽然Word文档中的宏容易被警惕）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VB.NET代码输出&lt;/strong&gt;：可通过vbc和Mono编译为独立可执行文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;地理定位精度&#34;&gt;地理定位精度
+&lt;/h2&gt;&lt;p&gt;通过地图选项卡可以查看历史定位记录。在测试案例中，定位精度可达20-100米。例如，在拉斯维加斯Mandalay Bay会议中心的定位非常精确。&lt;/p&gt;
+&lt;p&gt;日志记录显示所有收集的无线接入点信息，包括BSSID和提交给Google API的数据。Google会返回经纬度坐标和以米为单位的精度估计。&lt;/p&gt;
+&lt;h2 id=&#34;法律考量&#34;&gt;法律考量
+&lt;/h2&gt;&lt;p&gt;关于这种技术的合法性问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击者需要先入侵系统并触发机制&lt;/li&gt;
+&lt;li&gt;使用的API与手机日常使用的定位服务相同&lt;/li&gt;
+&lt;li&gt;作为防御技术使用更具合理性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;HoneyBadger为网络安全专业人员提供了极强的归因能力，是主动防御工具箱中的重要工具。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：想从John Strand那里学习更多技能？可以查看他的课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;使用BHIS和MITRE ATT&amp;amp;CK入门安全&lt;/li&gt;
+&lt;li&gt;渗透测试入门&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>OpenSSH服务器远程代码执行漏洞(CVE-2024-6387) - regreSSHion漏洞深度分析</title>
+        <link>http://localhost:1313/p/openssh%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-6387-regresshion%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 08:16:52 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/openssh%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-6387-regresshion%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;openssh服务器远程代码执行漏洞cve-2024-6387---regresshion&#34;&gt;OpenSSH服务器远程代码执行漏洞(CVE-2024-6387) - regreSSHion
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2024年7月3日更新&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;发现OpenSSH服务器(sshd)中存在一个严重漏洞(CVE-2024-6387)，命名为regreSSHion。该漏洞源于信号处理程序中的竞争条件，当客户端在指定时间(LoginGraceTime)内未能完成认证时触发，可能导致远程代码执行(RCE)。此漏洞在2020年10月被无意中重新引入，影响基于glibc的Linux系统上8.5p1至9.7p1版本的OpenSSH。未经认证的攻击者可远程利用此漏洞，可能以root权限执行任意代码。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统和应用&#34;&gt;受影响系统和应用
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;易受攻击版本:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenSSH &amp;lt; 4.4p1（若未针对CVE-2006-5051或CVE-2008-4109打补丁）&lt;/li&gt;
+&lt;li&gt;8.5p1 &amp;lt;= OpenSSH &amp;lt; 9.8p1（因信号处理程序中关键安全检查被意外移除）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不受影响版本:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;4.4p1 &amp;lt;= OpenSSH &amp;lt; 8.4p1（受&amp;quot;#ifdef DO_LOG_SAFE_IN_SIGHAND&amp;quot;指令保护）&lt;/li&gt;
+&lt;li&gt;OpenBSD版本（使用异步信号安全的syslog_r()）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h2&gt;&lt;p&gt;当客户端未在LoginGraceTime期限内完成认证时，sshd的SIGALRM处理程序会被异步调用。该处理程序调用了非异步信号安全的syslog()函数，导致竞争条件。攻击者可利用此条件在sshd特权代码中实现远程代码执行。&lt;/p&gt;
+&lt;p&gt;漏洞利用涉及三个主要版本的OpenSSH在不同Debian和Ubuntu系统上的表现。已成功在启用ASLR的32位Linux/glibc系统上演示利用。实验室条件下，攻击平均需要6-8小时的持续连接尝试（达到服务器接受的最大连接数）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_3.4p1 Debian 1:3.4p1-1.woody.3 (Debian 3.0r6, 2005)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：针对sshd公钥解析代码中的free()调用，导致堆损坏&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均约1周获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_4.2p1 Debian-7ubuntu3 (Ubuntu 6.06.1, 2006)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：聚焦SIGALRM处理程序中的pam_start()，使PAM结构不一致，然后在pam_end()调用时利用此状态&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均1-2天获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2 (Debian 12.5.0, 2024)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论：利用SIGALRM处理程序中syslog()的malloc()调用&lt;/li&gt;
+&lt;li&gt;实践：约需10,000次尝试，平均6-8小时获得远程root shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;临时解决方案&#34;&gt;临时解决方案
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;SSHD代码修改&lt;/strong&gt;
+可直接修改代码，在sshsigdie()函数中添加C预处理器指令以避免调用不安全函数。但请注意这些修改可能有副作用且未经充分测试，CFC建议直接更新SSH版本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SSH配置加固&lt;/strong&gt;
+在&lt;code&gt;sshd_config&lt;/code&gt;中调整以下设置以降低攻击有效性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;LoginGraceTime&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为0：通过消除认证超时期来防止漏洞&lt;/li&gt;
+&lt;li&gt;注意：此设置可能占用系统资源，因为它移除了认证尝试的超时限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MaxStartups&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为较小数值：限制未认证连接数&lt;/li&gt;
+&lt;li&gt;注意：设置过低可能阻止合法用户，特别是在攻击激烈或主机用户数多时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PerSourceMaxStartups&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置为较小数值：限制单个源IP的并发未认证连接&lt;/li&gt;
+&lt;li&gt;注意：设置过低可能阻止合法用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;实施这些配置可增强SSH服务器安全性，但会使sshd面临因耗尽所有连接而导致的拒绝服务风险，同时消除远程代码执行风险。&lt;/p&gt;
+&lt;h2 id=&#34;建议&#34;&gt;建议
+&lt;/h2&gt;&lt;p&gt;针对OpenSSH中允许Linux系统远程代码执行的regreSSHion漏洞，需要采取战略性和多层次的安全措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;补丁管理&lt;/strong&gt;：立即应用可用的OpenSSH补丁，并优先考虑定期更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强访问控制&lt;/strong&gt;：使用基于网络的控制限制SSH访问，减少攻击面&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络分段和入侵检测&lt;/strong&gt;：分段网络以防止对关键系统的未授权访问和横向移动，部署入侵检测系统监控和警报利用尝试的可疑活动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;cfc行动&#34;&gt;CFC行动
+&lt;/h2&gt;&lt;p&gt;Kudelski Security在撰写本文时未观察到或收到这些漏洞被主动利用的迹象。CFC将持续监控情况，必要时发布咨询更新。具有漏洞扫描服务的客户将在扫描提供商提供插件后立即收到相关关键漏洞的扫描结果。&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;p&gt;[多个外部参考链接已省略]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>高级威胁攻击者开启网络安全新纪元：CrowdStrike 2025威胁狩猎报告解析</title>
+        <link>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 08:00:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;CISOs及其团队正在进入网络威胁的&amp;quot;新时代&amp;quot;，网络安全巨头CrowdStrike研究人员在《2025威胁狩猎报告》中指出，如今的威胁攻击者展现出&amp;quot;商业级效率&amp;quot;的精密运作特征。&amp;ldquo;这些对手以战略精度操作以最大化影响并快速达成目标，&amp;ldquo;报告强调，&amp;ldquo;创新是智胜这些进取型对手的关键基石。&amp;rdquo;&lt;/p&gt;
+&lt;h3 id=&#34;ai驱动的攻击升级&#34;&gt;AI驱动的攻击升级
+&lt;/h3&gt;&lt;p&gt;威胁战术中最突出的趋势是AI技术的快速采用。&amp;ldquo;高级对手使用生成式AI提升攻击复杂度、加快行动速度并增强能力，&amp;ldquo;CrowdStrike高级副总裁Adam Meyers在简报会上表示。攻击者正利用生成式AI制作更逼真的钓鱼内容、商业邮件诈骗话术，甚至伪造身份信息。&lt;/p&gt;
+&lt;p&gt;防御这类高效攻击者的挑战在于，他们高度依赖通过社交工程（现常由AI辅助）利用难以控制的人为因素，并瞄准IT管辖范围外的非托管设备以规避检测。&lt;/p&gt;
+&lt;h3 id=&#34;五大威胁集群深度剖析&#34;&gt;五大威胁集群深度剖析
+&lt;/h3&gt;&lt;p&gt;报告通过典型案例将威胁集群划分为五大作战领域：&lt;/p&gt;
+&lt;h4 id=&#34;跨域攻击blockade-spider与operator-panda&#34;&gt;跨域攻击：Blockade Spider与Operator Panda
+&lt;/h4&gt;&lt;p&gt;这类攻击者通过身份系统、终端设备、云环境等多领域分散行动逃避检测。2025年初观察到的Blockade Spider通过非托管VPN接入网络，试图删除备份文件并干扰CrowdStrike的Falcon传感器。而中国背景的Operator Panda（又称Salt Typhoon）则通过漏洞链攻击思科交换机，并清除日志掩盖行踪。&lt;/p&gt;
+&lt;h4 id=&#34;身份威胁scattered-spider&#34;&gt;身份威胁：Scattered Spider
+&lt;/h4&gt;&lt;p&gt;该组织专精社交工程攻击，2025年4月复出后，其勒索攻击从初始访问到加密仅需24小时，较2024年的35.5小时大幅提速。语音钓鱼（vishing）是其标志性手段，去年使用量激增443%。&lt;/p&gt;
+&lt;h4 id=&#34;云环境威胁genesis-panda与murky-panda&#34;&gt;云环境威胁：Genesis Panda与Murky Panda
+&lt;/h4&gt;&lt;p&gt;过去12个月与中国关联的云入侵事件增长40%。Genesis Panda利用云服务支持工具部署和C2通信，曾通过入侵Jenkins服务器获取云凭证。Murky Panda则通过合作伙伴关系渗透北美企业的Entra ID租户。&lt;/p&gt;
+&lt;h4 id=&#34;终端威胁glacial-panda&#34;&gt;终端威胁：Glacial Panda
+&lt;/h4&gt;&lt;p&gt;这个与中国关联的组织专门针对电信行业Linux系统（包括传统系统），部署特制OpenSSH工具实施ShieldSlide技术，通过记录认证事件实现横向移动。&lt;/p&gt;
+&lt;h4 id=&#34;漏洞威胁graceful-spider&#34;&gt;漏洞威胁：Graceful Spider
+&lt;/h4&gt;&lt;p&gt;2024年观察到的漏洞中52%与初始访问相关。该犯罪组织在2024年底利用Cleo数据传输产品的零日文件上传漏洞，实现跨地域多行业的远程代码执行。&lt;/p&gt;
+&lt;h3 id=&#34;关键防御建议&#34;&gt;关键防御建议
+&lt;/h3&gt;&lt;p&gt;Meyers为防御者提出六项核心策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实施身份威胁检测&lt;/strong&gt;：部署身份威胁检测响应(ITDR)系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强制多因素认证&lt;/strong&gt;：避免使用SMS等弱认证方式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强化云安全防护&lt;/strong&gt;：弥补云环境安全短板&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消除跨域盲点&lt;/strong&gt;：通过EDR和下一代SIEM覆盖非托管设备&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调整补丁优先级&lt;/strong&gt;：优先修补已知被利用漏洞（参考CISA每周清单）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深入了解对手&lt;/strong&gt;：研究威胁组织战术变化趋势&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;报告特别强调，勒索软件团伙现在平均在入侵后24小时内就会实施加密，较2023年的80小时大幅提升，这要求企业必须建立更快速的威胁响应机制。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>测量网络攻防平衡：防御者比想象中做得更好</title>
+        <link>http://localhost:1313/p/%E6%B5%8B%E9%87%8F%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%B9%B3%E8%A1%A1%E9%98%B2%E5%BE%A1%E8%80%85%E6%AF%94%E6%83%B3%E8%B1%A1%E4%B8%AD%E5%81%9A%E5%BE%97%E6%9B%B4%E5%A5%BD/</link>
+        <pubDate>Thu, 07 Aug 2025 05:40:57 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B5%8B%E9%87%8F%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%B9%B3%E8%A1%A1%E9%98%B2%E5%BE%A1%E8%80%85%E6%AF%94%E6%83%B3%E8%B1%A1%E4%B8%AD%E5%81%9A%E5%BE%97%E6%9B%B4%E5%A5%BD/</guid>
+        <description>&lt;p&gt;“互联网上谁是赢家，攻击者还是防御者？”&lt;br&gt;
+我常被问及这个问题，但以往只能给出定性回答。直到Jason Healey和Tarang Jain在《Lawfare》发表的研究首次通过数据量化了这一平衡。&lt;/p&gt;
+&lt;p&gt;该研究基于三个关键洞察：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;防御者需要基于威胁、漏洞和后果的框架来分类海量安全指标&lt;/li&gt;
+&lt;li&gt;趋势比具体数值更重要&lt;/li&gt;
+&lt;li&gt;应优先利用Verizon、Cyentia、Mandiant等机构现有数据而非从头收集&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;意外结论&lt;/strong&gt;：我们仍有很长的路要走，但现状比想象中乐观。威胁运营、威胁生态组织和软件漏洞领域均有显著改善。遗憾的是，后果指标仍未提升，而成本转嫁正导致&amp;quot;适者生存&amp;quot;的竞争，最终可能留下数量更少但更凶悍的攻击者。&lt;/p&gt;
+&lt;p&gt;这仅是研究的第一阶段，后续计划包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立更完整的威胁/漏洞/后果指标目录&lt;/li&gt;
+&lt;li&gt;推动网络安全公司按时间序列提交防御相关统计数据&lt;/li&gt;
+&lt;li&gt;优化分析报告机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（评论节选）&lt;br&gt;
+&lt;strong&gt;@Clive Robinson&lt;/strong&gt;：&lt;br&gt;
+“技术本身无善恶，关键在于使用者的意图。防御者必须遵循孙子的智慧：了解敌我、选择战场。现代网络安全的核心策略应是‘隔离’——为什么这台电脑要联网？”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;@Swede&lt;/strong&gt;：&lt;br&gt;
+“攻击者只需找到一个漏洞，防御者却要修复所有漏洞。”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;@ResearcherZero&lt;/strong&gt;：&lt;br&gt;
+“俄罗斯FSB长期通过ISP级中间人攻击（AiTM）实施TLS剥离，最新案例显示其伪造卡巴斯基安装程序渗透外交机构。电信公司未修补旧漏洞的行为加剧了风险，某运营商甚至使用‘123456’作为密码。”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数据警示&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verizon报告显示81%的黑客入侵利用弱密码或重复密码&lt;/li&gt;
+&lt;li&gt;近400名AUKUS项目人员在社交媒体暴露身份&lt;/li&gt;
+&lt;li&gt;澳大利亚企业累计损失20亿澳元商业秘密&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>英国数据保护监管机构因凭证填充攻击对23andMe处以310万美元罚款</title>
+        <link>http://localhost:1313/p/%E8%8B%B1%E5%9B%BD%E6%95%B0%E6%8D%AE%E4%BF%9D%E6%8A%A4%E7%9B%91%E7%AE%A1%E6%9C%BA%E6%9E%84%E5%9B%A0%E5%87%AD%E8%AF%81%E5%A1%AB%E5%85%85%E6%94%BB%E5%87%BB%E5%AF%B923andme%E5%A4%84%E4%BB%A5310%E4%B8%87%E7%BE%8E%E5%85%83%E7%BD%9A%E6%AC%BE/</link>
+        <pubDate>Thu, 07 Aug 2025 04:14:16 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%8B%B1%E5%9B%BD%E6%95%B0%E6%8D%AE%E4%BF%9D%E6%8A%A4%E7%9B%91%E7%AE%A1%E6%9C%BA%E6%9E%84%E5%9B%A0%E5%87%AD%E8%AF%81%E5%A1%AB%E5%85%85%E6%94%BB%E5%87%BB%E5%AF%B923andme%E5%A4%84%E4%BB%A5310%E4%B8%87%E7%BE%8E%E5%85%83%E7%BD%9A%E6%AC%BE/</guid>
+        <description>&lt;h3 id=&#34;事件概述&#34;&gt;事件概述
+&lt;/h3&gt;&lt;p&gt;2025年6月5日，英国信息专员办公室(ICO)对23andMe处以231万英镑（约310万美元）罚款。该处罚源于该公司未能保护超过15.5万英国用户的个人数据安全。此次调查由ICO与加拿大隐私专员办公室联合开展，体现了监管机构在数据保护执法中日益加强的协作。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ico.org.uk&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ICO处罚通知原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关于23andme&#34;&gt;关于23andMe
+&lt;/h3&gt;&lt;p&gt;23andMe是一家美国个人基因组学和生物技术公司，提供直接面向消费者的基因检测服务。用户通过提交唾液样本获取 ancestry、健康风险和遗传特征分析，并可下载原始基因数据。该公司目前正处于破产重组阶段。&lt;/p&gt;
+&lt;h3 id=&#34;攻击事件详情&#34;&gt;攻击事件详情
+&lt;/h3&gt;&lt;p&gt;2023年4月至9月期间，攻击者通过凭证填充攻击（使用其他数据泄露事件中窃取的凭证）入侵了大量用户账户。23andMe在8月通过客户门户和暗网市场Hydra获知此事，但最初误认为是恶作剧而关闭了内部调查工单。&lt;/p&gt;
+&lt;p&gt;10月，约1400万用户的敏感数据在多个论坛出售，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;健康信息&lt;/li&gt;
+&lt;li&gt;原始基因数据&lt;/li&gt;
+&lt;li&gt;种族/民族背景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ico认定的安全缺陷&#34;&gt;ICO认定的安全缺陷
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;缺乏多因素认证(MFA)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;原始基因数据下载控制不足&lt;/li&gt;
+&lt;li&gt;事件监控与响应系统薄弱&lt;/li&gt;
+&lt;li&gt;强制使用邮箱作为用户名&lt;/li&gt;
+&lt;li&gt;弱密码策略（未过滤常见词和已知泄露凭证）&lt;/li&gt;
+&lt;li&gt;缺少设备指纹识别技术&lt;/li&gt;
+&lt;li&gt;下载原始数据前无额外验证步骤&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关键教训&#34;&gt;关键教训
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;监管机构明确要求在线服务必须部署防凭证填充攻击措施&lt;/li&gt;
+&lt;li&gt;数据泄露通知必须符合GDPR第34(2)条要求（需包含泄露时段、数据类型和潜在影响）&lt;/li&gt;
+&lt;li&gt;调查期间与监管机构的合作缺失可能导致处罚加重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;企业应对建议&#34;&gt;企业应对建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;聘请外部法律顾问和取证专家&lt;/li&gt;
+&lt;li&gt;建立结构化监管响应策略&lt;/li&gt;
+&lt;li&gt;对敏感数据实施分层保护机制&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>关键网络问题：基于Zeek日志的网络技术分析</title>
+        <link>http://localhost:1313/p/%E5%85%B3%E9%94%AE%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%9F%BA%E4%BA%8Ezeek%E6%97%A5%E5%BF%97%E7%9A%84%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 03:52:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%85%B3%E9%94%AE%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%9F%BA%E4%BA%8Ezeek%E6%97%A5%E5%BF%97%E7%9A%84%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;关键网络问题&#34;&gt;关键网络问题
+&lt;/h1&gt;&lt;p&gt;我于2018年12月7日写下这些内容，但直到今天才发布。以下是&amp;quot;关键网络问题&amp;quot;，这些问题&amp;quot;无需访问第三方日志存储库即可回答关于网络的关键问题。这些数据是通过实时挖掘Zeek日志数据而非存储和查询第三方存储库中的Zeek日志得出的。&amp;ldquo;这是我在2018年下半年对Zeek数据的思考方式。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在使用哪些网络技术，在用户指定的时间间隔内？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;枚举非IP协议（IPv6，不常见的以太类型）&lt;/li&gt;
+&lt;li&gt;枚举IPv4和IPv6协议（TCP、UDP、ICMP等）&lt;/li&gt;
+&lt;li&gt;本地IP网络拓扑/寻址方案是什么？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;哪些系统在用户指定的时间间隔内为网络提供核心服务？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DHCP&lt;/li&gt;
+&lt;li&gt;DNS&lt;/li&gt;
+&lt;li&gt;NTP&lt;/li&gt;
+&lt;li&gt;域控制器&lt;/li&gt;
+&lt;li&gt;文件共享&lt;/li&gt;
+&lt;li&gt;默认网关（通过DHCP检查等）&lt;/li&gt;
+&lt;li&gt;Web和云服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在使用哪些隧道机制，在用户指定的时间间隔内？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;IPSec或其他VPN&lt;/li&gt;
+&lt;li&gt;SOCKS代理&lt;/li&gt;
+&lt;li&gt;Web代理（端口3128）&lt;/li&gt;
+&lt;li&gt;其他代理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在使用哪些访问服务，在用户指定的时间间隔内？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH&lt;/li&gt;
+&lt;li&gt;Telnet&lt;/li&gt;
+&lt;li&gt;RDP&lt;/li&gt;
+&lt;li&gt;VNC&lt;/li&gt;
+&lt;li&gt;SMB&lt;/li&gt;
+&lt;li&gt;其他&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;在使用哪些文件传输服务，在用户指定的时间间隔内？&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SCP或其他基于SSH的文件传输&lt;/li&gt;
+&lt;li&gt;FTP&lt;/li&gt;
+&lt;li&gt;SMB&lt;/li&gt;
+&lt;li&gt;NFS&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加密测量，在用户指定的时间间隔内&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在使用哪些加密方法？&lt;/li&gt;
+&lt;li&gt;在用户指定的时间间隔内，加密网络流量的百分比是多少，以及使用哪种方法？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;带宽测量，在用户指定的时间间隔内&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;聚合&lt;/li&gt;
+&lt;li&gt;按IP地址&lt;/li&gt;
+&lt;li&gt;按服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;会话跟踪，在用户指定的时间间隔内&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;前N个连接对&lt;/li&gt;
+&lt;li&gt;后N个连接对&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;检测计数，在用户指定的时间间隔内&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;提供来自Zeek weird.log的消息计数&lt;/li&gt;
+&lt;li&gt;提供来自其他Zeek检测日志的消息计数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;对于每个IP地址（或可能的IP-MAC地址配对），在用户指定的时间间隔内，构建包含以下内容的配置文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首次出现，最后出现&lt;/li&gt;
+&lt;li&gt;通过DNS、SMB等观察到的名称&lt;/li&gt;
+&lt;li&gt;访问和提供的核心服务&lt;/li&gt;
+&lt;li&gt;使用和提供的隧道机制&lt;/li&gt;
+&lt;li&gt;使用和提供的访问服务&lt;/li&gt;
+&lt;li&gt;使用和提供的文件传输服务&lt;/li&gt;
+&lt;li&gt;加密方法&lt;/li&gt;
+&lt;li&gt;带宽测量&lt;/li&gt;
+&lt;li&gt;前N和后N的会话跟踪&lt;/li&gt;
+&lt;li&gt;检测计数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>如何阻断由社会工程学引发的网络攻击</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%BB%E6%96%AD%E7%94%B1%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%BC%95%E5%8F%91%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Thu, 07 Aug 2025 02:41:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%BB%E6%96%AD%E7%94%B1%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%BC%95%E5%8F%91%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;p&gt;本译文基于微软安全响应中心博客&amp;quot;How to disrupt attacks caused by social engineering&amp;quot;（2018年1月10日发布）。&lt;/p&gt;
+&lt;p&gt;十年前，大多数网络攻击通过恶意软件或复合手段直接针对企业基础设施发起。如今情况已截然不同，一封精心设计的窃取身份信息的邮件就足以构成威胁。&lt;/p&gt;
+&lt;p&gt;数字化转型已成为不可逆转的趋势。微软的安全战略聚焦于实现安全的数字化转型，通过帮助客户建立网络犯罪防护、检测和响应能力来实现这一目标。&lt;/p&gt;
+&lt;p&gt;社会工程学手法并非新鲜事物，早在宽带网络出现前就已存在。现代威胁组织如STRONTIUM沿用了传统骗术，只是将战场转移到了数字世界。相比寻找系统漏洞，他们更倾向于发送高仿真钓鱼邮件。&lt;/p&gt;
+&lt;p&gt;根据Verizon《2016年数据泄露调查报告》：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;30%的钓鱼邮件会被打开&lt;/li&gt;
+&lt;li&gt;收件人平均仅需40秒就会打开邮件&lt;/li&gt;
+&lt;li&gt;45秒内就会点击恶意附件&lt;/li&gt;
+&lt;li&gt;89%的钓鱼邮件来自有组织犯罪集团&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;图1展示了Verizon调查报告的关键数据。现代钓鱼邮件的制作流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过社交网络搜集目标信息（组织架构、邮件模板等）&lt;/li&gt;
+&lt;li&gt;使用专业工具从公开/泄露数据库提取数据&lt;/li&gt;
+&lt;li&gt;制作仿冒邮件模板（如密码重置通知）&lt;/li&gt;
+&lt;li&gt;发送给目标用户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;攻击分为五个阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定目标员工&lt;/li&gt;
+&lt;li&gt;诱导打开恶意邮件&lt;/li&gt;
+&lt;li&gt;工作站沦陷，收集凭证&lt;/li&gt;
+&lt;li&gt;横向移动获取未授权访问&lt;/li&gt;
+&lt;li&gt;窃取敏感数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;图4展示了微软安全产品在各阶段的防护能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enterprise Mobility + Security提供身份保护&lt;/li&gt;
+&lt;li&gt;Windows 10具备设备级防护&lt;/li&gt;
+&lt;li&gt;Office 365防范邮件威胁&lt;/li&gt;
+&lt;li&gt;Azure确保云安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;企业需要转变安全思维，从&amp;quot;被动防御&amp;quot;转向&amp;quot;假设已被入侵&amp;quot;的主动防御模式。无论规模大小，所有企业都存储着对攻击者有价值的数据。&lt;/p&gt;
+&lt;p&gt;完整的安全方案需要包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;完善的事件响应流程&lt;/li&gt;
+&lt;li&gt;防护/检测/响应技术栈&lt;/li&gt;
+&lt;li&gt;IT人员和终端用户的充分准备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更多微软安全产品信息请访问：&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/secure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.microsoft.com/secure&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SonicWall SMA 100系列管理界面远程代码执行漏洞分析</title>
+        <link>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 02:08:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/sonicwall-sma-100%E7%B3%BB%E5%88%97%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;sonicwall-secure-mobile-access-sma-100系列管理界面远程代码执行漏洞&#34;&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面远程代码执行漏洞
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;MS-ISAC咨询编号&lt;/strong&gt;: 2025-043&lt;br&gt;
+&lt;strong&gt;发布日期&lt;/strong&gt;: 2025年4月22日&lt;/p&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;在SonicWall Secure Mobile Access (SMA) 100管理界面中发现了一个漏洞，可能导致远程代码执行。SonicWall SMA是企业用于提供远程应用访问的统一安全网关。成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h2&gt;&lt;p&gt;根据SonicWall 2025年4月15日的公告，该漏洞已被发现在野外被积极利用。作为预防措施，SonicWall PSIRT已将CVSS评分从中等提升至高危(7.2)。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SMA 200&lt;/li&gt;
+&lt;li&gt;SMA 210&lt;/li&gt;
+&lt;li&gt;SMA 400&lt;/li&gt;
+&lt;li&gt;SMA 410&lt;/li&gt;
+&lt;li&gt;SMA 500v (ESX, KVM, AWS, Azure)&lt;/li&gt;
+&lt;li&gt;版本10.2.1.0-17sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本10.2.0.7-34sv及更早版本&lt;/li&gt;
+&lt;li&gt;版本9.0.0.10-28sv及更早版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;用户类型&lt;/th&gt;
+          &lt;th&gt;风险等级&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;政府机构(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(大中型)&lt;/td&gt;
+          &lt;td&gt;高&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业(小型)&lt;/td&gt;
+          &lt;td&gt;中&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;家庭用户&lt;/td&gt;
+          &lt;td&gt;低&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;p&gt;SonicWall Secure Mobile Access (SMA) 100系列管理界面中存在漏洞，可能导致远程代码执行。漏洞详情如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;战术&lt;/strong&gt;: 初始访问(TA0001)&lt;br&gt;
+&lt;strong&gt;技术&lt;/strong&gt;: 利用面向公众的应用程序(T1190)&lt;/p&gt;
+&lt;p&gt;SMA100管理界面中对特殊元素的不当中和处理允许远程认证攻击者以&amp;rsquo;nobody&amp;rsquo;用户身份注入任意命令，可能导致代码执行(CVE-2021-20035)。&lt;/p&gt;
+&lt;p&gt;成功利用此漏洞可能导致远程代码执行。&lt;/p&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;建议采取以下措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;软件更新&lt;/strong&gt;: 在适当测试后立即应用SonicWall提供的更新(M1051: 更新软件)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;漏洞管理流程&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立并维护企业资产的漏洞管理流程(保障措施7.1)&lt;/li&gt;
+&lt;li&gt;建立基于风险的修复策略，每月至少审查一次(保障措施7.2)&lt;/li&gt;
+&lt;li&gt;每月至少执行一次自动化应用补丁管理(保障措施7.4)&lt;/li&gt;
+&lt;li&gt;每季度至少执行一次内部企业资产的自动化漏洞扫描(保障措施7.5)&lt;/li&gt;
+&lt;li&gt;每月至少修复一次检测到的漏洞(保障措施7.7)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络基础设施&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确保网络基础设施保持最新(保障措施12.1)&lt;/li&gt;
+&lt;li&gt;建立并维护安全的网络架构(保障措施12.2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立适合企业规模的渗透测试计划(保障措施18.1)&lt;/li&gt;
+&lt;li&gt;每年至少执行一次外部渗透测试(保障措施18.2)&lt;/li&gt;
+&lt;li&gt;根据企业政策修复渗透测试发现的问题(保障措施18.3)&lt;/li&gt;
+&lt;li&gt;对关键应用进行渗透测试(保障措施16.13)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限管理&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对所有系统和服务应用最小权限原则(M1026: 特权账户管理)&lt;/li&gt;
+&lt;li&gt;管理企业资产和软件的默认账户(保障措施4.7)&lt;/li&gt;
+&lt;li&gt;建立并维护服务账户清单(保障措施5.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;利用防护&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用功能检测和阻止可能导致软件利用的条件(M1050: 利用防护)&lt;/li&gt;
+&lt;li&gt;尽可能在企业资产和软件上启用反利用功能(保障措施10.5)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络分段&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过网络分段隔离关键系统(M1030: 网络分段)&lt;/li&gt;
+&lt;li&gt;使用DMZ隔离面向互联网的服务&lt;/li&gt;
+&lt;li&gt;配置单独的VPC实例隔离关键云系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVE: &lt;a class=&#34;link&#34; href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20035&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SonicWall: &lt;a class=&#34;link&#34; href=&#34;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2021-0022&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>curl中HTTP/3/QUIC支持的TLS密码套件配置问题分析</title>
+        <link>http://localhost:1313/p/curl%E4%B8%ADhttp/3/quic%E6%94%AF%E6%8C%81%E7%9A%84tls%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 01:29:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E4%B8%ADhttp/3/quic%E6%94%AF%E6%8C%81%E7%9A%84tls%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;tls-cipher-misconfiguration-in-http3quic-support&#34;&gt;TLS Cipher Misconfiguration in HTTP/3/QUIC Support
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞摘要&#34;&gt;漏洞摘要
+&lt;/h2&gt;&lt;p&gt;当使用curl命令的&lt;code&gt;--ciphers&lt;/code&gt;选项手动指定TLS密码套件时，HTTP/3或QUIC协议将无法正常工作。这是因为QUIC协议不依赖于为TLS 1.2或更早版本定义的传统TLS密码套件，导致在尝试访问仅支持HTTP/3或QUIC的端点时出现连接失败。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;curl实现问题&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;curl的&lt;code&gt;--ciphers&lt;/code&gt;选项无法区分传统TLS协议(TLS 1.2/1.3)和QUIC协议&lt;/li&gt;
+&lt;li&gt;当指定不兼容的密码套件时会导致配置冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协议不匹配&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP/3使用QUIC协议，该协议不与&lt;code&gt;--ciphers&lt;/code&gt;选项指定的传统TLS密码套件协同工作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl 8.11.1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;x86_64-pc-linux-gnu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; libcurl/8.11.1 OpenSSL/3.3.2 zlib/1.3.1 brotli/1.1.0 zstd/1.5.6 c-ares/1.34.3 libidn2/2.3.7 libpsl/0.21.5 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.6.0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Release-Date: 2024-12-11
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt pop3 pop3s rtsp scp sftp smb smbs smtp smtps telnet tftp ws wss
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTP3 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe TLS-SRP TrackMemory UnixSockets zstd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;复现步骤&#34;&gt;复现步骤
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl --disable -v --http3-only --ciphers &lt;span class=&#34;s1&#34;&gt;&amp;#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA:AES256-SHA&amp;#39;&lt;/span&gt; https://1.1.1.1/cdn-cgi/trace
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;错误输出&#34;&gt;错误输出
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;*   Trying 1.1.1.1:443...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* failed setting cipher list: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:D
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* QUIC connect to 1.1.1.1 port &lt;span class=&#34;m&#34;&gt;443&lt;/span&gt; failed: Could not use specified SSL cipher
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* Failed to connect to 1.1.1.1 port &lt;span class=&#34;m&#34;&gt;443&lt;/span&gt; after &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; ms: Could not use specified SSL cipher
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* closing connection &lt;span class=&#34;c1&#34;&gt;#0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;59&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; failed setting cipher list: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;影响范围&#34;&gt;影响范围
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;尝试使用curl的&lt;code&gt;--ciphers&lt;/code&gt;选项进行HTTP/3或QUIC连接的用户会遇到连接失败&lt;/li&gt;
+&lt;li&gt;可能中断依赖curl与HTTP/3/QUIC服务器交互的自动化脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;</description>
+        </item>
+        <item>
+        <title>不信任制造商，也不信任客户：一种用于安全增材制造的STL文件流式传输新方法</title>
+        <link>http://localhost:1313/p/%E4%B8%8D%E4%BF%A1%E4%BB%BB%E5%88%B6%E9%80%A0%E5%95%86%E4%B9%9F%E4%B8%8D%E4%BF%A1%E4%BB%BB%E5%AE%A2%E6%88%B7%E4%B8%80%E7%A7%8D%E7%94%A8%E4%BA%8E%E5%AE%89%E5%85%A8%E5%A2%9E%E6%9D%90%E5%88%B6%E9%80%A0%E7%9A%84stl%E6%96%87%E4%BB%B6%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93%E6%96%B0%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Thu, 07 Aug 2025 01:12:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%8D%E4%BF%A1%E4%BB%BB%E5%88%B6%E9%80%A0%E5%95%86%E4%B9%9F%E4%B8%8D%E4%BF%A1%E4%BB%BB%E5%AE%A2%E6%88%B7%E4%B8%80%E7%A7%8D%E7%94%A8%E4%BA%8E%E5%AE%89%E5%85%A8%E5%A2%9E%E6%9D%90%E5%88%B6%E9%80%A0%E7%9A%84stl%E6%96%87%E4%BB%B6%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93%E6%96%B0%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;虽然增材制造为重新构想&amp;quot;制造即服务&amp;quot;(MaaS)平台开辟了有趣途径，但设计文件通过网络从客户端传输到制造商处会带来诸多网络安全挑战。保护客户知识产权(IP)免受网络攻击成为一个主要难题。先前研究提出采用流式传输而非共享工艺计划(G代码)文件作为潜在解决方案。然而，在制造商机器上执行客户的G代码会使其面临潜在恶意G代码的风险。本文提出了一种适用于客户和制造商互不信任场景的可行方案，双方可分别保护其设计IP和制造工艺IP。该方法基于对设计(STL)文件进行分段流式传输，并在制造商端实时采用新型机器专用STL到G代码转换器进行打印。实际应用表明，该方法能有效保护设计和制造工艺的知识产权。&lt;/p&gt;
+&lt;h2 id=&#34;主题分类&#34;&gt;主题分类
+&lt;/h2&gt;&lt;p&gt;密码学与安全(cs.CR)&lt;/p&gt;
+&lt;h2 id=&#34;引用信息&#34;&gt;引用信息
+&lt;/h2&gt;&lt;p&gt;arXiv:2507.06421 [cs.CR]&lt;br&gt;
+DOI: 10.48550/arXiv.2507.06421&lt;/p&gt;
+&lt;h2 id=&#34;提交历史&#34;&gt;提交历史
+&lt;/h2&gt;&lt;p&gt;2025年7月8日提交，版本v1&lt;/p&gt;
+&lt;h2 id=&#34;全文链接&#34;&gt;全文链接
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://arxiv.org/pdf/2507.06421v1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;查看PDF&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://arxiv.org/html/2507.06421v1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HTML实验版&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>是否应将渗透测试报告提交给MSRC？微软安全响应中心技术解析</title>
+        <link>http://localhost:1313/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Thu, 07 Aug 2025 00:29:49 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%98%AF%E5%90%A6%E5%BA%94%E5%B0%86%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E6%8F%90%E4%BA%A4%E7%BB%99msrc%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;每天，微软安全响应中心（MSRC）都会收到来自安全研究人员、技术/行业合作伙伴和客户的漏洞报告。我们重视这些报告，因为它们能帮助我们提升产品和服务的安防水平。包含概念验证、攻击细节或漏洞演示的高质量报告极具行动价值。如果您提交过这类报告，我们深表感谢！&lt;/p&gt;
+&lt;p&gt;客户常委托渗透测试人员评估其部署环境并生成报告。这些报告能帮助客户发现并修正部署中的安全风险。但需要注意的是，渗透测试结果必须结合客户的组策略对象、现有缓解措施及检测工具来综合评估。我们收到的渗透测试报告通常仅声明产品存在漏洞，却未提供具体的攻击向量或漏洞利用演示。实际上，许多安全风险可通过现有缓解措施解决，无需修改产品代码。&lt;/p&gt;
+&lt;p&gt;以Lync Server 2013的渗透测试报告为例，该报告未提及现有缓解措施：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;案例：部署环境存在暴力破解风险？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;某客户部署了支持拨入功能的Lync Server 2013，包含多个允许用户加入/安排会议的Web端点。渗透测试报告指出&amp;quot;可通过Lync实例进行密码暴力破解&amp;quot;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;技术细节分析：&lt;/strong&gt;
+Lync Server 2013使用特定Web端点进行表单认证。若这些端点配置不当，攻击者可能通过以下SOAP服务与Active Directory交互：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/WebTicket/WebTicketService.svc/Auth
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该服务调用LogonUserW API进行AD认证。当认证端点暴露时，确实存在暴力破解风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;现有缓解方案：&lt;/strong&gt;
+在启用账户锁定策略的环境中，此类攻击仅会导致目标用户遭遇临时拒绝服务（DoS），而非账户沦陷。虽然影响用户体验，但相比账户失窃危害更小。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;深度防御方案：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;强化密码策略&lt;/strong&gt;
+采用强密码策略可有效防御常见密码字典攻击。微软密码指南提供基于Azure云防护经验的研究成果：https://www.microsoft.com/en-us/research/publication/password-guidance/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实施账户锁定策略&lt;/strong&gt;
+账户锁定机制可增加攻击时间成本，同时提升异常登录的可观测性。技术细节参见：https://blogs.technet.microsoft.com/secguide/2014/08/13/configuring-account-lockout/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;记录访问尝试&lt;/strong&gt;
+通过防火墙层的Web应用过滤或速率限制，可降低单IP暴力破解成功率。丢弃异常登录数据包能有效阻断特定IP范围的攻击。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;审计账户登录事件&lt;/strong&gt;
+在认证服务器上启用组策略审计功能，可监控密码猜测行为。AD环境安全最佳实践指南：https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/monitoring-active-directory-for-signs-of-compromise&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web应用过滤规则&lt;/strong&gt;
+当上述方案不可行时，可通过IIS ARR反向代理实施缓解。测试环境中，我们使用IIS重写规则阻止了以下外部访问请求（返回403错误）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;rule&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;BlockDialin&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;patternSyntax=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Wildcard&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;stopProcessing=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;match&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;url=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;conditions&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;logicalGrouping=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;MatchAny&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;trackAllCaptures=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;input=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{HTTP_HOST}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;pattern=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;dialin.foo.bar.com&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;input=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;{REQUEST_URI}&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;pattern=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/dialin/*&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/conditions&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;action&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;CustomResponse&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusCode=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;403&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusReason=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Access denied.&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;statusDescription=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Access denied.&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/rule&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Lync Server的ARR配置参考：https://blogs.technet.microsoft.com/nexthop/2013/02/19/using-iis-arr-as-a-reverse-proxy-for-lync-server-2013/&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;渗透测试报告的最佳使用方式：&lt;/strong&gt;
+建议先评估报告中的缓解措施再决定是否外传。若发现无补丁的零日漏洞，请将报告及POC提交至MSRC。更多信息请访问：www.microsoft.com/msrc&lt;/p&gt;
+&lt;p&gt;（本文由微软安全中心团队与IDC Skype Exchange研发部门共同撰写）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Exchange本地缓解工具（一键式缓解工具）技术解析</title>
+        <link>http://localhost:1313/p/exchange%E6%9C%AC%E5%9C%B0%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%80%E9%94%AE%E5%BC%8F%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Wed, 06 Aug 2025 23:37:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/exchange%E6%9C%AC%E5%9C%B0%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%80%E9%94%AE%E5%BC%8F%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;p&gt;「One-Click Microsoft Exchange On-Premises Mitigation Tool – March 2021」日文技术摘要翻译：&lt;/p&gt;
+&lt;p&gt;针对近期针对本地Exchange Server的攻击威胁，微软发布了新型一键式缓解工具*。该工具专为缺乏专职安全团队或尚未打补丁的Exchange 2013/2016/2019环境设计，包含三大自动化功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;漏洞缓解&lt;/strong&gt;&lt;br&gt;
+通过配置URL Rewrite规则阻断CVE-2021-26855漏洞利用路径&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全扫描&lt;/strong&gt;&lt;br&gt;
+集成Microsoft Safety Scanner进行恶意软件检测&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;威胁修复&lt;/strong&gt;&lt;br&gt;
+自动回滚已识别攻击造成的配置变更&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/wp-content-uploads-2021-03-image-28.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Exchange本地缓解工具工作流程&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;关键说明&#34;&gt;关键说明
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;该工具需从GitHub下载EOMT.ps1脚本执行&lt;/li&gt;
+&lt;li&gt;仅为临时解决方案，仍需尽快安装正式安全更新&lt;/li&gt;
+&lt;li&gt;相比旧版ExchangeMitigation.ps1整合了最新威胁情报&lt;/li&gt;
+&lt;li&gt;经测试不影响Exchange基础功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术限制&#34;&gt;技术限制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;仅针对当前已知攻击手法有效&lt;/li&gt;
+&lt;li&gt;需联网环境获取最新威胁数据&lt;/li&gt;
+&lt;li&gt;采用MIT开源协议（详见GitHub仓库）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整技术文档与执行示例请访问：&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/eomt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub仓库&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;免责声明：微软不对本工具提供任何明示或默示担保&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>微软产品关键补丁发布：2025年4月8日安全更新详解</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E4%BA%A7%E5%93%81%E5%85%B3%E9%94%AE%E8%A1%A5%E4%B8%81%E5%8F%91%E5%B8%832025%E5%B9%B44%E6%9C%888%E6%97%A5%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Wed, 06 Aug 2025 22:58:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E4%BA%A7%E5%93%81%E5%85%B3%E9%94%AE%E8%A1%A5%E4%B8%81%E5%8F%91%E5%B8%832025%E5%B9%B44%E6%9C%888%E6%97%A5%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h3 id=&#34;安全公告编号&#34;&gt;安全公告编号
+&lt;/h3&gt;&lt;p&gt;MS-ISAC ADVISORY NUMBER: 2025-036&lt;br&gt;
+发布日期：2025/04/08&lt;/p&gt;
+&lt;h3 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h3&gt;&lt;p&gt;微软产品中发现多个安全漏洞，其中最严重的漏洞可允许攻击者以登录用户权限执行远程代码。根据用户权限级别，攻击者可能安装程序、增删改数据或创建具有完全权限的新账户。系统权限较低的用户受影响程度小于管理员账户。&lt;/p&gt;
+&lt;h3 id=&#34;威胁情报&#34;&gt;威胁情报
+&lt;/h3&gt;&lt;p&gt;目前尚未发现这些漏洞在野利用的实例。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Visual Studio Code&lt;/li&gt;
+&lt;li&gt;Windows标准存储管理服务&lt;/li&gt;
+&lt;li&gt;Windows本地安全认证(LSA)&lt;/li&gt;
+&lt;li&gt;Windows NTFS文件系统&lt;/li&gt;
+&lt;li&gt;Windows路由和远程访问服务(RRAS)&lt;/li&gt;
+&lt;li&gt;Windows更新堆栈&lt;/li&gt;
+&lt;li&gt;22个其他核心组件（完整列表见正文）&lt;/li&gt;
+&lt;li&gt;Microsoft Office全家桶（Word/Excel/SharePoint等）&lt;/li&gt;
+&lt;li&gt;Azure本地集群&lt;/li&gt;
+&lt;li&gt;Windows Defender应用控制(WDAC)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;风险等级&#34;&gt;风险等级
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;用户类型&lt;/th&gt;
+          &lt;th&gt;风险级别&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;大中型政府机构&lt;/td&gt;
+          &lt;td&gt;高危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;小型政府机构&lt;/td&gt;
+          &lt;td&gt;中危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;企业用户&lt;/td&gt;
+          &lt;td&gt;高危&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;家庭用户&lt;/td&gt;
+          &lt;td&gt;低危&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h3&gt;&lt;p&gt;最严重漏洞存在于Windows内核权限验证模块，攻击者可通过特制网络包触发缓冲区溢出。其他漏洞涉及：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;权限提升（3个）&lt;/li&gt;
+&lt;li&gt;信息泄露（2个）&lt;/li&gt;
+&lt;li&gt;安全功能绕过（1个）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整漏洞列表请参考微软官方公告链接。&lt;/p&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立即打补丁&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过WSUS或Microsoft Update部署官方补丁&lt;/li&gt;
+&lt;li&gt;关键系统建议72小时内完成更新（M1051补丁策略）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;权限控制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施最小权限原则（M1026）&lt;/li&gt;
+&lt;li&gt;禁用默认管理员账户（Safeguard 4.7）&lt;/li&gt;
+&lt;li&gt;日常操作使用非特权账户（Safeguard 5.4）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;终端防护&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署EDR解决方案（Safeguard 13.7）&lt;/li&gt;
+&lt;li&gt;启用行为检测（M1040）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全意识&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;年度社会工程培训（Safeguard 14.2）&lt;/li&gt;
+&lt;li&gt;钓鱼攻击模拟演练&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软安全更新指南&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cisecurity.org/controls&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CIS漏洞管理标准&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PhreshPhish：一个真实世界、高质量、大规模的钓鱼网站数据集与基准测试</title>
+        <link>http://localhost:1313/p/phreshphish%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E9%AB%98%E8%B4%A8%E9%87%8F%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</link>
+        <pubDate>Wed, 06 Aug 2025 22:03:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/phreshphish%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E9%AB%98%E8%B4%A8%E9%87%8F%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E9%92%93%E9%B1%BC%E7%BD%91%E7%AB%99%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/</guid>
+        <description>&lt;p&gt;钓鱼攻击仍然是一个普遍且不断增长的威胁，造成了严重的经济和声誉损失。虽然机器学习在实时检测钓鱼攻击方面表现有效，但由于缺乏大规模、高质量的数据集和基准测试，进展受到了阻碍。除了数据收集困难导致的低质量问题外，现有数据集还存在数据泄露和基准率不现实的问题，从而导致性能评估过于乐观。&lt;/p&gt;
+&lt;p&gt;在本文中，我们介绍了PhreshPhish，一个针对钓鱼网站的大规模高质量数据集，解决了这些局限性。与现有的公开数据集相比，PhreshPhish规模更大，并且通过估计无效或错误标记数据点的比例，其质量显著更高。此外，我们提出了一套全面的基准测试数据集，专门设计用于现实模型评估，通过最小化数据泄露、提高任务难度、增强数据集多样性以及调整更接近现实世界的基准率来实现。&lt;/p&gt;
+&lt;p&gt;我们训练并评估了多种解决方案方法，以提供基准测试集的基线性能。我们相信，该数据集和基准测试的可用性将实现现实、标准化的模型比较，并推动钓鱼检测领域的进一步进展。数据集和基准测试可在Hugging Face上获取（&lt;a class=&#34;link&#34; href=&#34;https://huggingface.co&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;链接&lt;/a&gt;）。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>深入解析Vultr内容分发网络(CDN)技术架构与应用实践</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90vultr%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9Ccdn%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Wed, 06 Aug 2025 20:02:44 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90vultr%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9Ccdn%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h1 id=&#34;理解vultr内容分发网络cdn&#34;&gt;理解Vultr内容分发网络(CDN)
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;内容分发网络(CDN)通过全球分布的服务器节点网络，有效降低延迟、提升网站性能并保障用户体验。随着对快速可靠在线服务需求的增长，CDN在数字生态中的重要性日益凸显。&lt;/p&gt;
+&lt;h2 id=&#34;vultr-cdn技术架构&#34;&gt;Vultr CDN技术架构
+&lt;/h2&gt;&lt;p&gt;专为高性能企业设计的Vultr CDN具备以下核心技术特性：&lt;/p&gt;
+&lt;h3 id=&#34;跨域资源共享cors&#34;&gt;跨域资源共享(CORS)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;通过验证文件访问权限防止静态资源盗链&lt;/li&gt;
+&lt;li&gt;仅接受来自源URL的请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;gzip压缩&#34;&gt;Gzip压缩
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;减小静态内容体积&lt;/li&gt;
+&lt;li&gt;加速内容传输&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ai机器人拦截&#34;&gt;AI机器人拦截
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;阻止已知AI工具爬取CDN端点&lt;/li&gt;
+&lt;li&gt;防止内容被复制和未授权访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安全合规体系&#34;&gt;安全合规体系
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;AI和恶意机器人拦截机制&lt;/li&gt;
+&lt;li&gt;符合行业领先安全标准&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cms深度集成&#34;&gt;CMS深度集成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;与主流内容管理系统无缝对接&lt;/li&gt;
+&lt;li&gt;通过CDN缓存降低延迟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;push-zone与pull-zone技术解析&#34;&gt;Push Zone与Pull Zone技术解析
+&lt;/h2&gt;&lt;h3 id=&#34;push-zone技术实现&#34;&gt;Push Zone技术实现
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;需手动上传文件至Vultr CDN&lt;/li&gt;
+&lt;li&gt;内容被缓存至全球战略位置服务器&lt;/li&gt;
+&lt;li&gt;特别适合需要全球快速分发静态资源的场景&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pull-zone工作机制&#34;&gt;Pull Zone工作机制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;根据用户请求自动从源服务器拉取内容&lt;/li&gt;
+&lt;li&gt;自动缓存机制减轻源站压力&lt;/li&gt;
+&lt;li&gt;适合内容频繁更新的动态网站&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;典型应用场景&#34;&gt;典型应用场景
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;电子商务平台：全球快速加载商品图片&lt;/li&gt;
+&lt;li&gt;流媒体服务：高效分发大体积媒体文件&lt;/li&gt;
+&lt;li&gt;SaaS应用：全球快速交付软件更新和API&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;进阶技术集成&#34;&gt;进阶技术集成
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在Nginx/Apache服务器部署CDN&lt;/li&gt;
+&lt;li&gt;WordPress四大缓存插件配置方案&lt;/li&gt;
+&lt;li&gt;对象存储全局缓存实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术总结&#34;&gt;技术总结
+&lt;/h2&gt;&lt;p&gt;Vultr CDN通过其创新的双区架构和智能缓存策略，为各类数字化场景提供高性能内容分发解决方案。从技术实现角度看，其安全防护机制与深度集成能力尤其值得开发者关注。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>卡巴斯基SAS &#39;23峰会：全球网络安全威胁洞察与前沿技术分享</title>
         <link>http://localhost:1313/p/%E5%8D%A1%E5%B7%B4%E6%96%AF%E5%9F%BAsas-23%E5%B3%B0%E4%BC%9A%E5%85%A8%E7%90%83%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E6%B4%9E%E5%AF%9F%E4%B8%8E%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>
         <pubDate>Wed, 06 Aug 2025 18:41:57 +0800</pubDate>

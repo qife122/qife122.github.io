@@ -7,7 +7,102 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 18:25:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 14:44:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软更新AI系统漏洞严重性分类标准</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%9B%B4%E6%96%B0ai%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E4%B8%A5%E9%87%8D%E6%80%A7%E5%88%86%E7%B1%BB%E6%A0%87%E5%87%86/</link>
+        <pubDate>Thu, 07 Aug 2025 14:44:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%9B%B4%E6%96%B0ai%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E4%B8%A5%E9%87%8D%E6%80%A7%E5%88%86%E7%B1%BB%E6%A0%87%E5%87%86/</guid>
+        <description>&lt;p&gt;微软安全响应中心(MSRC)始终致力于提高漏洞影响评估的透明度。我们正式发布《AI系统漏洞严重性分类标准》，这是对现有漏洞分类体系（即&amp;quot;漏洞评级标准&amp;quot;）的更新，专门涵盖AI产品中出现的新型漏洞类别。该框架旨在为外部研究者和微软安全团队提供更精细的漏洞影响评估依据。&lt;/p&gt;
+&lt;h3 id=&#34;新增漏洞类别&#34;&gt;新增漏洞类别
+&lt;/h3&gt;&lt;p&gt;本次更新包含三大顶级分类，每个分类下包含若干AI特有漏洞类型：&lt;/p&gt;
+&lt;h4 id=&#34;1-推理操纵&#34;&gt;1. 推理操纵
+&lt;/h4&gt;&lt;p&gt;此类漏洞可操纵AI模型对单个推理请求的响应，但不修改模型本身。包含两种新型漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指令注入&lt;/strong&gt;：通过注入指令使模型偏离预期行为。与&amp;quot;提示注入&amp;quot;类似，但只有当注入内容能实质性改变模型行为时才构成漏洞（例如导致模型执行完全不同的任务）。攻击载体不限于文本输入，多模态模型中特制图像也可触发。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输入扰动&lt;/strong&gt;：通过扰动合法输入导致模型输出错误结果（又称&amp;quot;对抗样本&amp;quot;）。需证明扰动能持续导致错误输出并产生明确安全影响才会被认定为漏洞。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;漏洞严重性取决于被操纵响应的应用场景。仅影响攻击者自身的情况暂不计入有效漏洞范围。&lt;/p&gt;
+&lt;h4 id=&#34;2-模型操纵&#34;&gt;2. 模型操纵
+&lt;/h4&gt;&lt;p&gt;涉及训练阶段模型篡改的漏洞，包含两种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模型投毒&lt;/strong&gt;：通过篡改模型架构、训练代码或超参数污染模型&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据投毒&lt;/strong&gt;：在训练前修改训练数据集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需证明投毒行为对最终模型产生可验证的影响（如植入可被特定输入触发的后门）。严重性取决于受影响模型的应用范围。&lt;/p&gt;
+&lt;h4 id=&#34;3-推断性信息泄露&#34;&gt;3. 推断性信息泄露
+&lt;/h4&gt;&lt;p&gt;可通过模型交互推断敏感信息的漏洞，包含多种子类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;推断特定数据是否用于训练（成员推断）&lt;/li&gt;
+&lt;li&gt;推断训练数据的敏感属性（属性推断）&lt;/li&gt;
+&lt;li&gt;推断模型架构/权重（模型窃取）&lt;/li&gt;
+&lt;li&gt;提取系统提示（提示提取）&lt;/li&gt;
+&lt;li&gt;推断其他用户输入（输入提取）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;评估标准取决于攻击者可达到的推断置信度/准确度，严重性根据受影响数据的敏感级别确定。&lt;/p&gt;
+&lt;h3 id=&#34;与现有分类的关系&#34;&gt;与现有分类的关系
+&lt;/h3&gt;&lt;p&gt;本次更新是对现有体系的补充，AI系统仍可能产生传统类型漏洞。例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过存储配置错误直接窃取模型权重属于现有&amp;quot;信息泄露&amp;quot;类别&lt;/li&gt;
+&lt;li&gt;直接修改存储的模型权重属于&amp;quot;篡改&amp;quot;类别&lt;/li&gt;
+&lt;li&gt;导致模型响应缓慢的漏洞属于&amp;quot;拒绝服务&amp;quot;类别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;与其他分类体系的关联&#34;&gt;与其他分类体系的关联
+&lt;/h3&gt;&lt;p&gt;新分类与MITRE ATLAS、OWASP LLM Top 10等现有 taxonomy 存在关联但不完全对应。值得注意的是，本次定义的漏洞类型不仅适用于大语言模型，还涵盖所有AI模态。&lt;/p&gt;
+&lt;p&gt;微软将持续监控AI安全领域的发展动态，适时更新漏洞分类标准。我们欢迎安全研究者通过secure@microsoft.com提交漏洞报告，共同守护全球用户安全。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>如何阻断由社会工程学引发的网络攻击</title>
+        <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%BB%E6%96%AD%E7%94%B1%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%BC%95%E5%8F%91%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB/</link>
+        <pubDate>Thu, 07 Aug 2025 02:41:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E9%98%BB%E6%96%AD%E7%94%B1%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%BC%95%E5%8F%91%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB/</guid>
+        <description>&lt;p&gt;本译文基于微软安全响应中心博客&amp;quot;How to disrupt attacks caused by social engineering&amp;quot;（2018年1月10日发布）。&lt;/p&gt;
+&lt;p&gt;十年前，大多数网络攻击通过恶意软件或复合手段直接针对企业基础设施发起。如今情况已截然不同，一封精心设计的窃取身份信息的邮件就足以构成威胁。&lt;/p&gt;
+&lt;p&gt;数字化转型已成为不可逆转的趋势。微软的安全战略聚焦于实现安全的数字化转型，通过帮助客户建立网络犯罪防护、检测和响应能力来实现这一目标。&lt;/p&gt;
+&lt;p&gt;社会工程学手法并非新鲜事物，早在宽带网络出现前就已存在。现代威胁组织如STRONTIUM沿用了传统骗术，只是将战场转移到了数字世界。相比寻找系统漏洞，他们更倾向于发送高仿真钓鱼邮件。&lt;/p&gt;
+&lt;p&gt;根据Verizon《2016年数据泄露调查报告》：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;30%的钓鱼邮件会被打开&lt;/li&gt;
+&lt;li&gt;收件人平均仅需40秒就会打开邮件&lt;/li&gt;
+&lt;li&gt;45秒内就会点击恶意附件&lt;/li&gt;
+&lt;li&gt;89%的钓鱼邮件来自有组织犯罪集团&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;图1展示了Verizon调查报告的关键数据。现代钓鱼邮件的制作流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过社交网络搜集目标信息（组织架构、邮件模板等）&lt;/li&gt;
+&lt;li&gt;使用专业工具从公开/泄露数据库提取数据&lt;/li&gt;
+&lt;li&gt;制作仿冒邮件模板（如密码重置通知）&lt;/li&gt;
+&lt;li&gt;发送给目标用户&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;攻击分为五个阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定目标员工&lt;/li&gt;
+&lt;li&gt;诱导打开恶意邮件&lt;/li&gt;
+&lt;li&gt;工作站沦陷，收集凭证&lt;/li&gt;
+&lt;li&gt;横向移动获取未授权访问&lt;/li&gt;
+&lt;li&gt;窃取敏感数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;图4展示了微软安全产品在各阶段的防护能力：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enterprise Mobility + Security提供身份保护&lt;/li&gt;
+&lt;li&gt;Windows 10具备设备级防护&lt;/li&gt;
+&lt;li&gt;Office 365防范邮件威胁&lt;/li&gt;
+&lt;li&gt;Azure确保云安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;企业需要转变安全思维，从&amp;quot;被动防御&amp;quot;转向&amp;quot;假设已被入侵&amp;quot;的主动防御模式。无论规模大小，所有企业都存储着对攻击者有价值的数据。&lt;/p&gt;
+&lt;p&gt;完整的安全方案需要包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;完善的事件响应流程&lt;/li&gt;
+&lt;li&gt;防护/检测/响应技术栈&lt;/li&gt;
+&lt;li&gt;IT人员和终端用户的充分准备&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更多微软安全产品信息请访问：&lt;a class=&#34;link&#34; href=&#34;https://www.microsoft.com/secure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.microsoft.com/secure&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>MSRC内部揭秘：以客户为中心的安全事件响应机制</title>
         <link>http://localhost:1313/p/msrc%E5%86%85%E9%83%A8%E6%8F%AD%E7%A7%98%E4%BB%A5%E5%AE%A2%E6%88%B7%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E6%9C%BA%E5%88%B6/</link>
         <pubDate>Wed, 06 Aug 2025 18:25:29 +0800</pubDate>

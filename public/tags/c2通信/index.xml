@@ -7,7 +7,37 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 07:27:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/c2%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 21:30:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/c2%E9%80%9A%E4%BF%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>绕过Cylance防护：第二部分——使用DNSCat2建立DNS隐蔽信道</title>
+        <link>http://localhost:1313/p/%E7%BB%95%E8%BF%87cylance%E9%98%B2%E6%8A%A4%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E4%BD%BF%E7%94%A8dnscat2%E5%BB%BA%E7%AB%8Bdns%E9%9A%90%E8%94%BD%E4%BF%A1%E9%81%93/</link>
+        <pubDate>Wed, 06 Aug 2025 21:30:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%BB%95%E8%BF%87cylance%E9%98%B2%E6%8A%A4%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E4%BD%BF%E7%94%A8dnscat2%E5%BB%BA%E7%AB%8Bdns%E9%9A%90%E8%94%BD%E4%BF%A1%E9%81%93/</guid>
+        <description>&lt;h1 id=&#34;绕过cylance防护第二部分使用dnscat2&#34;&gt;绕过Cylance防护：第二部分——使用DNSCat2
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;David Fletcher&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;以下技术展示了在特定Cylance防护环境中建立C2通信的方法。测试前未检查集中式基础设施和终端代理的配置。该环境可能存在配置错误，可能不符合Cylance部署的最佳实践。但根据我们的经验，配置错误并不罕见，且往往会对环境整体安全态势造成灾难性影响。这就是我们在接受其声称的保护级别前进行测试的原因。此外，这些案例也说明了深度防御的必要性——在每个成功建立C2的实例中，二级或三级控制措施本应（且应该）弥补初始控制的失效。分层防御是任何环境中的关键保护要素，组织必须认清信息安全没有&amp;quot;银弹&amp;quot;的事实。&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;第一部分使用VSAgent.exe的案例见此&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;dnscat2github工具链接&#34;&gt;DNSCat2（&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;GitHub工具链接&lt;/a&gt;）
+&lt;/h2&gt;&lt;p&gt;DNSCat2作为另一种非传统绕过手段，通过DNS查询/响应机制建立C2信道。测试发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用默认参数（启用加密）执行时，初始连接虽可建立但会立即终止&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键突破&lt;/strong&gt;：当服务器禁用加密时，会话成功建立（如下图所示）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Cylance工具仍未检测到该工具的执行和C2信道建立。与VSAgent案例相同，正确的应用程序白名单技术本可阻止此攻击。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;防御建议&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实施严格的应用程序白名单&lt;/li&gt;
+&lt;li&gt;监控异常DNS流量模式&lt;/li&gt;
+&lt;li&gt;启用多层级防御控制措施&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;延伸学习&lt;/strong&gt;：&lt;br&gt;
+Antisyphon提供可负担的进阶培训课程（支持随需/直播形式）&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;← 第一部分：使用VSAgent.exe&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;%e5%8e%9f%e9%93%be%e6%8e%a5%e6%9c%aa%e7%bf%bb%e8%af%91&#34; &gt;第三部分：Netcat与Nishang的ICMP C2信道 →&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>利用合法互联网渠道实现C2通信：Sneaky-Creeper开源工具解析</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E5%90%88%E6%B3%95%E4%BA%92%E8%81%94%E7%BD%91%E6%B8%A0%E9%81%93%E5%AE%9E%E7%8E%B0c2%E9%80%9A%E4%BF%A1sneaky-creeper%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Tue, 05 Aug 2025 07:27:25 +0800</pubDate>

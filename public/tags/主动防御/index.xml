@@ -7,7 +7,50 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 23:48:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 09:37:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用HoneyBadger追踪黑客入门指南</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8honeybadger%E8%BF%BD%E8%B8%AA%E9%BB%91%E5%AE%A2%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Thu, 07 Aug 2025 09:37:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8honeybadger%E8%BF%BD%E8%B8%AA%E9%BB%91%E5%AE%A2%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h1 id=&#34;使用honeybadger追踪黑客入门指南&#34;&gt;使用HoneyBadger追踪黑客入门指南
+&lt;/h1&gt;&lt;p&gt;大家好，我是John Strand。在本视频中，我们将讨论HoneyBadger。在讨论归因或网络欺骗时，通常会关注创建能够回传信标的文档或元素，并收集发起信标的IP地址。虽然这可行，但IP地址的地理定位并不十分准确。我们可以做得更好，这就是HoneyBadger的用武之地。&lt;/p&gt;
+&lt;p&gt;HoneyBadger是由Black Hills Information Security的Bradley基于Tim Tomes（lanmaster53）的工作开发的工具。它可以通过收集攻击者周围的无线网络信息，利用Google API进行精确定位。&lt;/p&gt;
+&lt;h2 id=&#34;安装与配置&#34;&gt;安装与配置
+&lt;/h2&gt;&lt;p&gt;HoneyBadger可在ADHD（Active Defense Harbinger Distribution）上安装。ADHD是用于Wild West Hackin&amp;rsquo; Fest课程和Black Hat培训的发行版。安装完成后，桌面上的&amp;quot;ADHD Usage&amp;quot;文件提供了详细的使用说明。选择&amp;quot;Attribution&amp;quot;，然后选择&amp;quot;HoneyBadger&amp;quot;即可开始。&lt;/p&gt;
+&lt;p&gt;配置HoneyBadger时，需要注意必须获取Google API密钥以使地图功能正常工作。&lt;/p&gt;
+&lt;h2 id=&#34;工作原理&#34;&gt;工作原理
+&lt;/h2&gt;&lt;p&gt;HoneyBadger通过无线站点调查实现追踪。使用USB无线适配器（如Hak5商店出售的产品）可以扫描周围的无线网络。实际上，任何计算机系统都能检测到周围的无线网络接入点。&lt;/p&gt;
+&lt;p&gt;无线接入点每秒约发送10次信标，广播其BSSID（MAC地址）和ESSID（接入点名称）。HoneyBadger会促使攻击者的计算机执行无线站点调查，收集这些SSID、BSSID和ESSID信息，然后通过Google API查询地理位置数据。&lt;/p&gt;
+&lt;h2 id=&#34;使用界面&#34;&gt;使用界面
+&lt;/h2&gt;&lt;p&gt;在HoneyBadger界面中，可以设置不同的目标（targets）来区分不同活动。例如，可以创建&amp;quot;demo&amp;quot;、&amp;ldquo;class&amp;quot;或&amp;quot;Spearfish&amp;quot;等不同标识的GUID。这种区分很重要，因为可以在Excel表格、网站等多种媒介中部署HoneyBadger元素。&lt;/p&gt;
+&lt;p&gt;HoneyBadger提供以下功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;生成原始宏&lt;/strong&gt;：可插入Excel表格或Word文档（虽然Word文档中的宏容易被警惕）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VB.NET代码输出&lt;/strong&gt;：可通过vbc和Mono编译为独立可执行文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;地理定位精度&#34;&gt;地理定位精度
+&lt;/h2&gt;&lt;p&gt;通过地图选项卡可以查看历史定位记录。在测试案例中，定位精度可达20-100米。例如，在拉斯维加斯Mandalay Bay会议中心的定位非常精确。&lt;/p&gt;
+&lt;p&gt;日志记录显示所有收集的无线接入点信息，包括BSSID和提交给Google API的数据。Google会返回经纬度坐标和以米为单位的精度估计。&lt;/p&gt;
+&lt;h2 id=&#34;法律考量&#34;&gt;法律考量
+&lt;/h2&gt;&lt;p&gt;关于这种技术的合法性问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;攻击者需要先入侵系统并触发机制&lt;/li&gt;
+&lt;li&gt;使用的API与手机日常使用的定位服务相同&lt;/li&gt;
+&lt;li&gt;作为防御技术使用更具合理性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;HoneyBadger为网络安全专业人员提供了极强的归因能力，是主动防御工具箱中的重要工具。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：想从John Strand那里学习更多技能？可以查看他的课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOC核心技能&lt;/li&gt;
+&lt;li&gt;主动防御与网络欺骗&lt;/li&gt;
+&lt;li&gt;使用BHIS和MITRE ATT&amp;amp;CK入门安全&lt;/li&gt;
+&lt;li&gt;渗透测试入门&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>实战演练：使用John Strand讲解Active Directory主动防御(Active DAD)入门</title>
         <link>http://localhost:1313/p/%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83%E4%BD%BF%E7%94%A8john-strand%E8%AE%B2%E8%A7%A3active-directory%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1active-dad%E5%85%A5%E9%97%A8/</link>
         <pubDate>Sun, 03 Aug 2025 23:48:09 +0800</pubDate>

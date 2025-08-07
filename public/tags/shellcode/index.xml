@@ -7,7 +7,53 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 23:18:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/shellcode/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Aug 2025 18:08:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/shellcode/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>修改Metasploit x64模板实现反病毒规避技术</title>
+        <link>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Thu, 07 Aug 2025 18:08:23 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h1 id=&#34;修改metasploit-x64模板实现反病毒规避&#34;&gt;修改Metasploit x64模板实现反病毒规避
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Joff Thyer&lt;/strong&gt;&lt;br&gt;
+&lt;em&gt;免责声明：本文所述技术可能已过时，但仍可作为学习参考，并可能整合到现代工具中。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;在针对Windows桌面的渗透测试中，测试人员常使用Veil&amp;rsquo;s Powershell Empire等工具将shellcode直接注入内存。这种方法虽能避免磁盘写入和端点防护的检测，但有时我们需要使用实际恶意软件可执行文件进行更全面的测试。&lt;/p&gt;
+&lt;h2 id=&#34;反病毒软件的检测机制&#34;&gt;反病毒软件的检测机制
+&lt;/h2&gt;&lt;p&gt;反病毒引擎对Metasploit生成的32位恶意软件检测效果显著，但对64位payload的检测能力较弱。研究发现，AV引擎不仅检测shellcode，还会匹配msfvenom生成的可执行文件中存根加载器的汇编代码模式。&lt;/p&gt;
+&lt;h2 id=&#34;metasploit模板分析&#34;&gt;Metasploit模板分析
+&lt;/h2&gt;&lt;p&gt;Metasploit的payload生成使用预编译的32位（C语言）和64位（汇编语言）模板，位于KALI系统的&lt;code&gt;/usr/share/metasploit-framework/data/templates/src/pe/exe&lt;/code&gt;目录。模板功能包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;分配4096字节内存缓冲区&lt;/li&gt;
+&lt;li&gt;写入&amp;quot;PAYLOAD:&amp;ldquo;标记字符串&lt;/li&gt;
+&lt;li&gt;保留缓冲区空间供msfvenom插入shellcode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;64位模板修改实验&#34;&gt;64位模板修改实验
+&lt;/h2&gt;&lt;p&gt;通过修改64位汇编模板进行三项测试：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;直接重编译原代码&lt;/strong&gt;：Avast立即报警&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;仅将缓冲区扩大至8192字节&lt;/strong&gt;：成功绕过检测&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全面修改汇编值+生成payload&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用XOR编码和无编码两种shellcode&lt;/li&gt;
+&lt;li&gt;均成功通过Avast的深度扫描&lt;/li&gt;
+&lt;li&gt;最终获得shell访问权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术验证截图&#34;&gt;技术验证截图
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;修改后的汇编源代码（8192字节缓冲区）&lt;/li&gt;
+&lt;li&gt;使用新模板生成的64位payload文件&lt;/li&gt;
+&lt;li&gt;Avast扫描结果显示&amp;quot;安全&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;成功获取shell的终端界面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论与启示&#34;&gt;结论与启示
+&lt;/h2&gt;&lt;p&gt;反病毒厂商主要检测模板特征而非shellcode本身。本实验证明，仅通过简单的汇编代码修改（如调整缓冲区大小）即可有效绕过AV检测。该方法对其他AV引擎的适用性有待进一步验证。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;延伸学习：&lt;/em&gt;&lt;br&gt;
+作者相关课程：《正则表达式实战》《企业攻击模拟与C2植入开发》《Python入门》等&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>修改Metasploit x64模板实现反病毒规避技术</title>
         <link>http://localhost:1313/p/%E4%BF%AE%E6%94%B9metasploit-x64%E6%A8%A1%E6%9D%BF%E5%AE%9E%E7%8E%B0%E5%8F%8D%E7%97%85%E6%AF%92%E8%A7%84%E9%81%BF%E6%8A%80%E6%9C%AF/</link>
         <pubDate>Tue, 05 Aug 2025 23:18:51 +0800</pubDate>

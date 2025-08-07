@@ -7,7 +7,78 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 18:30:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Aug 2025 20:19:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2017年3月微软安全更新汇总 - MS17-006至MS17-023漏洞修复指南</title>
+        <link>http://localhost:1313/p/2017%E5%B9%B43%E6%9C%88%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB-ms17-006%E8%87%B3ms17-023%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Wed, 06 Aug 2025 20:19:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2017%E5%B9%B43%E6%9C%88%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB-ms17-006%E8%87%B3ms17-023%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;h3 id=&#34;安全更新要点&#34;&gt;安全更新要点
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;发布18项新安全公告（9项紧急/9项重要）&lt;/li&gt;
+&lt;li&gt;安全独立更新包不再包含IE补丁（需单独安装）&lt;/li&gt;
+&lt;li&gt;新增Windows 10差分更新机制（Delta Update）&lt;/li&gt;
+&lt;li&gt;特别提示：Windows Server 2012的CVE-2017-0042补丁暂未发布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键漏洞修复清单&#34;&gt;关键漏洞修复清单
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;公告编号&lt;/th&gt;
+          &lt;th&gt;影响组件&lt;/th&gt;
+          &lt;th&gt;最高风险&lt;/th&gt;
+          &lt;th&gt;漏洞影响&lt;/th&gt;
+          &lt;th&gt;受影响系统&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS17-006&lt;/td&gt;
+          &lt;td&gt;Internet Explorer&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;远程代码执行&lt;/td&gt;
+          &lt;td&gt;Windows全系/IE9-11&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS17-010&lt;/td&gt;
+          &lt;td&gt;Windows SMB服务器&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;永恒之蓝漏洞&lt;/td&gt;
+          &lt;td&gt;Windows 7/8.1/10/Server系列&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS17-013&lt;/td&gt;
+          &lt;td&gt;图形组件&lt;/td&gt;
+          &lt;td&gt;紧急&lt;/td&gt;
+          &lt;td&gt;内存破坏漏洞&lt;/td&gt;
+          &lt;td&gt;Office/Skype/Silverlight等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS17-017&lt;/td&gt;
+          &lt;td&gt;Windows内核&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;权限提升&lt;/td&gt;
+          &lt;td&gt;Windows 8.1/10/Server 2012 R2&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;更新部署建议&#34;&gt;更新部署建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;优先处理&lt;/strong&gt;：MS17-010（SMB协议漏洞）必须立即部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特殊要求&lt;/strong&gt;：IE9用户需额外安装KB3218362补丁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意例外&lt;/strong&gt;：Windows Server 2012的MS17-021补丁暂缓发布&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术变更说明&#34;&gt;技术变更说明
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SHA-1弃用回滚&lt;/strong&gt;：安全公告3123479恢复SHA-1证书支持&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Delta Update&lt;/strong&gt;：针对Windows 10 1607/1704版本推出的增量更新方案，显著减少下载体积&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;完整受影响软件列表及详细技术说明参见：&lt;a class=&#34;link&#34; href=&#34;https://technet.microsoft.com/ja-jp/library/security/ms17-Mar&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软安全公告库&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>2025年7月Patch Tuesday更新汇总：系统管理员必读</title>
         <link>http://localhost:1313/p/2025%E5%B9%B47%E6%9C%88patch-tuesday%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%BF%85%E8%AF%BB/</link>
         <pubDate>Tue, 05 Aug 2025 18:30:42 +0800</pubDate>
