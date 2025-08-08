@@ -7,7 +7,668 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 22:33:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 07:35:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>政府涉足区块链技术时需要考虑的关键问题</title>
+        <link>http://localhost:1313/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sat, 09 Aug 2025 07:35:06 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h3 id=&#34;使用区块链技术时需要重点考虑哪些问题&#34;&gt;使用区块链技术时需要重点考虑哪些问题？
+&lt;/h3&gt;&lt;p&gt;理解使用区块链时必须做出的权衡及其安全影响至关重要。目前人们已普遍意识到，使用区块链在部署和智能合约交互成本方面会产生显著额外开销。虽然随着新型共识机制和高级协议的出现，这些成本逐渐降低，但差异仍然显著。&lt;/p&gt;
+&lt;p&gt;必须认识到：所有存储在公有链上的数据都是公开可查的。任何人都可以查看每个账户或合约的完整历史记录并推断其行为含义。如果系统有隐私需求，就必须采取额外保护措施。&lt;/p&gt;
+&lt;p&gt;公有链中的大多数参与者都不可信。这种架构将原本集中于权威机构的信任分散到了其他可能不受控制的实体。你不仅需要信任智能合约开发者，还隐式信任着区块链技术栈的每个环节——包括节点软件、矿机硬件、挖矿软件、矿池协议等。其中任何环节的漏洞都可能导致整个系统崩溃。&lt;/p&gt;
+&lt;p&gt;区块链允许开发者快速原型设计。由于基础设施和DevOps都由区块链本身处理，从创意产生到用户使用的周期大幅缩短。但这种快速迭代也伴随着风险：紧凑的开发周期可能导致测试不足、设计缺陷或代码漏洞，最终成为攻击者的主要目标。&lt;/p&gt;
+&lt;p&gt;DeFi/Web3的吸引力还在于快速原型能力以及与整个生态的即时连接。区块链作为巨型共享数据库，使得竞争对手创建的合约和资产能够交互——这种组合在传统中心化平台上难以实现。但这种可组合性需要代价：系统复杂度剧增，开发者必须理解所有相关合约的代码逻辑，并考虑应用可能交互的所有外部组件。&lt;/p&gt;
+&lt;p&gt;近期在以太坊上出现的闪贷、最大可提取价值(MEV)等新型金融工具已印证了这种复杂性——数百万美元损失正是由于多个DeFi应用以非预期方式组合交易所致。正如计算机科学家Leslie Lamport在1987年指出的：&amp;ldquo;分布式系统中，一个你从未知晓的计算机故障也可能导致你的系统瘫痪。&amp;ldquo;这条定律在区块链领域依然成立。&lt;/p&gt;
+&lt;h3 id=&#34;美国政府为何需要关注区块链技术&#34;&gt;美国政府为何需要关注区块链技术？
+&lt;/h3&gt;&lt;p&gt;这关乎国家安全：虽然国税局可能只关心比特币交易带来的税收损失，但当朝鲜黑客窃取加密货币时，政府就必须介入。美国对手已开始利用这些技术规避制裁、破坏市场。&lt;/p&gt;
+&lt;p&gt;更建设性的提问是：&amp;ldquo;区块链和Web3技术能否实现安全？如何实现？&amp;ldquo;美国政府需要通过研发投入来回答这个问题，以保持其在分布式账本技术领域的领导地位。&lt;/p&gt;
+&lt;h3 id=&#34;如何构建web3领域的人才培养体系&#34;&gt;如何构建Web3领域的人才培养体系？
+&lt;/h3&gt;&lt;p&gt;现有软件研发知识不能直接迁移到Web3领域。与传统移动开发不同，Web3开发需要全栈认知：必须理解所用编译器、底层虚拟机、拜占庭容错共识协议、零知识证明等技术。目前同时掌握这些技术的专家凤毛麟角。&lt;/p&gt;
+&lt;p&gt;需要制定政策激励人才获取这些技能。Trail of Bits为此创建了区块链安全学徒计划——因为在当前市场很难找到具备全部必要技能的人才。安全专家可能精通C++程序分析却不了解区块链，而区块链开发者又往往缺乏安全背景。&lt;/p&gt;
+&lt;h3 id=&#34;web3开发工具链的安全困境&#34;&gt;Web3开发工具链的安全困境
+&lt;/h3&gt;&lt;p&gt;Web3开发门槛意外地低，这本身也是问题所在：其工具链沿袭了传统应用开发模式，为提高开发者友好性牺牲了安全性。我们需要现代化工具来扭转这种优先级失衡。&lt;/p&gt;
+&lt;h3 id=&#34;结语&#34;&gt;结语
+&lt;/h3&gt;&lt;p&gt;政府仅表示对区块链安全的兴趣远远不够，必须进行有目的的实际投资。除了安全架构、编程语言、编译器和协议设计外，这些投资还应包括培养能应对未来Web3需求的人才队伍。&lt;/p&gt;
+&lt;p&gt;如需评估区块链是否适合您的项目，建议参考我们的操作风险评估报告《你真的需要区块链吗？》。该报告将全面分析可能面临的优势与风险。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://nps.edu/web/nps-video-portal/-/blockchain-research-opportunities-for-nps-students-and-faculty&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;观看完整专家讨论视频&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>我的密码是否在网上公开？四个减少损失的关键措施</title>
+        <link>http://localhost:1313/p/%E6%88%91%E7%9A%84%E5%AF%86%E7%A0%81%E6%98%AF%E5%90%A6%E5%9C%A8%E7%BD%91%E4%B8%8A%E5%85%AC%E5%BC%80%E5%9B%9B%E4%B8%AA%E5%87%8F%E5%B0%91%E6%8D%9F%E5%A4%B1%E7%9A%84%E5%85%B3%E9%94%AE%E6%8E%AA%E6%96%BD/</link>
+        <pubDate>Sat, 09 Aug 2025 06:56:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E7%9A%84%E5%AF%86%E7%A0%81%E6%98%AF%E5%90%A6%E5%9C%A8%E7%BD%91%E4%B8%8A%E5%85%AC%E5%BC%80%E5%9B%9B%E4%B8%AA%E5%87%8F%E5%B0%91%E6%8D%9F%E5%A4%B1%E7%9A%84%E5%85%B3%E9%94%AE%E6%8E%AA%E6%96%BD/</guid>
+        <description>&lt;p&gt;我们经常听到电子邮件、社交网络、新闻和其他类型网站发生大规模数据泄露事件。许多用户可能在网站遭受入侵时被要求更改密码，甚至收到过数据泄露通知邮件。&lt;/p&gt;
+&lt;p&gt;但如果我们能随时查询自己的密码是否以明文形式暴露在网上，将会非常有用。好消息是安全博主Troy Hunt创建了一个网站http://haveibeenpwned.com/，您可以输入电子邮件地址（常用登录凭证）来查询对应密码是否在泄露网站曝光。坏消息是它仅涵盖黑客将泄露密码列表发布在PasteBin等粘贴网站上的数据泄露事件。这仅代表已曝光密码的一小部分，而且很可能在漏洞被发现前，黑客已有一段时间可以访问您的账户。这也意味着任何知道您电子邮件地址的人（朋友、敌人、欺凌者、前任、亲戚、竞争对手和同事）都可以检查您的密码，并有选择地针对您。&lt;/p&gt;
+&lt;p&gt;我对所有网络公民的建议，特别是在发现密码泄露后：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;永远不要重复使用已泄露的密码&lt;/strong&gt;，也不要跨网站使用相同密码。一次泄露可能会对您的在线资产造成连锁损害。如果您在多个网站使用相同密码，请立即全部更改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用双重认证&lt;/strong&gt;，大多数网站都提供此功能，可以限制泄露密码的使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;每3个月更改一次密码&lt;/strong&gt;，以缩短暴露窗口期。在大规模数据泄露中，黑客可能需要时间锁定您的账户，如果您已更改密码，就能幸免于难。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;一旦发现数据泄露，立即更改密码&lt;/strong&gt;，快速反应是减少损失的关键。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>BlueHat奖决赛名单揭晓：ROP缓解技术成焦点</title>
+        <link>http://localhost:1313/p/bluehat%E5%A5%96%E5%86%B3%E8%B5%9B%E5%90%8D%E5%8D%95%E6%8F%AD%E6%99%93rop%E7%BC%93%E8%A7%A3%E6%8A%80%E6%9C%AF%E6%88%90%E7%84%A6%E7%82%B9/</link>
+        <pubDate>Sat, 09 Aug 2025 06:30:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/bluehat%E5%A5%96%E5%86%B3%E8%B5%9B%E5%90%8D%E5%8D%95%E6%8F%AD%E6%99%93rop%E7%BC%93%E8%A7%A3%E6%8A%80%E6%9C%AF%E6%88%90%E7%84%A6%E7%82%B9/</guid>
+        <description>&lt;h1 id=&#34;bluehat-prize-and-the-finalists-are&#34;&gt;BlueHat Prize: And the finalists are&amp;hellip;
+&lt;/h1&gt;&lt;p&gt;评委组已完成首届BlueHat Prize竞赛的参赛作品评审，现正式公布决赛名单！请访问&lt;a class=&#34;link&#34; href=&#34;http://www.BlueHatPrize.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.BlueHatPrize.com&lt;/a&gt;查看三位决赛选手及其针对返回导向编程（ROP）的缓解方案。决赛选手将共同获得超过25万美元的现金和奖品，颁奖仪式定于2012年7月26日拉斯维加斯黑帽大会后的微软研究员答谢晚宴举行。&lt;/p&gt;
+&lt;p&gt;祝贺所有入围者，我们期待在拉斯维加斯与您相见。&lt;/p&gt;
+&lt;p&gt;此致&lt;br&gt;
+Yunsun Wee&lt;br&gt;
+总监&lt;br&gt;
+微软可信计算部门&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Katz窃取者 | 强大的恶意软件即服务(MaaS)肆虐窃取凭证与加密资产</title>
+        <link>http://localhost:1313/p/katz%E7%AA%83%E5%8F%96%E8%80%85-%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%B3%E6%9C%8D%E5%8A%A1maas%E8%82%86%E8%99%90%E7%AA%83%E5%8F%96%E5%87%AD%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</link>
+        <pubDate>Sat, 09 Aug 2025 06:14:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/katz%E7%AA%83%E5%8F%96%E8%80%85-%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%B3%E6%9C%8D%E5%8A%A1maas%E8%82%86%E8%99%90%E7%AA%83%E5%8F%96%E5%87%AD%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</guid>
+        <description>&lt;h1 id=&#34;katz窃取者--强大的maas肆虐窃取凭证与加密资产&#34;&gt;Katz窃取者 | 强大的MaaS肆虐窃取凭证与加密资产
+&lt;/h1&gt;&lt;p&gt;Katz窃取者是一款功能丰富的信息窃取恶意软件，以恶意软件即服务(MaaS)模式进行营销和运营。该窃取程序于2025年初发布，迅速在信息窃取领域获得关注。&lt;/p&gt;
+&lt;h2 id=&#34;营销与maas平台&#34;&gt;营销与MaaS平台
+&lt;/h2&gt;&lt;p&gt;Katz窃取者作为商业分发的MaaS平台运营。开发者向&amp;quot;会员&amp;quot;或&amp;quot;客户&amp;quot;收取前期费用提供服务，会员可通过基于Web的管理面板生成和配置自定义窃取程序载荷。&lt;/p&gt;
+&lt;p&gt;该面板还作为窃取程序的数据后端，允许处理和搜索窃取的受害者数据。攻击者还能以多种方式导出和打包被盗数据，便于进行勒索。&lt;/p&gt;
+&lt;p&gt;Katz窃取者在多个网络犯罪论坛以及自有门户网站进行营销，重点宣传其对众多应用程序和数据类型的强大窃取能力。当前广告宣传的功能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器凭证窃取&lt;/li&gt;
+&lt;li&gt;加密货币钱包扫描&lt;/li&gt;
+&lt;li&gt;消息会话劫持&lt;/li&gt;
+&lt;li&gt;屏幕截图捕获&lt;/li&gt;
+&lt;li&gt;剪贴板监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;感染与规避战术&#34;&gt;感染与规避战术
+&lt;/h2&gt;&lt;p&gt;Katz窃取者采用多阶段感染链，通常从通过钓鱼邮件或木马化下载传递的恶意压缩文件(.gz)开始。这些文件包含高度混淆的JavaScript投放器，执行时会启动带有-WindowStyle Hidden标志的PowerShell命令以下载看似无害的图片文件。&lt;/p&gt;
+&lt;p&gt;该图片实际上使用隐写术武器化，包含base64编码的字符串。脚本扫描图片中的特定标记(如&amp;laquo;INICIO&amp;raquo;和&amp;laquo;FIM&amp;raquo;)，提取字符串并完全在内存中解码，确保此阶段不会有恶意载荷写入磁盘。&lt;/p&gt;
+&lt;p&gt;解码后的载荷通过滥用合法的Windows工具cmstp.exe实现UAC绕过获取提升权限，然后创建计划任务确保持久性。&lt;/p&gt;
+&lt;h2 id=&#34;信息窃取功能&#34;&gt;信息窃取功能
+&lt;/h2&gt;&lt;p&gt;Katz窃取者能够从几乎所有常见应用程序或服务中窃取文件、令牌和凭证，主要功能包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;浏览器数据窃取&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持Chrome、Edge、Brave、Firefox等主流浏览器&lt;/li&gt;
+&lt;li&gt;窃取保存的密码、登录会话cookie、会话令牌、自动填充数据&lt;/li&gt;
+&lt;li&gt;能够解密某些加密的浏览器数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;消息和游戏平台&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;窃取Discord、Telegram等安全通讯平台的会话令牌&lt;/li&gt;
+&lt;li&gt;窃取Steam等知名游戏网站凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;其他客户端&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;邮件客户端(Outlook、Windows Live Mail等)&lt;/li&gt;
+&lt;li&gt;FTP和VPN客户端&lt;/li&gt;
+&lt;li&gt;已知WiFi网络配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多媒体捕获&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定时或即时屏幕截图&lt;/li&gt;
+&lt;li&gt;音频和视频捕获&lt;/li&gt;
+&lt;li&gt;监控剪贴板活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加密货币重点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对Exodus和Coinomi等多币种钱包&lt;/li&gt;
+&lt;li&gt;窃取Dash、Dogecoin、Litecoin等特定钱包数据&lt;/li&gt;
+&lt;li&gt;扫描150多种加密货币浏览器扩展&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;浏览器注入过程与加密绕过&#34;&gt;浏览器注入过程与加密绕过
+&lt;/h2&gt;&lt;p&gt;Katz窃取者DLL注入浏览器进程后，可以利用浏览器的安全上下文和可用API提取敏感数据，绕过某些现代浏览器安全措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chromium浏览器&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定位浏览器的&amp;quot;Local State&amp;quot;文件获取主加密密钥&lt;/li&gt;
+&lt;li&gt;使用Windows加密API解密该密钥&lt;/li&gt;
+&lt;li&gt;解密所有保存的密码和cookie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Firefox浏览器&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定位Firefox配置文件目录&lt;/li&gt;
+&lt;li&gt;收集logins.json和key4.db等核心文件&lt;/li&gt;
+&lt;li&gt;离线解密密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;c2与网络行为&#34;&gt;C2与网络行为
+&lt;/h2&gt;&lt;p&gt;成功感染后，Katz窃取者建立持久C2通道，主要特点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个窃取程序实例包含硬编码C2 IP地址&lt;/li&gt;
+&lt;li&gt;使用HTTP/HTTPS进行主要功能通信&lt;/li&gt;
+&lt;li&gt;设计为持续渗出数据，而非一次性窃取&lt;/li&gt;
+&lt;li&gt;凭证和令牌等文本数据通过HTTP Post逐行发送&lt;/li&gt;
+&lt;li&gt;较大数据块(如截图、钱包文件)分块传输&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Katz窃取者代表了凭证窃取与现代恶意软件设计的强大组合，具有以下特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨浏览器、消息系统和加密数据的多面窃取能力&lt;/li&gt;
+&lt;li&gt;隐蔽的交付方法(内存暂存、伪隐写术、进程注入和空洞化)&lt;/li&gt;
+&lt;li&gt;低门槛导致使用量显著增加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然而，Katz窃取者仍然依赖社会工程和用户交互来实现成功入侵。SentinelOne Singularity能够检测和预防与Katz窃取者相关的恶意行为和工件。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>安全通告：Zimbra Collaboration Suite远程代码执行漏洞(CVE-2024-45519)技术分析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 05:30:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是Zimbra协作套件postjournal服务中发现的关键安全漏洞。该漏洞目前尚未获得CVSS评分，但允许远程攻击者在受影响系统上执行任意代码，可能导致未授权访问、数据泄露和完全系统沦陷。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及应用&#34;&gt;受影响系统及应用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用&lt;/strong&gt;：Zimbra Collaboration Suite (ZCS)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;受影响版本&lt;/strong&gt;：8.8.15(至Patch 45)和9.0.0(至Patch 40)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：所有支持平台(Linux, Mac OS X)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是存在于Zimbra协作套件postjournal服务邮件处理模块中的远程代码执行(RCE)漏洞。该漏洞源于未能正确清理用户输入，使得攻击者无需认证即可注入任意命令。攻击者可通过向易受攻击的Zimbra服务器发送特制邮件来绕过用户输入清理机制。&lt;/p&gt;
+&lt;p&gt;攻击流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;识别运行漏洞版本的Zimbra服务器&lt;/li&gt;
+&lt;li&gt;制作包含特定payload的邮件以绕过输入清理&lt;/li&gt;
+&lt;li&gt;发送特制邮件至目标服务器，触发任意代码执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;立即更新系统&lt;/strong&gt;：升级至最新修补版本(8.8.15 Patch 46和9.0.0 Patch 41)或更新至10.0.9/10.1.1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;临时解决方案&lt;/strong&gt;：如无法立即更新，考虑临时禁用或限制postjournal服务访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮件过滤&lt;/strong&gt;：使用邮件安全网关在邮件到达Zimbra服务器前过滤恶意内容&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志监控&lt;/strong&gt;：监控postjournal服务相关日志中的可疑活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通用建议&#34;&gt;通用建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;网络隔离&lt;/strong&gt;：将Zimbra服务器与其他网络隔离以降低风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定期补丁&lt;/strong&gt;：实施补丁管理策略确保软件及时更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志记录&lt;/strong&gt;：启用详细日志记录并监控异常活动&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户培训&lt;/strong&gt;：定期培训用户识别钓鱼邮件和基于邮件的攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;备份恢复&lt;/strong&gt;：定期备份Zimbra数据并验证恢复能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Feedly威胁情报报告&lt;/li&gt;
+&lt;li&gt;NIST国家漏洞数据库&lt;/li&gt;
+&lt;li&gt;Zimbra安全中心&lt;/li&gt;
+&lt;li&gt;Dark Reading文章&lt;/li&gt;
+&lt;li&gt;Project Discovery文章-Zimbra远程命令执行(CVE-2024-45519)&lt;/li&gt;
+&lt;li&gt;Zimbra补丁下载链接：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Gladinet CentreStack与Triofox高危远程代码执行漏洞分析(CVE-2025-30406)</title>
+        <link>http://localhost:1313/p/gladinet-centrestack%E4%B8%8Etriofox%E9%AB%98%E5%8D%B1%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2025-30406/</link>
+        <pubDate>Sat, 09 Aug 2025 05:08:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gladinet-centrestack%E4%B8%8Etriofox%E9%AB%98%E5%8D%B1%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2025-30406/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;安全研究人员发现Gladinet CentreStack和Triofox存在CVSS评分9.0的关键漏洞(CVE-2025-30406)，该漏洞源于硬编码加密密钥问题，可导致远程代码执行。证据表明该漏洞在2025年3月已被作为零日漏洞利用。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Gladinet Triofox（远程访问解决方案）：16.4.10317.56372及之前版本&lt;/li&gt;
+&lt;li&gt;Gladinet CentreStack：16.4.10315.56368及之前版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h2&gt;&lt;h3 id=&#34;硬编码加密密钥&#34;&gt;硬编码加密密钥
+&lt;/h3&gt;&lt;p&gt;漏洞源于&lt;code&gt;web.config&lt;/code&gt;文件中硬编码的machineKey，该密钥用于ASP.NET应用中ViewState的完整性验证。ViewState是维护网页回发状态的重要机制。&lt;/p&gt;
+&lt;h3 id=&#34;viewstate反序列化攻击&#34;&gt;ViewState反序列化攻击
+&lt;/h3&gt;&lt;p&gt;掌握machineKey的攻击者可构造恶意ViewState载荷。当服务器反序列化这些载荷时，可执行任意代码。这是ASP.NET应用中ViewState未正确保护的典型攻击向量。&lt;/p&gt;
+&lt;h3 id=&#34;配置文件路径&#34;&gt;配置文件路径
+&lt;/h3&gt;&lt;p&gt;存在漏洞的&lt;code&gt;web.config&lt;/code&gt;文件通常位于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Gladinet Cloud Enterprise\root\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Gladinet Cloud Enterprise\portal\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Triofox的类似路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Triofox\root\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Triofox\portal\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;攻击活动&#34;&gt;攻击活动
+&lt;/h2&gt;&lt;p&gt;自2025年3月起，攻击者已利用该漏洞通过编码PowerShell脚本下载并旁加载DLL。攻击手法与近期CrushFTP漏洞利用相似，攻击者还使用Impacket进行横向移动，并安装MeshCentral实现远程控制。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;补丁升级&lt;/strong&gt;：更新至CentreStack 16.4.10315.56368和Triofox 16.4.10317.56372版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置修改&lt;/strong&gt;：若无法立即升级，需修改所有&lt;code&gt;web.config&lt;/code&gt;中的machineKey值&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监控措施&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;监测异常PowerShell执行行为&lt;/li&gt;
+&lt;li&gt;检查可疑IP的网络连接&lt;/li&gt;
+&lt;li&gt;查看Windows应用事件日志中的ViewState错误（事件ID 1316）&lt;/li&gt;
+&lt;li&gt;监控IIS工作进程的异常外联&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cve.org/CVERecord?id=CVE-2025-30406&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE官方记录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gladinetsupport.s3.us-east-1.amazonaws.com/gladinet/securityadvisory-cve-2025-triofox.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gladinet安全公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.huntress.com/blog/cve-2025-30406-critical-gladinet-centrestack-triofox-vulnerability-exploited-in-the-wild&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Huntress技术分析&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>从Zalando钓鱼攻击到远程访问木马(RAT)的技术分析</title>
+        <link>http://localhost:1313/p/%E4%BB%8Ezalando%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9C%A8%E9%A9%ACrat%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 04:25:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%8Ezalando%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9C%A8%E9%A9%ACrat%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;p&gt;今天，我在isc.sans.edu上发布了以下分析日记《从Zalando钓鱼攻击到远程访问木马》：&lt;/p&gt;
+&lt;p&gt;钓鱼攻击仍然是高回报的威胁手段。我们每天都会收到冒充知名品牌（如DHL、PayPal、Netflix、微软、Dropbox、苹果等）的欺诈邮件。最近，我截获了一批针对Zalando客户的钓鱼邮件。Zalando是欧洲著名的鞋履时尚零售商，这是我首次发现其品牌被用于钓鱼攻击活动&amp;hellip;[阅读全文]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析</title>
+        <link>http://localhost:1313/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 04:09:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;curl未在跨源重定向时剥离proxy-authorization头部的安全漏洞分析&#34;&gt;curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要
+&lt;/h2&gt;&lt;p&gt;curl在8.14.1版本中存在未剥离Proxy-Authorization头部的安全缺陷。当服务器返回跨源重定向响应时，curl会正确移除Authorization和Cookie头部，但会错误保留Proxy-Authorization头部。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;curl 8.14.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重现步骤&#34;&gt;重现步骤
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -L &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://github.com/php/php-src/archive/refs/tags/php-8.4.8.tar.gz&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Authorization: foo&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Proxy-Authorization: bar&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -vvv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;首次请求包含所有头部：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/php/php-src/archive/refs/tags/php-8.4.8.tar.gz&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Host: github.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Authorization: foo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Proxy-Authorization: bar&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;服务端返回重定向：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;location: https://codeload.github.com/php/php-src/tar.gz/refs/tags/php-8.4.8
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;后续请求错误保留代理凭证：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/php/php-src/tar.gz/refs/tags/php-8.4.8&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Host: codeload.github.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Proxy-Authorization: bar&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;技术讨论&#34;&gt;技术讨论
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Golang团队已修复类似问题(CVE-2025-4673)&lt;/li&gt;
+&lt;li&gt;Python requests库存在相关安全公告(GHSA-j8r2-6x86-q33q)&lt;/li&gt;
+&lt;li&gt;curl团队认为这是预期行为：
+&lt;ul&gt;
+&lt;li&gt;代理凭证通常适用于同一代理&lt;/li&gt;
+&lt;li&gt;用户可通过&lt;code&gt;--proxy-header&lt;/code&gt;明确控制&lt;/li&gt;
+&lt;li&gt;RFC 9110规定Proxy-Authorization为&amp;quot;hop-by-hop&amp;quot;头部&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安全影响&#34;&gt;安全影响
+&lt;/h2&gt;&lt;p&gt;可能导致代理认证信息泄露给非预期的第三方服务器。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案
+&lt;/h2&gt;&lt;p&gt;curl团队建议：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用原生代理凭证配置选项&lt;/li&gt;
+&lt;li&gt;调用方应自行处理敏感头部&lt;/li&gt;
+&lt;li&gt;不认为这是curl的安全漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;报告最终状态：Not Applicable（非安全问题）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>什么是入口过滤？网络安全的第一道防线</title>
+        <link>http://localhost:1313/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%A5%E5%8F%A3%E8%BF%87%E6%BB%A4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%93%E9%98%B2%E7%BA%BF/</link>
+        <pubDate>Sat, 09 Aug 2025 03:36:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%A5%E5%8F%A3%E8%BF%87%E6%BB%A4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%93%E9%98%B2%E7%BA%BF/</guid>
+        <description>&lt;h1 id=&#34;什么是入口过滤&#34;&gt;什么是入口过滤？
+&lt;/h1&gt;&lt;p&gt;入口过滤（Ingress filtering）是企业和互联网服务提供商用于阻止可疑流量进入网络的一种方法。当在边缘设备（如路由器或防火墙）上配置时，入口过滤会检查所有入站数据包，并根据数据包头中的信息决定是否允许其进入网络。它是一种数据包过滤技术。&lt;/p&gt;
+&lt;p&gt;入口流量过滤是网络安全策略中的第一道防线，旨在防止网络攻击，尤其是利用互联网协议（IP）地址欺骗的拒绝服务（DoS）攻击。&lt;/p&gt;
+&lt;h2 id=&#34;ip欺骗与dos攻击防护&#34;&gt;IP欺骗与DoS攻击防护
+&lt;/h2&gt;&lt;p&gt;入口过滤的核心是建立一个访问控制列表（ACL），包含所有允许的源IP地址。反之，ACL也可以阻止被禁止的源地址。&lt;/p&gt;
+&lt;p&gt;入口过滤利用边缘路由器的数据链路层IP地址过滤能力，阻止极可能是恶意的流量。其判断依据是IP数据包头部内容是否符合预定义的标准。&lt;/p&gt;
+&lt;p&gt;数据包过滤器会检查多个属性，包括源IP地址。如果源地址无效（即与其原始网络不匹配），过滤器会判定其为伪造或欺骗地址，并丢弃该数据包。&lt;/p&gt;
+&lt;p&gt;交换机也具备入口过滤功能，这意味着它们可以在虚拟局域网（VLAN）上过滤流量，以防止私有网络内的恶意活动，如VLAN跳跃攻击。在VLAN中，入口过滤会丢弃试图访问非成员端口的数据帧。&lt;/p&gt;
+&lt;h2 id=&#34;入口过滤的工作原理&#34;&gt;入口过滤的工作原理
+&lt;/h2&gt;&lt;p&gt;入口过滤通常会阻止以下类型的源IP地址：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;内部IP地址&lt;/strong&gt;：防止攻击者利用编写不当的防火墙规则欺骗内部IP地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;私有IP地址&lt;/strong&gt;：防止来自配置不当的互联网主机或攻击者伪造地址的恶意流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环回IP地址&lt;/strong&gt;：防止攻击者利用编写不当的防火墙规则欺骗环回地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组播IP地址&lt;/strong&gt;：防止可能是垃圾邮件的组播流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务或管理IP地址&lt;/strong&gt;：防止攻击者通过公共互联网未经授权访问运行在应用层及以上的网络服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外，网络管理员可能希望允许来自特定地区的流量进入网络，同时阻止来自危险地区的访问。许多免费和付费服务可以为网络边界路由器创建ACL。&lt;/p&gt;
+&lt;h2 id=&#34;入口过滤与出口过滤&#34;&gt;入口过滤与出口过滤
+&lt;/h2&gt;&lt;p&gt;入口过滤是一种数据包过滤技术，其对应的是出口过滤（egress filtering），后者检查出站流量。出口过滤仅允许符合管理员预设策略的数据包离开网络。&lt;/p&gt;
+&lt;p&gt;出口过滤可以防止以下恶意活动：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;受感染的机器试图将数据泄露到远程主机。&lt;/li&gt;
+&lt;li&gt;阻止合法用户访问被禁止的服务。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>API安全日益严峻：漏洞挖掘与防护策略</title>
+        <link>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%97%A5%E7%9B%8A%E4%B8%A5%E5%B3%BB%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E6%8A%A4%E7%AD%96%E7%95%A5/</link>
+        <pubDate>Sat, 09 Aug 2025 03:14:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%97%A5%E7%9B%8A%E4%B8%A5%E5%B3%BB%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E6%8A%A4%E7%AD%96%E7%95%A5/</guid>
+        <description>&lt;h1 id=&#34;api安全日益严峻&#34;&gt;API安全日益严峻
+&lt;/h1&gt;&lt;p&gt;随着互联网发展，应用程序接口(API)已成为Web服务、移动应用、云计算和物联网(IoT)的关键支柱。根据Cloudflare 2021年数据，API流量已占互联网总请求量的54%。然而，API的爆炸式增长也带来了严重的安全隐患：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check Point数据显示，2024年1月API攻击同比激增20%&lt;/li&gt;
+&lt;li&gt;每周有1/4.6的组织遭受API攻击&lt;/li&gt;
+&lt;li&gt;典型案例：2018年USPS的API端点认证缺陷导致所有包裹数据和用户PII可被实时获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api安全为何至关重要&#34;&gt;API安全为何至关重要
+&lt;/h2&gt;&lt;p&gt;作为系统间的数据通道，API面临三大典型威胁：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;弱认证机制&lt;/strong&gt;：攻击者通过伪造身份获取系统权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据验证缺陷&lt;/strong&gt;：未过滤的恶意输入导致注入攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;业务逻辑漏洞&lt;/strong&gt;：滥用正常功能实现非预期操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;api与传统web应用的本质差异&#34;&gt;API与传统Web应用的本质差异
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;维度&lt;/th&gt;
+          &lt;th&gt;Web应用&lt;/th&gt;
+          &lt;th&gt;API&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;交互对象&lt;/td&gt;
+          &lt;td&gt;人类用户&lt;/td&gt;
+          &lt;td&gt;其他系统/程序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;通信协议&lt;/td&gt;
+          &lt;td&gt;HTTP+HTML&lt;/td&gt;
+          &lt;td&gt;REST/GraphQL+JSON/XML&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;安全测试重点&lt;/td&gt;
+          &lt;td&gt;XSS/CSRF等前端漏洞&lt;/td&gt;
+          &lt;td&gt;业务逻辑/数据流控制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;逆向工程难度&lt;/td&gt;
+          &lt;td&gt;较高(需解析前端逻辑)&lt;/td&gt;
+          &lt;td&gt;较低(文档完善+协议标准化)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;api渗透测试的独特挑战&#34;&gt;API渗透测试的独特挑战
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;后端核心暴露&lt;/strong&gt;：API直接暴露业务逻辑层，漏洞影响远超传统Web应用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动化攻击风险&lt;/strong&gt;：Burp Suite等工具可批量探测API端点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐蔽数据泄露&lt;/strong&gt;：响应结构泄露敏感字段(如过度数据返回问题)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;协议复杂性&lt;/strong&gt;：需测试GraphQL嵌套查询、REST速率限制等特殊机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;实施严格的API网关策略&lt;/li&gt;
+&lt;li&gt;采用零信任架构进行微服务间认证&lt;/li&gt;
+&lt;li&gt;定期执行专项API渗透测试&lt;/li&gt;
+&lt;li&gt;监控异常API调用模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;随着API成为数字化基础设施的核心组件，企业必须建立针对性的安全防护体系。专业的API渗透测试应覆盖业务逻辑验证、协议模糊测试和逆向工程分析等关键维度。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>Mozilla以隐私之名推出劫持所有DNS流量的机制</title>
+        <link>http://localhost:1313/p/mozilla%E4%BB%A5%E9%9A%90%E7%A7%81%E4%B9%8B%E5%90%8D%E6%8E%A8%E5%87%BA%E5%8A%AB%E6%8C%81%E6%89%80%E6%9C%89dns%E6%B5%81%E9%87%8F%E7%9A%84%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sat, 09 Aug 2025 02:58:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mozilla%E4%BB%A5%E9%9A%90%E7%A7%81%E4%B9%8B%E5%90%8D%E6%8E%A8%E5%87%BA%E5%8A%AB%E6%8C%81%E6%89%80%E6%9C%89dns%E6%B5%81%E9%87%8F%E7%9A%84%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;p&gt;2019年9月，Mozilla开始通过其可信递归解析器（TRR）计划在Firefox中发布基于HTTPS的DNS（DoH）。这项变更基于两个常见论点：a) 旧协议未考虑安全性和隐私性；b) 存在他人窥探用户搜索内容的风险。&lt;/p&gt;
+&lt;p&gt;技术层面，我对提供DoH功能没有异议，但质疑是否应将系统级控制权转移到Web层。真正令人担忧的是其默认启用的实现方式——未经用户同意即开启，并默认将Cloudflare作为DoH服务提供商。这意味着所有Firefox请求都将流向用户未自主选择的私营机构。&lt;/p&gt;
+&lt;p&gt;相比之下，Google的实施方案默认为关闭状态，并允许用户自选DoH提供商。&lt;/p&gt;
+&lt;h3 id=&#34;mozilla-doh实施的影响&#34;&gt;Mozilla DoH实施的影响
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;教育机构&lt;/strong&gt;：校园DNS过滤系统将失效，学生可绕过恶意网站/色情内容拦截&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;家长控制&lt;/strong&gt;：家庭网络防护工具形同虚设&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;企业安全&lt;/strong&gt;：安全团队无法监控网络流量中的恶意行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;政府监管&lt;/strong&gt;：阻碍ISP对儿童色情等非法内容的追责&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;应对方案&#34;&gt;应对方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络级拦截&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过DNS查询&amp;quot;use-application-dns.net&amp;quot;返回NXDOMAIN或空记录&lt;/li&gt;
+&lt;li&gt;注意：手动启用DoH的用户会绕过该限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Firefox设置禁用&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;进入首选项 &amp;gt; 网络设置&lt;/li&gt;
+&lt;li&gt;取消勾选&amp;quot;启用基于HTTPS的DNS&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;卸载Firefox&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部分企业CISO考虑完全移除Firefox，视其为未经授权的VPN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术演进争议&#34;&gt;技术演进争议
+&lt;/h3&gt;&lt;p&gt;DNS作为互联网关键组件正在变革，技术社区对实现更安全私密的网络存在共识，但具体实施方式存在根本分歧。未来将深入探讨不同方案间的技术细节与社区政治因素。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>微软扩展零信任工作坊，涵盖网络、安全运维等更多领域</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%89%A9%E5%B1%95%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%B7%A5%E4%BD%9C%E5%9D%8A%E6%B6%B5%E7%9B%96%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E7%AD%89%E6%9B%B4%E5%A4%9A%E9%A2%86%E5%9F%9F/</link>
+        <pubDate>Sat, 09 Aug 2025 01:58:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%89%A9%E5%B1%95%E9%9B%B6%E4%BF%A1%E4%BB%BB%E5%B7%A5%E4%BD%9C%E5%9D%8A%E6%B6%B5%E7%9B%96%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E7%AD%89%E6%9B%B4%E5%A4%9A%E9%A2%86%E5%9F%9F/</guid>
+        <description>&lt;p&gt;随着网络威胁和安全挑战的演变，零信任架构已成为企业现代化安全建设的核心策略。2024年11月，微软首次推出聚焦&amp;quot;安全访问&amp;quot;三大支柱（身份、数据、设备）的零信任工作坊预览版。现在，我们宣布将该工作坊扩展至完整的零信任六大技术支柱，新增：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;网络&lt;/strong&gt;：通过微隔离、实时威胁检测和安全访问控制实现全面网络安全&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基础设施&lt;/strong&gt;：通过强化配置、访问管理和持续监控保护云和本地基础设施&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全运维(SecOps)&lt;/strong&gt;：集成Microsoft Defender系列产品与Sentinel，增强威胁检测与响应能力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;工作坊升级亮点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新增实施难度和用户影响评估指标&lt;/li&gt;
+&lt;li&gt;强化跨支柱场景联动指导（如不同团队协作场景）&lt;/li&gt;
+&lt;li&gt;包含3000+客户验证的部署框架和进度追踪工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;早期采用者反馈：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;这是对零信任模型的最佳诠释，完美契合我们的实施方法论&amp;rdquo; ——Mobile Mentor CEO Denis O&amp;rsquo;Shea&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;微软同时为零信任合作伙伴提供专项工具包，并建议结合&lt;a class=&#34;link&#34; href=&#34;https://aka.ms/ztworkshop/feedback&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;零信任指导中心&lt;/a&gt;使用该工作坊。工作坊现可通过官网下载，包含完整的技术实施路线图和基准评估体系。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>防御安全播客第281期：网络安全事件与技术探讨</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC281%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</link>
+        <pubDate>Sat, 09 Aug 2025 00:07:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC281%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</guid>
+        <description>&lt;h3 id=&#34;防御安全播客第281期&#34;&gt;防御安全播客第281期
+&lt;/h3&gt;&lt;p&gt;在本期防御安全播客中，主持人Jerry Bell和Andrew Kalat探讨了多个网络安全事件与技术议题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;灾难准备与天气影响&lt;/strong&gt;&lt;br&gt;
+开篇讨论了近期天气对Asheville地区的影响，以及安全行业在灾难准备方面应吸取的教训。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CrowdStrike国会证词分析&lt;/strong&gt;&lt;br&gt;
+深入剖析CrowdStrike在国会听证会上承认的测试失败事件，探讨安全软件需要内核级访问权限的技术影响。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Meta的GDPR违规事件&lt;/strong&gt;&lt;br&gt;
+曝光Meta因以明文形式存储用户密码而违反GDPR规定，被爱尔兰罚款9100万美元。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux CUPS打印系统漏洞&lt;/strong&gt;&lt;br&gt;
+分析一个被过度炒作但实际危害有限的Linux打印系统漏洞（CVE未提及）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AI系统安全风险&lt;/strong&gt;&lt;br&gt;
+讨论ChatGPT等AI系统存在的安全隐患，包括通过植入虚假记忆实现数据渗透的技术案例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;工控系统(OT/ICS)安全警报&lt;/strong&gt;&lt;br&gt;
+强调美国CISA针对水务系统等关键基础设施持续网络威胁的预警。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;相关技术链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CrowdStrike事件分析&lt;/li&gt;
+&lt;li&gt;Meta罚款报道&lt;/li&gt;
+&lt;li&gt;Linux漏洞详情&lt;/li&gt;
+&lt;li&gt;ChatGPT安全研究&lt;/li&gt;
+&lt;li&gt;CISA工控安全警报&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;播客最后重申了网络安全基础工作的重要性。技术讨论涵盖内核权限、数据存储规范、漏洞评估和AI攻击向量等实质性内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>WSL2 DNS解析异常问题分析</title>
+        <link>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 23:12:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;wsl2-dns解析异常&#34;&gt;WSL2 DNS解析异常
+&lt;/h1&gt;&lt;p&gt;昨晚我在给服务器打补丁时遇到了看似DNS劫持的现象，经过调查发现这实际上是WSL2的一个异常行为。&lt;/p&gt;
+&lt;h2 id=&#34;正常dns查询解析&#34;&gt;正常DNS查询解析
+&lt;/h2&gt;&lt;p&gt;在标准Linux主机上使用dig进行DNS查询时，响应通常包含几个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QUESTION：查询的问题&lt;/li&gt;
+&lt;li&gt;ANSWER：回答部分&lt;/li&gt;
+&lt;li&gt;AUTHORITY：权威服务器列表&lt;/li&gt;
+&lt;li&gt;ADDITIONAL：附加信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;wsl2的异常行为&#34;&gt;WSL2的异常行为
+&lt;/h2&gt;&lt;p&gt;在WSL2环境下运行相同的查询时，发现E.ROOT-SERVERS.net和G.ROOT-SERVERS.net等本应出现在附加区的记录被错误地放入了回答区。通过数据包分析可见，WSL2的DNS服务器没有像标准DNS服务器那样正确区分各个区段。&lt;/p&gt;
+&lt;h2 id=&#34;实际问题场景&#34;&gt;实际问题场景
+&lt;/h2&gt;&lt;p&gt;作者在服务器升级后尝试SSH重连时遇到了异常：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端报告发现服务器新IP并要求验证签名&lt;/li&gt;
+&lt;li&gt;实际上连接到了错误的内部IP（本应只在附加区出现的DNS服务器IP）&lt;/li&gt;
+&lt;li&gt;问题表现为间歇性出现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;p&gt;问题根源在于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端进行DNS查询时获得两个回答（正确IP和错误IP）&lt;/li&gt;
+&lt;li&gt;由于第一个IP无响应，客户端尝试了第二个错误IP&lt;/li&gt;
+&lt;li&gt;该IP恰好运行着SSH服务，导致连接成功但连接到错误主机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;安全影响评估&#34;&gt;安全影响评估
+&lt;/h2&gt;&lt;p&gt;虽然理论上可能被恶意利用，但攻击者需要较高权限才能实现。作者已计划将该问题提交至WSL2的GitHub问题列表。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;这个WSL2特有的DNS处理异常可能在某些环境下造成问题，特别是在自动化脚本或安全敏感场景中。虽然当前风险有限，但仍建议开发者注意此行为差异。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>深入解析CVE-2024-49112与CVE-2024-49113：Windows LDAP高危漏洞分析</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 22:33:48 +0800</pubDate>

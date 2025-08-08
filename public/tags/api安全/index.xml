@@ -7,7 +7,77 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 22:06:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 03:14:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>API安全日益严峻：漏洞挖掘与防护策略</title>
+        <link>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%97%A5%E7%9B%8A%E4%B8%A5%E5%B3%BB%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E6%8A%A4%E7%AD%96%E7%95%A5/</link>
+        <pubDate>Sat, 09 Aug 2025 03:14:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/api%E5%AE%89%E5%85%A8%E6%97%A5%E7%9B%8A%E4%B8%A5%E5%B3%BB%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E6%8A%A4%E7%AD%96%E7%95%A5/</guid>
+        <description>&lt;h1 id=&#34;api安全日益严峻&#34;&gt;API安全日益严峻
+&lt;/h1&gt;&lt;p&gt;随着互联网发展，应用程序接口(API)已成为Web服务、移动应用、云计算和物联网(IoT)的关键支柱。根据Cloudflare 2021年数据，API流量已占互联网总请求量的54%。然而，API的爆炸式增长也带来了严重的安全隐患：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check Point数据显示，2024年1月API攻击同比激增20%&lt;/li&gt;
+&lt;li&gt;每周有1/4.6的组织遭受API攻击&lt;/li&gt;
+&lt;li&gt;典型案例：2018年USPS的API端点认证缺陷导致所有包裹数据和用户PII可被实时获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api安全为何至关重要&#34;&gt;API安全为何至关重要
+&lt;/h2&gt;&lt;p&gt;作为系统间的数据通道，API面临三大典型威胁：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;弱认证机制&lt;/strong&gt;：攻击者通过伪造身份获取系统权限&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据验证缺陷&lt;/strong&gt;：未过滤的恶意输入导致注入攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;业务逻辑漏洞&lt;/strong&gt;：滥用正常功能实现非预期操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;api与传统web应用的本质差异&#34;&gt;API与传统Web应用的本质差异
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;维度&lt;/th&gt;
+          &lt;th&gt;Web应用&lt;/th&gt;
+          &lt;th&gt;API&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;交互对象&lt;/td&gt;
+          &lt;td&gt;人类用户&lt;/td&gt;
+          &lt;td&gt;其他系统/程序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;通信协议&lt;/td&gt;
+          &lt;td&gt;HTTP+HTML&lt;/td&gt;
+          &lt;td&gt;REST/GraphQL+JSON/XML&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;安全测试重点&lt;/td&gt;
+          &lt;td&gt;XSS/CSRF等前端漏洞&lt;/td&gt;
+          &lt;td&gt;业务逻辑/数据流控制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;逆向工程难度&lt;/td&gt;
+          &lt;td&gt;较高(需解析前端逻辑)&lt;/td&gt;
+          &lt;td&gt;较低(文档完善+协议标准化)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;api渗透测试的独特挑战&#34;&gt;API渗透测试的独特挑战
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;后端核心暴露&lt;/strong&gt;：API直接暴露业务逻辑层，漏洞影响远超传统Web应用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动化攻击风险&lt;/strong&gt;：Burp Suite等工具可批量探测API端点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐蔽数据泄露&lt;/strong&gt;：响应结构泄露敏感字段(如过度数据返回问题)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;协议复杂性&lt;/strong&gt;：需测试GraphQL嵌套查询、REST速率限制等特殊机制&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;防护建议&#34;&gt;防护建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;实施严格的API网关策略&lt;/li&gt;
+&lt;li&gt;采用零信任架构进行微服务间认证&lt;/li&gt;
+&lt;li&gt;定期执行专项API渗透测试&lt;/li&gt;
+&lt;li&gt;监控异常API调用模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;随着API成为数字化基础设施的核心组件，企业必须建立针对性的安全防护体系。专业的API渗透测试应覆盖业务逻辑验证、协议模糊测试和逆向工程分析等关键维度。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>我是如何操纵Bugcrowd平台排名的 - 漏洞挖掘技术解析</title>
         <link>http://localhost:1313/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 22:06:25 +0800</pubDate>

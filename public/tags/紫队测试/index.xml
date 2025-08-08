@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>紫队测试 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%B4%AB%E9%98%9F%E6%B5%8B%E8%AF%95/</link>
+        <description>Recent content in 紫队测试 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 01:20:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%B4%AB%E9%98%9F%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没</title>
+        <link>http://localhost:1313/p/%E7%B4%AB%E9%98%9F%E8%A1%8C%E5%8A%A8%E6%8C%87%E5%8D%97ot%E4%B8%8Eiot%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B7%A5%E5%8E%82%E5%81%9C%E4%BA%A7%E6%88%96%E7%9F%B3%E6%B2%B9%E9%92%BB%E4%BA%95%E5%B9%B3%E5%8F%B0%E6%B2%89%E6%B2%A1/</link>
+        <pubDate>Sat, 09 Aug 2025 01:20:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%B4%AB%E9%98%9F%E8%A1%8C%E5%8A%A8%E6%8C%87%E5%8D%97ot%E4%B8%8Eiot%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B7%A5%E5%8E%82%E5%81%9C%E4%BA%A7%E6%88%96%E7%9F%B3%E6%B2%B9%E9%92%BB%E4%BA%95%E5%B9%B3%E5%8F%B0%E6%B2%89%E6%B2%A1/</guid>
+        <description>&lt;h1 id=&#34;紫队行动指南ot与iot测试中如何避免工厂停产或石油钻井平台沉没&#34;&gt;紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没
+&lt;/h1&gt;&lt;p&gt;作者：Umair Ahmed&lt;/p&gt;
+&lt;p&gt;大家好，我是目前在HelloFresh担任高级安全工程师的Umair Ahmed。最近参与了大量工业系统的紫队测试，希望在此分享经验。测试运营技术和物联网系统绝非易事，尤其是当风险涉及工厂停产或石油钻井平台事故时。每个参与OT/IoT系统测试的同行都对可能出现的意外状况保持高度警惕。本文献给所有希望在这些场景中表现出色的战友们：&lt;/p&gt;
+&lt;h2 id=&#34;1-准备规划与范围界定&#34;&gt;1. 准备、规划与范围界定
+&lt;/h2&gt;&lt;p&gt;开始前需重点关注以下方面：网络服务、Web/API、CMS/应用系统、无线安全、社会工程、IaaS/PaaS/SaaS、物理安全和运营技术。将其分解为可管理的类别有助于避免疏漏并改进规划。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全景认知&lt;/strong&gt;：全面了解现有技术、流程和人员架构&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键提问&lt;/strong&gt;：询问第三方公司在部署维护中的角色，包括备份策略、灾难恢复计划、冗余机制等。例如：&amp;ldquo;第三方支持的响应时间是多少？&amp;quot;、&amp;ldquo;哪些系统部署了冗余？&amp;quot;、&amp;ldquo;重大故障时的灾难恢复协议是什么？&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;研究准备&lt;/strong&gt;：搭建社会工程基础设施、C2框架（参考C2 Matrix）、协作工具（如Vectr）、VPN（如需）以及不同用户行为的访问系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-业务关键操作分析&#34;&gt;2. 业务关键操作分析
+&lt;/h2&gt;&lt;p&gt;基于CIA三要素（机密性、完整性、可用性）识别分析关键因素。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;考量要点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;系统影响&lt;/strong&gt;：评估系统宕机对财务和运营的影响（如工厂/钻井平台场景）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;冗余机制&lt;/strong&gt;：计算系统受影响时的业务/人力/财务成本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无线安全&lt;/strong&gt;：评估对IoT/OT/PLC通信的影响&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标准流程&lt;/strong&gt;：审查物理安全和现场安全的SOP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环境规范&lt;/strong&gt;：确保符合特定环境的操作准则&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试设备&lt;/strong&gt;：确认硬件测试设备的可用性和成本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-威胁建模&#34;&gt;3. 威胁建模
+&lt;/h2&gt;&lt;p&gt;基于对业务、设施、硬件和SOP的了解进行威胁建模。通过关键人员访谈、操作手册/事故报告审查、现场观察等方式有效收集信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;APT研究&lt;/strong&gt;：调查行业相关高级持续性威胁及其TTPs（参考MITRE ATT&amp;amp;CK）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险登记&lt;/strong&gt;：通过风险登记表验证可行性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;威胁登记&lt;/strong&gt;：纳入历史事件、威胁狩猎或预测产生的业务威胁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检测团队输入&lt;/strong&gt;：结合检测响应团队的洞察验证威胁&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;业务洞察&lt;/strong&gt;：整合业务和供应链团队的输入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;杀伤链场景&lt;/strong&gt;：使用洛克希德·马丁杀伤链等框架创建详细场景（配合Vectr等工具）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后，务必全面记录投放器、shell、命令、战术、进程和工具，这将帮助利益相关方获得可见性，危险行为将在后续环节被排除。&lt;/p&gt;
+&lt;h2 id=&#34;4-利益相关方对齐&#34;&gt;4. 利益相关方对齐
+&lt;/h2&gt;&lt;p&gt;协调各方有效降低风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键行动：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目标定义&lt;/strong&gt;：确保对目标、流程、时间线和行动达成共识&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险讨论&lt;/strong&gt;：识别并缓解最坏情况&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时机选择&lt;/strong&gt;：安排在非业务高峰期测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;审批确认&lt;/strong&gt;：获得所有利益相关方的书面同意&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-执行阶段&#34;&gt;5. 执行阶段
+&lt;/h2&gt;&lt;p&gt;执行时需谨慎进行扫描、枚举和漏洞利用。例如：进行漏洞扫描时使用低强度模式避免网络过载；漏洞利用时在受控环境模拟入侵场景评估影响而不干扰运营。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最佳实践：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;扫描限流&lt;/strong&gt;：避免引发可用性问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预设入侵&lt;/strong&gt;：对可能破坏系统的利用方案规划冗余&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API测试&lt;/strong&gt;：从文档分析入手而非直接扫描&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;访问控制检查&lt;/strong&gt;：在网络和应用层进行测试&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无线测试&lt;/strong&gt;：模拟攻击者远距离测试场景&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;社会工程&lt;/strong&gt;：聚焦证据收集而非部署恶意载荷&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全差距分析&lt;/strong&gt;：审查人员流程，将结果编入检查表供后续参考&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;物理安全&lt;/strong&gt;：检查门禁系统，演示身份克隆技术（如Flipper Zero）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OSINT与CTI&lt;/strong&gt;：使用Shodan/Censys等工具追踪设备足迹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监控证据&lt;/strong&gt;：记录检测和监控结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6-清理阶段&#34;&gt;6. 清理阶段
+&lt;/h2&gt;&lt;p&gt;确保测试后环境复原。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;操作步骤：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;硬件软件&lt;/strong&gt;：移除所有测试工具&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置回滚&lt;/strong&gt;：恢复所有变更至原始状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7-报告撰写&#34;&gt;7. 报告撰写
+&lt;/h2&gt;&lt;p&gt;制作适合技术人员和非技术决策层阅读的完整报告。包含执行摘要、方法论、带证据的详细发现、影响分析和可操作建议，使用图表使复杂数据更易理解。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心要素：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;发现记录&lt;/strong&gt;：提供证据和复现步骤&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成果总结&lt;/strong&gt;：为技术人员和业务领导分别准备结论与行动项&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;汇报演示&lt;/strong&gt;：向所有利益相关方汇报并确认责任归属&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流程简化&lt;/strong&gt;：制定易于团队跟进的流程，明确SLA和例外情况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;切记这是最重要的环节，除非结果被正确传达、理解并实施缓解措施，否则整个测试将失去价值。&lt;/p&gt;
+&lt;h2 id=&#34;8-漏洞管理后续跟进&#34;&gt;8. 漏洞管理（后续跟进）
+&lt;/h2&gt;&lt;p&gt;此阶段考验团队的持续跟进能力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;实用技巧：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;看板跟踪&lt;/strong&gt;：使用前期创建的看板监控行动项进展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定期提醒&lt;/strong&gt;：建立团队跟进机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完成所有流程后，记得给自己喘息的空间——毕竟到达这个阶段时你肯定已经精疲力尽。&lt;/p&gt;
+&lt;p&gt;欢迎在评论区分享观点！如需联系：
+&lt;a class=&#34;link&#34; href=&#34;https://linkedin.com/in/umairahmedofficial&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LinkedIn&lt;/a&gt; | &lt;a class=&#34;link&#34; href=&#34;https://twitter.com/u_ahmedofficial&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twitter&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

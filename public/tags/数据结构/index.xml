@@ -7,7 +7,80 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 19:29:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 01:36:40 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>哈希之叶 - 深入解析Indurative密码学库与Merkle树技术</title>
+        <link>http://localhost:1313/p/%E5%93%88%E5%B8%8C%E4%B9%8B%E5%8F%B6-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90indurative%E5%AF%86%E7%A0%81%E5%AD%A6%E5%BA%93%E4%B8%8Emerkle%E6%A0%91%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sat, 09 Aug 2025 01:36:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%93%88%E5%B8%8C%E4%B9%8B%E5%8F%B6-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90indurative%E5%AF%86%E7%A0%81%E5%AD%A6%E5%BA%93%E4%B8%8Emerkle%E6%A0%91%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h2 id=&#34;merkle树的诞生与原理&#34;&gt;Merkle树的诞生与原理
+&lt;/h2&gt;&lt;p&gt;1979年，Ralph Merkle提交了基于哈希的签名方案专利，其中 incidental 提出的&amp;quot;认证树&amp;quot;（现称Merkle树）结构，通过树形哈希结构实现高效的数据认证。典型实现中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个叶节点存储消息的哈希值&lt;/li&gt;
+&lt;li&gt;分支节点存储子节点哈希的拼接值&lt;/li&gt;
+&lt;li&gt;验证时只需保存顶层哈希作为承诺&lt;/li&gt;
+&lt;li&gt;包含证明大小与数据集大小呈对数关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;示例验证流程：要证明L3的包含性，验证路径为[(Left, Hash 1-1), (Right, Hash 0)]，通过计算hash(Hash 0 + hash(hash(L3) + Hash 1-1))是否匹配根哈希来完成验证。&lt;/p&gt;
+&lt;h2 id=&#34;认证数据结构的演进&#34;&gt;认证数据结构的演进
+&lt;/h2&gt;&lt;p&gt;2014年Miller等人的研究突破：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在OCaml编译器中实现通用认证数据结构&lt;/li&gt;
+&lt;li&gt;重新定义认证结构核心价值：允许不受信任的证明者执行操作&lt;/li&gt;
+&lt;li&gt;支持认证读写操作，实现客户端与服务端状态同步&lt;/li&gt;
+&lt;li&gt;为区块链等半信任分布式系统奠定基础&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2016年关键技术进展：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bob Atkins实现OCaml库形态的认证结构&lt;/li&gt;
+&lt;li&gt;Google的Trillian项目引入稀疏Merkle树：
+&lt;ul&gt;
+&lt;li&gt;使用2^256规模的虚拟树结构&lt;/li&gt;
+&lt;li&gt;通过空值哈希优化计算&lt;/li&gt;
+&lt;li&gt;支持高效的存在性/不存在性证明&lt;/li&gt;
+&lt;li&gt;已应用于证书透明度和以太坊等项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;indurative库的技术实现&#34;&gt;Indurative库的技术实现
+&lt;/h2&gt;&lt;p&gt;Trail of Bits发布的Haskell库创新点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用GHC 8.6的DerivingVia特性&lt;/li&gt;
+&lt;li&gt;自动为可索引类型派生认证语义&lt;/li&gt;
+&lt;li&gt;支持标准容器库的无缝集成&lt;/li&gt;
+&lt;li&gt;典型应用场景（软件包管理器透明化）：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 仅需8行代码实现二进制透明度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Indurative&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;instance&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Hashable&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Package&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;instance&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Serialize&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Package&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Store&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;AuthStore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;Merkle256&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;SHA3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Package&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;verifyPackage&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;::&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Digest&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Store&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Package&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Proof&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;Bool&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;verifyPackage&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;verifyProof&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当前状态：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alpha版本，性能待优化&lt;/li&gt;
+&lt;li&gt;使用UndecidableInstances等高级特性&lt;/li&gt;
+&lt;li&gt;完备的代码注释和测试套件&lt;/li&gt;
+&lt;li&gt;暂不建议生产环境使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;该技术栈为分布式系统、区块链等需要密码学认证的场景提供了新的工程实现范式。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>可扩展的贡献边界技术实现隐私保护</title>
         <link>http://localhost:1313/p/%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E8%B4%A1%E7%8C%AE%E8%BE%B9%E7%95%8C%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/</link>
         <pubDate>Thu, 07 Aug 2025 19:29:51 +0800</pubDate>

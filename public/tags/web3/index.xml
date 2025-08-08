@@ -7,7 +7,35 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 08:47:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web3/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 07:35:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/web3/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>政府涉足区块链技术时需要考虑的关键问题</title>
+        <link>http://localhost:1313/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sat, 09 Aug 2025 07:35:06 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h3 id=&#34;使用区块链技术时需要重点考虑哪些问题&#34;&gt;使用区块链技术时需要重点考虑哪些问题？
+&lt;/h3&gt;&lt;p&gt;理解使用区块链时必须做出的权衡及其安全影响至关重要。目前人们已普遍意识到，使用区块链在部署和智能合约交互成本方面会产生显著额外开销。虽然随着新型共识机制和高级协议的出现，这些成本逐渐降低，但差异仍然显著。&lt;/p&gt;
+&lt;p&gt;必须认识到：所有存储在公有链上的数据都是公开可查的。任何人都可以查看每个账户或合约的完整历史记录并推断其行为含义。如果系统有隐私需求，就必须采取额外保护措施。&lt;/p&gt;
+&lt;p&gt;公有链中的大多数参与者都不可信。这种架构将原本集中于权威机构的信任分散到了其他可能不受控制的实体。你不仅需要信任智能合约开发者，还隐式信任着区块链技术栈的每个环节——包括节点软件、矿机硬件、挖矿软件、矿池协议等。其中任何环节的漏洞都可能导致整个系统崩溃。&lt;/p&gt;
+&lt;p&gt;区块链允许开发者快速原型设计。由于基础设施和DevOps都由区块链本身处理，从创意产生到用户使用的周期大幅缩短。但这种快速迭代也伴随着风险：紧凑的开发周期可能导致测试不足、设计缺陷或代码漏洞，最终成为攻击者的主要目标。&lt;/p&gt;
+&lt;p&gt;DeFi/Web3的吸引力还在于快速原型能力以及与整个生态的即时连接。区块链作为巨型共享数据库，使得竞争对手创建的合约和资产能够交互——这种组合在传统中心化平台上难以实现。但这种可组合性需要代价：系统复杂度剧增，开发者必须理解所有相关合约的代码逻辑，并考虑应用可能交互的所有外部组件。&lt;/p&gt;
+&lt;p&gt;近期在以太坊上出现的闪贷、最大可提取价值(MEV)等新型金融工具已印证了这种复杂性——数百万美元损失正是由于多个DeFi应用以非预期方式组合交易所致。正如计算机科学家Leslie Lamport在1987年指出的：&amp;ldquo;分布式系统中，一个你从未知晓的计算机故障也可能导致你的系统瘫痪。&amp;ldquo;这条定律在区块链领域依然成立。&lt;/p&gt;
+&lt;h3 id=&#34;美国政府为何需要关注区块链技术&#34;&gt;美国政府为何需要关注区块链技术？
+&lt;/h3&gt;&lt;p&gt;这关乎国家安全：虽然国税局可能只关心比特币交易带来的税收损失，但当朝鲜黑客窃取加密货币时，政府就必须介入。美国对手已开始利用这些技术规避制裁、破坏市场。&lt;/p&gt;
+&lt;p&gt;更建设性的提问是：&amp;ldquo;区块链和Web3技术能否实现安全？如何实现？&amp;ldquo;美国政府需要通过研发投入来回答这个问题，以保持其在分布式账本技术领域的领导地位。&lt;/p&gt;
+&lt;h3 id=&#34;如何构建web3领域的人才培养体系&#34;&gt;如何构建Web3领域的人才培养体系？
+&lt;/h3&gt;&lt;p&gt;现有软件研发知识不能直接迁移到Web3领域。与传统移动开发不同，Web3开发需要全栈认知：必须理解所用编译器、底层虚拟机、拜占庭容错共识协议、零知识证明等技术。目前同时掌握这些技术的专家凤毛麟角。&lt;/p&gt;
+&lt;p&gt;需要制定政策激励人才获取这些技能。Trail of Bits为此创建了区块链安全学徒计划——因为在当前市场很难找到具备全部必要技能的人才。安全专家可能精通C++程序分析却不了解区块链，而区块链开发者又往往缺乏安全背景。&lt;/p&gt;
+&lt;h3 id=&#34;web3开发工具链的安全困境&#34;&gt;Web3开发工具链的安全困境
+&lt;/h3&gt;&lt;p&gt;Web3开发门槛意外地低，这本身也是问题所在：其工具链沿袭了传统应用开发模式，为提高开发者友好性牺牲了安全性。我们需要现代化工具来扭转这种优先级失衡。&lt;/p&gt;
+&lt;h3 id=&#34;结语&#34;&gt;结语
+&lt;/h3&gt;&lt;p&gt;政府仅表示对区块链安全的兴趣远远不够，必须进行有目的的实际投资。除了安全架构、编程语言、编译器和协议设计外，这些投资还应包括培养能应对未来Web3需求的人才队伍。&lt;/p&gt;
+&lt;p&gt;如需评估区块链是否适合您的项目，建议参考我们的操作风险评估报告《你真的需要区块链吗？》。该报告将全面分析可能面临的优势与风险。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://nps.edu/web/nps-video-portal/-/blockchain-research-opportunities-for-nps-students-and-faculty&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;观看完整专家讨论视频&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Web3游戏完全指南：游戏平台的未来</title>
         <link>http://localhost:1313/p/web3%E6%B8%B8%E6%88%8F%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E6%B8%B8%E6%88%8F%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%9C%AA%E6%9D%A5/</link>
         <pubDate>Mon, 04 Aug 2025 08:47:07 +0800</pubDate>

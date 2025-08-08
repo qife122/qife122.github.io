@@ -7,7 +7,45 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 15:39:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/wsl2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 23:12:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/wsl2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>WSL2 DNS解析异常问题分析</title>
+        <link>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 23:12:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;wsl2-dns解析异常&#34;&gt;WSL2 DNS解析异常
+&lt;/h1&gt;&lt;p&gt;昨晚我在给服务器打补丁时遇到了看似DNS劫持的现象，经过调查发现这实际上是WSL2的一个异常行为。&lt;/p&gt;
+&lt;h2 id=&#34;正常dns查询解析&#34;&gt;正常DNS查询解析
+&lt;/h2&gt;&lt;p&gt;在标准Linux主机上使用dig进行DNS查询时，响应通常包含几个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QUESTION：查询的问题&lt;/li&gt;
+&lt;li&gt;ANSWER：回答部分&lt;/li&gt;
+&lt;li&gt;AUTHORITY：权威服务器列表&lt;/li&gt;
+&lt;li&gt;ADDITIONAL：附加信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;wsl2的异常行为&#34;&gt;WSL2的异常行为
+&lt;/h2&gt;&lt;p&gt;在WSL2环境下运行相同的查询时，发现E.ROOT-SERVERS.net和G.ROOT-SERVERS.net等本应出现在附加区的记录被错误地放入了回答区。通过数据包分析可见，WSL2的DNS服务器没有像标准DNS服务器那样正确区分各个区段。&lt;/p&gt;
+&lt;h2 id=&#34;实际问题场景&#34;&gt;实际问题场景
+&lt;/h2&gt;&lt;p&gt;作者在服务器升级后尝试SSH重连时遇到了异常：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端报告发现服务器新IP并要求验证签名&lt;/li&gt;
+&lt;li&gt;实际上连接到了错误的内部IP（本应只在附加区出现的DNS服务器IP）&lt;/li&gt;
+&lt;li&gt;问题表现为间歇性出现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;p&gt;问题根源在于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端进行DNS查询时获得两个回答（正确IP和错误IP）&lt;/li&gt;
+&lt;li&gt;由于第一个IP无响应，客户端尝试了第二个错误IP&lt;/li&gt;
+&lt;li&gt;该IP恰好运行着SSH服务，导致连接成功但连接到错误主机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;安全影响评估&#34;&gt;安全影响评估
+&lt;/h2&gt;&lt;p&gt;虽然理论上可能被恶意利用，但攻击者需要较高权限才能实现。作者已计划将该问题提交至WSL2的GitHub问题列表。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;这个WSL2特有的DNS处理异常可能在某些环境下造成问题，特别是在自动化脚本或安全敏感场景中。虽然当前风险有限，但仍建议开发者注意此行为差异。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>WSL2完全指南：在Windows 10/11上运行Linux的终极教程</title>
         <link>http://localhost:1313/p/wsl2%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97%E5%9C%A8windows-10/11%E4%B8%8A%E8%BF%90%E8%A1%8Clinux%E7%9A%84%E7%BB%88%E6%9E%81%E6%95%99%E7%A8%8B/</link>
         <pubDate>Thu, 07 Aug 2025 15:39:56 +0800</pubDate>

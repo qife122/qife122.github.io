@@ -7,7 +7,275 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 22:33:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 05:30:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>安全通告：Zimbra Collaboration Suite远程代码执行漏洞(CVE-2024-45519)技术分析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 05:30:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是Zimbra协作套件postjournal服务中发现的关键安全漏洞。该漏洞目前尚未获得CVSS评分，但允许远程攻击者在受影响系统上执行任意代码，可能导致未授权访问、数据泄露和完全系统沦陷。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及应用&#34;&gt;受影响系统及应用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用&lt;/strong&gt;：Zimbra Collaboration Suite (ZCS)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;受影响版本&lt;/strong&gt;：8.8.15(至Patch 45)和9.0.0(至Patch 40)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：所有支持平台(Linux, Mac OS X)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是存在于Zimbra协作套件postjournal服务邮件处理模块中的远程代码执行(RCE)漏洞。该漏洞源于未能正确清理用户输入，使得攻击者无需认证即可注入任意命令。攻击者可通过向易受攻击的Zimbra服务器发送特制邮件来绕过用户输入清理机制。&lt;/p&gt;
+&lt;p&gt;攻击流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;识别运行漏洞版本的Zimbra服务器&lt;/li&gt;
+&lt;li&gt;制作包含特定payload的邮件以绕过输入清理&lt;/li&gt;
+&lt;li&gt;发送特制邮件至目标服务器，触发任意代码执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;立即更新系统&lt;/strong&gt;：升级至最新修补版本(8.8.15 Patch 46和9.0.0 Patch 41)或更新至10.0.9/10.1.1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;临时解决方案&lt;/strong&gt;：如无法立即更新，考虑临时禁用或限制postjournal服务访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮件过滤&lt;/strong&gt;：使用邮件安全网关在邮件到达Zimbra服务器前过滤恶意内容&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志监控&lt;/strong&gt;：监控postjournal服务相关日志中的可疑活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通用建议&#34;&gt;通用建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;网络隔离&lt;/strong&gt;：将Zimbra服务器与其他网络隔离以降低风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定期补丁&lt;/strong&gt;：实施补丁管理策略确保软件及时更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志记录&lt;/strong&gt;：启用详细日志记录并监控异常活动&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户培训&lt;/strong&gt;：定期培训用户识别钓鱼邮件和基于邮件的攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;备份恢复&lt;/strong&gt;：定期备份Zimbra数据并验证恢复能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Feedly威胁情报报告&lt;/li&gt;
+&lt;li&gt;NIST国家漏洞数据库&lt;/li&gt;
+&lt;li&gt;Zimbra安全中心&lt;/li&gt;
+&lt;li&gt;Dark Reading文章&lt;/li&gt;
+&lt;li&gt;Project Discovery文章-Zimbra远程命令执行(CVE-2024-45519)&lt;/li&gt;
+&lt;li&gt;Zimbra补丁下载链接：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Gladinet CentreStack与Triofox高危远程代码执行漏洞分析(CVE-2025-30406)</title>
+        <link>http://localhost:1313/p/gladinet-centrestack%E4%B8%8Etriofox%E9%AB%98%E5%8D%B1%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2025-30406/</link>
+        <pubDate>Sat, 09 Aug 2025 05:08:59 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gladinet-centrestack%E4%B8%8Etriofox%E9%AB%98%E5%8D%B1%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90cve-2025-30406/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;安全研究人员发现Gladinet CentreStack和Triofox存在CVSS评分9.0的关键漏洞(CVE-2025-30406)，该漏洞源于硬编码加密密钥问题，可导致远程代码执行。证据表明该漏洞在2025年3月已被作为零日漏洞利用。&lt;/p&gt;
+&lt;h2 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Gladinet Triofox（远程访问解决方案）：16.4.10317.56372及之前版本&lt;/li&gt;
+&lt;li&gt;Gladinet CentreStack：16.4.10315.56368及之前版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h2&gt;&lt;h3 id=&#34;硬编码加密密钥&#34;&gt;硬编码加密密钥
+&lt;/h3&gt;&lt;p&gt;漏洞源于&lt;code&gt;web.config&lt;/code&gt;文件中硬编码的machineKey，该密钥用于ASP.NET应用中ViewState的完整性验证。ViewState是维护网页回发状态的重要机制。&lt;/p&gt;
+&lt;h3 id=&#34;viewstate反序列化攻击&#34;&gt;ViewState反序列化攻击
+&lt;/h3&gt;&lt;p&gt;掌握machineKey的攻击者可构造恶意ViewState载荷。当服务器反序列化这些载荷时，可执行任意代码。这是ASP.NET应用中ViewState未正确保护的典型攻击向量。&lt;/p&gt;
+&lt;h3 id=&#34;配置文件路径&#34;&gt;配置文件路径
+&lt;/h3&gt;&lt;p&gt;存在漏洞的&lt;code&gt;web.config&lt;/code&gt;文件通常位于：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Gladinet Cloud Enterprise\root\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Gladinet Cloud Enterprise\portal\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Triofox的类似路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Triofox\root\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files (x86)\Triofox\portal\web.config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;攻击活动&#34;&gt;攻击活动
+&lt;/h2&gt;&lt;p&gt;自2025年3月起，攻击者已利用该漏洞通过编码PowerShell脚本下载并旁加载DLL。攻击手法与近期CrushFTP漏洞利用相似，攻击者还使用Impacket进行横向移动，并安装MeshCentral实现远程控制。&lt;/p&gt;
+&lt;h2 id=&#34;缓解措施&#34;&gt;缓解措施
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;补丁升级&lt;/strong&gt;：更新至CentreStack 16.4.10315.56368和Triofox 16.4.10317.56372版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置修改&lt;/strong&gt;：若无法立即升级，需修改所有&lt;code&gt;web.config&lt;/code&gt;中的machineKey值&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监控措施&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;监测异常PowerShell执行行为&lt;/li&gt;
+&lt;li&gt;检查可疑IP的网络连接&lt;/li&gt;
+&lt;li&gt;查看Windows应用事件日志中的ViewState错误（事件ID 1316）&lt;/li&gt;
+&lt;li&gt;监控IIS工作进程的异常外联&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cve.org/CVERecord?id=CVE-2025-30406&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE官方记录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gladinetsupport.s3.us-east-1.amazonaws.com/gladinet/securityadvisory-cve-2025-triofox.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gladinet安全公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.huntress.com/blog/cve-2025-30406-critical-gladinet-centrestack-triofox-vulnerability-exploited-in-the-wild&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Huntress技术分析&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析</title>
+        <link>http://localhost:1313/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 04:09:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;curl未在跨源重定向时剥离proxy-authorization头部的安全漏洞分析&#34;&gt;curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要
+&lt;/h2&gt;&lt;p&gt;curl在8.14.1版本中存在未剥离Proxy-Authorization头部的安全缺陷。当服务器返回跨源重定向响应时，curl会正确移除Authorization和Cookie头部，但会错误保留Proxy-Authorization头部。&lt;/p&gt;
+&lt;h2 id=&#34;技术细节&#34;&gt;技术细节
+&lt;/h2&gt;&lt;h3 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;curl 8.14.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;重现步骤&#34;&gt;重现步骤
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;curl -L &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://github.com/php/php-src/archive/refs/tags/php-8.4.8.tar.gz&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Authorization: foo&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -H &lt;span class=&#34;s1&#34;&gt;&amp;#39;Proxy-Authorization: bar&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -vvv
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;首次请求包含所有头部：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/php/php-src/archive/refs/tags/php-8.4.8.tar.gz&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Host: github.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Authorization: foo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Proxy-Authorization: bar&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;服务端返回重定向：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;location: https://codeload.github.com/php/php-src/tar.gz/refs/tags/php-8.4.8
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;后续请求错误保留代理凭证：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/php/php-src/tar.gz/refs/tags/php-8.4.8&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Host: codeload.github.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;Proxy-Authorization: bar&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;技术讨论&#34;&gt;技术讨论
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Golang团队已修复类似问题(CVE-2025-4673)&lt;/li&gt;
+&lt;li&gt;Python requests库存在相关安全公告(GHSA-j8r2-6x86-q33q)&lt;/li&gt;
+&lt;li&gt;curl团队认为这是预期行为：
+&lt;ul&gt;
+&lt;li&gt;代理凭证通常适用于同一代理&lt;/li&gt;
+&lt;li&gt;用户可通过&lt;code&gt;--proxy-header&lt;/code&gt;明确控制&lt;/li&gt;
+&lt;li&gt;RFC 9110规定Proxy-Authorization为&amp;quot;hop-by-hop&amp;quot;头部&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安全影响&#34;&gt;安全影响
+&lt;/h2&gt;&lt;p&gt;可能导致代理认证信息泄露给非预期的第三方服务器。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案
+&lt;/h2&gt;&lt;p&gt;curl团队建议：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用原生代理凭证配置选项&lt;/li&gt;
+&lt;li&gt;调用方应自行处理敏感头部&lt;/li&gt;
+&lt;li&gt;不认为这是curl的安全漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;报告最终状态：Not Applicable（非安全问题）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>防御安全播客第281期：网络安全事件与技术探讨</title>
+        <link>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC281%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</link>
+        <pubDate>Sat, 09 Aug 2025 00:07:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC281%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</guid>
+        <description>&lt;h3 id=&#34;防御安全播客第281期&#34;&gt;防御安全播客第281期
+&lt;/h3&gt;&lt;p&gt;在本期防御安全播客中，主持人Jerry Bell和Andrew Kalat探讨了多个网络安全事件与技术议题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;灾难准备与天气影响&lt;/strong&gt;&lt;br&gt;
+开篇讨论了近期天气对Asheville地区的影响，以及安全行业在灾难准备方面应吸取的教训。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CrowdStrike国会证词分析&lt;/strong&gt;&lt;br&gt;
+深入剖析CrowdStrike在国会听证会上承认的测试失败事件，探讨安全软件需要内核级访问权限的技术影响。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Meta的GDPR违规事件&lt;/strong&gt;&lt;br&gt;
+曝光Meta因以明文形式存储用户密码而违反GDPR规定，被爱尔兰罚款9100万美元。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linux CUPS打印系统漏洞&lt;/strong&gt;&lt;br&gt;
+分析一个被过度炒作但实际危害有限的Linux打印系统漏洞（CVE未提及）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AI系统安全风险&lt;/strong&gt;&lt;br&gt;
+讨论ChatGPT等AI系统存在的安全隐患，包括通过植入虚假记忆实现数据渗透的技术案例。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;工控系统(OT/ICS)安全警报&lt;/strong&gt;&lt;br&gt;
+强调美国CISA针对水务系统等关键基础设施持续网络威胁的预警。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;相关技术链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CrowdStrike事件分析&lt;/li&gt;
+&lt;li&gt;Meta罚款报道&lt;/li&gt;
+&lt;li&gt;Linux漏洞详情&lt;/li&gt;
+&lt;li&gt;ChatGPT安全研究&lt;/li&gt;
+&lt;li&gt;CISA工控安全警报&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;播客最后重申了网络安全基础工作的重要性。技术讨论涵盖内核权限、数据存储规范、漏洞评估和AI攻击向量等实质性内容。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>深入解析CVE-2024-49112与CVE-2024-49113：Windows LDAP高危漏洞分析</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 22:33:48 +0800</pubDate>

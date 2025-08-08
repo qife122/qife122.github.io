@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>计算复杂性 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E6%80%A7/</link>
+        <description>Recent content in 计算复杂性 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 02:36:35 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E6%80%A7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>认知战中的验证成本不对称性：一个基于复杂性理论的框架</title>
+        <link>http://localhost:1313/p/%E8%AE%A4%E7%9F%A5%E6%88%98%E4%B8%AD%E7%9A%84%E9%AA%8C%E8%AF%81%E6%88%90%E6%9C%AC%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8E%E5%A4%8D%E6%9D%82%E6%80%A7%E7%90%86%E8%AE%BA%E7%9A%84%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Sat, 09 Aug 2025 02:36:35 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%AE%A4%E7%9F%A5%E6%88%98%E4%B8%AD%E7%9A%84%E9%AA%8C%E8%AF%81%E6%88%90%E6%9C%AC%E4%B8%8D%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8E%E5%A4%8D%E6%9D%82%E6%80%A7%E7%90%86%E8%AE%BA%E7%9A%84%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;人类在对抗性信息流下的验证行为是一种受工作记忆限制和认知偏见约束的成本有限决策过程。我们提出&lt;strong&gt;验证成本不对称性(VCA)系数&lt;/strong&gt;，将其形式化为相同声明分布下不同人群间预期验证工作的比值。基于概率可检查证明(PCP)和参数化复杂性理论，我们构建的传播协议可将可信受众的验证成本降至常数级，同时对缺乏密码学基础设施的对抗群体施加超线性成本。本文证明了该不对称性的理论保证，通过控制性用户研究验证了带/不带可抽查溯源的验证工作量差异，并演示了现实信息战活动的实际编码方案。研究结果为认知战中工程化民主优势奠定了复杂性理论基础，在内容认证、平台治理和信息作战条令领域具有直接应用价值。&lt;/p&gt;
+&lt;h3 id=&#34;主题分类&#34;&gt;主题分类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;密码学与安全 (cs.CR)&lt;/li&gt;
+&lt;li&gt;计算复杂性 (cs.CC)&lt;/li&gt;
+&lt;li&gt;计算机与社会 (cs.CY)&lt;/li&gt;
+&lt;li&gt;计算机科学与博弈论 (cs.GT)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;理论框架&#34;&gt;理论框架
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;VCA系数建模&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义验证工作量函数 $W: \mathcal{D} \times \mathcal{P} \to \mathbb{R}^+$，其中$\mathcal{D}$为声明分布，$\mathcal{P}$为人群特征&lt;/li&gt;
+&lt;li&gt;不对称系数 $\eta = \frac{\mathbb{E}[W(D,P_{adv})]}{\mathbb{E}[W(D,P_{trust})]}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协议构造&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;采用PCP系统实现&amp;quot;局部可验证性&amp;quot;，要求对抗方必须重构完整证明链&lt;/li&gt;
+&lt;li&gt;引入参数化复杂度理论中的$W[1]$-困难问题作为计算障碍&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实证验证&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户实验显示：具备密码学溯源的群体验证时间降低83%&lt;/li&gt;
+&lt;li&gt;对抗群体验证成本随信息深度呈$\Omega(n \log n)$增长&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;应用场景&#34;&gt;应用场景
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;内容认证&lt;/strong&gt;：部署轻量级SPV(简化支付验证)式校验机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平台治理&lt;/strong&gt;：设计基于VCA的虚假信息防御评分系统&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;军事条令&lt;/strong&gt;：优化OODA循环中的信息验证阶段效率&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

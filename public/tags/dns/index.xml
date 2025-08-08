@@ -7,7 +7,88 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 05:21:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 02:58:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/dns/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mozilla以隐私之名推出劫持所有DNS流量的机制</title>
+        <link>http://localhost:1313/p/mozilla%E4%BB%A5%E9%9A%90%E7%A7%81%E4%B9%8B%E5%90%8D%E6%8E%A8%E5%87%BA%E5%8A%AB%E6%8C%81%E6%89%80%E6%9C%89dns%E6%B5%81%E9%87%8F%E7%9A%84%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sat, 09 Aug 2025 02:58:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mozilla%E4%BB%A5%E9%9A%90%E7%A7%81%E4%B9%8B%E5%90%8D%E6%8E%A8%E5%87%BA%E5%8A%AB%E6%8C%81%E6%89%80%E6%9C%89dns%E6%B5%81%E9%87%8F%E7%9A%84%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;p&gt;2019年9月，Mozilla开始通过其可信递归解析器（TRR）计划在Firefox中发布基于HTTPS的DNS（DoH）。这项变更基于两个常见论点：a) 旧协议未考虑安全性和隐私性；b) 存在他人窥探用户搜索内容的风险。&lt;/p&gt;
+&lt;p&gt;技术层面，我对提供DoH功能没有异议，但质疑是否应将系统级控制权转移到Web层。真正令人担忧的是其默认启用的实现方式——未经用户同意即开启，并默认将Cloudflare作为DoH服务提供商。这意味着所有Firefox请求都将流向用户未自主选择的私营机构。&lt;/p&gt;
+&lt;p&gt;相比之下，Google的实施方案默认为关闭状态，并允许用户自选DoH提供商。&lt;/p&gt;
+&lt;h3 id=&#34;mozilla-doh实施的影响&#34;&gt;Mozilla DoH实施的影响
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;教育机构&lt;/strong&gt;：校园DNS过滤系统将失效，学生可绕过恶意网站/色情内容拦截&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;家长控制&lt;/strong&gt;：家庭网络防护工具形同虚设&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;企业安全&lt;/strong&gt;：安全团队无法监控网络流量中的恶意行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;政府监管&lt;/strong&gt;：阻碍ISP对儿童色情等非法内容的追责&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;应对方案&#34;&gt;应对方案
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络级拦截&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过DNS查询&amp;quot;use-application-dns.net&amp;quot;返回NXDOMAIN或空记录&lt;/li&gt;
+&lt;li&gt;注意：手动启用DoH的用户会绕过该限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Firefox设置禁用&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;进入首选项 &amp;gt; 网络设置&lt;/li&gt;
+&lt;li&gt;取消勾选&amp;quot;启用基于HTTPS的DNS&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;卸载Firefox&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部分企业CISO考虑完全移除Firefox，视其为未经授权的VPN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术演进争议&#34;&gt;技术演进争议
+&lt;/h3&gt;&lt;p&gt;DNS作为互联网关键组件正在变革，技术社区对实现更安全私密的网络存在共识，但具体实施方式存在根本分歧。未来将深入探讨不同方案间的技术细节与社区政治因素。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>WSL2 DNS解析异常问题分析</title>
+        <link>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 23:12:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/wsl2-dns%E8%A7%A3%E6%9E%90%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;wsl2-dns解析异常&#34;&gt;WSL2 DNS解析异常
+&lt;/h1&gt;&lt;p&gt;昨晚我在给服务器打补丁时遇到了看似DNS劫持的现象，经过调查发现这实际上是WSL2的一个异常行为。&lt;/p&gt;
+&lt;h2 id=&#34;正常dns查询解析&#34;&gt;正常DNS查询解析
+&lt;/h2&gt;&lt;p&gt;在标准Linux主机上使用dig进行DNS查询时，响应通常包含几个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QUESTION：查询的问题&lt;/li&gt;
+&lt;li&gt;ANSWER：回答部分&lt;/li&gt;
+&lt;li&gt;AUTHORITY：权威服务器列表&lt;/li&gt;
+&lt;li&gt;ADDITIONAL：附加信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;wsl2的异常行为&#34;&gt;WSL2的异常行为
+&lt;/h2&gt;&lt;p&gt;在WSL2环境下运行相同的查询时，发现E.ROOT-SERVERS.net和G.ROOT-SERVERS.net等本应出现在附加区的记录被错误地放入了回答区。通过数据包分析可见，WSL2的DNS服务器没有像标准DNS服务器那样正确区分各个区段。&lt;/p&gt;
+&lt;h2 id=&#34;实际问题场景&#34;&gt;实际问题场景
+&lt;/h2&gt;&lt;p&gt;作者在服务器升级后尝试SSH重连时遇到了异常：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端报告发现服务器新IP并要求验证签名&lt;/li&gt;
+&lt;li&gt;实际上连接到了错误的内部IP（本应只在附加区出现的DNS服务器IP）&lt;/li&gt;
+&lt;li&gt;问题表现为间歇性出现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;p&gt;问题根源在于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SSH客户端进行DNS查询时获得两个回答（正确IP和错误IP）&lt;/li&gt;
+&lt;li&gt;由于第一个IP无响应，客户端尝试了第二个错误IP&lt;/li&gt;
+&lt;li&gt;该IP恰好运行着SSH服务，导致连接成功但连接到错误主机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;安全影响评估&#34;&gt;安全影响评估
+&lt;/h2&gt;&lt;p&gt;虽然理论上可能被恶意利用，但攻击者需要较高权限才能实现。作者已计划将该问题提交至WSL2的GitHub问题列表。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;这个WSL2特有的DNS处理异常可能在某些环境下造成问题，特别是在自动化脚本或安全敏感场景中。虽然当前风险有限，但仍建议开发者注意此行为差异。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>MS08-037：增强DNS解析器的随机性以提升安全性</title>
         <link>http://localhost:1313/p/ms08-037%E5%A2%9E%E5%BC%BAdns%E8%A7%A3%E6%9E%90%E5%99%A8%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%80%A7%E4%BB%A5%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%80%A7/</link>
         <pubDate>Fri, 08 Aug 2025 05:21:56 +0800</pubDate>

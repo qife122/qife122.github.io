@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细探讨了工业控制系统(OT)和物联网(IoT)安全测试的关键注意事项，包括准备阶段、业务关键操作分析、威胁建模、执行策略等核心环节，帮助安全团队在保障关键基础设施安全的同时避免造成业务中断。">
+<title>紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E7%B4%AB%E9%98%9F%E8%A1%8C%E5%8A%A8%E6%8C%87%E5%8D%97ot%E4%B8%8Eiot%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B7%A5%E5%8E%82%E5%81%9C%E4%BA%A7%E6%88%96%E7%9F%B3%E6%B2%B9%E9%92%BB%E4%BA%95%E5%B9%B3%E5%8F%B0%E6%B2%89%E6%B2%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没">
+<meta property='og:description' content="本文详细探讨了工业控制系统(OT)和物联网(IoT)安全测试的关键注意事项，包括准备阶段、业务关键操作分析、威胁建模、执行策略等核心环节，帮助安全团队在保障关键基础设施安全的同时避免造成业务中断。">
+<meta property='og:url' content='http://localhost:1313/p/%E7%B4%AB%E9%98%9F%E8%A1%8C%E5%8A%A8%E6%8C%87%E5%8D%97ot%E4%B8%8Eiot%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B7%A5%E5%8E%82%E5%81%9C%E4%BA%A7%E6%88%96%E7%9F%B3%E6%B2%B9%E9%92%BB%E4%BA%95%E5%B9%B3%E5%8F%B0%E6%B2%89%E6%B2%A1/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='紫队测试' /><meta property='article:tag' content='OT安全' /><meta property='article:tag' content='IoT安全' /><meta property='article:tag' content='工业系统安全' /><meta property='article:published_time' content='2025-08-09T01:20:09&#43;08:00'/><meta property='article:modified_time' content='2025-08-09T01:20:09&#43;08:00'/>
+<meta name="twitter:title" content="紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没">
+<meta name="twitter:description" content="本文详细探讨了工业控制系统(OT)和物联网(IoT)安全测试的关键注意事项，包括准备阶段、业务关键操作分析、威胁建模、执行策略等核心环节，帮助安全团队在保障关键基础设施安全的同时避免造成业务中断。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-准备规划与范围界定">1. 准备、规划与范围界定</a></li>
+    <li><a href="#2-业务关键操作分析">2. 业务关键操作分析</a></li>
+    <li><a href="#3-威胁建模">3. 威胁建模</a></li>
+    <li><a href="#4-利益相关方对齐">4. 利益相关方对齐</a></li>
+    <li><a href="#5-执行阶段">5. 执行阶段</a></li>
+    <li><a href="#6-清理阶段">6. 清理阶段</a></li>
+    <li><a href="#7-报告撰写">7. 报告撰写</a></li>
+    <li><a href="#8-漏洞管理后续跟进">8. 漏洞管理（后续跟进）</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%B4%AB%E9%98%9F%E8%A1%8C%E5%8A%A8%E6%8C%87%E5%8D%97ot%E4%B8%8Eiot%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%B7%A5%E5%8E%82%E5%81%9C%E4%BA%A7%E6%88%96%E7%9F%B3%E6%B2%B9%E9%92%BB%E4%BA%95%E5%B9%B3%E5%8F%B0%E6%B2%89%E6%B2%A1/">紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细探讨了工业控制系统(OT)和物联网(IoT)安全测试的关键注意事项，包括准备阶段、业务关键操作分析、威胁建模、执行策略等核心环节，帮助安全团队在保障关键基础设施安全的同时避免造成业务中断。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 09, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="紫队行动指南ot与iot测试中如何避免工厂停产或石油钻井平台沉没">紫队行动指南：OT与IoT测试中如何避免工厂停产或石油钻井平台沉没
+</h1><p>作者：Umair Ahmed</p>
+<p>大家好，我是目前在HelloFresh担任高级安全工程师的Umair Ahmed。最近参与了大量工业系统的紫队测试，希望在此分享经验。测试运营技术和物联网系统绝非易事，尤其是当风险涉及工厂停产或石油钻井平台事故时。每个参与OT/IoT系统测试的同行都对可能出现的意外状况保持高度警惕。本文献给所有希望在这些场景中表现出色的战友们：</p>
+<h2 id="1-准备规划与范围界定">1. 准备、规划与范围界定
+</h2><p>开始前需重点关注以下方面：网络服务、Web/API、CMS/应用系统、无线安全、社会工程、IaaS/PaaS/SaaS、物理安全和运营技术。将其分解为可管理的类别有助于避免疏漏并改进规划。</p>
+<p><strong>关键步骤：</strong></p>
+<ul>
+<li><strong>全景认知</strong>：全面了解现有技术、流程和人员架构</li>
+<li><strong>关键提问</strong>：询问第三方公司在部署维护中的角色，包括备份策略、灾难恢复计划、冗余机制等。例如：&ldquo;第三方支持的响应时间是多少？&quot;、&ldquo;哪些系统部署了冗余？&quot;、&ldquo;重大故障时的灾难恢复协议是什么？&rdquo;</li>
+<li><strong>研究准备</strong>：搭建社会工程基础设施、C2框架（参考C2 Matrix）、协作工具（如Vectr）、VPN（如需）以及不同用户行为的访问系统</li>
+</ul>
+<h2 id="2-业务关键操作分析">2. 业务关键操作分析
+</h2><p>基于CIA三要素（机密性、完整性、可用性）识别分析关键因素。</p>
+<p><strong>考量要点：</strong></p>
+<ul>
+<li><strong>系统影响</strong>：评估系统宕机对财务和运营的影响（如工厂/钻井平台场景）</li>
+<li><strong>冗余机制</strong>：计算系统受影响时的业务/人力/财务成本</li>
+<li><strong>无线安全</strong>：评估对IoT/OT/PLC通信的影响</li>
+<li><strong>标准流程</strong>：审查物理安全和现场安全的SOP</li>
+<li><strong>环境规范</strong>：确保符合特定环境的操作准则</li>
+<li><strong>测试设备</strong>：确认硬件测试设备的可用性和成本</li>
+</ul>
+<h2 id="3-威胁建模">3. 威胁建模
+</h2><p>基于对业务、设施、硬件和SOP的了解进行威胁建模。通过关键人员访谈、操作手册/事故报告审查、现场观察等方式有效收集信息。</p>
+<p><strong>关键步骤：</strong></p>
+<ul>
+<li><strong>APT研究</strong>：调查行业相关高级持续性威胁及其TTPs（参考MITRE ATT&amp;CK）</li>
+<li><strong>风险登记</strong>：通过风险登记表验证可行性</li>
+<li><strong>威胁登记</strong>：纳入历史事件、威胁狩猎或预测产生的业务威胁</li>
+<li><strong>检测团队输入</strong>：结合检测响应团队的洞察验证威胁</li>
+<li><strong>业务洞察</strong>：整合业务和供应链团队的输入</li>
+<li><strong>杀伤链场景</strong>：使用洛克希德·马丁杀伤链等框架创建详细场景（配合Vectr等工具）</li>
+</ul>
+<p>最后，务必全面记录投放器、shell、命令、战术、进程和工具，这将帮助利益相关方获得可见性，危险行为将在后续环节被排除。</p>
+<h2 id="4-利益相关方对齐">4. 利益相关方对齐
+</h2><p>协调各方有效降低风险。</p>
+<p><strong>关键行动：</strong></p>
+<ul>
+<li><strong>目标定义</strong>：确保对目标、流程、时间线和行动达成共识</li>
+<li><strong>风险讨论</strong>：识别并缓解最坏情况</li>
+<li><strong>时机选择</strong>：安排在非业务高峰期测试</li>
+<li><strong>审批确认</strong>：获得所有利益相关方的书面同意</li>
+</ul>
+<h2 id="5-执行阶段">5. 执行阶段
+</h2><p>执行时需谨慎进行扫描、枚举和漏洞利用。例如：进行漏洞扫描时使用低强度模式避免网络过载；漏洞利用时在受控环境模拟入侵场景评估影响而不干扰运营。</p>
+<p><strong>最佳实践：</strong></p>
+<ul>
+<li><strong>扫描限流</strong>：避免引发可用性问题</li>
+<li><strong>预设入侵</strong>：对可能破坏系统的利用方案规划冗余</li>
+<li><strong>API测试</strong>：从文档分析入手而非直接扫描</li>
+<li><strong>访问控制检查</strong>：在网络和应用层进行测试</li>
+<li><strong>无线测试</strong>：模拟攻击者远距离测试场景</li>
+<li><strong>社会工程</strong>：聚焦证据收集而非部署恶意载荷</li>
+<li><strong>安全差距分析</strong>：审查人员流程，将结果编入检查表供后续参考</li>
+<li><strong>物理安全</strong>：检查门禁系统，演示身份克隆技术（如Flipper Zero）</li>
+<li><strong>OSINT与CTI</strong>：使用Shodan/Censys等工具追踪设备足迹</li>
+<li><strong>监控证据</strong>：记录检测和监控结果</li>
+</ul>
+<h2 id="6-清理阶段">6. 清理阶段
+</h2><p>确保测试后环境复原。</p>
+<p><strong>操作步骤：</strong></p>
+<ul>
+<li><strong>硬件软件</strong>：移除所有测试工具</li>
+<li><strong>配置回滚</strong>：恢复所有变更至原始状态</li>
+</ul>
+<h2 id="7-报告撰写">7. 报告撰写
+</h2><p>制作适合技术人员和非技术决策层阅读的完整报告。包含执行摘要、方法论、带证据的详细发现、影响分析和可操作建议，使用图表使复杂数据更易理解。</p>
+<p><strong>核心要素：</strong></p>
+<ul>
+<li><strong>发现记录</strong>：提供证据和复现步骤</li>
+<li><strong>成果总结</strong>：为技术人员和业务领导分别准备结论与行动项</li>
+<li><strong>汇报演示</strong>：向所有利益相关方汇报并确认责任归属</li>
+<li><strong>流程简化</strong>：制定易于团队跟进的流程，明确SLA和例外情况</li>
+</ul>
+<p>切记这是最重要的环节，除非结果被正确传达、理解并实施缓解措施，否则整个测试将失去价值。</p>
+<h2 id="8-漏洞管理后续跟进">8. 漏洞管理（后续跟进）
+</h2><p>此阶段考验团队的持续跟进能力。</p>
+<p><strong>实用技巧：</strong></p>
+<ul>
+<li><strong>看板跟踪</strong>：使用前期创建的看板监控行动项进展</li>
+<li><strong>定期提醒</strong>：建立团队跟进机制</li>
+</ul>
+<p>完成所有流程后，记得给自己喘息的空间——毕竟到达这个阶段时你肯定已经精疲力尽。</p>
+<p>欢迎在评论区分享观点！如需联系：
+<a class="link" href="https://linkedin.com/in/umairahmedofficial"  target="_blank" rel="noopener"
+    >LinkedIn</a> | <a class="link" href="https://twitter.com/u_ahmedofficial"  target="_blank" rel="noopener"
+    >Twitter</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%B4%AB%E9%98%9F%E6%B5%8B%E8%AF%95/">紫队测试</a>
+        
+            <a href="/tags/ot%E5%AE%89%E5%85%A8/">OT安全</a>
+        
+            <a href="/tags/iot%E5%AE%89%E5%85%A8/">IoT安全</a>
+        
+            <a href="/tags/%E5%B7%A5%E4%B8%9A%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/">工业系统安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -7,7 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 16:13:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 00:57:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ai%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>本周AI开发工具动态：Gemini API批量模式、Amazon SageMaker AI更新等（2025年7月11日）</title>
+        <link>http://localhost:1313/p/%E6%9C%AC%E5%91%A8ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8A%A8%E6%80%81gemini-api%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8Famazon-sagemaker-ai%E6%9B%B4%E6%96%B0%E7%AD%892025%E5%B9%B47%E6%9C%8811%E6%97%A5/</link>
+        <pubDate>Sat, 09 Aug 2025 00:57:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%9C%AC%E5%91%A8ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8A%A8%E6%80%81gemini-api%E6%89%B9%E9%87%8F%E6%A8%A1%E5%BC%8Famazon-sagemaker-ai%E6%9B%B4%E6%96%B0%E7%AD%892025%E5%B9%B47%E6%9C%8811%E6%97%A5/</guid>
+        <description>&lt;h3 id=&#34;gemini-api推出批量模式&#34;&gt;Gemini API推出批量模式
+&lt;/h3&gt;&lt;p&gt;Google为Gemini API新增批量处理功能，支持提交大规模任务并在24小时内返回结果。延迟处理的优势包括成本降低50%以及更高的速率限制。&lt;br&gt;
+&amp;ldquo;批量模式适合数据已就绪且无需即时响应的场景，&amp;ldquo;Google在博客中说明。&lt;/p&gt;
+&lt;h3 id=&#34;aws发布sagemaker-ai新功能&#34;&gt;AWS发布SageMaker AI新功能
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SageMaker HyperPod更新&lt;/strong&gt;：新增CLI/SDK工具，提供可视化仪表盘展示性能指标、资源利用率和集群健康状态，并支持通过JumpStart部署开源模型。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;远程连接增强&lt;/strong&gt;：支持从本地VS Code实例连接SageMaker AI。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MLFlow 3.0集成&lt;/strong&gt;：提供实验跟踪、训练监控和模型行为分析的统一管理界面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;anthropic提出前沿ai开发透明度框架&#34;&gt;Anthropic提出前沿AI开发透明度框架
+&lt;/h3&gt;&lt;p&gt;该框架包含六大核心原则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;仅适用于大型AI开发商&lt;/li&gt;
+&lt;li&gt;要求系统卡片和文档规范&lt;/li&gt;
+&lt;li&gt;保持与AI技术同步演进&lt;/li&gt;
+&lt;li&gt;确保安全实践可见性&lt;/li&gt;
+&lt;li&gt;保留私营企业灵活性&lt;/li&gt;
+&lt;li&gt;为政策制定提供基准&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;docker-compose强化ai代理支持&#34;&gt;Docker Compose强化AI代理支持
+&lt;/h3&gt;&lt;p&gt;开发者现可通过&lt;code&gt;compose.yaml&lt;/code&gt;定义开放模型和MCP兼容工具，使用&lt;code&gt;docker compose up&lt;/code&gt;一键启动代理栈。已集成LangGraph、Vercel AI SDK等主流框架。&lt;/p&gt;
+&lt;h3 id=&#34;coder推出ai云开发环境&#34;&gt;Coder推出AI云开发环境
+&lt;/h3&gt;&lt;p&gt;主要特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为AI代理优化的隔离环境&lt;/li&gt;
+&lt;li&gt;双防火墙访问控制模型&lt;/li&gt;
+&lt;li&gt;代理管理交互界面&lt;/li&gt;
+&lt;li&gt;动态策略治理体系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;digitalocean整合ai产品线为gradientai&#34;&gt;DigitalOcean整合AI产品线为GradientAI
+&lt;/h3&gt;&lt;p&gt;三大模块：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Infrastructure&lt;/strong&gt;：GPU实例/向量数据库等基础设施&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Platform&lt;/strong&gt;：模型集成/RAG等开发工具&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Application&lt;/strong&gt;：预构建代理解决方案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;lf分布式信任实验室新增hoprs&#34;&gt;LF分布式信任实验室新增HOPrS
+&lt;/h3&gt;&lt;p&gt;OpenOrigins的开源图像验证框架采用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;感知哈希算法&lt;/li&gt;
+&lt;li&gt;四叉树分割技术&lt;/li&gt;
+&lt;li&gt;区块链存证
+可检测AI生成内容与篡改痕迹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;denodo发布deepquery预览版&#34;&gt;Denodo发布DeepQuery预览版
+&lt;/h3&gt;&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨系统实时数据治理&lt;/li&gt;
+&lt;li&gt;MCP协议支持&lt;/li&gt;
+&lt;li&gt;AI SDK内置MCP服务器实现&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Docker Offload：AI工作负载的最佳特性解析</title>
         <link>http://localhost:1313/p/docker-offloadai%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD%E7%9A%84%E6%9C%80%E4%BD%B3%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Thu, 07 Aug 2025 16:13:12 +0800</pubDate>

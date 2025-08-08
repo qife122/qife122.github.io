@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文详细介绍了如何在运行iOS 13的现代设备上使用checkra1n越狱工具搭建渗透测试环境，包括Cydia配置、Frida/Objection安装、流量代理、证书固定绕过等关键技术步骤。">
+<title>从checkra1n到Frida：iOS 13应用渗透测试快速入门指南</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E4%BB%8Echeckra1n%E5%88%B0fridaios-13%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="从checkra1n到Frida：iOS 13应用渗透测试快速入门指南">
+<meta property='og:description' content="本文详细介绍了如何在运行iOS 13的现代设备上使用checkra1n越狱工具搭建渗透测试环境，包括Cydia配置、Frida/Objection安装、流量代理、证书固定绕过等关键技术步骤。">
+<meta property='og:url' content='http://localhost:1313/p/%E4%BB%8Echeckra1n%E5%88%B0fridaios-13%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='iOS安全' /><meta property='article:tag' content='渗透测试' /><meta property='article:tag' content='越狱' /><meta property='article:tag' content='Frida' /><meta property='article:published_time' content='2025-08-08T23:51:31&#43;08:00'/><meta property='article:modified_time' content='2025-08-08T23:51:31&#43;08:00'/>
+<meta name="twitter:title" content="从checkra1n到Frida：iOS 13应用渗透测试快速入门指南">
+<meta name="twitter:description" content="本文详细介绍了如何在运行iOS 13的现代设备上使用checkra1n越狱工具搭建渗透测试环境，包括Cydia配置、Frida/Objection安装、流量代理、证书固定绕过等关键技术步骤。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#动机">动机</a></li>
+    <li><a href="#快速开始">快速开始</a>
+      <ol>
+        <li><a href="#硬件准备">硬件准备</a></li>
+        <li><a href="#越狱操作">越狱操作</a></li>
+        <li><a href="#安装cydia">安装Cydia</a></li>
+        <li><a href="#配置iproxy">配置iProxy</a></li>
+        <li><a href="#安装frida和objection">安装Frida和Objection</a></li>
+        <li><a href="#代理流量与绕过证书固定">代理流量与绕过证书固定</a></li>
+        <li><a href="#绕过越狱检测">绕过越狱检测</a></li>
+        <li><a href="#提取应用文件">提取应用文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#结语">结语</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BB%8Echeckra1n%E5%88%B0fridaios-13%E5%BA%94%E7%94%A8%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">从checkra1n到Frida：iOS 13应用渗透测试快速入门指南</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文详细介绍了如何在运行iOS 13的现代设备上使用checkra1n越狱工具搭建渗透测试环境，包括Cydia配置、Frida/Objection安装、流量代理、证书固定绕过等关键技术步骤。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 08, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="从checkra1n到fridaios-app渗透测试快速入门指南">从checkra1n到Frida：iOS App渗透测试快速入门指南
+</h1><p><strong>2020年4月19日更新：</strong></p>
+<ul>
+<li>通过Cydia安装OpenSSH (ramsexy)</li>
+<li>Checkra1n现已支持Linux (inhibitor181)</li>
+<li>使用USB Type-A线缆而非Type-C (c0rv4x)</li>
+</ul>
+<p><strong>2020年4月26日更新：</strong></p>
+<ul>
+<li>Linux专用说明 (inhibitor181)</li>
+</ul>
+<p><strong>2020年8月14日更新：</strong></p>
+<ul>
+<li>Burp TLS v1.3配置</li>
+</ul>
+<h2 id="动机">动机
+</h2><p>我希望能开展移动应用渗透测试。虽然Android平台相对容易上手，但iOS则困难得多。例如Android有Android Virtual Device等模拟器，而iOS只有Xcode的iOS模拟器——它仅模拟软件环境而非硬件。因此iOS应用测试需要真实设备。</p>
+<p>更麻烦的是，即使像绕过SSL证书固定这样的基础操作也很复杂。Portswigger的Burp Suite Mobile Assistant需要安装在已越狱设备上，且仅支持iOS 9及以下版本。</p>
+<p>长期以来，渗透测试指南都建议从eBay购买运行旧版iOS的iPhone。较新的方案如Yogendra Jaiswal的优秀指南基于Unc0ver越狱，仅支持iOS 11.0-12.4。如果你的设备不在这个范围内，那就无计可施。</p>
+<p>幸运的是，随着checkra1n越狱工具的发布，现在可以越狱运行最新iOS的A5-A11芯片设备（包括iPhone、iPad和iPod）。许多在越狱&quot;寒冬&quot;中沉寂的iOS测试工具正在更新适配，新工具也在不断涌现。</p>
+<p>因此我编写这个快速入门指南，整合各种工具的安装说明，帮助你在现代设备上搭建iOS应用测试环境。后续我将分享如何用这些工具发现iOS应用漏洞。</p>
+<h2 id="快速开始">快速开始
+</h2><h3 id="硬件准备">硬件准备
+</h3><p>首先需要A5-A11芯片的设备，推荐iPhone。我使用iPhone 8。得益于checkra1n，你无需担心iOS版本——目前它支持最新的iOS 13.3。除macOS外，checkra1n也支持Linux。</p>
+<h3 id="越狱操作">越狱操作
+</h3><p><strong>警告</strong>：越狱会显著降低设备安全性。请不要在主设备上进行，且越狱设备应仅用于渗透测试。</p>
+<p>建议使用USB-A线缆进行越狱，USB-C可能导致问题。</p>
+<p>注意checkra1n是半绑定式越狱——每次重启后越狱状态会丢失，需要重新操作。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>从https://checkra.in/下载最新版checkra1n</li>
+<li>将iPhone连接至macOS设备，通过Applications → 右键checkra1n → 打开</li>
+<li>解锁iPhone，点击checkra1n中的&quot;Start&quot;</li>
+<li>按提示完成后续步骤，必要时重启</li>
+</ol>
+<p><strong>Linux用户</strong>：请先按<a class="link" href="https://checkra.in/"  target="_blank" rel="noopener"
+    >此指南</a>安装checkra1n，再执行相同越狱步骤。</p>
+<p>恭喜！你现在拥有已越狱的iPhone。让我们继续配置。</p>
+<h3 id="安装cydia">安装Cydia
+</h3><p>非常简单：在越狱后的iPhone上打开checkra1n应用，点击&quot;Install&quot;部分的&quot;Cydia&quot;按钮。</p>
+<p>现在你已安装Cydia，可以安装后续测试所需的各种包。</p>
+<h3 id="配置iproxy">配置iProxy
+</h3><p>虽然可以通过Wi-Fi SSH连接iPhone，但USB连接更快速可靠。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>在iPhone的Cydia商店安装OpenSSH包，安装后会自动重启Springboard</li>
+<li>在连接的macOS设备上执行：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install libusbmuxd  <span class="c1"># Linux使用apt-get install libusbmuxd*</span>
+</span></span><span class="line"><span class="cl">iproxy <span class="m">2222</span> <span class="m">22</span>           <span class="c1"># Linux使用iproxy 2222 44</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>另开终端执行：<code>ssh root@localhost -p 2222</code></li>
+<li>密码输入：<code>alpine</code></li>
+</ol>
+<p>现在你已建立SSH会话。还可以使用FileZilla等SFTP客户端传输文件，设置协议为SFTP，主机localhost，端口2222。</p>
+<h3 id="安装frida和objection">安装Frida和Objection
+</h3><p>现在安装两个重要的移动应用测试工具：Frida和Objection。这里只介绍安装，使用细节请参考<a class="link" href="https://www.frida.re/docs/ios/"  target="_blank" rel="noopener"
+    >Frida iOS指南</a>。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>macOS执行：<code>pip3 install frida-tools</code></li>
+<li>iPhone上打开Cydia → Sources → Edit → Add → 输入<code>https://build.frida.re</code></li>
+<li>搜索安装Frida</li>
+<li>macOS执行：<code>pip3 install objection</code></li>
+<li>测试集成：<code>objection --gadget &quot;com.apple.AppStore&quot; explore</code></li>
+</ol>
+<h3 id="代理流量与绕过证书固定">代理流量与绕过证书固定
+</h3><p>通过Burp Suite代理流量是标准操作，请遵循Yogendra Jaiswal文章中的步骤。Burp Suite 2020.4版本新增了禁用TLSv1.3的选项，有助于iOS信任自定义证书。</p>
+<p><strong>配置步骤</strong>：</p>
+<ol>
+<li>Burp Suite中：Proxy → Options → Proxy Listener → Add → 绑定端口1337 → 绑定地址选All interfaces → TLS Protocols → 取消勾选TLSv1.3 → OK</li>
+<li>iPhone设置：Wi-Fi → 信息 → 配置代理 → 手动 → 设置服务器和端口</li>
+<li>iPhone访问<code>http://burp</code> → 下载CA证书 → 设置中安装</li>
+</ol>
+<p>对于使用证书固定的应用，可以使用支持iOS 13的SSL Kill Switch 2工具。</p>
+<p><strong>安装步骤</strong>：</p>
+<ol>
+<li>确保Cydia已安装：wget、Debian Packager、Cydia Substrate、PreferenceLoader</li>
+<li>从<a class="link" href="https://github.com/nabla-c0d3/ssl-kill-switch2/releases"  target="_blank" rel="noopener"
+    >SSL Kill Switch 2发布页</a>复制最新.deb链接</li>
+<li>SSH到iPhone执行：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget &lt;下载链接&gt;
+</span></span><span class="line"><span class="cl">dpkg -i &lt;包名&gt;
+</span></span><span class="line"><span class="cl">killall -HUP SpringBoard
+</span></span><span class="line"><span class="cl">rm &lt;包名&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>iPhone设置中启用SSL Kill Switch 2 → 禁用证书验证</li>
+</ol>
+<h3 id="绕过越狱检测">绕过越狱检测
+</h3><p>虽然越狱检测很麻烦，但有解决方案。在支持iOS 13的包中，Liberty Lite Cydia模块表现最稳定。</p>
+<p><strong>安装步骤</strong>：</p>
+<ol>
+<li>Cydia中添加源：<code>https://ryleyangus.com/repo/</code></li>
+<li>搜索安装Liberty Lite</li>
+<li>设置中启用对应应用的越狱检测屏蔽</li>
+</ol>
+<p>如果仍不生效，可以尝试其他模块。</p>
+<h3 id="提取应用文件">提取应用文件
+</h3><p>与Android的apk不同，iOS应用以加密的ipa格式存储。通过iproxy和Frida，我们可以使用frida-ios-dump在运行时提取。</p>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>macOS执行：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/AloneMonkey/frida-ios-dump.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> frida-ios-dump
+</span></span><span class="line"><span class="cl">sudo pip3 install -r requirements.txt --upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>另开终端运行<code>iproxy 2222 22</code>（如果未运行）</li>
+<li>提取应用：<code>./dump.py &lt;应用显示名或Bundle ID&gt;</code></li>
+</ol>
+<p>建议创建符号链接方便使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s &lt;绝对路径/dump.py&gt; /usr/local/bin/dump-ipa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="结语">结语
+</h2><p>通过本指南，你现在已具备iOS应用渗透测试的基础工具链，可以开始分析应用文件、挂钩类方法以及测试Web API。最重要的是，这一切都在现代iOS设备和版本上实现。</p>
+<p>希望本指南能帮助你搭建iOS测试环境。后续我将分享使用这些工具发现的漏洞案例，指出常见问题模式。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ios%E5%AE%89%E5%85%A8/">IOS安全</a>
+        
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+        
+            <a href="/tags/%E8%B6%8A%E7%8B%B1/">越狱</a>
+        
+            <a href="/tags/frida/">Frida</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

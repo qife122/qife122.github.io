@@ -7,7 +7,40 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 18:51:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%98%B2%E7%81%AB%E5%A2%99/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 03:36:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%98%B2%E7%81%AB%E5%A2%99/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>什么是入口过滤？网络安全的第一道防线</title>
+        <link>http://localhost:1313/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%A5%E5%8F%A3%E8%BF%87%E6%BB%A4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%93%E9%98%B2%E7%BA%BF/</link>
+        <pubDate>Sat, 09 Aug 2025 03:36:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%A5%E5%8F%A3%E8%BF%87%E6%BB%A4%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%93%E9%98%B2%E7%BA%BF/</guid>
+        <description>&lt;h1 id=&#34;什么是入口过滤&#34;&gt;什么是入口过滤？
+&lt;/h1&gt;&lt;p&gt;入口过滤（Ingress filtering）是企业和互联网服务提供商用于阻止可疑流量进入网络的一种方法。当在边缘设备（如路由器或防火墙）上配置时，入口过滤会检查所有入站数据包，并根据数据包头中的信息决定是否允许其进入网络。它是一种数据包过滤技术。&lt;/p&gt;
+&lt;p&gt;入口流量过滤是网络安全策略中的第一道防线，旨在防止网络攻击，尤其是利用互联网协议（IP）地址欺骗的拒绝服务（DoS）攻击。&lt;/p&gt;
+&lt;h2 id=&#34;ip欺骗与dos攻击防护&#34;&gt;IP欺骗与DoS攻击防护
+&lt;/h2&gt;&lt;p&gt;入口过滤的核心是建立一个访问控制列表（ACL），包含所有允许的源IP地址。反之，ACL也可以阻止被禁止的源地址。&lt;/p&gt;
+&lt;p&gt;入口过滤利用边缘路由器的数据链路层IP地址过滤能力，阻止极可能是恶意的流量。其判断依据是IP数据包头部内容是否符合预定义的标准。&lt;/p&gt;
+&lt;p&gt;数据包过滤器会检查多个属性，包括源IP地址。如果源地址无效（即与其原始网络不匹配），过滤器会判定其为伪造或欺骗地址，并丢弃该数据包。&lt;/p&gt;
+&lt;p&gt;交换机也具备入口过滤功能，这意味着它们可以在虚拟局域网（VLAN）上过滤流量，以防止私有网络内的恶意活动，如VLAN跳跃攻击。在VLAN中，入口过滤会丢弃试图访问非成员端口的数据帧。&lt;/p&gt;
+&lt;h2 id=&#34;入口过滤的工作原理&#34;&gt;入口过滤的工作原理
+&lt;/h2&gt;&lt;p&gt;入口过滤通常会阻止以下类型的源IP地址：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;内部IP地址&lt;/strong&gt;：防止攻击者利用编写不当的防火墙规则欺骗内部IP地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;私有IP地址&lt;/strong&gt;：防止来自配置不当的互联网主机或攻击者伪造地址的恶意流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环回IP地址&lt;/strong&gt;：防止攻击者利用编写不当的防火墙规则欺骗环回地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组播IP地址&lt;/strong&gt;：防止可能是垃圾邮件的组播流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务或管理IP地址&lt;/strong&gt;：防止攻击者通过公共互联网未经授权访问运行在应用层及以上的网络服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外，网络管理员可能希望允许来自特定地区的流量进入网络，同时阻止来自危险地区的访问。许多免费和付费服务可以为网络边界路由器创建ACL。&lt;/p&gt;
+&lt;h2 id=&#34;入口过滤与出口过滤&#34;&gt;入口过滤与出口过滤
+&lt;/h2&gt;&lt;p&gt;入口过滤是一种数据包过滤技术，其对应的是出口过滤（egress filtering），后者检查出站流量。出口过滤仅允许符合管理员预设策略的数据包离开网络。&lt;/p&gt;
+&lt;p&gt;出口过滤可以防止以下恶意活动：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;受感染的机器试图将数据泄露到远程主机。&lt;/li&gt;
+&lt;li&gt;阻止合法用户访问被禁止的服务。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>SonicWall漏洞CVE-2024-53704技术分析：SSL VPN会话劫持漏洞详解</title>
         <link>http://localhost:1313/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Thu, 07 Aug 2025 18:51:25 +0800</pubDate>

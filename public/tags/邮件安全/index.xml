@@ -7,7 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 20:16:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 05:30:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>安全通告：Zimbra Collaboration Suite远程代码执行漏洞(CVE-2024-45519)技术分析</title>
+        <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 05:30:27 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8Azimbra-collaboration-suite%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2024-45519%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是Zimbra协作套件postjournal服务中发现的关键安全漏洞。该漏洞目前尚未获得CVSS评分，但允许远程攻击者在受影响系统上执行任意代码，可能导致未授权访问、数据泄露和完全系统沦陷。&lt;/p&gt;
+&lt;h3 id=&#34;受影响系统及应用&#34;&gt;受影响系统及应用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;应用&lt;/strong&gt;：Zimbra Collaboration Suite (ZCS)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;受影响版本&lt;/strong&gt;：8.8.15(至Patch 45)和9.0.0(至Patch 40)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：所有支持平台(Linux, Mac OS X)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术细节攻击概述&#34;&gt;技术细节/攻击概述
+&lt;/h3&gt;&lt;p&gt;CVE-2024-45519是存在于Zimbra协作套件postjournal服务邮件处理模块中的远程代码执行(RCE)漏洞。该漏洞源于未能正确清理用户输入，使得攻击者无需认证即可注入任意命令。攻击者可通过向易受攻击的Zimbra服务器发送特制邮件来绕过用户输入清理机制。&lt;/p&gt;
+&lt;p&gt;攻击流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;识别运行漏洞版本的Zimbra服务器&lt;/li&gt;
+&lt;li&gt;制作包含特定payload的邮件以绕过输入清理&lt;/li&gt;
+&lt;li&gt;发送特制邮件至目标服务器，触发任意代码执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;立即更新系统&lt;/strong&gt;：升级至最新修补版本(8.8.15 Patch 46和9.0.0 Patch 41)或更新至10.0.9/10.1.1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;临时解决方案&lt;/strong&gt;：如无法立即更新，考虑临时禁用或限制postjournal服务访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮件过滤&lt;/strong&gt;：使用邮件安全网关在邮件到达Zimbra服务器前过滤恶意内容&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志监控&lt;/strong&gt;：监控postjournal服务相关日志中的可疑活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通用建议&#34;&gt;通用建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;网络隔离&lt;/strong&gt;：将Zimbra服务器与其他网络隔离以降低风险&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定期补丁&lt;/strong&gt;：实施补丁管理策略确保软件及时更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;日志记录&lt;/strong&gt;：启用详细日志记录并监控异常活动&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户培训&lt;/strong&gt;：定期培训用户识别钓鱼邮件和基于邮件的攻击&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;备份恢复&lt;/strong&gt;：定期备份Zimbra数据并验证恢复能力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Feedly威胁情报报告&lt;/li&gt;
+&lt;li&gt;NIST国家漏洞数据库&lt;/li&gt;
+&lt;li&gt;Zimbra安全中心&lt;/li&gt;
+&lt;li&gt;Dark Reading文章&lt;/li&gt;
+&lt;li&gt;Project Discovery文章-Zimbra远程命令执行(CVE-2024-45519)&lt;/li&gt;
+&lt;li&gt;Zimbra补丁下载链接：
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/8.8.15/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/9.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.0.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wiki.zimbra.com/wiki/Zimbra_Releases/10.1.0/patch_installation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>如何绕过邮件过滤器投递恶意宏代码 - 高级渗透测试技巧</title>
         <link>http://localhost:1313/p/%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87%E9%82%AE%E4%BB%B6%E8%BF%87%E6%BB%A4%E5%99%A8%E6%8A%95%E9%80%92%E6%81%B6%E6%84%8F%E5%AE%8F%E4%BB%A3%E7%A0%81-%E9%AB%98%E7%BA%A7%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%80%E5%B7%A7/</link>
         <pubDate>Tue, 05 Aug 2025 20:16:26 +0800</pubDate>

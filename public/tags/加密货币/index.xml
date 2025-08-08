@@ -7,7 +7,112 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 11:07:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 06:14:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Katz窃取者 | 强大的恶意软件即服务(MaaS)肆虐窃取凭证与加密资产</title>
+        <link>http://localhost:1313/p/katz%E7%AA%83%E5%8F%96%E8%80%85-%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%B3%E6%9C%8D%E5%8A%A1maas%E8%82%86%E8%99%90%E7%AA%83%E5%8F%96%E5%87%AD%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</link>
+        <pubDate>Sat, 09 Aug 2025 06:14:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/katz%E7%AA%83%E5%8F%96%E8%80%85-%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8D%B3%E6%9C%8D%E5%8A%A1maas%E8%82%86%E8%99%90%E7%AA%83%E5%8F%96%E5%87%AD%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</guid>
+        <description>&lt;h1 id=&#34;katz窃取者--强大的maas肆虐窃取凭证与加密资产&#34;&gt;Katz窃取者 | 强大的MaaS肆虐窃取凭证与加密资产
+&lt;/h1&gt;&lt;p&gt;Katz窃取者是一款功能丰富的信息窃取恶意软件，以恶意软件即服务(MaaS)模式进行营销和运营。该窃取程序于2025年初发布，迅速在信息窃取领域获得关注。&lt;/p&gt;
+&lt;h2 id=&#34;营销与maas平台&#34;&gt;营销与MaaS平台
+&lt;/h2&gt;&lt;p&gt;Katz窃取者作为商业分发的MaaS平台运营。开发者向&amp;quot;会员&amp;quot;或&amp;quot;客户&amp;quot;收取前期费用提供服务，会员可通过基于Web的管理面板生成和配置自定义窃取程序载荷。&lt;/p&gt;
+&lt;p&gt;该面板还作为窃取程序的数据后端，允许处理和搜索窃取的受害者数据。攻击者还能以多种方式导出和打包被盗数据，便于进行勒索。&lt;/p&gt;
+&lt;p&gt;Katz窃取者在多个网络犯罪论坛以及自有门户网站进行营销，重点宣传其对众多应用程序和数据类型的强大窃取能力。当前广告宣传的功能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器凭证窃取&lt;/li&gt;
+&lt;li&gt;加密货币钱包扫描&lt;/li&gt;
+&lt;li&gt;消息会话劫持&lt;/li&gt;
+&lt;li&gt;屏幕截图捕获&lt;/li&gt;
+&lt;li&gt;剪贴板监控&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;感染与规避战术&#34;&gt;感染与规避战术
+&lt;/h2&gt;&lt;p&gt;Katz窃取者采用多阶段感染链，通常从通过钓鱼邮件或木马化下载传递的恶意压缩文件(.gz)开始。这些文件包含高度混淆的JavaScript投放器，执行时会启动带有-WindowStyle Hidden标志的PowerShell命令以下载看似无害的图片文件。&lt;/p&gt;
+&lt;p&gt;该图片实际上使用隐写术武器化，包含base64编码的字符串。脚本扫描图片中的特定标记(如&amp;laquo;INICIO&amp;raquo;和&amp;laquo;FIM&amp;raquo;)，提取字符串并完全在内存中解码，确保此阶段不会有恶意载荷写入磁盘。&lt;/p&gt;
+&lt;p&gt;解码后的载荷通过滥用合法的Windows工具cmstp.exe实现UAC绕过获取提升权限，然后创建计划任务确保持久性。&lt;/p&gt;
+&lt;h2 id=&#34;信息窃取功能&#34;&gt;信息窃取功能
+&lt;/h2&gt;&lt;p&gt;Katz窃取者能够从几乎所有常见应用程序或服务中窃取文件、令牌和凭证，主要功能包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;浏览器数据窃取&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持Chrome、Edge、Brave、Firefox等主流浏览器&lt;/li&gt;
+&lt;li&gt;窃取保存的密码、登录会话cookie、会话令牌、自动填充数据&lt;/li&gt;
+&lt;li&gt;能够解密某些加密的浏览器数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;消息和游戏平台&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;窃取Discord、Telegram等安全通讯平台的会话令牌&lt;/li&gt;
+&lt;li&gt;窃取Steam等知名游戏网站凭证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;其他客户端&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;邮件客户端(Outlook、Windows Live Mail等)&lt;/li&gt;
+&lt;li&gt;FTP和VPN客户端&lt;/li&gt;
+&lt;li&gt;已知WiFi网络配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多媒体捕获&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定时或即时屏幕截图&lt;/li&gt;
+&lt;li&gt;音频和视频捕获&lt;/li&gt;
+&lt;li&gt;监控剪贴板活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加密货币重点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;针对Exodus和Coinomi等多币种钱包&lt;/li&gt;
+&lt;li&gt;窃取Dash、Dogecoin、Litecoin等特定钱包数据&lt;/li&gt;
+&lt;li&gt;扫描150多种加密货币浏览器扩展&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;浏览器注入过程与加密绕过&#34;&gt;浏览器注入过程与加密绕过
+&lt;/h2&gt;&lt;p&gt;Katz窃取者DLL注入浏览器进程后，可以利用浏览器的安全上下文和可用API提取敏感数据，绕过某些现代浏览器安全措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Chromium浏览器&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定位浏览器的&amp;quot;Local State&amp;quot;文件获取主加密密钥&lt;/li&gt;
+&lt;li&gt;使用Windows加密API解密该密钥&lt;/li&gt;
+&lt;li&gt;解密所有保存的密码和cookie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Firefox浏览器&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定位Firefox配置文件目录&lt;/li&gt;
+&lt;li&gt;收集logins.json和key4.db等核心文件&lt;/li&gt;
+&lt;li&gt;离线解密密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;c2与网络行为&#34;&gt;C2与网络行为
+&lt;/h2&gt;&lt;p&gt;成功感染后，Katz窃取者建立持久C2通道，主要特点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个窃取程序实例包含硬编码C2 IP地址&lt;/li&gt;
+&lt;li&gt;使用HTTP/HTTPS进行主要功能通信&lt;/li&gt;
+&lt;li&gt;设计为持续渗出数据，而非一次性窃取&lt;/li&gt;
+&lt;li&gt;凭证和令牌等文本数据通过HTTP Post逐行发送&lt;/li&gt;
+&lt;li&gt;较大数据块(如截图、钱包文件)分块传输&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;Katz窃取者代表了凭证窃取与现代恶意软件设计的强大组合，具有以下特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨浏览器、消息系统和加密数据的多面窃取能力&lt;/li&gt;
+&lt;li&gt;隐蔽的交付方法(内存暂存、伪隐写术、进程注入和空洞化)&lt;/li&gt;
+&lt;li&gt;低门槛导致使用量显著增加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然而，Katz窃取者仍然依赖社会工程和用户交互来实现成功入侵。SentinelOne Singularity能够检测和预防与Katz窃取者相关的恶意行为和工件。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>跨交易所加密货币套利机器人：自动化交易的技术实现</title>
         <link>http://localhost:1313/p/%E8%B7%A8%E4%BA%A4%E6%98%93%E6%89%80%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%A5%97%E5%88%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0/</link>
         <pubDate>Tue, 05 Aug 2025 11:07:43 +0800</pubDate>
