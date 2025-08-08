@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 08:00:18 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 02:29:09 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E4%BA%91%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Nitro Enclaves安全攻防面深度解析</title>
+      <link>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 02:29:09 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;aws-nitro-enclaves安全笔记攻击面分析&#34;&gt;AWS Nitro Enclaves安全笔记：攻击面分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;威胁模型概述&#34;&gt;威胁模型概述&lt;/h2&gt;&#xA;&lt;p&gt;首先建立基础威胁模型。Enclave可能遭受来自父级Amazon EC2实例的攻击——这是唯一能直接访问enclave的组件。在攻击场景中，我们应假设父实例的内核（包括其nitro_enclaves驱动）已被攻击者控制。来自实例的DoS攻击并非核心威胁，因为父实例随时可以关闭其enclaves。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>高级威胁攻击者开启网络安全新纪元：CrowdStrike 2025威胁狩猎报告解析</title>
       <link>https://qife122.github.io/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</link>

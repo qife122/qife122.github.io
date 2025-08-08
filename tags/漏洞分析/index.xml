@@ -7,8 +7,36 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 15:56:31 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 22:33:48 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入解析CVE-2024-49112与CVE-2024-49113：Windows LDAP高危漏洞分析</title>
+      <link>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 22:33:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景&lt;/h3&gt;&#xA;&lt;p&gt;2024年12月，安全研究员Yuki Chen发现两个Windows轻量级目录访问协议(LDAP)漏洞：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE-2024-49112&lt;/strong&gt;：CVSS 9.8分的远程代码执行(RCE)漏洞&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;CVE-2024-49113&lt;/strong&gt;：CVSS 7.5分的拒绝服务(DoS)漏洞&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;漏洞利用原理&#34;&gt;漏洞利用原理&lt;/h3&gt;&#xA;&lt;h4 id=&#34;cve-2024-49112rce漏洞&#34;&gt;CVE-2024-49112（RCE漏洞）&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;攻击域控制器时：攻击者需向目标发送特制RPC调用，触发对攻击者域的控制查找&lt;/li&gt;&#xA;&lt;li&gt;攻击LDAP客户端时：需诱骗受害者执行域控制器查找或连接恶意LDAP服务器&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h4 id=&#34;cve-2024-49113dos漏洞&#34;&gt;CVE-2024-49113（DoS漏洞）&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;SafeBreach实验室已发布PoC（代号LDAPNightmare）&lt;/li&gt;&#xA;&lt;li&gt;攻击流程：发送DCE/RPC请求导致LSASS崩溃，并通过特制CLDAP响应包强制重启&lt;/li&gt;&#xA;&lt;li&gt;该利用链经修改后可能实现CVE-2024-49112的RCE攻击&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;受影响系统&#34;&gt;受影响系统&lt;/h3&gt;&#xA;&lt;p&gt;多个Windows版本受影响，具体列表参见：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Windows cldflt.sys驱动堆溢出漏洞CVE-2024-30085分析与利用</title>
+      <link>https://qife122.github.io/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Fri, 08 Aug 2025 20:26:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;&#xA;&lt;p&gt;CVE-2024-30085是影响Windows云文件迷你过滤器驱动cldflt.sys的基于堆的缓冲区溢出漏洞。通过构造特殊的重解析点，可以触发缓冲区溢出破坏相邻的_WNF_STATE_DATA对象。被破坏的_WNF_STATE_DATA对象可用于从ALPC句柄表对象泄露内核指针。第二次缓冲区溢出用于破坏另一个_WNF_STATE_DATA对象，进而破坏相邻的PipeAttribute对象。通过在用户空间伪造PipeAttribute对象，我们能够泄露令牌地址并覆盖权限，将权限提升至NT AUTHORITY\SYSTEM。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MainWP插件文章创建模块存在反射型XSS漏洞分析</title>
+      <link>https://qife122.github.io/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 07:48:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;mainwp--报告-3179138---文章创建模块创建分类功能中的反射型xss漏洞--hackerone&#34;&gt;MainWP | 报告 #3179138 - 文章创建模块&amp;quot;创建分类&amp;quot;功能中的反射型XSS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在文章创建功能的&amp;quot;创建分类&amp;quot;特性中发现了一个反射型跨站脚本(XSS)漏洞。当用户在分类名称字段输入恶意JavaScript载荷时，该输入会立即被反射并执行。不过，此XSS仅在攻击者自身会话中执行，不会持久化或影响其他用户。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Adobe产品多重漏洞可能导致任意代码执行</title>
+      <link>https://qife122.github.io/p/adobe%E4%BA%A7%E5%93%81%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</link>
+      <pubDate>Fri, 08 Aug 2025 00:12:07 +0800</pubDate>
+      <guid>https://qife122.github.io/p/adobe%E4%BA%A7%E5%93%81%E5%A4%9A%E9%87%8D%E6%BC%8F%E6%B4%9E%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</guid>
+      <description>&lt;h1 id=&#34;adobe产品多重漏洞可能导致任意代码执行&#34;&gt;Adobe产品多重漏洞可能导致任意代码执行&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;MS-ISAC公告编号&lt;/strong&gt;：2025-050&lt;br&gt;&#xA;&lt;strong&gt;发布日期&lt;/strong&gt;：2025/05/13&lt;/p&gt;&#xA;&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;在Adobe系列产品中发现多个安全漏洞，其中最严重的漏洞可能导致任意代码执行。成功利用这些漏洞的攻击者可以在已登录用户权限下执行任意代码，进而安装程序、增删改查数据或创建具有完全用户权限的新账户。系统权限较低的用户受影响程度可能低于管理员权限用户。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Avira VPN 2.15.2.28160本地权限提升漏洞分析</title>
       <link>https://qife122.github.io/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

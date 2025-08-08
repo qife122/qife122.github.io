@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>检测工程 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E6%A3%80%E6%B5%8B%E5%B7%A5%E7%A8%8B/</link>
+    <description>Recent content in 检测工程 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Fri, 08 Aug 2025 01:12:37 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E6%A3%80%E6%B5%8B%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用Splunk查找表加速检测工程开发</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8splunk%E6%9F%A5%E6%89%BE%E8%A1%A8%E5%8A%A0%E9%80%9F%E6%A3%80%E6%B5%8B%E5%B7%A5%E7%A8%8B%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Fri, 08 Aug 2025 01:12:37 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8splunk%E6%9F%A5%E6%89%BE%E8%A1%A8%E5%8A%A0%E9%80%9F%E6%A3%80%E6%B5%8B%E5%B7%A5%E7%A8%8B%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;利用splunk查找表加速检测工程开发&#34;&gt;利用Splunk查找表加速检测工程开发&lt;/h1&gt;&#xA;&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;&#xA;&lt;p&gt;本文介绍如何通过Splunk查找表(Lookups)技术快速实现基于字符串匹配的新型检测规则开发。例如当检测到&amp;quot;dump /service:krbtgt&amp;quot;这类命令时立即触发告警。虽然检测即代码(Detection-as-code)的部署可能减少此类需求，但实践表明基于字符串搜索的新规则部署周期仍然过长。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 14:55:21 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 21:49:51 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/ssl%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>重新审视高级SSL证书的价值 - 技术分析与未来展望</title>
+      <link>https://qife122.github.io/p/%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E9%AB%98%E7%BA%A7ssl%E8%AF%81%E4%B9%A6%E7%9A%84%E4%BB%B7%E5%80%BC-%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B/</link>
+      <pubDate>Fri, 08 Aug 2025 21:49:51 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E9%AB%98%E7%BA%A7ssl%E8%AF%81%E4%B9%A6%E7%9A%84%E4%BB%B7%E5%80%BC-%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B/</guid>
+      <description>&lt;h3 id=&#34;ssl证书生态解析&#34;&gt;SSL证书生态解析&lt;/h3&gt;&#xA;&lt;p&gt;SSL证书作为数字文件，通过绑定公钥与加密私钥来验证系统间通信实体的身份。其核心功能包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;验证网站所有者身份&lt;/li&gt;&#xA;&lt;li&gt;通过TLS协议加密浏览器与服务器间的数据传输（防范中间人攻击）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;证书颁发机构(CA)遵循CA/B论坛制定的基线要求(BR)进行证书签发管理。2017年Chrome撤销对Symantec根证书的信任事件，印证了根证书库对CA生存的关键性。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Let&#39;s Encrypt：为互联网加密的革命性SSL证书颁发机构</title>
+      <link>https://qife122.github.io/p/lets-encrypt%E4%B8%BA%E4%BA%92%E8%81%94%E7%BD%91%E5%8A%A0%E5%AF%86%E7%9A%84%E9%9D%A9%E5%91%BD%E6%80%A7ssl%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84/</link>
+      <pubDate>Fri, 08 Aug 2025 02:06:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/lets-encrypt%E4%B8%BA%E4%BA%92%E8%81%94%E7%BD%91%E5%8A%A0%E5%AF%86%E7%9A%84%E9%9D%A9%E5%91%BD%E6%80%A7ssl%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84/</guid>
+      <description>&lt;h1 id=&#34;为互联网加密---trail-of-bits博客&#34;&gt;为互联网加密 - Trail of Bits博客&lt;/h1&gt;&#xA;&lt;p&gt;我们很高兴地宣布对Let&amp;rsquo;s Encrypt提供资金支持。这个开放、自动化且免费的SSL证书颁发机构(CA)已于12月3日进入公开测试阶段。在当前CA领域存在巨大改进空间的情况下，Let&amp;rsquo;s Encrypt为网络加密提供了一个令人耳目一新、前景广阔的解决方案。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>如何通过CAA记录限制证书颁发机构(CA)签发SSL证书</title>
       <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87caa%E8%AE%B0%E5%BD%95%E9%99%90%E5%88%B6%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84ca%E7%AD%BE%E5%8F%91ssl%E8%AF%81%E4%B9%A6/</link>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 02 Aug 2025 08:12:19 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 02:29:09 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E4%BE%A7%E4%BF%A1%E9%81%93%E6%94%BB%E5%87%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Nitro Enclaves安全攻防面深度解析</title>
+      <link>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 02:29:09 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;aws-nitro-enclaves安全笔记攻击面分析&#34;&gt;AWS Nitro Enclaves安全笔记：攻击面分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;威胁模型概述&#34;&gt;威胁模型概述&lt;/h2&gt;&#xA;&lt;p&gt;首先建立基础威胁模型。Enclave可能遭受来自父级Amazon EC2实例的攻击——这是唯一能直接访问enclave的组件。在攻击场景中，我们应假设父实例的内核（包括其nitro_enclaves驱动）已被攻击者控制。来自实例的DoS攻击并非核心威胁，因为父实例随时可以关闭其enclaves。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ECDSA安全漏洞深度解析：从非ce泄露到密钥恢复实战</title>
       <link>https://qife122.github.io/p/ecdsa%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%BB%8E%E9%9D%9Ece%E6%B3%84%E9%9C%B2%E5%88%B0%E5%AF%86%E9%92%A5%E6%81%A2%E5%A4%8D%E5%AE%9E%E6%88%98/</link>

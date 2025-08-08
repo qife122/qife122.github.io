@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OAuth2 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/oauth2/</link>
+    <description>Recent content in OAuth2 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Fri, 08 Aug 2025 03:33:33 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/oauth2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不安全的刷新令牌使用导致账户接管漏洞(IDOR)</title>
+      <link>https://qife122.github.io/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</link>
+      <pubDate>Fri, 08 Aug 2025 03:33:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</guid>
+      <description>&lt;h1 id=&#34;不安全的刷新令牌使用导致账户接管idor&#34;&gt;不安全的刷新令牌使用导致账户接管(IDOR)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在这篇文章中，我将详细说明一个存在于认证域而非主应用域的IDOR漏洞。通过滥用OAuth2刷新令牌流程，我能够获取任意用户的JWT访问令牌。利用该令牌，我可以完全冒充平台上的任何用户，最终导致完整的账户接管(ATO)。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 20:47:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 22:06:25 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我是如何操纵Bugcrowd平台排名的 - 漏洞挖掘技术解析</title>
+      <link>https://qife122.github.io/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 22:06:25 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;如何操纵我在bugcrowd平台的排名&#34;&gt;如何操纵我在Bugcrowd平台的排名&lt;/h1&gt;&#xA;&lt;p&gt;近年来，随着越来越多的公司依赖众包平台来识别系统漏洞，漏洞赏金计划获得了极大的普及。因此，这些平台的安全性变得愈发关键。去年我发现了一个可以操纵Bugcrowd平台排名的方法，本文将分享具体实现方式及其潜在影响。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>不安全的刷新令牌使用导致账户接管漏洞(IDOR)</title>
+      <link>https://qife122.github.io/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</link>
+      <pubDate>Fri, 08 Aug 2025 03:33:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</guid>
+      <description>&lt;h1 id=&#34;不安全的刷新令牌使用导致账户接管idor&#34;&gt;不安全的刷新令牌使用导致账户接管(IDOR)&lt;/h1&gt;&#xA;&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;&#xA;&lt;p&gt;在这篇文章中，我将详细说明一个存在于认证域而非主应用域的IDOR漏洞。通过滥用OAuth2刷新令牌流程，我能够获取任意用户的JWT访问令牌。利用该令牌，我可以完全冒充平台上的任何用户，最终导致完整的账户接管(ATO)。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>3CX供应链攻击内幕：国家级APT组织的复杂攻击链分析</title>
       <link>https://qife122.github.io/p/3cx%E4%BE%9B%E5%BA%94%E9%93%BE%E6%94%BB%E5%87%BB%E5%86%85%E5%B9%95%E5%9B%BD%E5%AE%B6%E7%BA%A7apt%E7%BB%84%E7%BB%87%E7%9A%84%E5%A4%8D%E6%9D%82%E6%94%BB%E5%87%BB%E9%93%BE%E5%88%86%E6%9E%90/</link>

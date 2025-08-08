@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS Nitro Enclaves on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/aws-nitro-enclaves/</link>
+    <description>Recent content in AWS Nitro Enclaves on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Fri, 08 Aug 2025 02:29:09 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/aws-nitro-enclaves/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Nitro Enclaves安全攻防面深度解析</title>
+      <link>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 02:29:09 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;aws-nitro-enclaves安全笔记攻击面分析&#34;&gt;AWS Nitro Enclaves安全笔记：攻击面分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;威胁模型概述&#34;&gt;威胁模型概述&lt;/h2&gt;&#xA;&lt;p&gt;首先建立基础威胁模型。Enclave可能遭受来自父级Amazon EC2实例的攻击——这是唯一能直接访问enclave的组件。在攻击场景中，我们应假设父实例的内核（包括其nitro_enclaves驱动）已被攻击者控制。来自实例的DoS攻击并非核心威胁，因为父实例随时可以关闭其enclaves。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

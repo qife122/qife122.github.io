@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 15:56:31 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 20:26:58 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows cldflt.sys驱动堆溢出漏洞CVE-2024-30085分析与利用</title>
+      <link>https://qife122.github.io/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Fri, 08 Aug 2025 20:26:58 +0800</pubDate>
+      <guid>https://qife122.github.io/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;&#xA;&lt;p&gt;CVE-2024-30085是影响Windows云文件迷你过滤器驱动cldflt.sys的基于堆的缓冲区溢出漏洞。通过构造特殊的重解析点，可以触发缓冲区溢出破坏相邻的_WNF_STATE_DATA对象。被破坏的_WNF_STATE_DATA对象可用于从ALPC句柄表对象泄露内核指针。第二次缓冲区溢出用于破坏另一个_WNF_STATE_DATA对象，进而破坏相邻的PipeAttribute对象。通过在用户空间伪造PipeAttribute对象，我们能够泄露令牌地址并覆盖权限，将权限提升至NT AUTHORITY\SYSTEM。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CVE-2025-32463漏洞利用：Sudo chroot本地提权漏洞分析</title>
+      <link>https://qife122.github.io/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 03:01:33 +0800</pubDate>
+      <guid>https://qife122.github.io/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;cve-2025-32463---sudo-chroot漏洞利用&#34;&gt;CVE-2025-32463 - sudo chroot漏洞利用&lt;/h1&gt;&#xA;&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker build -t cve .&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it cve&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./poc.sh&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;h2 id=&#34;漏洞介绍&#34;&gt;漏洞介绍&lt;/h2&gt;&#xA;&lt;p&gt;该漏洞是一个涉及Sudo chroot功能的本地权限提升漏洞。利用此漏洞不需要为用户定义任何sudo规则。因此，如果安装了存在漏洞的sudo版本，任何本地用户都可能提升到root权限。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Avira VPN 2.15.2.28160本地权限提升漏洞分析</title>
       <link>https://qife122.github.io/p/avira-vpn-2.15.2.28160%E6%9C%AC%E5%9C%B0%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 19:59:42 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Aug 2025 07:48:18 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MainWP插件文章创建模块存在反射型XSS漏洞分析</title>
+      <link>https://qife122.github.io/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Fri, 08 Aug 2025 07:48:18 +0800</pubDate>
+      <guid>https://qife122.github.io/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;mainwp--报告-3179138---文章创建模块创建分类功能中的反射型xss漏洞--hackerone&#34;&gt;MainWP | 报告 #3179138 - 文章创建模块&amp;quot;创建分类&amp;quot;功能中的反射型XSS漏洞 | HackerOne&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述&lt;/h2&gt;&#xA;&lt;p&gt;在文章创建功能的&amp;quot;创建分类&amp;quot;特性中发现了一个反射型跨站脚本(XSS)漏洞。当用户在分类名称字段输入恶意JavaScript载荷时，该输入会立即被反射并执行。不过，此XSS仅在攻击者自身会话中执行，不会持久化或影响其他用户。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
       <link>https://qife122.github.io/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>

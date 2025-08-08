@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>系统权限 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90/</link>
+    <description>Recent content in 系统权限 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Thu, 07 Aug 2025 23:55:14 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux组密码设置与应用详解</title>
+      <link>https://qife122.github.io/p/linux%E7%BB%84%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 07 Aug 2025 23:55:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/linux%E7%BB%84%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;h1 id=&#34;linux组可以拥有密码&#34;&gt;Linux组可以拥有密码&lt;/h1&gt;&#xA;&lt;p&gt;你知道吗？Linux组竟然可以设置密码！我之前也不知道，但现在掌握了这个技巧。下面演示具体操作方法。&lt;/p&gt;&#xA;&lt;h2 id=&#34;创建带密码的新组&#34;&gt;创建带密码的新组&lt;/h2&gt;&#xA;&lt;p&gt;使用&lt;code&gt;groupadd&lt;/code&gt;命令配合&lt;code&gt;-p&lt;/code&gt;参数可以创建带密码的组。需要注意的是，&lt;code&gt;-p&lt;/code&gt;参数不接受明文密码，而是需要经过crypt(3)加密的字符串。最简单的方式是使用openssl生成：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
