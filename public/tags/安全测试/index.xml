@@ -7,7 +7,100 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 20:30:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 21:00:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用GPU加速在云端破解密码(Kali 2017版)</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8gpu%E5%8A%A0%E9%80%9F%E5%9C%A8%E4%BA%91%E7%AB%AF%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81kali-2017%E7%89%88/</link>
+        <pubDate>Fri, 08 Aug 2025 21:00:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8gpu%E5%8A%A0%E9%80%9F%E5%9C%A8%E4%BA%91%E7%AB%AF%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81kali-2017%E7%89%88/</guid>
+        <description>&lt;h1 id=&#34;如何在云端利用gpu加速破解密码kali-2017版&#34;&gt;如何在云端利用GPU加速破解密码(Kali 2017版)
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者：Carrie Roberts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;免责声明：本文所述技术工具可能已过时，但仍具学习价值，可帮助理解现代工具的演进过程。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;云端密码破解的实际效果究竟如何？可能没有想象的那么美好。我在网上看到这个令人兴奋的消息：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;只需30秒即可启动Kali GPU实例。选择P2实例类型，立即开始破解！&amp;rdquo; &lt;a class=&#34;link&#34; href=&#34;https://www.kali.org/news/cloud-cracking-with-cuda-gpu/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kali.org链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这基本属实！但首次尝试时会发现，默认情况下亚马逊不允许直接启动P2 Kali实例，会收到如下错误提示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;您请求的实例数(1)已超过该实例类型的当前限额(0)。请访问&lt;a class=&#34;link&#34; href=&#34;http://aws.amazon.com/contact-us/ec2-request&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;EC2限额申请页面&lt;/a&gt;申请调整限额&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;提交申请后，我在一天内就获得了批准。&lt;/p&gt;
+&lt;p&gt;使用&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/marketplace/pp/B01M26MMTT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS市场链接&lt;/a&gt;启动GPU云实例，流程如下图所示：&lt;/p&gt;
+&lt;h2 id=&#34;破解速度对比测试&#34;&gt;破解速度对比测试
+&lt;/h2&gt;&lt;p&gt;使用Hashcat的基准测试功能进行对比，结果如下表所示（完整测试截图见文末）。作为对比的本地系统配置详见&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/?p=5995&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这篇博客&lt;/a&gt;。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;测试环境&lt;/th&gt;
+          &lt;th&gt;性能表现&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端CPU破解&lt;/td&gt;
+          &lt;td&gt;基准值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;本地GPU破解&lt;/td&gt;
+          &lt;td&gt;显著提升&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端单GPU破解&lt;/td&gt;
+          &lt;td&gt;中等提升&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端16GPU集群破解&lt;/td&gt;
+          &lt;td&gt;极高性能&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;成本效益分析&#34;&gt;成本效益分析
+&lt;/h2&gt;&lt;p&gt;结论是：16GPU云实例($15/小时)适合CTF比赛等短期破解需求，但按月计算费用将超过1万美元！建议安全研究人员还是投资搭建本地破解系统更经济实惠。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Carrie Roberts已离职，但我们很荣幸能继续分享她的精彩技术文章！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;想跟Carrie学习更多？推荐她的课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;《攻击模拟工具：Atomic Red Team与CALDERA实战》&lt;/li&gt;
+&lt;li&gt;《PowerShell安全应用》
+（提供直播/点播多种学习方式）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具</title>
+        <link>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Fri, 08 Aug 2025 20:09:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h1 id=&#34;发布attacknet基于混沌测试的区块链节点漏洞挖掘新工具&#34;&gt;发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具
+&lt;/h1&gt;&lt;p&gt;今天，Trail of Bits正式发布与以太坊基金会合作开发的Attacknet工具。该工具突破了传统运行时验证工具的局限，通过对执行客户端和共识客户端施加最严苛的网络条件来增强现有测试方法。&lt;/p&gt;
+&lt;p&gt;区块链节点需要最高级别的安全保障。传统依赖详尽规范、测试套件、客户端多样性、人工审计和测试网的方法存在固有缺陷，可能导致类似2023年5月以太坊主网最终性事件的关键漏洞。Attacknet通过在开发网络中模拟比常规测试网更广泛的网络条件和错误配置来解决这些问题。&lt;/p&gt;
+&lt;h2 id=&#34;attacknet工作原理&#34;&gt;Attacknet工作原理
+&lt;/h2&gt;&lt;p&gt;Attacknet采用混沌工程方法，主动向生产环境注入故障以验证系统容错能力。这些故障能复现真实场景问题，也可创建极端场景测试区块链边界条件。&lt;/p&gt;
+&lt;p&gt;工具基于Kurtosis生成的开发网络环境，通过Chaos Mesh注入以下故障类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时钟偏移&lt;/strong&gt;：向前/向后调整节点时钟（成功复现以太坊最终性事件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络延迟&lt;/strong&gt;：模拟全局延迟或检测共识中非预期的同步假设&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络分区&lt;/strong&gt;：测试网络分叉选择规则和重组能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据包丢弃/损坏&lt;/strong&gt;：验证节点消息验证机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强制节点崩溃&lt;/strong&gt;：测试网络对验证者失效的恢复能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;磁盘I/O故障&lt;/strong&gt;：分析节点资源需求瓶颈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;故障结束后，Attacknet对每个节点执行健康检查。若节点失败，将生成包含日志和测试信息的调试文件。&lt;/p&gt;
+&lt;h2 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h2&gt;&lt;p&gt;当前版本支持两种模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手动配置网络拓扑和故障参数&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;规划模式&amp;quot;针对特定客户端运行预设故障&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;未来将增加&amp;quot;探索模式&amp;rdquo;，动态定义故障参数并持续监控网络状态（类似模糊测试）。虽然目前正用于Dencun硬分叉测试，但Attacknet采用模块化设计，可扩展支持其他区块链系统（包括L2）。欢迎有意整合该工具的链开发团队联系我们。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原文链接：https://blog.trailofbits.com/2024/03/18/attacknet-chaos-testing-blockchain-nodes/&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>以太坊智能合约可复用属性库 - 提升安全测试效率的168个预置属性</title>
         <link>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%8F%AF%E5%A4%8D%E7%94%A8%E5%B1%9E%E6%80%A7%E5%BA%93-%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E6%95%88%E7%8E%87%E7%9A%84168%E4%B8%AA%E9%A2%84%E7%BD%AE%E5%B1%9E%E6%80%A7/</link>
         <pubDate>Thu, 07 Aug 2025 20:30:43 +0800</pubDate>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JWT on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/jwt/</link>
+        <description>Recent content in JWT on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 03:33:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/jwt/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>不安全的刷新令牌使用导致账户接管漏洞(IDOR)</title>
+        <link>http://localhost:1313/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</link>
+        <pubDate>Fri, 08 Aug 2025 03:33:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/</guid>
+        <description>&lt;h1 id=&#34;不安全的刷新令牌使用导致账户接管idor&#34;&gt;不安全的刷新令牌使用导致账户接管(IDOR)
+&lt;/h1&gt;&lt;h2 id=&#34;引言&#34;&gt;引言
+&lt;/h2&gt;&lt;p&gt;在这篇文章中，我将详细说明一个存在于认证域而非主应用域的IDOR漏洞。通过滥用OAuth2刷新令牌流程，我能够获取任意用户的JWT访问令牌。利用该令牌，我可以完全冒充平台上的任何用户，最终导致完整的账户接管(ATO)。&lt;/p&gt;
+&lt;h2 id=&#34;问题发现过程&#34;&gt;问题发现过程
+&lt;/h2&gt;&lt;p&gt;在浏览网站时，我经常将有趣的请求转发到Burp Repeater进行进一步测试。某天，当我把一个请求留在Repeater中约10分钟后再次发送时，收到了401未授权响应。&lt;/p&gt;
+&lt;p&gt;这很不寻常 - 因为当我在浏览器中执行相同操作时，它正常工作且没有要求重新登录。这引起了我的好奇。&lt;/p&gt;
+&lt;p&gt;我决定被动监控从浏览器到服务器的网络请求，而不手动与页面交互。&lt;/p&gt;
+&lt;h2 id=&#34;发现步骤&#34;&gt;发现步骤
+&lt;/h2&gt;&lt;p&gt;我注意到一个POST请求被发送到认证域：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;POST https://auth.target.com/oauth/token
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;该请求返回了用户的新JWT令牌(access_token)。发送的唯一参数是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grant_type=refresh_token
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;refresh_token=&amp;lt;token&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;client_id=&amp;lt;client_id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;参数测试&#34;&gt;参数测试
+&lt;/h2&gt;&lt;p&gt;我观察到使用相同接口的不同账户的client_id是相同的。
+例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过www.target.com登录 → client_id=xxxx&lt;/li&gt;
+&lt;li&gt;通过community.target.com登录 → client_id=yyyy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里重要的参数是refresh_token。为了进一步测试，我：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建第二个账户&lt;/li&gt;
+&lt;li&gt;获取第二个账户的refresh_token&lt;/li&gt;
+&lt;li&gt;在第一个账户的会话中使用该refresh_token发送相同的POST请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;服务器返回了第二个账户的JWT令牌。这意味着我可以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问第二个用户的账户&lt;/li&gt;
+&lt;li&gt;查看和编辑他们的个人资料&lt;/li&gt;
+&lt;li&gt;以他们的身份执行任何操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;错误配置&#34;&gt;错误配置
+&lt;/h2&gt;&lt;p&gt;此漏洞源于认证流程中的两个关键缺陷：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;缺乏绑定：服务器不验证正在使用的刷新令牌是否确实属于当前认证的用户/会话&lt;/li&gt;
+&lt;li&gt;静态刷新令牌：refresh_token数月保持不变，意味着被盗/泄露的令牌可以无限期重复使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;建议&#34;&gt;建议
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;始终观察令牌交换，特别是前端和认证服务之间的交换&lt;/li&gt;
+&lt;li&gt;小的异常行为(如不一致的错误或缺少重新认证)可能导致严重漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不幸的是，由于refresh_token使用的是不可猜测的UUID，且无法通过受害者个人资料交互获取，他们将其评定为P5级别漏洞。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

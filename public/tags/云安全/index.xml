@@ -7,7 +7,113 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 08:00:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%91%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 02:29:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BA%91%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AWS Nitro Enclaves安全攻防面深度解析</title>
+        <link>http://localhost:1313/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 02:29:09 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;aws-nitro-enclaves安全笔记攻击面分析&#34;&gt;AWS Nitro Enclaves安全笔记：攻击面分析
+&lt;/h1&gt;&lt;h2 id=&#34;威胁模型概述&#34;&gt;威胁模型概述
+&lt;/h2&gt;&lt;p&gt;首先建立基础威胁模型。Enclave可能遭受来自父级Amazon EC2实例的攻击——这是唯一能直接访问enclave的组件。在攻击场景中，我们应假设父实例的内核（包括其nitro_enclaves驱动）已被攻击者控制。来自实例的DoS攻击并非核心威胁，因为父实例随时可以关闭其enclaves。&lt;/p&gt;
+&lt;p&gt;若EC2实例转发来自互联网的用户流量，则针对enclave的攻击可能涉及常规攻击向量（业务逻辑漏洞、内存破坏、加密问题等）。反之，用户可能遭受恶意EC2实例的伪装攻击。&lt;/p&gt;
+&lt;p&gt;在信任域划分上，enclave应被视为单一信任域。虽然enclave运行标准Linux系统，理论上可利用其访问控制功能划分内部权限，但这会削弱强隔离和认证的价值。因此，任何enclave组件的沦陷都应视为整个enclave的沦陷。&lt;/p&gt;
+&lt;p&gt;最后，hypervisor属于可信组件——我们必须假设其行为正确且无恶意。&lt;/p&gt;
+&lt;h2 id=&#34;虚拟套接字vsock&#34;&gt;虚拟套接字(Vsock)
+&lt;/h2&gt;&lt;p&gt;enclave的主要入口是本地虚拟套接字(vsock)，仅父EC2实例可使用。Vsock由hypervisor管理，通过&lt;code&gt;/dev/vsock&lt;/code&gt;设备节点提供给双方内核。&lt;/p&gt;
+&lt;p&gt;Vsock通过上下文标识符(CID)和端口识别。每个enclave必须使用唯一CID，可监听多个端口。关键预定义CID包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;VMADDR_CID_HYPERVISOR = 0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMADDR_CID_LOCAL = 1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMADDR_CID_HOST = 2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMADDR_CID_PARENT = 3&lt;/code&gt;（父EC2实例）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;VMADDR_CID_ANY = 0xFFFFFFFF&lt;/code&gt;（监听所有CID）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;标准套接字问题是vsock的主要风险点。开发时需考虑：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;是否支持异步连接（多线程）？否则单用户可能长时间阻塞其他用户&lt;/li&gt;
+&lt;li&gt;是否设置连接超时？否则单用户可能持续占用套接字&lt;/li&gt;
+&lt;li&gt;多线程下状态同步是否正确实现？&lt;/li&gt;
+&lt;li&gt;错误处理是否完善？特别是&lt;code&gt;recv&lt;/code&gt;调用：
+&lt;ul&gt;
+&lt;li&gt;遇到&lt;code&gt;EINTR&lt;/code&gt;错误应重试&lt;/li&gt;
+&lt;li&gt;返回长度为0时应终止循环&lt;/li&gt;
+&lt;li&gt;非阻塞套接字需更复杂处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;另一类风险是CID混淆：当EC2实例运行多个enclave时，可能因竞争条件将数据发往错误enclave。不过由于用户-enclave通信应端到端认证，此类风险有限。&lt;/p&gt;
+&lt;h2 id=&#34;随机熵源&#34;&gt;随机熵源
+&lt;/h2&gt;&lt;p&gt;Enclave必须获取安全随机数。&amp;ldquo;安全&amp;quot;意味着攻击者无法知晓或控制所有熵源。Linux内核会混合多个熵源，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU提供的RDRAND/RDSEED指令&lt;/li&gt;
+&lt;li&gt;平台硬件随机数生成器(RNG)&lt;/li&gt;
+&lt;li&gt;AWS Nitro可信平台模块的专用硬件RNG(nsm-hwrng)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建议采取以下措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在enclave中显式检查&lt;code&gt;rng_current&lt;/code&gt;是否为nsm-hwrng&lt;/li&gt;
+&lt;li&gt;通过AWS KMS的GenerateRandom方法补充外部熵源&lt;/li&gt;
+&lt;li&gt;可禁用&lt;code&gt;random.trust_{bootloader,cpu}&lt;/code&gt;内核参数&lt;/li&gt;
+&lt;li&gt;确保使用5.17.12以上内核版本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;侧信道防护&#34;&gt;侧信道防护
+&lt;/h2&gt;&lt;p&gt;应用级时序侧信道是enclave的重大威胁。enclave内应用必须确保处理机密数据时保持恒定时间。父EC2实例可使用近乎系统时钟精度的计时测量，不能依赖网络抖动缓解。&lt;/p&gt;
+&lt;p&gt;错误消息也可能泄露enclave状态（如填充oracle攻击）。建议返回尽可能通用的错误信息，具体程度需平衡业务需求。&lt;/p&gt;
+&lt;h3 id=&#34;cpu内存侧信道&#34;&gt;CPU内存侧信道
+&lt;/h3&gt;&lt;p&gt;CPU共享内存（尤其是缓存行）可能成为侧信道。即使应用实现恒定时间处理，攻击者仍可能通过内存访问模式推测数据。&lt;/p&gt;
+&lt;p&gt;AWS白皮书声称L3缓存不会同时共享，但最新研究表明公有云中此类攻击可行。若担忧L3缓存侧信道：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可在完整NUMA节点上运行enclave&lt;/li&gt;
+&lt;li&gt;尝试使用Intel缓存分配技术(CAT)&lt;/li&gt;
+&lt;li&gt;关键代码应实现与秘密无关的内存访问模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;内存管理&#34;&gt;内存管理
+&lt;/h2&gt;&lt;p&gt;enclave内存从父EC2实例划分，由hypervisor负责隔离和清理。主要需防范DoS攻击——应用应限制外部用户数据存储量，避免单用户耗尽内存。&lt;/p&gt;
+&lt;p&gt;可用&lt;code&gt;free&lt;/code&gt;命令查看可用内存，文件系统空间限制约为总内存的40-50%。需注意enclave无持久化存储，关闭后所有数据丢失，且AWS Nitro未提供数据密封机制。&lt;/p&gt;
+&lt;h2 id=&#34;时间源安全&#34;&gt;时间源安全
+&lt;/h2&gt;&lt;p&gt;攻击者控制时间源可能导致回滚/重放攻击（如接受过期TLS证书）。建议采取以下措施：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确保&lt;code&gt;current_clocksource&lt;/code&gt;设置为kvm-clock&lt;/li&gt;
+&lt;li&gt;启用精确时间协议(PTP)提升时钟同步&lt;/li&gt;
+&lt;li&gt;安全关键功能使用Unix时间（避免UTC时区问题）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;为何选择kvm-clock&#34;&gt;为何选择kvm-clock？
+&lt;/h3&gt;&lt;p&gt;x86架构有多种时间源。enclave通常有两个可用源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TSC机制&lt;/strong&gt;：基于时间戳计数器寄存器，存在虚拟化问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kvm-clock&lt;/strong&gt;：半虚拟化时钟驱动协议，hypervisor提供基准时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;TSC初始日期可能被随机设置为1999年，而kvm-clock通过hypervisor获取准确基准时间。注意用户态应用仍可能使用未调整的TSC读数。&lt;/p&gt;
+&lt;h2 id=&#34;认证机制&#34;&gt;认证机制
+&lt;/h2&gt;&lt;p&gt;密码学认证是终端用户的信任基础。除AWS文档建议外，开发者还应注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;强制最小nonce长度&lt;/li&gt;
+&lt;li&gt;同时验证nonce和时间戳&lt;/li&gt;
+&lt;li&gt;认证时间戳不可用于推断enclave时间&lt;/li&gt;
+&lt;li&gt;尽量避免在public_key中使用RSA&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;nsm驱动&#34;&gt;NSM驱动
+&lt;/h2&gt;&lt;p&gt;enclave应用通过&lt;code&gt;/dev/nsm&lt;/code&gt;节点使用NSM驱动，通过IOCTL系统调用通信。需注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;正确使用额外平台配置寄存器(PCR)&lt;/li&gt;
+&lt;li&gt;检查PCR锁定状态&lt;/li&gt;
+&lt;li&gt;正确处理CBOR编码&lt;/li&gt;
+&lt;li&gt;避免直接使用nsm_get_random&lt;/li&gt;
+&lt;li&gt;处理nsm_init的特殊错误返回值(-1)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;核心结论&#34;&gt;核心结论
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;将enclave视为单一信任域，实施端到端安全&lt;/li&gt;
+&lt;li&gt;通过合理CPU分配和恒定时间处理缓解侧信道风险&lt;/li&gt;
+&lt;li&gt;运行时验证熵源质量&lt;/li&gt;
+&lt;li&gt;使用正确时间源&lt;/li&gt;
+&lt;li&gt;实施健壮的认证实践&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如需深入评估Nitro Enclaves部署，Trail of Bits提供专业安全评估和加固方案。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>高级威胁攻击者开启网络安全新纪元：CrowdStrike 2025威胁狩猎报告解析</title>
         <link>http://localhost:1313/p/%E9%AB%98%E7%BA%A7%E5%A8%81%E8%83%81%E6%94%BB%E5%87%BB%E8%80%85%E5%BC%80%E5%90%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%96%B0%E7%BA%AA%E5%85%83crowdstrike-2025%E5%A8%81%E8%83%81%E7%8B%A9%E7%8C%8E%E6%8A%A5%E5%91%8A%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Thu, 07 Aug 2025 08:00:18 +0800</pubDate>

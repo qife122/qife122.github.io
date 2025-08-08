@@ -7,7 +7,91 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 22:55:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 20:09:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具</title>
+        <link>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Fri, 08 Aug 2025 20:09:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h1 id=&#34;发布attacknet基于混沌测试的区块链节点漏洞挖掘新工具&#34;&gt;发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具
+&lt;/h1&gt;&lt;p&gt;今天，Trail of Bits正式发布与以太坊基金会合作开发的Attacknet工具。该工具突破了传统运行时验证工具的局限，通过对执行客户端和共识客户端施加最严苛的网络条件来增强现有测试方法。&lt;/p&gt;
+&lt;p&gt;区块链节点需要最高级别的安全保障。传统依赖详尽规范、测试套件、客户端多样性、人工审计和测试网的方法存在固有缺陷，可能导致类似2023年5月以太坊主网最终性事件的关键漏洞。Attacknet通过在开发网络中模拟比常规测试网更广泛的网络条件和错误配置来解决这些问题。&lt;/p&gt;
+&lt;h2 id=&#34;attacknet工作原理&#34;&gt;Attacknet工作原理
+&lt;/h2&gt;&lt;p&gt;Attacknet采用混沌工程方法，主动向生产环境注入故障以验证系统容错能力。这些故障能复现真实场景问题，也可创建极端场景测试区块链边界条件。&lt;/p&gt;
+&lt;p&gt;工具基于Kurtosis生成的开发网络环境，通过Chaos Mesh注入以下故障类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时钟偏移&lt;/strong&gt;：向前/向后调整节点时钟（成功复现以太坊最终性事件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络延迟&lt;/strong&gt;：模拟全局延迟或检测共识中非预期的同步假设&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络分区&lt;/strong&gt;：测试网络分叉选择规则和重组能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据包丢弃/损坏&lt;/strong&gt;：验证节点消息验证机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强制节点崩溃&lt;/strong&gt;：测试网络对验证者失效的恢复能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;磁盘I/O故障&lt;/strong&gt;：分析节点资源需求瓶颈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;故障结束后，Attacknet对每个节点执行健康检查。若节点失败，将生成包含日志和测试信息的调试文件。&lt;/p&gt;
+&lt;h2 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h2&gt;&lt;p&gt;当前版本支持两种模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手动配置网络拓扑和故障参数&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;规划模式&amp;quot;针对特定客户端运行预设故障&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;未来将增加&amp;quot;探索模式&amp;rdquo;，动态定义故障参数并持续监控网络状态（类似模糊测试）。虽然目前正用于Dencun硬分叉测试，但Attacknet采用模块化设计，可扩展支持其他区块链系统（包括L2）。欢迎有意整合该工具的链开发团队联系我们。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原文链接：https://blog.trailofbits.com/2024/03/18/attacknet-chaos-testing-blockchain-nodes/&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>首届智能合约分析国际研讨会(WoSCA 2020)重磅来袭</title>
+        <link>http://localhost:1313/p/%E9%A6%96%E5%B1%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%88%86%E6%9E%90%E5%9B%BD%E9%99%85%E7%A0%94%E8%AE%A8%E4%BC%9Awosca-2020%E9%87%8D%E7%A3%85%E6%9D%A5%E8%A2%AD/</link>
+        <pubDate>Fri, 08 Aug 2025 08:04:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%A6%96%E5%B1%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%88%86%E6%9E%90%E5%9B%BD%E9%99%85%E7%A0%94%E8%AE%A8%E4%BC%9Awosca-2020%E9%87%8D%E7%A3%85%E6%9D%A5%E8%A2%AD/</guid>
+        <description>&lt;p&gt;在Trail of Bits，我们不仅从事安全审计工作：还不断突破漏洞检测工具的研究边界，定期在学术会议上展示成果，并评审其他研究人员的优秀论文（参见我们近期对Real World Crypto和Financial Crypto的综述）。&lt;/p&gt;
+&lt;p&gt;秉承这一理念，我们与北亚利桑那大学共同筹办首届智能合约分析国际研讨会(WoSCA 2020)。本次研讨会将与ISSTA 2020同期举行，汇聚全球研究者探讨智能合约的静态与动态分析方法，包括但不限于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于分析的漏洞发现（如启发式静态分析、模糊测试）&lt;/li&gt;
+&lt;li&gt;可靠分析（如模型检测、时序逻辑）&lt;/li&gt;
+&lt;li&gt;代码优化（如代码精简、Gas成本估算）&lt;/li&gt;
+&lt;li&gt;代码理解（如反编译、逆向工程）&lt;/li&gt;
+&lt;li&gt;代码监控（如调试、故障检测）&lt;/li&gt;
+&lt;li&gt;中间表示（如设计、规范）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WoSCA 2020积极倡导开放可复现的研究，特别欢迎关于改进现有工具或提出新工具的论文投稿！&lt;/p&gt;
+&lt;p&gt;论文提交（最长8页）截止日期延长至2020年6月26日（AoE时区）。另请注意：我们仍在接收&amp;quot;10k Crytic研究奖金&amp;quot;的申请，该奖项专门奖励基于我们区块链工具开发的学术论文。&lt;/p&gt;
+&lt;p&gt;（社交媒体分享图标：Twitter/LinkedIn/GitHub/Mastodon/Hacker News）&lt;/p&gt;
+&lt;p&gt;© 2025 Trail of Bits.
+采用Hugo和Mainroad主题生成。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>智能合约论文评审专家的自白：如何写出优秀论文</title>
+        <link>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87%E8%AF%84%E5%AE%A1%E4%B8%93%E5%AE%B6%E7%9A%84%E8%87%AA%E7%99%BD%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E4%BC%98%E7%A7%80%E8%AE%BA%E6%96%87/</link>
+        <pubDate>Fri, 08 Aug 2025 03:50:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%AE%BA%E6%96%87%E8%AF%84%E5%AE%A1%E4%B8%93%E5%AE%B6%E7%9A%84%E8%87%AA%E7%99%BD%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E4%BC%98%E7%A7%80%E8%AE%BA%E6%96%87/</guid>
+        <description>&lt;p&gt;作为多年评审智能合约分析论文的专家（去年在7个不同场合评审了25篇以上论文），我总结了优秀论文的六大要求，并分享如何将论文从&amp;quot;合格&amp;quot;提升到&amp;quot;卓越&amp;quot;的秘诀。&lt;/p&gt;
+&lt;h3 id=&#34;1-清晰阐明分析方法&#34;&gt;1. 清晰阐明分析方法
+&lt;/h3&gt;&lt;p&gt;切忌仅用&amp;quot;我们结合了符号执行和群体测试&amp;quot;这类高层级术语。论文需要提供足够技术细节让读者理解并评估你的提案。工具类短文可适当简化，但完整会议论文必须包含可复现新方法的具体说明。&lt;/p&gt;
+&lt;h3 id=&#34;2-掌握区块链基础知识&#34;&gt;2. 掌握区块链基础知识
+&lt;/h3&gt;&lt;p&gt;许多论文因对合约或区块链工作原理的明显误解而被拒。建议新手先完成Ethernaut CTF挑战，研读《Building Secure Contracts》教程。注意现代合约价值多存在于ERC-20等新型代币，仅关注以太币相关漏洞已不合时宜。&lt;/p&gt;
+&lt;h3 id=&#34;3-基于有意义的合约集实验&#34;&gt;3. 基于有意义的合约集实验
+&lt;/h3&gt;&lt;p&gt;避免使用Etherscan上随机选取的&amp;quot;玩具合约&amp;quot;。应选择具有实际交易、持有代币价值的活跃合约，并注意合约多样性。当前重点已转向多合约系统分析，需考虑合约组合行为。漏洞研究同样需针对真实有价值的合约。&lt;/p&gt;
+&lt;h3 id=&#34;4-遵守模糊测试研究规范&#34;&gt;4. 遵守模糊测试研究规范
+&lt;/h3&gt;&lt;p&gt;实验需持续足够时长，提供基于统计的证据而非个例。必须注明Solidity编译器版本等关键参数。特别注意两点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与主流工具进行基准对比&lt;/li&gt;
+&lt;li&gt;明确定义工具的检测范围（如整数溢出、重入等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-选择合理的对比基线&#34;&gt;5. 选择合理的对比基线
+&lt;/h3&gt;&lt;p&gt;需与公认工具和概念对比，注意智能合约工具迭代迅速。要证明你已尽力选择写作时的最先进工具作为参照。&lt;/p&gt;
+&lt;h3 id=&#34;6-明确工具的检测边界&#34;&gt;6. 明确工具的检测边界
+&lt;/h3&gt;&lt;p&gt;不同工具可能侧重不同漏洞类型。需证明你的方法能发现真实漏洞，可通过代码覆盖率等指标进行客观比较。&lt;/p&gt;
+&lt;h3 id=&#34;从优秀到卓越的跨越&#34;&gt;从优秀到卓越的跨越
+&lt;/h3&gt;&lt;p&gt;解释核心创意的来源及其深层启示：为何该方法能更有效发现漏洞？这对理解智能合约本质或生成结构化测试序列有何启示？你的工作如何推动智能合约或测试领域的认知进步？&lt;/p&gt;
+&lt;p&gt;遵循这些建议不仅能满足评审要求，更能提升研究质量，最终造福智能合约开发者社区。期待在今年的WoSCA会议上见到您的研究成果！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>即刻保护，延时揭秘：可扩展的时间锁谜题解决方案</title>
         <link>http://localhost:1313/p/%E5%8D%B3%E5%88%BB%E4%BF%9D%E6%8A%A4%E5%BB%B6%E6%97%B6%E6%8F%AD%E7%A7%98%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84%E6%97%B6%E9%97%B4%E9%94%81%E8%B0%9C%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
         <pubDate>Thu, 07 Aug 2025 22:55:53 +0800</pubDate>

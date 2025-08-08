@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>混沌工程 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/</link>
+        <description>Recent content in 混沌工程 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 20:09:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具</title>
+        <link>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Fri, 08 Aug 2025 20:09:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%8F%91%E5%B8%83attacknet%E5%9F%BA%E4%BA%8E%E6%B7%B7%E6%B2%8C%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B0%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h1 id=&#34;发布attacknet基于混沌测试的区块链节点漏洞挖掘新工具&#34;&gt;发布Attacknet：基于混沌测试的区块链节点漏洞挖掘新工具
+&lt;/h1&gt;&lt;p&gt;今天，Trail of Bits正式发布与以太坊基金会合作开发的Attacknet工具。该工具突破了传统运行时验证工具的局限，通过对执行客户端和共识客户端施加最严苛的网络条件来增强现有测试方法。&lt;/p&gt;
+&lt;p&gt;区块链节点需要最高级别的安全保障。传统依赖详尽规范、测试套件、客户端多样性、人工审计和测试网的方法存在固有缺陷，可能导致类似2023年5月以太坊主网最终性事件的关键漏洞。Attacknet通过在开发网络中模拟比常规测试网更广泛的网络条件和错误配置来解决这些问题。&lt;/p&gt;
+&lt;h2 id=&#34;attacknet工作原理&#34;&gt;Attacknet工作原理
+&lt;/h2&gt;&lt;p&gt;Attacknet采用混沌工程方法，主动向生产环境注入故障以验证系统容错能力。这些故障能复现真实场景问题，也可创建极端场景测试区块链边界条件。&lt;/p&gt;
+&lt;p&gt;工具基于Kurtosis生成的开发网络环境，通过Chaos Mesh注入以下故障类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时钟偏移&lt;/strong&gt;：向前/向后调整节点时钟（成功复现以太坊最终性事件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络延迟&lt;/strong&gt;：模拟全局延迟或检测共识中非预期的同步假设&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络分区&lt;/strong&gt;：测试网络分叉选择规则和重组能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据包丢弃/损坏&lt;/strong&gt;：验证节点消息验证机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强制节点崩溃&lt;/strong&gt;：测试网络对验证者失效的恢复能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;磁盘I/O故障&lt;/strong&gt;：分析节点资源需求瓶颈&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;故障结束后，Attacknet对每个节点执行健康检查。若节点失败，将生成包含日志和测试信息的调试文件。&lt;/p&gt;
+&lt;h2 id=&#34;未来规划&#34;&gt;未来规划
+&lt;/h2&gt;&lt;p&gt;当前版本支持两种模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手动配置网络拓扑和故障参数&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;规划模式&amp;quot;针对特定客户端运行预设故障&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;未来将增加&amp;quot;探索模式&amp;rdquo;，动态定义故障参数并持续监控网络状态（类似模糊测试）。虽然目前正用于Dencun硬分叉测试，但Attacknet采用模块化设计，可扩展支持其他区块链系统（包括L2）。欢迎有意整合该工具的链开发团队联系我们。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原文链接：https://blog.trailofbits.com/2024/03/18/attacknet-chaos-testing-blockchain-nodes/&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

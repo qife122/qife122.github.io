@@ -7,7 +7,34 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 19:59:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 07:48:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/xss%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MainWP插件文章创建模块存在反射型XSS漏洞分析</title>
+        <link>http://localhost:1313/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 07:48:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/mainwp%E6%8F%92%E4%BB%B6%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%AD%98%E5%9C%A8%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;mainwp--报告-3179138---文章创建模块创建分类功能中的反射型xss漏洞--hackerone&#34;&gt;MainWP | 报告 #3179138 - 文章创建模块&amp;quot;创建分类&amp;quot;功能中的反射型XSS漏洞 | HackerOne
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞描述&#34;&gt;漏洞描述
+&lt;/h2&gt;&lt;p&gt;在文章创建功能的&amp;quot;创建分类&amp;quot;特性中发现了一个反射型跨站脚本(XSS)漏洞。当用户在分类名称字段输入恶意JavaScript载荷时，该输入会立即被反射并执行。不过，此XSS仅在攻击者自身会话中执行，不会持久化或影响其他用户。&lt;/p&gt;
+&lt;h2 id=&#34;影响分析&#34;&gt;影响分析
+&lt;/h2&gt;&lt;p&gt;该漏洞的存在表明用户输入在反射回HTML响应前未经过适当清理或编码。虽然无法被其他用户直接利用，但此缺陷可能带来以下影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果应用中存在类似的输入处理方式，这可能成为更严重XSS漏洞的潜在入口点&lt;/li&gt;
+&lt;li&gt;在存在浏览器扩展、调试工具或集成第三方脚本的环境中构成客户端安全风险&lt;/li&gt;
+&lt;li&gt;降低了用户对平台安全编码实践的信任，特别是在管理多个WordPress站点的管理界面中&lt;/li&gt;
+&lt;li&gt;可被拥有仪表板访问权限的攻击者(如内部威胁或低权限用户账户被攻破)用来测试或探索更多载荷注入点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;解决此类漏洞能提高应用的整体韧性，有助于预防未来更具影响力的攻击。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞修复过程&#34;&gt;漏洞修复过程
+&lt;/h2&gt;&lt;p&gt;2025年6月5日，研究人员rishail01向MainWP提交了漏洞报告。MainWP开发团队于次日(6月6日)确认问题并标记为&amp;quot;已分类&amp;quot;，随后提供了修复版本mainwp.zip进行验证。&lt;/p&gt;
+&lt;p&gt;6月8日，研究人员确认反射型XSS漏洞已修复，但指出报告中提及的另外两个漏洞仍未解决。MainWP团队于6月13日确认所有问题均已解决并发布修复版本，同时向研究人员支付了50美元奖金。&lt;/p&gt;
+&lt;h2 id=&#34;cve协调披露&#34;&gt;CVE协调披露
+&lt;/h2&gt;&lt;p&gt;研究人员询问了CVE编号分配事宜，MainWP团队表示支持CVE申请，但请求给予30天的协调期以便用户有足够时间更新。双方就披露时间表达成一致，最终漏洞于2025年7月17日公开披露。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞严重性&#34;&gt;漏洞严重性
+&lt;/h2&gt;&lt;p&gt;该漏洞被评为低危(2.3分)，属于反射型跨站脚本(XSS)漏洞，未分配CVE编号。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>SharePoint跨站脚本(XSS)漏洞安全通告发布</title>
         <link>http://localhost:1313/p/sharepoint%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%ACxss%E6%BC%8F%E6%B4%9E%E5%AE%89%E5%85%A8%E9%80%9A%E5%91%8A%E5%8F%91%E5%B8%83/</link>
         <pubDate>Tue, 05 Aug 2025 19:59:42 +0800</pubDate>

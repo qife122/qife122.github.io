@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>代码设计 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/</link>
+        <description>Recent content in 代码设计 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 07:05:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>软件设计方程：量化开发决策的数学之美</title>
+        <link>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%96%B9%E7%A8%8B%E9%87%8F%E5%8C%96%E5%BC%80%E5%8F%91%E5%86%B3%E7%AD%96%E7%9A%84%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/</link>
+        <pubDate>Fri, 08 Aug 2025 07:05:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%96%B9%E7%A8%8B%E9%87%8F%E5%8C%96%E5%BC%80%E5%8F%91%E5%86%B3%E7%AD%96%E7%9A%84%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/</guid>
+        <description>&lt;h3 id=&#34;软件设计方程&#34;&gt;软件设计方程
+&lt;/h3&gt;&lt;p&gt;2010年1月6日 by Max Kanat-Alexander&lt;/p&gt;
+&lt;p&gt;今天我在研究一个可能解释几乎所有软件设计原则的方程。虽然它可能无法用具体数字求解，但清晰地展示了软件开发决策中各因素的相互关系。&lt;/p&gt;
+&lt;h4 id=&#34;核心变量定义&#34;&gt;核心变量定义
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实现潜在价值(Vi)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;衡量实现某功能的&amp;quot;价值&amp;quot;量级&lt;/li&gt;
+&lt;li&gt;示例：防止用户死亡的功能价值极高，修正拼写错误的价值极低&lt;/li&gt;
+&lt;li&gt;对程序员而言，灵活性是主要价值维度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;价值实现概率(Pv)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该价值被终端用户（功能需求）或其他开发者（设计决策）实际触发的概率&lt;/li&gt;
+&lt;li&gt;如支持外星猿类交互的代码概率趋近0，而全员可用的功能概率为100%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实现成本(Ei)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一次性投入的工作量（通常以人时计）&lt;/li&gt;
+&lt;li&gt;包括首次实现所需的所有开发成本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;维护成本(Em)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;随时间累积的维护工作量&lt;/li&gt;
+&lt;li&gt;需考虑对系统整体维护复杂度的增量影响&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;基本方程&#34;&gt;基本方程
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;实现合意度 D = (Pv × Vi) / (Ei + Em)&lt;/strong&gt;&lt;br&gt;
+即：决策合意度与价值概率和潜在价值成正比，与总成本（实现+维护）成反比。&lt;/p&gt;
+&lt;h4 id=&#34;时间维度修正&#34;&gt;时间维度修正
+&lt;/h4&gt;&lt;p&gt;原始方程缺失关键时间因子，修正后的逻辑关系：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;实现成本(Ei)&lt;/strong&gt;：一次性固定成本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;潜在价值(Vi)&lt;/strong&gt;：假设为静态值（或通过维护保持恒定）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;价值概率(Pv)&lt;/strong&gt;：随时间趋向100%&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;维护成本(Em)&lt;/strong&gt;：随时间趋向无限大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;关键洞见&#34;&gt;关键洞见
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;维护系数&lt;/strong&gt;：不同设计的维护成本增长率差异巨大，简单代码的维护系数极低&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技术杠杆效应&lt;/strong&gt;：编程语言/框架的微小改进能显著降低Em，从而指数级提升D值&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简洁性本质&lt;/strong&gt;：代码简洁性实质是控制维护系数的核心手段&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;实践启示&#34;&gt;实践启示
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;当Pv高且Em低时，决策简化为Vi与Ei的权衡&lt;/li&gt;
+&lt;li&gt;当Pv低且Em高时，需接近无限的Vi才值得实现&lt;/li&gt;
+&lt;li&gt;解释为何Ruby on Rails等框架能改变行业：通过降低Em释放创新潜力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方程演进&#34;&gt;方程演进
+&lt;/h4&gt;&lt;p&gt;作者后续提出优化版本：&lt;br&gt;
+&lt;strong&gt;D = (Vn + Vf) / (Ei + Em)&lt;/strong&gt;&lt;br&gt;
+其中Vn=当前价值，Vf=未来价值，随时间推移简化为D = Vf/Em&lt;/p&gt;
+&lt;p&gt;（评论区包含27条技术讨论，涉及概率单位、时间导数、创业公司策略等技术性对话）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

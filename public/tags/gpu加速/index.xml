@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>GPU加速 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/gpu%E5%8A%A0%E9%80%9F/</link>
+        <description>Recent content in GPU加速 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 21:00:28 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/gpu%E5%8A%A0%E9%80%9F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用GPU加速在云端破解密码(Kali 2017版)</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8gpu%E5%8A%A0%E9%80%9F%E5%9C%A8%E4%BA%91%E7%AB%AF%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81kali-2017%E7%89%88/</link>
+        <pubDate>Fri, 08 Aug 2025 21:00:28 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8gpu%E5%8A%A0%E9%80%9F%E5%9C%A8%E4%BA%91%E7%AB%AF%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81kali-2017%E7%89%88/</guid>
+        <description>&lt;h1 id=&#34;如何在云端利用gpu加速破解密码kali-2017版&#34;&gt;如何在云端利用GPU加速破解密码(Kali 2017版)
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者：Carrie Roberts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;免责声明：本文所述技术工具可能已过时，但仍具学习价值，可帮助理解现代工具的演进过程。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;云端密码破解的实际效果究竟如何？可能没有想象的那么美好。我在网上看到这个令人兴奋的消息：&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;只需30秒即可启动Kali GPU实例。选择P2实例类型，立即开始破解！&amp;rdquo; &lt;a class=&#34;link&#34; href=&#34;https://www.kali.org/news/cloud-cracking-with-cuda-gpu/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;kali.org链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这基本属实！但首次尝试时会发现，默认情况下亚马逊不允许直接启动P2 Kali实例，会收到如下错误提示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;您请求的实例数(1)已超过该实例类型的当前限额(0)。请访问&lt;a class=&#34;link&#34; href=&#34;http://aws.amazon.com/contact-us/ec2-request&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;EC2限额申请页面&lt;/a&gt;申请调整限额&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;提交申请后，我在一天内就获得了批准。&lt;/p&gt;
+&lt;p&gt;使用&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/marketplace/pp/B01M26MMTT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS市场链接&lt;/a&gt;启动GPU云实例，流程如下图所示：&lt;/p&gt;
+&lt;h2 id=&#34;破解速度对比测试&#34;&gt;破解速度对比测试
+&lt;/h2&gt;&lt;p&gt;使用Hashcat的基准测试功能进行对比，结果如下表所示（完整测试截图见文末）。作为对比的本地系统配置详见&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/?p=5995&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这篇博客&lt;/a&gt;。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;测试环境&lt;/th&gt;
+          &lt;th&gt;性能表现&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端CPU破解&lt;/td&gt;
+          &lt;td&gt;基准值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;本地GPU破解&lt;/td&gt;
+          &lt;td&gt;显著提升&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端单GPU破解&lt;/td&gt;
+          &lt;td&gt;中等提升&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;云端16GPU集群破解&lt;/td&gt;
+          &lt;td&gt;极高性能&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;成本效益分析&#34;&gt;成本效益分析
+&lt;/h2&gt;&lt;p&gt;结论是：16GPU云实例($15/小时)适合CTF比赛等短期破解需求，但按月计算费用将超过1万美元！建议安全研究人员还是投资搭建本地破解系统更经济实惠。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Carrie Roberts已离职，但我们很荣幸能继续分享她的精彩技术文章！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;想跟Carrie学习更多？推荐她的课程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;《攻击模拟工具：Atomic Red Team与CALDERA实战》&lt;/li&gt;
+&lt;li&gt;《PowerShell安全应用》
+（提供直播/点播多种学习方式）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

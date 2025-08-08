@@ -7,7 +7,71 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 19:30:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/darpa%E7%AB%9E%E8%B5%9B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 06:05:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/darpa%E7%AB%9E%E8%B5%9B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>我们在网络大挑战中的表现 - 自动化漏洞挖掘与修复技术解析</title>
+        <link>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%8C%91%E6%88%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 06:05:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%8C%91%E6%88%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E4%BF%AE%E5%A4%8D%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;我们在网络大挑战中的表现&#34;&gt;我们在网络大挑战中的表现
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Artem Dinaburg&lt;/strong&gt;&lt;br&gt;
+2015年7月15日&lt;/p&gt;
+&lt;p&gt;网络大挑战资格赛于6月3日东部时间中午准时开始。那一刻，我们的网络推理系统(CRS)收到了131个专门构建的不安全程序。在随后的24小时内，我们的CRS成功识别了其中65个程序的漏洞，并重写了94个程序以消除代码中的缺陷。这无疑证明，将优秀软件审计师的工作自动化不仅是可能的，而且是可实现的。&lt;/p&gt;
+&lt;p&gt;尽管我们的CRS在发现和修补漏洞方面取得了成功，但我们并未获得明年决赛的资格。一个致命缺陷使我们的总分降至第9名，低于第7名的晋级门槛。本文将讨论我们的CRS工作原理、与其他竞争系统的表现对比、导致得分失利的原因以及我们接下来的计划。&lt;/p&gt;
+&lt;h2 id=&#34;网络大挑战背景&#34;&gt;网络大挑战背景
+&lt;/h2&gt;&lt;p&gt;网络大挑战(CGC)的目标是将自动化的速度和规模与人类专家的推理能力相结合。多个团队创建的网络推理系统(CRS)能够自主分析任意网络程序，证明这些程序中存在缺陷，并自动制定有效的防御措施。这些系统的有效性通过锦标赛形式的对抗竞赛来评估。&lt;/p&gt;
+&lt;p&gt;比赛分为两个主要阶段：资格赛和决赛。资格赛于2015年6月3日举行，决赛定于2016年8月进行。只有资格赛前7名的队伍才能进入决赛。&lt;/p&gt;
+&lt;p&gt;在资格赛中，每个参赛队伍都收到了相同的131个挑战项目（即专门构建的易受攻击程序），每个程序至少包含一个故意植入的漏洞。在24小时内，各参赛CRS系统相互较量，并根据四个标准评分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CRS必须无需人工干预运行，使用人工协助的队伍将被取消资格&lt;/li&gt;
+&lt;li&gt;CRS必须修补挑战项目中的漏洞，成功修补每个漏洞都能获得分数&lt;/li&gt;
+&lt;li&gt;CRS可以证明挑战项目中存在漏洞，若能生成导致程序崩溃的输入，修补挑战的分数将翻倍&lt;/li&gt;
+&lt;li&gt;修补后的挑战项目必须保持原有功能和性能，根据修补后程序的性能损失和功能缺失会扣分&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作
+&lt;/h2&gt;&lt;p&gt;作为一家分布式工作的小公司，我们无法物理托管大量服务器。因此我们选择了云计算处理，具体使用亚马逊EC2。我们准备了三个不同的CRS实例，分别部署在美国的三个EC2区域，昵称为Biggie(us-east-1)、Tupac(us-west-2)和Dre(us-west-1)。&lt;/p&gt;
+&lt;p&gt;实际上资格赛只有131个挑战项目，没有巨大的网络流量捕获。我们本可以用17个c4.8xlarge EC2实例完成资格赛，但出于谨慎我们使用了297个，过度配置了约17倍。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞发现&#34;&gt;漏洞发现
+&lt;/h2&gt;&lt;p&gt;我们的CRS在已验证发现的漏洞数量上排名第二（图1）。考虑到我们是从零开始，而其他几个团队在CGC之前已有现成的漏洞发现系统，这一结果令人印象深刻。&lt;/p&gt;
+&lt;p&gt;我们的CRS采用多管齐下的策略发现漏洞（图2）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模糊测试&lt;/strong&gt;：使用自定义动态二进制翻译器(DBT)实现，能在单个64位地址空间中运行多个32位挑战程序&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;符号执行&lt;/strong&gt;：配备两个符号执行引擎，一个运行在原始二进制上，另一个运行在mcsema转换的LLVM上&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MinSet系统&lt;/strong&gt;：通过分支覆盖率维护最小最大覆盖输入集，形成模糊测试与符号执行之间的反馈循环&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;补丁生成&#34;&gt;补丁生成
+&lt;/h2&gt;&lt;p&gt;我们的CRS在补丁有效性（安全评分）方面排名第四（图3）。补丁生成流程包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用mcsema将挑战项目转换为LLVM位码&lt;/li&gt;
+&lt;li&gt;在LLVM位码上应用补丁并优化&lt;/li&gt;
+&lt;li&gt;转换回可执行代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们开发了两种主要补丁策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通用补丁&lt;/strong&gt;：排除法策略，默认验证所有内存访问，然后排除可证明安全的访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于漏洞的补丁&lt;/strong&gt;：包含法策略，默认只验证发现漏洞的内存访问，然后包含附近可能不安全的访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;功能与性能&#34;&gt;功能与性能
+&lt;/h2&gt;&lt;p&gt;在成功修补的94个挑战中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;56个保持完整功能&lt;/li&gt;
+&lt;li&gt;30个保持部分功能&lt;/li&gt;
+&lt;li&gt;8个无法运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;性能问题是导致我们失利的主要原因。在资格赛前十名队伍中，我们的CRS在修补后程序性能方面排名最后（图5）。性能问题源于：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;技术原因&lt;/strong&gt;：补丁流程涉及将挑战转换为LLVM位码再重新生成可执行文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作原因&lt;/strong&gt;：补丁开发较晚且针对错误的性能指标进行了优化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;下一步计划&#34;&gt;下一步计划
+&lt;/h2&gt;&lt;p&gt;根据CGC常见问题解答，资格赛后允许团队合并。我们希望与晋级决赛的队伍合作，结合双方技术优势争取胜利。如果找不到合作伙伴，我们将专注于使CRS能够自动发现和修补真实软件中的漏洞。&lt;/p&gt;
+&lt;p&gt;我们计划回馈CRS中使用的开源项目的修复和更新。开发过程中我们使用了众多开源项目，并进行了多项定制修改，期待将这些改进贡献给社区。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;© 2025 Trail of Bits.&lt;br&gt;
+使用Hugo和Mainroad主题生成&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>我们在网络大挑战中的表现 - 自动化漏洞挖掘与修复的技术实践</title>
         <link>http://localhost:1313/p/%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%A4%A7%E6%8C%91%E6%88%98%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%8E%B0-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E4%BF%AE%E5%A4%8D%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5/</link>
         <pubDate>Sun, 03 Aug 2025 19:30:29 +0800</pubDate>

@@ -7,7 +7,64 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 01:17:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A4%BE%E4%BA%A4%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 07:21:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%A4%BE%E4%BA%A4%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>BlackSuit利用社交工程攻击升级技术手段分析</title>
+        <link>http://localhost:1313/p/blacksuit%E5%88%A9%E7%94%A8%E7%A4%BE%E4%BA%A4%E5%B7%A5%E7%A8%8B%E6%94%BB%E5%87%BB%E5%8D%87%E7%BA%A7%E6%8A%80%E6%9C%AF%E6%89%8B%E6%AE%B5%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 07:21:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/blacksuit%E5%88%A9%E7%94%A8%E7%A4%BE%E4%BA%A4%E5%B7%A5%E7%A8%8B%E6%94%BB%E5%87%BB%E5%8D%87%E7%BA%A7%E6%8A%80%E6%9C%AF%E6%89%8B%E6%AE%B5%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;blacksuit在black-basta内部分裂后持续发起社交工程攻击&#34;&gt;BlackSuit在Black Basta内部分裂后持续发起社交工程攻击
+&lt;/h1&gt;&lt;h2 id=&#34;执行摘要&#34;&gt;执行摘要
+&lt;/h2&gt;&lt;p&gt;自2024年12月下旬以来，与Black Basta勒索软件组织相关的社交工程攻击显著减少。2025年2月泄露的Black Basta聊天日志表明该组织存在内部分裂。尽管如此，Rapid7仍观察到持续的社交工程攻击。现有证据表明，BlackSuit附属组织要么采用了Black Basta的策略，要么吸收了该组织的成员。先前在社交工程攻击中分发的Java恶意软件家族的开发者现已被评估为初始访问经纪人，可能为Black Basta和/或FIN7附属组织提供历史访问权限。&lt;/p&gt;
+&lt;h2 id=&#34;攻击概述&#34;&gt;攻击概述
+&lt;/h2&gt;&lt;p&gt;攻击的第一阶段保持不变。攻击者会向目标用户发送大量电子邮件，每小时可达数千封。这通常是通过将目标用户的电子邮件同时注册到许多公开可用的邮件列表来实现的，当每个服务发送欢迎电子邮件时，实际上形成了拒绝服务攻击。这种技术通常被称为电子邮件炸弹。&lt;/p&gt;
+&lt;h2 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h2&gt;&lt;h3 id=&#34;java-rat&#34;&gt;Java RAT
+&lt;/h3&gt;&lt;p&gt;Rapid7处理的大量社交工程事件导致Java RAT被下载并执行。该恶意软件现在滥用Google和Microsoft提供的基于云的文件托管服务，通过各自的云服务提供商(CSP)服务器代理命令。RAT的逻辑使用各种类型的垃圾代码、控制流混淆和字符串混淆来阻碍分析。&lt;/p&gt;
+&lt;h3 id=&#34;qemu攻击&#34;&gt;QEMU攻击
+&lt;/h3&gt;&lt;p&gt;在Rapid7处理的少量事件中，攻击者被观察到向用户发送Google Drive链接以下载包含QEMU(快速模拟器)及其依赖项的zip存档，包括自定义制作的.qcow2虚拟磁盘映像。该映像包含一个Windows 7 Ultimate虚拟机(VM)，配置为自动登录并执行RunOnce注册表项，该注册表项启动ScreenConnect安装程序。&lt;/p&gt;
+&lt;h2 id=&#34;缓解建议&#34;&gt;缓解建议
+&lt;/h2&gt;&lt;p&gt;Rapid7建议采取以下预防措施来限制对此类攻击的暴露：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;尽可能限制外部用户通过Microsoft Teams联系用户的能力&lt;/li&gt;
+&lt;li&gt;在环境中标准化远程管理工具&lt;/li&gt;
+&lt;li&gt;提供有关社交工程活动的用户意识培训&lt;/li&gt;
+&lt;li&gt;标准化VPN访问&lt;/li&gt;
+&lt;li&gt;在整个环境中要求多因素认证(MFA)&lt;/li&gt;
+&lt;li&gt;定期更新软件和固件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mitre-attck技术&#34;&gt;MITRE ATT&amp;amp;CK技术
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;战术&lt;/th&gt;
+          &lt;th&gt;技术&lt;/th&gt;
+          &lt;th&gt;程序&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;侦察&lt;/td&gt;
+          &lt;td&gt;T1591: 收集受害者组织信息&lt;/td&gt;
+          &lt;td&gt;攻击者利用公开可用信息识别目标联系方式和财务信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;资源开发&lt;/td&gt;
+          &lt;td&gt;T1587.001: 开发能力: 恶意软件&lt;/td&gt;
+          &lt;td&gt;威胁行为者正在积极开发新的恶意软件进行分发&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;影响&lt;/td&gt;
+          &lt;td&gt;T1498: 网络拒绝服务&lt;/td&gt;
+          &lt;td&gt;威胁行为者用垃圾邮件淹没电子邮件保护解决方案&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;完整的技术指标(IoC)可在&lt;a class=&#34;link&#34; href=&#34;https://github.com/rapid7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Rapid7 GitHub仓库&lt;/a&gt;获取。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>数字时代的七宗罪：网络安全风险全景剖析</title>
         <link>http://localhost:1313/p/%E6%95%B0%E5%AD%97%E6%97%B6%E4%BB%A3%E7%9A%84%E4%B8%83%E5%AE%97%E7%BD%AA%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E5%85%A8%E6%99%AF%E5%89%96%E6%9E%90/</link>
         <pubDate>Wed, 06 Aug 2025 01:17:57 +0800</pubDate>

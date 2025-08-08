@@ -7,7 +7,119 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 05:24:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows%E5%86%85%E6%A0%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 20:26:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows%E5%86%85%E6%A0%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows cldflt.sys驱动堆溢出漏洞CVE-2024-30085分析与利用</title>
+        <link>http://localhost:1313/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Fri, 08 Aug 2025 20:26:58 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/windows-cldflt.sys%E9%A9%B1%E5%8A%A8%E5%A0%86%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9Ecve-2024-30085%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR
+&lt;/h1&gt;&lt;p&gt;CVE-2024-30085是影响Windows云文件迷你过滤器驱动cldflt.sys的基于堆的缓冲区溢出漏洞。通过构造特殊的重解析点，可以触发缓冲区溢出破坏相邻的_WNF_STATE_DATA对象。被破坏的_WNF_STATE_DATA对象可用于从ALPC句柄表对象泄露内核指针。第二次缓冲区溢出用于破坏另一个_WNF_STATE_DATA对象，进而破坏相邻的PipeAttribute对象。通过在用户空间伪造PipeAttribute对象，我们能够泄露令牌地址并覆盖权限，将权限提升至NT AUTHORITY\SYSTEM。&lt;/p&gt;
+&lt;h1 id=&#34;漏洞分析与补丁&#34;&gt;漏洞分析与补丁
+&lt;/h1&gt;&lt;p&gt;CVE-2024-30085是由SSD Secure Disclosure的Alex Birnberg以及Theori的Gwangun Jung和Junoh Lee发现的基于堆的缓冲区溢出漏洞。对于Windows 10 22H2，该漏洞在KB5039211更新中被修复。&lt;/p&gt;
+&lt;p&gt;查看补丁差异，可以清楚地看到HsmIBitmapNORMALOpen函数已被修改。在未打补丁的函数中，驱动程序在分页池中分配了一个大小为0x1000的HsBm对象，并将memcpy_size大小的数据复制到分配的缓冲区中。由于用户可以控制复制的数据以及memcpy_size的值，如果memcpy_size大于0x1000，就会发生分页池中的堆缓冲区溢出！&lt;/p&gt;
+&lt;h1 id=&#34;重解析点结构&#34;&gt;重解析点结构
+&lt;/h1&gt;&lt;p&gt;重解析点包含一个重解析标签（标识拥有该重解析点的文件系统驱动程序）和用户定义的数据。在本例中，我们将使用IO_REPARSE_TAG_CLOUD_6(0x9000601a)作为重解析标签。&lt;/p&gt;
+&lt;p&gt;用户定义的数据具有以下结构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_REPARSE_DATA_BUFFER&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ULONG&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;ReparseTag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;USHORT&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ReparseDataLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;USHORT&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Reserved&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;UCHAR&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DataBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GenericReparseBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;REPARSE_DATA_BUFFER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PREPARSE_DATA_BUFFER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;触发漏洞&#34;&gt;触发漏洞
+&lt;/h1&gt;&lt;p&gt;让我们看看触发漏洞所需的代码路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-&amp;gt; HsmFltPostCREATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    -&amp;gt; HsmiFltPostECPCREATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        -&amp;gt; HsmpSetupContexts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            -&amp;gt; HsmpCtxCreateStreamContext
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                -&amp;gt; HsmIBitmapNORMALOpen
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过打开包含cldflt重解析数据的文件，我们能够到达HsmpCtxCreateStreamContext。但是，为了到达HsmIBitmapNORMALOpen触发易受攻击的memcpy，我们必须通过一些与FeRp对象及其嵌套的BtRp对象相关的检查。&lt;/p&gt;
+&lt;h1 id=&#34;利用概述&#34;&gt;利用概述
+&lt;/h1&gt;&lt;p&gt;目前，我们在分页池中有一个溢出，影响大小为0x1000的对象。为了提升权限，我们需要一个内核指针泄露和任意写入能力。我们计划触发这个漏洞两次——第一次获取内核泄露并获得任意写入原语，第二次获取任意读取能力从而获取令牌地址。&lt;/p&gt;
+&lt;p&gt;完整的利用步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建漏洞利用文件1并设置大小为0x1010的自定义重解析点数据&lt;/li&gt;
+&lt;li&gt;喷洒填充_WNF_STATE_DATA&lt;/li&gt;
+&lt;li&gt;喷洒第一组_WNF_STATE_DATA对象&lt;/li&gt;
+&lt;li&gt;通过释放每隔一个_WNF_STATE_DATA对象来打孔&lt;/li&gt;
+&lt;li&gt;第一次触发漏洞以回收其中一个孔——这会破坏_WNF_STATE_DATA对象，给我们越界读写能力&lt;/li&gt;
+&lt;li&gt;喷洒ALPC句柄表以回收剩余的孔&lt;/li&gt;
+&lt;li&gt;通过从第一个被破坏的_WNF_STATE_DATA对象读取泄露内核指针&lt;/li&gt;
+&lt;li&gt;创建漏洞利用文件2并设置大小为0x1010的自定义重解析点数据&lt;/li&gt;
+&lt;li&gt;喷洒第二组填充_WNF_STATE_DATA&lt;/li&gt;
+&lt;li&gt;通过释放每隔一个_WNF_STATE_DATA对象来打孔&lt;/li&gt;
+&lt;li&gt;第二次触发漏洞以回收其中一个孔&lt;/li&gt;
+&lt;li&gt;喷洒PipeAttribute以回收剩余的孔&lt;/li&gt;
+&lt;li&gt;使用第二个被破坏的_WNF_STATE_DATA对象破坏PipeAttribute对象，使其指向用户空间中的伪造对象——这给了我们任意读取能力&lt;/li&gt;
+&lt;li&gt;使用被破坏的PipeAttribute对象获取令牌地址&lt;/li&gt;
+&lt;li&gt;使用第一个被破坏的_WNF_STATE_DATA对象破坏ALPC句柄表，给我们任意写入能力&lt;/li&gt;
+&lt;li&gt;覆盖令牌权限获取完全权限！&lt;/li&gt;
+&lt;li&gt;获取winlogon进程的句柄&lt;/li&gt;
+&lt;li&gt;弹出NT AUTHORITY\SYSTEM shell！！！&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;获取内核指针泄露&#34;&gt;获取内核指针泄露
+&lt;/h1&gt;&lt;p&gt;我们将使用两个内核对象来获取内核指针泄露：_WNF_STATE_DATA和_ALPC_HANDLE_TABLE。&lt;/p&gt;
+&lt;p&gt;Windows通知设施(WNF)是一个未记录的内核组件，用于在系统间发送通知。用于发送通知的数据存储在_WNF_STATE_DATA对象中，该对象分配在分页池中，由一个大小为0x10的头部和紧随其后的数据组成。&lt;/p&gt;
+&lt;p&gt;高级本地过程调用(ALPC)是Windows内核中未记录的内部进程间通信设施。当创建ALPC端口时，_ALPC_HANDLE_TABLE对象最初以0x80的大小分配在分页池中。每次调用NtAlpcCreateResourceReserve时，都会创建一个_KALPC_RESERVE blob，并调用AlpcAddHandleTableEntry将其地址添加到句柄表中。&lt;/p&gt;
+&lt;h1 id=&#34;任意读取&#34;&gt;任意读取
+&lt;/h1&gt;&lt;p&gt;现在我们有了内核指针泄露，我们想要获得任意读取能力以便获取令牌地址。为此，可以第二次触发漏洞来覆盖第二个_WNF_STATE_DATA数据对象。与之前一样，我们将喷洒_WNF_STATE_DATA，通过释放每隔一个对象来打孔，然后触发漏洞导致溢出并破坏相邻的_WNF_STATE_DATA对象。但这次，我们将喷洒PipeAttribute，并使用被破坏的_WNF_STATE_DATA来破坏相邻的PipeAttribute结构。&lt;/p&gt;
+&lt;p&gt;PipeAttribute任意读取技术由Corentin Bayet和Paul Fariello在他们的论文中提出。当创建管道时，用户可以添加属性，这些属性随后以键值对的形式存储在链表中。PipeAttribute是一个可变大小的结构，分配在分页池中。&lt;/p&gt;
+&lt;h1 id=&#34;权限提升&#34;&gt;权限提升
+&lt;/h1&gt;&lt;p&gt;现在我们有了令牌地址，我们最终可以将权限提升到NT AUTHORITY\SYSTEM！&lt;/p&gt;
+&lt;p&gt;记住我们用来泄露ALPC句柄表中_KALPC_RESERVE指针的第一个_WNF_STATE_DATA吗？我们可以使用相同的_WNF_STATE_DATA对象用指向用户空间中伪造的_KALPC_RESERVE结构的指针覆盖该指针。在_KALPC_RESERVE内部，有一个指向_KALPC_MESSAGE的指针。&lt;/p&gt;
+&lt;p&gt;在_KALPC_MESSAGE内部，有两个我们感兴趣的字段：ExtensisonBuffer和ExtensionBufferSize。当调用NtAlpcSendWaitReceivePort时，用户可控的ExtensionBufferSize大小的数据被写入ExtensionBuffer。为了获得任意写入，我们可以让我们的伪造_KALPC_RESERVE结构指向一个伪造的_KALPC_MESSAGE结构（也在用户空间中），将ExtensionBuffer设置为我们想要写入的位置！&lt;/p&gt;
+&lt;p&gt;在这种情况下，我们将ExtensionBuffer设置为令牌权限（位于偏移量0x40），ExtensionBufferSize设置为0x10，这样我们可以写入16个\xff，这将启用所有权限。&lt;/p&gt;
+&lt;h1 id=&#34;漏洞利用演示&#34;&gt;漏洞利用演示
+&lt;/h1&gt;&lt;p&gt;这是漏洞利用运行时的样子：&lt;/p&gt;
+&lt;p&gt;[图片描述漏洞利用成功运行]&lt;/p&gt;
+&lt;p&gt;漏洞利用源代码可以在此处获取。&lt;/p&gt;
+&lt;h1 id=&#34;致谢&#34;&gt;致谢
+&lt;/h1&gt;&lt;p&gt;我要感谢Chen Le Qi在我研究这个漏洞时的耐心指导——我真的学到了很多！&lt;/p&gt;
+&lt;h1 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;Windows云过滤器API文档&lt;/li&gt;
+&lt;li&gt;占位文件文档&lt;/li&gt;
+&lt;li&gt;重解析点文档&lt;/li&gt;
+&lt;li&gt;Windows结构体参考&lt;/li&gt;
+&lt;li&gt;云过滤器重解析数据结构&lt;/li&gt;
+&lt;li&gt;ALPC技术论文&lt;/li&gt;
+&lt;li&gt;PipeAttribute技术论文&lt;/li&gt;
+&lt;li&gt;Windows内核堆分析&lt;/li&gt;
+&lt;li&gt;使用ALPC和PipeAttribute利用CVE-2023-36424&lt;/li&gt;
+&lt;li&gt;WNF堆喷洒技术&lt;/li&gt;
+&lt;li&gt;从句柄创建进程技术&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Windows内核对象初始化器实验：绕过对象回调实现进程监控与反调试</title>
         <link>http://localhost:1313/p/windows%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E5%99%A8%E5%AE%9E%E9%AA%8C%E7%BB%95%E8%BF%87%E5%AF%B9%E8%B1%A1%E5%9B%9E%E8%B0%83%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%8F%8D%E8%B0%83%E8%AF%95/</link>
         <pubDate>Thu, 07 Aug 2025 05:24:38 +0800</pubDate>

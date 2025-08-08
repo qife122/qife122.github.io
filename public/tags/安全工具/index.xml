@@ -7,7 +7,42 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 06:11:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 02:45:30 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>增强缓解评估工具包(EMET)正式发布 - 微软安全响应中心</title>
+        <link>http://localhost:1313/p/%E5%A2%9E%E5%BC%BA%E7%BC%93%E8%A7%A3%E8%AF%84%E4%BC%B0%E5%B7%A5%E5%85%B7%E5%8C%85emet%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83/</link>
+        <pubDate>Fri, 08 Aug 2025 02:45:30 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%A2%9E%E5%BC%BA%E7%BC%93%E8%A7%A3%E8%AF%84%E4%BC%B0%E5%B7%A5%E5%85%B7%E5%8C%85emet%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83-%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E5%93%8D%E5%BA%94%E4%B8%AD%E5%BF%83/</guid>
+        <description>&lt;h1 id=&#34;增强缓解评估工具包发布公告&#34;&gt;增强缓解评估工具包发布公告
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;更新&lt;/strong&gt;：EMET 2.0版本现已发布。&lt;/p&gt;
+&lt;p&gt;当您阅读本文时，全球各地都有人在寻找软件应用中的漏洞。您的系统和软件可能因此面临风险。如何防护未知漏洞？安全缓解技术是重要选择。&lt;/p&gt;
+&lt;p&gt;微软提供多种缓解技术来增加漏洞利用难度。我们宣布推出全新工具——增强缓解评估工具包(EMET)1.0.2版本，现可从&lt;a class=&#34;link&#34; href=&#34;http://go.microsoft.com/fwlink/?LinkID=162309&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微软下载中心&lt;/a&gt;免费获取。该工具在以下方面实现突破：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无需重编译&lt;/strong&gt;：通过命令行工具即可为应用启用防护，特别适合无法获取源代码的旧版软件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进程级控制&lt;/strong&gt;：可针对单个进程启用/禁用缓解措施，避免产品套件全局影响。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;向下兼容&lt;/strong&gt;：使新版Windows的防护技术能在旧系统上运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;持续更新&lt;/strong&gt;：将随新技术发展不断更新，让用户提前体验未来防护功能。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;支持的缓解技术&#34;&gt;支持的缓解技术
+&lt;/h2&gt;&lt;p&gt;当前版本包含四项核心技术：&lt;/p&gt;
+&lt;h3 id=&#34;sehop&#34;&gt;SEHOP
+&lt;/h3&gt;&lt;p&gt;通过结构化异常处理(SEH)链验证阻断覆盖攻击。如我们此前分析的msvidctl漏洞(&lt;a class=&#34;link&#34; href=&#34;http://blogs.technet.com/srd/archive/2009/07/28/msvidctl-ms09-032-and-the-atl-vulnerability.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;详情&lt;/a&gt;)将因此失效。&lt;/p&gt;
+&lt;h3 id=&#34;动态dep&#34;&gt;动态DEP
+&lt;/h3&gt;&lt;p&gt;数据执行保护(DEP)通过标记内存页不可执行来防范内存破坏漏洞。工作原理详见&lt;a class=&#34;link&#34; href=&#34;http://blogs.technet.com/srd/archive/2009/06/12/understanding-dep-as-a-mitigation-technology-part-1.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术解析&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;null页分配&#34;&gt;NULL页分配
+&lt;/h3&gt;&lt;p&gt;通过预分配内存首页阻断用户态NULL解引用攻击。当前仅防护用户态漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;堆喷射分配&#34;&gt;堆喷射分配
+&lt;/h3&gt;&lt;p&gt;通过预占常见内存地址阻断利用堆喷射技术的攻击。可随攻击模式变化调整配置。&lt;/p&gt;
+&lt;h2 id=&#34;应用兼容性说明&#34;&gt;应用兼容性说明
+&lt;/h2&gt;&lt;p&gt;安全缓解可能影响依赖特定行为的应用程序。EMET面向IT专业人员和安全研究人员，建议在生产环境部署前充分测试。&lt;/p&gt;
+&lt;p&gt;欢迎通过switech@microsoft.com提交反馈。特别感谢Matt Miller的贡献。&lt;/p&gt;
+&lt;p&gt;—— Fermin J. Serna和Andrew Roths，MSRC工程团队&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>EMET 2.0 安全缓解工具培训视频发布</title>
         <link>http://localhost:1313/p/emet-2.0-%E5%AE%89%E5%85%A8%E7%BC%93%E8%A7%A3%E5%B7%A5%E5%85%B7%E5%9F%B9%E8%AE%AD%E8%A7%86%E9%A2%91%E5%8F%91%E5%B8%83/</link>
         <pubDate>Wed, 06 Aug 2025 06:11:19 +0800</pubDate>

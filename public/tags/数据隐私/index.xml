@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>数据隐私 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81/</link>
+        <description>Recent content in 数据隐私 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 05:05:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>时序不可学习样本：防止个人视频数据被目标跟踪模型未经授权利用</title>
+        <link>http://localhost:1313/p/%E6%97%B6%E5%BA%8F%E4%B8%8D%E5%8F%AF%E5%AD%A6%E4%B9%A0%E6%A0%B7%E6%9C%AC%E9%98%B2%E6%AD%A2%E4%B8%AA%E4%BA%BA%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E8%A2%AB%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA%E6%A8%A1%E5%9E%8B%E6%9C%AA%E7%BB%8F%E6%8E%88%E6%9D%83%E5%88%A9%E7%94%A8/</link>
+        <pubDate>Fri, 08 Aug 2025 05:05:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%97%B6%E5%BA%8F%E4%B8%8D%E5%8F%AF%E5%AD%A6%E4%B9%A0%E6%A0%B7%E6%9C%AC%E9%98%B2%E6%AD%A2%E4%B8%AA%E4%BA%BA%E8%A7%86%E9%A2%91%E6%95%B0%E6%8D%AE%E8%A2%AB%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA%E6%A8%A1%E5%9E%8B%E6%9C%AA%E7%BB%8F%E6%8E%88%E6%9D%83%E5%88%A9%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;随着社交媒体的兴起，大量用户上传视频（如YouTube内容）被用作视觉目标跟踪（VOT）的训练数据。然而VOT社区长期忽视视频数据隐私问题，许多私人视频在未经授权的情况下被用于商业模型训练。为缓解此问题，本文首次研究如何防止个人视频数据被深度跟踪器未经授权利用。现有防数据滥用的方法主要针对图像任务（如图像分类），直接应用于视频存在效率低下、有效性有限和泛化性差等问题。我们提出新型时序不可学习样本（TUEs）生成框架，其高效计算能力可扩展至大规模视频数据集。使用TUEs训练的跟踪器会过度依赖不可学习的噪声进行时序匹配，从而忽略原始数据结构确保训练视频的隐私性。为增强TUEs效果，我们引入时序对比损失，进一步破坏现有跟踪器在使用TUEs训练时的学习能力。大量实验表明，我们的方法在视频数据隐私保护方面达到最先进性能，且在VOT模型、数据集和时序匹配任务间具有强迁移性。&lt;/p&gt;
+&lt;h2 id=&#34;核心贡献&#34;&gt;核心贡献
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;首个视频数据隐私保护框架&lt;/strong&gt;：针对视觉目标跟踪任务提出时序不可学习样本生成方法&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高效时序噪声生成&lt;/strong&gt;：通过可扩展的计算架构实现大规模视频处理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时序对比损失函数&lt;/strong&gt;：创新性地破坏跟踪器的时空特征学习能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨模型迁移性验证&lt;/strong&gt;：在多种VOT架构、数据集和匹配任务上证明方法普适性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;技术亮点&#34;&gt;技术亮点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;采用生成对抗网络架构动态生成时序相关的不可学习噪声&lt;/li&gt;
+&lt;li&gt;通过时空注意力机制确保噪声在视频帧间的时序一致性&lt;/li&gt;
+&lt;li&gt;设计噪声强度自适应模块平衡隐私保护与视觉质量&lt;/li&gt;
+&lt;li&gt;提出三阶段训练策略（预训练-对抗训练-微调）优化生成效果&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

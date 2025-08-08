@@ -7,7 +7,65 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 10:15:50 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 22:06:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/api%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>我是如何操纵Bugcrowd平台排名的 - 漏洞挖掘技术解析</title>
+        <link>http://localhost:1313/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 22:06:25 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;如何操纵我在bugcrowd平台的排名&#34;&gt;如何操纵我在Bugcrowd平台的排名
+&lt;/h1&gt;&lt;p&gt;近年来，随着越来越多的公司依赖众包平台来识别系统漏洞，漏洞赏金计划获得了极大的普及。因此，这些平台的安全性变得愈发关键。去年我发现了一个可以操纵Bugcrowd平台排名的方法，本文将分享具体实现方式及其潜在影响。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h2&gt;&lt;p&gt;在测试Bugcrowd平台时，我发现可以通过API导入大量报告并给自己奖励积分来操纵平台排名。虽然这些是演示积分不会显示在个人公开主页，但它们会出现在提交页面的积分总计中——而这些演示积分会被计入平台的排名算法。通过此漏洞，我仅凭3205分就位列平台第10名，而原本第11名的研究者拥有13789分。&lt;/p&gt;
+&lt;h2 id=&#34;技术实现细节&#34;&gt;技术实现细节
+&lt;/h2&gt;&lt;p&gt;该漏洞需要以下操作步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Bugcrowd创建两个账户：研究员账户和公司账户&lt;/li&gt;
+&lt;li&gt;从跟踪账户创建演示程序并获取API凭证&lt;/li&gt;
+&lt;li&gt;按照官方文档构造API请求，为研究员账户创建可认领的提交&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;示例API请求代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;accept&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;application/vnd.bugcrowd+json&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;authorization&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Token &amp;lt;ADD-YOUR-API-TOKEN&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;content-type&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;{&amp;#34;submission&amp;#34;:{&amp;#34;source&amp;#34;:&amp;#34;platform&amp;#34;,&amp;#34;title&amp;#34;:&amp;#34;Security Breached&amp;#34;,&amp;#34;submitted_at&amp;#34;:&amp;#34;2022-06-07T00:00:00.181Z&amp;#34;,&amp;#34;substate&amp;#34;:&amp;#34;resolved&amp;#34;,&amp;#34;vrt_id&amp;#34;:&amp;#34;server_side_injection.remote_code_execution_rce&amp;#34;,&amp;#34;priority&amp;#34;:&amp;#34;1&amp;#34;,&amp;#34;researcher_email&amp;#34;:&amp;#34;muhammadkhizerjaved@bugcrowdninja.com&amp;#34;}}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;https://api.bugcrowd.com/bounties/&amp;lt;YOUR-BOUNTY-UUID&amp;gt;/submissions&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;请求成功后，研究员邮箱会收到可认领提交的链接，认领后即可获得演示积分。当积累足够积分后，平台排名就会发生变化。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞影响&#34;&gt;漏洞影响
+&lt;/h2&gt;&lt;p&gt;该漏洞主要影响Bugcrowd的商业信誉及其关联方，因为排名系统是平台用户信任体系的重要组成部分。攻击者可能通过操纵排名获取间接经济利益，例如在公开平台展示虚假排名，导致企业声誉受损和客户信任流失。&lt;/p&gt;
+&lt;h2 id=&#34;负责任的披露&#34;&gt;负责任的披露
+&lt;/h2&gt;&lt;p&gt;我及时向Bugcrowd报告了该问题，他们迅速进行了修复。这次经历让我深刻认识到负责任的漏洞披露的重要性，以及漏洞赏金计划对保障数字世界安全的关键作用。&lt;/p&gt;
+&lt;p&gt;随着漏洞赏金计划的普及，保持警惕并识别潜在可利用漏洞显得尤为重要。我呼吁研究者和企业共同重视安全问题，携手打造更安全的互联网环境。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>用NIST SP 800-228解决API安全问题的技术解析</title>
         <link>http://localhost:1313/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Tue, 05 Aug 2025 10:15:50 +0800</pubDate>

@@ -7,7 +7,84 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 10:34:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/impacket/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 00:55:45 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/impacket/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用Azure实验室进行Impacket防御基础 - 检测与缓解攻击技术</title>
+        <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8azure%E5%AE%9E%E9%AA%8C%E5%AE%A4%E8%BF%9B%E8%A1%8Cimpacket%E9%98%B2%E5%BE%A1%E5%9F%BA%E7%A1%80-%E6%A3%80%E6%B5%8B%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Fri, 08 Aug 2025 00:55:45 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BD%BF%E7%94%A8azure%E5%AE%9E%E9%AA%8C%E5%AE%A4%E8%BF%9B%E8%A1%8Cimpacket%E9%98%B2%E5%BE%A1%E5%9F%BA%E7%A1%80-%E6%A3%80%E6%B5%8B%E4%B8%8E%E7%BC%93%E8%A7%A3%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h3 id=&#34;概述&#34;&gt;概述
+&lt;/h3&gt;&lt;p&gt;本文是对SecureAuthCorp开源的Impacket工具集的防御视角分析，延续此前《使用Azure实验室进行Impacket攻击基础》的内容，重点探讨如何检测和防御这些技术。&lt;/p&gt;
+&lt;h3 id=&#34;实验室搭建&#34;&gt;实验室搭建
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ARM模板&lt;/strong&gt;：通过&lt;a class=&#34;link&#34; href=&#34;http://doazlab.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;doazlab.com&lt;/a&gt;或&lt;a class=&#34;link&#34; href=&#34;https://github.com/DefensiveOrigins/DO-LAB&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub&lt;/a&gt;部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环境组成&lt;/strong&gt;：域控制器、已加入域的工作站及Ubuntu系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;预防性欺骗&#34;&gt;预防性欺骗
+&lt;/h3&gt;&lt;p&gt;通过创建Active Directory诱饵账户（如&lt;code&gt;Luis.Graves&lt;/code&gt;）来检测枚举和Kerberoasting攻击：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;New-ADUser&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-UserPrincipalName&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;email&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;protected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;OU=DomainUsers,dc=doazlab,DC=com&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-GivenName&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Luis&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Surname&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Graves&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Enabled&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Luis.Graves&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-desc&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Accounting Controller&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-AccountPassword&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ConvertTo-SecureString&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Password1!&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-AsPlainText&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;ntlmrelayxpy防御&#34;&gt;Ntlmrelayx.py防御
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;攻击场景&lt;/strong&gt;：MITRE ATT&amp;amp;CK T1204（恶意LNK文件触发凭证中继）&lt;br&gt;
+&lt;strong&gt;防御方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;检测&lt;/strong&gt;：通过Sysmon监控&lt;code&gt;.LNK&lt;/code&gt;和&lt;code&gt;.URL&lt;/code&gt;文件创建（事件ID 4656）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;阻断&lt;/strong&gt;：使用Microsoft文件服务器资源管理器（FSRM）限制共享文件扩展名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络加固&lt;/strong&gt;：关闭不必要的SMB端口，限制工作站出站流量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;中间人攻击mitre-t1557&#34;&gt;中间人攻击（MITRE T1557）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;防御重点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁用LLMNR/NBNS协议&lt;/li&gt;
+&lt;li&gt;监控事件ID 4662（对象属性读取）以检测诱饵账户访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;域账户枚举mitre-t1087&#34;&gt;域账户枚举（MITRE T1087）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;检测方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;部署Deploy-Deception工具创建诱饵用户&lt;/li&gt;
+&lt;li&gt;通过ObjectGUID关联事件ID 4662生成警报&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;kerberoastingmitre-t1558&#34;&gt;Kerberoasting（MITRE T1558）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;防御措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为服务账户设置25字符以上的强密码&lt;/li&gt;
+&lt;li&gt;使用托管服务账户（MSA/gMSA）&lt;/li&gt;
+&lt;li&gt;监控SPN查询活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;凭证转储mitre-t1003&#34;&gt;凭证转储（MITRE T1003）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;关键检测点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;远程注册表服务启动（事件ID 4688）&lt;/li&gt;
+&lt;li&gt;非域控制器发起的DCSync操作（事件ID 4662）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;防御建议&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;限制工作站防火墙的SMB RPC访问&lt;/li&gt;
+&lt;li&gt;启用LDAP通道绑定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FSRM文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/olafhartong/sysmon-modular&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Sysmon-Modular&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://attack.mitre.org/techniques/T1204/001/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MITRE ATT&amp;amp;CK T1204&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者：Jordan Drysdale&lt;br&gt;
+原文发布于Black Hills Information Security&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>使用Azure实验室进行Impacket攻击基础教程</title>
         <link>http://localhost:1313/p/%E4%BD%BF%E7%94%A8azure%E5%AE%9E%E9%AA%8C%E5%AE%A4%E8%BF%9B%E8%A1%8Cimpacket%E6%94%BB%E5%87%BB%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</link>
         <pubDate>Sat, 02 Aug 2025 10:34:24 +0800</pubDate>

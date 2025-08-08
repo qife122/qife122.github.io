@@ -7,7 +7,78 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 20:19:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 22:33:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>深入解析CVE-2024-49112与CVE-2024-49113：Windows LDAP高危漏洞分析</title>
+        <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 22:33:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h3&gt;&lt;p&gt;2024年12月，安全研究员Yuki Chen发现两个Windows轻量级目录访问协议(LDAP)漏洞：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-49112&lt;/strong&gt;：CVSS 9.8分的远程代码执行(RCE)漏洞&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CVE-2024-49113&lt;/strong&gt;：CVSS 7.5分的拒绝服务(DoS)漏洞&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;漏洞利用原理&#34;&gt;漏洞利用原理
+&lt;/h3&gt;&lt;h4 id=&#34;cve-2024-49112rce漏洞&#34;&gt;CVE-2024-49112（RCE漏洞）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;攻击域控制器时：攻击者需向目标发送特制RPC调用，触发对攻击者域的控制查找&lt;/li&gt;
+&lt;li&gt;攻击LDAP客户端时：需诱骗受害者执行域控制器查找或连接恶意LDAP服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cve-2024-49113dos漏洞&#34;&gt;CVE-2024-49113（DoS漏洞）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;SafeBreach实验室已发布PoC（代号LDAPNightmare）&lt;/li&gt;
+&lt;li&gt;攻击流程：发送DCE/RPC请求导致LSASS崩溃，并通过特制CLDAP响应包强制重启&lt;/li&gt;
+&lt;li&gt;该利用链经修改后可能实现CVE-2024-49112的RCE攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;受影响系统&#34;&gt;受影响系统
+&lt;/h3&gt;&lt;p&gt;多个Windows版本受影响，具体列表参见：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49112&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2024-49112&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-49113&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2024-49113&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防护措施&#34;&gt;防护措施
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;微软补丁&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;已通过2024年12月补丁星期二更新修复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;趋势科技防护规则&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Deep Discovery Inspector规则：
+&lt;ul&gt;
+&lt;li&gt;5297: CVE-2024-49113检测规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;终端/云工作负载安全规则：
+&lt;ul&gt;
+&lt;li&gt;1012240: CVE-2024-49113防护规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;TippingPoint网络过滤器：
+&lt;ul&gt;
+&lt;li&gt;45267: LDAP漏洞防护过滤器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;最佳实践&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;补丁管理：立即应用微软补丁&lt;/li&gt;
+&lt;li&gt;网络分段：隔离关键网络段&lt;/li&gt;
+&lt;li&gt;安全审计：定期漏洞评估&lt;/li&gt;
+&lt;li&gt;事件响应：建立应急响应计划&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;趋势vision-one附加功能&#34;&gt;趋势Vision One附加功能
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;提供漏洞知识库（&lt;a class=&#34;link&#34; href=&#34;https://example.com/kb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;KB链接&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;威胁情报报告（含LDAPNightmare PoC分析）&lt;/li&gt;
+&lt;li&gt;后渗透检测与修复技术&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>2017年3月微软安全更新汇总 - MS17-006至MS17-023漏洞修复指南</title>
         <link>http://localhost:1313/p/2017%E5%B9%B43%E6%9C%88%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E6%B1%87%E6%80%BB-ms17-006%E8%87%B3ms17-023%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%8C%87%E5%8D%97/</link>
         <pubDate>Wed, 06 Aug 2025 20:19:11 +0800</pubDate>

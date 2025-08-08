@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>文件系统 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+        <description>Recent content in 文件系统 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Fri, 08 Aug 2025 04:49:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux取证魔法之旅：深入探索文件系统与数据恢复技术</title>
+        <link>http://localhost:1313/p/linux%E5%8F%96%E8%AF%81%E9%AD%94%E6%B3%95%E4%B9%8B%E6%97%85%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Fri, 08 Aug 2025 04:49:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E5%8F%96%E8%AF%81%E9%AD%94%E6%B3%95%E4%B9%8B%E6%97%85%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h3 id=&#34;网络研讨会与hal-pomeranz共探linux取证魔法之旅&#34;&gt;网络研讨会：与Hal Pomeranz共探Linux取证魔法之旅
+&lt;/h3&gt;&lt;p&gt;我们最爱的BHIS客座讲师Hal Pomeranz再度回归，带来更多Linux技术干货。本次将开启一场穿越Linux文件系统神秘领域的魔法之旅！您将了解到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;相对访问时间(atime)更新机制&lt;/li&gt;
+&lt;li&gt;块组与分配策略&lt;/li&gt;
+&lt;li&gt;已删除目录项恢复技术&lt;/li&gt;
+&lt;li&gt;其他关键文件系统特性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些知识将帮助您：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;更精准解析Linux系统时间线&lt;/li&gt;
+&lt;li&gt;显著提升删除数据恢复速度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;警告&lt;/strong&gt;：这是一条偏离常规路径的险峻旅程，参与后您将获得永久性的技术蜕变！&lt;/p&gt;
+&lt;h4 id=&#34;资源链接&#34;&gt;资源链接
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://discord.gg/aHHh3u5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;加入BHIS Discord讨论组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/wp-content/uploads/2020/08/SLIDES_LinuxMagicalMysteryTour.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;研讨会幻灯片下载&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;时间戳导航&#34;&gt;时间戳导航
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;0:00 – 开场 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1:10 – Hal Pomeranz介绍 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;5:49 – EXT文件系统详解 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;8:13 – 访问时间机制剖析 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;19:25 – 目录结构解密 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;28:29 – 文件删除原理 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;38:23 – 文件分配与数据恢复实战 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1:07:23 – 总结陈述
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;进阶学习&#34;&gt;进阶学习
+&lt;/h4&gt;&lt;p&gt;通过Antisyphon的平价课程继续提升技能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持&amp;quot;随付随捐&amp;quot;模式&lt;/li&gt;
+&lt;li&gt;提供直播/虚拟及点播多种形式&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

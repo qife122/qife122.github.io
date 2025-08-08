@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文深入剖析AWS Nitro Enclaves的安全攻击面，涵盖虚拟套接字安全、随机熵源管理、侧信道防护等关键技术要点，为开发者提供实战级加固指南。">
+<title>AWS Nitro Enclaves安全攻防面深度解析</title>
+
+<link rel='canonical' href='http://localhost:1313/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="AWS Nitro Enclaves安全攻防面深度解析">
+<meta property='og:description' content="本文深入剖析AWS Nitro Enclaves的安全攻击面，涵盖虚拟套接字安全、随机熵源管理、侧信道防护等关键技术要点，为开发者提供实战级加固指南。">
+<meta property='og:url' content='http://localhost:1313/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/'>
+<meta property='og:site_name' content='办公AI智能小助手'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AWS Nitro Enclaves' /><meta property='article:tag' content='机密计算' /><meta property='article:tag' content='云安全' /><meta property='article:tag' content='侧信道攻击' /><meta property='article:published_time' content='2025-08-08T02:29:09&#43;08:00'/><meta property='article:modified_time' content='2025-08-08T02:29:09&#43;08:00'/>
+<meta name="twitter:title" content="AWS Nitro Enclaves安全攻防面深度解析">
+<meta name="twitter:description" content="本文深入剖析AWS Nitro Enclaves的安全攻击面，涵盖虚拟套接字安全、随机熵源管理、侧信道防护等关键技术要点，为开发者提供实战级加固指南。">
+
+
+<script
+  async
+  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECH1V9TWJT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ECH1V9TWJT');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f509edb42ecc0ebd.png" width="234"
+                            height="170" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">办公AI智能小助手</a></h1>
+            <h2 class="site-description">qife的个人博客</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E9%93%BE/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#威胁模型概述">威胁模型概述</a></li>
+    <li><a href="#虚拟套接字vsock">虚拟套接字(Vsock)</a></li>
+    <li><a href="#随机熵源">随机熵源</a></li>
+    <li><a href="#侧信道防护">侧信道防护</a>
+      <ol>
+        <li><a href="#cpu内存侧信道">CPU内存侧信道</a></li>
+      </ol>
+    </li>
+    <li><a href="#内存管理">内存管理</a></li>
+    <li><a href="#时间源安全">时间源安全</a>
+      <ol>
+        <li><a href="#为何选择kvm-clock">为何选择kvm-clock？</a></li>
+      </ol>
+    </li>
+    <li><a href="#认证机制">认证机制</a></li>
+    <li><a href="#nsm驱动">NSM驱动</a></li>
+    <li><a href="#核心结论">核心结论</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/aws-nitro-enclaves%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E9%9D%A2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">AWS Nitro Enclaves安全攻防面深度解析</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文深入剖析AWS Nitro Enclaves的安全攻击面，涵盖虚拟套接字安全、随机熵源管理、侧信道防护等关键技术要点，为开发者提供实战级加固指南。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 08, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="aws-nitro-enclaves安全笔记攻击面分析">AWS Nitro Enclaves安全笔记：攻击面分析
+</h1><h2 id="威胁模型概述">威胁模型概述
+</h2><p>首先建立基础威胁模型。Enclave可能遭受来自父级Amazon EC2实例的攻击——这是唯一能直接访问enclave的组件。在攻击场景中，我们应假设父实例的内核（包括其nitro_enclaves驱动）已被攻击者控制。来自实例的DoS攻击并非核心威胁，因为父实例随时可以关闭其enclaves。</p>
+<p>若EC2实例转发来自互联网的用户流量，则针对enclave的攻击可能涉及常规攻击向量（业务逻辑漏洞、内存破坏、加密问题等）。反之，用户可能遭受恶意EC2实例的伪装攻击。</p>
+<p>在信任域划分上，enclave应被视为单一信任域。虽然enclave运行标准Linux系统，理论上可利用其访问控制功能划分内部权限，但这会削弱强隔离和认证的价值。因此，任何enclave组件的沦陷都应视为整个enclave的沦陷。</p>
+<p>最后，hypervisor属于可信组件——我们必须假设其行为正确且无恶意。</p>
+<h2 id="虚拟套接字vsock">虚拟套接字(Vsock)
+</h2><p>enclave的主要入口是本地虚拟套接字(vsock)，仅父EC2实例可使用。Vsock由hypervisor管理，通过<code>/dev/vsock</code>设备节点提供给双方内核。</p>
+<p>Vsock通过上下文标识符(CID)和端口识别。每个enclave必须使用唯一CID，可监听多个端口。关键预定义CID包括：</p>
+<ul>
+<li><code>VMADDR_CID_HYPERVISOR = 0</code></li>
+<li><code>VMADDR_CID_LOCAL = 1</code></li>
+<li><code>VMADDR_CID_HOST = 2</code></li>
+<li><code>VMADDR_CID_PARENT = 3</code>（父EC2实例）</li>
+<li><code>VMADDR_CID_ANY = 0xFFFFFFFF</code>（监听所有CID）</li>
+</ul>
+<p>标准套接字问题是vsock的主要风险点。开发时需考虑：</p>
+<ol>
+<li>是否支持异步连接（多线程）？否则单用户可能长时间阻塞其他用户</li>
+<li>是否设置连接超时？否则单用户可能持续占用套接字</li>
+<li>多线程下状态同步是否正确实现？</li>
+<li>错误处理是否完善？特别是<code>recv</code>调用：
+<ul>
+<li>遇到<code>EINTR</code>错误应重试</li>
+<li>返回长度为0时应终止循环</li>
+<li>非阻塞套接字需更复杂处理</li>
+</ul>
+</li>
+</ol>
+<p>另一类风险是CID混淆：当EC2实例运行多个enclave时，可能因竞争条件将数据发往错误enclave。不过由于用户-enclave通信应端到端认证，此类风险有限。</p>
+<h2 id="随机熵源">随机熵源
+</h2><p>Enclave必须获取安全随机数。&ldquo;安全&quot;意味着攻击者无法知晓或控制所有熵源。Linux内核会混合多个熵源，包括：</p>
+<ul>
+<li>CPU提供的RDRAND/RDSEED指令</li>
+<li>平台硬件随机数生成器(RNG)</li>
+<li>AWS Nitro可信平台模块的专用硬件RNG(nsm-hwrng)</li>
+</ul>
+<p>建议采取以下措施：</p>
+<ol>
+<li>在enclave中显式检查<code>rng_current</code>是否为nsm-hwrng</li>
+<li>通过AWS KMS的GenerateRandom方法补充外部熵源</li>
+<li>可禁用<code>random.trust_{bootloader,cpu}</code>内核参数</li>
+<li>确保使用5.17.12以上内核版本</li>
+</ol>
+<h2 id="侧信道防护">侧信道防护
+</h2><p>应用级时序侧信道是enclave的重大威胁。enclave内应用必须确保处理机密数据时保持恒定时间。父EC2实例可使用近乎系统时钟精度的计时测量，不能依赖网络抖动缓解。</p>
+<p>错误消息也可能泄露enclave状态（如填充oracle攻击）。建议返回尽可能通用的错误信息，具体程度需平衡业务需求。</p>
+<h3 id="cpu内存侧信道">CPU内存侧信道
+</h3><p>CPU共享内存（尤其是缓存行）可能成为侧信道。即使应用实现恒定时间处理，攻击者仍可能通过内存访问模式推测数据。</p>
+<p>AWS白皮书声称L3缓存不会同时共享，但最新研究表明公有云中此类攻击可行。若担忧L3缓存侧信道：</p>
+<ol>
+<li>可在完整NUMA节点上运行enclave</li>
+<li>尝试使用Intel缓存分配技术(CAT)</li>
+<li>关键代码应实现与秘密无关的内存访问模式</li>
+</ol>
+<h2 id="内存管理">内存管理
+</h2><p>enclave内存从父EC2实例划分，由hypervisor负责隔离和清理。主要需防范DoS攻击——应用应限制外部用户数据存储量，避免单用户耗尽内存。</p>
+<p>可用<code>free</code>命令查看可用内存，文件系统空间限制约为总内存的40-50%。需注意enclave无持久化存储，关闭后所有数据丢失，且AWS Nitro未提供数据密封机制。</p>
+<h2 id="时间源安全">时间源安全
+</h2><p>攻击者控制时间源可能导致回滚/重放攻击（如接受过期TLS证书）。建议采取以下措施：</p>
+<ol>
+<li>确保<code>current_clocksource</code>设置为kvm-clock</li>
+<li>启用精确时间协议(PTP)提升时钟同步</li>
+<li>安全关键功能使用Unix时间（避免UTC时区问题）</li>
+</ol>
+<h3 id="为何选择kvm-clock">为何选择kvm-clock？
+</h3><p>x86架构有多种时间源。enclave通常有两个可用源：</p>
+<ul>
+<li><strong>TSC机制</strong>：基于时间戳计数器寄存器，存在虚拟化问题</li>
+<li><strong>kvm-clock</strong>：半虚拟化时钟驱动协议，hypervisor提供基准时间</li>
+</ul>
+<p>TSC初始日期可能被随机设置为1999年，而kvm-clock通过hypervisor获取准确基准时间。注意用户态应用仍可能使用未调整的TSC读数。</p>
+<h2 id="认证机制">认证机制
+</h2><p>密码学认证是终端用户的信任基础。除AWS文档建议外，开发者还应注意：</p>
+<ol>
+<li>强制最小nonce长度</li>
+<li>同时验证nonce和时间戳</li>
+<li>认证时间戳不可用于推断enclave时间</li>
+<li>尽量避免在public_key中使用RSA</li>
+</ol>
+<h2 id="nsm驱动">NSM驱动
+</h2><p>enclave应用通过<code>/dev/nsm</code>节点使用NSM驱动，通过IOCTL系统调用通信。需注意：</p>
+<ol>
+<li>正确使用额外平台配置寄存器(PCR)</li>
+<li>检查PCR锁定状态</li>
+<li>正确处理CBOR编码</li>
+<li>避免直接使用nsm_get_random</li>
+<li>处理nsm_init的特殊错误返回值(-1)</li>
+</ol>
+<h2 id="核心结论">核心结论
+</h2><ol>
+<li>将enclave视为单一信任域，实施端到端安全</li>
+<li>通过合理CPU分配和恒定时间处理缓解侧信道风险</li>
+<li>运行时验证熵源质量</li>
+<li>使用正确时间源</li>
+<li>实施健壮的认证实践</li>
+</ol>
+<p>如需深入评估Nitro Enclaves部署，Trail of Bits提供专业安全评估和加固方案。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/aws-nitro-enclaves/">AWS Nitro Enclaves</a>
+        
+            <a href="/tags/%E6%9C%BA%E5%AF%86%E8%AE%A1%E7%AE%97/">机密计算</a>
+        
+            <a href="/tags/%E4%BA%91%E5%AE%89%E5%85%A8/">云安全</a>
+        
+            <a href="/tags/%E4%BE%A7%E4%BF%A1%E9%81%93%E6%94%BB%E5%87%BB/">侧信道攻击</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 qife
+    </section>
+    
+    <section class="powerby">
+        
+
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+
+            
+
+    <div class="busuanzi-footer">
+      <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+      </span>
+      <span id="busuanzi_container_site_uv">
+        本站访客数<span id="busuanzi_value_site_uv"></span>人次
+      </span>
+    </div>
+
+    </section>
+
+    
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.313ab02d2f8415261a3718a5b3d0e35b62826b81a7f2c46c8122082f4cba0bcf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

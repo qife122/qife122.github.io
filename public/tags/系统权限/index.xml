@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>系统权限 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90/</link>
+        <description>Recent content in 系统权限 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Thu, 07 Aug 2025 23:55:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux组密码设置与应用详解</title>
+        <link>http://localhost:1313/p/linux%E7%BB%84%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Thu, 07 Aug 2025 23:55:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/linux%E7%BB%84%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;linux组可以拥有密码&#34;&gt;Linux组可以拥有密码
+&lt;/h1&gt;&lt;p&gt;你知道吗？Linux组竟然可以设置密码！我之前也不知道，但现在掌握了这个技巧。下面演示具体操作方法。&lt;/p&gt;
+&lt;h2 id=&#34;创建带密码的新组&#34;&gt;创建带密码的新组
+&lt;/h2&gt;&lt;p&gt;使用&lt;code&gt;groupadd&lt;/code&gt;命令配合&lt;code&gt;-p&lt;/code&gt;参数可以创建带密码的组。需要注意的是，&lt;code&gt;-p&lt;/code&gt;参数不接受明文密码，而是需要经过crypt(3)加密的字符串。最简单的方式是使用openssl生成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;groupadd -p &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;openssl passwd -1&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; passgroup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这条命令会创建名为passgroup的组，并在创建过程中要求输入密码。特别注意：openssl参数是数字1，且整个openssl命令需要用反引号包裹。&lt;/p&gt;
+&lt;h2 id=&#34;使用密码组&#34;&gt;使用密码组
+&lt;/h2&gt;&lt;p&gt;通过&lt;code&gt;sg&lt;/code&gt;命令可以切换到密码组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;robin:~$ id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;robin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;robin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;robin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;robin@web2py:~$ sg passgroup
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Password: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;robin:~$ id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;robin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1002&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;pass&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;robin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,1002&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;passgroup&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;操作成功后，用户就成为了passgroup组的成员。&lt;/p&gt;
+&lt;h2 id=&#34;为现有组添加密码&#34;&gt;为现有组添加密码
+&lt;/h2&gt;&lt;p&gt;使用&lt;code&gt;groupmod&lt;/code&gt;命令可以为已有组添加密码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;groupmod -p &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;openssl passwd -1&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; passgroup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;应用场景&#34;&gt;应用场景
+&lt;/h2&gt;&lt;p&gt;作者表示尚未想到特别好的应用场景，欢迎读者提供建议。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;特别说明：以上操作均在Debian系统验证，其他发行版尚未测试。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

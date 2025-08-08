@@ -7,7 +7,38 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 18:51:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Aug 2025 03:01:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>CVE-2025-32463漏洞利用：Sudo chroot本地提权漏洞分析</title>
+        <link>http://localhost:1313/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 08 Aug 2025 03:01:33 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;cve-2025-32463---sudo-chroot漏洞利用&#34;&gt;CVE-2025-32463 - sudo chroot漏洞利用
+&lt;/h1&gt;&lt;h2 id=&#34;使用方法&#34;&gt;使用方法
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker build -t cve .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it cve
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./poc.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;漏洞介绍&#34;&gt;漏洞介绍
+&lt;/h2&gt;&lt;p&gt;该漏洞是一个涉及Sudo chroot功能的本地权限提升漏洞。利用此漏洞不需要为用户定义任何sudo规则。因此，如果安装了存在漏洞的sudo版本，任何本地用户都可能提升到root权限。&lt;/p&gt;
+&lt;h2 id=&#34;受影响版本&#34;&gt;受影响版本
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;稳定版1.9.14至1.9.17&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：Sudo版本&amp;lt;=1.8.32不受影响，因为这些版本不存在chroot功能&lt;/p&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;CVE-2025-32463 Sudo chroot权限提升漏洞由Stratascale网络研究部门的Rich Mirch发现。所有研究和PoC的功劳都归于他。请访问以下链接支持并阅读完整研究报告：https://www.stratascale.com/vulnerability-alert-CVE-2025-32463-sudo-chroot&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>SonicWall漏洞CVE-2024-53704技术分析：SSL VPN会话劫持漏洞详解</title>
         <link>http://localhost:1313/p/sonicwall%E6%BC%8F%E6%B4%9Ecve-2024-53704%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90ssl-vpn%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Thu, 07 Aug 2025 18:51:25 +0800</pubDate>
