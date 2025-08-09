@@ -7,7 +7,59 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 09 Aug 2025 02:58:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 13:29:01 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>电子邮件泄露个人IP地址的安全漏洞分析</title>
+        <link>http://localhost:1313/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 13:29:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h3&gt;&lt;p&gt;当发送电子邮件时，邮件会经过多个服务器（SMTP中继、垃圾邮件过滤器、日志和备份系统）。这些服务器可能存储或记录所有信息，包括邮件内容（如发件人IP地址）。即使邮件使用TLS传输加密，内容在每台处理服务器上仍会被解密。&lt;/p&gt;
+&lt;h3 id=&#34;技术风险&#34;&gt;技术风险
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PII数据暴露&lt;/strong&gt;&lt;br&gt;
+IP地址根据GDPR等法规可被归类为个人身份信息（PII），可能泄露：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户大致地理位置&lt;/li&gt;
+&lt;li&gt;互联网服务提供商&lt;/li&gt;
+&lt;li&gt;可能暴露设备名/组织的主机名&lt;/li&gt;
+&lt;li&gt;与其他用户活动的关联性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击者利用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过IP进行网络侦察&lt;/li&gt;
+&lt;li&gt;设备/ISP指纹识别&lt;/li&gt;
+&lt;li&gt;端口扫描和服务发现&lt;/li&gt;
+&lt;li&gt;结合其他数据泄漏进行OSINT聚合&lt;/li&gt;
+&lt;li&gt;基于ISP/地理位置的定向攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;建议措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免在外发邮件中包含原始IP地址&lt;/li&gt;
+&lt;li&gt;改为提供近似位置（城市/国家）&lt;/li&gt;
+&lt;li&gt;引导用户通过安全仪表盘查看登录活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;技术参考&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gdpr-info.eu/recitals/no-30/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GDPR第30条&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cwe.mitre.org/data/definitions/200.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CWE-200&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cwe.mitre.org/data/definitions/359.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CWE-359&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;处理进展&#34;&gt;处理进展
+&lt;/h3&gt;&lt;p&gt;Weblate团队已通过GitHub提交修复补丁（&lt;a class=&#34;link&#34; href=&#34;https://github.com/WeblateOrg/weblate/pull/15102&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PR#15102&lt;/a&gt;），并计划发布安全公告。该漏洞状态已标记为&amp;quot;已修复&amp;quot;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Mozilla以隐私之名推出劫持所有DNS流量的机制</title>
         <link>http://localhost:1313/p/mozilla%E4%BB%A5%E9%9A%90%E7%A7%81%E4%B9%8B%E5%90%8D%E6%8E%A8%E5%87%BA%E5%8A%AB%E6%8C%81%E6%89%80%E6%9C%89dns%E6%B5%81%E9%87%8F%E7%9A%84%E6%9C%BA%E5%88%B6/</link>
         <pubDate>Sat, 09 Aug 2025 02:58:14 +0800</pubDate>

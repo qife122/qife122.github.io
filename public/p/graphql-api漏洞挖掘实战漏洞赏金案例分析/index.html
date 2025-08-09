@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本视频通过分析已公开的GraphQL漏洞赏金报告，探讨真实场景中的API安全漏洞，包括未授权数据访问、数据篡改、SQL注入、DoS攻击等常见漏洞类型，并附赠数字海洋100美元优惠券。">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本视频通过分析已公开的GraphQL漏洞赏金报告，总结了实际应用中常见的GraphQL漏洞类型，包括未授权数据访问、数据篡改、DoS攻击、SQL注入以及CSRF等安全风险。">
 <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
 
 <link rel='canonical' href='http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/'>
 
 <link rel="stylesheet" href="/scss/style.min.cfa5b1b0e78d61c00a14173992a1f3fa3b5c1b9fa34d023de959af564e7b19dd.css"><meta property='og:title' content="GraphQL API漏洞挖掘实战：漏洞赏金案例分析">
-<meta property='og:description' content="本视频通过分析已公开的GraphQL漏洞赏金报告，探讨真实场景中的API安全漏洞，包括未授权数据访问、数据篡改、SQL注入、DoS攻击等常见漏洞类型，并附赠数字海洋100美元优惠券。">
+<meta property='og:description' content="本视频通过分析已公开的GraphQL漏洞赏金报告，总结了实际应用中常见的GraphQL漏洞类型，包括未授权数据访问、数据篡改、DoS攻击、SQL注入以及CSRF等安全风险。">
 <meta property='og:url' content='http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/'>
 <meta property='og:site_name' content='办公AI智能小助手'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GraphQL' /><meta property='article:tag' content='漏洞赏金' /><meta property='article:tag' content='API安全' /><meta property='article:tag' content='网络安全' /><meta property='article:published_time' content='2025-08-02T18:15:58&#43;08:00'/><meta property='article:modified_time' content='2025-08-02T18:15:58&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GraphQL' /><meta property='article:tag' content='漏洞挖掘' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='API安全' /><meta property='article:published_time' content='2025-08-09T12:12:43&#43;08:00'/><meta property='article:modified_time' content='2025-08-09T12:12:43&#43;08:00'/>
 <meta name="twitter:title" content="GraphQL API漏洞挖掘实战：漏洞赏金案例分析">
-<meta name="twitter:description" content="本视频通过分析已公开的GraphQL漏洞赏金报告，探讨真实场景中的API安全漏洞，包括未授权数据访问、数据篡改、SQL注入、DoS攻击等常见漏洞类型，并附赠数字海洋100美元优惠券。">
+<meta name="twitter:description" content="本视频通过分析已公开的GraphQL漏洞赏金报告，总结了实际应用中常见的GraphQL漏洞类型，包括未授权数据访问、数据篡改、DoS攻击、SQL注入以及CSRF等安全风险。">
 
 
 <script
@@ -249,8 +249,8 @@
         <li><a href="#graphql与未授权数据创建修改漏洞">GraphQL与未授权数据创建/修改漏洞</a></li>
         <li><a href="#graphql与未授权数据删除漏洞">GraphQL与未授权数据删除漏洞</a></li>
         <li><a href="#graphql如何导致dos攻击">GraphQL如何导致DoS攻击</a></li>
-        <li><a href="#graphql中的sql注入漏洞">GraphQL中的SQL注入漏洞</a></li>
-        <li><a href="#graphql模式泄露是否算漏洞">GraphQL模式泄露是否算漏洞？</a></li>
+        <li><a href="#graphql中的sql注入风险">GraphQL中的SQL注入风险</a></li>
+        <li><a href="#graphql架构泄露问题">GraphQL架构泄露问题</a></li>
         <li><a href="#graphql的csrf攻击面">GraphQL的CSRF攻击面</a></li>
       </ol>
     </li>
@@ -278,7 +278,7 @@
     
         
         <h3 class="article-subtitle">
-            本视频通过分析已公开的GraphQL漏洞赏金报告，探讨真实场景中的API安全漏洞，包括未授权数据访问、数据篡改、SQL注入、DoS攻击等常见漏洞类型，并附赠数字海洋100美元优惠券。
+            本视频通过分析已公开的GraphQL漏洞赏金报告，总结了实际应用中常见的GraphQL漏洞类型，包括未授权数据访问、数据篡改、DoS攻击、SQL注入以及CSRF等安全风险。
         </h3>
         
     </div>
@@ -299,7 +299,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Aug 02, 2025</time>
+                <time class="article-time--published">Aug 09, 2025</time>
             </div>
         
 
@@ -330,25 +330,21 @@
     
     
     <h3 id="graphql与未授权数据访问漏洞">GraphQL与未授权数据访问漏洞
-</h3><p>0:19 章节探讨攻击者如何绕过权限控制获取敏感数据，包含HackerOne案例#343464分析</p>
+</h3><p>探讨了攻击者如何利用GraphQL接口绕过权限控制，获取本应受限的数据访问权限。案例包括HackerOne报告#343464等实际漏洞。</p>
 <h3 id="graphql与未授权数据创建修改漏洞">GraphQL与未授权数据创建/修改漏洞
-</h3><p>2:15 演示通过GraphQL突变(Mutation)实现未授权数据操作的漏洞模式，引用HackerOne报告#2233480</p>
+</h3><p>分析了错误配置的Mutation操作如何允许攻击者非法创建或修改数据（HackerOne报告#2233480）。</p>
 <h3 id="graphql与未授权数据删除漏洞">GraphQL与未授权数据删除漏洞
-</h3><p>3:27 分析危险的数据删除操作漏洞，涉及HackerOne案例#858671</p>
+</h3><p>通过HackerOne报告#858671案例，演示了缺乏权限验证的delete操作可能引发的数据销毁风险。</p>
 <h3 id="graphql如何导致dos攻击">GraphQL如何导致DoS攻击
-</h3><p>6:11 解析复杂查询嵌套导致的服务器资源耗尽问题，引用LANDH技术博客2024年3月分析报告</p>
-<h3 id="graphql中的sql注入漏洞">GraphQL中的SQL注入漏洞
-</h3><p>7:29 展示GraphQL参数如何传导至后端数据库，包含HackerOne案例#435066的注入技术细节</p>
-<h3 id="graphql模式泄露是否算漏洞">GraphQL模式泄露是否算漏洞？
-</h3><p>10:09 讨论introspection查询暴露API结构的风险，分析敏感信息泄露场景</p>
+</h3><p>解释了复杂嵌套查询可能引发的服务拒绝攻击，并引用DEF CON 32相关研究成果。</p>
+<h3 id="graphql中的sql注入风险">GraphQL中的SQL注入风险
+</h3><p>展示了GraphQL参数未正确过滤时可能触发的SQL注入漏洞（HackerOne报告#435066）。</p>
+<h3 id="graphql架构泄露问题">GraphQL架构泄露问题
+</h3><p>讨论了introspection功能暴露API敏感信息是否应被认定为可报告漏洞。</p>
 <h3 id="graphql的csrf攻击面">GraphQL的CSRF攻击面
-</h3><p>11:28 讲解跨站请求伪造在GraphQL中的特殊表现形式，引用Doyensec安全研究报告</p>
-<p><a class="link" href="https://bbre.dev/gql"  target="_blank" rel="noopener"
-    >获取完整案例研究</a> | <a class="link" href="https://bbre.dev/nl"  target="_blank" rel="noopener"
-    >订阅邮件列表</a> | <a class="link" href="https://bbre.dev/tw"  target="_blank" rel="noopener"
-    >关注Twitter</a></p>
+</h3><p>分析Doyensec研究报告中提到的跨站请求伪造攻击场景，包括GitHub OAuth流程的HEAD方法CSRF绕过案例（Teddy Katz博客）。</p>
 <blockquote>
-<p>关键资源链接已内嵌在时间轴章节中，包含DEF CON 32会议资料和GitHub OAuth CSRF绕过技术博客等专业参考内容。</p></blockquote>
+<p>关键资源链接均保留原始英文URL以方便技术溯源。</p></blockquote>
 
 </section>
 
@@ -359,11 +355,11 @@
         
             <a href="/tags/graphql/">GraphQL</a>
         
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/">漏洞赏金</a>
-        
-            <a href="/tags/api%E5%AE%89%E5%85%A8/">API安全</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">漏洞挖掘</a>
         
             <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+        
+            <a href="/tags/api%E5%AE%89%E5%85%A8/">API安全</a>
         
     </section>
 
@@ -397,6 +393,32 @@
             
                 
 <article class="">
+    <a href="/p/%E9%80%9A%E8%BF%87swagger-ui%E8%BF%9B%E8%A1%8C%E9%92%93%E9%B1%BC%E6%94%BB%E5%87%BB%E5%88%A9%E7%94%A8%E9%94%99%E8%AF%AF%E9%85%8D%E7%BD%AE%E8%8E%B7%E5%8F%96%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">通过Swagger UI进行钓鱼攻击——利用错误配置获取漏洞赏金</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GraphQL API漏洞挖掘实战：漏洞赏金案例分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/api%E5%AE%89%E5%85%A8%E6%97%A5%E7%9B%8A%E4%B8%A5%E5%B3%BB%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E6%8A%A4%E7%AD%96%E7%95%A5/">
         
         
@@ -410,12 +432,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%B5%84%E4%BA%A7%E5%A4%8D%E6%9D%82%E6%80%A7%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%89%E6%95%88%E6%80%A7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
+    <a href="/p/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%93%8D%E7%BA%B5bugcrowd%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D%E7%9A%84-%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">安全成熟度、资产复杂性与漏洞赏金计划有效性深度解析</h2>
+            <h2 class="article-title">我是如何操纵Bugcrowd平台排名的 - 漏洞挖掘技术解析</h2>
         </div>
     </a>
 </article>
@@ -423,38 +445,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BAelectionguard%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E4%BF%9D%E9%9A%9C%E9%80%89%E4%B8%BE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/">
+    <a href="/p/%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%88%B7%E6%96%B0%E4%BB%A4%E7%89%8C%E4%BD%BF%E7%94%A8%E5%AF%BC%E8%87%B4%E8%B4%A6%E6%88%B7%E6%8E%A5%E7%AE%A1%E6%BC%8F%E6%B4%9Eidor/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">微软推出ElectionGuard漏洞赏金计划，保障选举安全技术</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E7%94%A8nist-sp-800-228%E8%A7%A3%E5%86%B3api%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">用NIST SP 800-228解决API安全问题的技术解析</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E8%B6%85%E8%B6%8A%E4%BC%A0%E7%BB%9F%E5%A8%81%E8%83%81ai%E9%A9%B1%E5%8A%A8%E7%9A%84api%E6%BC%8F%E6%B4%9E%E5%B4%9B%E8%B5%B7/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">超越传统威胁：AI驱动的API漏洞崛起</h2>
+            <h2 class="article-title">不安全的刷新令牌使用导致账户接管漏洞(IDOR)</h2>
         </div>
     </a>
 </article>

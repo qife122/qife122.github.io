@@ -7,7 +7,109 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 03:01:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cve/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 13:45:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cve/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>CVE-2025-29927：Next.js 中间件授权绕过漏洞深度分析</title>
+        <link>http://localhost:1313/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 13:45:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;cve-2025-29927nextjs中间件授权绕过&#34;&gt;CVE-2025-29927：Next.js中间件授权绕过
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;2025年3月，流行的React框架Next.js披露了编号为CVE-2025-29927的关键漏洞。该漏洞影响12.3.5、13.5.9、14.2.25和15.2.3之前的版本，源于框架对&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的盲目信任。攻击者通过伪造该头可完全绕过中间件逻辑（包括认证授权机制），从而越权访问受保护路由。由于Next.js应用普遍依赖中间件，该漏洞影响范围广泛。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;漏洞详情&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE ID: CVE-2025-29927&lt;/li&gt;
+&lt;li&gt;危险等级: 严重&lt;/li&gt;
+&lt;li&gt;CVSS评分: 9.1&lt;/li&gt;
+&lt;li&gt;EPSS评分: 92.56&lt;/li&gt;
+&lt;li&gt;发布时间: 2025年3月&lt;/li&gt;
+&lt;li&gt;受影响版本: &amp;lt; 12.3.5, &amp;lt; 13.5.9, &amp;lt; 14.2.25, &amp;lt; 15.2.3&lt;/li&gt;
+&lt;li&gt;已修复版本: 12.3.5, 13.5.9, 14.2.25, 15.2.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;Next.js使用中间件在路由请求前执行安全策略（如认证授权）。为避免内部重定向或服务端渲染(SSR)时的无限循环，框架会在内部请求中添加特殊头&lt;code&gt;x-middleware-subrequest&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;漏洞本质在于框架未验证该头的来源。攻击者伪造该头即可欺骗服务器跳过中间件层，导致所有由中间件实施的访问控制逻辑失效。&lt;/p&gt;
+&lt;h2 id=&#34;攻击示例&#34;&gt;攻击示例
+&lt;/h2&gt;&lt;p&gt;攻击者发送包含伪造头的请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/admin&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;vulnerable-app.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x-middleware-subrequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;middleware&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;服务器误判为可信内部请求，从而绕过会话/角色验证等中间件逻辑。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻击影响&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无需认证访问受保护路由&lt;/li&gt;
+&lt;li&gt;绕过关键授权逻辑&lt;/li&gt;
+&lt;li&gt;实现权限提升&lt;/li&gt;
+&lt;li&gt;访问中间件暴露的内部功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;检测方案&#34;&gt;检测方案
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;版本检查&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm list next 或 yarn list next
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;低于以下版本即存在风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;12.3.5&lt;/li&gt;
+&lt;li&gt;13.5.9&lt;/li&gt;
+&lt;li&gt;14.2.25&lt;/li&gt;
+&lt;li&gt;15.2.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;中间件审计&lt;/strong&gt;&lt;br&gt;
+检查依赖中间件进行访问控制的路由&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;日志分析&lt;/strong&gt;&lt;br&gt;
+监控外部IP使用&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的异常请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;紧急修复&lt;/strong&gt;：&lt;br&gt;
+升级至以下版本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;12.3.5+&lt;/li&gt;
+&lt;li&gt;13.5.9+&lt;/li&gt;
+&lt;li&gt;14.2.25+&lt;/li&gt;
+&lt;li&gt;15.2.3+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;临时方案&lt;/strong&gt;：&lt;br&gt;
+在反向代理层（如Nginx、Cloudflare）拦截或剥离&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;长期实践&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免仅依赖中间件进行认证/授权&lt;/li&gt;
+&lt;li&gt;在路由/控制器层实现备用访问控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://nvd.nist.gov/vuln/detail/CVE-2025-29927&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NVD漏洞详情&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://nextjs.org/blog/cve-2025-29927&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Next.js官方公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://securitylabs.datadoghq.com/articles/nextjs-middleware-auth-bypass&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DataDog安全分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.akamai.com/blog/security-research/march-authorization-bypass-critical-nextjs-detections-mitigations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Akamai缓解措施&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>CVE-2025-32463漏洞利用：Sudo chroot本地提权漏洞分析</title>
         <link>http://localhost:1313/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 03:01:33 +0800</pubDate>

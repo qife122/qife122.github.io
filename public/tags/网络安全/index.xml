@@ -7,7 +7,582 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 09 Aug 2025 07:35:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 16:40:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2024年底以来与大规模DDoS攻击关联的IoT僵尸网络技术分析</title>
+        <link>http://localhost:1313/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 16:40:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;自2024年底以来，我们持续监测到一个IoT僵尸网络通过Mirai和Bashlite变种恶意软件感染设备，针对日本及其他国家企业发起大规模分布式拒绝服务（DDoS）攻击。该僵尸网络利用漏洞和弱凭证入侵设备，通过多阶段感染流程连接C&amp;amp;C服务器获取攻击指令，攻击目标主要分布在北美和欧洲，涉及金融、交通等多个行业。&lt;/p&gt;
+&lt;h3 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h3&gt;&lt;h4 id=&#34;初始感染&#34;&gt;初始感染
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;入侵方式&lt;/strong&gt;：通过远程代码执行（RCE）漏洞或弱密码入侵IoT设备，下载并执行恶意加载器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;载荷传递&lt;/strong&gt;：加载器通过HTTP下载恶意载荷至内存执行，避免本地留存文件，请求中设置特定User-Agent头以规避检测。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C&amp;amp;C通信&lt;/strong&gt;：恶意载荷连接C&amp;amp;C服务器，接收DDoS攻击等指令。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;攻击指令&#34;&gt;攻击指令
+&lt;/h4&gt;&lt;p&gt;指令采用&amp;quot;&amp;lt;2字节消息长度&amp;gt;.&amp;lt;文本命令&amp;gt;&amp;ldquo;格式，支持多种攻击方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;网络层攻击&lt;/strong&gt;：SYN Flood、UDP Flood、GRE协议攻击等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;资源耗尽攻击&lt;/strong&gt;：通过&lt;code&gt;socket&lt;/code&gt;、&lt;code&gt;handshake&lt;/code&gt;等指令建立大量TCP连接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理功能&lt;/strong&gt;：通过&lt;code&gt;socks&lt;/code&gt;命令将受控设备转为Socks代理节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自我更新&lt;/strong&gt;：&lt;code&gt;update&lt;/code&gt;指令可更新恶意代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;技术对抗手段&#34;&gt;技术对抗手段
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;禁用看门狗定时器&lt;/strong&gt;：防止设备因高负载重启。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;滥用iptables&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;阻断WAN侧TCP连接请求以排斥其他僵尸网络。&lt;/li&gt;
+&lt;li&gt;允许LAN侧管理访问以隐藏异常。&lt;/li&gt;
+&lt;li&gt;动态设置规则配合&lt;code&gt;udpfwd&lt;/code&gt;等指令实施攻击。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击目标分析&#34;&gt;攻击目标分析
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地理分布&lt;/strong&gt;：美国（17%）、巴林（10%）、波兰（9%）为主要目标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;行业差异&lt;/strong&gt;：日本以交通、金融业为主；国际目标中信息通信业占比34%。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击组合&lt;/strong&gt;：常混合使用多种指令（如同时发起网络层和资源耗尽攻击）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;僵尸网络构成&#34;&gt;僵尸网络构成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;设备类型&lt;/strong&gt;：无线路由器（80%）、IP摄像头（15%）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;厂商分布&lt;/strong&gt;：TP-Link（52%）、Zyxel（20%）路由器，海康威视（12%）摄像头。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地理位置&lt;/strong&gt;：印度（57%）、南非（17%）设备占比最高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h3&gt;&lt;h4 id=&#34;设备防护&#34;&gt;设备防护
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;立即修改默认凭证，定期更新固件。&lt;/li&gt;
+&lt;li&gt;禁用非必要远程访问功能，划分IoT专用网络。&lt;/li&gt;
+&lt;li&gt;检查路由器设置，关闭闲置端口。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;ddos缓解措施&#34;&gt;DDoS缓解措施
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;UDP Flood&lt;/strong&gt;：协同ISP进行流量清洗，强化路由器处理能力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP类攻击&lt;/strong&gt;：采用CDN分流，限制单IP请求速率，增强服务器资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;趋势科技解决方案&#34;&gt;趋势科技解决方案
+&lt;/h3&gt;&lt;p&gt;Trend Vision One平台提供相关威胁情报（IOC扫描、狩猎查询等），支持客户检测环境中的Mirai变种活动。&lt;/p&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;此类跨境僵尸网络攻击凸显IoT设备安全的重要性。通过基础防护措施可有效降低成为攻击跳板的风险。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>微软推出本地服务器产品漏洞赏金计划，最高奖励2.6万美元</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</link>
+        <pubDate>Sat, 09 Aug 2025 15:45:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</guid>
+        <description>&lt;p&gt;微软兴奋地宣布将Exchange本地服务器、SharePoint本地服务器和Skype for Business本地服务器纳入&amp;quot;应用程序与本地服务器漏洞赏金计划&amp;quot;。通过这项扩展计划，我们鼓励研究人员发现并报告高危安全漏洞以帮助保护客户。符合条件的提交最高可获得26,000美元奖励。以下产品现已纳入赏金范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Exchange本地服务器&lt;/li&gt;
+&lt;li&gt;SharePoint本地服务器&lt;/li&gt;
+&lt;li&gt;Skype for Business本地服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不仅如此！该赏金计划还包含高危场景，对客户安全潜在影响最大的研究领域将获得最高奖励。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;安全影响&lt;/th&gt;
+          &lt;th&gt;严重性乘数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限Exchange：服务器端请求伪造漏洞允许攻击者向任意URL发起服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限SharePoint：经过认证的服务器端请求伪造漏洞允许攻击者向任意URL发起认证服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;用户可控数据的不安全反序列化，导致服务端远程代码执行&lt;/td&gt;
+          &lt;td&gt;30%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;在服务器上用户可控位置写入用户可控数据的任意文件&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;认证绕过漏洞允许未经认证的利用，导致漏洞大规模利用&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Exchange紧急缓解服务(EEMS)中的漏洞&lt;/td&gt;
+          &lt;td&gt;15%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;要了解符合条件的范围和奖励金额，请访问[应用程序与本地服务器漏洞赏金计划]页面。微软的漏洞赏金计划只是我们与全球安全研究社区合作帮助保护微软客户的众多方式之一。如果您对新的本地服务器范围有任何疑问，或对任何其他安全研究激励计划有一般性询问，请通过bounty@microsoft.com联系我们。&lt;/p&gt;
+&lt;p&gt;Madeline Eckert和Lynn Miyashita，MSRC团队&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Softaculous Webuzo身份验证绕过漏洞分析</title>
+        <link>http://localhost:1313/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 14:56:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;softaculous-webuzo身份验证绕过&#34;&gt;Softaculous Webuzo身份验证绕过
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2024年7月25日&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞公告&#34;&gt;漏洞公告
+&lt;/h2&gt;&lt;p&gt;EIP-ce40b086&lt;br&gt;
+Softaculous Webuzo在密码重置功能中存在身份验证绕过漏洞。远程匿名攻击者可利用此漏洞获取服务器root用户的完全访问权限。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞标识符&#34;&gt;漏洞标识符
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Exodus Intelligence: EIP-ce40b086&lt;/li&gt;
+&lt;li&gt;MITRE: CVE-2024-24621&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞指标&#34;&gt;漏洞指标
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVSSv2向量: AV:N/AC:L/Au:N/C:C/I:C/A:C&lt;/li&gt;
+&lt;li&gt;CVSSv2评分: 10.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;厂商参考&#34;&gt;厂商参考
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://webuzo.com/blog/webuzo-4-2-9-launched/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://webuzo.com/blog/webuzo-4-2-9-launched/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;发现者&#34;&gt;发现者
+&lt;/h2&gt;&lt;p&gt;Exodus Intelligence&lt;/p&gt;
+&lt;h2 id=&#34;披露时间线&#34;&gt;披露时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;向厂商披露: 2024年7月11日&lt;/li&gt;
+&lt;li&gt;厂商修复: 2024年7月12日&lt;/li&gt;
+&lt;li&gt;公开披露: 2024年7月25日&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;更多信息&#34;&gt;更多信息
+&lt;/h2&gt;&lt;p&gt;对本公告感兴趣的读者如需获取有关漏洞、缓解措施、检测指南等更多详细信息，可通过sales@exodusintel.com联系我们。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>告别脚本小子时代：高级防御体系下的恶意软件执行技术</title>
+        <link>http://localhost:1313/p/%E5%91%8A%E5%88%AB%E8%84%9A%E6%9C%AC%E5%B0%8F%E5%AD%90%E6%97%B6%E4%BB%A3%E9%AB%98%E7%BA%A7%E9%98%B2%E5%BE%A1%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sat, 09 Aug 2025 14:40:40 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%91%8A%E5%88%AB%E8%84%9A%E6%9C%AC%E5%B0%8F%E5%AD%90%E6%97%B6%E4%BB%A3%E9%AB%98%E7%BA%A7%E9%98%B2%E5%BE%A1%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h3 id=&#34;技术背景演变&#34;&gt;技术背景演变
+&lt;/h3&gt;&lt;p&gt;几年前渗透测试人员无需费力即可建立恶意软件命令通道。如今在终端检测响应(EDR)、用户行为分析(UBA)和高级操作系统防御机制面前，传统恶意软件生成/执行工具已完全失效。&lt;/p&gt;
+&lt;h3 id=&#34;核心对抗技术&#34;&gt;核心对抗技术
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;C2植入执行&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过自定义编程技术和战术调整突破现代防御&lt;/li&gt;
+&lt;li&gt;需采用比以往更谨慎的横向移动策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;流量伪装技术&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分析Metasploit网络流量被检测的根本原因&lt;/li&gt;
+&lt;li&gt;自定义C2通信实现LOLBins规避&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;关键防御绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AMSI(反恶意软件扫描接口)绕过技术详解&lt;/li&gt;
+&lt;li&gt;事件追踪(ETW)绕过方法&lt;/li&gt;
+&lt;li&gt;攻击链组合技巧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;技术资源&#34;&gt;技术资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.blackhillsinfosec.com/wp-content/uploads/2021/03/SLIDES_MoveAsideScriptKiddies.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;完整演讲幻灯片&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;配套培训课程：
+&lt;ul&gt;
+&lt;li&gt;《正则表达式实战》&lt;/li&gt;
+&lt;li&gt;《企业级攻击模拟与C2植入开发》&lt;/li&gt;
+&lt;li&gt;《Python入门》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;时间轴标记&#34;&gt;时间轴标记
+&lt;/h3&gt;&lt;p&gt;04:10 高级防御下的恶意软件执行&lt;br&gt;
+13:25 C2植入执行技术&lt;br&gt;
+19:41 Metasploit流量分析&lt;br&gt;
+46:15 AMSI绕过实战&lt;br&gt;
+50:27 事件追踪绕过&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>CVE-2025-29927：Next.js 中间件授权绕过漏洞深度分析</title>
+        <link>http://localhost:1313/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 13:45:42 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;cve-2025-29927nextjs中间件授权绕过&#34;&gt;CVE-2025-29927：Next.js中间件授权绕过
+&lt;/h1&gt;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述
+&lt;/h2&gt;&lt;p&gt;2025年3月，流行的React框架Next.js披露了编号为CVE-2025-29927的关键漏洞。该漏洞影响12.3.5、13.5.9、14.2.25和15.2.3之前的版本，源于框架对&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的盲目信任。攻击者通过伪造该头可完全绕过中间件逻辑（包括认证授权机制），从而越权访问受保护路由。由于Next.js应用普遍依赖中间件，该漏洞影响范围广泛。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;漏洞详情&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE ID: CVE-2025-29927&lt;/li&gt;
+&lt;li&gt;危险等级: 严重&lt;/li&gt;
+&lt;li&gt;CVSS评分: 9.1&lt;/li&gt;
+&lt;li&gt;EPSS评分: 92.56&lt;/li&gt;
+&lt;li&gt;发布时间: 2025年3月&lt;/li&gt;
+&lt;li&gt;受影响版本: &amp;lt; 12.3.5, &amp;lt; 13.5.9, &amp;lt; 14.2.25, &amp;lt; 15.2.3&lt;/li&gt;
+&lt;li&gt;已修复版本: 12.3.5, 13.5.9, 14.2.25, 15.2.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术原理&#34;&gt;技术原理
+&lt;/h2&gt;&lt;p&gt;Next.js使用中间件在路由请求前执行安全策略（如认证授权）。为避免内部重定向或服务端渲染(SSR)时的无限循环，框架会在内部请求中添加特殊头&lt;code&gt;x-middleware-subrequest&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;漏洞本质在于框架未验证该头的来源。攻击者伪造该头即可欺骗服务器跳过中间件层，导致所有由中间件实施的访问控制逻辑失效。&lt;/p&gt;
+&lt;h2 id=&#34;攻击示例&#34;&gt;攻击示例
+&lt;/h2&gt;&lt;p&gt;攻击者发送包含伪造头的请求：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/admin&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;vulnerable-app.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x-middleware-subrequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;l&#34;&gt;middleware&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;服务器误判为可信内部请求，从而绕过会话/角色验证等中间件逻辑。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;攻击影响&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无需认证访问受保护路由&lt;/li&gt;
+&lt;li&gt;绕过关键授权逻辑&lt;/li&gt;
+&lt;li&gt;实现权限提升&lt;/li&gt;
+&lt;li&gt;访问中间件暴露的内部功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;检测方案&#34;&gt;检测方案
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;版本检查&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm list next 或 yarn list next
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;低于以下版本即存在风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;12.3.5&lt;/li&gt;
+&lt;li&gt;13.5.9&lt;/li&gt;
+&lt;li&gt;14.2.25&lt;/li&gt;
+&lt;li&gt;15.2.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;中间件审计&lt;/strong&gt;&lt;br&gt;
+检查依赖中间件进行访问控制的路由&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;日志分析&lt;/strong&gt;&lt;br&gt;
+监控外部IP使用&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的异常请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修复建议&#34;&gt;修复建议
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;紧急修复&lt;/strong&gt;：&lt;br&gt;
+升级至以下版本：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;12.3.5+&lt;/li&gt;
+&lt;li&gt;13.5.9+&lt;/li&gt;
+&lt;li&gt;14.2.25+&lt;/li&gt;
+&lt;li&gt;15.2.3+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;临时方案&lt;/strong&gt;：&lt;br&gt;
+在反向代理层（如Nginx、Cloudflare）拦截或剥离&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;长期实践&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免仅依赖中间件进行认证/授权&lt;/li&gt;
+&lt;li&gt;在路由/控制器层实现备用访问控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://nvd.nist.gov/vuln/detail/CVE-2025-29927&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NVD漏洞详情&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://nextjs.org/blog/cve-2025-29927&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Next.js官方公告&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://securitylabs.datadoghq.com/articles/nextjs-middleware-auth-bypass&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DataDog安全分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.akamai.com/blog/security-research/march-authorization-bypass-critical-nextjs-detections-mitigations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Akamai缓解措施&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>电子邮件泄露个人IP地址的安全漏洞分析</title>
+        <link>http://localhost:1313/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 13:29:01 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景
+&lt;/h3&gt;&lt;p&gt;当发送电子邮件时，邮件会经过多个服务器（SMTP中继、垃圾邮件过滤器、日志和备份系统）。这些服务器可能存储或记录所有信息，包括邮件内容（如发件人IP地址）。即使邮件使用TLS传输加密，内容在每台处理服务器上仍会被解密。&lt;/p&gt;
+&lt;h3 id=&#34;技术风险&#34;&gt;技术风险
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PII数据暴露&lt;/strong&gt;&lt;br&gt;
+IP地址根据GDPR等法规可被归类为个人身份信息（PII），可能泄露：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户大致地理位置&lt;/li&gt;
+&lt;li&gt;互联网服务提供商&lt;/li&gt;
+&lt;li&gt;可能暴露设备名/组织的主机名&lt;/li&gt;
+&lt;li&gt;与其他用户活动的关联性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;攻击者利用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过IP进行网络侦察&lt;/li&gt;
+&lt;li&gt;设备/ISP指纹识别&lt;/li&gt;
+&lt;li&gt;端口扫描和服务发现&lt;/li&gt;
+&lt;li&gt;结合其他数据泄漏进行OSINT聚合&lt;/li&gt;
+&lt;li&gt;基于ISP/地理位置的定向攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修复方案&#34;&gt;修复方案
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;建议措施&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免在外发邮件中包含原始IP地址&lt;/li&gt;
+&lt;li&gt;改为提供近似位置（城市/国家）&lt;/li&gt;
+&lt;li&gt;引导用户通过安全仪表盘查看登录活动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;技术参考&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gdpr-info.eu/recitals/no-30/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GDPR第30条&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cwe.mitre.org/data/definitions/200.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CWE-200&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cwe.mitre.org/data/definitions/359.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CWE-359&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;处理进展&#34;&gt;处理进展
+&lt;/h3&gt;&lt;p&gt;Weblate团队已通过GitHub提交修复补丁（&lt;a class=&#34;link&#34; href=&#34;https://github.com/WeblateOrg/weblate/pull/15102&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PR#15102&lt;/a&gt;），并计划发布安全公告。该漏洞状态已标记为&amp;quot;已修复&amp;quot;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+        <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 12:12:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞
+&lt;/h3&gt;&lt;p&gt;探讨了攻击者如何利用GraphQL接口绕过权限控制，获取本应受限的数据访问权限。案例包括HackerOne报告#343464等实际漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞
+&lt;/h3&gt;&lt;p&gt;分析了错误配置的Mutation操作如何允许攻击者非法创建或修改数据（HackerOne报告#2233480）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据删除漏洞&#34;&gt;GraphQL与未授权数据删除漏洞
+&lt;/h3&gt;&lt;p&gt;通过HackerOne报告#858671案例，演示了缺乏权限验证的delete操作可能引发的数据销毁风险。&lt;/p&gt;
+&lt;h3 id=&#34;graphql如何导致dos攻击&#34;&gt;GraphQL如何导致DoS攻击
+&lt;/h3&gt;&lt;p&gt;解释了复杂嵌套查询可能引发的服务拒绝攻击，并引用DEF CON 32相关研究成果。&lt;/p&gt;
+&lt;h3 id=&#34;graphql中的sql注入风险&#34;&gt;GraphQL中的SQL注入风险
+&lt;/h3&gt;&lt;p&gt;展示了GraphQL参数未正确过滤时可能触发的SQL注入漏洞（HackerOne报告#435066）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql架构泄露问题&#34;&gt;GraphQL架构泄露问题
+&lt;/h3&gt;&lt;p&gt;讨论了introspection功能暴露API敏感信息是否应被认定为可报告漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql的csrf攻击面&#34;&gt;GraphQL的CSRF攻击面
+&lt;/h3&gt;&lt;p&gt;分析Doyensec研究报告中提到的跨站请求伪造攻击场景，包括GitHub OAuth流程的HEAD方法CSRF绕过案例（Teddy Katz博客）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键资源链接均保留原始英文URL以方便技术溯源。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>利用WebAssembly和Go进行本地端口扫描：浏览器如何成为攻击本地服务的入口</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</link>
+        <pubDate>Sat, 09 Aug 2025 11:01:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</guid>
+        <description>&lt;h1 id=&#34;浏览器是本地主机的网关使用webassembly和go进行客户端端口扫描&#34;&gt;浏览器是本地主机的网关：使用WebAssembly和Go进行客户端端口扫描
+&lt;/h1&gt;&lt;p&gt;网站倾向于通过浏览器扫描用户的开放端口，以更好地识别新用户或回访用户。浏览器能否滥用“localhost”？能否通过WebAssembly实现这一点？本文将通过实际演示（http://ports.sh）和代码示例（https://github.com/avilum/portsscan）展示浏览器如何被滥用来攻击本地服务，甚至穿透组织或从浏览器运行远程代码。&lt;/p&gt;
+&lt;h2 id=&#34;客户端指纹与代码执行&#34;&gt;客户端指纹与代码执行
+&lt;/h2&gt;&lt;p&gt;每个用户在访问网页时都有独特的指纹。客户端指纹帮助网站在多个网站间跟踪用户活动。指纹由设备、浏览器、屏幕大小、IP地址等多种因素组合而成。网站（如eBay）通过JavaScript等前端技术在用户计算机上运行代码。随着技术的发展，JavaScript、TypeScript、Deno等语言逐渐普及，而WebAssembly（WASM）的出现使得下一代恶意软件更加复杂。&lt;/p&gt;
+&lt;p&gt;WebAssembly运行时允许将语言编译为二进制代码，由浏览器的WebAssembly运行时执行。WASM不仅速度更快，还解耦了编程语言，专注于“做什么”。尽管WASM带来了许多新API和功能，但它也成为安全研究者和黑客的目标。目前，Rust、Go等语言已提供对WebAssembly的现成支持。&lt;/p&gt;
+&lt;h2 id=&#34;研究webassembly运行时使用go&#34;&gt;研究WebAssembly运行时（使用Go）
+&lt;/h2&gt;&lt;p&gt;本文探讨了如何通过浏览器上下文映射主机的开放端口，并使用低级语言实现。端口扫描技术用于发现资产和服务器，许多操作系统在启动时会在localhost上运行服务（如IPC、SSH、SMTP等）。通过WASM，可以轻松发现易受攻击的服务。&lt;/p&gt;
+&lt;p&gt;作者选择Go语言，因其易于使用的Net/Socket和HTTP标准库API。以下是实现流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户访问网页。&lt;/li&gt;
+&lt;li&gt;浏览器初始化WebAssembly运行时。&lt;/li&gt;
+&lt;li&gt;自动运行编译为WebAssembly二进制的Go端口扫描器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;编写端口扫描器&#34;&gt;编写端口扫描器
+&lt;/h2&gt;&lt;p&gt;作者尝试了多种方法，发现浏览器代理（有时会阻止）WebAssembly请求和响应。最终选择使用Go的“http”包，因为浏览器主要处理应用层协议（如HTTP）。以下是关键发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;响应分类&lt;/strong&gt;：连接拒绝（端口关闭）、超时（端口可能开放或关闭）、HTTP响应（端口开放且有HTTP服务）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CORS问题&lt;/strong&gt;：localhost的HTTP服务通常缺少跨域头，浏览器会阻止请求。通过添加特定HTTP头，作者成功绕过了这一问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TLS/SSL服务&lt;/strong&gt;：跳过SSL握手可以扫描任何TCP开放端口，而不仅是支持SSL的服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实际演示&#34;&gt;实际演示
+&lt;/h2&gt;&lt;p&gt;作者通过Python启动本地服务器（&lt;code&gt;python3 -m http.server 5000&lt;/code&gt;），并在浏览器中运行端口扫描。扫描结果通过netstat和nmap验证，确认了WASM扫描器的准确性。&lt;/p&gt;
+&lt;h2 id=&#34;安全风险与攻击场景&#34;&gt;安全风险与攻击场景
+&lt;/h2&gt;&lt;p&gt;localhost通常被视为“安全”环境，但本文展示了如何通过浏览器轻易扫描和攻击本地服务。以下是两个攻击场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Linux RPC漏洞（CVE-2017-8779）&lt;/strong&gt;：通过访问网页触发拒绝服务攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows打印后台程序远程代码执行漏洞（CVE-2021-34527）&lt;/strong&gt;：利用浏览器访问本地服务，以SYSTEM权限运行任意代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;本文展示了网页如何通过WebAssembly与用户的本地主机服务通信，并映射其网络。尽管目前无法使用原始TCP/UDP会话，但随着WASI标准的推进，浏览器的攻击面将进一步扩大。WebAssembly和WASI是强大的技术，但浏览器作为操作系统的发展趋势也带来了严重的安全风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;演示地址&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP服务扫描：http://ports.sh&lt;/li&gt;
+&lt;li&gt;HTTPS服务扫描：https://ports.sh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;代码仓库&lt;/strong&gt;：https://github.com/avilum/portsscan（欢迎贡献！）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>《后门与漏洞》桌游模拟器指南：网络安全实战演练</title>
+        <link>http://localhost:1313/p/%E5%90%8E%E9%97%A8%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%A1%8C%E6%B8%B8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8C%87%E5%8D%97%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83/</link>
+        <pubDate>Sat, 09 Aug 2025 10:44:31 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%90%8E%E9%97%A8%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%A1%8C%E6%B8%B8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8C%87%E5%8D%97%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83/</guid>
+        <description>&lt;h1 id=&#34;后门与漏洞桌游模拟器指南&#34;&gt;《后门与漏洞》——桌游模拟器指南
+&lt;/h1&gt;&lt;p&gt;爱德华·米罗 //&lt;/p&gt;
+&lt;p&gt;《后门与漏洞》现已作为官方模组登陆Tabletop Simulator工坊！&lt;/p&gt;
+&lt;h2 id=&#34;模组概述&#34;&gt;模组概述
+&lt;/h2&gt;&lt;p&gt;《后门与漏洞》(B&amp;amp;B)包含52+张独特卡牌，用于开展事件响应桌面演练，学习攻击战术、工具和方法。本指南将帮助您快速启动虚拟版游戏。&lt;/p&gt;
+&lt;h2 id=&#34;安装流程&#34;&gt;安装流程
+&lt;/h2&gt;&lt;h3 id=&#34;1-安装steam平台&#34;&gt;1. 安装Steam平台
+&lt;/h3&gt;&lt;p&gt;访问&lt;a class=&#34;link&#34; href=&#34;https://store.steampowered.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://store.steampowered.com/&lt;/a&gt;&lt;br&gt;
+点击右上角&amp;quot;安装Steam&amp;quot; → 下载&lt;code&gt;SteamSetup.exe&lt;/code&gt; → 完成安装并登录/注册账号。&lt;/p&gt;
+&lt;h3 id=&#34;2-安装桌游模拟器tts&#34;&gt;2. 安装桌游模拟器(TTS)
+&lt;/h3&gt;&lt;p&gt;在Steam商店搜索&amp;quot;Tabletop Simulator&amp;quot; → 购买后可在库中启动（需购买TTS本体，B&amp;amp;B模组免费）。&lt;/p&gt;
+&lt;h3 id=&#34;3-加载bb模组&#34;&gt;3. 加载B&amp;amp;B模组
+&lt;/h3&gt;&lt;p&gt;访问工坊页面：&lt;a class=&#34;link&#34; href=&#34;https://steamcommunity.com/sharedfiles/filedetails/?id=2401033477&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://steamcommunity.com/sharedfiles/filedetails/?id=2401033477&lt;/a&gt;&lt;br&gt;
+点击&amp;quot;订阅&amp;quot; → 在TTS中创建游戏 → 选择&amp;quot;工坊&amp;quot; → 加载&amp;quot;BHIS Backdoors &amp;amp; Breaches&amp;quot;。&lt;/p&gt;
+&lt;h2 id=&#34;游戏模式&#34;&gt;游戏模式
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;单人模式&lt;/strong&gt;：独立练习&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多人模式&lt;/strong&gt;：联机对抗&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本地热座&lt;/strong&gt;：单机多人轮流操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实战演示&#34;&gt;实战演示
+&lt;/h2&gt;&lt;p&gt;观看2021年3月10日的《神圣摇钱树》直播活动，了解模组实际应用：[活动回放链接]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;技术提示：该模组支持VR设备，可通过TTS知识库学习基础操作控制。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>AWS证书管理器推出可导出的公共SSL/TLS证书，随处可用</title>
+        <link>http://localhost:1313/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</link>
+        <pubDate>Sat, 09 Aug 2025 08:23:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/09/EZemX.png" alt="Featured image of post AWS证书管理器推出可导出的公共SSL/TLS证书，随处可用" /&gt;&lt;p&gt;今天，我们宣布AWS证书管理器(ACM)推出可导出的公共SSL/TLS证书功能。在此功能发布前，您可以免费签发公共证书或导入第三方证书颁发机构(CA)颁发的证书，并通过集成AWS服务（如弹性负载均衡(ELB)、Amazon CloudFront分发和Amazon API网关）进行部署。&lt;/p&gt;
+&lt;p&gt;现在，您可以从ACM导出公共证书，获取私钥，并在任何运行于Amazon弹性计算云(Amazon EC2)实例、容器或本地主机的工作负载上使用。可导出的公共证书有效期为395天，签发和续订时均会产生费用。从ACM导出的公共证书由Amazon Trust Services颁发，并被Apple、Microsoft等常用平台以及Google Chrome、Mozilla Firefox等主流浏览器广泛信任。&lt;/p&gt;
+&lt;h3 id=&#34;acm可导出公共证书实践&#34;&gt;ACM可导出公共证书实践
+&lt;/h3&gt;&lt;p&gt;要导出公共证书，您需要先申请新的可导出公共证书。无法导出之前创建的公共证书。&lt;/p&gt;
+&lt;p&gt;首先，在ACM控制台选择&amp;quot;申请证书&amp;quot;，并在&amp;quot;允许导出&amp;quot;部分选择&amp;quot;启用导出&amp;quot;。若选择&amp;quot;禁用导出&amp;quot;，则该证书的私钥将无法从ACM导出，且此设置在证书签发后不可更改。&lt;/p&gt;
+&lt;p&gt;您也可以通过AWS命令行界面(AWS CLI)使用&lt;code&gt;request-certificate&lt;/code&gt;命令申请可导出公共证书，并设置&lt;code&gt;Export=ENABLED&lt;/code&gt;选项：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws acm request-certificate &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--domain-name mydomain.com &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--key-algorithm EC_Prime256v1 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--validation-method DNS &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--idempotency-token &amp;lt;token&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--options &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;CertificateTransparencyLoggingPreference&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;DISABLED &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Export&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ENABLED
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;成功验证域名所有权后，证书通常会在几秒内签发。当证书状态变为&amp;quot;已签发&amp;quot;时，选择&amp;quot;导出&amp;quot;即可导出证书。&lt;/p&gt;
+&lt;p&gt;您需要设置用于加密私钥的密码短语（后续解密私钥时需使用）。点击&amp;quot;生成PEM编码&amp;quot;可获取公钥，并可选择复制或下载PEM编码的证书、证书链和私钥。&lt;/p&gt;
+&lt;p&gt;也可通过&lt;code&gt;export-certificate&lt;/code&gt;命令导出证书和私钥。为增强安全性，建议使用文件编辑器存储密码短语和输出密钥，避免存入命令历史记录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws acm export-certificate &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     --certificate-arn arn:aws:acm:us-east-1:&amp;lt;accountID&amp;gt;:certificate/&amp;lt;certificateID&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     --passphrase fileb://path-to-passphrase-file &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#34;\(.Certificate)\(.CertificateChain)\(.PrivateKey)&amp;#34;&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     &amp;gt; /tmp/export.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;导出的公共证书可用于任何需要SSL/TLS通信的工作负载，如Amazon EC2实例。更多信息请参阅&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在EC2实例的Amazon Linux上配置SSL/TLS&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h3&gt;&lt;p&gt;关于可导出公共证书，您需要了解以下关键点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;密钥安全&lt;/strong&gt;：组织管理员可通过AWS IAM策略授权可申请导出证书的角色和用户。拥有证书签发权限的ACM用户将自动获得可导出证书的签发权限。导出的私钥需通过安全存储和访问控制进行保护。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;吊销管理&lt;/strong&gt;：为遵守组织策略或应对密钥泄露，您可能需要吊销已导出的公共证书。吊销操作具有全局性和永久性，被吊销的证书无法恢复使用。详见&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS文档中的吊销公共证书&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;续订机制&lt;/strong&gt;：可通过Amazon EventBridge配置自动续订事件，监控证书续订并创建自动化部署流程。也可手动续订证书，续订时将按新证书标准收费。详见&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;强制证书续订&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;现已可用&#34;&gt;现已可用
+&lt;/h3&gt;&lt;p&gt;您现在可以从ACM签发可导出的公共证书，并将证书与私钥导出至任意计算工作负载，以及ELB、Amazon CloudFront和Amazon API网关等AWS服务。&lt;/p&gt;
+&lt;p&gt;使用ACM创建可导出公共证书将产生额外费用：每个完全限定域名收费15美元，通配符域名收费149美元。证书生命周期内仅支付一次费用，续订时再次计费。详见&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/certificate-manager/pricing/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS证书管理器服务定价页&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;立即通过&lt;a class=&#34;link&#34; href=&#34;https://console.aws.amazon.com/acm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ACM控制台&lt;/a&gt;体验此功能。更多信息请参阅&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/acm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ACM文档页&lt;/a&gt;，并通过&lt;a class=&#34;link&#34; href=&#34;https://repost.aws/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS re:Post&lt;/a&gt;或常规AWS支持渠道提交反馈。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2025年4月补丁星期二：微软修复121个漏洞，Windows零日漏洞成首要威胁</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</link>
+        <pubDate>Sat, 09 Aug 2025 07:56:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</guid>
+        <description>&lt;h3 id=&#34;四月补丁星期二概览&#34;&gt;四月补丁星期二概览
+&lt;/h3&gt;&lt;p&gt;本月微软共修复121个新漏洞，其中11个为关键漏洞，1个已被主动利用。零日漏洞出现在Windows操作系统中，应列为首要修复目标。Adobe发布12个更新修复54个漏洞，ColdFusion的15个漏洞修复被列为最高优先级。&lt;/p&gt;
+&lt;h3 id=&#34;浏览器更新警报&#34;&gt;浏览器更新警报
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Google Chrome在补丁日修复2个漏洞（4月1日已修复13个）&lt;/li&gt;
+&lt;li&gt;Mozilla Firefox于4月1日修复8个漏洞&lt;/li&gt;
+&lt;li&gt;基于Chromium的Microsoft Edge预计本周内发布更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;微软高危漏洞详情&#34;&gt;微软高危漏洞详情
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;CVE-2025-29824&lt;/strong&gt;&lt;br&gt;
+Windows通用日志文件系统驱动程序的权限提升漏洞，攻击者可获取SYSTEM权限。影响所有Windows版本，CVSS 3.1评分为7.8。尽管微软标记为&amp;quot;重要&amp;quot;，基于风险应视为&amp;quot;严重&amp;quot;级威胁。&lt;/p&gt;
+&lt;h3 id=&#34;第三方漏洞动态&#34;&gt;第三方漏洞动态
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adobe&lt;/strong&gt;：Creative Suite系列软件（After Effects/Photoshop等）发布更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Oracle&lt;/strong&gt;：计划4月15日发布季度关键补丁更新(CPU)，将引发Java框架更新浪潮（包括RedHat OpenJDK/Amazon Corretto等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ivanti安全公告&#34;&gt;Ivanti安全公告
+&lt;/h3&gt;&lt;p&gt;EPM 2022/2024版本共修复6个漏洞，详情参见Ivanti博客的&lt;a class=&#34;link&#34; href=&#34;https://www.ivanti.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;四月安全更新&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;修复优先级建议&#34;&gt;修复优先级建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;立即修复Windows零日漏洞（CVE-2025-29824）&lt;/li&gt;
+&lt;li&gt;将浏览器更新调整为每周周期（Chrome/Edge每周更新，Firefox月均2-3次）&lt;/li&gt;
+&lt;li&gt;准备4月15日的Oracle更新及后续Java框架更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者Chris Goettl系Ivanti安全产品副总裁，拥有15年IT安全领域经验，定期在SC Magazine等权威媒体发表安全分析。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>政府涉足区块链技术时需要考虑的关键问题</title>
         <link>http://localhost:1313/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</link>
         <pubDate>Sat, 09 Aug 2025 07:35:06 +0800</pubDate>

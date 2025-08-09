@@ -7,7 +7,43 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 15:33:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 14:56:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Softaculous Webuzo身份验证绕过漏洞分析</title>
+        <link>http://localhost:1313/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 14:56:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h1 id=&#34;softaculous-webuzo身份验证绕过&#34;&gt;Softaculous Webuzo身份验证绕过
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;2024年7月25日&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞公告&#34;&gt;漏洞公告
+&lt;/h2&gt;&lt;p&gt;EIP-ce40b086&lt;br&gt;
+Softaculous Webuzo在密码重置功能中存在身份验证绕过漏洞。远程匿名攻击者可利用此漏洞获取服务器root用户的完全访问权限。&lt;/p&gt;
+&lt;h2 id=&#34;漏洞标识符&#34;&gt;漏洞标识符
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Exodus Intelligence: EIP-ce40b086&lt;/li&gt;
+&lt;li&gt;MITRE: CVE-2024-24621&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;漏洞指标&#34;&gt;漏洞指标
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;CVSSv2向量: AV:N/AC:L/Au:N/C:C/I:C/A:C&lt;/li&gt;
+&lt;li&gt;CVSSv2评分: 10.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;厂商参考&#34;&gt;厂商参考
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://webuzo.com/blog/webuzo-4-2-9-launched/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://webuzo.com/blog/webuzo-4-2-9-launched/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;发现者&#34;&gt;发现者
+&lt;/h2&gt;&lt;p&gt;Exodus Intelligence&lt;/p&gt;
+&lt;h2 id=&#34;披露时间线&#34;&gt;披露时间线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;向厂商披露: 2024年7月11日&lt;/li&gt;
+&lt;li&gt;厂商修复: 2024年7月12日&lt;/li&gt;
+&lt;li&gt;公开披露: 2024年7月25日&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;更多信息&#34;&gt;更多信息
+&lt;/h2&gt;&lt;p&gt;对本公告感兴趣的读者如需获取有关漏洞、缓解措施、检测指南等更多详细信息，可通过sales@exodusintel.com联系我们。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>利用飞行模式绕过未成年账户锁定：Worldcoin iOS应用逻辑漏洞分析</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E9%A3%9E%E8%A1%8C%E6%A8%A1%E5%BC%8F%E7%BB%95%E8%BF%87%E6%9C%AA%E6%88%90%E5%B9%B4%E8%B4%A6%E6%88%B7%E9%94%81%E5%AE%9Aworldcoin-ios%E5%BA%94%E7%94%A8%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Sun, 03 Aug 2025 15:33:21 +0800</pubDate>

@@ -7,7 +7,212 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 09 Aug 2025 07:13:29 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 17:13:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Manticore：面向人类的符号执行工具 - 技术解析与应用案例</title>
+        <link>http://localhost:1313/p/manticore%E9%9D%A2%E5%90%91%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%B7%A5%E5%85%B7-%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/</link>
+        <pubDate>Sat, 09 Aug 2025 17:13:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/manticore%E9%9D%A2%E5%90%91%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%B7%A5%E5%85%B7-%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/</guid>
+        <description>&lt;h3 id=&#34;双接口设计--多样应用场景&#34;&gt;双接口设计 · 多样应用场景
+&lt;/h3&gt;&lt;p&gt;Manticore提供两种使用方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;命令行工具&lt;/strong&gt;：快速生成程序测试用例（样本输入），每个用例对应独特执行结果（如正常退出或崩溃）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python API&lt;/strong&gt;：支持定制化分析与应用优化，可解决以下问题：
+&lt;ul&gt;
+&lt;li&gt;执行到X点时变量Y是否可能为特定值？&lt;/li&gt;
+&lt;li&gt;程序能否在运行时到达某段代码？&lt;/li&gt;
+&lt;li&gt;如何构造触发特定代码执行的输入？&lt;/li&gt;
+&lt;li&gt;用户输入是否被用作libc函数参数？&lt;/li&gt;
+&lt;li&gt;函数执行次数统计&lt;/li&gt;
+&lt;li&gt;给定输入下的指令执行计数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;API核心功能还包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;丢弃无关执行状态&lt;/li&gt;
+&lt;li&gt;在任意执行点运行自定义分析函数&lt;/li&gt;
+&lt;li&gt;具体化符号内存&lt;/li&gt;
+&lt;li&gt;内省和修改模拟机器状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;早期应用实例&#34;&gt;早期应用实例
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DARPA网络大挑战&lt;/strong&gt;：作为符号执行漏洞挖掘基础组件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CTF实战案例&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Eric Hennenfent：通过二进制插桩/符号执行双解法完成逆向挑战&lt;/li&gt;
+&lt;li&gt;Yan与Mark：用污点符号值追踪用户输入影响范围&lt;/li&gt;
+&lt;li&gt;Josselin Feist：纯API实现漏洞利用（定位崩溃点+符号执行构造约束）&lt;/li&gt;
+&lt;li&gt;Cory Duplantis：解决Google CTF 2016逆向题（演示CTF解题标准化流程）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;快速入门指南&#34;&gt;快速入门指南
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;环境准备（Ubuntu 16.04）&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装系统依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get update &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install z3 python-pip -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python -m pip install -U pip
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 安装Manticore&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/trailofbits/manticore.git &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; manticore
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo pip install --no-binary capstone .
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;基础使用演示&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;命令行发现测试用例：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; examples/linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;manticore basic
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat mcore_*/*1.stdin &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ./basic
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;API统计指令数：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;../&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;script&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;python&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;count_instructions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;py&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;../&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linux&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;helloworld&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（正文完）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>漏洞赏金机制的困境：从i915漏洞看ChromeOS与英特尔赏金计划的问题</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sat, 09 Aug 2025 14:24:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h2 id=&#34;linux内核i915驱动线性越界读写漏洞&#34;&gt;Linux内核i915驱动线性越界读写漏洞
+&lt;/h2&gt;&lt;p&gt;在分析i915驱动时发现一个线性越界读写漏洞(CVE-2023-28410)。该漏洞存在于&lt;code&gt;vm_access&lt;/code&gt;函数中，该函数通常用于调试进程，仅适用于VM_IO | VM_PFNMAP类型的VMA：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;vm_access&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_area_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用户控制数据写入&amp;#34;固定&amp;#34;页
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nf&#34;&gt;__i915_gem_object_flush_map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;obj&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 从&amp;#34;固定&amp;#34;页读取数据
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参数&lt;code&gt;len&lt;/code&gt;未经校验直接用于memcpy()：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在[1]处可能导致内存破坏/溢出&lt;/li&gt;
+&lt;li&gt;在[2]处可能导致信息泄露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整漏洞分析及PoC见：&lt;a class=&#34;link&#34; href=&#34;http://site.pi3.com.pl/adv/CVE-2023-28410_i915.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pi3技术公告&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞赏金计划遭遇的问题&#34;&gt;漏洞赏金计划遭遇的问题
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;响应迟缓&lt;/strong&gt;：Google在58天内未提供任何更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;透明度缺失&lt;/strong&gt;：漏洞被英特尔悄悄修复，声称是内部发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;沟通障碍&lt;/strong&gt;：多方推诿责任，缺乏有效协调&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢问题&lt;/strong&gt;：修复提交使用了错误的企业邮箱(已离职的微软邮箱)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞赏金机制的系统性缺陷&#34;&gt;漏洞赏金机制的系统性缺陷
+&lt;/h2&gt;&lt;p&gt;文章指出当前漏洞赏金计划存在根本性的&amp;quot;权力失衡&amp;quot;问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;条款完全由企业单方面制定&lt;/li&gt;
+&lt;li&gt;研究人员缺乏有效申诉渠道&lt;/li&gt;
+&lt;li&gt;存在虚假宣传现象(如百万美元漏洞猎人的营销)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术影响范围&#34;&gt;技术影响范围
+&lt;/h2&gt;&lt;p&gt;该i915驱动漏洞影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Google Chromebook/ChromeOS&lt;/li&gt;
+&lt;li&gt;多数商务笔记本&lt;/li&gt;
+&lt;li&gt;高能效笔记本&lt;/li&gt;
+&lt;li&gt;所有使用英特尔集成GPU的设备&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线关键节点&#34;&gt;时间线关键节点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2021年11月：发现漏洞&lt;/li&gt;
+&lt;li&gt;2022年2月3日：报告给Google&lt;/li&gt;
+&lt;li&gt;2022年3月11日：英特尔悄悄修复漏洞&lt;/li&gt;
+&lt;li&gt;2022年10月：英特尔最终发布安全公告(INTEL-SA-00886)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;行业反思&#34;&gt;行业反思
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;建立更公平的漏洞披露条款&lt;/li&gt;
+&lt;li&gt;提高赏金计划透明度&lt;/li&gt;
+&lt;li&gt;改善研究人员与企业间的权力平衡&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;完整的技术分析和事件细节揭示了当前漏洞赏金机制亟待改进的现状。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+        <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 12:12:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞
+&lt;/h3&gt;&lt;p&gt;探讨了攻击者如何利用GraphQL接口绕过权限控制，获取本应受限的数据访问权限。案例包括HackerOne报告#343464等实际漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞
+&lt;/h3&gt;&lt;p&gt;分析了错误配置的Mutation操作如何允许攻击者非法创建或修改数据（HackerOne报告#2233480）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据删除漏洞&#34;&gt;GraphQL与未授权数据删除漏洞
+&lt;/h3&gt;&lt;p&gt;通过HackerOne报告#858671案例，演示了缺乏权限验证的delete操作可能引发的数据销毁风险。&lt;/p&gt;
+&lt;h3 id=&#34;graphql如何导致dos攻击&#34;&gt;GraphQL如何导致DoS攻击
+&lt;/h3&gt;&lt;p&gt;解释了复杂嵌套查询可能引发的服务拒绝攻击，并引用DEF CON 32相关研究成果。&lt;/p&gt;
+&lt;h3 id=&#34;graphql中的sql注入风险&#34;&gt;GraphQL中的SQL注入风险
+&lt;/h3&gt;&lt;p&gt;展示了GraphQL参数未正确过滤时可能触发的SQL注入漏洞（HackerOne报告#435066）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql架构泄露问题&#34;&gt;GraphQL架构泄露问题
+&lt;/h3&gt;&lt;p&gt;讨论了introspection功能暴露API敏感信息是否应被认定为可报告漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql的csrf攻击面&#34;&gt;GraphQL的CSRF攻击面
+&lt;/h3&gt;&lt;p&gt;分析Doyensec研究报告中提到的跨站请求伪造攻击场景，包括GitHub OAuth流程的HEAD方法CSRF绕过案例（Teddy Katz博客）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键资源链接均保留原始英文URL以方便技术溯源。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>路由器固件漏洞自动化挖掘：基于污点分析的规模化漏洞检测</title>
         <link>http://localhost:1313/p/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8C%96%E6%8E%98%E5%9F%BA%E4%BA%8E%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90%E7%9A%84%E8%A7%84%E6%A8%A1%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B/</link>
         <pubDate>Sat, 09 Aug 2025 07:13:29 +0800</pubDate>

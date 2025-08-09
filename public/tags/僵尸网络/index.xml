@@ -7,7 +7,71 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Tue, 05 Aug 2025 07:11:13 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 16:40:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2024年底以来与大规模DDoS攻击关联的IoT僵尸网络技术分析</title>
+        <link>http://localhost:1313/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 16:40:24 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;自2024年底以来，我们持续监测到一个IoT僵尸网络通过Mirai和Bashlite变种恶意软件感染设备，针对日本及其他国家企业发起大规模分布式拒绝服务（DDoS）攻击。该僵尸网络利用漏洞和弱凭证入侵设备，通过多阶段感染流程连接C&amp;amp;C服务器获取攻击指令，攻击目标主要分布在北美和欧洲，涉及金融、交通等多个行业。&lt;/p&gt;
+&lt;h3 id=&#34;技术分析&#34;&gt;技术分析
+&lt;/h3&gt;&lt;h4 id=&#34;初始感染&#34;&gt;初始感染
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;入侵方式&lt;/strong&gt;：通过远程代码执行（RCE）漏洞或弱密码入侵IoT设备，下载并执行恶意加载器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;载荷传递&lt;/strong&gt;：加载器通过HTTP下载恶意载荷至内存执行，避免本地留存文件，请求中设置特定User-Agent头以规避检测。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C&amp;amp;C通信&lt;/strong&gt;：恶意载荷连接C&amp;amp;C服务器，接收DDoS攻击等指令。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;攻击指令&#34;&gt;攻击指令
+&lt;/h4&gt;&lt;p&gt;指令采用&amp;quot;&amp;lt;2字节消息长度&amp;gt;.&amp;lt;文本命令&amp;gt;&amp;ldquo;格式，支持多种攻击方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;网络层攻击&lt;/strong&gt;：SYN Flood、UDP Flood、GRE协议攻击等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;资源耗尽攻击&lt;/strong&gt;：通过&lt;code&gt;socket&lt;/code&gt;、&lt;code&gt;handshake&lt;/code&gt;等指令建立大量TCP连接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理功能&lt;/strong&gt;：通过&lt;code&gt;socks&lt;/code&gt;命令将受控设备转为Socks代理节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自我更新&lt;/strong&gt;：&lt;code&gt;update&lt;/code&gt;指令可更新恶意代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;技术对抗手段&#34;&gt;技术对抗手段
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;禁用看门狗定时器&lt;/strong&gt;：防止设备因高负载重启。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;滥用iptables&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;阻断WAN侧TCP连接请求以排斥其他僵尸网络。&lt;/li&gt;
+&lt;li&gt;允许LAN侧管理访问以隐藏异常。&lt;/li&gt;
+&lt;li&gt;动态设置规则配合&lt;code&gt;udpfwd&lt;/code&gt;等指令实施攻击。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;攻击目标分析&#34;&gt;攻击目标分析
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地理分布&lt;/strong&gt;：美国（17%）、巴林（10%）、波兰（9%）为主要目标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;行业差异&lt;/strong&gt;：日本以交通、金融业为主；国际目标中信息通信业占比34%。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击组合&lt;/strong&gt;：常混合使用多种指令（如同时发起网络层和资源耗尽攻击）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;僵尸网络构成&#34;&gt;僵尸网络构成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;设备类型&lt;/strong&gt;：无线路由器（80%）、IP摄像头（15%）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;厂商分布&lt;/strong&gt;：TP-Link（52%）、Zyxel（20%）路由器，海康威视（12%）摄像头。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;地理位置&lt;/strong&gt;：印度（57%）、南非（17%）设备占比最高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;防御建议&#34;&gt;防御建议
+&lt;/h3&gt;&lt;h4 id=&#34;设备防护&#34;&gt;设备防护
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;立即修改默认凭证，定期更新固件。&lt;/li&gt;
+&lt;li&gt;禁用非必要远程访问功能，划分IoT专用网络。&lt;/li&gt;
+&lt;li&gt;检查路由器设置，关闭闲置端口。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;ddos缓解措施&#34;&gt;DDoS缓解措施
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;UDP Flood&lt;/strong&gt;：协同ISP进行流量清洗，强化路由器处理能力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP类攻击&lt;/strong&gt;：采用CDN分流，限制单IP请求速率，增强服务器资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;趋势科技解决方案&#34;&gt;趋势科技解决方案
+&lt;/h3&gt;&lt;p&gt;Trend Vision One平台提供相关威胁情报（IOC扫描、狩猎查询等），支持客户检测环境中的Mirai变种活动。&lt;/p&gt;
+&lt;h3 id=&#34;结论&#34;&gt;结论
+&lt;/h3&gt;&lt;p&gt;此类跨境僵尸网络攻击凸显IoT设备安全的重要性。通过基础防护措施可有效降低成为攻击跳板的风险。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Critical Langflow漏洞(CVE-2025-3248)被利用传播Flodrix僵尸网络的技术分析</title>
         <link>http://localhost:1313/p/critical-langflow%E6%BC%8F%E6%B4%9Ecve-2025-3248%E8%A2%AB%E5%88%A9%E7%94%A8%E4%BC%A0%E6%92%ADflodrix%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
         <pubDate>Tue, 05 Aug 2025 07:11:13 +0800</pubDate>

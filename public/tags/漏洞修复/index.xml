@@ -7,7 +7,95 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 21:16:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 11:56:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GDI&#43;新攻击面缩减功能详解</title>
+        <link>http://localhost:1313/p/gdi-%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sat, 09 Aug 2025 11:56:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gdi-%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;gdi新攻击面缩减功能&#34;&gt;GDI+新攻击面缩减功能
+&lt;/h1&gt;&lt;p&gt;MS09-062修复了GDI+中多个与图像解析相关的漏洞，同时引入了一项新功能：允许管理员禁用不同图像格式的解析器。该功能今年早些时候已在Microsoft下载中心作为可选更新发布，现正式纳入本次安全公告。&lt;/p&gt;
+&lt;p&gt;安装此更新后，您可以按需关闭GDI+中的各类图像解析器。例如，若某台计算机无需显示TIFF文件，禁用GDI+的TIFF解析器即可缩减攻击面，避免未来可能出现的GDI+ TIFF解析代码漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;可禁用解析器对照表&#34;&gt;可禁用解析器对照表
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;格式&lt;/th&gt;
+          &lt;th&gt;注册表键值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;BMP&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableBMPCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GIF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableGIFCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PNG&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisablePNGCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ICO&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableICOCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIFF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableTIFFCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;JPEG&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableJPEGCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;WMF/EMF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\GRE_Initialize\DisableMetaFiles&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;启用禁用开关后，尝试解析对应格式文件时将返回错误（如同解析损坏图像文件时的行为）。部分应用程序可能未做错误处理，建议先禁用非必要解析器，再测试常用应用确保兼容性。&lt;/p&gt;
+&lt;p&gt;需注意：此功能仅禁用GDI+解析器，其他不使用GDI+的应用程序（包括部分微软应用）仍可能通过自有解析器处理图像。&lt;/p&gt;
+&lt;p&gt;致谢：Windows持续工程团队Christopher Leung和Ryan Becker的贡献。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>2025年4月补丁星期二：微软修复121个漏洞，Windows零日漏洞成首要威胁</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</link>
+        <pubDate>Sat, 09 Aug 2025 07:56:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</guid>
+        <description>&lt;h3 id=&#34;四月补丁星期二概览&#34;&gt;四月补丁星期二概览
+&lt;/h3&gt;&lt;p&gt;本月微软共修复121个新漏洞，其中11个为关键漏洞，1个已被主动利用。零日漏洞出现在Windows操作系统中，应列为首要修复目标。Adobe发布12个更新修复54个漏洞，ColdFusion的15个漏洞修复被列为最高优先级。&lt;/p&gt;
+&lt;h3 id=&#34;浏览器更新警报&#34;&gt;浏览器更新警报
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Google Chrome在补丁日修复2个漏洞（4月1日已修复13个）&lt;/li&gt;
+&lt;li&gt;Mozilla Firefox于4月1日修复8个漏洞&lt;/li&gt;
+&lt;li&gt;基于Chromium的Microsoft Edge预计本周内发布更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;微软高危漏洞详情&#34;&gt;微软高危漏洞详情
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;CVE-2025-29824&lt;/strong&gt;&lt;br&gt;
+Windows通用日志文件系统驱动程序的权限提升漏洞，攻击者可获取SYSTEM权限。影响所有Windows版本，CVSS 3.1评分为7.8。尽管微软标记为&amp;quot;重要&amp;quot;，基于风险应视为&amp;quot;严重&amp;quot;级威胁。&lt;/p&gt;
+&lt;h3 id=&#34;第三方漏洞动态&#34;&gt;第三方漏洞动态
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adobe&lt;/strong&gt;：Creative Suite系列软件（After Effects/Photoshop等）发布更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Oracle&lt;/strong&gt;：计划4月15日发布季度关键补丁更新(CPU)，将引发Java框架更新浪潮（包括RedHat OpenJDK/Amazon Corretto等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ivanti安全公告&#34;&gt;Ivanti安全公告
+&lt;/h3&gt;&lt;p&gt;EPM 2022/2024版本共修复6个漏洞，详情参见Ivanti博客的&lt;a class=&#34;link&#34; href=&#34;https://www.ivanti.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;四月安全更新&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;修复优先级建议&#34;&gt;修复优先级建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;立即修复Windows零日漏洞（CVE-2025-29824）&lt;/li&gt;
+&lt;li&gt;将浏览器更新调整为每周周期（Chrome/Edge每周更新，Firefox月均2-3次）&lt;/li&gt;
+&lt;li&gt;准备4月15日的Oracle更新及后续Java框架更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者Chris Goettl系Ivanti安全产品副总裁，拥有15年IT安全领域经验，定期在SC Magazine等权威媒体发表安全分析。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>MS09-037漏洞公告解析：为何重复使用MS09-035中的CVE编号</title>
         <link>http://localhost:1313/p/ms09-037%E6%BC%8F%E6%B4%9E%E5%85%AC%E5%91%8A%E8%A7%A3%E6%9E%90%E4%B8%BA%E4%BD%95%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8ms09-035%E4%B8%AD%E7%9A%84cve%E7%BC%96%E5%8F%B7/</link>
         <pubDate>Fri, 08 Aug 2025 21:16:53 +0800</pubDate>

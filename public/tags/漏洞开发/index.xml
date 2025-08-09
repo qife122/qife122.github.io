@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>漏洞开发 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91/</link>
+        <description>Recent content in 漏洞开发 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 10:22:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>漏洞实验室告别Win XP | 漏洞实验室技术演进</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%91%8A%E5%88%ABwin-xp-%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</link>
+        <pubDate>Sat, 09 Aug 2025 10:22:48 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%91%8A%E5%88%ABwin-xp-%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/</guid>
+        <description>&lt;p&gt;漏洞实验室告别Win XP&lt;/p&gt;
+&lt;p&gt;时代在变化。2014年4月，全球桌面电脑告别了Windows XP，漏洞实验室也不例外。&lt;/p&gt;
+&lt;p&gt;基于Windows XP的漏洞将不再出现在漏洞实验室中。&lt;/p&gt;
+&lt;p&gt;毕竟，在一个逐渐消失的平台上学习漏洞开发已经没有意义了，不是吗？&lt;/p&gt;
+&lt;p&gt;2014年Blackhat USA的课程内容已经全面更新。所有漏洞和示例都已修订。几年前的高级内容现在已被重新整合到我们的中级课程&amp;quot;漏洞实验室：红队课程&amp;quot;中。&amp;ldquo;漏洞实验室：黑带课程&amp;quot;将专注于现代高级主题，如Use-After-Free漏洞、信息泄露、复合漏洞和动态ROP链。&lt;/p&gt;
+&lt;p&gt;我们的Blackhat 2014课程报名火爆。对于已经注册的学员，请浏览以下概念复习教程：&lt;/p&gt;
+&lt;p&gt;操作系统入门
+调试器简介
+函数工作原理&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;description-介绍arm-x固件仿真框架的发布该框架可用于iot设备仿真渗透测试和漏洞开发培训并推出首个iot-ctf挑战赛&#34;&gt;title: ARM-X框架与全新IoT CTF挑战
+tags: [ARM漏洞, IoT安全, CTF挑战]
+authors: qife
+description: 介绍ARM-X固件仿真框架的发布，该框架可用于IoT设备仿真、渗透测试和漏洞开发培训，并推出首个IoT CTF挑战赛。
+&lt;/h2&gt;&lt;p&gt;ARM-X与全新IoT CTF挑战&lt;/p&gt;
+&lt;p&gt;几天前，我发布了ARM-X固件仿真框架。我的目标是尽可能接近拥有一个IoT虚拟机。ARM-X有多种应用场景。我编写它是为了仿真和渗透测试IoT设备，并用于在我的ARM IoT漏洞实验室培训中教授漏洞开发。ARM-X还可用于模糊测试IoT目标和举办IoT CTF挑战赛！&lt;/p&gt;
+&lt;p&gt;ARM-X预览版虚拟机
+我于2019年10月23日发布了ARM-X的预览版虚拟机及代码。该镜像是基于Alpine Linux作为主机操作系统的VMWare虚拟机，原因是我无法忍受systemd。ARM-X预览版预装了两个仿真IoT设备：&lt;/p&gt;
+&lt;p&gt;DVAR - 该死的易受攻击ARM路由器，最初以TinysploitARM发布
+Trivision 227WF IP摄像头&lt;/p&gt;
+&lt;p&gt;ARM-X CTF挑战赛#1
+正如预期，Trivision IP摄像头存在一些严重漏洞。目前我们已经发现了三个漏洞。可能还有更多隐藏在暗处。第一个有效利用和write-up将赢得我提供的特别Ringzer0&amp;quot;0-day盒子&amp;rdquo;！&lt;/p&gt;
+&lt;p&gt;接下来几天，我将陆续发布关于如何使用gdb和gdbserver调试ARM-X的提示，以及使用strace和ltrace等动态分析工具的教程。关注@therealsaumil获取更新。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;description-宣布dvar路由器rop挑战赛奖励关卡要求参与者利用lightsrv服务的栈溢出漏洞构建rop链获取shell并提示相关内存映射信息&#34;&gt;title: DVAR ROP挑战 - 解锁奖励关卡！
+tags: [ARM漏洞, ROP技术, IoT安全]
+authors: qife
+description: 宣布DVAR路由器ROP挑战赛奖励关卡，要求参与者利用lightsrv服务的栈溢出漏洞构建ROP链获取shell，并提示相关内存映射信息。
+&lt;/h2&gt;&lt;p&gt;DVAR ROP挑战 - 奖励关卡解锁！&lt;/p&gt;
+&lt;p&gt;ARM IoT漏洞实验室&lt;/p&gt;
+&lt;p&gt;在我首次发布&amp;quot;该死的易受攻击ARM路由器&amp;quot;(DVAR)时，曾承诺会宣布奖励挑战。&lt;/p&gt;
+&lt;p&gt;我一直在等待第一个栈溢出练习的成功完成，然后宣布奖励挑战。&lt;/p&gt;
+&lt;p&gt;@JatanKRaval提供了第一个有效解决方案，所以现在 - 奖励关卡解锁！&lt;/p&gt;
+&lt;p&gt;DVAR挑战的第二部分是利用&amp;quot;/usr/bin/lightsrv&amp;quot;交通信号灯服务器中的栈溢出漏洞。lightsrv在启动时自动运行，监听8080端口。&lt;/p&gt;
+&lt;p&gt;你的任务是：&lt;/p&gt;
+&lt;p&gt;找到lightsrv的缓冲区溢出向量
+使程序崩溃并获取pc=0x41414140
+构建有效的ROP链（XN已启用！）
+获取可用shell！&lt;/p&gt;
+&lt;p&gt;提示：&lt;/p&gt;
+&lt;p&gt;exploitlab-DVAR:~# ps
+PID USER  VSZ STAT COMMAND
+:    :    : :    :
+245 root  656 S    /usr/bin/miniweb
+246 root  640 S    /usr/bin/lightsrv &amp;lt;&amp;mdash;&amp;mdash;- [目标]
+292 root 1016 S    -ash
+321 root 1012 R    ps&lt;/p&gt;
+&lt;p&gt;exploitlab-DVAR:~# cat /proc/$(pidof lightsrv)/maps
+00010000-00012000 r-xp 00000000 08:00 512   /usr/bin/lightsrv
+00022000-00023000 rw-p 00002000 08:00 512   /usr/bin/lightsrv
+40000000-40064000 r-xp 00000000 08:00 185   /lib/libc.so
+40064000-40065000 r-xp 00000000 00:00 0     [sigpage]
+40073000-40074000 r&amp;ndash;p 00063000 08:00 185   /lib/libc.so
+40074000-40075000 rw-p 00064000 08:00 185   /lib/libc.so
+40075000-40077000 rw-p 00000000 00:00 0
+40078000-40089000 r-xp 00000000 08:00 2791  /lib/libgcc_s.so.1
+40089000-4008a000 rw-p 00009000 08:00 2791  /lib/libgcc_s.so.1
+befdf000-bf000000 rw-p 00000000 00:00 0     [stack]
+ffff0000-ffff1000 r-xp 00000000 00:00 0     [vectors]&lt;/p&gt;
+&lt;p&gt;如果你还没有体验过DVAR，可以从这里下载：
+&lt;a class=&#34;link&#34; href=&#34;http://blog.exploitlab.net/2018/01/dvar-damn-vulnerable-arm-router.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://blog.exploitlab.net/2018/01/dvar-damn-vulnerable-arm-router.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;即将举行的ARM IoT漏洞实验室培训&lt;/p&gt;
+&lt;p&gt;Cansecwest Vancouver 2019（4天）3月16-19日
+&lt;a class=&#34;link&#34; href=&#34;https://cansecwest.com/dojos/2019/exploitlab.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cansecwest.com/dojos/2019/exploitlab.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Hack In The Box Amsterdam HITB2019AMS（3天）5月6,7,8日
+&lt;a class=&#34;link&#34; href=&#34;https://conference.hitb.org/hitbsecconf2019ams/sessions/3-day-training-1-the-arm-exploit-laboratory/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://conference.hitb.org/hitbsecconf2019ams/sessions/3-day-training-1-the-arm-exploit-laboratory/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;祝你在DVAR-ROP挑战中玩得开心！&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>攻击面缩减 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F/</link>
+        <description>Recent content in 攻击面缩减 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 11:56:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GDI&#43;新攻击面缩减功能详解</title>
+        <link>http://localhost:1313/p/gdi-%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sat, 09 Aug 2025 11:56:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/gdi-%E6%96%B0%E6%94%BB%E5%87%BB%E9%9D%A2%E7%BC%A9%E5%87%8F%E5%8A%9F%E8%83%BD%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h1 id=&#34;gdi新攻击面缩减功能&#34;&gt;GDI+新攻击面缩减功能
+&lt;/h1&gt;&lt;p&gt;MS09-062修复了GDI+中多个与图像解析相关的漏洞，同时引入了一项新功能：允许管理员禁用不同图像格式的解析器。该功能今年早些时候已在Microsoft下载中心作为可选更新发布，现正式纳入本次安全公告。&lt;/p&gt;
+&lt;p&gt;安装此更新后，您可以按需关闭GDI+中的各类图像解析器。例如，若某台计算机无需显示TIFF文件，禁用GDI+的TIFF解析器即可缩减攻击面，避免未来可能出现的GDI+ TIFF解析代码漏洞。&lt;/p&gt;
+&lt;h2 id=&#34;可禁用解析器对照表&#34;&gt;可禁用解析器对照表
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;格式&lt;/th&gt;
+          &lt;th&gt;注册表键值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;BMP&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableBMPCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GIF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableGIFCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PNG&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisablePNGCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ICO&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableICOCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIFF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableTIFFCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;JPEG&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Gdiplus\DisableJPEGCodec&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;WMF/EMF&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\GRE_Initialize\DisableMetaFiles&lt;/code&gt; (DWORD=1)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;启用禁用开关后，尝试解析对应格式文件时将返回错误（如同解析损坏图像文件时的行为）。部分应用程序可能未做错误处理，建议先禁用非必要解析器，再测试常用应用确保兼容性。&lt;/p&gt;
+&lt;p&gt;需注意：此功能仅禁用GDI+解析器，其他不使用GDI+的应用程序（包括部分微软应用）仍可能通过自有解析器处理图像。&lt;/p&gt;
+&lt;p&gt;致谢：Windows持续工程团队Christopher Leung和Ryan Becker的贡献。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

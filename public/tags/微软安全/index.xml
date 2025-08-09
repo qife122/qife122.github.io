@@ -7,7 +7,58 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 21:16:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 15:45:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BE%AE%E8%BD%AF%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软推出本地服务器产品漏洞赏金计划，最高奖励2.6万美元</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</link>
+        <pubDate>Sat, 09 Aug 2025 15:45:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</guid>
+        <description>&lt;p&gt;微软兴奋地宣布将Exchange本地服务器、SharePoint本地服务器和Skype for Business本地服务器纳入&amp;quot;应用程序与本地服务器漏洞赏金计划&amp;quot;。通过这项扩展计划，我们鼓励研究人员发现并报告高危安全漏洞以帮助保护客户。符合条件的提交最高可获得26,000美元奖励。以下产品现已纳入赏金范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Exchange本地服务器&lt;/li&gt;
+&lt;li&gt;SharePoint本地服务器&lt;/li&gt;
+&lt;li&gt;Skype for Business本地服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不仅如此！该赏金计划还包含高危场景，对客户安全潜在影响最大的研究领域将获得最高奖励。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;安全影响&lt;/th&gt;
+          &lt;th&gt;严重性乘数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限Exchange：服务器端请求伪造漏洞允许攻击者向任意URL发起服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限SharePoint：经过认证的服务器端请求伪造漏洞允许攻击者向任意URL发起认证服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;用户可控数据的不安全反序列化，导致服务端远程代码执行&lt;/td&gt;
+          &lt;td&gt;30%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;在服务器上用户可控位置写入用户可控数据的任意文件&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;认证绕过漏洞允许未经认证的利用，导致漏洞大规模利用&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Exchange紧急缓解服务(EEMS)中的漏洞&lt;/td&gt;
+          &lt;td&gt;15%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;要了解符合条件的范围和奖励金额，请访问[应用程序与本地服务器漏洞赏金计划]页面。微软的漏洞赏金计划只是我们与全球安全研究社区合作帮助保护微软客户的众多方式之一。如果您对新的本地服务器范围有任何疑问，或对任何其他安全研究激励计划有一般性询问，请通过bounty@microsoft.com联系我们。&lt;/p&gt;
+&lt;p&gt;Madeline Eckert和Lynn Miyashita，MSRC团队&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>MS09-037漏洞公告解析：为何重复使用MS09-035中的CVE编号</title>
         <link>http://localhost:1313/p/ms09-037%E6%BC%8F%E6%B4%9E%E5%85%AC%E5%91%8A%E8%A7%A3%E6%9E%90%E4%B8%BA%E4%BD%95%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8ms09-035%E4%B8%AD%E7%9A%84cve%E7%BC%96%E5%8F%B7/</link>
         <pubDate>Fri, 08 Aug 2025 21:16:53 +0800</pubDate>

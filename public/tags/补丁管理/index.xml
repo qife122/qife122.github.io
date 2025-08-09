@@ -7,7 +7,42 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Fri, 08 Aug 2025 22:33:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 07:56:34 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A1%A5%E4%B8%81%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025年4月补丁星期二：微软修复121个漏洞，Windows零日漏洞成首要威胁</title>
+        <link>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</link>
+        <pubDate>Sat, 09 Aug 2025 07:56:34 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</guid>
+        <description>&lt;h3 id=&#34;四月补丁星期二概览&#34;&gt;四月补丁星期二概览
+&lt;/h3&gt;&lt;p&gt;本月微软共修复121个新漏洞，其中11个为关键漏洞，1个已被主动利用。零日漏洞出现在Windows操作系统中，应列为首要修复目标。Adobe发布12个更新修复54个漏洞，ColdFusion的15个漏洞修复被列为最高优先级。&lt;/p&gt;
+&lt;h3 id=&#34;浏览器更新警报&#34;&gt;浏览器更新警报
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Google Chrome在补丁日修复2个漏洞（4月1日已修复13个）&lt;/li&gt;
+&lt;li&gt;Mozilla Firefox于4月1日修复8个漏洞&lt;/li&gt;
+&lt;li&gt;基于Chromium的Microsoft Edge预计本周内发布更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;微软高危漏洞详情&#34;&gt;微软高危漏洞详情
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;CVE-2025-29824&lt;/strong&gt;&lt;br&gt;
+Windows通用日志文件系统驱动程序的权限提升漏洞，攻击者可获取SYSTEM权限。影响所有Windows版本，CVSS 3.1评分为7.8。尽管微软标记为&amp;quot;重要&amp;quot;，基于风险应视为&amp;quot;严重&amp;quot;级威胁。&lt;/p&gt;
+&lt;h3 id=&#34;第三方漏洞动态&#34;&gt;第三方漏洞动态
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adobe&lt;/strong&gt;：Creative Suite系列软件（After Effects/Photoshop等）发布更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Oracle&lt;/strong&gt;：计划4月15日发布季度关键补丁更新(CPU)，将引发Java框架更新浪潮（包括RedHat OpenJDK/Amazon Corretto等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ivanti安全公告&#34;&gt;Ivanti安全公告
+&lt;/h3&gt;&lt;p&gt;EPM 2022/2024版本共修复6个漏洞，详情参见Ivanti博客的&lt;a class=&#34;link&#34; href=&#34;https://www.ivanti.com/blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;四月安全更新&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;修复优先级建议&#34;&gt;修复优先级建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;立即修复Windows零日漏洞（CVE-2025-29824）&lt;/li&gt;
+&lt;li&gt;将浏览器更新调整为每周周期（Chrome/Edge每周更新，Firefox月均2-3次）&lt;/li&gt;
+&lt;li&gt;准备4月15日的Oracle更新及后续Java框架更新&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作者Chris Goettl系Ivanti安全产品副总裁，拥有15年IT安全领域经验，定期在SC Magazine等权威媒体发表安全分析。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>深入解析CVE-2024-49112与CVE-2024-49113：Windows LDAP高危漏洞分析</title>
         <link>http://localhost:1313/p/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90cve-2024-49112%E4%B8%8Ecve-2024-49113windows-ldap%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 08 Aug 2025 22:33:48 +0800</pubDate>

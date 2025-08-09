@@ -7,7 +7,48 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 17:10:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ctf%E7%AB%9E%E8%B5%9B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 13:12:41 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ctf%E7%AB%9E%E8%B5%9B/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>以太坊安全技术深度解析：智能合约漏洞挖掘与防御实践</title>
+        <link>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Sat, 09 Aug 2025 13:12:41 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;h3 id=&#34;观看演讲视频回放&#34;&gt;观看演讲视频回放
+&lt;/h3&gt;&lt;p&gt;2017年12月12日，超过150名参与者在我们举办的年度最终Empire Hacking聚会上学习了如何编写和攻防智能合约。感谢所有到场人员、优秀演讲者以及Datadog提供的场地支持。&lt;/p&gt;
+&lt;h3 id=&#34;智能合约安全简史&#34;&gt;智能合约安全简史
+&lt;/h3&gt;&lt;p&gt;Consensys Diligence的Jon Maurelian从安全视角系统回顾了以太坊的过去、现在与未来：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;以太坊被设计为全球分布式共享计算机，Solidity等高级语言使智能合约开发成为可能&lt;/li&gt;
+&lt;li&gt;这种开放执行环境存在委托调用、重入攻击等固有安全问题，已导致多起重大链上盗窃事件&lt;/li&gt;
+&lt;li&gt;未来发展方向包括Viper安全语言、zk-SNARKs链上隐私方案，以及Manticore、KEVM等安全工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;智能合约ctf实战指南&#34;&gt;智能合约CTF实战指南
+&lt;/h3&gt;&lt;p&gt;Trail of Bits的Sophia D&amp;rsquo;Antoine解析了包含Solidity挑战的CTF竞赛：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;参考CSAW 2017脚本可搭建以太坊CTF环境&lt;/li&gt;
+&lt;li&gt;需掌握Manticore、Ethersplay等工具进行漏洞挖掘&lt;/li&gt;
+&lt;li&gt;整数溢出和重入攻击是CTF常见题型，需研究历史赛题Write-up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;区块链自动化漏洞挖掘&#34;&gt;区块链自动化漏洞挖掘
+&lt;/h3&gt;&lt;p&gt;Trail of Bits的Mark Mossberg演示了Manticore对EVM字节码的符号执行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;符号执行技术可实现高代码覆盖率，用于构建自动化漏洞发现系统&lt;/li&gt;
+&lt;li&gt;在以太坊场景中可自动识别合约函数、生成触发异常状态的交易&lt;/li&gt;
+&lt;li&gt;开源工具Manticore通过符号执行分析EVM智能合约&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;区块链解决信息安全需求&#34;&gt;区块链解决信息安全需求
+&lt;/h3&gt;&lt;p&gt;Paul Makowski介绍了网络安全代币PolySwarm的创新设计：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前威胁情报市场存在检测能力重叠、覆盖不足等问题&lt;/li&gt;
+&lt;li&gt;以太坊智能合约通过程序化市场设计重构激励体系&lt;/li&gt;
+&lt;li&gt;PolySwarm通过降低参与门槛激活安全专家资源，构建集体防御网络&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;联系我们&#34;&gt;联系我们
+&lt;/h3&gt;&lt;p&gt;我们已成为行业领先的智能合约审计服务商，保障过代币发行、DApp及区块链平台的安全。如需帮助请联系我们。&lt;/p&gt;
+&lt;p&gt;（原文包含的社交媒体分享链接及页脚信息已省略）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>迎战DARPA网络挑战赛：Trail of Bits的自动化安全系统征程</title>
         <link>http://localhost:1313/p/%E8%BF%8E%E6%88%98darpa%E7%BD%91%E7%BB%9C%E6%8C%91%E6%88%98%E8%B5%9Btrail-of-bits%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F%E5%BE%81%E7%A8%8B/</link>
         <pubDate>Wed, 06 Aug 2025 17:10:11 +0800</pubDate>

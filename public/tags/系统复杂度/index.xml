@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>系统复杂度 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
+        <description>Recent content in 系统复杂度 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 12:56:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>软件设计的两句箴言：维护成本与系统复杂度的关系</title>
+        <link>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%A4%E5%8F%A5%E7%AE%B4%E8%A8%80%E7%BB%B4%E6%8A%A4%E6%88%90%E6%9C%AC%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%85%B3%E7%B3%BB/</link>
+        <pubDate>Sat, 09 Aug 2025 12:56:22 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%B8%A4%E5%8F%A5%E7%AE%B4%E8%A8%80%E7%BB%B4%E6%8A%A4%E6%88%90%E6%9C%AC%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%85%B3%E7%B3%BB/</guid>
+        <description>&lt;h3 id=&#34;软件设计的两句箴言&#34;&gt;软件设计的两句箴言
+&lt;/h3&gt;&lt;p&gt;2010年5月13日 · Max Kanat-Alexander&lt;/p&gt;
+&lt;p&gt;在《软件设计方程》的背景下，现在可以将软件设计的主要原则简化为两句话：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;降低维护成本比降低实现成本更重要&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;维护成本与系统复杂度成正比&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这就是核心。如果你只了解这两条原则和软件的目的，就可以推导出软件开发的所有其他通用原则。&lt;/p&gt;
+&lt;p&gt;——Max&lt;/p&gt;
+&lt;h4 id=&#34;读者讨论精选&#34;&gt;读者讨论精选
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Mark Castillo&lt;/strong&gt;（2010年5月13日）：&lt;br&gt;
+嘿嘿…我还在寻找“实现和维护零成本”的原则。也许这里可以总结为：“零成本是不可实现的”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wanderson Santos&lt;/strong&gt;（2010年5月18日）：&lt;br&gt;
+完全同意，但能否将其与敏捷原则（如XP中的“简单设计”）对齐？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Max回复&lt;/strong&gt;：&lt;br&gt;
+我不完全认同任何现有的软件方法论。如果有人觉得这些原则与XP类似并能结合使用，那很好。但如果只是为了强行对齐而对齐，则意义不大。方法论推广者往往带有利益动机（如卖书或咨询），但不应仅因利益而传播观点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ape&lt;/strong&gt;（2010年6月12日）：&lt;br&gt;
+能否举例说明如何从这两条原则推导其他原则？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Max回复&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;降低复杂度&lt;/strong&gt;：松散耦合能减少组件间依赖，从而降低复杂度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;减少维护时间&lt;/strong&gt;：自动化测试能提前捕获缺陷，减少后期修复时间。&lt;br&gt;
+几乎所有软件开发原则（除人机交互外）均可由此衍生。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Harald Wellmann&lt;/strong&gt;（2010年10月27日）：&lt;br&gt;
+维护成本与系统规模的关系可能非线性（如O(c log c)或O(c²)）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Max回复&lt;/strong&gt;：&lt;br&gt;
+更准确的表述应为“维护成本是系统复杂度的函数”，但为避免理解障碍，保留了原表述。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mike W.&lt;/strong&gt;（2017年9月21日）：&lt;br&gt;
+“维护成本与复杂度成正比”使用的是日常语义。若用数学表达可改为：“系统复杂度增加时，维护成本增加。”&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;延伸思考&#34;&gt;延伸思考
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;技术债务的真相&lt;/strong&gt;（Max Kanat-Alexander, 2017年6月4日）&lt;br&gt;
+技术债务的价值多是神话。糟糕的工程决策会在几小时到几周内拖慢进度。正确的设计通常只需多花几小时，且能立即收回成本。长期累积的债务会导致系统陷入无法修复的泥潭。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如何应对变更抵触&lt;/strong&gt;（Max Kanat-Alexander, 2010年5月29日）&lt;br&gt;
+用户对系统变更的负面反馈常源于“变更厌恶”而非真实问题。可通过以下方式区分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;抵触情绪通常在3-10天内消退；&lt;/li&gt;
+&lt;li&gt;情绪化反馈（如“新菜单颜色难看”）多为抵触，而事实性反馈（如“性能下降10倍”）需认真对待。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文通过简洁原则揭示了软件设计的本质，并辅以实例和讨论，为开发者提供了实用指导。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

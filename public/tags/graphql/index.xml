@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sat, 02 Aug 2025 18:15:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/graphql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 12:12:43 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/graphql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+        <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+        <pubDate>Sat, 09 Aug 2025 12:12:43 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞
+&lt;/h3&gt;&lt;p&gt;探讨了攻击者如何利用GraphQL接口绕过权限控制，获取本应受限的数据访问权限。案例包括HackerOne报告#343464等实际漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞
+&lt;/h3&gt;&lt;p&gt;分析了错误配置的Mutation操作如何允许攻击者非法创建或修改数据（HackerOne报告#2233480）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql与未授权数据删除漏洞&#34;&gt;GraphQL与未授权数据删除漏洞
+&lt;/h3&gt;&lt;p&gt;通过HackerOne报告#858671案例，演示了缺乏权限验证的delete操作可能引发的数据销毁风险。&lt;/p&gt;
+&lt;h3 id=&#34;graphql如何导致dos攻击&#34;&gt;GraphQL如何导致DoS攻击
+&lt;/h3&gt;&lt;p&gt;解释了复杂嵌套查询可能引发的服务拒绝攻击，并引用DEF CON 32相关研究成果。&lt;/p&gt;
+&lt;h3 id=&#34;graphql中的sql注入风险&#34;&gt;GraphQL中的SQL注入风险
+&lt;/h3&gt;&lt;p&gt;展示了GraphQL参数未正确过滤时可能触发的SQL注入漏洞（HackerOne报告#435066）。&lt;/p&gt;
+&lt;h3 id=&#34;graphql架构泄露问题&#34;&gt;GraphQL架构泄露问题
+&lt;/h3&gt;&lt;p&gt;讨论了introspection功能暴露API敏感信息是否应被认定为可报告漏洞。&lt;/p&gt;
+&lt;h3 id=&#34;graphql的csrf攻击面&#34;&gt;GraphQL的CSRF攻击面
+&lt;/h3&gt;&lt;p&gt;分析Doyensec研究报告中提到的跨站请求伪造攻击场景，包括GitHub OAuth流程的HEAD方法CSRF绕过案例（Teddy Katz博客）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键资源链接均保留原始英文URL以方便技术溯源。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
         <link>http://localhost:1313/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
         <pubDate>Sat, 02 Aug 2025 18:15:58 +0800</pubDate>

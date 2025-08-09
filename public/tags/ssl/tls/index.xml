@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SSL/TLS on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/ssl/tls/</link>
+        <description>Recent content in SSL/TLS on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 08:23:32 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/ssl/tls/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AWS证书管理器推出可导出的公共SSL/TLS证书，随处可用</title>
+        <link>http://localhost:1313/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</link>
+        <pubDate>Sat, 09 Aug 2025 08:23:32 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</guid>
+        <description>&lt;img src="https://i.imgs.ovh/2025/08/09/EZemX.png" alt="Featured image of post AWS证书管理器推出可导出的公共SSL/TLS证书，随处可用" /&gt;&lt;p&gt;今天，我们宣布AWS证书管理器(ACM)推出可导出的公共SSL/TLS证书功能。在此功能发布前，您可以免费签发公共证书或导入第三方证书颁发机构(CA)颁发的证书，并通过集成AWS服务（如弹性负载均衡(ELB)、Amazon CloudFront分发和Amazon API网关）进行部署。&lt;/p&gt;
+&lt;p&gt;现在，您可以从ACM导出公共证书，获取私钥，并在任何运行于Amazon弹性计算云(Amazon EC2)实例、容器或本地主机的工作负载上使用。可导出的公共证书有效期为395天，签发和续订时均会产生费用。从ACM导出的公共证书由Amazon Trust Services颁发，并被Apple、Microsoft等常用平台以及Google Chrome、Mozilla Firefox等主流浏览器广泛信任。&lt;/p&gt;
+&lt;h3 id=&#34;acm可导出公共证书实践&#34;&gt;ACM可导出公共证书实践
+&lt;/h3&gt;&lt;p&gt;要导出公共证书，您需要先申请新的可导出公共证书。无法导出之前创建的公共证书。&lt;/p&gt;
+&lt;p&gt;首先，在ACM控制台选择&amp;quot;申请证书&amp;quot;，并在&amp;quot;允许导出&amp;quot;部分选择&amp;quot;启用导出&amp;quot;。若选择&amp;quot;禁用导出&amp;quot;，则该证书的私钥将无法从ACM导出，且此设置在证书签发后不可更改。&lt;/p&gt;
+&lt;p&gt;您也可以通过AWS命令行界面(AWS CLI)使用&lt;code&gt;request-certificate&lt;/code&gt;命令申请可导出公共证书，并设置&lt;code&gt;Export=ENABLED&lt;/code&gt;选项：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws acm request-certificate &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--domain-name mydomain.com &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--key-algorithm EC_Prime256v1 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--validation-method DNS &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--idempotency-token &amp;lt;token&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;--options &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;CertificateTransparencyLoggingPreference&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;DISABLED &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Export&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ENABLED
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;成功验证域名所有权后，证书通常会在几秒内签发。当证书状态变为&amp;quot;已签发&amp;quot;时，选择&amp;quot;导出&amp;quot;即可导出证书。&lt;/p&gt;
+&lt;p&gt;您需要设置用于加密私钥的密码短语（后续解密私钥时需使用）。点击&amp;quot;生成PEM编码&amp;quot;可获取公钥，并可选择复制或下载PEM编码的证书、证书链和私钥。&lt;/p&gt;
+&lt;p&gt;也可通过&lt;code&gt;export-certificate&lt;/code&gt;命令导出证书和私钥。为增强安全性，建议使用文件编辑器存储密码短语和输出密钥，避免存入命令历史记录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aws acm export-certificate &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     --certificate-arn arn:aws:acm:us-east-1:&amp;lt;accountID&amp;gt;:certificate/&amp;lt;certificateID&amp;gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     --passphrase fileb://path-to-passphrase-file &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#34;\(.Certificate)\(.CertificateChain)\(.PrivateKey)&amp;#34;&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;     &amp;gt; /tmp/export.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;导出的公共证书可用于任何需要SSL/TLS通信的工作负载，如Amazon EC2实例。更多信息请参阅&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在EC2实例的Amazon Linux上配置SSL/TLS&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h3&gt;&lt;p&gt;关于可导出公共证书，您需要了解以下关键点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;密钥安全&lt;/strong&gt;：组织管理员可通过AWS IAM策略授权可申请导出证书的角色和用户。拥有证书签发权限的ACM用户将自动获得可导出证书的签发权限。导出的私钥需通过安全存储和访问控制进行保护。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;吊销管理&lt;/strong&gt;：为遵守组织策略或应对密钥泄露，您可能需要吊销已导出的公共证书。吊销操作具有全局性和永久性，被吊销的证书无法恢复使用。详见&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS文档中的吊销公共证书&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;续订机制&lt;/strong&gt;：可通过Amazon EventBridge配置自动续订事件，监控证书续订并创建自动化部署流程。也可手动续订证书，续订时将按新证书标准收费。详见&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;强制证书续订&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;现已可用&#34;&gt;现已可用
+&lt;/h3&gt;&lt;p&gt;您现在可以从ACM签发可导出的公共证书，并将证书与私钥导出至任意计算工作负载，以及ELB、Amazon CloudFront和Amazon API网关等AWS服务。&lt;/p&gt;
+&lt;p&gt;使用ACM创建可导出公共证书将产生额外费用：每个完全限定域名收费15美元，通配符域名收费149美元。证书生命周期内仅支付一次费用，续订时再次计费。详见&lt;a class=&#34;link&#34; href=&#34;https://aws.amazon.com/certificate-manager/pricing/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS证书管理器服务定价页&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;立即通过&lt;a class=&#34;link&#34; href=&#34;https://console.aws.amazon.com/acm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ACM控制台&lt;/a&gt;体验此功能。更多信息请参阅&lt;a class=&#34;link&#34; href=&#34;https://docs.aws.amazon.com/acm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ACM文档页&lt;/a&gt;，并通过&lt;a class=&#34;link&#34; href=&#34;https://repost.aws/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AWS re:Post&lt;/a&gt;或常规AWS支持渠道提交反馈。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

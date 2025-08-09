@@ -7,7 +7,242 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 15:23:23 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 15:45:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微软推出本地服务器产品漏洞赏金计划，最高奖励2.6万美元</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</link>
+        <pubDate>Sat, 09 Aug 2025 15:45:21 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</guid>
+        <description>&lt;p&gt;微软兴奋地宣布将Exchange本地服务器、SharePoint本地服务器和Skype for Business本地服务器纳入&amp;quot;应用程序与本地服务器漏洞赏金计划&amp;quot;。通过这项扩展计划，我们鼓励研究人员发现并报告高危安全漏洞以帮助保护客户。符合条件的提交最高可获得26,000美元奖励。以下产品现已纳入赏金范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Exchange本地服务器&lt;/li&gt;
+&lt;li&gt;SharePoint本地服务器&lt;/li&gt;
+&lt;li&gt;Skype for Business本地服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不仅如此！该赏金计划还包含高危场景，对客户安全潜在影响最大的研究领域将获得最高奖励。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;安全影响&lt;/th&gt;
+          &lt;th&gt;严重性乘数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限Exchange：服务器端请求伪造漏洞允许攻击者向任意URL发起服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;仅限SharePoint：经过认证的服务器端请求伪造漏洞允许攻击者向任意URL发起认证服务端HTTP请求&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;用户可控数据的不安全反序列化，导致服务端远程代码执行&lt;/td&gt;
+          &lt;td&gt;30%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;在服务器上用户可控位置写入用户可控数据的任意文件&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;认证绕过漏洞允许未经认证的利用，导致漏洞大规模利用&lt;/td&gt;
+          &lt;td&gt;20%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Exchange紧急缓解服务(EEMS)中的漏洞&lt;/td&gt;
+          &lt;td&gt;15%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;要了解符合条件的范围和奖励金额，请访问[应用程序与本地服务器漏洞赏金计划]页面。微软的漏洞赏金计划只是我们与全球安全研究社区合作帮助保护微软客户的众多方式之一。如果您对新的本地服务器范围有任何疑问，或对任何其他安全研究激励计划有一般性询问，请通过bounty@microsoft.com联系我们。&lt;/p&gt;
+&lt;p&gt;Madeline Eckert和Lynn Miyashita，MSRC团队&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>漏洞赏金机制的困境：从i915漏洞看ChromeOS与英特尔赏金计划的问题</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sat, 09 Aug 2025 14:24:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h2 id=&#34;linux内核i915驱动线性越界读写漏洞&#34;&gt;Linux内核i915驱动线性越界读写漏洞
+&lt;/h2&gt;&lt;p&gt;在分析i915驱动时发现一个线性越界读写漏洞(CVE-2023-28410)。该漏洞存在于&lt;code&gt;vm_access&lt;/code&gt;函数中，该函数通常用于调试进程，仅适用于VM_IO | VM_PFNMAP类型的VMA：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;vm_access&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_area_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用户控制数据写入&amp;#34;固定&amp;#34;页
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nf&#34;&gt;__i915_gem_object_flush_map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;obj&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 从&amp;#34;固定&amp;#34;页读取数据
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参数&lt;code&gt;len&lt;/code&gt;未经校验直接用于memcpy()：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在[1]处可能导致内存破坏/溢出&lt;/li&gt;
+&lt;li&gt;在[2]处可能导致信息泄露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整漏洞分析及PoC见：&lt;a class=&#34;link&#34; href=&#34;http://site.pi3.com.pl/adv/CVE-2023-28410_i915.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pi3技术公告&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞赏金计划遭遇的问题&#34;&gt;漏洞赏金计划遭遇的问题
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;响应迟缓&lt;/strong&gt;：Google在58天内未提供任何更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;透明度缺失&lt;/strong&gt;：漏洞被英特尔悄悄修复，声称是内部发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;沟通障碍&lt;/strong&gt;：多方推诿责任，缺乏有效协调&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢问题&lt;/strong&gt;：修复提交使用了错误的企业邮箱(已离职的微软邮箱)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞赏金机制的系统性缺陷&#34;&gt;漏洞赏金机制的系统性缺陷
+&lt;/h2&gt;&lt;p&gt;文章指出当前漏洞赏金计划存在根本性的&amp;quot;权力失衡&amp;quot;问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;条款完全由企业单方面制定&lt;/li&gt;
+&lt;li&gt;研究人员缺乏有效申诉渠道&lt;/li&gt;
+&lt;li&gt;存在虚假宣传现象(如百万美元漏洞猎人的营销)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术影响范围&#34;&gt;技术影响范围
+&lt;/h2&gt;&lt;p&gt;该i915驱动漏洞影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Google Chromebook/ChromeOS&lt;/li&gt;
+&lt;li&gt;多数商务笔记本&lt;/li&gt;
+&lt;li&gt;高能效笔记本&lt;/li&gt;
+&lt;li&gt;所有使用英特尔集成GPU的设备&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线关键节点&#34;&gt;时间线关键节点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2021年11月：发现漏洞&lt;/li&gt;
+&lt;li&gt;2022年2月3日：报告给Google&lt;/li&gt;
+&lt;li&gt;2022年3月11日：英特尔悄悄修复漏洞&lt;/li&gt;
+&lt;li&gt;2022年10月：英特尔最终发布安全公告(INTEL-SA-00886)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;行业反思&#34;&gt;行业反思
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;建立更公平的漏洞披露条款&lt;/li&gt;
+&lt;li&gt;提高赏金计划透明度&lt;/li&gt;
+&lt;li&gt;改善研究人员与企业间的权力平衡&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;完整的技术分析和事件细节揭示了当前漏洞赏金机制亟待改进的现状。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Google Drive授权绕过漏洞：仅查看权限的文件夹共享如何泄露Google表单响应数据（5000美元漏洞赏金）</title>
+        <link>http://localhost:1313/p/google-drive%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E4%BB%85%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%85%B1%E4%BA%AB%E5%A6%82%E4%BD%95%E6%B3%84%E9%9C%B2google%E8%A1%A8%E5%8D%95%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE5000%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</link>
+        <pubDate>Sat, 09 Aug 2025 11:40:03 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/google-drive%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E4%BB%85%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%85%B1%E4%BA%AB%E5%A6%82%E4%BD%95%E6%B3%84%E9%9C%B2google%E8%A1%A8%E5%8D%95%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE5000%E7%BE%8E%E5%85%83%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91/</guid>
+        <description>&lt;h1 id=&#34;-google-drive授权绕过漏洞仅查看权限的文件夹共享如何泄露google表单响应数据5000美元漏洞赏金&#34;&gt;💣 Google Drive授权绕过漏洞：仅查看权限的文件夹共享如何泄露Google表单响应数据（5000美元漏洞赏金）
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;作者：Aditya Sunny | 分类：漏洞赏金 | Google VRP | 授权绕过&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-内容提要&#34;&gt;🔍 内容提要
+&lt;/h2&gt;&lt;p&gt;一个简单的Google Drive文件夹共享配置错误导致了严重的授权绕过漏洞：任何拥有&amp;quot;仅查看&amp;quot;权限的用户都可以下载私密的Google表单响应数据。安全研究员Andrew Sirkin负责任地披露该漏洞后，获得了Google漏洞奖励计划(VRP)5000美元的奖金。&lt;/p&gt;
+&lt;h2 id=&#34;-漏洞原理&#34;&gt;🧩 漏洞原理
+&lt;/h2&gt;&lt;p&gt;当用户在共享的Google Drive文件夹中创建Google表单时，表单响应(CSV)会与表单一起存储在内部。即使用户仅被授予文件夹的查看权限，仍可以：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将整个文件夹下载为zip压缩包&lt;/li&gt;
+&lt;li&gt;解压后发现包含表单响应的第二个zip文件&lt;/li&gt;
+&lt;li&gt;提取包含完整表单提交数据的CSV文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这实质上允许未授权访问本不应共享的私有数据。&lt;/p&gt;
+&lt;h2 id=&#34;-复现步骤poc&#34;&gt;🧪 复现步骤(PoC)
+&lt;/h2&gt;&lt;p&gt;该漏洞可通过以下步骤完全复现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在Google Drive创建文件夹&lt;/li&gt;
+&lt;li&gt;在该文件夹内：
+&lt;ul&gt;
+&lt;li&gt;创建Google表单&lt;/li&gt;
+&lt;li&gt;创建Google文档(仅用于演示)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;向表单提交测试数据&lt;/li&gt;
+&lt;li&gt;将文件夹链接共享给他人(使用&amp;quot;查看者&amp;quot;权限)&lt;/li&gt;
+&lt;li&gt;接收方操作：
+&lt;ul&gt;
+&lt;li&gt;从文件夹选项点击&amp;quot;全部下载&amp;quot;&lt;/li&gt;
+&lt;li&gt;这将下载包含所有文件的.zip压缩包&lt;/li&gt;
+&lt;li&gt;在该压缩包内会发现第二个zip文件：yourformname.zip&lt;/li&gt;
+&lt;li&gt;解压后即可获取表单响应的CSV文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;-测试数据示例&#34;&gt;🔁 测试数据示例
+&lt;/h2&gt;&lt;p&gt;您可以使用这个&lt;a class=&#34;link&#34; href=&#34;%e7%a4%ba%e4%be%8b%e9%93%be%e6%8e%a5&#34; &gt;公开的Google Drive文件夹&lt;/a&gt;自行测试该行为。&lt;/p&gt;
+&lt;h2 id=&#34;-实际攻击场景&#34;&gt;⚠️ 实际攻击场景
+&lt;/h2&gt;&lt;p&gt;该漏洞在以下场景具有严重影响：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;教育机构&lt;/strong&gt;：教师共享反馈表或测验表可能无意中泄露学生数据&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;人力资源招聘&lt;/strong&gt;：包含简历、电话号码和私人回复的申请表可能通过共享链接被轻易访问&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;初创企业和大型企业&lt;/strong&gt;：内部调查或投票可能被非目标接收者下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;想象一个场景：您仅希望协作者查看表单，但他们却下载了包含以下内容的敏感响应：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;电子邮件地址&lt;/li&gt;
+&lt;li&gt;员工反馈&lt;/li&gt;
+&lt;li&gt;客户投诉&lt;/li&gt;
+&lt;li&gt;安全问题报告
+而所有这些都未经明确授权。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-漏洞成因&#34;&gt;� 漏洞成因
+&lt;/h2&gt;&lt;p&gt;该漏洞源于Google Drive处理共享文件夹和批量下载的方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Google Drive假设共享文件夹中的所有内容都可供下载&lt;/li&gt;
+&lt;li&gt;Google表单自动将响应存储在关联的.csv文件中&lt;/li&gt;
+&lt;li&gt;这些.csv响应文件不会在Drive界面显示，但会被包含在&amp;quot;全部下载&amp;quot;中
+这种访问控制执行的缺失通过zip打包造成了权限提升——一个经典但危险的缺陷。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;-google的响应与奖励&#34;&gt;💰 Google的响应与奖励
+&lt;/h2&gt;&lt;p&gt;提交至Google漏洞奖励计划(VRP)后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题被确认并分类&lt;/li&gt;
+&lt;li&gt;标记为安全配置错误/授权绕过&lt;/li&gt;
+&lt;li&gt;向报告者发放5000美元奖金
+这完美展示了看似微小的漏洞如何产生重大安全后果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-经验教训&#34;&gt;🔒 经验教训
+&lt;/h2&gt;&lt;h3 id=&#34;-对google及类似平台的建议&#34;&gt;✅ 对Google(及类似平台)的建议：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;切勿假设对文件夹的查看权限等同于同意查看内部自动生成的文件&lt;/li&gt;
+&lt;li&gt;除非明确授予访问权限，否则应排除表单响应文件的下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;-对用户的建议&#34;&gt;✅ 对用户的建议：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;避免将表单和敏感数据存储在共享文件夹中，即使使用&amp;quot;仅查看&amp;quot;链接&lt;/li&gt;
+&lt;li&gt;当涉及隐私时，使用单独文件共享而非文件夹级共享&lt;/li&gt;
+&lt;li&gt;仔细检查&amp;quot;全部下载&amp;quot;选项包含的内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-对漏洞赏金猎人的启示&#34;&gt;🛡️ 对漏洞赏金猎人的启示
+&lt;/h2&gt;&lt;p&gt;该漏洞为安全研究人员提供了宝贵经验：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;关注UI之外的内容——用户所见未必是服务器发送的全部&lt;/li&gt;
+&lt;li&gt;像攻击者一样思考——当用户下载、压缩、导出或批量交互时会发生什么？&lt;/li&gt;
+&lt;li&gt;测试自动生成的内容——如Google表单、文档或表格等服务常创建可能泄露数据的后台文件&lt;/li&gt;
+&lt;li&gt;重新审视基础产品——即使如Google Drive这样值得信赖的平台，仍存在显而易见的边缘案例和安全漏洞&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;-最终结论&#34;&gt;🎯 最终结论
+&lt;/h2&gt;&lt;p&gt;这个授权绕过漏洞因其简洁性而显得精妙——无需复杂载荷、令牌劫持或高级利用技术，仅一个zip文件就暴露了本应保密的内容。
+然而其影响可能非常巨大。
+最好的漏洞往往隐藏于平凡之处。数十亿用户日常使用的Google Drive+表单系统，此案例深刻提醒我们：便利性永远不应凌驾于访问控制之上。&lt;/p&gt;
+&lt;p&gt;向发现者Andrew Sirkin致敬——也为Google负责任的处置点赞。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>安全成熟度、资产复杂性与漏洞赏金计划有效性深度解析</title>
         <link>http://localhost:1313/p/%E5%AE%89%E5%85%A8%E6%88%90%E7%86%9F%E5%BA%A6%E8%B5%84%E4%BA%A7%E5%A4%8D%E6%9D%82%E6%80%A7%E4%B8%8E%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%89%E6%95%88%E6%80%A7%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</link>
         <pubDate>Thu, 07 Aug 2025 15:23:23 +0800</pubDate>

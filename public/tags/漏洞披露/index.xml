@@ -7,7 +7,92 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 12:31:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 14:24:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>漏洞赏金机制的困境：从i915漏洞看ChromeOS与英特尔赏金计划的问题</title>
+        <link>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sat, 09 Aug 2025 14:24:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h2 id=&#34;linux内核i915驱动线性越界读写漏洞&#34;&gt;Linux内核i915驱动线性越界读写漏洞
+&lt;/h2&gt;&lt;p&gt;在分析i915驱动时发现一个线性越界读写漏洞(CVE-2023-28410)。该漏洞存在于&lt;code&gt;vm_access&lt;/code&gt;函数中，该函数通常用于调试进程，仅适用于VM_IO | VM_PFNMAP类型的VMA：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;vm_access&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vm_area_struct&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用户控制数据写入&amp;#34;固定&amp;#34;页
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nf&#34;&gt;__i915_gem_object_flush_map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;obj&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 从&amp;#34;固定&amp;#34;页读取数据
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参数&lt;code&gt;len&lt;/code&gt;未经校验直接用于memcpy()：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在[1]处可能导致内存破坏/溢出&lt;/li&gt;
+&lt;li&gt;在[2]处可能导致信息泄露&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;完整漏洞分析及PoC见：&lt;a class=&#34;link&#34; href=&#34;http://site.pi3.com.pl/adv/CVE-2023-28410_i915.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pi3技术公告&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;漏洞赏金计划遭遇的问题&#34;&gt;漏洞赏金计划遭遇的问题
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;响应迟缓&lt;/strong&gt;：Google在58天内未提供任何更新&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;透明度缺失&lt;/strong&gt;：漏洞被英特尔悄悄修复，声称是内部发现&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;沟通障碍&lt;/strong&gt;：多方推诿责任，缺乏有效协调&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;致谢问题&lt;/strong&gt;：修复提交使用了错误的企业邮箱(已离职的微软邮箱)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;漏洞赏金机制的系统性缺陷&#34;&gt;漏洞赏金机制的系统性缺陷
+&lt;/h2&gt;&lt;p&gt;文章指出当前漏洞赏金计划存在根本性的&amp;quot;权力失衡&amp;quot;问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;条款完全由企业单方面制定&lt;/li&gt;
+&lt;li&gt;研究人员缺乏有效申诉渠道&lt;/li&gt;
+&lt;li&gt;存在虚假宣传现象(如百万美元漏洞猎人的营销)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术影响范围&#34;&gt;技术影响范围
+&lt;/h2&gt;&lt;p&gt;该i915驱动漏洞影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Google Chromebook/ChromeOS&lt;/li&gt;
+&lt;li&gt;多数商务笔记本&lt;/li&gt;
+&lt;li&gt;高能效笔记本&lt;/li&gt;
+&lt;li&gt;所有使用英特尔集成GPU的设备&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;时间线关键节点&#34;&gt;时间线关键节点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;2021年11月：发现漏洞&lt;/li&gt;
+&lt;li&gt;2022年2月3日：报告给Google&lt;/li&gt;
+&lt;li&gt;2022年3月11日：英特尔悄悄修复漏洞&lt;/li&gt;
+&lt;li&gt;2022年10月：英特尔最终发布安全公告(INTEL-SA-00886)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;行业反思&#34;&gt;行业反思
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;建立更公平的漏洞披露条款&lt;/li&gt;
+&lt;li&gt;提高赏金计划透明度&lt;/li&gt;
+&lt;li&gt;改善研究人员与企业间的权力平衡&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;完整的技术分析和事件细节揭示了当前漏洞赏金机制亟待改进的现状。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Windows Help and Support中心漏洞全披露：技术分析与防护方案</title>
         <link>http://localhost:1313/p/windows-help-and-support%E4%B8%AD%E5%BF%83%E6%BC%8F%E6%B4%9E%E5%85%A8%E6%8A%AB%E9%9C%B2%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%96%B9%E6%A1%88/</link>
         <pubDate>Thu, 07 Aug 2025 12:31:46 +0800</pubDate>

@@ -7,7 +7,51 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Sun, 03 Aug 2025 21:41:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/go%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 11:01:26 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/go%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>利用WebAssembly和Go进行本地端口扫描：浏览器如何成为攻击本地服务的入口</title>
+        <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</link>
+        <pubDate>Sat, 09 Aug 2025 11:01:26 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</guid>
+        <description>&lt;h1 id=&#34;浏览器是本地主机的网关使用webassembly和go进行客户端端口扫描&#34;&gt;浏览器是本地主机的网关：使用WebAssembly和Go进行客户端端口扫描
+&lt;/h1&gt;&lt;p&gt;网站倾向于通过浏览器扫描用户的开放端口，以更好地识别新用户或回访用户。浏览器能否滥用“localhost”？能否通过WebAssembly实现这一点？本文将通过实际演示（http://ports.sh）和代码示例（https://github.com/avilum/portsscan）展示浏览器如何被滥用来攻击本地服务，甚至穿透组织或从浏览器运行远程代码。&lt;/p&gt;
+&lt;h2 id=&#34;客户端指纹与代码执行&#34;&gt;客户端指纹与代码执行
+&lt;/h2&gt;&lt;p&gt;每个用户在访问网页时都有独特的指纹。客户端指纹帮助网站在多个网站间跟踪用户活动。指纹由设备、浏览器、屏幕大小、IP地址等多种因素组合而成。网站（如eBay）通过JavaScript等前端技术在用户计算机上运行代码。随着技术的发展，JavaScript、TypeScript、Deno等语言逐渐普及，而WebAssembly（WASM）的出现使得下一代恶意软件更加复杂。&lt;/p&gt;
+&lt;p&gt;WebAssembly运行时允许将语言编译为二进制代码，由浏览器的WebAssembly运行时执行。WASM不仅速度更快，还解耦了编程语言，专注于“做什么”。尽管WASM带来了许多新API和功能，但它也成为安全研究者和黑客的目标。目前，Rust、Go等语言已提供对WebAssembly的现成支持。&lt;/p&gt;
+&lt;h2 id=&#34;研究webassembly运行时使用go&#34;&gt;研究WebAssembly运行时（使用Go）
+&lt;/h2&gt;&lt;p&gt;本文探讨了如何通过浏览器上下文映射主机的开放端口，并使用低级语言实现。端口扫描技术用于发现资产和服务器，许多操作系统在启动时会在localhost上运行服务（如IPC、SSH、SMTP等）。通过WASM，可以轻松发现易受攻击的服务。&lt;/p&gt;
+&lt;p&gt;作者选择Go语言，因其易于使用的Net/Socket和HTTP标准库API。以下是实现流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户访问网页。&lt;/li&gt;
+&lt;li&gt;浏览器初始化WebAssembly运行时。&lt;/li&gt;
+&lt;li&gt;自动运行编译为WebAssembly二进制的Go端口扫描器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;编写端口扫描器&#34;&gt;编写端口扫描器
+&lt;/h2&gt;&lt;p&gt;作者尝试了多种方法，发现浏览器代理（有时会阻止）WebAssembly请求和响应。最终选择使用Go的“http”包，因为浏览器主要处理应用层协议（如HTTP）。以下是关键发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;响应分类&lt;/strong&gt;：连接拒绝（端口关闭）、超时（端口可能开放或关闭）、HTTP响应（端口开放且有HTTP服务）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CORS问题&lt;/strong&gt;：localhost的HTTP服务通常缺少跨域头，浏览器会阻止请求。通过添加特定HTTP头，作者成功绕过了这一问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TLS/SSL服务&lt;/strong&gt;：跳过SSL握手可以扫描任何TCP开放端口，而不仅是支持SSL的服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实际演示&#34;&gt;实际演示
+&lt;/h2&gt;&lt;p&gt;作者通过Python启动本地服务器（&lt;code&gt;python3 -m http.server 5000&lt;/code&gt;），并在浏览器中运行端口扫描。扫描结果通过netstat和nmap验证，确认了WASM扫描器的准确性。&lt;/p&gt;
+&lt;h2 id=&#34;安全风险与攻击场景&#34;&gt;安全风险与攻击场景
+&lt;/h2&gt;&lt;p&gt;localhost通常被视为“安全”环境，但本文展示了如何通过浏览器轻易扫描和攻击本地服务。以下是两个攻击场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Linux RPC漏洞（CVE-2017-8779）&lt;/strong&gt;：通过访问网页触发拒绝服务攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows打印后台程序远程代码执行漏洞（CVE-2021-34527）&lt;/strong&gt;：利用浏览器访问本地服务，以SYSTEM权限运行任意代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论
+&lt;/h2&gt;&lt;p&gt;本文展示了网页如何通过WebAssembly与用户的本地主机服务通信，并映射其网络。尽管目前无法使用原始TCP/UDP会话，但随着WASI标准的推进，浏览器的攻击面将进一步扩大。WebAssembly和WASI是强大的技术，但浏览器作为操作系统的发展趋势也带来了严重的安全风险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;演示地址&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP服务扫描：http://ports.sh&lt;/li&gt;
+&lt;li&gt;HTTPS服务扫描：https://ports.sh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;代码仓库&lt;/strong&gt;：https://github.com/avilum/portsscan（欢迎贡献！）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Go语言访问控制指南：Java开发者必读</title>
         <link>http://localhost:1313/p/go%E8%AF%AD%E8%A8%80%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%8C%87%E5%8D%97java%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E8%AF%BB/</link>
         <pubDate>Sun, 03 Aug 2025 21:41:56 +0800</pubDate>

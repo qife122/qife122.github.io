@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>规则漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E8%A7%84%E5%88%99%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in 规则漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 17:51:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E8%A7%84%E5%88%99%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>邮件规则漏洞解析：括号引发的邮件转发风暴</title>
+        <link>http://localhost:1313/p/%E9%82%AE%E4%BB%B6%E8%A7%84%E5%88%99%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E6%8B%AC%E5%8F%B7%E5%BC%95%E5%8F%91%E7%9A%84%E9%82%AE%E4%BB%B6%E8%BD%AC%E5%8F%91%E9%A3%8E%E6%9A%B4/</link>
+        <pubDate>Sat, 09 Aug 2025 17:51:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E9%82%AE%E4%BB%B6%E8%A7%84%E5%88%99%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E6%8B%AC%E5%8F%B7%E5%BC%95%E5%8F%91%E7%9A%84%E9%82%AE%E4%BB%B6%E8%BD%AC%E5%8F%91%E9%A3%8E%E6%9A%B4/</guid>
+        <description>&lt;h3 id=&#34;邮件规则可能让我被解雇&#34;&gt;邮件规则可能让我被解雇
+&lt;/h3&gt;&lt;p&gt;我的初级管理员创建了一条邮件规则，在45分钟内将所有入站邮件转至新共享邮箱。该规则看似万无一失：&amp;ldquo;若主题或正文包含特定短语，则发送至目标邮箱&amp;rdquo;——仅此而已。但启用后却重定向了所有邮件，就像用16位复杂密码作为短语却每封邮件都匹配一样不可思议。&lt;/p&gt;
+&lt;p&gt;连Copilot都表示这不该发生。接到报告后我们立即关闭规则，问题随即终止。我盯着这条排在规则列表末位却凌驾于其他规则之上的配置百思不得其解。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;更新&lt;/strong&gt;：终于找到原因——是括号的问题。初级管理员在短语外加了括号，而邮件系统将括号内的每个字母都作为独立条件解析，而非整体短语。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最终结果&lt;/strong&gt;：未被解雇。这个教训深刻提醒我们：再资深的从业者也需保持谦逊，系统规则的细节处理可能带来灾难性后果。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
