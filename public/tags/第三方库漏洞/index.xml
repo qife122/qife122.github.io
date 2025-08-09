@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>第三方库漏洞 on 办公AI智能小助手</title>
+        <link>http://localhost:1313/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E6%BC%8F%E6%B4%9E/</link>
+        <description>Recent content in 第三方库漏洞 on 办公AI智能小助手</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>qife</copyright>
+        <lastBuildDate>Sat, 09 Aug 2025 18:57:18 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>软件成分分析工具对比：Snyk、Semgrep与Dependabot深度评测</title>
+        <link>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94snyksemgrep%E4%B8%8Edependabot%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B/</link>
+        <pubDate>Sat, 09 Aug 2025 18:57:18 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%BD%AF%E4%BB%B6%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94snyksemgrep%E4%B8%8Edependabot%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B/</guid>
+        <description>&lt;h3 id=&#34;背景&#34;&gt;背景
+&lt;/h3&gt;&lt;p&gt;在Doyensec，我们专注于白盒与灰盒应用安全审计。除动态测试外，通常还会审计客户源代码。该过程常借助开源或商用工具实现，现代版本的工具具备检测第三方漏洞库的能力，即软件成分分析（SCA）。&lt;/p&gt;
+&lt;h3 id=&#34;工具生态&#34;&gt;工具生态
+&lt;/h3&gt;&lt;p&gt;SCA领域的三款知名工具分别为Snyk、Semgrep和Dependabot。前两者是含云组件的独立应用，后者直接集成于GitHub环境。作为安全自动化专家，Doyensec对这些工具具有丰富经验：从为Semgrep编写定制检测规则，到协助客户在SDLC流程中部署这类工具。我们此前还发布过关于它们静态应用安全测试(SAST)能力的研究报告（&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/research&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;查看详情&lt;/a&gt;）。在与Semgrep团队交流后，我们受邀对这三款工具的SCA功能进行无偏见横向对比。&lt;/p&gt;
+&lt;h3 id=&#34;核心发现&#34;&gt;核心发现
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;应当忽略大多数依赖项告警&lt;/strong&gt;。完整测试结果已发布于&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/research&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;研究页面&lt;/a&gt;，白皮书中详细描述了测试集构建方法。简言之，我们旨在评估哪款工具能提供最高效的可行动结果（即高真阳性率），而非关注漏报率。这种场景符合多数安全团队的实际需求——他们无法承受耗时数日追查误报的代价。除超大型团队外，低精度工具带来的海量误报会耗尽人力资源。此外，在CI/CD流程中实施部署阻断时，系统对误报的容忍度极低。&lt;/p&gt;
+&lt;h3 id=&#34;后续计划&#34;&gt;后续计划
+&lt;/h3&gt;&lt;p&gt;希望本次工具对比白皮书对您有所启发。欢迎关注我们的博客获取更多应用安全趋势分析。如需应用安全项目协助（包括安全自动化服务），请通过info@doyensec.com联系我们。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;相关文章推荐&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/blog/unsafe-archive-unpacking&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;不安全的归档解压：实验与Semgrep规则&lt;/a&gt;（2024-12-16）&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/blog/semgrep-vs-codeql&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Semgrep与CodeQL深度对比&lt;/a&gt;（2022-10-06）&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/blog/internship-experience&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;我在Doyensec的实习经历&lt;/a&gt;（2022-08-24）&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://doyensec.com/blog/regexploit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Regexploit：可导致DoS的正则表达式&lt;/a&gt;（2021-03-11）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,42 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Mon, 04 Aug 2025 02:19:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 18:24:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RubySec安全实战指南 - 深入解析Ruby漏洞与防御技术</title>
+        <link>http://localhost:1313/p/rubysec%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ruby%E6%BC%8F%E6%B4%9E%E4%B8%8E%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF/</link>
+        <pubDate>Sat, 09 Aug 2025 18:24:12 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/rubysec%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90ruby%E6%BC%8F%E6%B4%9E%E4%B8%8E%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF/</guid>
+        <description>&lt;h3 id=&#34;rubysec实战指南发布&#34;&gt;RubySec实战指南发布
+&lt;/h3&gt;&lt;p&gt;在互联网广泛使用的Ruby应用中，潜藏着可能影响大量系统的安全漏洞，这些漏洞正吸引攻击者瞄准高价值目标。其中，利用YAML格式数据序列化/反序列化等常见特性的漏洞尤为突出。经测试，几乎所有主流开源Ruby项目均存在此类隐患，但多数开发者尚未意识到风险。&lt;/p&gt;
+&lt;p&gt;本《RubySec实战指南》将带您：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;剖析近期典型Ruby漏洞类型及其根本成因&lt;/li&gt;
+&lt;li&gt;通过演示开发真实漏洞利用案例&lt;/li&gt;
+&lt;li&gt;研究漏洞背后的通用模式&lt;/li&gt;
+&lt;li&gt;制定规避漏洞的软件工程策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;核心学习内容&#34;&gt;核心学习内容
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;历史Rails漏洞机制与根源分析&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;反序列化缺陷的影响缓解方法&lt;/li&gt;
+&lt;li&gt;基于YAML反序列化的Rack应用rootkit技术&lt;/li&gt;
+&lt;li&gt;YAML反序列化漏洞的防御方案&lt;/li&gt;
+&lt;li&gt;防御性Ruby编程实践&lt;/li&gt;
+&lt;li&gt;高级测试技术与Mutant模糊测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们设计了灵活的学习路径，如需协助可随时联系。若需求集中，或将开设在线讲座。&lt;/p&gt;
+&lt;p&gt;——Trail of Bits团队&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;欢迎通过&lt;a class=&#34;link&#34; href=&#34;https://twitter.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twitter&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://linkedin.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LinkedIn&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://github.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://mastodon.social&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Mastodon&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://news.ycombinator.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hacker News&lt;/a&gt;分享本文&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>利用海象运算符简化Python反序列化漏洞利用</title>
         <link>http://localhost:1313/p/%E5%88%A9%E7%94%A8%E6%B5%B7%E8%B1%A1%E8%BF%90%E7%AE%97%E7%AC%A6%E7%AE%80%E5%8C%96python%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/</link>
         <pubDate>Mon, 04 Aug 2025 02:19:58 +0800</pubDate>
