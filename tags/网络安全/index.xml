@@ -7,8 +7,78 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 09 Aug 2025 07:56:34 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 16:40:24 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024年底以来与大规模DDoS攻击关联的IoT僵尸网络技术分析</title>
+      <link>https://qife122.github.io/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 16:40:24 +0800</pubDate>
+      <guid>https://qife122.github.io/p/2024%E5%B9%B4%E5%BA%95%E4%BB%A5%E6%9D%A5%E4%B8%8E%E5%A4%A7%E8%A7%84%E6%A8%A1ddos%E6%94%BB%E5%87%BB%E5%85%B3%E8%81%94%E7%9A%84iot%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;摘要&#34;&gt;摘要&lt;/h3&gt;&#xA;&lt;p&gt;自2024年底以来，我们持续监测到一个IoT僵尸网络通过Mirai和Bashlite变种恶意软件感染设备，针对日本及其他国家企业发起大规模分布式拒绝服务（DDoS）攻击。该僵尸网络利用漏洞和弱凭证入侵设备，通过多阶段感染流程连接C&amp;amp;C服务器获取攻击指令，攻击目标主要分布在北美和欧洲，涉及金融、交通等多个行业。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微软推出本地服务器产品漏洞赏金计划，最高奖励2.6万美元</title>
+      <link>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</link>
+      <pubDate>Sat, 09 Aug 2025 15:45:21 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%BE%AE%E8%BD%AF%E6%8E%A8%E5%87%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A7%E5%93%81%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E6%9C%80%E9%AB%98%E5%A5%96%E5%8A%B12.6%E4%B8%87%E7%BE%8E%E5%85%83/</guid>
+      <description>&lt;p&gt;微软兴奋地宣布将Exchange本地服务器、SharePoint本地服务器和Skype for Business本地服务器纳入&amp;quot;应用程序与本地服务器漏洞赏金计划&amp;quot;。通过这项扩展计划，我们鼓励研究人员发现并报告高危安全漏洞以帮助保护客户。符合条件的提交最高可获得26,000美元奖励。以下产品现已纳入赏金范围：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Softaculous Webuzo身份验证绕过漏洞分析</title>
+      <link>https://qife122.github.io/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 14:56:51 +0800</pubDate>
+      <guid>https://qife122.github.io/p/softaculous-webuzo%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;softaculous-webuzo身份验证绕过&#34;&gt;Softaculous Webuzo身份验证绕过&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;2024年7月25日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;漏洞公告&#34;&gt;漏洞公告&lt;/h2&gt;&#xA;&lt;p&gt;EIP-ce40b086&lt;br&gt;&#xA;Softaculous Webuzo在密码重置功能中存在身份验证绕过漏洞。远程匿名攻击者可利用此漏洞获取服务器root用户的完全访问权限。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>告别脚本小子时代：高级防御体系下的恶意软件执行技术</title>
+      <link>https://qife122.github.io/p/%E5%91%8A%E5%88%AB%E8%84%9A%E6%9C%AC%E5%B0%8F%E5%AD%90%E6%97%B6%E4%BB%A3%E9%AB%98%E7%BA%A7%E9%98%B2%E5%BE%A1%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sat, 09 Aug 2025 14:40:40 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%91%8A%E5%88%AB%E8%84%9A%E6%9C%AC%E5%B0%8F%E5%AD%90%E6%97%B6%E4%BB%A3%E9%AB%98%E7%BA%A7%E9%98%B2%E5%BE%A1%E4%BD%93%E7%B3%BB%E4%B8%8B%E7%9A%84%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%8A%80%E6%9C%AF/</guid>
+      <description>&lt;h3 id=&#34;技术背景演变&#34;&gt;技术背景演变&lt;/h3&gt;&#xA;&lt;p&gt;几年前渗透测试人员无需费力即可建立恶意软件命令通道。如今在终端检测响应(EDR)、用户行为分析(UBA)和高级操作系统防御机制面前，传统恶意软件生成/执行工具已完全失效。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CVE-2025-29927：Next.js 中间件授权绕过漏洞深度分析</title>
+      <link>https://qife122.github.io/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 13:45:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;cve-2025-29927nextjs中间件授权绕过&#34;&gt;CVE-2025-29927：Next.js中间件授权绕过&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;2025年3月，流行的React框架Next.js披露了编号为CVE-2025-29927的关键漏洞。该漏洞影响12.3.5、13.5.9、14.2.25和15.2.3之前的版本，源于框架对&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的盲目信任。攻击者通过伪造该头可完全绕过中间件逻辑（包括认证授权机制），从而越权访问受保护路由。由于Next.js应用普遍依赖中间件，该漏洞影响范围广泛。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>电子邮件泄露个人IP地址的安全漏洞分析</title>
+      <link>https://qife122.github.io/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 13:29:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景&lt;/h3&gt;&#xA;&lt;p&gt;当发送电子邮件时，邮件会经过多个服务器（SMTP中继、垃圾邮件过滤器、日志和备份系统）。这些服务器可能存储或记录所有信息，包括邮件内容（如发件人IP地址）。即使邮件使用TLS传输加密，内容在每台处理服务器上仍会被解密。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GraphQL API漏洞挖掘实战：漏洞赏金案例分析</title>
+      <link>https://qife122.github.io/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 12:12:43 +0800</pubDate>
+      <guid>https://qife122.github.io/p/graphql-api%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%AE%9E%E6%88%98%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;graphql与未授权数据访问漏洞&#34;&gt;GraphQL与未授权数据访问漏洞&lt;/h3&gt;&#xA;&lt;p&gt;探讨了攻击者如何利用GraphQL接口绕过权限控制，获取本应受限的数据访问权限。案例包括HackerOne报告#343464等实际漏洞。&lt;/p&gt;&#xA;&lt;h3 id=&#34;graphql与未授权数据创建修改漏洞&#34;&gt;GraphQL与未授权数据创建/修改漏洞&lt;/h3&gt;&#xA;&lt;p&gt;分析了错误配置的Mutation操作如何允许攻击者非法创建或修改数据（HackerOne报告#2233480）。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>利用WebAssembly和Go进行本地端口扫描：浏览器如何成为攻击本地服务的入口</title>
+      <link>https://qife122.github.io/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</link>
+      <pubDate>Sat, 09 Aug 2025 11:01:26 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%88%A9%E7%94%A8webassembly%E5%92%8Cgo%E8%BF%9B%E8%A1%8C%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E6%94%BB%E5%87%BB%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%85%A5%E5%8F%A3/</guid>
+      <description>&lt;h1 id=&#34;浏览器是本地主机的网关使用webassembly和go进行客户端端口扫描&#34;&gt;浏览器是本地主机的网关：使用WebAssembly和Go进行客户端端口扫描&lt;/h1&gt;&#xA;&lt;p&gt;网站倾向于通过浏览器扫描用户的开放端口，以更好地识别新用户或回访用户。浏览器能否滥用“localhost”？能否通过WebAssembly实现这一点？本文将通过实际演示（http://ports.sh）和代码示例（https://github.com/avilum/portsscan）展示浏览器如何被滥用来攻击本地服务，甚至穿透组织或从浏览器运行远程代码。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>《后门与漏洞》桌游模拟器指南：网络安全实战演练</title>
+      <link>https://qife122.github.io/p/%E5%90%8E%E9%97%A8%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%A1%8C%E6%B8%B8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8C%87%E5%8D%97%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83/</link>
+      <pubDate>Sat, 09 Aug 2025 10:44:31 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%90%8E%E9%97%A8%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%A1%8C%E6%B8%B8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8C%87%E5%8D%97%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83/</guid>
+      <description>&lt;h1 id=&#34;后门与漏洞桌游模拟器指南&#34;&gt;《后门与漏洞》——桌游模拟器指南&lt;/h1&gt;&#xA;&lt;p&gt;爱德华·米罗 //&lt;/p&gt;&#xA;&lt;p&gt;《后门与漏洞》现已作为官方模组登陆Tabletop Simulator工坊！&lt;/p&gt;&#xA;&lt;h2 id=&#34;模组概述&#34;&gt;模组概述&lt;/h2&gt;&#xA;&lt;p&gt;《后门与漏洞》(B&amp;amp;B)包含52+张独特卡牌，用于开展事件响应桌面演练，学习攻击战术、工具和方法。本指南将帮助您快速启动虚拟版游戏。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AWS证书管理器推出可导出的公共SSL/TLS证书，随处可用</title>
+      <link>https://qife122.github.io/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</link>
+      <pubDate>Sat, 09 Aug 2025 08:23:32 +0800</pubDate>
+      <guid>https://qife122.github.io/p/aws%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86%E5%99%A8%E6%8E%A8%E5%87%BA%E5%8F%AF%E5%AF%BC%E5%87%BA%E7%9A%84%E5%85%AC%E5%85%B1ssl/tls%E8%AF%81%E4%B9%A6%E9%9A%8F%E5%A4%84%E5%8F%AF%E7%94%A8/</guid>
+      <description>&lt;p&gt;今天，我们宣布AWS证书管理器(ACM)推出可导出的公共SSL/TLS证书功能。在此功能发布前，您可以免费签发公共证书或导入第三方证书颁发机构(CA)颁发的证书，并通过集成AWS服务（如弹性负载均衡(ELB)、Amazon CloudFront分发和Amazon API网关）进行部署。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>2025年4月补丁星期二：微软修复121个漏洞，Windows零日漏洞成首要威胁</title>
       <link>https://qife122.github.io/p/2025%E5%B9%B44%E6%9C%88%E8%A1%A5%E4%B8%81%E6%98%9F%E6%9C%9F%E4%BA%8C%E5%BE%AE%E8%BD%AF%E4%BF%AE%E5%A4%8D121%E4%B8%AA%E6%BC%8F%E6%B4%9Ewindows%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E%E6%88%90%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/</link>

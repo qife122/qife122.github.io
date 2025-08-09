@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Fri, 08 Aug 2025 03:01:33 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 13:45:42 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CVE-2025-29927：Next.js 中间件授权绕过漏洞深度分析</title>
+      <link>https://qife122.github.io/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 13:45:42 +0800</pubDate>
+      <guid>https://qife122.github.io/p/cve-2025-29927next.js-%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%8E%88%E6%9D%83%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;cve-2025-29927nextjs中间件授权绕过&#34;&gt;CVE-2025-29927：Next.js中间件授权绕过&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概述&#34;&gt;漏洞概述&lt;/h2&gt;&#xA;&lt;p&gt;2025年3月，流行的React框架Next.js披露了编号为CVE-2025-29927的关键漏洞。该漏洞影响12.3.5、13.5.9、14.2.25和15.2.3之前的版本，源于框架对&lt;code&gt;x-middleware-subrequest&lt;/code&gt;头的盲目信任。攻击者通过伪造该头可完全绕过中间件逻辑（包括认证授权机制），从而越权访问受保护路由。由于Next.js应用普遍依赖中间件，该漏洞影响范围广泛。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>CVE-2025-32463漏洞利用：Sudo chroot本地提权漏洞分析</title>
       <link>https://qife122.github.io/p/cve-2025-32463%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8sudo-chroot%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>

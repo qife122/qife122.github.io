@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 09 Aug 2025 00:07:48 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 13:29:01 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/gdpr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>电子邮件泄露个人IP地址的安全漏洞分析</title>
+      <link>https://qife122.github.io/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 13:29:01 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%B3%84%E9%9C%B2%E4%B8%AA%E4%BA%BAip%E5%9C%B0%E5%9D%80%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h3 id=&#34;漏洞背景&#34;&gt;漏洞背景&lt;/h3&gt;&#xA;&lt;p&gt;当发送电子邮件时，邮件会经过多个服务器（SMTP中继、垃圾邮件过滤器、日志和备份系统）。这些服务器可能存储或记录所有信息，包括邮件内容（如发件人IP地址）。即使邮件使用TLS传输加密，内容在每台处理服务器上仍会被解密。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>防御安全播客第281期：网络安全事件与技术探讨</title>
       <link>https://qife122.github.io/p/%E9%98%B2%E5%BE%A1%E5%AE%89%E5%85%A8%E6%92%AD%E5%AE%A2%E7%AC%AC281%E6%9C%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</link>

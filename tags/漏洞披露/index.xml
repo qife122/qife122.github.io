@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Thu, 07 Aug 2025 12:31:46 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 14:24:11 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E6%BC%8F%E6%B4%9E%E6%8A%AB%E9%9C%B2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>漏洞赏金机制的困境：从i915漏洞看ChromeOS与英特尔赏金计划的问题</title>
+      <link>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 09 Aug 2025 14:24:11 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%BC%8F%E6%B4%9E%E8%B5%8F%E9%87%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9B%B0%E5%A2%83%E4%BB%8Ei915%E6%BC%8F%E6%B4%9E%E7%9C%8Bchromeos%E4%B8%8E%E8%8B%B1%E7%89%B9%E5%B0%94%E8%B5%8F%E9%87%91%E8%AE%A1%E5%88%92%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h2 id=&#34;linux内核i915驱动线性越界读写漏洞&#34;&gt;Linux内核i915驱动线性越界读写漏洞&lt;/h2&gt;&#xA;&lt;p&gt;在分析i915驱动时发现一个线性越界读写漏洞(CVE-2023-28410)。该漏洞存在于&lt;code&gt;vm_access&lt;/code&gt;函数中，该函数通常用于调试进程，仅适用于VM_IO | VM_PFNMAP类型的VMA：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Windows Help and Support中心漏洞全披露：技术分析与防护方案</title>
       <link>https://qife122.github.io/p/windows-help-and-support%E4%B8%AD%E5%BF%83%E6%BC%8F%E6%B4%9E%E5%85%A8%E6%8A%AB%E9%9C%B2%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%96%B9%E6%A1%88/</link>

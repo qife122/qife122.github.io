@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SSH on 办公AI智能小助手</title>
+    <title>Ssh on 办公AI智能小助手</title>
     <link>https://qife122.github.io/tags/ssh/</link>
-    <description>Recent content in SSH on 办公AI智能小助手</description>
+    <description>Recent content in Ssh on 办公AI智能小助手</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Mon, 04 Aug 2025 22:19:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 11:23:03 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何在SELinux和Firewalld环境下配置SSH服务</title>
+      <link>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8selinux%E5%92%8Cfirewalld%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEssh%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sat, 09 Aug 2025 11:23:03 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8selinux%E5%92%8Cfirewalld%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEssh%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;h1 id=&#34;如何在selinux和firewalld环境下配置ssh服务&#34;&gt;如何在SELinux和Firewalld环境下配置SSH服务&lt;/h1&gt;&#xA;&lt;p&gt;在Fedora系统中，若需更改SSH端口，仅修改防火墙规则是不够的。如果启用了SELinux，还必须调整策略以允许新端口。以下是完整配置指南：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>通过SSH实现流量转发与VPN搭建的技术指南</title>
       <link>https://qife122.github.io/p/%E9%80%9A%E8%BF%87ssh%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91%E4%B8%8Evpn%E6%90%AD%E5%BB%BA%E7%9A%84%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/</link>

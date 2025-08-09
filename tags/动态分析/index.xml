@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Fri, 08 Aug 2025 08:04:30 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 17:13:14 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Manticore：面向人类的符号执行工具 - 技术解析与应用案例</title>
+      <link>https://qife122.github.io/p/manticore%E9%9D%A2%E5%90%91%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%B7%A5%E5%85%B7-%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sat, 09 Aug 2025 17:13:14 +0800</pubDate>
+      <guid>https://qife122.github.io/p/manticore%E9%9D%A2%E5%90%91%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C%E5%B7%A5%E5%85%B7-%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/</guid>
+      <description>&lt;h3 id=&#34;双接口设计--多样应用场景&#34;&gt;双接口设计 · 多样应用场景&lt;/h3&gt;&#xA;&lt;p&gt;Manticore提供两种使用方式：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;命令行工具&lt;/strong&gt;：快速生成程序测试用例（样本输入），每个用例对应独特执行结果（如正常退出或崩溃）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Python API&lt;/strong&gt;：支持定制化分析与应用优化，可解决以下问题：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;执行到X点时变量Y是否可能为特定值？&lt;/li&gt;&#xA;&lt;li&gt;程序能否在运行时到达某段代码？&lt;/li&gt;&#xA;&lt;li&gt;如何构造触发特定代码执行的输入？&lt;/li&gt;&#xA;&lt;li&gt;用户输入是否被用作libc函数参数？&lt;/li&gt;&#xA;&lt;li&gt;函数执行次数统计&lt;/li&gt;&#xA;&lt;li&gt;给定输入下的指令执行计数&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;API核心功能还包括：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>驯服文件解析风险的两款新工具：PolyFile与PolyTracker</title>
+      <link>https://qife122.github.io/p/%E9%A9%AF%E6%9C%8D%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E9%A3%8E%E9%99%A9%E7%9A%84%E4%B8%A4%E6%AC%BE%E6%96%B0%E5%B7%A5%E5%85%B7polyfile%E4%B8%8Epolytracker/</link>
+      <pubDate>Sat, 09 Aug 2025 16:56:48 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%A9%AF%E6%9C%8D%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E9%A3%8E%E9%99%A9%E7%9A%84%E4%B8%A4%E6%AC%BE%E6%96%B0%E5%B7%A5%E5%85%B7polyfile%E4%B8%8Epolytracker/</guid>
+      <description>&lt;h3 id=&#34;驯服文件解析风险的两款新工具&#34;&gt;驯服文件解析风险的两款新工具&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Evan Sultanik | 2019年11月1日&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;解析文件格式是困难的——即使规范明确定义时也是如此。当规范存在歧义时，会导致解析器和解释器出现意外行为，进而引发安全漏洞。在DARPA SafeDocs项目支持下，我们开发了两款工具来解决这一根本问题：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>首届智能合约分析国际研讨会(WoSCA 2020)重磅来袭</title>
       <link>https://qife122.github.io/p/%E9%A6%96%E5%B1%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E5%88%86%E6%9E%90%E5%9B%BD%E9%99%85%E7%A0%94%E8%AE%A8%E4%BC%9Awosca-2020%E9%87%8D%E7%A3%85%E6%9D%A5%E8%A2%AD/</link>
