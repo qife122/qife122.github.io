@@ -7,7 +7,132 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Thu, 07 Aug 2025 17:41:21 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%AF%84%E4%BC%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 22:02:19 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E%E8%AF%84%E4%BC%B0/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>评估二月份安全更新的风险 | MSRC博客</title>
+        <link>http://localhost:1313/p/%E8%AF%84%E4%BC%B0%E4%BA%8C%E6%9C%88%E4%BB%BD%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E7%9A%84%E9%A3%8E%E9%99%A9-msrc%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Sat, 09 Aug 2025 22:02:19 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%AF%84%E4%BC%B0%E4%BA%8C%E6%9C%88%E4%BB%BD%E5%AE%89%E5%85%A8%E6%9B%B4%E6%96%B0%E7%9A%84%E9%A3%8E%E9%99%A9-msrc%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;p&gt;今天，我们发布了十二个安全公告。其中三个的最高严重性评级为“严重”，九个为“重要”。此次发布修复了三个公开披露的漏洞。下表旨在帮助您根据环境需求合理优先部署更新：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;公告编号&lt;/th&gt;
+          &lt;th&gt;最可能的攻击途径&lt;/th&gt;
+          &lt;th&gt;最高公告严重性&lt;/th&gt;
+          &lt;th&gt;最大可利用性&lt;/th&gt;
+          &lt;th&gt;30天内可能的影响&lt;/th&gt;
+          &lt;th&gt;平台缓解措施及关键说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-003 (IE)&lt;/td&gt;
+          &lt;td&gt;受害者访问恶意网页&lt;/td&gt;
+          &lt;td&gt;严重&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;针对CVE-2010-3971的公开漏洞利用已存在（首次描述于公告2488013）。详见MMPC博客的攻击遥测数据。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;公告2490606 (shimgvw.dll)&lt;/td&gt;
+          &lt;td&gt;受害者访问包含恶意缩略图文件的SMB/WebDAV共享&lt;/td&gt;
+          &lt;td&gt;严重&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;针对CVE-2010-3970的公开漏洞利用已存在（首次描述于公告2490606）。未发现实际攻击。&lt;/td&gt;
+          &lt;td&gt;仅当explorer.exe处于缩略图/预览模式时存在攻击途径。默认详情模式不受影响。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-007 (OpenType字体驱动)&lt;/td&gt;
+          &lt;td&gt;受害者通过explorer.exe浏览含恶意OTF文件的文件夹&lt;/td&gt;
+          &lt;td&gt;严重&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;未来30天内发布的漏洞利用可能不稳定且难以实现代码执行。&lt;/td&gt;
+          &lt;td&gt;Windows XP/Server 2003不受外壳预览攻击途径影响。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-004 (IIS FTPSVC)&lt;/td&gt;
+          &lt;td&gt;攻击者针对启用FTP服务的IIS 7服务器发送恶意攻击&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;CVE-2010-3972漏洞细节已公开，但构建可靠代码执行利用较困难。传闻4月将公开讨论利用技术。&lt;/td&gt;
+          &lt;td&gt;Windows Server 2003/2008默认配置不受影响。详见博客说明。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-011 (内核)&lt;/td&gt;
+          &lt;td&gt;攻击者通过已运行代码从低权限账户提权至SYSTEM&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;公开存在概念验证代码。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-012 (win32k.sys)&lt;/td&gt;
+          &lt;td&gt;攻击者通过已运行代码从低权限账户提权至SYSTEM&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能发布本地攻击者获取SYSTEM权限的利用。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-014 (LSASS)&lt;/td&gt;
+          &lt;td&gt;攻击者通过已运行代码从低权限账户提权至SYSTEM&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能发布本地攻击者获取SYSTEM权限的利用。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-008 (Visio)&lt;/td&gt;
+          &lt;td&gt;受害者打开恶意.VSD文件&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能发布相关漏洞利用。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-010 (CSRSS)&lt;/td&gt;
+          &lt;td&gt;攻击者交互登录后运行代码，管理员登录时在其安全上下文中执行&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能发布利用代码。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-013 (Kerberos)&lt;/td&gt;
+          &lt;td&gt;1. 服务账户上下文攻击者提权；2. 中间人攻击降级加密至DES&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;可能发布利用以扩大网络入侵范围。&lt;/td&gt;
+          &lt;td&gt;1. 低权限服务账户无法作为初始攻击途径；2. 攻击者需嗅探并篡改流量。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-005 (Active Directory)&lt;/td&gt;
+          &lt;td&gt;域管理员账户攻击者可破坏域关键功能（如Kerberos服务）&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;仅可能导致拒绝服务。&lt;/td&gt;
+          &lt;td&gt;攻击者需先入侵拥有工作站管理权限的域账户。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MS11-009 (JScript/VBscript)&lt;/td&gt;
+          &lt;td&gt;受害者访问恶意网页导致攻击者读取IE进程内存&lt;/td&gt;
+          &lt;td&gt;重要&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;仅可能导致信息泄露。&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;此外，我们还发布了与自动运行功能相关的公告，描述了通过Windows Update禁用非光盘类可移动媒体自动运行的更新包。详见&lt;a class=&#34;link&#34; href=&#34;https://blogs.windows.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;此博客文章&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;致谢&lt;/strong&gt;&lt;br&gt;
+感谢Andrew Roths、Mark Wodrich及MSRC工程团队对本文的协助，以及全体成员为本月安全更新所做的努力。&lt;br&gt;
+Jonathan Ness, MSRC Engineering&lt;/p&gt;
+&lt;p&gt;（表格后原文包含的“攻击向量”“可利用性”等分类标签及历史文章链接未翻译，因无实质技术内容。）&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>neXCSer工具：将Nessus扫描结果转换为结构化CSV报告</title>
         <link>http://localhost:1313/p/nexcser%E5%B7%A5%E5%85%B7%E5%B0%86nessus%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BB%93%E6%9E%84%E5%8C%96csv%E6%8A%A5%E5%91%8A/</link>
         <pubDate>Thu, 07 Aug 2025 17:41:21 +0800</pubDate>

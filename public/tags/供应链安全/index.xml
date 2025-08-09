@@ -7,7 +7,38 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>qife</copyright>
-        <lastBuildDate>Wed, 06 Aug 2025 02:39:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Aug 2025 21:18:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PyPI现已支持项目归档功能 - 提升供应链安全的重要一步</title>
+        <link>http://localhost:1313/p/pypi%E7%8E%B0%E5%B7%B2%E6%94%AF%E6%8C%81%E9%A1%B9%E7%9B%AE%E5%BD%92%E6%A1%A3%E5%8A%9F%E8%83%BD-%E6%8F%90%E5%8D%87%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5/</link>
+        <pubDate>Sat, 09 Aug 2025 21:18:56 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/pypi%E7%8E%B0%E5%B7%B2%E6%94%AF%E6%8C%81%E9%A1%B9%E7%9B%AE%E5%BD%92%E6%A1%A3%E5%8A%9F%E8%83%BD-%E6%8F%90%E5%8D%87%E4%BE%9B%E5%BA%94%E9%93%BE%E5%AE%89%E5%85%A8%E7%9A%84%E9%87%8D%E8%A6%81%E4%B8%80%E6%AD%A5/</guid>
+        <description>&lt;h1 id=&#34;pypi现已支持归档项目&#34;&gt;PyPI现已支持归档项目
+&lt;/h1&gt;&lt;p&gt;PyPI现在支持将项目标记为已归档状态。项目所有者可以通过归档操作向用户明确表示该项目将不再接收更新。&lt;/p&gt;
+&lt;h2 id=&#34;为什么状态标记很重要&#34;&gt;为什么状态标记很重要
+&lt;/h2&gt;&lt;p&gt;项目状态标记能力是PyPI长期存在的功能需求。这适用于被放弃、无人维护、功能完整或已弃用的项目，维护者希望通过状态标记让用户对未来的更新和使用预期有清晰认知。&lt;/p&gt;
+&lt;h2 id=&#34;如何归档项目&#34;&gt;如何归档项目
+&lt;/h2&gt;&lt;p&gt;项目所有者可以在项目设置页面底部找到归档选项。归档后，项目主页会显示明显的归档通知。重要的是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;归档不同于yank或删除操作&lt;/li&gt;
+&lt;li&gt;归档项目不会被删除&lt;/li&gt;
+&lt;li&gt;归档项目默认仍可被解析&lt;/li&gt;
+&lt;li&gt;项目可随时取消归档状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;技术实现&#34;&gt;技术实现
+&lt;/h2&gt;&lt;p&gt;后台实现基于PyPI最近添加的&amp;quot;项目隔离&amp;quot;功能架构。通过复用为隔离功能开发的LifecycleStatus模型和状态机，PyPI团队能够快速扩展出新的&amp;quot;archived&amp;quot;状态。&lt;/p&gt;
+&lt;h2 id=&#34;未来方向&#34;&gt;未来方向
+&lt;/h2&gt;&lt;p&gt;当前归档状态仅体现在Web界面，团队正在努力：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为pip/uv等安装器添加机器可读的归档状态支持&lt;/li&gt;
+&lt;li&gt;规划更多项目状态类型（如&amp;quot;deprecated&amp;quot;、&amp;ldquo;feature-complete&amp;quot;等）&lt;/li&gt;
+&lt;li&gt;持续完善项目生命周期管理功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢
+&lt;/h2&gt;&lt;p&gt;感谢PyPI管理团队和Alpha-Omega基金会对这项工作的支持。Alpha-Omega致力于通过改进关键开源项目的安全性来保护社会。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>可信发布：软件包安全的新标杆——基于OpenID Connect的无密钥认证机制</title>
         <link>http://localhost:1313/p/%E5%8F%AF%E4%BF%A1%E5%8F%91%E5%B8%83%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%AE%89%E5%85%A8%E7%9A%84%E6%96%B0%E6%A0%87%E6%9D%86%E5%9F%BA%E4%BA%8Eopenid-connect%E7%9A%84%E6%97%A0%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/</link>
         <pubDate>Wed, 06 Aug 2025 02:39:11 +0800</pubDate>
