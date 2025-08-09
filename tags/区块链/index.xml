@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Sat, 09 Aug 2025 07:35:06 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 18:40:45 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Echidna对链上合约进行模糊测试 - 重现Stax Finance漏洞</title>
+      <link>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8echidna%E5%AF%B9%E9%93%BE%E4%B8%8A%E5%90%88%E7%BA%A6%E8%BF%9B%E8%A1%8C%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95-%E9%87%8D%E7%8E%B0stax-finance%E6%BC%8F%E6%B4%9E/</link>
+      <pubDate>Sat, 09 Aug 2025 18:40:45 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E4%BD%BF%E7%94%A8echidna%E5%AF%B9%E9%93%BE%E4%B8%8A%E5%90%88%E7%BA%A6%E8%BF%9B%E8%A1%8C%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95-%E9%87%8D%E7%8E%B0stax-finance%E6%BC%8F%E6%B4%9E/</guid>
+      <description>&lt;h1 id=&#34;使用echidna对链上合约进行模糊测试&#34;&gt;使用Echidna对链上合约进行模糊测试&lt;/h1&gt;&#xA;&lt;p&gt;随着Echidna 2.1.0版本的发布，我们为这款以太坊智能合约模糊测试工具新增了直接获取链上数据的功能，包括合约代码和存储槽值。这些数据可用于对已部署合约的链上状态进行模糊测试，或测试新代码如何与现有合约集成。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>智能合约迁移机制详解：从数据回写到成本分析</title>
+      <link>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%BF%81%E7%A7%BB%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%9B%9E%E5%86%99%E5%88%B0%E6%88%90%E6%9C%AC%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 18:07:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E8%BF%81%E7%A7%BB%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%9B%9E%E5%86%99%E5%88%B0%E6%88%90%E6%9C%AC%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;智能合约迁移机制详解&#34;&gt;智能合约迁移机制详解&lt;/h1&gt;&#xA;&lt;h2 id=&#34;为何需要合约迁移能力&#34;&gt;为何需要合约迁移能力&lt;/h2&gt;&#xA;&lt;p&gt;即使无漏洞的合约也可能因私钥被盗而被劫持。Bancor和KICKICO攻击事件证明，攻击者可入侵智能合约钱包。此时即便合约具备升级机制，也可能无法修复。必须部署新合约实例并正确初始化才能恢复功能。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>政府涉足区块链技术时需要考虑的关键问题</title>
       <link>https://qife122.github.io/p/%E6%94%BF%E5%BA%9C%E6%B6%89%E8%B6%B3%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%97%B6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E7%9A%84%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98/</link>
