@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webview逃逸 on 办公AI智能小助手</title>
+    <link>https://qife122.github.io/tags/webview%E9%80%83%E9%80%B8/</link>
+    <description>Recent content in Webview逃逸 on 办公AI智能小助手</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>qife</copyright>
+    <lastBuildDate>Fri, 08 Aug 2025 22:56:04 +0800</lastBuildDate>
+    <atom:link href="https://qife122.github.io/tags/webview%E9%80%83%E9%80%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>逃逸配置错误的VSCode扩展 - 技术漏洞分析与利用</title>
+      <link>https://qife122.github.io/p/%E9%80%83%E9%80%B8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84vscode%E6%89%A9%E5%B1%95-%E6%8A%80%E6%9C%AF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</link>
+      <pubDate>Fri, 08 Aug 2025 22:56:04 +0800</pubDate>
+      <guid>https://qife122.github.io/p/%E9%80%83%E9%80%B8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%E7%9A%84vscode%E6%89%A9%E5%B1%95-%E6%8A%80%E6%9C%AF%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8/</guid>
+      <description>&lt;h2 id=&#34;vscode-webviews基础&#34;&gt;VSCode Webviews基础&lt;/h2&gt;&#xA;&lt;p&gt;在深入漏洞之前，需要理解VSCode扩展的结构。VSCode是基于Electron的应用程序，具有访问文件系统和执行任意shell命令的权限，扩展拥有同等权限。这意味着如果攻击者能在扩展中执行JavaScript（例如通过XSS漏洞），就能完全控制系统。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>qife</copyright>
-    <lastBuildDate>Tue, 05 Aug 2025 00:37:20 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 04:09:54 +0800</lastBuildDate>
     <atom:link href="https://qife122.github.io/tags/http%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析</title>
+      <link>https://qife122.github.io/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 09 Aug 2025 04:09:54 +0800</pubDate>
+      <guid>https://qife122.github.io/p/curl%E6%9C%AA%E5%9C%A8%E8%B7%A8%E6%BA%90%E9%87%8D%E5%AE%9A%E5%90%91%E6%97%B6%E5%89%A5%E7%A6%BBproxy-authorization%E5%A4%B4%E9%83%A8%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90/</guid>
+      <description>&lt;h1 id=&#34;curl未在跨源重定向时剥离proxy-authorization头部的安全漏洞分析&#34;&gt;curl未在跨源重定向时剥离Proxy-Authorization头部的安全漏洞分析&lt;/h1&gt;&#xA;&lt;h2 id=&#34;漏洞概要&#34;&gt;漏洞概要&lt;/h2&gt;&#xA;&lt;p&gt;curl在8.14.1版本中存在未剥离Proxy-Authorization头部的安全缺陷。当服务器返回跨源重定向响应时，curl会正确移除Authorization和Cookie头部，但会错误保留Proxy-Authorization头部。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>cURL HTTP请求走私漏洞深度分析</title>
       <link>https://qife122.github.io/p/curl-http%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81%E6%BC%8F%E6%B4%9E%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90/</link>

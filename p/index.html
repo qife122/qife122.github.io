@@ -288,23 +288,105 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">date: 2025-08-06T20:35:24+08:00
-</span></span><span class="line"><span class="cl">title: Java与LLMs实战指南：使用Jakarta构建LLM应用程序
-</span></span><span class="line"><span class="cl">tags: [Java, LLM, LangChain4J, 人工智能]
+</span></span><span class="line"><span class="cl">date: 2025-08-06T21:08:33+08:00
+</span></span><span class="line"><span class="cl">title: &#34;2029年大选技术架构解析：ASP.NET Core与Google云服务实战&#34;
+</span></span><span class="line"><span class="cl">tags: [云计算, ASP.NET, 系统架构, 无服务器]
 </span></span><span class="line"><span class="cl">authors: qife
-</span></span><span class="line"><span class="cl">description: 本文介绍了如何利用Java语言和LangChain4J工具包构建大型语言模型(LLM)应用程序，打破Python在LLM领域的主导地位，展示Java在系统集成方面的优势。
+</span></span><span class="line"><span class="cl">description: &#34;本文详细剖析了2029年英国大选网站的技术架构，采用ASP.NET Core和Razor构建前端，基于Google Cloud Run实现无服务器部署，使用Firestore存储数据，并分享了云原生架构的设计思考与成本优化策略。&#34;
 </span></span><span class="line"><span class="cl">---
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Java是一门卓越的编程语言。数百万开发者日常使用Java开发，许多关键任务应用程序都运行在Java平台上。无论是银行、证券交易所还是航天领域，Java都是主流选择。
+</span></span><span class="line"><span class="cl"><span class="gh"># 技术概览
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>本文主要为场景设定用途。虽然内容没有特别出彩之处，但在探讨真正有趣的设计细节前，有必要先了解基础事实。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">随着大型语言模型(LLM)的出现，新的机遇正在涌现。虽然Python由于明显的原因一直是主导的运行时语言，但人们存在一个误解，认为构建LLM应用程序、智能体或其他组件也必须使用Python。实际上，大多数LLM集成都是通过REST API实现的，而Java在这方面毫不逊色。Java在系统集成领域表现出色，拥有丰富的工具生态。为什么不选择Java呢？
+</span></span><span class="line"><span class="cl">提醒：访问[<span class="nt">https://election2029.uk</span>](<span class="na">https://election2029.uk</span>)可查看当前实现效果。
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">LangChain4J！这个优秀的开发团队为我们提供了丰富的工具，可以将LLM集成到应用程序中。如果你还没尝试过，强烈推荐使用LangChain4J。
+</span></span><span class="line"><span class="cl">该网站具有以下显著特征：
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 纯只读架构：用户输入仅用于改变显示内容
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 数据量足够小，可全部加载到内存
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 在大选夜之前数据变化缓慢：选举公告前每天最多2-3次数据变更，竞选期间每天会有多个新投票和MRP数据，大选夜需要实时推送最新结果
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">上周在JChampionsConf会议上，我有幸与A N M Bazlur就这个话题进行了交流。源代码和分步指南可在github上获取，演讲幻灯片可在speakerdeck查看。
+</span></span><span class="line"><span class="cl"><span class="gu">## 技术栈选择
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>主要基于Google Cloud构建。作者坦言存在偏好，但未比较Azure或AWS的可行性。优势在于：
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 可直接使用自建的GCP库
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 可快速提交功能请求并自行修复
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 能向同事反馈Cloud Run和Cloud Build的使用体验
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 前端：ASP.NET Core与Razor
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="k">-</span> 使用Razor进行HTML格式化，但未采用标准MVC或Razor Pages模式
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 采用类似MVVM的模式（作者自认可能不符合标准实践）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 基于.NET 9开发，计划随版本更新升级（预计大选夜将运行.NET 13）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 仅使用少量JavaScript图形库，无前端框架（Bootstrap/Angular/React等）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 部署：Google Cloud Run
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="k">-</span> 2024年站点运行于GKE集群，现已迁移至Cloud Run
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 作者最终接受了无服务器理念，虽然带来设计挑战但整体满意
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 域名和HTTPS证书配置变得极其简单（对业余项目至关重要）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 当前使用GCP承诺使用折扣，预计日常运营成本可控制在1美元/天以下
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 构建/部署：Google Cloud Build
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="k">-</span> 与Cloud Run和GitHub深度集成
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 标准流程：编码→提交→推送→按需部署
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 数据存储：Firestore
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="k">-</span> 文档数据库，但实际使用方式接近blob存储
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 当前方案几乎零成本
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 未来可能尝试改用Google Cloud Storage进行比较
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 源代码管理：GitHub
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span><span class="k">-</span> 私有仓库（因包含投票机构的Excel/PDF原始数据）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 考虑未来将数据文件迁移至GCS存储
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 数据源
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>当前使用的数据源包括：
+</span></span><span class="line"><span class="cl"><span class="k">-</span> Democracy Club（候选人/选票/结果数据）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 议会成员API（政党变更数据）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 国家统计局（邮编信息）
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 维基百科选举投票页面
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 多家投票机构授权使用的投票数据
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
